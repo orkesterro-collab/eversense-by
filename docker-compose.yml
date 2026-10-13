@@ -1,0 +1,57 @@
+services:
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${DB_NAME:-eversense}
+      MARIADB_USER: ${DB_USER:-eversense}
+      MARIADB_PASSWORD: ${DB_PASSWORD:-eversense}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:php8.3-apache
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "${WP_PORT:-8080}:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: ${DB_NAME:-eversense}
+      WORDPRESS_DB_USER: ${DB_USER:-eversense}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:-eversense}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('EVERSENSE_COUNTRY', '${EVERSENSE_COUNTRY:-by}');
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content/themes/eversense:/var/www/html/wp-content/themes/eversense
+
+  # Утилита для первичной настройки: docker compose run --rm cli
+  cli:
+    image: wordpress:cli-php8.3
+    profiles: ["tools"]
+    user: "33:33"
+    depends_on:
+      - db
+      - wordpress
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: ${DB_NAME:-eversense}
+      WORDPRESS_DB_USER: ${DB_USER:-eversense}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:-eversense}
+      WP_URL: ${WP_URL:-http://localhost:8080}
+      WP_ADMIN_USER: ${WP_ADMIN_USER:-admin}
+      WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD:-admin}
+      WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL:-admin@example.com}
+      EVERSENSE_COUNTRY: ${EVERSENSE_COUNTRY:-by}
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content/themes/eversense:/var/www/html/wp-content/themes/eversense
+      - ./scripts:/scripts:ro
+    entrypoint: ["bash", "/scripts/setup.sh"]
+
+volumes:
+  db_data:
+  wp_data:
