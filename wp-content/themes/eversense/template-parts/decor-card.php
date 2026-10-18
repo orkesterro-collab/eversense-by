@@ -12,6 +12,7 @@ $p = get_post( $args['post'] ?? null );
 				<span class="ev-card__finish"><?php echo esc_html( get_post_meta( $p->ID, 'ev_finish', true ) ); ?></span>
 			<?php endif; ?>
 			<span class="ev-card__code"><?php echo esc_html( get_post_meta( $p->ID, 'ev_code', true ) ); ?></span>
+			<span class="ev-card__price"><?php echo ev_price_html( get_post_meta( $p->ID, 'ev_code', true ) ); // phpcs:ignore ?></span>
 		</span>
 	</a>
 </li>
