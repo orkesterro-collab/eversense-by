@@ -47,6 +47,8 @@ while ( have_posts() ) :
 						<span class="ev-decor__code"><?php ev_e( 'decor_code' ); ?> <?php echo esc_html( get_post_meta( $id, 'ev_code', true ) ); ?></span>
 					</p>
 
+					<div class="ev-decor-price"><?php echo ev_price_html( get_post_meta( $id, 'ev_code', true ) ); // phpcs:ignore ?></div>
+
 					<?php if ( get_the_content() ) : ?>
 						<div class="ev-prose"><?php the_content(); ?></div>
 					<?php endif; ?>
@@ -89,6 +91,12 @@ while ( have_posts() ) :
 	</article>
 
 	<?php
+	$projects = ev_projects_for_code( get_post_meta( $id, 'ev_code', true ) );
+	if ( $projects ) : ?>
+	<section class="ev-section--tight ev-beige"><div class="ev-container"><h2 class="ev-h3"><?php echo esc_html( ev_t( 'menu_projects' ) ); ?></h2><div class="ev-project-grid">
+	<?php foreach ( $projects as $project ) : ?><a class="ev-project-tile" href="<?php echo esc_url( get_permalink( $project ) ); ?>"><?php echo get_the_post_thumbnail( $project, 'ev-card', [ 'loading' => 'lazy' ] ); ?><strong><?php echo esc_html( get_the_title( $project ) ); ?></strong></a><?php endforeach; ?>
+	</div></div></section>
+	<?php endif;
 	if ( $series ) :
 		$more = get_posts(
 			[
