@@ -78,7 +78,7 @@ add_action(
 		} elseif ( is_tax( 'ev_series' ) ) {
 			$desc = (string) get_term_meta( get_queried_object_id(), 'ev_lead', true );
 		}
-		$img = has_post_thumbnail() && is_singular() ? get_the_post_thumbnail_url( null, 'ev-wide' ) : ev_image_url( ev_opt( 'img_hero_1' ), 'ev-wide' );
+		$img = has_post_thumbnail() && is_singular() ? get_the_post_thumbnail_url( null, 'ev-wide' ) : ( ev_image_url( ev_opt( 'img_hero_1' ), 'ev-wide' ) ?: EV_URI . '/assets/img/brand/forest-dark.webp' );
 		echo '<meta name="description" content="' . esc_attr( wp_strip_all_tags( $desc ) ) . '">' . "\n";
 		echo '<meta property="og:title" content="' . esc_attr( wp_get_document_title() ) . '">' . "\n";
 		echo '<meta property="og:description" content="' . esc_attr( wp_strip_all_tags( $desc ) ) . '">' . "\n";
