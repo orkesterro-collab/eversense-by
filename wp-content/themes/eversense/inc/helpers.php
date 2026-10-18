@@ -172,6 +172,20 @@ function ev_media( $opt_key, $art = 'warm', $class = '', $size = 'ev-wide', $alt
 	if ( $id ) {
 		return wp_get_attachment_image( $id, $size, false, [ 'class' => 'ev-media-img ' . $class, 'loading' => 'lazy', 'alt' => $alt ] );
 	}
+	// Фирменные изображения используются по умолчанию; администратор может заменить их в настройках.
+	$images = [
+		'img_hero_1' => 'forest-dark.webp', 'img_hero_2' => 'bark.webp', 'img_hero_3' => 'tree-core.webp',
+		'img_meet' => 'forest-light.webp', 'img_solution' => 'tree-rings.webp',
+		'img_feat_1' => 'tree-core.webp', 'img_feat_2' => 'forest-light.webp',
+		'img_feat_3' => 'bark.webp', 'img_feat_4' => 'tree-rings.webp',
+		'img_eco' => 'tree-rings.webp', 'img_textures' => 'forest-dark.webp',
+		'img_trust' => 'forest-light.webp', 'img_award' => 'bark.webp',
+	];
+	if ( isset( $images[ $opt_key ] ) ) {
+		$url = EV_URI . '/assets/img/brand/' . $images[ $opt_key ];
+		$loading = strpos( $opt_key, 'img_hero_' ) === 0 ? 'eager' : 'lazy';
+		return '<img class="ev-media-img ' . esc_attr( $class ) . '" src="' . esc_url( $url ) . '" loading="' . esc_attr( $loading ) . '" decoding="async" alt="' . esc_attr( $alt ?: 'Природная фактура дерева EVERSENSE' ) . '">';
+	}
 	return '<div class="ev-art ev-art--' . esc_attr( $art ) . ' ' . esc_attr( $class ) . '" aria-hidden="true"></div>';
 }
 
