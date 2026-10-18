@@ -51,6 +51,7 @@ function ev_option_schema() {
 		],
 		'Документы и файлы'      => [
 			'textures_url'    => [ 'Архив текстур для дизайнеров', 'url' ],
+			'prices_csv_url' => [ 'Google Таблица: опубликованная ссылка CSV с ценами в BYN', 'url' ],
 			'iso9001_url'     => [ 'Сертификат ISO 9001:2015', 'url' ],
 			'iso14001_url'    => [ 'Сертификат ISO 14001:2015', 'url' ],
 			'booklet_1_url'   => [ 'Буклет 1', 'url' ],
