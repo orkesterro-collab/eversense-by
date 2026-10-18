@@ -24,6 +24,7 @@ require EV_DIR . '/inc/content.php';
 require EV_DIR . '/inc/fields.php';
 require EV_DIR . '/inc/options.php';
 require EV_DIR . '/inc/icons.php';
+require EV_DIR . '/inc/belarus.php';
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	require EV_DIR . '/inc/seed.php';
