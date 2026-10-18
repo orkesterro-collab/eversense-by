@@ -185,6 +185,10 @@ function ev_language_links() {
 function ev_nav_items() {
 	return [
 		[ 'label' => ev_t( 'menu_catalog' ), 'url' => ev_catalog_url(), 'active' => is_post_type_archive( 'ev_decor' ) || is_singular( 'ev_decor' ) || is_tax( 'ev_series' ) ],
+		[ 'label' => ev_t( 'menu_projects' ), 'url' => get_post_type_archive_link( 'ev_project' ), 'active' => is_post_type_archive( 'ev_project' ) || is_singular( 'ev_project' ) ],
+		[ 'label' => ev_t( 'menu_installers' ), 'url' => get_post_type_archive_link( 'ev_installer' ), 'active' => is_post_type_archive( 'ev_installer' ) || is_singular( 'ev_installer' ) ],
+		[ 'label' => ev_t( 'menu_warranty' ), 'url' => ev_page_url( 'warranty' ), 'active' => is_page() && 'warranty' === get_post_meta( get_queried_object_id(), '_ev_role', true ) ],
+		[ 'label' => ev_t( 'menu_installation' ), 'url' => ev_page_url( 'installation' ), 'active' => is_page() && 'installation' === get_post_meta( get_queried_object_id(), '_ev_role', true ) ],
 		[ 'label' => ev_t( 'menu_where' ), 'url' => ev_page_url( 'where' ), 'active' => is_page() && 'where' === get_post_meta( get_queried_object_id(), '_ev_role', true ) ],
 		[ 'label' => ev_t( 'menu_contacts' ), 'url' => ev_home_url( '#contacts' ), 'active' => false ],
 	];
