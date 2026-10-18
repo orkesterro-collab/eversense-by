@@ -26,7 +26,7 @@ class EV_Seed_Command {
 		$series = $this->series( $catalog['series'] );
 		$this->decors( $catalog['decors'], $series );
 		$this->pages( $pages );
-		$this->dealers( $pages['dealers'] );
+		// Не добавляем вымышленные магазины. Заполняем список только проверенными партнёрами.
 
 		if ( false === get_option( 'ev_settings', false ) ) {
 			add_option( 'ev_settings', ev_option_defaults() );
@@ -78,7 +78,7 @@ class EV_Seed_Command {
 		$opts['browser']       = 0; // не угадывать язык по браузеру
 		$opts['redirect_lang'] = 0;
 		$opts['media_support'] = 0;
-		$opts['post_types']    = array_values( array_unique( array_merge( (array) ( $opts['post_types'] ?? [] ), [ 'ev_decor', 'ev_dealer' ] ) ) );
+		$opts['post_types']    = array_values( array_unique( array_merge( (array) ( $opts['post_types'] ?? [] ), [ 'ev_decor', 'ev_dealer', 'ev_project', 'ev_installer' ] ) ) );
 		$opts['taxonomies']    = array_values( array_unique( array_merge( (array) ( $opts['taxonomies'] ?? [] ), [ 'ev_series' ] ) ) );
 		update_option( 'polylang', $opts );
 
@@ -173,7 +173,7 @@ class EV_Seed_Command {
 	}
 
 	private function pages( $pages ) {
-		foreach ( [ 'home', 'where', 'privacy' ] as $role ) {
+		foreach ( [ 'home', 'where', 'privacy', 'warranty', 'installation' ] as $role ) {
 			$p   = $pages[ $role ];
 			$ids = [];
 			foreach ( $this->langs as $lang ) {
