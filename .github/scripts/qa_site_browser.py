@@ -65,11 +65,22 @@ with sync_playwright() as playwright:
                     visible = [a for a in anchors.all() if a.is_visible()]
                     row["visible_catalog_links"] = len(visible)
                     if visible:
+                        first = visible[0]
+                        diagnostic = first.evaluate("""a => {
+                            const r=a.getBoundingClientRect();
+                            const x=Math.min(innerWidth-1,Math.max(0,r.left+r.width/2));
+                            const y=Math.min(innerHeight-1,Math.max(0,r.top+r.height/2));
+                            return {tag:a.outerHTML.slice(0,300),rect:{x:r.x,y:r.y,w:r.width,h:r.height},
+                                pointer:getComputedStyle(a).pointerEvents,
+                                covering:document.elementFromPoint(x,y)?.outerHTML.slice(0,300)}
+                        }""")
+                        print("HOME_CATALOG_LINK_DIAGNOSTICS", device, json.dumps(diagnostic,ensure_ascii=False), flush=True)
                         try:
-                            visible[0].click(timeout=8000)
+                            first.click(timeout=5500)
                             page.wait_for_url("**/catalog-ru*", timeout=15000)
                             row["catalog_click_reached"] = page.url
                         except Exception as exc:
+                            print("HOME_CATALOG_CLICK_ERROR", device, str(exc)[:2000], flush=True)
                             failures.append(f"{device} homepage catalog click failed: {str(exc)[:170]}")
                     elif device == "desktop":
                         failures.append("Desktop homepage has no visible catalog navigation link")
