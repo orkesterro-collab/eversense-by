@@ -4,6 +4,7 @@ from urllib.request import Request, urlopen
 from urllib.parse import urlencode
 import json
 import re
+from pathlib import Path
 
 SHEET = "1zzypRi-wST20xu0rns-uSnGk7NmikkW2kw44jvsDgBY"
 url = "https://docs.google.com/spreadsheets/d/" + SHEET + "/gviz/tq?" + urlencode({
@@ -49,4 +50,8 @@ for row in rows:
 print(f"PRICES valid SKUs={len(price_rows)} sales_rows={sales}, sample EL1052={price_rows.get('EL1052')}")
 if len(price_rows) != 30 or len(rows) < 30:
     raise RuntimeError(f"Expected 30 product prices, got {len(price_rows)}")
+site_skus = {p.stem.upper() for p in Path("products").glob("EL*.html")}
+if site_skus != set(price_rows):
+    raise RuntimeError(f"SKU mismatch: absent in Google={sorted(site_skus-set(price_rows))}, absent on site={sorted(set(price_rows)-site_skus)}")
+print("PRICES every one of the", len(site_skus), "individual product cards has a matching price row")
 print("PASS: Public Google price feed is accessible to anonymous visitors with all 30 prices.")
