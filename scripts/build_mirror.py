@@ -105,6 +105,14 @@ def rewrite_page(page):
   rel=os.path.relpath(target,dest.parent).replace('\\','/')
   if remote in h:
    h=h.replace(remote,rel);replacements+=1
+ # Some Tilda stylesheets are referenced by root-relative /custom.css links.
+ # Map each versioned stylesheet to its exact saved file, otherwise GitHub Pages returns 404.
+ for remote, info in lookup.items():
+  if not remote.startswith('https://ever-home.ru/custom.css') or info.get('status') not in ('saved','cached'):continue
+  src='/custom.css'+(('?'+remote.split('?',1)[1]) if '?' in remote else '')
+  if src in h:
+   rel=os.path.relpath(Path(info['local']),dest.parent).replace('\\\\','/')
+   h=h.replace(src,rel)
  # Preserve internal links but redirect them to copied GitHub Pages routes.
  h=re.sub(r'''(?i)(href|action)=(['"])(https?://(?:www\.)?ever-home\.ru)(/[^'"<>]*)\2''',lambda m:m.group(1)+'='+m.group(2)+PUBLIC_BASE+m.group(4).lstrip('/')+m.group(2),h)
  h=re.sub(r'''(?i)(href|action)=(['"])(https?://(?:www\.)?ever-home\.ru)\2''',lambda m:m.group(1)+'='+m.group(2)+PUBLIC_BASE+m.group(2),h)
@@ -112,6 +120,8 @@ def rewrite_page(page):
  h=re.sub(r'''(?i)(href|action)=(['"])/(?!/|eversense-by/)([^'"<>]*)\2''',lambda m:m.group(1)+'='+m.group(2)+PUBLIC_BASE+m.group(3)+m.group(2),h)
  # Russian Belarus-specific replacements in contact CTA links. Keep factory info as original source reference.
  h=h.replace('https://ever-home.ru/where-to-buy-list-ru',PUBLIC_BASE+'where-to-buy.html')
+ h=h.replace(PUBLIC_BASE+'where-to-buy-list-ru',PUBLIC_BASE+'where-to-buy.html')
+ h=h.replace(PUBLIC_BASE+'where-to-buy-map-ru',PUBLIC_BASE+'where-to-buy.html')
  h=h.replace('https://ever-home.ru/where-to-buy-ru',PUBLIC_BASE+'where-to-buy.html')
  h=h.replace('<title>EVERSENSE |','<title>EVERSENSE Беларусь |')
  h=re.sub(r'<meta\s+name="robots"[^>]*>', '<meta name="robots" content="noindex,nofollow">',h,count=1)
