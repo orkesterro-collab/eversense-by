@@ -49,7 +49,7 @@ def local_name(url):
 
 def download_asset(info):
  url=info['url'];ext=ext_for(url)
- if not url.startswith(('https://static.tildacdn.com/','https://neo.tildacdn.com/','https://dl.dropboxusercontent.com/')):
+ if not url.startswith(('https://static.tildacdn.com/','https://neo.tildacdn.com/','https://dl.dropboxusercontent.com/','https://ever-home.ru/custom.css','https://cdnjs.cloudflare.com/')):
   return {'url':url,'status':'external','local':None}
  name=local_name(url);target=MEDIA/name
  if target.exists():return {'url':url,'status':'cached','local':str(target),'bytes':target.stat().st_size}
@@ -100,7 +100,7 @@ def rewrite_page(page):
   info=lookup.get(remote)
   if not info or info.get('status') not in ('saved','cached'):continue
   ext=ext_for(remote)
-  if ext not in ('jpg','jpeg','png','gif','webp','svg','mp4','webm'):continue
+  if ext not in ('jpg','jpeg','png','gif','webp','svg','mp4','webm') and not (remote.startswith('https://ever-home.ru/custom.css') or remote.startswith('https://cdnjs.cloudflare.com/')):continue
   target=Path(info['local'])
   rel=os.path.relpath(target,dest.parent).replace('\\','/')
   if remote in h:
