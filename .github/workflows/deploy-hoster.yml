@@ -55,51 +55,59 @@ jobs:
             exit 1
           fi
 
-      # Recheck FTP root after hoster.by account path update, then deploy if verified.
-      - name: Verify FTP directory serves the Eversence domain
+      - name: Discover and verify new Eversense web root
         env:
           FTP_PASSWORD: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
           FTP_CA: ${{ runner.temp }}/eversence-ftps.crt
         shell: bash
         run: |
           python3 - <<'PY'
-          import ftplib
-          import io
-          import os
-          import secrets
-          import ssl
-          import subprocess
-
+          import ftplib, io, os, secrets, ssl, subprocess
           context = ssl.create_default_context(cafile=os.environ["FTP_CA"])
-          name = "eversense-ftp-probe-" + secrets.token_hex(12) + ".txt"
-          value = "eversense-verified-" + secrets.token_hex(20)
-          seen = []
+          candidates = [".", "../eversense.by", "/eversense.by", "eversense.by",
+                        "/www/eversense.by", "www/eversense.by",
+                        "../../eversense.by", "../../www/eversense.by"]
+          marker = "eversense-directory-probe-" + secrets.token_hex(12) + ".txt"
+          token = "eversense-verified-" + secrets.token_hex(20)
+          found = None
           with ftplib.FTP_TLS(context=context, timeout=30) as ftp:
               ftp.connect("vh108.hoster.by", 21)
               ftp.login("eversense-deploy", os.environ["FTP_PASSWORD"])
               ftp.prot_p()
-              print("FTP home:", ftp.pwd())
-              print("Entries (before probe):", sorted(ftp.nlst())[:20])
-              try:
-                  ftp.storbinary("STOR " + name, io.BytesIO(value.encode("ascii")))
-                  for hostname in ("eversense.by", "www.eversense.by"):
-                      url = "https://" + hostname + "/" + name
-                      test = subprocess.run(
-                          ["curl", "-ksSL", "--max-time", "15", "--resolve",
-                           hostname + ":443:87.232.64.108", url],
-                          text=True, capture_output=True, timeout=25,
-                      )
-                      if test.returncode == 0 and test.stdout.strip() == value:
-                          seen.append(hostname)
-                          print(hostname, "serves this FTP directory")
-                      else:
-                          print(hostname, "does NOT serve this FTP directory; HTTP check result", test.returncode)
-                  if not seen:
-                      raise SystemExit("Blocked: FTP home is not verified as Eversence website root. No site files uploaded.")
-                  print("Verified domain(s):", ", ".join(seen))
-              finally:
-                  ftp.delete(name)
-                  print("Removed temporary probe file")
+              for candidate in candidates:
+                  try:
+                      ftp.cwd("/")
+                      ftp.cwd(candidate)
+                  except ftplib.all_errors:
+                      print("Directory unavailable:", candidate, flush=True)
+                      continue
+                  print("Testing FTP directory:", candidate, flush=True)
+                  try:
+                      ftp.storbinary("STOR " + marker, io.BytesIO(token.encode("ascii")))
+                  except ftplib.all_errors:
+                      print("Cannot write candidate:", candidate, flush=True)
+                      continue
+                  try:
+                      matches = []
+                      for hostname in ("eversense.by", "www.eversense.by"):
+                          r = subprocess.run(
+                              ["curl", "-ksSL", "--max-time", "15", "--resolve",
+                               hostname + ":443:87.232.64.108",
+                               "https://" + hostname + "/" + marker],
+                              capture_output=True, text=True, timeout=25)
+                          if r.returncode == 0 and r.stdout.strip() == token:
+                              matches.append(hostname)
+                      if len(matches) == 2:
+                          found = candidate
+                          print("Verified both domains for FTP directory:", candidate, flush=True)
+                          break
+                      print("Not the correct web directory:", candidate, flush=True)
+                  finally:
+                      ftp.delete(marker)
+          if found is None:
+              raise SystemExit("No verified FTP directory found for eversense.by; no site files were changed.")
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as stream:
+              stream.write("FTP_TARGET_DIR=" + found + "\\n")
           PY
 
       - name: Stage public website files only
