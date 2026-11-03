@@ -10,6 +10,7 @@ CASES = [
     ("/catalog-ru/", "catalog"),
     ("/catalog-ru/quiet-luxury-ru/natural-victoria-oak-ru/", "product"),
     ("/black-friday/", "promotion"),
+    ("/where-to-buy.html", "partners"),
 ]
 OUT = Path("hoster-browser-qa")
 OUT.mkdir(exist_ok=True)
@@ -60,53 +61,43 @@ with sync_playwright() as playwright:
                 row["page_errors"] = errors[:8]
                 page.screenshot(path=str(OUT / (label + "-" + device + ".png")),
                                 full_page=False, animations="disabled", timeout=30000)
+                # Shared header must behave identically on every page and viewport.
+                header = page.locator("#ev-global-header")
+                header.wait_for(state="visible", timeout=12000)
+                row["shared_header_visible"] = True
+                row["official_logo_loaded"] = header.locator("img").first.evaluate(
+                    "img => img.complete && img.naturalWidth > 0")
+                if not row["official_logo_loaded"]:
+                    failures.append(f"{device} {path}: official header logo missing")
+                toggle = header.locator(".ev-header-toggle")
+                toggle.click(timeout=8000)
+                row["menu_opens"] = page.locator("#ev-global-menu").is_visible()
+                if not row["menu_opens"]:
+                    failures.append(f"{device} {path}: shared menu failed to open")
+                page.keyboard.press("Escape")
+                row["escape_closes_menu"] = not page.locator("#ev-global-menu").is_visible()
+                if not row["escape_closes_menu"]:
+                    failures.append(f"{device} {path}: Escape did not close shared menu")
+                page.evaluate("window.scrollTo({top: 500, behavior: 'instant'})")
+                page.wait_for_timeout(450)
+                row["header_hides_down"] = "ev-header-hidden" in (header.get_attribute("class") or "")
+                if not row["header_hides_down"]:
+                    failures.append(f"{device} {path}: header did not hide on downward scroll")
+                page.evaluate("window.scrollTo({top: 180, behavior: 'instant'})")
+                page.wait_for_timeout(450)
+                row["header_returns_up"] = "ev-header-hidden" not in (header.get_attribute("class") or "")
+                if not row["header_returns_up"]:
+                    failures.append(f"{device} {path}: header did not reappear on upward scroll")
+                page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
+                page.wait_for_timeout(150)
                 if label == "home":
-                    onscreen = """a => {
-                        const r=a.getBoundingClientRect(), x=r.left+r.width/2,y=r.top+r.height/2;
-                        return r.width>0 && r.height>0 && x>0 && x<innerWidth && y>0 && y<innerHeight;
-                    }"""
-                    hit_test = """a => {
-                        const r=a.getBoundingClientRect(), x=r.left+r.width/2,y=r.top+r.height/2;
-                        const hit=document.elementFromPoint(x,y);
-                        return hit===a || a.contains(hit);
-                    }"""
-                    if device == "mobile":
-                        toggles = page.locator('a[href="#menuopen-ru"]')
-                        usable = [a for a in toggles.all() if a.is_visible() and a.evaluate(onscreen)]
-                        row["visible_mobile_menu_toggles"] = len(usable)
-                        if usable:
-                            try:
-                                usable[0].click(timeout=8500)
-                                page.wait_for_timeout(900)
-                                row["mobile_menu_opened"] = True
-                            except Exception as exc:
-                                row["mobile_menu_error"] = str(exc)[:400]
-                                failures.append("Mobile hamburger menu could not be opened")
-                        else:
-                            failures.append("Mobile hamburger button is not onscreen")
-                    anchors = page.locator('a[href="/catalog-ru"],a[href="/catalog-ru/"]')
-                    candidates = [a for a in anchors.all() if a.is_visible() and
-                                  a.evaluate(onscreen) and a.evaluate(hit_test)]
-                    row["clickable_catalog_links"] = len(candidates)
-                    if candidates:
-                        first = candidates[0]
-                        row["clicked_catalog_link_html"] = first.evaluate("a => a.outerHTML.slice(0,380)")
-                        try:
-                            first.click(timeout=8000)
-                            page.wait_for_timeout(1800)
-                            row["url_after_catalog_click"] = page.url
-                            row["open_page_urls"] = [p.url for p in context.pages]
-                            print("HOME_CATALOG_CLICK_STATE", device,
-                                  json.dumps({"clicked":row["clicked_catalog_link_html"],
-                                              "current":page.url,
-                                              "pages":row["open_page_urls"]},ensure_ascii=False),flush=True)
-                            if not page.url.startswith("https://eversense.by/catalog-ru/"):
-                                failures.append(f"{device} catalog navigation was not HTTPS: {page.url}")
-                        except Exception as exc:
-                            print("HOME_CATALOG_CLICK_ERROR", device, str(exc)[:1500], flush=True)
-                            failures.append(f"{device} real catalog navigation failed: {str(exc)[:180]}")
-                    else:
-                        failures.append(f"{device} no onscreen and unobstructed catalog navigation link")
+                    toggle.click(timeout=8000)
+                    catalog_link = page.locator('#ev-global-menu a[href$="/catalog-ru/"]').first
+                    catalog_link.click(timeout=8000)
+                    page.wait_for_timeout(1000)
+                    row["url_after_catalog_click"] = page.url
+                    if not page.url.startswith("https://eversense.by/catalog-ru/"):
+                        failures.append(f"{device}: shared menu catalog navigation failed: {page.url}")
             except Exception as exc:
                 row["exception"] = str(exc)[:300]
                 failures.append(f"{device} {path}: {str(exc)[:180]}")
