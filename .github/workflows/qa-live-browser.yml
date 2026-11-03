@@ -1,0 +1,29 @@
+name: Browser QA after Eversense hosting deployment
+on:
+  workflow_run:
+    workflows:
+      - "Eversense - verified deployment to hoster.by"
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Playwright Chromium
+        run: |
+          python3 -m pip install --break-system-packages playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Test navigation and prices on desktop/mobile
+        run: python3 .github/scripts/qa_site_browser.py
+      - name: Save screenshots and results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eversense-live-browser-qa
+          path: hoster-browser-qa/
+          retention-days: 7
