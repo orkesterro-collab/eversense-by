@@ -62,7 +62,14 @@ with sync_playwright() as playwright:
                                 full_page=False, animations="disabled", timeout=30000)
                 if label == "home":
                     anchors = page.locator('a[href="/catalog-ru"],a[href="/catalog-ru/"]')
-                    visible = [a for a in anchors.all() if a.is_visible()]
+                    stats = [a.evaluate("""a => {
+                        const r=a.getBoundingClientRect();
+                        return {y:Math.round(r.y), bottom:Math.round(r.bottom), x:Math.round(r.x),
+                                h:Math.round(r.height), text:a.textContent.trim().slice(0,35)}
+                    }""") for a in anchors.all()]
+                    print("HOME_CATALOG_LINK_POSITIONS", device, json.dumps(stats,ensure_ascii=False), flush=True)
+                    visible = [a for a in anchors.all() if a.is_visible() and
+                               a.evaluate("a => {const r=a.getBoundingClientRect();return r.bottom>2 && r.height>0}")]
                     row["visible_catalog_links"] = len(visible)
                     if visible:
                         first = visible[0]
