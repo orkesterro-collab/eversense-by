@@ -11,6 +11,7 @@ from pathlib import Path
 from urllib.parse import urlsplit, unquote
 import json
 import posixpath
+import re
 
 ROOT = Path("_deploy")
 PREFIX = "/eversense-by/"
@@ -67,6 +68,12 @@ def main():
     for p in files:
         raw = p.read_text(encoding="utf-8", errors="replace")
         updated = raw.replace(PAGES_HOST, "/").replace(PREFIX, "/")
+        # Correct a renamed collection that is linked in the original home page.
+        updated = updated.replace("/catalog-ru/silent-luxury-ru", "/catalog-ru/quiet-luxury-ru")
+        # Tilda source has two phone-number hrefs without the tel: URI scheme.
+        updated = re.sub(r"""href=(["'])(\\+\\d{10,15})\\1""",
+                         lambda m: "href=" + m.group(1) + "tel:" + m.group(2) + m.group(1),
+                         updated)
         if updated != raw:
             transformed[p.suffix.lower()] += 1
             p.write_text(updated, encoding="utf-8")
@@ -99,6 +106,8 @@ def main():
         "examples": sample,
     }
     Path("site-audit.json").write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
+    if missing:
+        raise RuntimeError(f"Broken local links remain: {len(missing)} distinct paths")
     if not (ROOT / "catalog-ru/index.html").is_file():
         raise RuntimeError("Russian catalog is missing")
     if not (ROOT / "catalog.html").is_file():
