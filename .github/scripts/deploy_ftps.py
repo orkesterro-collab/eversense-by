@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Deploy Eversence static files to verified hoster.by FTPS root.
 
-The GitHub workflow must verify that this FTP root is web-served by eversence.by
+The GitHub workflow must verify that this FTP root is web-served by eversense.by
 before invoking this uploader. This script does not delete remote files.
 """
 import ftplib
@@ -13,7 +13,7 @@ import time
 
 BASE = Path("_deploy")
 SERVER = "vh108.hoster.by"
-USERNAME = "eversence-deploy"
+USERNAME = "eversense-deploy"
 NETWORK_ERRORS = ftplib.all_errors + (OSError, EOFError)
 
 
@@ -32,7 +32,7 @@ def main():
     files = sorted(p for p in BASE.rglob("*") if p.is_file())
     files.sort(key=lambda p: p.relative_to(BASE).as_posix() == "index.html")
     total = len(files)
-    print(f"Uploading {total} static files to verified eversence.by FTP home", flush=True)
+    print(f"Uploading {total} static files to verified eversense.by FTP home", flush=True)
     created = set()
     ftp = connect()
     try:
