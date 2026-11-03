@@ -100,11 +100,6 @@ with sync_playwright() as playwright:
                     else:
                         failures.append(f"{device} no onscreen and unobstructed catalog navigation link")
             except Exception as exc:
-                            print("HOME_CATALOG_CLICK_ERROR", device, str(exc)[:2000], flush=True)
-                            failures.append(f"{device} homepage catalog click failed: {str(exc)[:170]}")
-                    elif device == "desktop":
-                        failures.append("Desktop homepage has no visible catalog navigation link")
-            except Exception as exc:
                 row["exception"] = str(exc)[:300]
                 failures.append(f"{device} {path}: {str(exc)[:180]}")
             print(json.dumps(row, ensure_ascii=False), flush=True)
