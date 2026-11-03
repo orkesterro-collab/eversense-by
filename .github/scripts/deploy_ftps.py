@@ -23,24 +23,23 @@ def connect():
     ftp.connect(SERVER, 21)
     ftp.login(USERNAME, os.environ["FTP_PASSWORD"])
     ftp.prot_p()
+    ftp.cwd(os.environ["FTP_TARGET_DIR"])
     return ftp
 
 
 def main():
     if not (BASE / "index.html").is_file():
         raise SystemExit("Missing staged index.html")
+    if not os.environ.get("FTP_TARGET_DIR"):
+        raise SystemExit("No verified FTP_TARGET_DIR; refusing upload")
     files = sorted(p for p in BASE.rglob("*") if p.is_file())
     files.sort(key=lambda p: p.relative_to(BASE).as_posix() == "index.html")
     total = len(files)
-    print(f"Uploading {total} static files to verified eversense.by FTP home", flush=True)
+    print(f"Uploading {total} static files to independently verified eversense.by web directory", flush=True)
     created = set()
     ftp = connect()
     try:
-        # Require the site's previously confirmed placeholder at the FTP root.
-        # Prevents accidental upload to another user's FTP home.
-        remote_names = ftp.nlst()
-        if not any(name.rstrip("/").split("/")[-1] == "index.html" for name in remote_names):
-            raise RuntimeError("index.html missing from FTP home; refusing upload")
+        print("Uploading into independently verified directory:", ftp.pwd(), flush=True)
         for n, path in enumerate(files, 1):
             rel = path.relative_to(BASE).as_posix()
             parts = rel.split("/")[:-1]
