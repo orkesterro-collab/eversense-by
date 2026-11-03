@@ -1,3 +1,4 @@
+@import url("./unified-header.css?v=20261104a");
 /* Цены EVERSENSE Беларусь: обычные и акционные, адаптивно. */
 .ev-price-box{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 12px;font-family:Manrope,Arial,sans-serif;line-height:1.4;letter-spacing:normal}
 .ev-price-box .ev-price-normal{color:#343333;font-size:21px;font-weight:750}
