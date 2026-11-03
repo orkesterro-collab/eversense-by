@@ -124,6 +124,12 @@ jobs:
             ./ _deploy/
           test -f _deploy/index.html
 
+      - name: Fix legacy root links and audit all HTML pages
+        run: python3 .github/scripts/prepare_hoster_site.py
+
+      - name: Confirm Google Sheets prices are publicly readable
+        run: python3 .github/scripts/check_public_price_feed.py
+
       # Strict FTPS and pinned server certificate; domain root verified above.
       # Deploy files without deleting unrelated remote content.
       - name: Upload verified Eversence website via FTPS
@@ -158,3 +164,7 @@ jobs:
                   raise SystemExit(f"Published homepage verification failed for {name}")
               print(f"Homepage verified for {name}: {len(expected)} bytes")
           PY
+
+      - name: Check every live HTML page and required resources
+        if: ${{ github.event_name == 'push' || inputs.publish }}
+        run: python3 .github/scripts/qa_live_site.py
