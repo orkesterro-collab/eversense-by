@@ -1,0 +1,70 @@
+/*ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ----------------------------------------------------------------------------------------*/
+/*десктоп-----------------------------------*/
+@media screen and (min-width: 1201px) {
+/*по всей ширине*/
+.uc-accord .t585 .t-container, .t585 .t-col  {
+    max-width: inherit !important;
+    margin: auto !important;
+}
+.uc-accord .t585 .t-col  {
+    width: calc(100% - 7%) !important;
+}
+
+.uc-accord .t585 .t-prefix_2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+}
+
+/*гориз планшет---------------------------------*/
+@media screen and (min-width: 980px) and (max-width: 1200px) {
+/*по всей ширине*/
+.uc-accord .t585 .t-container, .t585 .t-col  {
+    max-width: inherit !important;
+    margin: auto !important;
+}
+.uc-accord .t585 .t-col  {
+    width: calc(100% - 9%) !important;
+}
+
+.uc-accord .t585 .t-prefix_2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+}
+
+/*вертик планшет---------------------------------*/
+@media screen and (min-width: 480px) and (max-width: 979px) {
+/*по всей ширине*/
+.uc-accord .t585 .t-container, .t585 .t-col  {
+    max-width: inherit !important;
+    margin: auto !important;
+}
+.uc-accord .t585 .t-col  {
+    width: calc(100% - 7%) !important;
+}
+
+.uc-accord .t585 .t-prefix_2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+}
+
+
+/*мобилка-----------------------------------------*/
+@media screen and (max-width: 480px) {
+/*по всей ширине*/
+.uc-accord .t585 .t-container, .t585 .t-col  {
+    max-width: inherit !important;
+    margin: auto !important;
+}
+.uc-accord .t585 .t-col  {
+    width: calc(100% - 13%) !important;
+}
+
+.uc-accord .t585 .t-prefix_2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+}
+/*ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ----------------------------------------------------------------------------------------*/
