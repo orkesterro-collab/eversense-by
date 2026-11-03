@@ -37,7 +37,14 @@ jobs:
             tail -25 /tmp/eversence-tls.txt
             exit 1
           fi
-          openssl x509 -in /tmp/eversence-server.crt -noout -subject -issuer -dates -fingerprint -sha256 -ext subjectAltName
+          openssl x509 -in /tmp/eversence-server.crt -noout -subject -issuer -dates -fingerprint -sha256
+          actual="$(openssl x509 -in /tmp/eversence-server.crt -noout -fingerprint -sha256 | cut -d= -f2)"
+          expected="25:32:7D:62:99:47:12:DD:70:35:3A:3F:2C:3B:7F:35:66:60:73:CC:C9:50:A0:47:85:A3:7D:4E:5E:8E:C9:BB"
+          if [ "$actual" != "$expected" ]; then
+            echo "::error::FTPS server certificate does not match the pinned fingerprint. Refusing to send credentials."
+            exit 1
+          fi
+          cp /tmp/eversence-server.crt "$RUNNER_TEMP/eversence-ftps.crt"
 
       - name: Check FTP password is configured
         env:
@@ -66,6 +73,8 @@ jobs:
       # The server directory is intentionally ./ (the FTP account home).
       # First run with publish=false (dry-run) and check the remote path.
       - name: Upload to hoster.by over encrypted FTPS
+        env:
+          NODE_EXTRA_CA_CERTS: ${{ runner.temp }}/eversence-ftps.crt
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: vh108.hoster.by
