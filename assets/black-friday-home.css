@@ -1,0 +1,40 @@
+
+/* EVERSENSE Black Friday: replace slide one of the original three-slide hero. */
+#rec1028545506 .t396__artboard{position:relative}
+#rec1028545506 .t396__artboard > .t396__elem:not(.prevButton):not(.nextButton){visibility:hidden!important;pointer-events:none!important}
+#rec1028545506 .t396__artboard > .prevButton,
+#rec1028545506 .t396__artboard > .nextButton{visibility:visible!important;z-index:110!important;pointer-events:auto!important}
+#rec1028545506 .ev-bf-home{position:absolute;inset:0;z-index:85;display:flex;align-items:center;overflow:hidden;background:#1d211f;color:#fff;font-family:Manrope,Arial,sans-serif;isolation:isolate}
+#rec1028545506 .ev-bf-home:before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(17,19,18,.96) 1%,rgba(32,30,27,.72) 53%,rgba(30,24,21,.33) 100%),url("img/tree-rings.webp") center center/cover no-repeat}
+#rec1028545506 .ev-bf-home:after{content:"";position:absolute;inset:0;z-index:-1;background:repeating-radial-gradient(circle at 88% 49%,transparent 0,transparent 100px,#e1c5a716 101px,#e1c5a716 102px,transparent 103px,transparent 184px);pointer-events:none}
+#rec1028545506 .ev-bf-home__wrap{width:min(1160px,calc(100% - 150px));margin:0 auto;padding:65px 0 40px}
+#rec1028545506 .ev-bf-home__eyebrow{color:#e1c5a7;letter-spacing:.26em;font-weight:700;font-size:11px;margin:0 0 28px}
+#rec1028545506 .ev-bf-home__title{font-size:clamp(57px,6.65vw,100px);font-weight:600;line-height:1.03;letter-spacing:-.057em;margin:0 0 24px;max-width:1040px;color:white}
+#rec1028545506 .ev-bf-home__title span{color:#e1c5a7}
+#rec1028545506 .ev-bf-home__lead{font-size:clamp(15px,1.7vw,19px);font-weight:350;line-height:1.6;max-width:610px;margin:0 0 21px}
+#rec1028545506 .ev-bf-home__pricing{display:flex;flex-wrap:wrap;gap:14px;align-items:baseline;margin:0 0 22px}
+#rec1028545506 .ev-bf-home__pricing del{color:#c5b7a9;font-size:18px}
+#rec1028545506 .ev-bf-home__pricing strong{color:#e1c5a7;font-weight:750;font-size:clamp(31px,3.8vw,49px);letter-spacing:-.04em}
+#rec1028545506 .ev-bf-home__pricing small{font-size:13px;letter-spacing:0;font-weight:500}
+#rec1028545506 .ev-bf-home__date{font-size:11px;color:#e8e5dd;letter-spacing:.12em;text-transform:uppercase;margin:0 0 16px}
+#rec1028545506 .ev-bf-home__button{display:inline-flex;align-items:center;justify-content:space-between;gap:35px;padding:15px 25px;background:#c0a58c;color:#252525;text-transform:uppercase;font-size:12px;font-weight:800;letter-spacing:.08em;min-height:51px;text-decoration:none!important;transition:background .2s}
+#rec1028545506 .ev-bf-home__button:hover{background:#e1c5a7;color:#252525}
+#rec1028545506 .ev-bf-home__button:focus-visible{outline:3px solid #fff;outline-offset:4px}
+@media(max-width:900px){
+ #rec1028545506 .ev-bf-home__wrap{width:calc(100% - 115px)}
+ #rec1028545506 .ev-bf-home__title{font-size:clamp(45px,8vw,72px)}
+}
+@media(max-width:640px){
+ #rec1028545506 .ev-bf-home:before{background-image:linear-gradient(90deg,rgba(17,19,18,.92),rgba(24,25,22,.63)),url("img/tree-rings.webp");background-position:63% center}
+ #rec1028545506 .ev-bf-home__wrap{width:calc(100% - 42px);padding:105px 0 60px}
+ #rec1028545506 .ev-bf-home__eyebrow{font-size:9px;margin-bottom:20px}
+ #rec1028545506 .ev-bf-home__title{font-size:clamp(42px,11.5vw,60px);margin-bottom:20px}
+ #rec1028545506 .ev-bf-home__lead{font-size:15px}
+ #rec1028545506 .ev-bf-home__pricing{gap:7px 10px;margin-bottom:16px}
+ #rec1028545506 .ev-bf-home__pricing del{font-size:14px}
+ #rec1028545506 .ev-bf-home__pricing strong{font-size:31px}
+ #rec1028545506 .ev-bf-home__pricing small{font-size:11px}
+ #rec1028545506 .ev-bf-home__button{min-height:47px;padding:13px 20px;font-size:11px}
+ #rec1028545506 .t396__artboard > .prevButton,
+ #rec1028545506 .t396__artboard > .nextButton{z-index:110!important}
+}
