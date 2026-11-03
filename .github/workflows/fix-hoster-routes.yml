@@ -1,0 +1,26 @@
+name: Fix Eversense hosted directory navigation
+on:
+  push:
+    paths:
+      - .github/workflows/fix-hoster-routes.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  publish-routes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Stage public site
+        run: |
+          mkdir -p _deploy
+          rsync -a --exclude='/.git/' --exclude='/.github/' --exclude='/scripts/' --exclude='/reference/' --exclude='/README.md' --exclude='/_deploy/' ./ _deploy/
+      - name: Fix all directory URLs and list changed HTML
+        run: python3 .github/scripts/prepare_hoster_site.py
+      - name: Upload corrected HTML only to verified hoster.by directory
+        env:
+          FTP_PASSWORD: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
+        run: python3 .github/scripts/sync_html_routes.py
+      - name: Verify every hosted HTML page and key assets
+        run: python3 .github/scripts/qa_live_site.py
