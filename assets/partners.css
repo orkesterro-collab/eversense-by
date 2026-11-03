@@ -172,3 +172,53 @@ body{background:#f8f8f5}
   .partner-card__body{padding:2px 0 19px!important}
   .partner-card__row{grid-template-columns:81px minmax(0,1fr)}
 }
+
+
+
+/* 2026-11-04: subtle city separators and nested open-state highlighting. */
+/* One hairline between cities, never between individual dealers. */
+#partners-groups > .city-group + .city-group {
+  border-top: 1px solid #dbe3da !important;
+}
+#partners-groups > .city-group:not(.city-group--minsk)[open] {
+  border-bottom: 0 !important;
+}
+/* Keep text, arrows and details unboxed until a salon is expanded. */
+#partners-groups .partner-card,
+#partners-groups .partner-card:not([open]) > summary {
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+/* A gentle shade shows exactly which salon's details are expanded. */
+#partners-groups details.partner-card[open],
+#partners-groups details.partner-card[open] > summary,
+#partners-groups details.partner-card[open] > .partner-card__body {
+  border: 0 !important;
+  box-shadow: none !important;
+  background: #eaf0e9 !important;
+}
+#partners-groups .partner-card > summary {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+#partners-groups details.partner-card[open] > .partner-card__body {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+#partners-groups .partner-card > summary:hover {
+  background: #f0f3ee !important;
+}
+#partners-groups details.partner-card[open] > summary:hover {
+  background: #eaf0e9 !important;
+}
+@media (max-width: 650px) {
+  #partners-groups .partner-card > summary {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  #partners-groups details.partner-card[open] > .partner-card__body {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}

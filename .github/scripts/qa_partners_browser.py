@@ -42,6 +42,15 @@ with sync_playwright() as playwright:
                 "el => ({width:getComputedStyle(el).borderTopWidth,shadow:getComputedStyle(el).boxShadow})")
             row["partner_card_style"] = border
             assert border["width"] == "0px" and border["shadow"] == "none", "Dealer rows must have no boxes or shadows"
+            # A single fine border separates cities; no separators between salons.
+            row["city_dividers"] = page.locator("#partners-groups > .city-group + .city-group").count()
+            city_divider_width = page.locator("#partners-groups > .city-group + .city-group").first.evaluate(
+                "el => getComputedStyle(el).borderTopWidth")
+            row["city_divider_width"] = city_divider_width
+            assert row["city_dividers"] == 15 and city_divider_width == "1px", "City separators are missing"
+            closed_card_background = page.locator('.city-group[data-city="Минск"] .partner-card').nth(1).evaluate(
+                "el => getComputedStyle(el).backgroundColor")
+            row["closed_card_background"] = closed_card_background
             assert not page.locator(".partner-card__sub:visible").count(), "Duplicate district caption must be removed"
             assert page.locator('a[href="https://example.com"]').count() == 0, "Demo websites must not be promoted as real links"
 
@@ -57,6 +66,11 @@ with sync_playwright() as playwright:
             partner = minsk.locator(".partner-card").first
             partner.locator("summary").click()
             assert partner.get_attribute("open") is not None, "Contact accordion did not open"
+            row["expanded_card_background"] = partner.evaluate("el => getComputedStyle(el).backgroundColor")
+            assert row["expanded_card_background"] != closed_card_background, (
+                "An expanded salon must have a different, slightly darker background")
+            assert partner.evaluate("el => getComputedStyle(el).borderTopWidth") == "0px", (
+                "Expanded salons must remain borderless")
             row["contact_rows"] = partner.locator(".partner-card__row").count()
             assert row["contact_rows"] == 4, "Expected address, telephone, website, hours"
 
