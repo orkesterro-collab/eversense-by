@@ -118,6 +118,9 @@ def rewrite_page(page):
  h=re.sub(r'''(?i)(href|action)=(['"])(https?://(?:www\.)?ever-home\.ru)\2''',lambda m:m.group(1)+'='+m.group(2)+PUBLIC_BASE+m.group(2),h)
  # Root-relative navigation would otherwise escape the project path.
  h=re.sub(r'''(?i)(href|action)=(['"])/(?!/|eversense-by/)([^'"<>]*)\2''',lambda m:m.group(1)+'='+m.group(2)+PUBLIC_BASE+m.group(3)+m.group(2),h)
+ # Repair a collection slug renamed in the source and invalid telephone links.
+ h=h.replace('/catalog-ru/silent-luxury-ru','/catalog-ru/quiet-luxury-ru')
+ h=re.sub(r"""href=(["'])(\+\d{10,15})\1""",lambda m:'href='+m.group(1)+'tel:'+m.group(2)+m.group(1),h)
  # Russian Belarus-specific replacements in contact CTA links. Keep factory info as original source reference.
  h=h.replace('https://ever-home.ru/where-to-buy-list-ru',PUBLIC_BASE+'where-to-buy.html')
  h=h.replace(PUBLIC_BASE+'where-to-buy-list-ru',PUBLIC_BASE+'where-to-buy.html')
