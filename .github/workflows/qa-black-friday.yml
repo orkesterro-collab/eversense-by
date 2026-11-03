@@ -1,0 +1,27 @@
+name: QA EVERSENSE Black Friday
+on:
+  push:
+    paths:
+      - scripts/qa_black_friday.py
+      - .github/workflows/qa-black-friday.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Chromium
+        run: |
+          python3 -m pip install --break-system-packages playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Check campaign desktop and mobile
+        run: python3 scripts/qa_black_friday.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: black-friday-visual-check
+          path: black-friday-qa/
+          retention-days: 7
