@@ -14,6 +14,7 @@ import time
 BASE = Path("_deploy")
 SERVER = "vh108.hoster.by"
 USERNAME = "eversence-deploy"
+NETWORK_ERRORS = ftplib.all_errors + (OSError, EOFError)
 
 
 def connect():
@@ -58,7 +59,7 @@ def main():
                     with path.open("rb") as handle:
                         ftp.storbinary(f"STOR {rel}", handle, blocksize=131072)
                     break
-                except (ftplib.all_errors, OSError, EOFError) as exc:
+                except NETWORK_ERRORS as exc:
                     if attempt == 3:
                         raise RuntimeError(f"Failed after 3 tries: {rel}: {exc}") from exc
                     print(f"Retrying {rel} after connection failure: {type(exc).__name__}", flush=True)
@@ -74,7 +75,7 @@ def main():
     finally:
         try:
             ftp.quit()
-        except (ftplib.all_errors, OSError, EOFError):
+        except NETWORK_ERRORS:
             ftp.close()
 
 
