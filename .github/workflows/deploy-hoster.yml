@@ -5,6 +5,13 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/deploy-hoster.yml"
+      - "assets/**"
+      - "black-friday/**"
+      - "catalog-ru/**"
+      - "catalog-en/**"
+      - "ru/**"
+      - "en/**"
+      - "*.html"
   workflow_dispatch:
     inputs:
       publish:
