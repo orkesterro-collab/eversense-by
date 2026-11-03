@@ -27,6 +27,18 @@ jobs:
       - name: Check out Eversence
         uses: actions/checkout@v4
 
+      - name: Inspect FTPS certificate without using credentials
+        shell: bash
+        run: |
+          timeout 12 openssl s_client -connect vh108.hoster.by:21 -starttls ftp -servername vh108.hoster.by -showcerts </dev/null > /tmp/eversence-tls.txt 2>&1 || true
+          sed -n '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/p' /tmp/eversence-tls.txt | sed -n '1,/-----END CERTIFICATE-----/p' > /tmp/eversence-server.crt
+          if [ ! -s /tmp/eversence-server.crt ]; then
+            echo "No FTPS certificate was returned"
+            tail -25 /tmp/eversence-tls.txt
+            exit 1
+          fi
+          openssl x509 -in /tmp/eversence-server.crt -noout -subject -issuer -dates -fingerprint -sha256 -ext subjectAltName
+
       - name: Check FTP password is configured
         env:
           FTP_PASSWORD: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
