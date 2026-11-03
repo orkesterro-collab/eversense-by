@@ -1,1 +1,98 @@
-<!doctype html><html lang="ru" data-page="where" data-root="" data-sku=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#252727"><meta name="robots" content="noindex,nofollow"><meta name="description" content="EVERSENSE Беларусь: каталог 30 декоров, характеристики, преимущества, укладка и информация о дистрибьюторе ООО «Флорсток»."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/eversense.css?v=2"><title>EVERSENSE Беларусь — коллекция ощущений</title></head><body><div id="app"></div><script src="assets/eversense.js?v=2" defer></script></body></html>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#203732">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Карта и список точек продаж EVERSENSE по городам Беларуси. Контакты, адреса и часы работы партнёров.">
+  <title>Где купить EVERSENSE в Беларуси | Карта и партнёры</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/assets/partners.css?v=20261103b">
+  <script defer src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+  <script defer src="/assets/partners.js?v=20261103b"></script>
+</head>
+<body>
+  <a class="skip" href="#partners-list">К списку партнёров</a>
+  <header class="site-top">
+    <div class="site-top__inner">
+      <a class="brand" href="/" aria-label="EVERSENSE, главная страница">
+        EVERSENSE <small>КОЛЛЕКЦИЯ ОЩУЩЕНИЙ</small>
+      </a>
+      <nav class="top-nav" aria-label="Основная навигация">
+        <a href="/">Главная</a>
+        <a href="/catalog-ru/">Каталог</a>
+        <a class="is-active" aria-current="page" href="/where-to-buy.html">Где купить</a>
+        <a href="/contacts.html">Контакты</a>
+      </nav>
+      <a class="header-catalog" href="/catalog-ru/">Каталог <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <main>
+    <section class="intro">
+      <div class="intro__inner">
+        <div>
+          <div class="eyebrow"><span class="eyebrow__dot"></span> EVERSENSE · БЕЛАРУСЬ</div>
+          <h1>Где купить <em>EVERSENSE</em></h1>
+          <p class="intro__lead">Найдите ближайший салон на карте или выберите город в списке. Нажмите на партнёра, чтобы увидеть адрес, телефон, сайт и часы работы.</p>
+        </div>
+        <div class="intro__meta">
+          <strong id="partners-count">40</strong>
+          <span>точек в справочнике</span>
+          <small id="cities-count">Минск и города Беларуси</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="partners-area" aria-label="Карта и поиск партнёров">
+      <div class="controls">
+        <label class="search-field" for="partners-search">
+          <span class="search-field__icon" aria-hidden="true">⌕</span>
+          <input id="partners-search" type="search" placeholder="Город, район или название партнёра" autocomplete="off">
+        </label>
+        <label class="city-select" for="partners-city">
+          <span>Город</span>
+          <select id="partners-city"><option value="">Все города</option></select>
+        </label>
+        <button class="clear-button" id="partners-reset" type="button">Сбросить</button>
+      </div>
+      <div class="demo-banner" id="partners-demo" hidden>
+        <span class="demo-banner__badge">ДЕМО</span>
+        <p>Сейчас в справочнике тестовые партнёры. Контакты и метки условные, реальных точек продаж они не подтверждают.</p>
+      </div>
+      <div class="map-frame">
+        <div id="partners-map" role="region" aria-label="Интерактивная карта расположения партнёров в Беларуси">
+          <div class="map-skeleton">Загрузка карты Беларуси…</div>
+        </div>
+        <div class="map-note"><span class="map-note__dot"></span><span>Метка соответствует координатам из таблицы partners. Для тестовых точек положение приблизительное.</span></div>
+        <button type="button" id="partners-map-reset" class="map-reset" aria-label="Показать всю Беларусь на карте">Вся Беларусь <span aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+
+    <section class="list-section" id="partners-list">
+      <div class="list-heading">
+        <div>
+          <span class="eyebrow">АДРЕСА И КОНТАКТЫ</span>
+          <h2>Наши партнёры</h2>
+          <p>Сначала Минск, разделённый по районам, затем остальные города. Внутри группы порядок задаёт поле <code>sort_order</code> в таблице.</p>
+        </div>
+        <span class="list-count" id="partners-showing" aria-live="polite">Загрузка...</span>
+      </div>
+      <div id="partners-status" role="status" aria-live="polite" class="status">Загружаем данные из Google Sheets…</div>
+      <div id="partners-groups" class="groups" aria-label="Список партнёров по городам"></div>
+      <div class="list-footnote"><span>Данные обновляются из Google Sheets при открытии страницы и автоматически примерно раз в 15 минут.</span></div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="footer__inner">
+      <div><a href="/" class="footer__brand">EVERSENSE</a><p>Коллекция ощущений. Информационный сайт для Республики Беларусь.</p></div>
+      <div><strong>Представитель в Беларуси</strong><p>ООО «Флорсток» · УНП 192608003</p><p>Минск, пр. Победителей, 129, пом. 358</p><a href="tel:+375296713971">+375 29 671-39-71</a></div>
+      <div class="footer__links"><a href="/catalog-ru/">Каталог</a><a href="/contacts.html">Контакты</a><a href="/privacy.html">Конфиденциальность</a></div>
+    </div>
+  </footer>
+  <noscript>Для отображения карты и контактов включите JavaScript.</noscript>
+</body>
+</html>
