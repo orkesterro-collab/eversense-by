@@ -107,7 +107,7 @@ jobs:
           if found is None:
               raise SystemExit("No verified FTP directory found for eversense.by; no site files were changed.")
           with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as stream:
-              stream.write("FTP_TARGET_DIR=" + found + "\\n")
+              stream.write("FTP_TARGET_DIR=" + found + "\n")
           PY
 
       - name: Stage public website files only
