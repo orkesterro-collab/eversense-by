@@ -5,7 +5,11 @@ from playwright.sync_api import sync_playwright
 
 sites={
  'original':'https://ever-home.ru/',
- 'belarus':'https://orkesterro-collab.github.io/eversense-by/'
+ 'belarus':'https://orkesterro-collab.github.io/eversense-by/',
+ 'original-catalog':'https://ever-home.ru/catalog-ru',
+ 'belarus-catalog':'https://orkesterro-collab.github.io/eversense-by/catalog-ru/',
+ 'original-product':'https://ever-home.ru/catalog-ru/quiet-luxury-ru/natural-victoria-oak-ru',
+ 'belarus-product':'https://orkesterro-collab.github.io/eversense-by/catalog-ru/quiet-luxury-ru/natural-victoria-oak-ru/'
 }
 Path('screenshots').mkdir(exist_ok=True)
 checks=[]
