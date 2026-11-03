@@ -1,0 +1,65 @@
+name: Eversence - preview or deploy to hoster.by
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish files (leave OFF to preview changes only)"
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: eversence-hoster-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Eversence
+        uses: actions/checkout@v4
+
+      - name: Check FTP password is configured
+        env:
+          FTP_PASSWORD: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
+        run: |
+          if [ -z "$FTP_PASSWORD" ]; then
+            echo "::error::Add EVERSENCE_FTP_PASSWORD under Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+
+      - name: Stage public website files only
+        shell: bash
+        run: |
+          mkdir -p _deploy
+          rsync -a \
+            --exclude='/.git/' \
+            --exclude='/.github/' \
+            --exclude='/scripts/' \
+            --exclude='/reference/' \
+            --exclude='/README.md' \
+            --exclude='/_deploy/' \
+            ./ _deploy/
+          test -f _deploy/index.html
+
+      # This account MUST have its FTP home restricted to www/eversence.by/.
+      # The server directory is intentionally ./ (the FTP account home).
+      # First run with publish=false (dry-run) and check the remote path.
+      - name: Upload to hoster.by over encrypted FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: vh108.hoster.by
+          username: eversence-deploy
+          password: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
+          port: 21
+          protocol: ftps
+          security: strict
+          local-dir: ./_deploy/
+          server-dir: ./
+          dry-run: ${{ !inputs.publish }}
+          dangerous-clean-slate: false
+          log-level: standard
