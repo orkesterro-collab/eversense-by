@@ -1,9 +1,9 @@
 
 /* EVERSENSE Black Friday: replace slide one of the original three-slide hero. */
 #rec1028545506 .t396__artboard{position:relative}
-#rec1028545506 .t396__artboard > .t396__elem:not(.prevButton):not(.nextButton){visibility:hidden!important;pointer-events:none!important}
-#rec1028545506 .t396__artboard > .prevButton,
-#rec1028545506 .t396__artboard > .nextButton{visibility:visible!important;z-index:110!important;pointer-events:auto!important}
+#rec1028545506 .t396__elem:not(.prevButton):not(.nextButton){visibility:hidden!important;pointer-events:none!important}
+#rec1028545506 .prevButton,
+#rec1028545506 .nextButton{visibility:visible!important;z-index:110!important;pointer-events:auto!important}
 #rec1028545506 .ev-bf-home{position:absolute;inset:0;z-index:85;display:flex;align-items:center;overflow:hidden;background:#1d211f;color:#fff;font-family:Manrope,Arial,sans-serif;isolation:isolate}
 #rec1028545506 .ev-bf-home:before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(17,19,18,.96) 1%,rgba(32,30,27,.72) 53%,rgba(30,24,21,.33) 100%),url("img/tree-rings.webp") center center/cover no-repeat}
 #rec1028545506 .ev-bf-home:after{content:"";position:absolute;inset:0;z-index:-1;background:repeating-radial-gradient(circle at 88% 49%,transparent 0,transparent 100px,#e1c5a716 101px,#e1c5a716 102px,transparent 103px,transparent 184px);pointer-events:none}
@@ -35,12 +35,12 @@
  #rec1028545506 .ev-bf-home__pricing strong{font-size:31px}
  #rec1028545506 .ev-bf-home__pricing small{font-size:11px}
  #rec1028545506 .ev-bf-home__button{min-height:47px;padding:13px 20px;font-size:11px}
- #rec1028545506 .t396__artboard > .prevButton,
- #rec1028545506 .t396__artboard > .nextButton{z-index:110!important}
+ #rec1028545506 .prevButton,
+ #rec1028545506 .nextButton{z-index:110!important}
 }
 
 /* Seasonal campaign expires automatically after 29 November 2026. */
 .ev-bf-campaign-ended #rec1028545506 .ev-bf-home{display:none!important}
-.ev-bf-campaign-ended #rec1028545506 .t396__artboard > .t396__elem:not(.prevButton):not(.nextButton){
+.ev-bf-campaign-ended #rec1028545506 .t396__elem:not(.prevButton):not(.nextButton){
   visibility:visible!important;pointer-events:auto!important
 }
