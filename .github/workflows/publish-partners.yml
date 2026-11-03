@@ -32,7 +32,7 @@ jobs:
 
       - name: Publish HTML, CSS, JS to verified hoster.by directory
         env:
-          EVERSENSE_FTP_SECRET: \${{ secrets.EVERSENCE_FTP_PASSWORD }}
+          EVERSENSE_FTP_SECRET: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
         run: python3 .github/scripts/sync_partners_ftps.py
 
       - name: Install Chromium for browser QA
