@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - scripts/build_mirror.py
+      - reference/audit.json
       - .github/workflows/build-mirror.yml
   workflow_dispatch:
 permissions:
