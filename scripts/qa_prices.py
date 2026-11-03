@@ -27,6 +27,7 @@ with sync_playwright() as p:
         page.screenshot(path=f"price-qa/product-sale-{label}.png",animations="disabled",full_page=False)
         # After an expired promotion, only the regular price remains.
         page.evaluate("(value)=>EversensePriceFeed(value)",fixture("Date(2025,7,1)"))
+        print("EXPIRED_STATE",label,page.evaluate("window.EversensePrices.get(\'EL1052\')"),flush=True)
         expired=page.locator("#ev-product-price").inner_text()
         assert "120,00" in expired and "95,00" not in expired and "до " not in expired, expired
         # A future promotion must not appear before its start date.
