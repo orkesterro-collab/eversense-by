@@ -1,0 +1,28 @@
+name: Build original EVERSENSE HTML mirror
+on:
+  push:
+    paths:
+      - scripts/build_mirror.py
+      - .github/workflows/build-mirror.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install media optimizer
+        run: python3 -m pip install --break-system-packages Pillow
+      - name: Copy original site pages and media
+        run: python3 scripts/build_mirror.py
+      - name: Publish extracted mirror to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/original-tilda/ reference/original-media-manifest.json reference/missing-media.md
+          git add index.html catalog-ru/ catalog-en/ en/ 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -m "Mirror original EVERSENSE Tilda pages and licensed media"
+          git push origin HEAD:main
