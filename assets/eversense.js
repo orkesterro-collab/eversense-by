@@ -47,9 +47,17 @@ function privacy(){return infoPage("Конфиденциальность","Ин�
 function sitemap(){let pages=[["Главная","index.html"],["Каталог","catalog.html"],...Object.values(series).map(s=>[s.title,s.url]),["О бренде","about.html"],["Укладка","installation.html"],["Гарантия","warranty.html"],["Проекты","projects.html"],["Укладчики","installers.html"],["Где купить","where-to-buy.html"],["Документы","downloads.html"],["Контакты","contacts.html"],["Политика конфиденциальности","privacy.html"]];return infoPage("Все страницы","Навигация по разделам и карточкам декоров.",`<section class="section"><div class="container"><div class="download-grid">${pages.map(([t,p])=>`<a class="download" href="${link(p)}"><h3>${t}</h3><b>↗</b></a>`).join("")}</div><h2 style="margin-top:65px">30 декоров</h2><div class="catalog-grid">${rows.map(card).join("")}</div></div></section>`) }
 const content={home,catalog,nature:()=>category("nature"),luxury:()=>category("luxury"),minimal:()=>category("minimal"),product,about,installation,warranty,where,projects,installers,contacts,downloads,privacy,sitemap};
 document.getElementById("app").innerHTML=(content[P]||sitemap)();
+if(["catalog","product","nature","luxury","minimal"].includes(P)){
+  const priceCSS=document.createElement("link");
+  priceCSS.rel="stylesheet";priceCSS.href=R+"assets/prices.css?v=20261103";
+  document.head.appendChild(priceCSS);
+  const priceJS=document.createElement("script");
+  priceJS.src=R+"assets/prices.js?v=20261103";priceJS.defer=true;
+  document.head.appendChild(priceJS);
+}
 document.title=(P==="product"?(rows.find(v=>v[0]===CODE)?.slice(1,3).join(" ")||CODE):meta[P]||"EVERSENSE")+" | EVERSENSE Беларусь";
 const toggle=document.querySelector(".menu-toggle"),menu=document.querySelector(".mobile-nav");
 if(toggle&&menu){toggle.addEventListener("click",()=>{const o=menu.classList.toggle("open");toggle.setAttribute("aria-expanded",String(o));toggle.textContent=o?"×":"☰"});menu.addEventListener("click",e=>{if(e.target.closest("a")){menu.classList.remove("open");toggle.setAttribute("aria-expanded","false");toggle.textContent="☰"}})}
 const input=document.querySelector("#product-search");
-if(input){let filter="all",term="";const draw=()=>{const matching=rows.filter(p=>(filter==="all"||p[4]===filter)&&(p[0]+" "+p[1]+" "+p[2]).toLocaleLowerCase("ru").includes(term));document.querySelector("#catalog-results").innerHTML=matching.length?catalogBlock(matching):'<p class="search-empty">Ничего не найдено. Проверьте написание или номер артикула.</p>'};input.addEventListener("input",()=>{term=input.value.toLocaleLowerCase("ru").trim();draw()});document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===b));draw()}))}
+if(input){let filter="all",term="";const draw=()=>{const matching=rows.filter(p=>(filter==="all"||p[4]===filter)&&(p[0]+" "+p[1]+" "+p[2]).toLocaleLowerCase("ru").includes(term));document.querySelector("#catalog-results").innerHTML=matching.length?catalogBlock(matching):'<p class="search-empty">Ничего не найдено. Проверьте написание или номер артикула.</p>';if(window.EversensePrices)window.EversensePrices.render()};input.addEventListener("input",()=>{term=input.value.toLocaleLowerCase("ru").trim();draw()});document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===b));draw()}))}
 })();
