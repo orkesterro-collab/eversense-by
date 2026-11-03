@@ -9,7 +9,7 @@ from html.parser import HTMLParser
 BASE='https://ever-home.ru/'
 OUT=Path('reference')
 OUT.mkdir(exist_ok=True)
-MAX_PAGES=65
+MAX_PAGES=100
 HEADERS={'User-Agent':'Mozilla/5.0 (compatible; EVERSENSE-Belarus-archive/1.0; +brand-owner)'}
 class ResourceParser(HTMLParser):
  def __init__(self):super().__init__(convert_charrefs=True);self.assets=[];self.links=[];self.videos=[];self.meta=[];self.styles=[];self.groups=defaultdict(list)
@@ -56,7 +56,7 @@ def canonical(url):
  if re.search(r'\.(css|js|svg|png|jpg|jpeg|gif|webp|woff|woff2|pdf|zip|mp4|mov)$',u,re.I):return None
  return u
 
-queue=[BASE,'https://ever-home.ru/catalog-ru','https://ever-home.ru/catalog-ru/new-minimalism-ru','https://ever-home.ru/catalog-ru/quiet-luxury-ru','https://ever-home.ru/catalog-ru/nature-aesthetic-ru']
+queue=[BASE,'https://ever-home.ru/catalog-ru','https://ever-home.ru/catalog-ru/new-minimalism-ru','https://ever-home.ru/catalog-ru/quiet-luxury-ru','https://ever-home.ru/catalog-ru/nature-aesthetic-ru','https://ever-home.ru/en','https://ever-home.ru/ru','https://ever-home.ru/where-to-buy-map-ru','https://ever-home.ru/where-to-buy-list-ru','https://ever-home.ru/where-to-buy-map-en','https://ever-home.ru/where-to-buy-list-en','https://ever-home.ru/politica-ru','https://ever-home.ru/politica-en']
 robots,_,_=get(BASE+'robots.txt');sitemap_urls=[]
 if robots:
  for u in re.findall(r'(?im)^sitemap:\s*(\S+)',robots.decode('utf8','ignore')):sitemap_urls.append(u)
@@ -82,7 +82,7 @@ while queue and len(pages)<MAX_PAGES:
  for href in p.links:
   u=canonical(href)
   if u and u not in seen and u not in queue and len(queue)<200:
-   if len(u.split('/'))<=6 and ('catalog' in u or 'product' in u or u==BASE.rstrip('/')):queue.append(u)
+   if len(u.split('/'))<=6 and ('catalog' in u or 'product' in u or 'where-to-buy' in u or 'politica' in u or u.endswith('/en') or u.endswith('/ru') or u==BASE.rstrip('/')):queue.append(u)
   if u:rec['links'].append(u)
  # Tilda blocks
  rec['tilda_blocks']=re.findall(r'<div[^>]+class=["\'][^"\']*\bt-rec\b[^"\']*["\'][^>]+>',html)[:45]
