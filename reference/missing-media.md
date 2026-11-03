@@ -5,8 +5,8 @@
 Объём сохранённых ресурсов: **87.6 МБ**.
 
 ## Видео
-- saved · https://dl.dropboxusercontent.com/scl/fi/krjo6dc5k2udyk2s99k7p/1.mp4?rlkey=8klwitb2169p0glx8ra3zsx3c&st=26e3j6vc&dl=0
-- saved · https://dl.dropboxusercontent.com/scl/fi/23w6rkj5wf6yp79bse0cg/2.mp4?rlkey=61of26ipcgx4uxlths6oanls5&st=fqta5ktm&dl=0
+- cached · https://dl.dropboxusercontent.com/scl/fi/23w6rkj5wf6yp79bse0cg/2.mp4?rlkey=61of26ipcgx4uxlths6oanls5&st=fqta5ktm&dl=0
+- cached · https://dl.dropboxusercontent.com/scl/fi/krjo6dc5k2udyk2s99k7p/1.mp4?rlkey=8klwitb2169p0glx8ra3zsx3c&st=26e3j6vc&dl=0
 
 ## Недоступные файлы
 
