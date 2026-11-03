@@ -1,0 +1,24 @@
+/* Цены EVERSENSE Беларусь: обычные и акционные, адаптивно. */
+.ev-price-box{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 12px;font-family:Manrope,Arial,sans-serif;line-height:1.4;letter-spacing:normal}
+.ev-price-box .ev-price-normal{color:#343333;font-size:21px;font-weight:750}
+.ev-price-box .ev-price-before{color:#92908c;font-weight:500;font-size:16px;text-decoration:line-through}
+.ev-price-box .ev-price-sale{color:#b43a36;font-weight:800;font-size:23px}
+.ev-price-box .ev-price-until{color:#8e3632;background:#f6e4e2;border-radius:2px;font-size:13px;font-weight:650;padding:2px 6px;white-space:nowrap}
+.ev-price-box .ev-price-pending{color:#92908c;font-size:15px;font-weight:500}
+.ev-product-price-strip{padding:18px max(20px,calc((100% - 1200px)/2 + 40px)) 20px;background:#f7f5f1;border-bottom:1px solid #e4dfd8;box-sizing:border-box;min-height:75px}
+.ev-price-caption{display:block;color:#8c847c;font:500 12px Manrope,Arial,sans-serif;margin:0 0 5px}
+.ev-product-price-strip .ev-price-box{gap:4px 13px}
+.ev-product-price-strip .ev-price-normal{font-size:25px}
+.ev-product-price-strip .ev-price-sale{font-size:27px}
+.t396__elem>.ev-price-box--tile{position:absolute;z-index:4;top:calc(100% + 3px);left:0;max-width:max-content;min-width:105px;background:#fffefa;border:1px solid #e6dfd8;border-radius:3px;padding:4px 7px;box-shadow:0 2px 10px #0000000a;white-space:nowrap;font-size:12px;pointer-events:none}
+.t396__elem>.ev-price-box--tile .ev-price-normal{font-size:13px}
+.t396__elem>.ev-price-box--tile .ev-price-before{font-size:11px}
+.t396__elem>.ev-price-box--tile .ev-price-sale{font-size:14px}
+.t396__elem>.ev-price-box--tile .ev-price-until{font-size:11px;padding:1px 4px}
+.catalog-product>.ev-price-box--tile{margin-top:10px;padding:0 0 7px}
+.catalog-product>.ev-price-box--tile .ev-price-normal{font-size:15px}
+.catalog-product>.ev-price-box--tile .ev-price-before{font-size:12px}
+.catalog-product>.ev-price-box--tile .ev-price-sale{font-size:17px}
+.catalog-product>.ev-price-box--tile .ev-price-until{font-size:11px}
+.product-summary>.ev-price-box--alternate{margin:14px 0 22px}
+@media(max-width:600px){.ev-product-price-strip{padding:15px 20px 17px;min-height:65px}.ev-product-price-strip .ev-price-normal{font-size:21px}.ev-product-price-strip .ev-price-sale{font-size:23px}.ev-product-price-strip .ev-price-before{font-size:14px}.t396__elem>.ev-price-box--tile{padding:3px 4px;max-width:200px;white-space:normal;gap:2px 6px}.t396__elem>.ev-price-box--tile .ev-price-normal{font-size:12px}.t396__elem>.ev-price-box--tile .ev-price-sale{font-size:13px}}
