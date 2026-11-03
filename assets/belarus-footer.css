@@ -1,0 +1,12 @@
+/* Official EVERSENSE distributor information for the Republic of Belarus. */
+.ev-belarus-legal{background:#343333;color:#f0eee9;padding:44px 24px 27px;font-family:Manrope,Arial,sans-serif;font-weight:400;letter-spacing:normal;box-sizing:border-box}
+.ev-belarus-legal *{box-sizing:border-box}
+.ev-belarus-legal__inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:minmax(250px,.95fr) minmax(300px,1.2fr);gap:32px 72px;align-items:start}
+.ev-belarus-legal__eyebrow{color:#c0a58c;font-size:11px;text-transform:uppercase;letter-spacing:.17em;font-weight:700;line-height:1.6;margin:0 0 10px}
+.ev-belarus-legal__heading{color:#fff;font-size:clamp(17px,2vw,21px);font-weight:600;line-height:1.45;margin:0;letter-spacing:-.01em}
+.ev-belarus-legal__detail{font-size:14px;line-height:1.8;margin:0 0 3px;color:#f0eee9}
+.ev-belarus-legal__detail strong{font-weight:650;color:#fff}
+.ev-belarus-legal__phone{color:#e1c5a7!important;text-decoration:none;border-bottom:1px solid #c0a58c70;white-space:nowrap}
+.ev-belarus-legal__phone:hover,.ev-belarus-legal__phone:focus{border-color:#e1c5a7;color:#fff!important}
+.ev-belarus-legal__note{max-width:1200px;margin:26px auto 0;padding-top:15px;border-top:1px solid #ffffff29;color:#bdb8b1;font-size:11px;line-height:1.6}
+@media(max-width:700px){.ev-belarus-legal{padding:29px 20px 21px}.ev-belarus-legal__inner{grid-template-columns:1fr;gap:17px}.ev-belarus-legal__detail{font-size:13px}.ev-belarus-legal__heading{font-size:17px}.ev-belarus-legal__note{margin-top:22px}}
