@@ -1,3 +1,4 @@
+@import url('./belarus-footer.css');
 
 :root{--ink:#292b29;--muted:#716d67;--sand:#d6c2aa;--cream:#f7f5f1;--paper:#fffdf9;--line:#dedbd4;--dark:#262b29;--max:1390px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Manrope,Arial,sans-serif;-webkit-font-smoothing:antialiased}a{text-decoration:none;color:inherit}button,input{font:inherit}button{cursor:pointer}img{display:block;max-width:100%}::selection{background:#d7b99b;color:#292b29}
