@@ -55,27 +55,50 @@ jobs:
             exit 1
           fi
 
-      - name: Verify isolated FTP home and existing placeholder
+      - name: Verify FTP directory serves the Eversence domain
         env:
           FTP_PASSWORD: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
           FTP_CA: ${{ runner.temp }}/eversence-ftps.crt
+        shell: bash
         run: |
           python3 - <<'PY'
           import ftplib
+          import io
           import os
+          import secrets
           import ssl
+          import subprocess
+
           context = ssl.create_default_context(cafile=os.environ["FTP_CA"])
+          name = "eversence-ftp-probe-" + secrets.token_hex(12) + ".txt"
+          value = "eversence-verified-" + secrets.token_hex(20)
+          seen = []
           with ftplib.FTP_TLS(context=context, timeout=30) as ftp:
               ftp.connect("vh108.hoster.by", 21)
               ftp.login("eversence-deploy", os.environ["FTP_PASSWORD"])
               ftp.prot_p()
-              names = sorted(x.rsplit("/", 1)[-1] for x in ftp.nlst())
               print("FTP home:", ftp.pwd())
-              print("Existing FTP home entries:", names[:20])
-              if not names:
-                  print("Note: FTP home is empty")
-              elif "index.html" not in names:
-                  raise SystemExit("FTP home does not contain expected index.html, refusing to proceed")
+              print("Entries (before probe):", sorted(ftp.nlst())[:20])
+              try:
+                  ftp.storbinary("STOR " + name, io.BytesIO(value.encode("ascii")))
+                  for hostname in ("eversence.by", "www.eversence.by"):
+                      url = "https://" + hostname + "/" + name
+                      test = subprocess.run(
+                          ["curl", "-ksSL", "--max-time", "15", "--resolve",
+                           hostname + ":443:87.232.64.108", url],
+                          text=True, capture_output=True, timeout=25,
+                      )
+                      if test.returncode == 0 and test.stdout.strip() == value:
+                          seen.append(hostname)
+                          print(hostname, "serves this FTP directory")
+                      else:
+                          print(hostname, "does NOT serve this FTP directory; HTTP check result", test.returncode)
+                  if not seen:
+                      raise SystemExit("Blocked: FTP home is not verified as Eversence website root. No site files uploaded.")
+                  print("Verified domain(s):", ", ".join(seen))
+              finally:
+                  ftp.delete(name)
+                  print("Removed temporary probe file")
           PY
 
       - name: Stage public website files only
@@ -108,6 +131,6 @@ jobs:
           security: strict
           local-dir: ./_deploy/
           server-dir: ./
-          dry-run: ${{ github.event_name != 'workflow_dispatch' || !inputs.publish }}
+          dry-run: ${{ github.event_name == 'workflow_dispatch' && !inputs.publish }}
           dangerous-clean-slate: false
           log-level: standard
