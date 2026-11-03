@@ -88,7 +88,7 @@
     });
   }
   function locationLabel(p) {
-    return p.city === "Минск" && p.district ? p.city + " · " + p.district + " район" : p.city;
+    return p.city.toLocaleLowerCase("ru") === "минск" && p.district ? p.city + " · " + p.district + " район" : p.city;
   }
   function filtered() {
     var q = trim(el("partners-search").value).toLocaleLowerCase("ru");
@@ -112,7 +112,6 @@
     var phoneMarkup = p.demo ? escapeHTML(p.phone || "Не указан") + " (пример)"
       : tel ? '<a href="' + escapeHTML(tel) + '">' + escapeHTML(p.phone) + "</a>"
       : escapeHTML(p.phone || "Не указан");
-    var rank = p.order == null ? "без номера" : "№ " + p.order;
     return '<details class="partner-card" data-partner-id="' + key + '">' +
       '<summary><span class="partner-card__head">' +
         '<span class="partner-card__name">' + escapeHTML(p.name) + demo + '</span>' +
@@ -125,7 +124,7 @@
           '<div class="partner-card__row"><dt>Сайт</dt><dd>' + siteMarkup + '</dd></div>' +
           '<div class="partner-card__row"><dt>Режим работы</dt><dd>' + escapeHTML(p.hours || "Уточняется") + '</dd></div>' +
         '</dl>' +
-        '<div class="partner-card__foot"><span class="partner-card__sort">Порядок: ' + escapeHTML(rank) + '</span>' +
+        '<div class="partner-card__foot">' +
         (validCoords(p.lat, p.lng) ? '<button type="button" class="partner-card__showmap" data-map-id="' + key + '">Показать на карте ↗</button>' : '') +
         '</div>' +
       '</div></details>';
@@ -142,14 +141,18 @@
       var rb = all.get(b).slice().sort(orderByRank)[0];
       return orderByRank(ra, rb) || locale.compare(a, b);
     });
-    var showAll = !!(trim(el("partners-search").value) || el("partners-city").value);
+    // District names and their dealer cards are always visible.
+    // Only individual dealer contact details require a click.
     return '<div class="district-grid">' + districts.map(function (district) {
       var records = all.get(district).slice().sort(orderByRank);
-      return '<details class="district-group"' + (showAll ? " open" : "") + '>' +
-        '<summary><span>' + escapeHTML(district) + ' район</span><span class="district-group__count">'
-        + records.length + ' ' + plural(records.length, "точка", "точки", "точек") + '</span><span class="chevron" aria-hidden="true"></span></summary>' +
+      var title = district === "Район не указан" ? district : district + " район";
+      return '<section class="district-group" aria-label="' + escapeHTML(title) + '">' +
+        '<div class="district-group__heading"><h3 class="district-group__name">' +
+          escapeHTML(title) + '</h3><span class="district-group__count">' +
+          records.length + ' ' + plural(records.length, "салон", "салона", "салонов") +
+          '</span></div>' +
         '<div class="district-group__body"><div class="partner-list">' +
-          records.map(partnerMarkup).join("") + '</div></div></details>';
+          records.map(partnerMarkup).join("") + '</div></div></section>';
     }).join("") + "</div>";
   }
   function plural(n, one, two, many) {
@@ -169,14 +172,23 @@
       var minsk = city.toLocaleLowerCase("ru") === "минск";
       var body = minsk ? districtMarkup(records) : '<div class="partner-list">' +
         records.map(partnerMarkup).join("") + "</div>";
+      var iconName = minsk ? "⌂" : "⌖";
+      var title = '<span class="city-group__left"><span class="city-group__icon" aria-hidden="true">' +
+        iconName + '</span><span><span class="city-group__name">' + escapeHTML(city) +
+        '</span><span class="city-group__meta">' +
+        (minsk ? "Все районы сразу" : "Салоны и контакты") +
+        '</span></span></span>';
+      var count = '<span class="city-group__right">' +
+        records.length + " " + plural(records.length, "партнёр", "партнёра", "партнёров");
+      if (minsk) {
+        // Minsk cannot be collapsed: its nine districts and all dealer names are immediately visible.
+        return '<section class="city-group city-group--minsk" data-city="' + escapeHTML(city) +
+          '" aria-label="Партнёры Минска по районам">' +
+          '<div class="city-group__heading">' + title + count + '</span></div>' +
+          '<div class="city-group__body">' + body + '</div></section>';
+      }
       return '<details class="city-group" data-city="' + escapeHTML(city) + '"' +
-        (minsk || allExpanded ? " open" : "") + '><summary>' +
-        '<span class="city-group__left"><span class="city-group__icon" aria-hidden="true">' +
-        (minsk ? "⌂" : "⌖") + '</span><span><span class="city-group__name">' +
-        escapeHTML(city) + '</span><span class="city-group__meta">' +
-        (minsk ? "По районам города" : "Салоны и контакты") +
-        '</span></span></span><span class="city-group__right">' +
-        records.length + " " + plural(records.length, "партнёр", "партнёра", "партнёров") +
+        (allExpanded ? " open" : "") + '><summary>' + title + count +
         '<span class="chevron" aria-hidden="true"></span></span></summary>' +
         '<div class="city-group__body">' + body + "</div></details>";
     }).join("");

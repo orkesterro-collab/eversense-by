@@ -41,7 +41,13 @@ with sync_playwright() as playwright:
 
             # Expanding partner shows all requested contact fields.
             minsk = page.locator('.city-group[data-city="Минск"]')
-            minsk.locator(".district-group > summary").first.click()
+            row["minsk_static_section"] = minsk.evaluate("el => el.tagName === 'SECTION'")
+            row["district_headers_visible"] = minsk.locator(".district-group__heading:visible").count()
+            row["district_accordions"] = minsk.locator(".district-group > summary").count()
+            assert row["minsk_static_section"], "Minsk must not be collapsible"
+            assert row["district_headers_visible"] == 9, "All 9 districts must be visible immediately"
+            assert row["district_accordions"] == 0, "Districts must not require a click"
+            assert minsk.locator(".partner-card:visible").count() == 10, "All Minsk dealers must be visible"
             partner = minsk.locator(".partner-card").first
             partner.locator("summary").click()
             assert partner.get_attribute("open") is not None, "Contact accordion did not open"
@@ -112,5 +118,5 @@ for err in errors:
     print("PARTNER_BROWSER_QA FAIL:", err, flush=True)
 if errors:
     raise SystemExit("Partner browser QA failed")
-print("PASS: 40 partners, Minsk districts, city filter, marker sync, demo notice,",
+print("PASS: 40 partners, always-visible Minsk districts, city filter, marker sync, demo notice,",
       "contact accordion and numerical ranking in desktop/mobile browser.", flush=True)

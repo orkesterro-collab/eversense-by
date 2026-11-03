@@ -3,3 +3,87 @@
 @media(max-width:900px){.top-nav{gap:14px}.top-nav a{font-size:11px}.brand{font-size:22px}.site-top__inner{height:74px}.intro__inner{padding-top:75px;padding-bottom:70px}.intro__meta{min-width:150px}.intro__meta strong{font-size:50px}.partner-list,.district-grid{grid-template-columns:1fr}.footer__inner{grid-template-columns:1fr 1fr}.footer__links{grid-column:1/-1;flex-direction:row}}
 @media(max-width:650px){.site-top__inner{padding:0 18px;height:66px}.brand{font-size:21px}.brand small{font-size:6px;letter-spacing:.26em}.top-nav{display:none}.header-catalog{font-size:11px;padding:9px 10px}.header-catalog span{margin-left:4px}.intro__inner{padding:62px 21px 54px;display:block}.intro h1{font-size:40px;margin:19px 0}.intro__lead{font-size:13px;line-height:1.8}.intro__meta{border-left:0;border-top:1px solid #567266;padding:18px 0 0;margin-top:33px;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:8px 16px}.intro__meta strong{font-size:44px;grid-row:span 2}.intro__meta span{font-size:11px}.intro__meta small{font-size:10px}.partners-area{padding:20px 13px 12px}.controls{flex-wrap:wrap;gap:9px}.search-field{flex:1 0 100%}.search-field input{height:51px;font-size:12px}.city-select{min-width:0;flex:1;height:48px}.city-select select{height:46px}.clear-button{height:48px;padding:0 14px}.demo-banner{align-items:flex-start;font-size:10px;padding:12px}.demo-banner p{font-size:11px}.map-frame #partners-map{height:355px}.map-note{position:static;max-width:none;font-size:10px;background:#fff;border-radius:0;padding:9px 13px}.map-reset{top:10px;right:10px;padding:10px 11px;font-size:10px}.list-section{padding:44px 15px 65px}.list-heading{display:block;padding-bottom:23px}.list-heading h2{font-size:35px}.list-heading p{font-size:12px}.list-count{display:inline-block;margin-top:16px}.city-group>summary{padding:17px 14px}.city-group__left{gap:10px}.city-group__icon{width:36px;height:36px;font-size:16px}.city-group__name{font-size:18px}.city-group__right{gap:12px;font-size:11px}.city-group__body{padding:12px}.district-group>summary{padding:14px}.partner-card>summary{padding:14px}.partner-card__body{padding:14px}.partner-card__row{grid-template-columns:77px minmax(0,1fr);gap:7px}.footer__inner{padding:37px 22px;grid-template-columns:1fr;gap:25px}.footer__links{grid-column:auto;display:flex;flex-direction:row;flex-wrap:wrap;gap:16px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{scroll-behavior:auto;transition:none!important}}
+
+
+/* EVERSENSE directory refinement: quiet premium palette, fewer nested boxes. */
+:root{
+  --ink:#2b3a32;
+  --deep:#273b33;
+  --forest:#446b55;
+  --sage:#b3c4b5;
+  --cream:#f8f7f3;
+  --paper:#fffefa;
+  --line:#e1e5de;
+  --gold:#c8b18d;
+}
+body{background:#f8f8f5}
+.site-top{background:#223a32}
+.site-top__inner{max-width:1270px}
+.intro{background:linear-gradient(114deg,#263e35 8%,#3a5548 96%)}
+.intro__inner{max-width:1270px;padding-top:76px;padding-bottom:76px}
+.intro h1{letter-spacing:-.045em;font-weight:500}
+.intro__meta strong{font-weight:500}
+.partners-area,.list-section,.footer__inner{max-width:1270px}
+.partners-area{padding-top:31px}
+.map-frame{border-radius:7px;box-shadow:0 11px 36px #253d2912}
+.list-section{padding-top:54px}
+.list-heading{padding-bottom:29px;margin-bottom:12px}
+.list-heading h2{font-weight:520;letter-spacing:-.04em}
+.list-heading p{max-width:740px}
+.groups{gap:12px}
+.city-group{border:1px solid #e2e6df;border-radius:5px;box-shadow:0 1px 2px #283b2906}
+.city-group:not(.city-group--minsk)>summary{padding:21px 25px}
+.city-group:not(.city-group--minsk)[open]>summary{background:#f2f5f1}
+.city-group:not(.city-group--minsk)>.city-group__body{padding:21px 24px 25px}
+.city-group--minsk{border:0;border-radius:0;background:transparent;box-shadow:none}
+.city-group--minsk>.city-group__heading{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:21px 3px 22px;border-bottom:1px solid #cad7cb;
+}
+.city-group--minsk .city-group__icon{background:#dfe9e0;color:#365b47}
+.city-group--minsk .city-group__name{font-size:24px}
+.city-group--minsk .city-group__meta{font-size:12px}
+.city-group--minsk>.city-group__body{padding:22px 0 30px}
+.district-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 34px}
+.district-group{
+  border:0;border-top:1px solid #d6ded4;border-radius:0;background:transparent;min-width:0;
+}
+.district-group__heading{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;min-height:52px;padding:16px 0 13px;
+}
+.district-group__name{font-size:13px;font-weight:800;color:#365242;line-height:1.4;margin:0}
+.district-group__count{font-size:11px;font-weight:600;color:#8a978c;white-space:nowrap}
+.district-group__body{padding:0}
+.district-group .partner-list{grid-template-columns:1fr}
+.partner-card{border-color:#e4e9e2;border-radius:5px}
+.partner-card>summary{padding:18px 18px}
+.partner-card>summary:hover{background:#f6f8f4}
+.partner-card__name{font-size:14px;font-weight:750}
+.partner-card__sub{font-size:11px}
+.partner-card__foot{justify-content:flex-end}
+.partner-card--selected{border-color:#759b7c;box-shadow:0 0 0 2px #85a58a25}
+.city-group--minsk .partner-card{
+  background:#fff;border:1px solid #e5e9e2;box-shadow:0 2px 12px #243a2b08;
+}
+.city-group:not(.city-group--minsk) .partner-card{background:#fff}
+.city-group__right{white-space:nowrap}
+@media(max-width:900px){
+  .district-grid{grid-template-columns:1fr;gap:22px}
+  .city-group--minsk .city-group__name{font-size:21px}
+}
+@media(max-width:650px){
+  .intro__inner{padding:60px 21px 49px}
+  .intro h1{font-size:39px}
+  .partners-area{padding-top:20px}
+  .list-section{padding-top:43px}
+  .city-group--minsk>.city-group__heading{padding:17px 1px 20px}
+  .city-group--minsk>.city-group__body{padding:18px 0 28px}
+  .city-group--minsk .city-group__name{font-size:21px}
+  .district-grid{gap:20px}
+  .district-group__heading{min-height:49px;padding:13px 0 12px}
+  .district-group__name{font-size:13px}
+  .partner-card>summary{padding:16px 15px}
+  .city-group:not(.city-group--minsk)>summary{padding:17px 15px}
+  .city-group:not(.city-group--minsk)>.city-group__body{padding:14px}
+}
