@@ -1,6 +1,10 @@
 name: Eversence - preview or deploy to hoster.by
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/deploy-hoster.yml"
   workflow_dispatch:
     inputs:
       publish:
@@ -60,6 +64,6 @@ jobs:
           security: strict
           local-dir: ./_deploy/
           server-dir: ./
-          dry-run: ${{ !inputs.publish }}
+          dry-run: ${{ github.event_name != 'workflow_dispatch' || !inputs.publish }}
           dangerous-clean-slate: false
           log-level: standard
