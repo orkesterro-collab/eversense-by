@@ -71,8 +71,8 @@ jobs:
           import subprocess
 
           context = ssl.create_default_context(cafile=os.environ["FTP_CA"])
-          name = "eversence-ftp-probe-" + secrets.token_hex(12) + ".txt"
-          value = "eversence-verified-" + secrets.token_hex(20)
+          name = "eversense-ftp-probe-" + secrets.token_hex(12) + ".txt"
+          value = "eversense-verified-" + secrets.token_hex(20)
           seen = []
           with ftplib.FTP_TLS(context=context, timeout=30) as ftp:
               ftp.connect("vh108.hoster.by", 21)
@@ -82,7 +82,7 @@ jobs:
               print("Entries (before probe):", sorted(ftp.nlst())[:20])
               try:
                   ftp.storbinary("STOR " + name, io.BytesIO(value.encode("ascii")))
-                  for hostname in ("eversence.by", "www.eversence.by"):
+                  for hostname in ("eversense.by", "www.eversense.by"):
                       url = "https://" + hostname + "/" + name
                       test = subprocess.run(
                           ["curl", "-ksSL", "--max-time", "15", "--resolve",
@@ -119,21 +119,21 @@ jobs:
       # Strict FTPS and pinned server certificate; domain root verified above.
       # Deploy files without deleting unrelated remote content.
       - name: Upload verified Eversence website via FTPS
-        if: ${{ github.event_name == 'push' || inputs.publish }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.publish }}
         env:
           FTP_PASSWORD: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
           FTP_CA: ${{ runner.temp }}/eversence-ftps.crt
         run: python3 .github/scripts/deploy_ftps.py
 
       - name: Check live website after publication
-        if: ${{ github.event_name == 'push' || inputs.publish }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.publish }}
         run: |
           python3 - <<'PY'
           import subprocess
           import time
           import pathlib
           expected = pathlib.Path("_deploy/index.html").read_bytes()
-          for name in ("eversence.by", "www.eversence.by"):
+          for name in ("eversense.by", "www.eversense.by"):
               url = f"https://{name}/"
               ok = False
               for attempt in range(6):
