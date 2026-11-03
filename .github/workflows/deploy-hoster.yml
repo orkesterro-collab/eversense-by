@@ -76,7 +76,7 @@ jobs:
           seen = []
           with ftplib.FTP_TLS(context=context, timeout=30) as ftp:
               ftp.connect("vh108.hoster.by", 21)
-              ftp.login("eversence-deploy", os.environ["FTP_PASSWORD"])
+              ftp.login("eversense-deploy", os.environ["FTP_PASSWORD"])
               ftp.prot_p()
               print("FTP home:", ftp.pwd())
               print("Entries (before probe):", sorted(ftp.nlst())[:20])
