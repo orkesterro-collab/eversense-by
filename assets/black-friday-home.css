@@ -38,3 +38,9 @@
  #rec1028545506 .t396__artboard > .prevButton,
  #rec1028545506 .t396__artboard > .nextButton{z-index:110!important}
 }
+
+/* Seasonal campaign expires automatically after 29 November 2026. */
+.ev-bf-campaign-ended #rec1028545506 .ev-bf-home{display:none!important}
+.ev-bf-campaign-ended #rec1028545506 .t396__artboard > .t396__elem:not(.prevButton):not(.nextButton){
+  visibility:visible!important;pointer-events:auto!important
+}
