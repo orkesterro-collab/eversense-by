@@ -8,7 +8,7 @@ before uploading to the standalone https://eversense.by domain.
 from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlsplit, unquote
+from urllib.parse import urlsplit, urlunsplit, unquote
 import json
 import posixpath
 import re
@@ -62,9 +62,48 @@ def resolve(source, url):
     return route
 
 
+def normalize_directory_link(raw, source, route_paths):
+    parsed = urlsplit(raw)
+    host = parsed.netloc.lower()
+    if host and host not in {"eversense.by", "www.eversense.by"}:
+        return raw
+    if parsed.scheme and parsed.scheme not in {"http", "https"}:
+        return raw
+    route = parsed.path
+    if not route:
+        return raw
+    if route.startswith("/"):
+        normalized = posixpath.normpath(route)
+    else:
+        base = "/" + source.parent.relative_to(ROOT).as_posix().lstrip("./")
+        normalized = posixpath.normpath(posixpath.join(base, route))
+    if normalized not in route_paths or route.endswith("/"):
+        return raw
+    route = route + "/"
+    scheme = "https" if host else parsed.scheme
+    return urlunsplit((scheme, parsed.netloc, route, parsed.query, parsed.fragment))
+
+
+def rewrite_directory_hrefs(html, source, route_paths):
+    href = re.compile(r"""(?P<head>\b(?:href|action)\s*=\s*)(?P<quote>["'])(?P<value>[^"']+)(?P=quote)""", re.I)
+    count = 0
+    def change(match):
+        nonlocal count
+        old = match.group("value")
+        new = normalize_directory_link(old, source, route_paths)
+        if new != old:
+            count += 1
+        return match.group("head") + match.group("quote") + new + match.group("quote")
+    return href.sub(change, html), count
+
+
 def main():
     files = [p for p in ROOT.rglob("*") if p.is_file() and p.suffix.lower() in TRANSFORM_EXTS]
     transformed = Counter()
+    changed_html = []
+    normalized_count = 0
+    directories = {"/" + p.parent.relative_to(ROOT).as_posix() for p in ROOT.rglob("index.html")
+                   if p.parent != ROOT}
     for p in files:
         raw = p.read_text(encoding="utf-8", errors="replace")
         updated = raw.replace(PAGES_HOST, "/").replace(PREFIX, "/")
@@ -74,7 +113,12 @@ def main():
         updated = re.sub(r"""href=(["'])(\+\d{10,15})\1""",
                          lambda m: "href=" + m.group(1) + "tel:" + m.group(2) + m.group(1),
                          updated)
+        if p.suffix.lower() == ".html":
+            updated, changed_links = rewrite_directory_hrefs(updated, p, directories)
+            normalized_count += changed_links
         if updated != raw:
+            if p.suffix.lower() == ".html":
+                changed_html.append(p.relative_to(ROOT).as_posix())
             transformed[p.suffix.lower()] += 1
             p.write_text(updated, encoding="utf-8")
         if PREFIX in updated:
@@ -95,6 +139,8 @@ def main():
     print("SITE_AUDIT page_count =", len(page_paths), flush=True)
     print("SITE_AUDIT attributes_checked =", checked, flush=True)
     print("SITE_AUDIT transformed_files =", dict(transformed), flush=True)
+    print("SITE_AUDIT normalized_directory_links =", normalized_count, flush=True)
+    Path("site-changed-html.json").write_text(json.dumps(changed_html, ensure_ascii=False), encoding="utf-8")
     print("SITE_AUDIT unmatched_local_targets =", len(missing), flush=True)
     for path, count in missing.most_common(70):
         print(f"SITE_AUDIT unmatched ({count}): {path} | {sample[path]}", flush=True)
