@@ -1,0 +1,27 @@
+name: QA original and Belarus site in browsers
+on:
+  push:
+    paths:
+      - scripts/qa_browser.py
+      - .github/workflows/qa-browser.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Playwright
+        run: |
+          python3 -m pip install --break-system-packages playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Check mobile and desktop rendering
+        run: python3 scripts/qa_browser.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eversense-browser-screenshots
+          path: screenshots/
+          retention-days: 7
