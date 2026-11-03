@@ -133,7 +133,7 @@ def rewrite_page(page):
  h=h.replace('</head>','<link rel="stylesheet" href="'+css_rel+'"></head>',1)
  price_css_rel=os.path.relpath(ROOT/'assets'/'prices.css',dest.parent).replace(chr(92),'/')
  price_js_rel=os.path.relpath(ROOT/'assets'/'prices.js',dest.parent).replace(chr(92),'/')
- h=h.replace('</head>','<link rel="stylesheet" href="'+price_css_rel+'"><script defer src="'+price_js_rel+'"></script></head>',1)
+ h=h.replace('</head>','<link rel="stylesheet" href="'+price_css_rel+'"><script defer src="'+price_js_rel+'?v=20261103"></script></head>',1)
  if dest==ROOT/'index.html':
   h=h.replace('</head>','<link rel="stylesheet" href="assets/home-footer-trim.css"></head>',1)
  h=h.replace('</body>',"<section class=\"ev-belarus-legal\" aria-label=\"Реквизиты представителя EVERSENSE в Беларуси\"><div class=\"ev-belarus-legal__inner\"><div><p class=\"ev-belarus-legal__eyebrow\">EVERSENSE · Беларусь</p><h2 class=\"ev-belarus-legal__heading\">Представитель торговой марки EVERSENSE<br>на территории Республики Беларусь</h2></div><div><p class=\"ev-belarus-legal__detail\"><strong>ООО «Флорсток»</strong></p><p class=\"ev-belarus-legal__detail\">УНП 192608003</p><p class=\"ev-belarus-legal__detail\">220062, Республика Беларусь, г. Минск,<br>пр. Победителей, д. 129, пом. 358</p><p class=\"ev-belarus-legal__detail\">Тел.: <a class=\"ev-belarus-legal__phone\" href=\"tel:+375296713971\">+375 29 671-39-71</a></p></div></div><p class=\"ev-belarus-legal__note\">Информационный сайт EVERSENSE в Республике Беларусь.</p></section>"+'</body>')
