@@ -44,3 +44,14 @@
 .ev-bf-campaign-ended #rec1028545506 .t396__elem:not(.prevButton):not(.nextButton){
   visibility:visible!important;pointer-events:auto!important
 }
+
+/* The source Tilda homepage has a floating "up-banner" record with two
+   duplicate headings above the three slides. Hide those while campaign runs. */
+#rec1131720891 .t396__elem[data-elem-id="1746294093150"],
+#rec1131720891 .t396__elem[data-elem-id="1746294093154"]{
+  visibility:hidden!important;pointer-events:none!important;
+}
+.ev-bf-campaign-ended #rec1131720891 .t396__elem[data-elem-id="1746294093150"],
+.ev-bf-campaign-ended #rec1131720891 .t396__elem[data-elem-id="1746294093154"]{
+  visibility:visible!important;pointer-events:auto!important;
+}
