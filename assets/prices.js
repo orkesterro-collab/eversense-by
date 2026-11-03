@@ -1,5 +1,5 @@
 /* EVERSENSE Беларусь: публичный прайс Google Sheets. Не хранит ключей/паролей.
-   Схема листа price: sku | name | price | sale_price | sale_until */
+   Схема листа price: sku | name | price | sale_price | sale_until | sale_from */
 (function () {
   "use strict";
   var SHEET_ID = "1zzypRi-wST20xu0rns-uSnGk7NmikkW2kw44jvsDgBY";
@@ -33,7 +33,9 @@
   function activePrice(sku) {
     var d=table[String(sku||"").toUpperCase()];
     if (!d || !d.price) return null;
-    return {normal:d.price, sale:d.sale && d.sale<d.price && d.until && d.until>=todayMinsk()?d.sale:null,until:d.until};
+    var today=todayMinsk();
+    var saleActive=!!(d.sale && d.sale<d.price && d.until && d.until>=today && (!d.from || d.from<=today));
+    return {normal:d.price, sale:saleActive?d.sale:null,until:d.until,from:d.from};
   }
   function money(n) {
     return n.toLocaleString("ru-RU",{minimumFractionDigits:2,maximumFractionDigits:2})+" BYN/м²";
@@ -138,7 +140,7 @@
       var c=row.c||[],v=function(i){return c[i]&&c[i].v;},f=function(i){return c[i]&&c[i].f;};
       var sku=String(v(0)||"").trim().toUpperCase();
       if(!/^EL\d{3,4}$/.test(sku))return;
-      newTable[sku]={price:number(v(1)),sale:number(v(2)),until:date(v(3),f(3))};
+      newTable[sku]={price:number(v(1)),sale:number(v(2)),until:date(v(3),f(3)),from:date(v(4),f(4))};
     });
     table=newTable;loaded=true;render();
     setTimeout(render,1000);
@@ -152,7 +154,7 @@
     s.src="https://docs.google.com/spreadsheets/d/"+SHEET_ID+
       "/gviz/tq?"+new URLSearchParams({
         tqx:"out:json;responseHandler:EversensePriceFeed",
-        sheet:"price",headers:"1",tq:"select A,C,D,E",
+        sheet:"price",headers:"1",tq:"select A,C,D,E,F",
         nonce:String(Date.now())
       }).toString();
     s.onerror=function(){console.warn("EVERSENSE: нет доступа к опубликованной таблице price");};
