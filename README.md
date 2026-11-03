@@ -16,3 +16,5 @@
 Источник структуры и характеристик: https://ever-home.ru/ и https://ever-home.ru/catalog-ru .
 
 Публикация: GitHub Pages workflow `.github/workflows/deploy-pages.yml`.
+
+Главная страница: старая строка копирайта Tilda с подписью агентства скрыта через `assets/home-footer-trim.css`. Основной навигационный подвал и юридические реквизиты ООО «Флорсток» сохранены.
