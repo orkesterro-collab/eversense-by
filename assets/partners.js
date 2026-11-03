@@ -103,6 +103,7 @@
   function partnerMarkup(p) {
     var key = escapeHTML(p.id);
     var demo = p.demo ? '<span class="demo-tag">ДЕМО</span>' : "";
+    var displayName = p.demo ? p.name.replace(/^ДЕМО\s*[•·-]\s*/i, "") : p.name;
     var site = toWebsite(p.website);
     var siteMarkup = p.demo ? escapeHTML(p.website || "Не указан") + " (пример)"
       : site ? '<a target="_blank" rel="noopener noreferrer" href="' + escapeHTML(site) + '">'
@@ -114,8 +115,7 @@
       : escapeHTML(p.phone || "Не указан");
     return '<details class="partner-card" data-partner-id="' + key + '">' +
       '<summary><span class="partner-card__head">' +
-        '<span class="partner-card__name">' + escapeHTML(p.name) + demo + '</span>' +
-        '<span class="partner-card__sub">' + escapeHTML(locationLabel(p)) + '</span>' +
+        '<span class="partner-card__name">' + escapeHTML(displayName) + demo + '</span>' +
       '</span><span class="chevron" aria-hidden="true"></span></summary>' +
       '<div class="partner-card__body">' +
         '<dl>' +
@@ -148,23 +148,17 @@
       var title = district === "Район не указан" ? district : district + " район";
       return '<section class="district-group" aria-label="' + escapeHTML(title) + '">' +
         '<div class="district-group__heading"><h3 class="district-group__name">' +
-          escapeHTML(title) + '</h3><span class="district-group__count">' +
-          records.length + ' ' + plural(records.length, "салон", "салона", "салонов") +
-          '</span></div>' +
+          escapeHTML(title) + '</h3></div>' +
         '<div class="district-group__body"><div class="partner-list">' +
           records.map(partnerMarkup).join("") + '</div></div></section>';
     }).join("") + "</div>";
-  }
-  function plural(n, one, two, many) {
-    var m = n % 10, tens = n % 100;
-    return tens >= 11 && tens <= 14 ? many : m === 1 ? one : m >= 2 && m <= 4 ? two : many;
   }
   function renderList(items) {
     var root = el("partners-groups");
     var cities = cityNames(items);
     var allExpanded = !!(trim(el("partners-search").value) || el("partners-city").value);
     if (!items.length) {
-      root.innerHTML = '<div class="no-results">По вашему запросу точек нет. Измените фильтр или сбросьте поиск.</div>';
+      root.innerHTML = '<div class="no-results">По вашему запросу партнёры не найдены. Измените фильтр или сбросьте поиск.</div>';
       return;
     }
     root.innerHTML = cities.map(function (city) {
@@ -172,24 +166,16 @@
       var minsk = city.toLocaleLowerCase("ru") === "минск";
       var body = minsk ? districtMarkup(records) : '<div class="partner-list">' +
         records.map(partnerMarkup).join("") + "</div>";
-      var iconName = minsk ? "⌂" : "⌖";
-      var title = '<span class="city-group__left"><span class="city-group__icon" aria-hidden="true">' +
-        iconName + '</span><span><span class="city-group__name">' + escapeHTML(city) +
-        '</span><span class="city-group__meta">' +
-        (minsk ? "Все районы сразу" : "Салоны и контакты") +
-        '</span></span></span>';
-      var count = '<span class="city-group__right">' +
-        records.length + " " + plural(records.length, "партнёр", "партнёра", "партнёров");
+      var title = '<span class="city-group__name">' + escapeHTML(city) + '</span>';
       if (minsk) {
-        // Minsk cannot be collapsed: its nine districts and all dealer names are immediately visible.
         return '<section class="city-group city-group--minsk" data-city="' + escapeHTML(city) +
           '" aria-label="Партнёры Минска по районам">' +
-          '<div class="city-group__heading">' + title + count + '</span></div>' +
+          '<div class="city-group__heading">' + title + '</div>' +
           '<div class="city-group__body">' + body + '</div></section>';
       }
       return '<details class="city-group" data-city="' + escapeHTML(city) + '"' +
-        (allExpanded ? " open" : "") + '><summary>' + title + count +
-        '<span class="chevron" aria-hidden="true"></span></span></summary>' +
+        (allExpanded ? " open" : "") + '><summary>' + title +
+        '<span class="chevron" aria-hidden="true"></span></summary>' +
         '<div class="city-group__body">' + body + "</div></details>";
     }).join("");
   }
@@ -282,9 +268,6 @@
   }
   function render() {
     var list = filtered();
-    el("partners-count").textContent = String(partners.length);
-    el("cities-count").textContent = cityNames(partners).length + " городов, включая Минск";
-    el("partners-showing").textContent = list.length + " из " + partners.length + " точек";
     el("partners-demo").hidden = !list.some(function (p) { return p.demo; });
     renderList(list);
     renderMap(list);

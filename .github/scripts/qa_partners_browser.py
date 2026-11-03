@@ -37,6 +37,12 @@ with sync_playwright() as playwright:
             assert row["districts"] == 9, row
             assert row["map_markers"] == 40, "All 40 markers should appear on map: " + str(row)
             assert row["demo_banner_visible"], "Demo data must be clearly labeled"
+            assert page.locator(".district-group__count,.city-group__right,#partners-count,#cities-count,#partners-showing").count() == 0, "Visible partner counters must be removed"
+            border = page.locator('.city-group[data-city="Минск"] .partner-card').first.evaluate(
+                "el => ({width:getComputedStyle(el).borderTopWidth,shadow:getComputedStyle(el).boxShadow})")
+            row["partner_card_style"] = border
+            assert border["width"] == "0px" and border["shadow"] == "none", "Dealer rows must have no boxes or shadows"
+            assert not page.locator(".partner-card__sub:visible").count(), "Duplicate district caption must be removed"
             assert page.locator('a[href="https://example.com"]').count() == 0, "Demo websites must not be promoted as real links"
 
             # Expanding partner shows all requested contact fields.

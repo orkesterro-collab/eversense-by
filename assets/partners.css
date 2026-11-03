@@ -87,3 +87,88 @@ body{background:#f8f8f5}
   .city-group:not(.city-group--minsk)>summary{padding:17px 15px}
   .city-group:not(.city-group--minsk)>.city-group__body{padding:14px}
 }
+
+
+/* 2026-11-03: minimal text-first directory, without boxed dealer cards or visible counts. */
+.intro__inner{align-items:start;justify-content:flex-start}
+.intro__inner>div:first-child{width:100%;max-width:800px}
+.list-heading{display:block;border-bottom:0!important;padding-bottom:0!important;margin-bottom:32px}
+.groups{gap:0}
+.city-group,
+.city-group--minsk,
+.city-group:not(.city-group--minsk),
+.district-group,
+.partner-card,
+.city-group--minsk .partner-card,
+.city-group:not(.city-group--minsk) .partner-card{
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+  background:transparent!important;
+}
+.city-group:not(.city-group--minsk)>summary,
+.city-group:not(.city-group--minsk)[open]>summary{
+  background:transparent!important;border:0!important;padding:18px 0!important;
+  border-radius:0!important;
+}
+.city-group:not(.city-group--minsk)>summary:hover,
+.partner-card>summary:hover,
+.partner-card[open]>summary{
+  background:transparent!important;
+}
+.city-group:not(.city-group--minsk)>.city-group__body{padding:0 0 16px!important}
+.city-group--minsk{margin-bottom:22px}
+.city-group--minsk>.city-group__heading{
+  padding:0 0 21px!important;border:0!important;display:block;
+}
+.city-group--minsk .city-group__name{font-size:23px;font-weight:700}
+.city-group--minsk>.city-group__body{padding:0 0 12px!important}
+.district-grid{gap:26px 46px}
+.district-group{border:0!important;padding:0;min-width:0}
+.district-group__heading{padding:0 0 7px!important;min-height:unset!important;border:0!important}
+.district-group__name{font-size:13px;font-weight:700;color:#456450;letter-spacing:.004em}
+.district-group__body{padding:0!important}
+.partner-list,.district-group .partner-list{gap:0}
+.partner-card{margin:0!important;border:0!important}
+.partner-card>summary{
+  display:flex;gap:14px;padding:10px 0 11px!important;
+  background:transparent!important;border:0!important;min-height:48px;
+}
+.partner-card__name{font-size:14px;line-height:1.55;font-weight:650;letter-spacing:-.008em}
+.partner-card__head{display:block;min-width:0}
+.partner-card__sub{display:none!important}
+.partner-card .chevron{width:8px;height:8px;flex:0 0 8px;margin-right:3px}
+.partner-card[open]>summary{border:0!important}
+.partner-card__body{padding:2px 0 22px!important;border:0!important}
+.partner-card__row{font-size:12px}
+.partner-card__foot{padding-top:6px}
+.partner-card--selected{border:0!important;box-shadow:none!important}
+.partner-card--selected>.partner-card__head,
+.partner-card--selected>summary .partner-card__name{color:#315d49}
+.demo-tag{
+  display:inline-block;background:none!important;border-radius:0!important;
+  margin-left:10px!important;padding:0!important;
+  color:#9b8c72!important;font-size:10px;letter-spacing:.05em;font-weight:650;
+}
+.city-group:not(.city-group--minsk)>.city-group__body .partner-list{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:42px;
+}
+.city-group:not(.city-group--minsk) .city-group__name{font-size:18px;font-weight:700}
+.city-group>.city-group__heading .city-group__name{letter-spacing:-.02em}
+.map-frame{box-shadow:none!important;border:1px solid #e3e7e0!important}
+@media(max-width:900px){
+  .district-grid{grid-template-columns:1fr;gap:25px}
+  .city-group:not(.city-group--minsk)>.city-group__body .partner-list{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+  .list-heading{margin-bottom:29px!important}
+  .city-group--minsk>.city-group__heading{padding-bottom:22px!important}
+  .city-group--minsk .city-group__name{font-size:21px}
+  .city-group--minsk>.city-group__body{padding-bottom:8px!important}
+  .district-grid{gap:26px}
+  .district-group__heading{padding:0 0 5px!important}
+  .partner-card>summary{padding:10px 0 13px!important}
+  .partner-card__name{font-size:14px}
+  .city-group:not(.city-group--minsk)>summary{padding:18px 0!important}
+  .city-group:not(.city-group--minsk)>.city-group__body{padding:0 0 13px!important}
+  .partner-card__body{padding:2px 0 19px!important}
+  .partner-card__row{grid-template-columns:81px minmax(0,1fr)}
+}
