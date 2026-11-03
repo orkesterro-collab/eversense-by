@@ -1,3 +1,14 @@
+/* Shared header loader for every mirrored page. */
+(function(){
+  if (window.__evHeaderLoaderQueued) return;
+  window.__evHeaderLoaderQueued = true;
+  var current = document.currentScript;
+  if (!current || !current.src) return;
+  var script = document.createElement("script");
+  script.src = new URL("unified-header.js?v=20261104a",current.src).href;
+  script.async = true;
+  document.head.appendChild(script);
+})();
 /* EVERSENSE Беларусь: публичный прайс Google Sheets. Не хранит ключей/паролей.
    Схема листа price: sku | name | price | sale_price | sale_until | sale_from */
 (function () {
