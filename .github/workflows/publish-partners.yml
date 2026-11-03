@@ -1,0 +1,52 @@
+name: Publish and verify Eversense partner directory
+on:
+  push:
+    branches: [main]
+    paths:
+      - where-to-buy.html
+      - assets/partners.css
+      - assets/partners.js
+      - .github/scripts/sync_partners_ftps.py
+      - .github/scripts/check_partners_feed.py
+      - .github/scripts/qa_partners_browser.py
+      - .github/workflows/publish-partners.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: eversense-partners-deploy
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout current site
+        uses: actions/checkout@v4
+
+      - name: Check client script syntax
+        run: node --check assets/partners.js
+
+      - name: Check 40 partner rows are publicly readable
+        run: python3 .github/scripts/check_partners_feed.py
+
+      - name: Publish HTML, CSS, JS to verified hoster.by directory
+        env:
+          EVERSENSE_FTP_SECRET: \${{ secrets.EVERSENCE_FTP_PASSWORD }}
+        run: python3 .github/scripts/sync_partners_ftps.py
+
+      - name: Install Chromium for browser QA
+        run: |
+          python3 -m pip install --break-system-packages playwright
+          python3 -m playwright install --with-deps chromium
+
+      - name: Check live partners map, contacts, search and order
+        run: python3 .github/scripts/qa_partners_browser.py
+
+      - name: Upload screenshots and QA details
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eversense-partners-qa
+          path: partners-browser-qa/
+          retention-days: 7
