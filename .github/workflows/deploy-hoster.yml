@@ -1,4 +1,4 @@
-name: Eversence - preview or deploy to hoster.by
+name: Eversense - verified deployment to hoster.by
 
 on:
   push:
@@ -119,14 +119,14 @@ jobs:
       # Strict FTPS and pinned server certificate; domain root verified above.
       # Deploy files without deleting unrelated remote content.
       - name: Upload verified Eversence website via FTPS
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.publish }}
+        if: ${{ github.event_name == 'push' || inputs.publish }}
         env:
           FTP_PASSWORD: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
           FTP_CA: ${{ runner.temp }}/eversence-ftps.crt
         run: python3 .github/scripts/deploy_ftps.py
 
       - name: Check live website after publication
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.publish }}
+        if: ${{ github.event_name == 'push' || inputs.publish }}
         run: |
           python3 - <<'PY'
           import subprocess
