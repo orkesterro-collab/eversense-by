@@ -1,22 +1,22 @@
 # Original EVERSENSE public site audit
 
 {
-  "pages_count": 65,
-  "asset_urls_count": 402,
+  "pages_count": 77,
+  "asset_urls_count": 436,
   "extensions": {
-    "js": 85,
-    "css": 77,
+    "js": 98,
+    "css": 93,
     "unknown": 2,
-    "svg": 47,
+    "svg": 52,
     "jpg": 178,
     "mp4": 2,
     "png": 11
   },
   "hosts": {
     "neo.tildacdn.com": 1,
-    "static.tildacdn.com": 391,
+    "static.tildacdn.com": 421,
     "fonts.googleapis.com": 1,
-    "ever-home.ru": 5,
+    "ever-home.ru": 9,
     "dl.dropboxusercontent.com": 2,
     "cdnjs.cloudflare.com": 1,
     "mc.yandex.ru": 1
@@ -29,6 +29,14 @@
 - https://ever-home.ru/catalog-ru/new-minimalism-ru (46 assets)
 - https://ever-home.ru/catalog-ru/quiet-luxury-ru (46 assets)
 - https://ever-home.ru/catalog-ru/nature-aesthetic-ru (46 assets)
+- https://ever-home.ru/en (108 assets)
+- https://ever-home.ru/ru (108 assets)
+- https://ever-home.ru/where-to-buy-map-ru (33 assets)
+- https://ever-home.ru/where-to-buy-list-ru (38 assets)
+- https://ever-home.ru/where-to-buy-map-en (33 assets)
+- https://ever-home.ru/where-to-buy-list-en (38 assets)
+- https://ever-home.ru/politica-ru (33 assets)
+- https://ever-home.ru/politica-en (33 assets)
 - https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru (42 assets)
 - https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru (42 assets)
 - https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru (42 assets)
@@ -60,9 +68,9 @@
 - https://ever-home.ru/catalog-ru/new-minimalism-ru/marble-light-ru (42 assets)
 - https://ever-home.ru/catalog-ru/new-minimalism-ru/marble-grey-ru (42 assets)
 - https://ever-home.ru/catalog-en (91 assets)
-- https://ever-home.ru/catalog-en/new-minimalism-en (46 assets)
-- https://ever-home.ru/catalog-en/quiet-luxury-en (46 assets)
 - https://ever-home.ru/catalog-en/nature-aesthetic-en (46 assets)
+- https://ever-home.ru/catalog-en/quiet-luxury-en (46 assets)
+- https://ever-home.ru/catalog-en/new-minimalism-en (46 assets)
 - https://ever-home.ru/catalog-en/new-minimalism-en/jura-en (42 assets)
 - https://ever-home.ru/catalog-en/new-minimalism-en/taupe-grey-en (42 assets)
 - https://ever-home.ru/catalog-en/new-minimalism-en/grey-victoria-oak-en (42 assets)
@@ -89,3 +97,7 @@
 - https://ever-home.ru/catalog-en/quiet-luxury-en/brown-ticino-oak-en (42 assets)
 - https://ever-home.ru/catalog-en/quiet-luxury-en/natural-ticino-oak-en (42 assets)
 - https://ever-home.ru/catalog-en/nature-aesthetic-en/light-natural-ticino-oak-en (42 assets)
+- https://ever-home.ru/catalog-en/quiet-luxury-en/turin-oak-en (42 assets)
+- https://ever-home.ru/catalog-en/new-minimalism-en/white-sherman-oak-en (42 assets)
+- https://ever-home.ru/catalog-en/new-minimalism-en/marble-light-en (42 assets)
+- https://ever-home.ru/catalog-en/new-minimalism-en/marble-grey-en (42 assets)

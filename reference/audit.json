@@ -1,21 +1,21 @@
 {
   "summary": {
-    "pages_count": 65,
-    "asset_urls_count": 402,
+    "pages_count": 77,
+    "asset_urls_count": 436,
     "extensions": {
-      "js": 85,
-      "css": 77,
+      "js": 98,
+      "css": 93,
       "unknown": 2,
-      "svg": 47,
+      "svg": 52,
       "jpg": 178,
       "mp4": 2,
       "png": 11
     },
     "hosts": {
       "neo.tildacdn.com": 1,
-      "static.tildacdn.com": 391,
+      "static.tildacdn.com": 421,
       "fonts.googleapis.com": 1,
-      "ever-home.ru": 5,
+      "ever-home.ru": 9,
       "dl.dropboxusercontent.com": 2,
       "cdnjs.cloudflare.com": 1,
       "mc.yandex.ru": 1
@@ -530,6 +530,607 @@
         "https://ever-home.ru/politica-ru",
         "https://ever-home.ru/ru",
         "https://ever-home.ru/politica-en"
+      ]
+    },
+    {
+      "url": "https://ever-home.ru/en",
+      "title": "EVERSENSE | Main",
+      "html_bytes": 1591193,
+      "status": 200,
+      "assets": [
+        "https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js",
+        "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page69218947.min.css?t=1781013759",
+        "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
+        "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
+        "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
+        "https://static.tildacdn.com/css/tilda-popup-1.1.min.css",
+        "https://static.tildacdn.com/css/tilda-slds-1.4.min.css",
+        "https://static.tildacdn.com/css/tilda-zero-gallery-1.0.min.css",
+        "https://static.tildacdn.com/css/tilda-zoom-2.0.min.css",
+        "https://ever-home.ru/custom.css?t=1781013759",
+        "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
+        "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
+        "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page69218947.min.js?t=1781013759",
+        "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-widgeticons-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-popup-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-slds-1.4.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-gallery-1.0.min.js",
+        "https://static.tildacdn.com/js/hammer.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-sbs-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zoom-2.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-scale-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-fixed-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-skiplink-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-events-1.0.min.js",
+        "https://static.tildacdn.com/tild3963-6637-4135-b962-343934353139/Frame_784.svg",
+        "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
+        "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
+        "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
+        "https://static.tildacdn.com/tild3236-6632-4361-a631-373934313738/product-eng.svg",
+        "https://static.tildacdn.com/tild3036-3364-4838-b462-323664323432/photo_2025-12-17_15-.jpg",
+        "https://static.tildacdn.com/tild3966-3837-4862-a637-306538333831/Frame_660.svg",
+        "https://static.tildacdn.com/tild3961-3761-4731-b431-346530383233/12-min.jpg",
+        "https://static.tildacdn.com/tild3735-3032-4061-a632-333662363935/Rectangle_81.svg",
+        "https://static.tildacdn.com/tild3764-3663-4831-b063-623463616262/arrow_right_1.svg",
+        "https://static.tildacdn.com/tild3661-6136-4132-b732-353331386239/arrow_left_1.svg",
+        "https://static.tildacdn.com/tild6239-3865-4330-a538-613530363764/active.svg",
+        "https://static.tildacdn.com/tild3835-6138-4139-b435-653434653861/no_active.svg",
+        "https://static.tildacdn.com/tild6563-3962-4561-b363-303133373165/image_54-min.jpg",
+        "https://static.tildacdn.com/tild3531-6632-4232-b438-353438656332/Rectangle_81.svg",
+        "https://static.tildacdn.com/tild6333-3233-4763-b263-653862616236/image_53-min.jpg",
+        "https://static.tildacdn.com/tild3738-6231-4766-b165-333632613265/image_56-min.jpg",
+        "https://dl.dropboxusercontent.com/scl/fi/krjo6dc5k2udyk2s99k7p/1.mp4?rlkey=8klwitb2169p0glx8ra3zsx3c&st=26e3j6vc&dl=0",
+        "https://static.tildacdn.com/tild3133-3831-4033-a533-656133633236/photo.svg",
+        "https://static.tildacdn.com/tild3935-3665-4131-b261-376235363535/34_.svg",
+        "https://static.tildacdn.com/tild6238-3632-4365-b335-633361306532/photo.svg",
+        "https://static.tildacdn.com/tild3763-3030-4134-b233-346166666564/Frame_795-min.jpg",
+        "https://static.tildacdn.com/tild3330-3034-4035-b733-366135633532/Frame_789.svg",
+        "https://static.tildacdn.com/tild3037-6134-4363-a433-316162346538/_.svg",
+        "https://static.tildacdn.com/tild3165-3634-4032-a133-366163636139/image_25-min.jpg",
+        "https://static.tildacdn.com/tild6339-3061-4734-b437-666161643265/_1_2-min.jpg",
+        "https://static.tildacdn.com/tild3939-6532-4839-a263-346635633965/Frame_602-min.jpg",
+        "https://static.tildacdn.com/tild3661-3366-4234-b831-373433613166/image_55-min.jpg",
+        "https://dl.dropboxusercontent.com/scl/fi/23w6rkj5wf6yp79bse0cg/2.mp4?rlkey=61of26ipcgx4uxlths6oanls5&st=fqta5ktm&dl=0",
+        "https://static.tildacdn.com/tild3930-6461-4535-a537-663538636632/_1-min.jpg",
+        "https://static.tildacdn.com/tild3130-3931-4530-a539-663666633163/ar_left.svg",
+        "https://static.tildacdn.com/tild3765-3230-4731-b534-306232623265/ar_right.svg",
+        "https://static.tildacdn.com/tild6661-3764-4535-a530-623933393436/active.svg",
+        "https://static.tildacdn.com/tild3563-6535-4363-b235-613737353435/no_active.svg",
+        "https://static.tildacdn.com/tild3566-6461-4433-b363-633237663839/1.svg",
+        "https://static.tildacdn.com/tild6635-3239-4930-b862-626535373436/_2-min.jpg",
+        "https://static.tildacdn.com/tild3761-3730-4432-a465-383862376430/2.svg",
+        "https://static.tildacdn.com/tild3736-6432-4836-a162-376666313463/_3-min.jpg",
+        "https://static.tildacdn.com/tild3566-3764-4965-b366-346132613062/3.svg",
+        "https://static.tildacdn.com/tild3635-3438-4135-a630-323937346632/_4-min.jpg",
+        "https://static.tildacdn.com/tild6533-3439-4331-a131-663436356561/4.svg",
+        "https://static.tildacdn.com/tild3432-3336-4433-b561-303735363235/_5-min.jpg",
+        "https://static.tildacdn.com/tild3033-6365-4832-a338-393861313637/_.svg",
+        "https://static.tildacdn.com/tild3430-3336-4637-b734-306132323334/4_balancer-min.png",
+        "https://static.tildacdn.com/tild3966-3038-4534-b530-323363653038/3_board-min.png",
+        "https://static.tildacdn.com/tild6465-3639-4165-b462-373536363462/2_paper-min.png",
+        "https://static.tildacdn.com/tild3331-3063-4665-a637-643463316565/1_overlay-min.png",
+        "https://static.tildacdn.com/tild3037-3031-4634-a538-636436313338/_4.svg",
+        "https://static.tildacdn.com/tild6466-3266-4366-b761-356432623932/_3.svg",
+        "https://static.tildacdn.com/tild3132-3661-4731-b033-646433613930/_2.svg",
+        "https://static.tildacdn.com/tild3264-3064-4161-a436-316566346631/_1.svg",
+        "https://static.tildacdn.com/tild3134-3734-4162-b134-396135373639/Frame_753-12-min.jpg",
+        "https://static.tildacdn.com/tild3565-3736-4234-b735-323063633664/_1-min.png",
+        "https://static.tildacdn.com/tild3235-3939-4764-a566-636661373236/Frame_769-min.jpg",
+        "https://static.tildacdn.com/tild3132-3136-4339-a332-373934653237/_2-min.png",
+        "https://static.tildacdn.com/tild3438-3261-4335-b238-386137333464/_2-min.jpg",
+        "https://static.tildacdn.com/tild3834-3330-4932-b163-666536303762/_3-min.png",
+        "https://static.tildacdn.com/tild6636-6137-4031-a162-643636656364/_3-min.jpg",
+        "https://static.tildacdn.com/tild3132-3537-4665-b138-613635366365/-min.jpg",
+        "https://static.tildacdn.com/tild6636-6131-4537-a465-643539316566/photo.svg",
+        "https://static.tildacdn.com/tild3932-3930-4533-a465-623336623034/photo.svg",
+        "https://static.tildacdn.com/tild3436-3938-4636-b939-376634386234/photo.svg",
+        "https://static.tildacdn.com/tild3864-3261-4535-a165-626161323562/photo.svg",
+        "https://static.tildacdn.com/tild3434-6537-4434-a262-336362613466/textures_2000_1.png",
+        "https://static.tildacdn.com/tild3761-3062-4930-b034-353635303038/textures_2000.png",
+        "https://static.tildacdn.com/tild6635-3065-4435-a564-626332396236/Frame_750-min_1.png",
+        "https://static.tildacdn.com/tild3536-6536-4031-b934-656635336565/Frame_85555-min.jpg",
+        "https://static.tildacdn.com/tild3266-6665-4239-b762-336565393764/photo.svg",
+        "https://static.tildacdn.com/tild3565-6431-4333-b463-303566376665/Frame_835.svg",
+        "https://static.tildacdn.com/tild6262-3833-4963-b738-626566653731/Rectangle_101.svg",
+        "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
+        "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
+        "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
+        "https://static.tildacdn.com/tild3338-3061-4632-b434-383435633033/74.svg",
+        "https://static.tildacdn.com/tild3838-6564-4363-a230-643665343435/Frame_816.svg",
+        "https://static.tildacdn.com/tild3039-3635-4638-b161-663832653261/photo.svg",
+        "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js",
+        "https://mc.yandex.ru/watch/103534681"
+      ],
+      "videos": [
+        "https://dl.dropboxusercontent.com/scl/fi/krjo6dc5k2udyk2s99k7p/1.mp4?rlkey=8klwitb2169p0glx8ra3zsx3c&st=26e3j6vc&dl=0",
+        "https://dl.dropboxusercontent.com/scl/fi/23w6rkj5wf6yp79bse0cg/2.mp4?rlkey=61of26ipcgx4uxlths6oanls5&st=fqta5ktm&dl=0"
+      ],
+      "links": [
+        "https://ever-home.ru/where-to-buy-map-en",
+        "https://ever-home.ru",
+        "https://ever-home.ru/catalog-en",
+        "https://ever-home.ru/en",
+        "https://ever-home.ru/catalog-en/nature-aesthetic-en",
+        "https://ever-home.ru/catalog-en/quiet-luxury-en",
+        "https://ever-home.ru/catalog-en/new-minimalism-en",
+        "https://ever-home.ru/politica-ru",
+        "https://ever-home.ru/ru",
+        "https://ever-home.ru/where-to-buy-map-ru",
+        "https://ever-home.ru/catalog-ru",
+        "https://ever-home.ru/politica-en"
+      ]
+    },
+    {
+      "url": "https://ever-home.ru/ru",
+      "title": "EVERSENSE | Главная",
+      "html_bytes": 1578186,
+      "status": 200,
+      "assets": [
+        "https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js",
+        "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page68184635.min.css?t=1781013818",
+        "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
+        "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
+        "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
+        "https://static.tildacdn.com/css/tilda-popup-1.1.min.css",
+        "https://static.tildacdn.com/css/tilda-slds-1.4.min.css",
+        "https://static.tildacdn.com/css/tilda-zero-gallery-1.0.min.css",
+        "https://static.tildacdn.com/css/tilda-zoom-2.0.min.css",
+        "https://ever-home.ru/custom.css?t=1781013818",
+        "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
+        "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
+        "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page68184635.min.js?t=1781013818",
+        "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-widgeticons-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-popup-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-slds-1.4.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-gallery-1.0.min.js",
+        "https://static.tildacdn.com/js/hammer.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-sbs-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zoom-2.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-scale-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-fixed-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-skiplink-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-events-1.0.min.js",
+        "https://static.tildacdn.com/tild3963-6637-4135-b962-343934353139/Frame_784.svg",
+        "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
+        "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
+        "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
+        "https://static.tildacdn.com/tild3966-3837-4862-a637-306538333831/Frame_660.svg",
+        "https://static.tildacdn.com/tild3866-3466-4133-b536-336437646465/product-ru.svg",
+        "https://static.tildacdn.com/tild3036-3364-4838-b462-323664323432/photo_2025-12-17_15-.jpg",
+        "https://static.tildacdn.com/tild3961-3761-4731-b431-346530383233/12-min.jpg",
+        "https://static.tildacdn.com/tild3735-3032-4061-a632-333662363935/Rectangle_81.svg",
+        "https://static.tildacdn.com/tild3764-3663-4831-b063-623463616262/arrow_right_1.svg",
+        "https://static.tildacdn.com/tild3661-6136-4132-b732-353331386239/arrow_left_1.svg",
+        "https://static.tildacdn.com/tild6239-3865-4330-a538-613530363764/active.svg",
+        "https://static.tildacdn.com/tild3835-6138-4139-b435-653434653861/no_active.svg",
+        "https://static.tildacdn.com/tild6563-3962-4561-b363-303133373165/image_54-min.jpg",
+        "https://static.tildacdn.com/tild3531-6632-4232-b438-353438656332/Rectangle_81.svg",
+        "https://static.tildacdn.com/tild6333-3233-4763-b263-653862616236/image_53-min.jpg",
+        "https://static.tildacdn.com/tild3738-6231-4766-b165-333632613265/image_56-min.jpg",
+        "https://dl.dropboxusercontent.com/scl/fi/krjo6dc5k2udyk2s99k7p/1.mp4?rlkey=8klwitb2169p0glx8ra3zsx3c&st=26e3j6vc&dl=0",
+        "https://static.tildacdn.com/tild3133-3831-4033-a533-656133633236/photo.svg",
+        "https://static.tildacdn.com/tild3935-3665-4131-b261-376235363535/34_.svg",
+        "https://static.tildacdn.com/tild6238-3632-4365-b335-633361306532/photo.svg",
+        "https://static.tildacdn.com/tild3763-3030-4134-b233-346166666564/Frame_795-min.jpg",
+        "https://static.tildacdn.com/tild3330-3034-4035-b733-366135633532/Frame_789.svg",
+        "https://static.tildacdn.com/tild6438-6666-4264-b836-626131613635/_1.svg",
+        "https://static.tildacdn.com/tild3165-3634-4032-a133-366163636139/image_25-min.jpg",
+        "https://static.tildacdn.com/tild6339-3061-4734-b437-666161643265/_1_2-min.jpg",
+        "https://static.tildacdn.com/tild3939-6532-4839-a263-346635633965/Frame_602-min.jpg",
+        "https://static.tildacdn.com/tild3661-3366-4234-b831-373433613166/image_55-min.jpg",
+        "https://dl.dropboxusercontent.com/scl/fi/23w6rkj5wf6yp79bse0cg/2.mp4?rlkey=61of26ipcgx4uxlths6oanls5&st=fqta5ktm&dl=0",
+        "https://static.tildacdn.com/tild3930-6461-4535-a537-663538636632/_1-min.jpg",
+        "https://static.tildacdn.com/tild3130-3931-4530-a539-663666633163/ar_left.svg",
+        "https://static.tildacdn.com/tild3765-3230-4731-b534-306232623265/ar_right.svg",
+        "https://static.tildacdn.com/tild6661-3764-4535-a530-623933393436/active.svg",
+        "https://static.tildacdn.com/tild3563-6535-4363-b235-613737353435/no_active.svg",
+        "https://static.tildacdn.com/tild3566-6461-4433-b363-633237663839/1.svg",
+        "https://static.tildacdn.com/tild6635-3239-4930-b862-626535373436/_2-min.jpg",
+        "https://static.tildacdn.com/tild3761-3730-4432-a465-383862376430/2.svg",
+        "https://static.tildacdn.com/tild3736-6432-4836-a162-376666313463/_3-min.jpg",
+        "https://static.tildacdn.com/tild3566-3764-4965-b366-346132613062/3.svg",
+        "https://static.tildacdn.com/tild3635-3438-4135-a630-323937346632/_4-min.jpg",
+        "https://static.tildacdn.com/tild6533-3439-4331-a131-663436356561/4.svg",
+        "https://static.tildacdn.com/tild3432-3336-4433-b561-303735363235/_5-min.jpg",
+        "https://static.tildacdn.com/tild3163-3535-4365-b662-383930353934/_2.svg",
+        "https://static.tildacdn.com/tild3430-3336-4637-b734-306132323334/4_balancer-min.png",
+        "https://static.tildacdn.com/tild3966-3038-4534-b530-323363653038/3_board-min.png",
+        "https://static.tildacdn.com/tild6465-3639-4165-b462-373536363462/2_paper-min.png",
+        "https://static.tildacdn.com/tild3331-3063-4665-a637-643463316565/1_overlay-min.png",
+        "https://static.tildacdn.com/tild3037-3031-4634-a538-636436313338/_4.svg",
+        "https://static.tildacdn.com/tild6466-3266-4366-b761-356432623932/_3.svg",
+        "https://static.tildacdn.com/tild3132-3661-4731-b033-646433613930/_2.svg",
+        "https://static.tildacdn.com/tild3264-3064-4161-a436-316566346631/_1.svg",
+        "https://static.tildacdn.com/tild3134-3734-4162-b134-396135373639/Frame_753-12-min.jpg",
+        "https://static.tildacdn.com/tild3565-3736-4234-b735-323063633664/_1-min.png",
+        "https://static.tildacdn.com/tild3235-3939-4764-a566-636661373236/Frame_769-min.jpg",
+        "https://static.tildacdn.com/tild3132-3136-4339-a332-373934653237/_2-min.png",
+        "https://static.tildacdn.com/tild3438-3261-4335-b238-386137333464/_2-min.jpg",
+        "https://static.tildacdn.com/tild3834-3330-4932-b163-666536303762/_3-min.png",
+        "https://static.tildacdn.com/tild6636-6137-4031-a162-643636656364/_3-min.jpg",
+        "https://static.tildacdn.com/tild3132-3537-4665-b138-613635366365/-min.jpg",
+        "https://static.tildacdn.com/tild6636-6131-4537-a465-643539316566/photo.svg",
+        "https://static.tildacdn.com/tild3932-3930-4533-a465-623336623034/photo.svg",
+        "https://static.tildacdn.com/tild3436-3938-4636-b939-376634386234/photo.svg",
+        "https://static.tildacdn.com/tild3864-3261-4535-a165-626161323562/photo.svg",
+        "https://static.tildacdn.com/tild3434-6537-4434-a262-336362613466/textures_2000_1.png",
+        "https://static.tildacdn.com/tild3761-3062-4930-b034-353635303038/textures_2000.png",
+        "https://static.tildacdn.com/tild6635-3065-4435-a564-626332396236/Frame_750-min_1.png",
+        "https://static.tildacdn.com/tild3536-6536-4031-b934-656635336565/Frame_85555-min.jpg",
+        "https://static.tildacdn.com/tild3266-6665-4239-b762-336565393764/photo.svg",
+        "https://static.tildacdn.com/tild3565-6431-4333-b463-303566376665/Frame_835.svg",
+        "https://static.tildacdn.com/tild6262-3833-4963-b738-626566653731/Rectangle_101.svg",
+        "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
+        "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
+        "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
+        "https://static.tildacdn.com/tild3338-3061-4632-b434-383435633033/74.svg",
+        "https://static.tildacdn.com/tild3838-6564-4363-a230-643665343435/Frame_816.svg",
+        "https://static.tildacdn.com/tild3039-3635-4638-b161-663832653261/photo.svg",
+        "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js",
+        "https://mc.yandex.ru/watch/103534681"
+      ],
+      "videos": [
+        "https://dl.dropboxusercontent.com/scl/fi/krjo6dc5k2udyk2s99k7p/1.mp4?rlkey=8klwitb2169p0glx8ra3zsx3c&st=26e3j6vc&dl=0",
+        "https://dl.dropboxusercontent.com/scl/fi/23w6rkj5wf6yp79bse0cg/2.mp4?rlkey=61of26ipcgx4uxlths6oanls5&st=fqta5ktm&dl=0"
+      ],
+      "links": [
+        "https://ever-home.ru/where-to-buy-map-ru",
+        "https://ever-home.ru/en",
+        "https://ever-home.ru/catalog-ru",
+        "https://ever-home.ru",
+        "https://ever-home.ru/catalog-ru/nature-aesthetic-ru",
+        "https://ever-home.ru/catalog-ru/quiet-luxury-ru",
+        "https://ever-home.ru/catalog-ru/silent-luxury-ru",
+        "https://ever-home.ru/catalog-ru/new-minimalism-ru",
+        "https://ever-home.ru/politica-ru",
+        "https://ever-home.ru/ru",
+        "https://ever-home.ru/politica-en",
+        "https://ever-home.ru/where-to-buy-map-en",
+        "https://ever-home.ru/catalog-en"
+      ]
+    },
+    {
+      "url": "https://ever-home.ru/where-to-buy-map-ru",
+      "title": "EVERSENSE | Где купить (карта)",
+      "html_bytes": 360130,
+      "status": 200,
+      "assets": [
+        "https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js",
+        "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page151902546.min.css?t=1786351901",
+        "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
+        "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
+        "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
+        "https://ever-home.ru/custom.css?t=1786351901",
+        "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
+        "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
+        "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page151902546.min.js?t=1786351901",
+        "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-widgeticons-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-sbs-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-scale-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-fixed-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-skiplink-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-events-1.0.min.js",
+        "https://static.tildacdn.com/tild3963-6637-4135-b962-343934353139/Frame_784.svg",
+        "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
+        "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
+        "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
+        "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
+        "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
+        "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
+        "https://static.tildacdn.com/tild3338-3061-4632-b434-383435633033/74.svg",
+        "https://static.tildacdn.com/tild3838-6564-4363-a230-643665343435/Frame_816.svg",
+        "https://static.tildacdn.com/tild3039-3635-4638-b161-663832653261/photo.svg",
+        "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js",
+        "https://mc.yandex.ru/watch/103534681"
+      ],
+      "videos": [],
+      "links": [
+        "https://ever-home.ru/where-to-buy-map-ru",
+        "https://ever-home.ru/en",
+        "https://ever-home.ru/catalog-ru",
+        "https://ever-home.ru",
+        "https://ever-home.ru/where-to-buy-map-en",
+        "https://ever-home.ru/catalog-en",
+        "https://ever-home.ru/where-to-buy-list-ru",
+        "https://ever-home.ru/politica-ru",
+        "https://ever-home.ru/ru",
+        "https://ever-home.ru/politica-en"
+      ]
+    },
+    {
+      "url": "https://ever-home.ru/where-to-buy-list-ru",
+      "title": "EVERSENSE | Где купить (список)",
+      "html_bytes": 754668,
+      "status": 200,
+      "assets": [
+        "https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js",
+        "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page151456826.min.css?t=1786351901",
+        "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
+        "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
+        "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
+        "https://static.tildacdn.com/css/tilda-forms-1.0.min.css",
+        "https://ever-home.ru/custom.css?t=1786351901",
+        "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
+        "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
+        "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page151456826.min.js?t=1786351901",
+        "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-widgeticons-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-forms-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-forms-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-sbs-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-scale-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-fixed-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-skiplink-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-events-1.0.min.js",
+        "https://static.tildacdn.com/tild3963-6637-4135-b962-343934353139/Frame_784.svg",
+        "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
+        "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
+        "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
+        "https://static.tildacdn.com/tild3664-3035-4030-b937-326463386163/Prev.svg",
+        "https://static.tildacdn.com/tild6334-6335-4539-b634-636464396131/Next.svg",
+        "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
+        "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
+        "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
+        "https://static.tildacdn.com/tild3338-3061-4632-b434-383435633033/74.svg",
+        "https://static.tildacdn.com/tild3838-6564-4363-a230-643665343435/Frame_816.svg",
+        "https://static.tildacdn.com/tild3039-3635-4638-b161-663832653261/photo.svg",
+        "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js",
+        "https://mc.yandex.ru/watch/103534681"
+      ],
+      "videos": [],
+      "links": [
+        "https://ever-home.ru/where-to-buy-map-ru",
+        "https://ever-home.ru/en",
+        "https://ever-home.ru/catalog-ru",
+        "https://ever-home.ru",
+        "https://ever-home.ru/where-to-buy-map-en",
+        "https://ever-home.ru/catalog-en",
+        "https://ever-home.ru/+79376300801",
+        "https://ever-home.ru/+78552922220",
+        "https://ever-home.ru/politica-ru",
+        "https://ever-home.ru/ru",
+        "https://ever-home.ru/politica-en"
+      ]
+    },
+    {
+      "url": "https://ever-home.ru/where-to-buy-map-en",
+      "title": "EVERSENSE | Where to buy (map)",
+      "html_bytes": 359933,
+      "status": 200,
+      "assets": [
+        "https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js",
+        "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page152145706.min.css?t=1786352076",
+        "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
+        "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
+        "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
+        "https://ever-home.ru/custom.css?t=1786352076",
+        "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
+        "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
+        "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page152145706.min.js?t=1786352076",
+        "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-widgeticons-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-sbs-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-scale-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-fixed-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-skiplink-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-events-1.0.min.js",
+        "https://static.tildacdn.com/tild3963-6637-4135-b962-343934353139/Frame_784.svg",
+        "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
+        "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
+        "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
+        "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
+        "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
+        "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
+        "https://static.tildacdn.com/tild3338-3061-4632-b434-383435633033/74.svg",
+        "https://static.tildacdn.com/tild3838-6564-4363-a230-643665343435/Frame_816.svg",
+        "https://static.tildacdn.com/tild3039-3635-4638-b161-663832653261/photo.svg",
+        "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js",
+        "https://mc.yandex.ru/watch/103534681"
+      ],
+      "videos": [],
+      "links": [
+        "https://ever-home.ru/where-to-buy-map-ru",
+        "https://ever-home.ru/en",
+        "https://ever-home.ru/catalog-ru",
+        "https://ever-home.ru",
+        "https://ever-home.ru/where-to-buy-map-en",
+        "https://ever-home.ru/catalog-en",
+        "https://ever-home.ru/where-to-buy-list-en",
+        "https://ever-home.ru/politica-ru",
+        "https://ever-home.ru/ru",
+        "https://ever-home.ru/politica-en"
+      ]
+    },
+    {
+      "url": "https://ever-home.ru/where-to-buy-list-en",
+      "title": "EVERSENSE | Where to buy (list)",
+      "html_bytes": 715411,
+      "status": 200,
+      "assets": [
+        "https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js",
+        "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page152155796.min.css?t=1786352119",
+        "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
+        "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
+        "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
+        "https://static.tildacdn.com/css/tilda-forms-1.0.min.css",
+        "https://ever-home.ru/custom.css?t=1786352119",
+        "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
+        "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
+        "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page152155796.min.js?t=1786352119",
+        "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-widgeticons-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-forms-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-forms-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-sbs-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-scale-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-fixed-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-skiplink-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-events-1.0.min.js",
+        "https://static.tildacdn.com/tild3963-6637-4135-b962-343934353139/Frame_784.svg",
+        "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
+        "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
+        "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
+        "https://static.tildacdn.com/tild3664-3035-4030-b937-326463386163/Prev.svg",
+        "https://static.tildacdn.com/tild6334-6335-4539-b634-636464396131/Next.svg",
+        "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
+        "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
+        "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
+        "https://static.tildacdn.com/tild3338-3061-4632-b434-383435633033/74.svg",
+        "https://static.tildacdn.com/tild3838-6564-4363-a230-643665343435/Frame_816.svg",
+        "https://static.tildacdn.com/tild3039-3635-4638-b161-663832653261/photo.svg",
+        "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js",
+        "https://mc.yandex.ru/watch/103534681"
+      ],
+      "videos": [],
+      "links": [
+        "https://ever-home.ru/where-to-buy-map-ru",
+        "https://ever-home.ru/en",
+        "https://ever-home.ru/catalog-ru",
+        "https://ever-home.ru",
+        "https://ever-home.ru/where-to-buy-map-en",
+        "https://ever-home.ru/catalog-en",
+        "https://ever-home.ru/politica-ru",
+        "https://ever-home.ru/ru",
+        "https://ever-home.ru/politica-en"
+      ]
+    },
+    {
+      "url": "https://ever-home.ru/politica-ru",
+      "title": "EVERSENSE | Политика конфиденциальности",
+      "html_bytes": 390747,
+      "status": 200,
+      "assets": [
+        "https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js",
+        "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page69024681.min.css?t=1773749361",
+        "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
+        "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
+        "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
+        "https://ever-home.ru/custom.css?t=1773749361",
+        "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
+        "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
+        "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page69024681.min.js?t=1773749361",
+        "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-widgeticons-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-sbs-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-scale-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-fixed-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-skiplink-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-events-1.0.min.js",
+        "https://static.tildacdn.com/tild3963-6637-4135-b962-343934353139/Frame_784.svg",
+        "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
+        "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
+        "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
+        "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
+        "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
+        "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
+        "https://static.tildacdn.com/tild3338-3061-4632-b434-383435633033/74.svg",
+        "https://static.tildacdn.com/tild3838-6564-4363-a230-643665343435/Frame_816.svg",
+        "https://static.tildacdn.com/tild3039-3635-4638-b161-663832653261/photo.svg",
+        "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js",
+        "https://mc.yandex.ru/watch/103534681"
+      ],
+      "videos": [],
+      "links": [
+        "https://ever-home.ru/where-to-buy-map-ru",
+        "https://ever-home.ru/en",
+        "https://ever-home.ru/catalog-ru",
+        "https://ever-home.ru",
+        "https://ever-home.ru/where-to-buy-map-en",
+        "https://ever-home.ru/catalog-en",
+        "https://ever-home.ru/politica-ru",
+        "https://ever-home.ru/ru",
+        "https://ever-home.ru/politica-en"
+      ]
+    },
+    {
+      "url": "https://ever-home.ru/politica-en",
+      "title": "EVERSENSE | Confidentiality Policy",
+      "html_bytes": 382933,
+      "status": 200,
+      "assets": [
+        "https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js",
+        "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71852773.min.css?t=1773749361",
+        "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
+        "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
+        "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
+        "https://ever-home.ru/custom.css?t=1773749361",
+        "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
+        "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
+        "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71852773.min.js?t=1773749361",
+        "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-widgeticons-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-sbs-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-scale-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-fixed-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-skiplink-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-events-1.0.min.js",
+        "https://static.tildacdn.com/tild3963-6637-4135-b962-343934353139/Frame_784.svg",
+        "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
+        "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
+        "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
+        "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
+        "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
+        "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
+        "https://static.tildacdn.com/tild3338-3061-4632-b434-383435633033/74.svg",
+        "https://static.tildacdn.com/tild3838-6564-4363-a230-643665343435/Frame_816.svg",
+        "https://static.tildacdn.com/tild3039-3635-4638-b161-663832653261/photo.svg",
+        "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js",
+        "https://mc.yandex.ru/watch/103534681"
+      ],
+      "videos": [],
+      "links": [
+        "https://ever-home.ru/where-to-buy-map-ru",
+        "https://ever-home.ru/en",
+        "https://ever-home.ru/catalog-ru",
+        "https://ever-home.ru",
+        "https://ever-home.ru/where-to-buy-map-en",
+        "https://ever-home.ru/catalog-en",
+        "https://ever-home.ru/politica-en",
+        "https://ever-home.ru/politica-ru",
+        "https://ever-home.ru/ru"
       ]
     },
     {
@@ -2567,14 +3168,14 @@
       ]
     },
     {
-      "url": "https://ever-home.ru/catalog-en/new-minimalism-en",
-      "title": "EVERSENSE | New minimalism",
-      "html_bytes": 525307,
+      "url": "https://ever-home.ru/catalog-en/nature-aesthetic-en",
+      "title": "EVERSENSE | Nature aesthetic",
+      "html_bytes": 531341,
       "status": 200,
       "assets": [
         "https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js",
         "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
-        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760257.min.css?t=1773749385",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760255.min.css?t=1773749385",
         "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
         "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
         "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
@@ -2582,7 +3183,7 @@
         "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
         "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
         "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
-        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760257.min.js?t=1773749385",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760255.min.js?t=1773749385",
         "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
         "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
         "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
@@ -2597,19 +3198,19 @@
         "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
         "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
         "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
-        "https://static.tildacdn.com/tild3736-3764-4036-a634-646265326539/-min.jpg",
-        "https://static.tildacdn.com/tild6535-3333-4636-b734-303863346330/_-_01-min.jpg",
-        "https://static.tildacdn.com/tild6631-3063-4639-b330-356231633336/_-_2-min.jpg",
-        "https://static.tildacdn.com/tild3332-3361-4361-a164-316165643063/_-_01-min.jpg",
-        "https://static.tildacdn.com/tild3865-3666-4930-b061-633333393635/_-_2-min.jpg",
-        "https://static.tildacdn.com/tild6335-3331-4036-b135-303034616564/_-_5-min.jpg",
-        "https://static.tildacdn.com/tild3330-6639-4733-b334-643738346662/_4-min.jpg",
-        "https://static.tildacdn.com/tild6334-3366-4066-a562-626266346134/_1-min.jpg",
-        "https://static.tildacdn.com/tild3939-3834-4834-a338-343132616633/_1-min.jpg",
-        "https://static.tildacdn.com/tild6366-6638-4431-b065-653639653461/_1-min.jpg",
-        "https://static.tildacdn.com/tild6161-6231-4932-b964-306138633766/_2-min.jpg",
+        "https://static.tildacdn.com/tild3133-3030-4237-b931-373766343637/R1043_Living05_detai.png",
+        "https://static.tildacdn.com/tild6562-3932-4563-b162-353832323564/_-_4-min.jpg",
+        "https://static.tildacdn.com/tild3431-3034-4131-b531-346437376431/_3-min.jpg",
+        "https://static.tildacdn.com/tild3030-6566-4265-a536-303232383739/_4-min.jpg",
+        "https://static.tildacdn.com/tild3662-3333-4634-b065-333662303764/_01-min.jpg",
+        "https://static.tildacdn.com/tild6230-6362-4839-b330-353038643633/_4-min.jpg",
+        "https://static.tildacdn.com/tild3366-3232-4237-b766-336433396234/_3-min.jpg",
+        "https://static.tildacdn.com/tild3437-3964-4562-b464-356362333866/_01-min.jpg",
+        "https://static.tildacdn.com/tild3037-3639-4530-a331-303161633734/_2-min.jpg",
+        "https://static.tildacdn.com/tild6137-6164-4034-b064-636239383463/_3-min.jpg",
+        "https://static.tildacdn.com/tild3836-6563-4731-b731-373331636332/_4-min.jpg",
         "https://static.tildacdn.com/tild6634-3635-4438-a432-323933623762/Frame_4-min.jpg",
-        "https://static.tildacdn.com/tild3565-3736-4234-b735-323063633664/_1-min.png",
+        "https://static.tildacdn.com/tild3132-3136-4339-a332-373934653237/_2-min.png",
         "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
         "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
         "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
@@ -2627,17 +3228,17 @@
         "https://ever-home.ru",
         "https://ever-home.ru/where-to-buy-map-en",
         "https://ever-home.ru/catalog-en",
-        "https://ever-home.ru/catalog-en/new-minimalism-en/jura-en",
-        "https://ever-home.ru/catalog-en/new-minimalism-en/taupe-grey-en",
-        "https://ever-home.ru/catalog-en/new-minimalism-en/grey-victoria-oak-en",
-        "https://ever-home.ru/catalog-en/new-minimalism-en/victoria-oak-white-en",
-        "https://ever-home.ru/catalog-en/new-minimalism-en/light-gray-victoria-oak-en",
-        "https://ever-home.ru/catalog-en/new-minimalism-en/grey-lavaredo-oak-en",
-        "https://ever-home.ru/catalog-en/new-minimalism-en/white-ticino-oak-en",
-        "https://ever-home.ru/catalog-en/new-minimalism-en/white-sherman-oak-en",
-        "https://ever-home.ru/catalog-en/new-minimalism-en/marble-light-en",
-        "https://ever-home.ru/catalog-en/new-minimalism-en/marble-grey-en",
-        "https://ever-home.ru/catalog-en/nature-aesthetic-en",
+        "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-natural-victoria-oak-en",
+        "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-natural-virdia-oak-en",
+        "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-virdia-oak-en",
+        "https://ever-home.ru/catalog-en/nature-aesthetic-en/white-casella-oak-en",
+        "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-natural-casella-oak-en",
+        "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-natural-lavaredo-oak-en",
+        "https://ever-home.ru/catalog-en/nature-aesthetic-en/natural-padua-oak-en",
+        "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-padua-oak-en",
+        "https://ever-home.ru/catalog-en/nature-aesthetic-en/grey-padua-oak-en",
+        "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-natural-ticino-oak-en",
+        "https://ever-home.ru/catalog-en/quiet-luxury-en",
         "https://ever-home.ru/politica-ru",
         "https://ever-home.ru/ru",
         "https://ever-home.ru/politica-en"
@@ -2721,14 +3322,14 @@
       ]
     },
     {
-      "url": "https://ever-home.ru/catalog-en/nature-aesthetic-en",
-      "title": "EVERSENSE | Nature aesthetic",
-      "html_bytes": 531341,
+      "url": "https://ever-home.ru/catalog-en/new-minimalism-en",
+      "title": "EVERSENSE | New minimalism",
+      "html_bytes": 525307,
       "status": 200,
       "assets": [
         "https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js",
         "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
-        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760255.min.css?t=1773749385",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760257.min.css?t=1773749385",
         "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
         "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
         "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
@@ -2736,7 +3337,7 @@
         "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
         "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
         "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
-        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760255.min.js?t=1773749385",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760257.min.js?t=1773749385",
         "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
         "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
         "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
@@ -2751,19 +3352,19 @@
         "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
         "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
         "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
-        "https://static.tildacdn.com/tild3133-3030-4237-b931-373766343637/R1043_Living05_detai.png",
-        "https://static.tildacdn.com/tild6562-3932-4563-b162-353832323564/_-_4-min.jpg",
-        "https://static.tildacdn.com/tild3431-3034-4131-b531-346437376431/_3-min.jpg",
-        "https://static.tildacdn.com/tild3030-6566-4265-a536-303232383739/_4-min.jpg",
-        "https://static.tildacdn.com/tild3662-3333-4634-b065-333662303764/_01-min.jpg",
-        "https://static.tildacdn.com/tild6230-6362-4839-b330-353038643633/_4-min.jpg",
-        "https://static.tildacdn.com/tild3366-3232-4237-b766-336433396234/_3-min.jpg",
-        "https://static.tildacdn.com/tild3437-3964-4562-b464-356362333866/_01-min.jpg",
-        "https://static.tildacdn.com/tild3037-3639-4530-a331-303161633734/_2-min.jpg",
-        "https://static.tildacdn.com/tild6137-6164-4034-b064-636239383463/_3-min.jpg",
-        "https://static.tildacdn.com/tild3836-6563-4731-b731-373331636332/_4-min.jpg",
+        "https://static.tildacdn.com/tild3736-3764-4036-a634-646265326539/-min.jpg",
+        "https://static.tildacdn.com/tild6535-3333-4636-b734-303863346330/_-_01-min.jpg",
+        "https://static.tildacdn.com/tild6631-3063-4639-b330-356231633336/_-_2-min.jpg",
+        "https://static.tildacdn.com/tild3332-3361-4361-a164-316165643063/_-_01-min.jpg",
+        "https://static.tildacdn.com/tild3865-3666-4930-b061-633333393635/_-_2-min.jpg",
+        "https://static.tildacdn.com/tild6335-3331-4036-b135-303034616564/_-_5-min.jpg",
+        "https://static.tildacdn.com/tild3330-6639-4733-b334-643738346662/_4-min.jpg",
+        "https://static.tildacdn.com/tild6334-3366-4066-a562-626266346134/_1-min.jpg",
+        "https://static.tildacdn.com/tild3939-3834-4834-a338-343132616633/_1-min.jpg",
+        "https://static.tildacdn.com/tild6366-6638-4431-b065-653639653461/_1-min.jpg",
+        "https://static.tildacdn.com/tild6161-6231-4932-b964-306138633766/_2-min.jpg",
         "https://static.tildacdn.com/tild6634-3635-4438-a432-323933623762/Frame_4-min.jpg",
-        "https://static.tildacdn.com/tild3132-3136-4339-a332-373934653237/_2-min.png",
+        "https://static.tildacdn.com/tild3565-3736-4234-b735-323063633664/_1-min.png",
         "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
         "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
         "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
@@ -2781,17 +3382,17 @@
         "https://ever-home.ru",
         "https://ever-home.ru/where-to-buy-map-en",
         "https://ever-home.ru/catalog-en",
-        "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-natural-victoria-oak-en",
-        "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-natural-virdia-oak-en",
-        "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-virdia-oak-en",
-        "https://ever-home.ru/catalog-en/nature-aesthetic-en/white-casella-oak-en",
-        "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-natural-casella-oak-en",
-        "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-natural-lavaredo-oak-en",
-        "https://ever-home.ru/catalog-en/nature-aesthetic-en/natural-padua-oak-en",
-        "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-padua-oak-en",
-        "https://ever-home.ru/catalog-en/nature-aesthetic-en/grey-padua-oak-en",
-        "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-natural-ticino-oak-en",
-        "https://ever-home.ru/catalog-en/quiet-luxury-en",
+        "https://ever-home.ru/catalog-en/new-minimalism-en/jura-en",
+        "https://ever-home.ru/catalog-en/new-minimalism-en/taupe-grey-en",
+        "https://ever-home.ru/catalog-en/new-minimalism-en/grey-victoria-oak-en",
+        "https://ever-home.ru/catalog-en/new-minimalism-en/victoria-oak-white-en",
+        "https://ever-home.ru/catalog-en/new-minimalism-en/light-gray-victoria-oak-en",
+        "https://ever-home.ru/catalog-en/new-minimalism-en/grey-lavaredo-oak-en",
+        "https://ever-home.ru/catalog-en/new-minimalism-en/white-ticino-oak-en",
+        "https://ever-home.ru/catalog-en/new-minimalism-en/white-sherman-oak-en",
+        "https://ever-home.ru/catalog-en/new-minimalism-en/marble-light-en",
+        "https://ever-home.ru/catalog-en/new-minimalism-en/marble-grey-en",
+        "https://ever-home.ru/catalog-en/nature-aesthetic-en",
         "https://ever-home.ru/politica-ru",
         "https://ever-home.ru/ru",
         "https://ever-home.ru/politica-en"
@@ -4434,6 +5035,258 @@
         "https://ever-home.ru/ru",
         "https://ever-home.ru/politica-en"
       ]
+    },
+    {
+      "url": "https://ever-home.ru/catalog-en/quiet-luxury-en/turin-oak-en",
+      "title": "EVERSENSE | Quiet luxury | Turin Oak",
+      "html_bytes": 460580,
+      "status": 200,
+      "assets": [
+        "https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js",
+        "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760161.min.css?t=1773749395",
+        "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
+        "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
+        "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
+        "https://ever-home.ru/custom.css?t=1773749395",
+        "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
+        "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
+        "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760161.min.js?t=1773749395",
+        "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-widgeticons-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-sbs-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-scale-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-fixed-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-skiplink-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-events-1.0.min.js",
+        "https://static.tildacdn.com/tild3963-6637-4135-b962-343934353139/Frame_784.svg",
+        "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
+        "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
+        "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
+        "https://static.tildacdn.com/tild3064-3162-4562-b335-636161643564/A2190_Bedroom04_fron.jpg",
+        "https://static.tildacdn.com/tild3763-3565-4465-b830-396539393031/A2190_Bedroom04_deta.jpg",
+        "https://static.tildacdn.com/tild3739-6666-4364-a632-316562363461/EL2190___ver1_top-mi.jpg",
+        "https://static.tildacdn.com/tild3637-6661-4935-b635-613534363132/204.svg",
+        "https://static.tildacdn.com/tild6364-3663-4132-a638-333535653435/30_.svg",
+        "https://static.tildacdn.com/tild3932-6330-4238-b836-633466303635/207.svg",
+        "https://static.tildacdn.com/tild6465-6238-4235-b738-323265326563/205.svg",
+        "https://static.tildacdn.com/tild6634-3635-4438-a432-323933623762/Frame_4-min.jpg",
+        "https://static.tildacdn.com/tild3132-3136-4339-a332-373934653237/_2-min.png",
+        "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
+        "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
+        "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
+        "https://static.tildacdn.com/tild3338-3061-4632-b434-383435633033/74.svg",
+        "https://static.tildacdn.com/tild3838-6564-4363-a230-643665343435/Frame_816.svg",
+        "https://static.tildacdn.com/tild3039-3635-4638-b161-663832653261/photo.svg",
+        "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js",
+        "https://mc.yandex.ru/watch/103534681"
+      ],
+      "videos": [],
+      "links": [
+        "https://ever-home.ru/where-to-buy-map-ru",
+        "https://ever-home.ru/en",
+        "https://ever-home.ru/catalog-ru",
+        "https://ever-home.ru",
+        "https://ever-home.ru/where-to-buy-map-en",
+        "https://ever-home.ru/catalog-en",
+        "https://ever-home.ru/catalog-en/quiet-luxury-en",
+        "https://ever-home.ru/politica-ru",
+        "https://ever-home.ru/ru",
+        "https://ever-home.ru/politica-en"
+      ]
+    },
+    {
+      "url": "https://ever-home.ru/catalog-en/new-minimalism-en/white-sherman-oak-en",
+      "title": "EVERSENSE | New minimalism | White Sherman Oak",
+      "html_bytes": 464782,
+      "status": 200,
+      "assets": [
+        "https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js",
+        "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760247.min.css?t=1773749385",
+        "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
+        "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
+        "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
+        "https://ever-home.ru/custom.css?t=1773749385",
+        "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
+        "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
+        "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760247.min.js?t=1773749385",
+        "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-widgeticons-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-sbs-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-scale-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-fixed-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-skiplink-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-events-1.0.min.js",
+        "https://static.tildacdn.com/tild3963-6637-4135-b962-343934353139/Frame_784.svg",
+        "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
+        "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
+        "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
+        "https://static.tildacdn.com/tild6231-6366-4236-b032-313561363132/_-1-min.jpg",
+        "https://static.tildacdn.com/tild3132-6530-4635-b062-323666383035/_-min.jpg",
+        "https://static.tildacdn.com/tild6439-6636-4362-a265-303237646439/EL1054____ver1_top-m.jpg",
+        "https://static.tildacdn.com/tild3637-6661-4935-b635-613534363132/204.svg",
+        "https://static.tildacdn.com/tild6364-3663-4132-a638-333535653435/30_.svg",
+        "https://static.tildacdn.com/tild3932-6330-4238-b836-633466303635/207.svg",
+        "https://static.tildacdn.com/tild6465-6238-4235-b738-323265326563/205.svg",
+        "https://static.tildacdn.com/tild6634-3635-4438-a432-323933623762/Frame_4-min.jpg",
+        "https://static.tildacdn.com/tild3834-3330-4932-b163-666536303762/_3-min.png",
+        "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
+        "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
+        "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
+        "https://static.tildacdn.com/tild3338-3061-4632-b434-383435633033/74.svg",
+        "https://static.tildacdn.com/tild3838-6564-4363-a230-643665343435/Frame_816.svg",
+        "https://static.tildacdn.com/tild3039-3635-4638-b161-663832653261/photo.svg",
+        "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js",
+        "https://mc.yandex.ru/watch/103534681"
+      ],
+      "videos": [],
+      "links": [
+        "https://ever-home.ru/where-to-buy-map-ru",
+        "https://ever-home.ru/en",
+        "https://ever-home.ru/catalog-ru",
+        "https://ever-home.ru",
+        "https://ever-home.ru/where-to-buy-map-en",
+        "https://ever-home.ru/catalog-en",
+        "https://ever-home.ru/catalog-en/new-minimalism-en",
+        "https://ever-home.ru/politica-ru",
+        "https://ever-home.ru/ru",
+        "https://ever-home.ru/politica-en"
+      ]
+    },
+    {
+      "url": "https://ever-home.ru/catalog-en/new-minimalism-en/marble-light-en",
+      "title": "EVERSENSE | New minimalism | Light Marble",
+      "html_bytes": 464736,
+      "status": 200,
+      "assets": [
+        "https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js",
+        "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760251.min.css?t=1773749385",
+        "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
+        "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
+        "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
+        "https://ever-home.ru/custom.css?t=1773749385",
+        "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
+        "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
+        "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760251.min.js?t=1773749385",
+        "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-widgeticons-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-sbs-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-scale-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-fixed-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-skiplink-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-events-1.0.min.js",
+        "https://static.tildacdn.com/tild3963-6637-4135-b962-343934353139/Frame_784.svg",
+        "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
+        "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
+        "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
+        "https://static.tildacdn.com/tild3061-3934-4239-b835-393665353632/_-min.jpg",
+        "https://static.tildacdn.com/tild3965-6266-4230-b733-653234653535/_-1-min.jpg",
+        "https://static.tildacdn.com/tild6364-6136-4363-b738-366536396131/EL1000___ver1_top-mi.jpg",
+        "https://static.tildacdn.com/tild3637-6661-4935-b635-613534363132/204.svg",
+        "https://static.tildacdn.com/tild6364-3663-4132-a638-333535653435/30_.svg",
+        "https://static.tildacdn.com/tild3932-6330-4238-b836-633466303635/207.svg",
+        "https://static.tildacdn.com/tild6465-6238-4235-b738-323265326563/205.svg",
+        "https://static.tildacdn.com/tild6634-3635-4438-a432-323933623762/Frame_4-min.jpg",
+        "https://static.tildacdn.com/tild3834-3330-4932-b163-666536303762/_3-min.png",
+        "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
+        "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
+        "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
+        "https://static.tildacdn.com/tild3338-3061-4632-b434-383435633033/74.svg",
+        "https://static.tildacdn.com/tild3838-6564-4363-a230-643665343435/Frame_816.svg",
+        "https://static.tildacdn.com/tild3039-3635-4638-b161-663832653261/photo.svg",
+        "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js",
+        "https://mc.yandex.ru/watch/103534681"
+      ],
+      "videos": [],
+      "links": [
+        "https://ever-home.ru/where-to-buy-map-ru",
+        "https://ever-home.ru/en",
+        "https://ever-home.ru/catalog-ru",
+        "https://ever-home.ru",
+        "https://ever-home.ru/where-to-buy-map-en",
+        "https://ever-home.ru/catalog-en",
+        "https://ever-home.ru/catalog-en/new-minimalism-en",
+        "https://ever-home.ru/politica-ru",
+        "https://ever-home.ru/ru",
+        "https://ever-home.ru/politica-en"
+      ]
+    },
+    {
+      "url": "https://ever-home.ru/catalog-en/new-minimalism-en/marble-grey-en",
+      "title": "EVERSENSE | New minimalism | Grey Marble",
+      "html_bytes": 464729,
+      "status": 200,
+      "assets": [
+        "https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js",
+        "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760253.min.css?t=1773749385",
+        "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
+        "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
+        "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
+        "https://ever-home.ru/custom.css?t=1773749385",
+        "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
+        "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
+        "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
+        "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760253.min.js?t=1773749385",
+        "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-menu-widgeticons-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-animation-sbs-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-scale-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-zero-fixed-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-skiplink-1.0.min.js",
+        "https://static.tildacdn.com/js/tilda-events-1.0.min.js",
+        "https://static.tildacdn.com/tild3963-6637-4135-b962-343934353139/Frame_784.svg",
+        "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
+        "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
+        "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
+        "https://static.tildacdn.com/tild3334-6232-4062-b065-643564306330/_-3-min.jpg",
+        "https://static.tildacdn.com/tild6564-3761-4061-b734-393339343463/_-1-min.jpg",
+        "https://static.tildacdn.com/tild3236-6262-4634-b232-363436616666/EL1002___ver1_top-mi.jpg",
+        "https://static.tildacdn.com/tild3637-6661-4935-b635-613534363132/204.svg",
+        "https://static.tildacdn.com/tild6364-3663-4132-a638-333535653435/30_.svg",
+        "https://static.tildacdn.com/tild3932-6330-4238-b836-633466303635/207.svg",
+        "https://static.tildacdn.com/tild6465-6238-4235-b738-323265326563/205.svg",
+        "https://static.tildacdn.com/tild6634-3635-4438-a432-323933623762/Frame_4-min.jpg",
+        "https://static.tildacdn.com/tild3834-3330-4932-b163-666536303762/_3-min.png",
+        "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
+        "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
+        "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
+        "https://static.tildacdn.com/tild3338-3061-4632-b434-383435633033/74.svg",
+        "https://static.tildacdn.com/tild3838-6564-4363-a230-643665343435/Frame_816.svg",
+        "https://static.tildacdn.com/tild3039-3635-4638-b161-663832653261/photo.svg",
+        "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js",
+        "https://mc.yandex.ru/watch/103534681"
+      ],
+      "videos": [],
+      "links": [
+        "https://ever-home.ru/where-to-buy-map-ru",
+        "https://ever-home.ru/en",
+        "https://ever-home.ru/catalog-ru",
+        "https://ever-home.ru",
+        "https://ever-home.ru/where-to-buy-map-en",
+        "https://ever-home.ru/catalog-en",
+        "https://ever-home.ru/catalog-en/new-minimalism-en",
+        "https://ever-home.ru/politica-ru",
+        "https://ever-home.ru/ru",
+        "https://ever-home.ru/politica-en"
+      ]
     }
   ],
   "assets": [
@@ -4466,23 +5319,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/css/tilda-grid-3.0.min.css",
@@ -4513,23 +5366,23 @@
           "attr": "href"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "link",
           "attr": "href"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "link",
           "attr": "href"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "link",
           "attr": "href"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page68184635.min.css?t=1781013818",
@@ -4538,10 +5391,15 @@
           "page": "https://ever-home.ru",
           "tag": "link",
           "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "link",
+          "attr": "href"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic",
@@ -4572,23 +5430,23 @@
           "attr": "href"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "link",
           "attr": "href"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "link",
           "attr": "href"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "link",
           "attr": "href"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/css/tilda-animation-2.0.min.css",
@@ -4619,23 +5477,23 @@
           "attr": "href"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "link",
           "attr": "href"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "link",
           "attr": "href"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "link",
           "attr": "href"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/css/tilda-menu-widgeticons-1.0.min.css",
@@ -4666,23 +5524,23 @@
           "attr": "href"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "link",
           "attr": "href"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "link",
           "attr": "href"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "link",
           "attr": "href"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/css/tilda-popup-1.1.min.css",
@@ -4696,10 +5554,30 @@
           "page": "https://ever-home.ru",
           "tag": "link",
           "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "link",
+          "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "link",
+          "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "link",
+          "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "link",
+          "attr": "href"
         }
       ],
-      "use_count": 2,
-      "page_count": 1
+      "use_count": 6,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/css/tilda-slds-1.4.min.css",
@@ -4723,10 +5601,30 @@
           "page": "https://ever-home.ru",
           "tag": "link",
           "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "link",
+          "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "link",
+          "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "link",
+          "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "link",
+          "attr": "href"
         }
       ],
-      "use_count": 4,
-      "page_count": 1
+      "use_count": 12,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/css/tilda-zero-gallery-1.0.min.css",
@@ -4735,10 +5633,20 @@
           "page": "https://ever-home.ru",
           "tag": "link",
           "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "link",
+          "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "link",
+          "attr": "href"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/css/tilda-zoom-2.0.min.css",
@@ -4752,10 +5660,30 @@
           "page": "https://ever-home.ru",
           "tag": "link",
           "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "link",
+          "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "link",
+          "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "link",
+          "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "link",
+          "attr": "href"
         }
       ],
-      "use_count": 2,
-      "page_count": 1
+      "use_count": 6,
+      "page_count": 3
     },
     {
       "url": "https://ever-home.ru/custom.css?t=1781013818",
@@ -4764,10 +5692,15 @@
           "page": "https://ever-home.ru",
           "tag": "link",
           "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "link",
+          "attr": "href"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js",
@@ -4798,23 +5731,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/js/jquery-1.10.2.min.js",
@@ -4845,23 +5778,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-scripts-3.0.min.js",
@@ -4892,23 +5825,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page68184635.min.js?t=1781013818",
@@ -4917,10 +5850,15 @@
           "page": "https://ever-home.ru",
           "tag": "script",
           "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "script",
+          "attr": "src"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js",
@@ -4951,23 +5889,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-animation-2.0.min.js",
@@ -4998,23 +5936,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-zero-1.1.min.js",
@@ -5045,23 +5983,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-menu-1.0.min.js",
@@ -5092,23 +6030,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-menu-widgeticons-1.0.min.js",
@@ -5139,23 +6077,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-popup-1.0.min.js",
@@ -5164,10 +6102,20 @@
           "page": "https://ever-home.ru",
           "tag": "script",
           "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "script",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "script",
+          "attr": "src"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-slds-1.4.min.js",
@@ -5186,10 +6134,35 @@
           "page": "https://ever-home.ru",
           "tag": "script",
           "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "script",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "script",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "script",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "script",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "script",
+          "attr": "src"
         }
       ],
-      "use_count": 3,
-      "page_count": 1
+      "use_count": 9,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-zero-gallery-1.0.min.js",
@@ -5198,10 +6171,20 @@
           "page": "https://ever-home.ru",
           "tag": "script",
           "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "script",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "script",
+          "attr": "src"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/js/hammer.min.js",
@@ -5220,10 +6203,35 @@
           "page": "https://ever-home.ru",
           "tag": "script",
           "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "script",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "script",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "script",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "script",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "script",
+          "attr": "src"
         }
       ],
-      "use_count": 3,
-      "page_count": 1
+      "use_count": 9,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-animation-sbs-1.0.min.js",
@@ -5254,23 +6262,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-zoom-2.0.min.js",
@@ -5279,10 +6287,20 @@
           "page": "https://ever-home.ru",
           "tag": "script",
           "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "script",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "script",
+          "attr": "src"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-zero-scale-1.0.min.js",
@@ -5313,23 +6331,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-zero-fixed-1.0.min.js",
@@ -5360,23 +6378,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-skiplink-1.0.min.js",
@@ -5407,23 +6425,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/js/tilda-events-1.0.min.js",
@@ -5454,23 +6472,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/tild3963-6637-4135-b962-343934353139/Frame_784.svg",
@@ -5516,8 +6534,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 387,
-      "page_count": 65
+      "use_count": 453,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/tild3461-3234-4366-a635-383062633061/b2.svg",
@@ -5563,8 +6581,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 390,
-      "page_count": 65
+      "use_count": 462,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/tild3834-6535-4962-b730-623936653437/soc_1.svg",
@@ -5610,8 +6628,8 @@
           "attr": "src"
         }
       ],
-      "use_count": 129,
-      "page_count": 65
+      "use_count": 151,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/tild3335-6134-4139-b933-346565356434/soc_2.svg",
@@ -5657,8 +6675,8 @@
           "attr": "src"
         }
       ],
-      "use_count": 129,
-      "page_count": 65
+      "use_count": 151,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/tild3966-3837-4862-a637-306538333831/Frame_660.svg",
@@ -5667,10 +6685,20 @@
           "page": "https://ever-home.ru",
           "tag": "a",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "a",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "a",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3866-3466-4133-b536-336437646465/product-ru.svg",
@@ -5689,10 +6717,25 @@
           "page": "https://ever-home.ru",
           "tag": "img",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "data-original"
         }
       ],
-      "use_count": 3,
-      "page_count": 1
+      "use_count": 6,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/tild3036-3364-4838-b462-323664323432/photo_2025-12-17_15-.jpg",
@@ -5701,10 +6744,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3961-3761-4731-b431-346530383233/12-min.jpg",
@@ -5713,10 +6766,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3735-3032-4061-a632-333662363935/Rectangle_81.svg",
@@ -5730,10 +6793,30 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 2,
-      "page_count": 1
+      "use_count": 6,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3764-3663-4831-b063-623463616262/arrow_right_1.svg",
@@ -5779,8 +6862,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 9,
-      "page_count": 1
+      "use_count": 27,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3661-6136-4132-b732-353331386239/arrow_left_1.svg",
@@ -5826,8 +6909,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 9,
-      "page_count": 1
+      "use_count": 27,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild6239-3865-4330-a538-613530363764/active.svg",
@@ -5873,8 +6956,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 18,
-      "page_count": 1
+      "use_count": 54,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3835-6138-4139-b435-653434653861/no_active.svg",
@@ -5920,8 +7003,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 9,
-      "page_count": 1
+      "use_count": 27,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild6563-3962-4561-b363-303133373165/image_54-min.jpg",
@@ -5930,10 +7013,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3531-6632-4232-b438-353438656332/Rectangle_81.svg",
@@ -5942,10 +7035,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild6333-3233-4763-b263-653862616236/image_53-min.jpg",
@@ -5954,10 +7057,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3738-6231-4766-b165-333632613265/image_56-min.jpg",
@@ -5966,10 +7079,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://dl.dropboxusercontent.com/scl/fi/krjo6dc5k2udyk2s99k7p/1.mp4?rlkey=8klwitb2169p0glx8ra3zsx3c&st=26e3j6vc&dl=0",
@@ -5978,10 +7101,20 @@
           "page": "https://ever-home.ru",
           "tag": "source",
           "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "source",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "source",
+          "attr": "src"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3133-3831-4033-a533-656133633236/photo.svg",
@@ -6000,10 +7133,35 @@
           "page": "https://ever-home.ru",
           "tag": "img",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "data-original"
         }
       ],
-      "use_count": 3,
-      "page_count": 1
+      "use_count": 9,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3935-3665-4131-b261-376235363535/34_.svg",
@@ -6022,10 +7180,35 @@
           "page": "https://ever-home.ru",
           "tag": "img",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "data-original"
         }
       ],
-      "use_count": 3,
-      "page_count": 1
+      "use_count": 9,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild6238-3632-4365-b335-633361306532/photo.svg",
@@ -6044,10 +7227,35 @@
           "page": "https://ever-home.ru",
           "tag": "img",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "data-original"
         }
       ],
-      "use_count": 3,
-      "page_count": 1
+      "use_count": 9,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3763-3030-4134-b233-346166666564/Frame_795-min.jpg",
@@ -6056,10 +7264,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3330-3034-4035-b733-366135633532/Frame_789.svg",
@@ -6078,10 +7296,35 @@
           "page": "https://ever-home.ru",
           "tag": "img",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "data-original"
         }
       ],
-      "use_count": 3,
-      "page_count": 1
+      "use_count": 9,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild6438-6666-4264-b836-626131613635/_1.svg",
@@ -6100,10 +7343,25 @@
           "page": "https://ever-home.ru",
           "tag": "img",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "data-original"
         }
       ],
-      "use_count": 3,
-      "page_count": 1
+      "use_count": 6,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/tild3165-3634-4032-a133-366163636139/image_25-min.jpg",
@@ -6112,10 +7370,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild6339-3061-4734-b437-666161643265/_1_2-min.jpg",
@@ -6124,10 +7392,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3939-6532-4839-a263-346635633965/Frame_602-min.jpg",
@@ -6136,10 +7414,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3661-3366-4234-b831-373433613166/image_55-min.jpg",
@@ -6148,10 +7436,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://dl.dropboxusercontent.com/scl/fi/23w6rkj5wf6yp79bse0cg/2.mp4?rlkey=61of26ipcgx4uxlths6oanls5&st=fqta5ktm&dl=0",
@@ -6160,10 +7458,20 @@
           "page": "https://ever-home.ru",
           "tag": "source",
           "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "source",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "source",
+          "attr": "src"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3930-6461-4535-a537-663538636632/_1-min.jpg",
@@ -6172,10 +7480,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3130-3931-4530-a539-663666633163/ar_left.svg",
@@ -6221,8 +7539,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 15,
-      "page_count": 1
+      "use_count": 45,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3765-3230-4731-b534-306232623265/ar_right.svg",
@@ -6268,8 +7586,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 15,
-      "page_count": 1
+      "use_count": 45,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild6661-3764-4535-a530-623933393436/active.svg",
@@ -6315,8 +7633,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 60,
-      "page_count": 1
+      "use_count": 180,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3563-6535-4363-b235-613737353435/no_active.svg",
@@ -6362,8 +7680,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 15,
-      "page_count": 1
+      "use_count": 45,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3566-6461-4433-b363-633237663839/1.svg",
@@ -6372,10 +7690,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild6635-3239-4930-b862-626535373436/_2-min.jpg",
@@ -6384,10 +7712,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3761-3730-4432-a465-383862376430/2.svg",
@@ -6396,10 +7734,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3736-6432-4836-a162-376666313463/_3-min.jpg",
@@ -6408,10 +7756,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3566-3764-4965-b366-346132613062/3.svg",
@@ -6420,10 +7778,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3635-3438-4135-a630-323937346632/_4-min.jpg",
@@ -6432,10 +7800,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild6533-3439-4331-a131-663436356561/4.svg",
@@ -6444,10 +7822,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3432-3336-4433-b561-303735363235/_5-min.jpg",
@@ -6456,10 +7844,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3163-3535-4365-b662-383930353934/_2.svg",
@@ -6478,10 +7876,25 @@
           "page": "https://ever-home.ru",
           "tag": "img",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "img",
+          "attr": "data-original"
         }
       ],
-      "use_count": 3,
-      "page_count": 1
+      "use_count": 6,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/tild3430-3336-4637-b734-306132323334/4_balancer-min.png",
@@ -6490,10 +7903,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3966-3038-4534-b530-323363653038/3_board-min.png",
@@ -6502,10 +7925,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild6465-3639-4165-b462-373536363462/2_paper-min.png",
@@ -6514,10 +7947,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3331-3063-4665-a637-643463316565/1_overlay-min.png",
@@ -6526,10 +7969,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3037-3031-4634-a538-636436313338/_4.svg",
@@ -6563,10 +8016,20 @@
           "page": "https://ever-home.ru",
           "tag": "img",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
         }
       ],
-      "use_count": 6,
-      "page_count": 1
+      "use_count": 18,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild6466-3266-4366-b761-356432623932/_3.svg",
@@ -6600,10 +8063,20 @@
           "page": "https://ever-home.ru",
           "tag": "img",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
         }
       ],
-      "use_count": 6,
-      "page_count": 1
+      "use_count": 18,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3132-3661-4731-b033-646433613930/_2.svg",
@@ -6637,10 +8110,20 @@
           "page": "https://ever-home.ru",
           "tag": "img",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
         }
       ],
-      "use_count": 6,
-      "page_count": 1
+      "use_count": 18,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3264-3064-4161-a436-316566346631/_1.svg",
@@ -6674,10 +8157,20 @@
           "page": "https://ever-home.ru",
           "tag": "img",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
         }
       ],
-      "use_count": 6,
-      "page_count": 1
+      "use_count": 18,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3134-3734-4162-b134-396135373639/Frame_753-12-min.jpg",
@@ -6686,10 +8179,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3565-3736-4234-b735-323063633664/_1-min.png",
@@ -6710,6 +8213,16 @@
           "attr": "style-url"
         },
         {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
           "page": "https://ever-home.ru/catalog-ru/nature-aesthetic-ru/light-natural-victoria-oak-ru",
           "tag": "div",
           "attr": "style-url"
@@ -6723,20 +8236,10 @@
           "page": "https://ever-home.ru/catalog-ru/nature-aesthetic-ru/light-virdia-oak-ru",
           "tag": "div",
           "attr": "style-url"
-        },
-        {
-          "page": "https://ever-home.ru/catalog-ru/nature-aesthetic-ru/white-casella-oak-ru",
-          "tag": "div",
-          "attr": "style-url"
-        },
-        {
-          "page": "https://ever-home.ru/catalog-ru/nature-aesthetic-ru/light-natural-casella-oak-ru",
-          "tag": "div",
-          "attr": "style-url"
         }
       ],
-      "use_count": 25,
-      "page_count": 25
+      "use_count": 27,
+      "page_count": 27
     },
     {
       "url": "https://static.tildacdn.com/tild3235-3939-4764-a566-636661373236/Frame_769-min.jpg",
@@ -6745,10 +8248,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3132-3136-4339-a332-373934653237/_2-min.png",
@@ -6774,6 +8287,16 @@
           "attr": "style-url"
         },
         {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
           "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
           "tag": "div",
           "attr": "style-url"
@@ -6782,20 +8305,10 @@
           "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/natural-victoria-oak-ru",
           "tag": "div",
           "attr": "style-url"
-        },
-        {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/brown-virdia-oak-ru",
-          "tag": "div",
-          "attr": "style-url"
-        },
-        {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/natural-virdia-oak-ru",
-          "tag": "div",
-          "attr": "style-url"
         }
       ],
-      "use_count": 26,
-      "page_count": 26
+      "use_count": 29,
+      "page_count": 29
     },
     {
       "url": "https://static.tildacdn.com/tild3438-3261-4335-b238-386137333464/_2-min.jpg",
@@ -6804,10 +8317,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3834-3330-4932-b163-666536303762/_3-min.png",
@@ -6828,6 +8351,16 @@
           "attr": "style-url"
         },
         {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
           "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
           "tag": "div",
           "attr": "style-url"
@@ -6841,20 +8374,10 @@
           "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/taupe-grey-ru",
           "tag": "div",
           "attr": "style-url"
-        },
-        {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/grey-victoria-oak-ru",
-          "tag": "div",
-          "attr": "style-url"
-        },
-        {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/light-gray-victoria-oak-ru",
-          "tag": "div",
-          "attr": "style-url"
         }
       ],
-      "use_count": 22,
-      "page_count": 22
+      "use_count": 27,
+      "page_count": 27
     },
     {
       "url": "https://static.tildacdn.com/tild6636-6137-4031-a162-643636656364/_3-min.jpg",
@@ -6863,10 +8386,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3132-3537-4665-b138-613635366365/-min.jpg",
@@ -6875,10 +8408,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild6636-6131-4537-a465-643539316566/photo.svg",
@@ -6892,10 +8435,30 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 2,
-      "page_count": 1
+      "use_count": 6,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3932-3930-4533-a465-623336623034/photo.svg",
@@ -6909,10 +8472,30 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 2,
-      "page_count": 1
+      "use_count": 6,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3436-3938-4636-b939-376634386234/photo.svg",
@@ -6926,10 +8509,30 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 2,
-      "page_count": 1
+      "use_count": 6,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3864-3261-4535-a165-626161323562/photo.svg",
@@ -6943,10 +8546,30 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 2,
-      "page_count": 1
+      "use_count": 6,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3434-6537-4434-a262-336362613466/textures_2000_1.png",
@@ -6955,10 +8578,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3761-3062-4930-b034-353635303038/textures_2000.png",
@@ -6967,10 +8600,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild6635-3065-4435-a564-626332396236/Frame_750-min_1.png",
@@ -6979,10 +8622,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3536-6536-4031-b934-656635336565/Frame_85555-min.jpg",
@@ -6991,10 +8644,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3266-6665-4239-b762-336565393764/photo.svg",
@@ -7003,10 +8666,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3565-6431-4333-b463-303566376665/Frame_835.svg",
@@ -7015,10 +8688,20 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 3,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild6262-3833-4963-b738-626566653731/Rectangle_101.svg",
@@ -7032,10 +8715,30 @@
           "page": "https://ever-home.ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "div",
+          "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/ru",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 2,
-      "page_count": 1
+      "use_count": 6,
+      "page_count": 3
     },
     {
       "url": "https://static.tildacdn.com/tild3937-3061-4938-b064-343362383432/logo.svg",
@@ -7081,8 +8784,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 130,
-      "page_count": 65
+      "use_count": 154,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/tild3430-3234-4265-a366-393635323234/Frame_818.svg",
@@ -7128,8 +8831,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 390,
-      "page_count": 65
+      "use_count": 462,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/tild3636-3635-4166-a163-333561646161/75.svg",
@@ -7175,8 +8878,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 390,
-      "page_count": 65
+      "use_count": 462,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/tild3338-3061-4632-b434-383435633033/74.svg",
@@ -7222,8 +8925,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 390,
-      "page_count": 65
+      "use_count": 462,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/tild3838-6564-4363-a230-643665343435/Frame_816.svg",
@@ -7269,8 +8972,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 390,
-      "page_count": 65
+      "use_count": 462,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/tild3039-3635-4638-b161-663832653261/photo.svg",
@@ -7316,8 +9019,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 390,
-      "page_count": 65
+      "use_count": 462,
+      "page_count": 77
     },
     {
       "url": "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js",
@@ -7348,23 +9051,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "script",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "script",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://mc.yandex.ru/watch/103534681",
@@ -7395,23 +9098,23 @@
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
+          "page": "https://ever-home.ru/en",
           "tag": "img",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
+          "page": "https://ever-home.ru/ru",
           "tag": "img",
           "attr": "src"
         },
         {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
           "tag": "img",
           "attr": "src"
         }
       ],
-      "use_count": 65,
-      "page_count": 65
+      "use_count": 77,
+      "page_count": 77
     },
     {
       "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71698115.min.css?t=1773749361",
@@ -7449,6 +9152,16 @@
           "attr": "href"
         },
         {
+          "page": "https://ever-home.ru/politica-ru",
+          "tag": "link",
+          "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/politica-en",
+          "tag": "link",
+          "attr": "href"
+        },
+        {
           "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/victoria-oak-white-ru",
           "tag": "link",
           "attr": "href"
@@ -7457,20 +9170,10 @@
           "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
           "tag": "link",
           "attr": "href"
-        },
-        {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/jura-ru",
-          "tag": "link",
-          "attr": "href"
-        },
-        {
-          "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/taupe-grey-ru",
-          "tag": "link",
-          "attr": "href"
         }
       ],
-      "use_count": 10,
-      "page_count": 10
+      "use_count": 12,
+      "page_count": 12
     },
     {
       "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71698115.min.js?t=1773749361",
@@ -8854,8 +10557,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 62,
-      "page_count": 62
+      "use_count": 66,
+      "page_count": 66
     },
     {
       "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71756675.min.css?t=1773749361",
@@ -9093,6 +10796,398 @@
       "page_count": 2
     },
     {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page69218947.min.css?t=1781013759",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://ever-home.ru/custom.css?t=1781013759",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page69218947.min.js?t=1781013759",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "script",
+          "attr": "src"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/tild3236-6632-4361-a631-373934313738/product-eng.svg",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
+        }
+      ],
+      "use_count": 3,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/tild3037-6134-4363-a433-316162346538/_.svg",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
+        }
+      ],
+      "use_count": 3,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/tild3033-6365-4832-a338-393861313637/_.svg",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/en",
+          "tag": "img",
+          "attr": "data-original"
+        }
+      ],
+      "use_count": 3,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page151902546.min.css?t=1786351901",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://ever-home.ru/custom.css?t=1786351901",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
+          "tag": "link",
+          "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-ru",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 2,
+      "page_count": 2
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page151902546.min.js?t=1786351901",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-map-ru",
+          "tag": "script",
+          "attr": "src"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page151456826.min.css?t=1786351901",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-ru",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/css/tilda-forms-1.0.min.css",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-ru",
+          "tag": "link",
+          "attr": "href"
+        },
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-en",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 2,
+      "page_count": 2
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page151456826.min.js?t=1786351901",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-ru",
+          "tag": "script",
+          "attr": "src"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/js/tilda-forms-1.0.min.js",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-ru",
+          "tag": "script",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-en",
+          "tag": "script",
+          "attr": "src"
+        }
+      ],
+      "use_count": 2,
+      "page_count": 2
+    },
+    {
+      "url": "https://static.tildacdn.com/js/tilda-zero-forms-1.0.min.js",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-ru",
+          "tag": "script",
+          "attr": "src"
+        },
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-en",
+          "tag": "script",
+          "attr": "src"
+        }
+      ],
+      "use_count": 2,
+      "page_count": 2
+    },
+    {
+      "url": "https://static.tildacdn.com/tild3664-3035-4030-b937-326463386163/Prev.svg",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-ru",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-ru",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-en",
+          "tag": "div",
+          "attr": "data-original"
+        }
+      ],
+      "use_count": 4,
+      "page_count": 2
+    },
+    {
+      "url": "https://static.tildacdn.com/tild6334-6335-4539-b634-636464396131/Next.svg",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-ru",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-ru",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-en",
+          "tag": "div",
+          "attr": "data-original"
+        },
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-en",
+          "tag": "div",
+          "attr": "data-original"
+        }
+      ],
+      "use_count": 4,
+      "page_count": 2
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page152145706.min.css?t=1786352076",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-map-en",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://ever-home.ru/custom.css?t=1786352076",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-map-en",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page152145706.min.js?t=1786352076",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-map-en",
+          "tag": "script",
+          "attr": "src"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page152155796.min.css?t=1786352119",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-en",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://ever-home.ru/custom.css?t=1786352119",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-en",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page152155796.min.js?t=1786352119",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/where-to-buy-list-en",
+          "tag": "script",
+          "attr": "src"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page69024681.min.css?t=1773749361",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/politica-ru",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page69024681.min.js?t=1773749361",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/politica-ru",
+          "tag": "script",
+          "attr": "src"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71852773.min.css?t=1773749361",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/politica-en",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71852773.min.js?t=1773749361",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/politica-en",
+          "tag": "script",
+          "attr": "src"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
       "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71539237.min.css?t=1773749361",
       "uses": [
         {
@@ -9211,8 +11306,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 56,
-      "page_count": 56
+      "use_count": 60,
+      "page_count": 60
     },
     {
       "url": "https://static.tildacdn.com/tild6364-3663-4132-a638-333535653435/30_.svg",
@@ -9258,8 +11353,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 56,
-      "page_count": 56
+      "use_count": 60,
+      "page_count": 60
     },
     {
       "url": "https://static.tildacdn.com/tild3932-6330-4238-b836-633466303635/207.svg",
@@ -9305,8 +11400,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 56,
-      "page_count": 56
+      "use_count": 60,
+      "page_count": 60
     },
     {
       "url": "https://static.tildacdn.com/tild6465-6238-4235-b738-323265326563/205.svg",
@@ -9352,8 +11447,8 @@
           "attr": "data-original"
         }
       ],
-      "use_count": 56,
-      "page_count": 56
+      "use_count": 60,
+      "page_count": 60
     },
     {
       "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71456711.min.css?t=1773749361",
@@ -9386,10 +11481,15 @@
           "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/catalog-en/quiet-luxury-en/turin-oak-en",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/tild3763-3565-4465-b830-396539393031/A2190_Bedroom04_deta.jpg",
@@ -9398,10 +11498,15 @@
           "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/catalog-en/quiet-luxury-en/turin-oak-en",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/tild3739-6666-4364-a632-316562363461/EL2190___ver1_top-mi.jpg",
@@ -9410,10 +11515,15 @@
           "page": "https://ever-home.ru/catalog-ru/quiet-luxury-ru/turin-oak-ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/catalog-en/quiet-luxury-en/turin-oak-en",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71699279.min.css?t=1773749361",
@@ -11303,7 +13413,7 @@
           "attr": "href"
         },
         {
-          "page": "https://ever-home.ru/catalog-en/new-minimalism-en",
+          "page": "https://ever-home.ru/catalog-en/nature-aesthetic-en",
           "tag": "link",
           "attr": "href"
         },
@@ -11313,13 +13423,13 @@
           "attr": "href"
         },
         {
-          "page": "https://ever-home.ru/catalog-en/nature-aesthetic-en",
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en",
           "tag": "link",
           "attr": "href"
         }
       ],
-      "use_count": 17,
-      "page_count": 17
+      "use_count": 20,
+      "page_count": 20
     },
     {
       "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71722529.min.js?t=1773749385",
@@ -11415,10 +13525,15 @@
           "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/white-sherman-oak-ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/white-sherman-oak-en",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/tild3132-6530-4635-b062-323666383035/_-min.jpg",
@@ -11427,10 +13542,15 @@
           "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/white-sherman-oak-ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/white-sherman-oak-en",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/tild6439-6636-4362-a265-303237646439/EL1054____ver1_top-m.jpg",
@@ -11439,10 +13559,15 @@
           "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/white-sherman-oak-ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/white-sherman-oak-en",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71722969.min.css?t=1773749385",
@@ -11475,10 +13600,15 @@
           "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/marble-light-ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/marble-light-en",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/tild3965-6266-4230-b733-653234653535/_-1-min.jpg",
@@ -11487,10 +13617,15 @@
           "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/marble-light-ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/marble-light-en",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/tild6364-6136-4363-b738-366536396131/EL1000___ver1_top-mi.jpg",
@@ -11499,10 +13634,15 @@
           "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/marble-light-ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/marble-light-en",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71723963.min.css?t=1773749385",
@@ -11535,10 +13675,15 @@
           "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/marble-grey-ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/marble-grey-en",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/tild6564-3761-4061-b734-393339343463/_-1-min.jpg",
@@ -11547,10 +13692,15 @@
           "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/marble-grey-ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/marble-grey-en",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/tild3236-6262-4634-b232-363436616666/EL1002___ver1_top-mi.jpg",
@@ -11559,10 +13709,15 @@
           "page": "https://ever-home.ru/catalog-ru/new-minimalism-ru/marble-grey-ru",
           "tag": "div",
           "attr": "style-url"
+        },
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/marble-grey-en",
+          "tag": "div",
+          "attr": "style-url"
         }
       ],
-      "use_count": 1,
-      "page_count": 1
+      "use_count": 2,
+      "page_count": 2
     },
     {
       "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760157.min.css?t=1773749385",
@@ -11589,10 +13744,10 @@
       "page_count": 1
     },
     {
-      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760257.min.css?t=1773749385",
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760255.min.css?t=1773749385",
       "uses": [
         {
-          "page": "https://ever-home.ru/catalog-en/new-minimalism-en",
+          "page": "https://ever-home.ru/catalog-en/nature-aesthetic-en",
           "tag": "link",
           "attr": "href"
         }
@@ -11601,10 +13756,10 @@
       "page_count": 1
     },
     {
-      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760257.min.js?t=1773749385",
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760255.min.js?t=1773749385",
       "uses": [
         {
-          "page": "https://ever-home.ru/catalog-en/new-minimalism-en",
+          "page": "https://ever-home.ru/catalog-en/nature-aesthetic-en",
           "tag": "script",
           "attr": "src"
         }
@@ -11637,10 +13792,10 @@
       "page_count": 1
     },
     {
-      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760255.min.css?t=1773749385",
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760257.min.css?t=1773749385",
       "uses": [
         {
-          "page": "https://ever-home.ru/catalog-en/nature-aesthetic-en",
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en",
           "tag": "link",
           "attr": "href"
         }
@@ -11649,10 +13804,10 @@
       "page_count": 1
     },
     {
-      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760255.min.js?t=1773749385",
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760257.min.js?t=1773749385",
       "uses": [
         {
-          "page": "https://ever-home.ru/catalog-en/nature-aesthetic-en",
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en",
           "tag": "script",
           "attr": "src"
         }
@@ -11716,8 +13871,8 @@
           "attr": "href"
         }
       ],
-      "use_count": 17,
-      "page_count": 17
+      "use_count": 18,
+      "page_count": 18
     },
     {
       "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760167.min.js?t=1773749395",
@@ -12324,6 +14479,102 @@
       "uses": [
         {
           "page": "https://ever-home.ru/catalog-en/nature-aesthetic-en/light-natural-ticino-oak-en",
+          "tag": "script",
+          "attr": "src"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760161.min.css?t=1773749395",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/catalog-en/quiet-luxury-en/turin-oak-en",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760161.min.js?t=1773749395",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/catalog-en/quiet-luxury-en/turin-oak-en",
+          "tag": "script",
+          "attr": "src"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760247.min.css?t=1773749385",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/white-sherman-oak-en",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760247.min.js?t=1773749385",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/white-sherman-oak-en",
+          "tag": "script",
+          "attr": "src"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760251.min.css?t=1773749385",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/marble-light-en",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760251.min.js?t=1773749385",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/marble-light-en",
+          "tag": "script",
+          "attr": "src"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760253.min.css?t=1773749385",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/marble-grey-en",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "use_count": 1,
+      "page_count": 1
+    },
+    {
+      "url": "https://static.tildacdn.com/ws/project12331345/tilda-blocks-page71760253.min.js?t=1773749385",
+      "uses": [
+        {
+          "page": "https://ever-home.ru/catalog-en/new-minimalism-en/marble-grey-en",
           "tag": "script",
           "attr": "src"
         }
