@@ -88,6 +88,22 @@ with sync_playwright() as playwright:
         print("PARTNER_BROWSER_QA", json.dumps(row, ensure_ascii=False), flush=True)
         results.append(row)
         page.close()
+    home = browser.new_page(ignore_https_errors=False)
+    try:
+        response = home.goto("https://eversense.by/", wait_until="domcontentloaded", timeout=50000)
+        assert response and response.status == 200
+        home_links = home.evaluate("""() => [...document.querySelectorAll('a[href]')]
+            .filter(a => /где купить/i.test(a.textContent || '') ||
+                (a.getAttribute('href') || '').includes('where-to-buy'))
+            .map(a => ({label:(a.textContent||'').trim().slice(0,40),
+                         href:a.getAttribute('href')||''}))""")
+        print("PARTNERS_HOMEPAGE_LINKS",json.dumps(home_links[:30],ensure_ascii=False),flush=True)
+        assert any(x["href"] in ("/where-to-buy.html","https://eversense.by/where-to-buy.html")
+                   for x in home_links), "Homepage is missing link to new live dealer directory"
+    except Exception as exc:
+        errors.append("Homepage partner navigation: " + str(exc)[:400])
+    finally:
+        home.close()
     browser.close()
 
 (OUT / "results.json").write_text(
