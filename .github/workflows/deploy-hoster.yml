@@ -55,6 +55,7 @@ jobs:
             exit 1
           fi
 
+      # Recheck FTP root after hoster.by account path update, then deploy if verified.
       - name: Verify FTP directory serves the Eversence domain
         env:
           FTP_PASSWORD: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
