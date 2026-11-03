@@ -1,0 +1,27 @@
+name: QA EVERSENSE price widgets
+on:
+  push:
+    paths:
+      - .github/workflows/qa-prices.yml
+      - scripts/qa_prices.py
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install browser tester
+        run: |
+          python3 -m pip install --break-system-packages playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Test regular price, crossed-out sale and expiry
+        run: python3 scripts/qa_prices.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: price-widget-screenshots
+          path: price-qa/
+          retention-days: 7
