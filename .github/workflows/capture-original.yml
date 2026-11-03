@@ -1,0 +1,24 @@
+name: Capture original EVERSENSE site
+on:
+  push:
+    paths:
+      - scripts/capture_original.py
+      - .github/workflows/capture-original.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read public original site
+        run: python3 scripts/capture_original.py
+      - name: Save original site audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reference/
+          git commit -m "Capture original Tilda site page and asset inventory" || exit 0
+          git push origin HEAD:main
