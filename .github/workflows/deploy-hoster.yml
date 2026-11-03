@@ -116,22 +116,37 @@ jobs:
             ./ _deploy/
           test -f _deploy/index.html
 
-      # This account MUST have its FTP home restricted to www/eversence.by/.
-      # The server directory is intentionally ./ (the FTP account home).
-      # First run with publish=false (dry-run) and check the remote path.
-      - name: Upload to hoster.by over encrypted FTPS
+      # Strict FTPS and pinned server certificate; domain root verified above.
+      # Deploy files without deleting unrelated remote content.
+      - name: Upload verified Eversence website via FTPS
+        if: ${{ github.event_name == 'push' || inputs.publish }}
         env:
-          NODE_EXTRA_CA_CERTS: ${{ runner.temp }}/eversence-ftps.crt
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
-        with:
-          server: vh108.hoster.by
-          username: eversence-deploy
-          password: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
-          port: 21
-          protocol: ftps
-          security: strict
-          local-dir: ./_deploy/
-          server-dir: ./
-          dry-run: ${{ github.event_name == 'workflow_dispatch' && !inputs.publish }}
-          dangerous-clean-slate: false
-          log-level: standard
+          FTP_PASSWORD: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
+          FTP_CA: ${{ runner.temp }}/eversence-ftps.crt
+        run: python3 .github/scripts/deploy_ftps.py
+
+      - name: Check live website after publication
+        if: ${{ github.event_name == 'push' || inputs.publish }}
+        run: |
+          python3 - <<'PY'
+          import subprocess
+          import time
+          import pathlib
+          expected = pathlib.Path("_deploy/index.html").read_bytes()
+          for name in ("eversence.by", "www.eversence.by"):
+              url = f"https://{name}/"
+              ok = False
+              for attempt in range(6):
+                  r = subprocess.run(
+                      ["curl", "-ksSL", "--max-time", "20", "--resolve",
+                       f"{name}:443:87.232.64.108", url],
+                      capture_output=True, timeout=30,
+                  )
+                  if r.returncode == 0 and r.stdout == expected:
+                      ok = True
+                      break
+                  time.sleep(3)
+              if not ok:
+                  raise SystemExit(f"Published homepage verification failed for {name}")
+              print(f"Homepage verified for {name}: {len(expected)} bytes")
+          PY
