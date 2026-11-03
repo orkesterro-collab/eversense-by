@@ -90,10 +90,19 @@ with sync_playwright() as playwright:
                     row["clickable_catalog_links"] = len(candidates)
                     if candidates:
                         first = candidates[0]
+                        row["clicked_catalog_link_html"] = first.evaluate("a => a.outerHTML.slice(0,380)")
                         try:
                             first.click(timeout=8000)
-                            page.wait_for_url("**/catalog-ru*", timeout=15000)
-                            row["catalog_click_reached"] = page.url
+                            page.wait_for_timeout(1800)
+                            row["url_after_catalog_click"] = page.url
+                            row["open_page_urls"] = [p.url for p in context.pages]
+                            print("HOME_CATALOG_CLICK_STATE", device,
+                                  json.dumps({"clicked":row["clicked_catalog_link_html"],
+                                              "current":page.url,
+                                              "pages":row["open_page_urls"]},ensure_ascii=False),flush=True)
+                            if "/catalog-ru" not in page.url and not any(
+                                "/catalog-ru" in p.url for p in context.pages):
+                                failures.append(f"{device} click did not open catalog in any browser tab")
                         except Exception as exc:
                             print("HOME_CATALOG_CLICK_ERROR", device, str(exc)[:1500], flush=True)
                             failures.append(f"{device} real catalog navigation failed: {str(exc)[:180]}")
