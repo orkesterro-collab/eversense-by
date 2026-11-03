@@ -13,6 +13,8 @@ with sync_playwright() as p:
     browser=p.chromium.launch(headless=True,args=["--no-sandbox","--disable-dev-shm-usage"])
     for label,width in [("desktop",1440),("mobile",390)]:
         page=browser.new_page(viewport={"width":width,"height":900},device_scale_factor=1)
+        # The real asynchronous Google request must not overwrite deterministic QA fixtures.
+        page.route("**/gviz/tq?**",lambda route: route.abort())
         page.goto(PRODUCT,wait_until="domcontentloaded",timeout=60000)
         page.wait_for_function("typeof EversensePriceFeed==='function' && !!document.querySelector('h2.tn-atom')",timeout=30000)
         page.evaluate("(value)=>EversensePriceFeed(value)",fixture("Date(2027,7,1)"))
@@ -34,6 +36,7 @@ with sync_playwright() as p:
         print(label,"PRODUCT OK",json.dumps(data,ensure_ascii=False),"expired=",expired,"upcoming=",upcoming)
         page.close()
     page=browser.new_page(viewport={"width":1440,"height":900})
+    page.route("**/gviz/tq?**",lambda route: route.abort())
     page.goto(CATALOG,wait_until="domcontentloaded",timeout=60000)
     page.wait_for_function("typeof EversensePriceFeed==='function' && [...document.querySelectorAll('.tn-atom')].some(n=>n.textContent.trim()==='EL1052')",timeout=30000)
     page.evaluate("(value)=>EversensePriceFeed(value)",fixture("Date(2027,7,1)"))
