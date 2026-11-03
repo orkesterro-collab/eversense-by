@@ -55,6 +55,29 @@ jobs:
             exit 1
           fi
 
+      - name: Verify isolated FTP home and existing placeholder
+        env:
+          FTP_PASSWORD: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
+          FTP_CA: ${{ runner.temp }}/eversence-ftps.crt
+        run: |
+          python3 - <<'PY'
+          import ftplib
+          import os
+          import ssl
+          context = ssl.create_default_context(cafile=os.environ["FTP_CA"])
+          with ftplib.FTP_TLS(context=context, timeout=30) as ftp:
+              ftp.connect("vh108.hoster.by", 21)
+              ftp.login("eversence-deploy", os.environ["FTP_PASSWORD"])
+              ftp.prot_p()
+              names = sorted(x.rsplit("/", 1)[-1] for x in ftp.nlst())
+              print("FTP home:", ftp.pwd())
+              print("Existing FTP home entries:", names[:20])
+              if not names:
+                  print("Note: FTP home is empty")
+              elif "index.html" not in names:
+                  raise SystemExit("FTP home does not contain expected index.html, refusing to proceed")
+          PY
+
       - name: Stage public website files only
         shell: bash
         run: |
