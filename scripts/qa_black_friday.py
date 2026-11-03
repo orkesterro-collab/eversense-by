@@ -20,6 +20,8 @@ with sync_playwright() as p:
         return {hero:{display:getComputedStyle(el).display, visibility:getComputedStyle(el).visibility, opacity:getComputedStyle(el).opacity, box:el.getBoundingClientRect().toJSON()},artboard:a?{display:getComputedStyle(a).display,visibility:getComputedStyle(a).visibility,box:a.getBoundingClientRect().toJSON()}:null,record:rec?{display:getComputedStyle(rec).display,visibility:getComputedStyle(rec).visibility,opacity:getComputedStyle(rec).opacity,box:rec.getBoundingClientRect().toJSON()}:null};
       }""")
       print("HERO_NOT_VISIBLE",label,json.dumps(info,ensure_ascii=False),flush=True)
+    debug=page.evaluate("""() => [...document.querySelectorAll('#rec1028545506 .t396__elem, #rec1028545516 .t396__elem, #rec1028545521 .t396__elem')].filter(el => /Чувственный|EVERSENSE|Посмотреть каталог/.test(el.innerText||'')).map(el=>({rec:el.closest('.t-rec')?.id, txt:(el.innerText||'').slice(0,50), display:getComputedStyle(el).display,visibility:getComputedStyle(el).visibility,opacity:getComputedStyle(el).opacity, box:el.getBoundingClientRect().toJSON()}))""")
+    print("OVERLAY_DEBUG",label,json.dumps(debug,ensure_ascii=False),flush=True)
     page.screenshot(path=str(out/f"homepage-{label}.png"),animations="disabled",timeout=30000)
     assert hero.is_visible(),"First slide is not visible"
     button=hero.get_by_role("link",name="Смотреть акцию")
