@@ -31,12 +31,17 @@ with sync_playwright() as playwright:
             row["minsk_count"] = page.locator('.city-group[data-city="Минск"] .partner-card').count()
             row["map_markers"] = page.locator(".leaflet-marker-icon").count()
             row["districts"] = page.locator('.city-group[data-city="Минск"] .district-group').count()
-            row["demo_banner_visible"] = page.locator("#partners-demo").is_visible()
+            row["demo_banner_removed"] = page.locator("#partners-demo").count() == 0
+            row["demo_tags_count"] = page.locator(".demo-tag").count()
             assert row["data_count"] == 40, row
             assert row["city_count"] == 16 and row["minsk_count"] == 10, row
             assert row["districts"] == 9, row
             assert row["map_markers"] == 40, "All 40 markers should appear on map: " + str(row)
-            assert row["demo_banner_visible"], "Demo data must be clearly labeled"
+            assert row["demo_banner_removed"], "Large DEMO banner must be removed"
+            assert row["demo_tags_count"] == 40, "Sample dealers must retain compact DEMO labels"
+            assert not page.locator("#partners-reset").is_visible(), "Clear filter should be hidden initially"
+            row["search_style"] = page.locator(".search-field input").evaluate("el => ({top:getComputedStyle(el).borderTopWidth, bottom:getComputedStyle(el).borderBottomWidth, bg:getComputedStyle(el).backgroundColor})")
+            assert row["search_style"]["top"] == "0px" and row["search_style"]["bottom"] == "0px", "Search must be unboxed"
             assert page.locator(".district-group__count,.city-group__right,#partners-count,#cities-count,#partners-showing").count() == 0, "Visible partner counters must be removed"
             border = page.locator('.city-group[data-city="Минск"] .partner-card').first.evaluate(
                 "el => ({width:getComputedStyle(el).borderTopWidth,shadow:getComputedStyle(el).boxShadow})")
@@ -77,6 +82,7 @@ with sync_playwright() as playwright:
             # City filter: 2 sites in Brest, with two corresponding pins.
             page.select_option("#partners-city", "Брест")
             page.wait_for_timeout(300)
+            assert page.locator("#partners-reset").is_visible(), "Clear filter must appear when city is selected"
             row["brest_visible"] = page.locator(".partner-card").count()
             row["brest_pins"] = page.locator(".leaflet-marker-icon").count()
             assert row["brest_visible"] == 2 and row["brest_pins"] == 2, row
@@ -104,6 +110,7 @@ with sync_playwright() as playwright:
             assert row["district_search_count"] == 2, row
 
             page.fill("#partners-search", "")
+            assert not page.locator("#partners-reset").is_visible(), "Clear filter must disappear when filters are empty"
             page.screenshot(path=str(OUT / (label + "-directory.png")),
                             full_page=True, animations="disabled", timeout=40000)
             row["js_errors"] = js_errors

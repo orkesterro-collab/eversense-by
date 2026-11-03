@@ -268,7 +268,7 @@
   }
   function render() {
     var list = filtered();
-    el("partners-demo").hidden = !list.some(function (p) { return p.demo; });
+    el("partners-reset").hidden = !(trim(el("partners-search").value) || el("partners-city").value);
     renderList(list);
     renderMap(list);
   }
