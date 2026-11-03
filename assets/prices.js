@@ -69,6 +69,14 @@
   function renderTilda() {
     var nodes=tildaSkuNodes(), isProduct=/\/catalog-(ru|en)\/[^/]+\/[^/]+\/?(?:index\.html)?$/.test(location.pathname);
     if (isProduct) {
+      // Once the price panel exists, keep it synchronized even if Tilda changes SKU nodes.
+      var existingPanel=document.getElementById("ev-product-price");
+      if (existingPanel && existingPanel.dataset.evSku) {
+        var existingBox=existingPanel.querySelector(".ev-price-box");
+        if (existingBox) existingBox.remove();
+        existingPanel.append(block(existingPanel.dataset.evSku,"product"));
+        return;
+      }
       var match=null, sku=null;
       for (var i=0;i<nodes.length;i++){
         var t=nodes[i].textContent.trim().toUpperCase();
