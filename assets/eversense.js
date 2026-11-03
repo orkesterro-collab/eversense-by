@@ -1,6 +1,11 @@
 (function boot(){
 "use strict";
 const R=document.documentElement.dataset.root||"";
+/* Live Google Sheets BYN pricing also applies to the simplified HTML pages. */
+(function(){
+  var style=document.createElement("link");style.rel="stylesheet";style.href=R+"assets/prices.css";document.head.appendChild(style);
+  var feed=document.createElement("script");feed.src=R+"assets/prices.js";feed.defer=true;document.head.appendChild(feed);
+})();
 const P=document.documentElement.dataset.page||"home";
 const CODE=document.documentElement.dataset.sku||"";
 const rows=[["EL153","Однотонные","Бежевый песок","#d9c7ad","minimal"],["EL750","Однотонные","Ярко-серый","#b7b4ae","minimal"],["EL1049","Дуб Виктория","Белый","#e8e1d6","minimal"],["EL1050","Дуб Виктория","Светло-серый","#cfc9bf","minimal"],["EL1053","Дуб Виктория","Серый","#a9a296","minimal"],["EL1051","Дуб Виктория","Натуральный светлый","#c9ab86","nature"],["EL1052","Дуб Виктория","Натуральный","#a8835c","luxury"],["EL1036","Дуб Вирдиа","Светлый","#d3bb99","nature"],["EL1037","Дуб Вирдиа","Натуральный светлый","#c4a37c","nature"],["EL1038","Дуб Вирдиа","Натуральный","#9e7a54","luxury"],["EL1039","Дуб Вирдиа","Коричневый","#6b4f38","luxury"],["EL2150","Дуб Каселла","Белый","#e4dacb","nature"],["EL2151","Дуб Каселла","Натуральный светлый","#c8a982","nature"],["EL2152","Дуб Каселла","Натуральный","#a47e57","luxury"],["EL2153","Дуб Каселла","Коричневый","#5e4532","luxury"],["EL1045","Дуб Лаваредо","Серый","#a59d90","minimal"],["EL1046","Дуб Лаваредо","Натуральный светлый","#c6a680","nature"],["EL1047","Дуб Лаваредо","Натуральный","#a07c58","luxury"],["EL1048","Дуб Лаваредо","Коричневый","#634a36","luxury"],["EL2170","Дуб Падуа","Светлый","#d6c0a0","nature"],["EL2171","Дуб Падуа","Натуральный","#b08b63","nature"],["EL2173","Дуб Падуа","Серый","#9f968a","nature"],["EL1040","Дуб Тичино","Белый","#e6ddcf","minimal"],["EL1041","Дуб Тичино","Натуральный светлый","#c9aa83","nature"],["EL1043","Дуб Тичино","Натуральный","#a8845e","luxury"],["EL1044","Дуб Тичино","Коричневый","#5a4232","luxury"],["EL2190","Дуб Турин","Глубокий тёмный","#2f2b28","luxury"],["EL1054","Дуб Шерман","Белый","#ebe4d8","minimal"],["EL1000","Мрамор","Светлый","#ece9e4","minimal"],["EL1002","Мрамор","Серый","#9c9a97","minimal"]];
