@@ -1,5 +1,9 @@
 name: Browser QA after Eversense hosting deployment
 on:
+  push:
+    paths:
+      - .github/workflows/qa-live-browser.yml
+      - .github/scripts/qa_site_browser.py
   workflow_run:
     workflows:
       - "Eversense - verified deployment to hoster.by"
