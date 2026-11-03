@@ -71,7 +71,7 @@ def main():
         # Correct a renamed collection that is linked in the original home page.
         updated = updated.replace("/catalog-ru/silent-luxury-ru", "/catalog-ru/quiet-luxury-ru")
         # Tilda source has two phone-number hrefs without the tel: URI scheme.
-        updated = re.sub(r"""href=(["'])(\\+\\d{10,15})\\1""",
+        updated = re.sub(r"""href=(["'])(\+\d{10,15})\1""",
                          lambda m: "href=" + m.group(1) + "tel:" + m.group(2) + m.group(1),
                          updated)
         if updated != raw:
