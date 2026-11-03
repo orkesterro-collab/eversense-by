@@ -21,7 +21,7 @@ jobs:
           from urllib.parse import urlencode
           url="https://docs.google.com/spreadsheets/d/1zzypRi-wST20xu0rns-uSnGk7NmikkW2kw44jvsDgBY/gviz/tq?"+urlencode({
             "tqx":"out:json;responseHandler:EversensePriceFeed",
-            "sheet":"price","headers":"1","tq":"select A,C,D,E"})
+            "sheet":"price","headers":"1","tq":"select A,C,D,E,F"})
           try:
               with urlopen(Request(url,headers={"User-Agent":"Mozilla/5.0"}),timeout=35) as r:
                   body=r.read(150000).decode("utf-8","replace")
@@ -30,6 +30,7 @@ jobs:
                   assert r.status == 200
                   assert "EL1052" in body
                   assert "status" in body
+                  assert "sale_from" in body and "sale_until" in body
                   print("PASS: public Google Sheets price feed is reachable.")
           except Exception as exc:
               print("FAIL:",str(exc))
