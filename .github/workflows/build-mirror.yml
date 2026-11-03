@@ -29,4 +29,9 @@ jobs:
           done
           git diff --cached --quiet && exit 0
           git commit -m "Mirror original EVERSENSE Tilda pages and licensed media"
-          git push origin HEAD:main
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 4
+          done
+          exit 1
