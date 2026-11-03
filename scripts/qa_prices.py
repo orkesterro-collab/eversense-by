@@ -8,7 +8,7 @@ ROOT="https://orkesterro-collab.github.io/eversense-by"
 PRODUCT=ROOT+"/catalog-ru/quiet-luxury-ru/natural-victoria-oak-ru/"
 CATALOG=ROOT+"/catalog-ru/"
 Path("price-qa").mkdir(exist_ok=True)
-fixture=lambda end:{"status":"ok","table":{"rows":[{"c":[{"v":"EL1052"},{"v":120},{"v":95},{"v":end}]}]}}
+fixture=lambda end, start=None:{"status":"ok","table":{"rows":[{"c":[{"v":"EL1052"},{"v":120},{"v":95},{"v":end},{"v":start}]}]}}
 with sync_playwright() as p:
     browser=p.chromium.launch(headless=True,args=["--no-sandbox","--disable-dev-shm-usage"])
     for label,width in [("desktop",1440),("mobile",390)]:
@@ -27,7 +27,11 @@ with sync_playwright() as p:
         page.evaluate("(value)=>EversensePriceFeed(value)",fixture("Date(2025,7,1)"))
         expired=page.locator("#ev-product-price").inner_text()
         assert "120,00" in expired and "95,00" not in expired and "до " not in expired, expired
-        print(label,"PRODUCT OK",json.dumps(data,ensure_ascii=False),"expired=",expired)
+        # A future promotion must not appear before its start date.
+        page.evaluate("(value)=>EversensePriceFeed(value)",fixture("Date(2999,7,1)","Date(2999,0,1)"))
+        upcoming=page.locator("#ev-product-price").inner_text()
+        assert "120,00" in upcoming and "95,00" not in upcoming and "до " not in upcoming, upcoming
+        print(label,"PRODUCT OK",json.dumps(data,ensure_ascii=False),"expired=",expired,"upcoming=",upcoming)
         page.close()
     page=browser.new_page(viewport={"width":1440,"height":900})
     page.goto(CATALOG,wait_until="domcontentloaded",timeout=60000)
