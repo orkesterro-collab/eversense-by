@@ -100,9 +100,8 @@ with sync_playwright() as playwright:
                                   json.dumps({"clicked":row["clicked_catalog_link_html"],
                                               "current":page.url,
                                               "pages":row["open_page_urls"]},ensure_ascii=False),flush=True)
-                            if "/catalog-ru" not in page.url and not any(
-                                "/catalog-ru" in p.url for p in context.pages):
-                                failures.append(f"{device} click did not open catalog in any browser tab")
+                            if not page.url.startswith("https://eversense.by/catalog-ru/"):
+                                failures.append(f"{device} catalog navigation was not HTTPS: {page.url}")
                         except Exception as exc:
                             print("HOME_CATALOG_CLICK_ERROR", device, str(exc)[:1500], flush=True)
                             failures.append(f"{device} real catalog navigation failed: {str(exc)[:180]}")
