@@ -28,7 +28,7 @@ function render(prices){
    if(!box)return;
    if(!p){if(expired)box.innerHTML='<strong>Цена уточняется</strong>';return;}
    const until=p.until||END,start=p.start||START;
-   const special=!!(p.sale&&p.sale<p.price&&now<=until);
+   const special=!!(p.sale&&p.sale<p.price&&now>=start&&now<=until);
    box.classList.toggle("is-expired",!special);
    box.replaceChildren();
    if(special){
