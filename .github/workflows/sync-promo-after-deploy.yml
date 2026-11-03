@@ -1,0 +1,20 @@
+name: Sync Eversense promotion price script
+on:
+  workflow_run:
+    workflows:
+      - "Eversense - verified deployment to hoster.by"
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sync:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify remote site and promotion price script
+        env:
+          FTP_PASSWORD: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
+        run: python3 .github/scripts/sync_promo_asset.py
