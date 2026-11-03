@@ -1,0 +1,28 @@
+/* Hide only the obsolete copyright / agency attribution row in the
+   original Russian Tilda footer on the Belarus homepage. */
+#rec1128306611 .tn-elem[data-elem-id="1742835530013"],
+#rec1128306611 .tn-elem[data-elem-id="1746384619229"],
+#rec1128306611 .tn-elem[data-elem-id="1746384603057"],
+#rec1128306611 .tn-elem[data-elem-id="1746384378443"]{
+  display:none!important;
+}
+/* Retain the separator and download links, but remove space previously
+   occupied by the hidden bottom row. */
+#rec1128306611 .t396__artboard,
+#rec1128306611 .t396__filter,
+#rec1128306611 .t396__carrier{height:265px!important}
+@media (max-width:959px){
+  #rec1128306611 .t396__artboard,
+  #rec1128306611 .t396__filter,
+  #rec1128306611 .t396__carrier{height:296px!important}
+}
+@media (max-width:639px){
+  #rec1128306611 .t396__artboard,
+  #rec1128306611 .t396__filter,
+  #rec1128306611 .t396__carrier{height:370px!important}
+}
+@media (max-width:479px){
+  #rec1128306611 .t396__artboard,
+  #rec1128306611 .t396__filter,
+  #rec1128306611 .t396__carrier{height:433px!important}
+}
