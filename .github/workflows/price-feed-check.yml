@@ -1,0 +1,37 @@
+name: Validate EVERSENSE Google price feed
+on:
+  push:
+    paths:
+      - .github/workflows/price-feed-check.yml
+      - assets/prices.js
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check price JavaScript syntax
+        run: node --check assets/prices.js
+      - name: Confirm public price data endpoint
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request,urlopen
+          from urllib.parse import urlencode
+          url="https://docs.google.com/spreadsheets/d/1zzypRi-wST20xu0rns-uSnGk7NmikkW2kw44jvsDgBY/gviz/tq?"+urlencode({
+            "tqx":"out:json;responseHandler:EversensePriceFeed",
+            "sheet":"price","headers":"1","tq":"select A,C,D,E"})
+          try:
+              with urlopen(Request(url,headers={"User-Agent":"Mozilla/5.0"}),timeout=35) as r:
+                  body=r.read(150000).decode("utf-8","replace")
+                  print("HTTP",r.status,"Length",len(body))
+                  print("Response prefix:",body[:220])
+                  assert r.status == 200
+                  assert "EL1052" in body
+                  assert "status" in body
+                  print("PASS: public Google Sheets price feed is reachable.")
+          except Exception as exc:
+              print("FAIL:",str(exc))
+              raise
+          PY
