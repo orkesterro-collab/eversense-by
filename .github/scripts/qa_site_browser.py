@@ -61,32 +61,45 @@ with sync_playwright() as playwright:
                 page.screenshot(path=str(OUT / (label + "-" + device + ".png")),
                                 full_page=False, animations="disabled", timeout=30000)
                 if label == "home":
+                    onscreen = """a => {
+                        const r=a.getBoundingClientRect(), x=r.left+r.width/2,y=r.top+r.height/2;
+                        return r.width>0 && r.height>0 && x>0 && x<innerWidth && y>0 && y<innerHeight;
+                    }"""
+                    hit_test = """a => {
+                        const r=a.getBoundingClientRect(), x=r.left+r.width/2,y=r.top+r.height/2;
+                        const hit=document.elementFromPoint(x,y);
+                        return hit===a || a.contains(hit);
+                    }"""
+                    if device == "mobile":
+                        toggles = page.locator('a[href="#menuopen-ru"]')
+                        usable = [a for a in toggles.all() if a.is_visible() and a.evaluate(onscreen)]
+                        row["visible_mobile_menu_toggles"] = len(usable)
+                        if usable:
+                            try:
+                                usable[0].click(timeout=8500)
+                                page.wait_for_timeout(900)
+                                row["mobile_menu_opened"] = True
+                            except Exception as exc:
+                                row["mobile_menu_error"] = str(exc)[:400]
+                                failures.append("Mobile hamburger menu could not be opened")
+                        else:
+                            failures.append("Mobile hamburger button is not onscreen")
                     anchors = page.locator('a[href="/catalog-ru"],a[href="/catalog-ru/"]')
-                    stats = [a.evaluate("""a => {
-                        const r=a.getBoundingClientRect();
-                        return {y:Math.round(r.y), bottom:Math.round(r.bottom), x:Math.round(r.x),
-                                h:Math.round(r.height), text:a.textContent.trim().slice(0,35)}
-                    }""") for a in anchors.all()]
-                    print("HOME_CATALOG_LINK_POSITIONS", device, json.dumps(stats,ensure_ascii=False), flush=True)
-                    visible = [a for a in anchors.all() if a.is_visible() and
-                               a.evaluate("a => {const r=a.getBoundingClientRect();return r.bottom>2 && r.height>0}")]
-                    row["visible_catalog_links"] = len(visible)
-                    if visible:
-                        first = visible[0]
-                        diagnostic = first.evaluate("""a => {
-                            const r=a.getBoundingClientRect();
-                            const x=Math.min(innerWidth-1,Math.max(0,r.left+r.width/2));
-                            const y=Math.min(innerHeight-1,Math.max(0,r.top+r.height/2));
-                            return {tag:a.outerHTML.slice(0,300),rect:{x:r.x,y:r.y,w:r.width,h:r.height},
-                                pointer:getComputedStyle(a).pointerEvents,
-                                covering:document.elementFromPoint(x,y)?.outerHTML.slice(0,300)}
-                        }""")
-                        print("HOME_CATALOG_LINK_DIAGNOSTICS", device, json.dumps(diagnostic,ensure_ascii=False), flush=True)
+                    candidates = [a for a in anchors.all() if a.is_visible() and
+                                  a.evaluate(onscreen) and a.evaluate(hit_test)]
+                    row["clickable_catalog_links"] = len(candidates)
+                    if candidates:
+                        first = candidates[0]
                         try:
-                            first.click(timeout=5500)
+                            first.click(timeout=8000)
                             page.wait_for_url("**/catalog-ru*", timeout=15000)
                             row["catalog_click_reached"] = page.url
                         except Exception as exc:
+                            print("HOME_CATALOG_CLICK_ERROR", device, str(exc)[:1500], flush=True)
+                            failures.append(f"{device} real catalog navigation failed: {str(exc)[:180]}")
+                    else:
+                        failures.append(f"{device} no onscreen and unobstructed catalog navigation link")
+            except Exception as exc:
                             print("HOME_CATALOG_CLICK_ERROR", device, str(exc)[:2000], flush=True)
                             failures.append(f"{device} homepage catalog click failed: {str(exc)[:170]}")
                     elif device == "desktop":
