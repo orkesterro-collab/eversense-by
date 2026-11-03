@@ -60,6 +60,19 @@ with sync_playwright() as playwright:
                 row["page_errors"] = errors[:8]
                 page.screenshot(path=str(OUT / (label + "-" + device + ".png")),
                                 full_page=False, animations="disabled", timeout=30000)
+                if label == "home":
+                    anchors = page.locator('a[href="/catalog-ru"],a[href="/catalog-ru/"]')
+                    visible = [a for a in anchors.all() if a.is_visible()]
+                    row["visible_catalog_links"] = len(visible)
+                    if visible:
+                        try:
+                            visible[0].click(timeout=8000)
+                            page.wait_for_url("**/catalog-ru*", timeout=15000)
+                            row["catalog_click_reached"] = page.url
+                        except Exception as exc:
+                            failures.append(f"{device} homepage catalog click failed: {str(exc)[:170]}")
+                    elif device == "desktop":
+                        failures.append("Desktop homepage has no visible catalog navigation link")
             except Exception as exc:
                 row["exception"] = str(exc)[:300]
                 failures.append(f"{device} {path}: {str(exc)[:180]}")
