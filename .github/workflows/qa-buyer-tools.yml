@@ -12,6 +12,7 @@ on:
       - 'scripts/extract_products.py'
       - 'scripts/test_buyer_core.cjs'
       - 'scripts/qa_buyer_tools.py'
+      - '.github/scripts/prepare_hoster_site.py'
       - '.github/workflows/qa-buyer-tools.yml'
       - '*.html'
       - 'catalog-ru/**'

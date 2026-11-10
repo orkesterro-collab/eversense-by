@@ -556,6 +556,53 @@ def main():
                 require(placement["supportCount"] == 1, f"{sku}: support section missing or duplicated")
                 require(placement["footerCount"] == 1 and placement["supportBeforeFooter"],
                         f"{sku}: support content is after the Tilda footer: {placement}")
+                viewport_width = page.viewport_size["width"]
+                minimum_visible = viewport_width - 20 if viewport_width < 1000 else viewport_width * 0.9
+                try:
+                    geometry_handle = page.wait_for_function("""args=>{
+                      const gallery=document.getElementById('ev-product-tools')?.previousElementSibling;
+                      const artboard=gallery?.querySelector('.t396__artboard.rendered');
+                      if(!artboard)return false;
+                      const candidates=[...gallery.querySelectorAll('[role="img"]')].map(el=>{
+                        const r=el.getBoundingClientRect();
+                        return {left:r.left,right:r.right,width:r.width,height:r.height,
+                          visibleWidth:Math.max(0,Math.min(innerWidth,r.right)-Math.max(0,r.left))};
+                      }).filter(r=>r.height>0).sort((a,b)=>b.visibleWidth-a.visibleWidth);
+                      const best=candidates[0];
+                      if(!best||best.visibleWidth<args.minimum||Math.abs(best.left)>20){
+                        window.__qaGalleryGeometry=null;
+                        return false;
+                      }
+                      const signature=[best.left,best.width,best.right].map(n=>Math.round(n*10)).join(',');
+                      const previous=window.__qaGalleryGeometry;
+                      const stable=previous?.signature===signature?previous.stable+1:1;
+                      window.__qaGalleryGeometry={signature,stable};
+                      return stable>=3?{...best,viewport:innerWidth,stableFrames:stable,artboardRendered:true}:false;
+                    }""", arg={"minimum": minimum_visible}, polling="raf", timeout=5000)
+                    gallery_geometry = geometry_handle.json_value()
+                    geometry_handle.dispose()
+                except Exception as error:
+                    diagnostics = page.evaluate("""()=>{
+                      const gallery=document.getElementById('ev-product-tools')?.previousElementSibling;
+                      const rect=el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,right:r.right};};
+                      const info=el=>{
+                        const css=getComputedStyle(el);
+                        return {tag:el.tagName,id:el.id,className:el.className,rect:rect(el),style:el.getAttribute('style'),
+                          computed:{width:css.width,minWidth:css.minWidth,maxWidth:css.maxWidth,height:css.height,
+                            zoom:css.zoom,left:css.left,top:css.top,position:css.position,transform:css.transform,
+                            display:css.display,overflow:css.overflow,boxSizing:css.boxSizing}};
+                      };
+                      return {viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio},gallery:gallery?info(gallery):null,
+                        artboards:[...(gallery?.querySelectorAll('.t396__artboard')||[])].map(el=>({
+                          ...info(el),attributes:Object.fromEntries([...el.attributes].map(a=>[a.name,a.value]))})),
+                        images:[...(gallery?.querySelectorAll('[role="img"]')||[])].map(el=>{
+                          const chain=[];let parent=el;
+                          for(let depth=0;parent&&depth<7;depth++,parent=parent.parentElement)chain.push(info(parent));
+                          return {ancestors:chain};
+                        })};
+                    }""")
+                    raise AssertionError(f"{sku}: gallery never reached stable full visible width >= {minimum_visible:.1f}px within 5s; "
+                                         + json.dumps(diagnostics, ensure_ascii=False)) from error
                 favorite = page.locator("#ev-product-tools [data-ev-favorite]")
                 comparison = page.locator("#ev-product-tools [data-ev-compare]")
                 require(favorite.count() == 1 and favorite.get_attribute("data-ev-favorite") == sku,
@@ -595,7 +642,7 @@ def main():
                         finally:
                             page.mouse.move(0, 0)
                 return {"sku": sku, "tools_count": 1, "price": price, "calculator_link_has_sku": True,
-                        "placement": placement, "styles": styles}
+                        "placement": placement, "gallery_geometry": gallery_geometry, "styles": styles}
 
             def mirrored_test(page, context, path, device, product=False):
                 goto(page, path)

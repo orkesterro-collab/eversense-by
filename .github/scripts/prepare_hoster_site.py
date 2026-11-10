@@ -6,10 +6,12 @@ The original site snapshot was generated under a GitHub Pages project prefix
 before uploading to the standalone https://eversense.by domain.
 """
 from collections import Counter
+from html import escape, unescape
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlsplit, urlunsplit, unquote
+from urllib.parse import urlsplit, urlunsplit, unquote, unquote_plus
 import json
+import os
 import posixpath
 import re
 
@@ -18,6 +20,11 @@ PREFIX = "/eversense-by/"
 PAGES_HOST = "https://orkesterro-collab.github.io/eversense-by/"
 DOMAINS = {"eversense.by", "www.eversense.by", "orkesterro-collab.github.io"}
 TRANSFORM_EXTS = {".html", ".css", ".js", ".json", ".txt", ".xml"}
+release_revision = os.environ.get("GITHUB_SHA", "20261110b")[:12]
+RELEASE_ASSETS = {
+    "/assets/prices.js", "/assets/unified-header.js", "/assets/unified-header.css",
+    "/assets/buyer.js", "/assets/buyer.css", "/assets/buyer-core.js", "/assets/products-data.js",
+}
 
 
 class Resources(HTMLParser):
@@ -97,11 +104,87 @@ def rewrite_directory_hrefs(html, source, route_paths):
     return href.sub(change, html), count
 
 
+def version_asset_url(raw, source):
+    """Only version the named local assets, preserving URL paths and fragments."""
+    parsed = urlsplit(unescape(raw))
+    if parsed.scheme not in {"", "http", "https"}:
+        return raw
+    if parsed.netloc and parsed.netloc.lower() not in {"eversense.by", "www.eversense.by"}:
+        return raw
+    if not parsed.path:
+        return raw
+    path = unquote(parsed.path)
+    if path.startswith("/"):
+        normalized = posixpath.normpath(path)
+    else:
+        base = "/" + source.parent.relative_to(ROOT).as_posix().lstrip("./")
+        normalized = posixpath.normpath(posixpath.join(base, path))
+    if normalized not in RELEASE_ASSETS:
+        return raw
+    # Keep unrelated query parameters byte-for-byte; replace any existing v.
+    query = [part for part in parsed.query.split("&")
+             if part and unquote_plus(part.split("=", 1)[0]) != "v"]
+    query.append("v=" + release_revision)
+    updated = urlunsplit((parsed.scheme, parsed.netloc, parsed.path, "&".join(query), parsed.fragment))
+    return escape(updated, quote=True)
+
+
+def rewrite_asset_versions(html, source):
+    # Parse real tags so data-src, inline script strings and attribute contents
+    # resembling another attribute are never mistaken for href/src.
+    attribute = re.compile(r"""(?P<head>(?P<name>[^\s"'<>/=]+)\s*=\s*)(?:(?P<quote>["'])(?P<quoted>.*?)(?P=quote)|(?P<unquoted>[^\s>]+))""", re.I | re.S)
+    count = 0
+    def change(match):
+        nonlocal count
+        if match.group("name").lower() not in {"href", "src"}:
+            return match.group(0)
+        old = match.group("quoted") if match.group("quote") else match.group("unquoted")
+        new = version_asset_url(old, source)
+        if new != old:
+            count += 1
+            quote = match.group("quote") or '"'
+            return match.group("head") + quote + new + quote
+        return match.group(0)
+    offsets = []
+    offset = 0
+    for line in html.splitlines(keepends=True):
+        offsets.append(offset)
+        offset += len(line)
+    replacements = []
+    class AssetTags(HTMLParser):
+        def handle_starttag(self, tag, attrs):
+            if not any(key in {"href", "src"} for key, _ in attrs):
+                return
+            raw_tag = self.get_starttag_text()
+            updated_tag = attribute.sub(change, raw_tag)
+            if updated_tag != raw_tag:
+                line, column = self.getpos()
+                start = offsets[line - 1] + column
+                replacements.append((start, start + len(raw_tag), updated_tag))
+    parser = AssetTags(convert_charrefs=False)
+    parser.feed(html)
+    for start, end, tag in reversed(replacements):
+        html = html[:start] + tag + html[end:]
+    return html, count
+
+
+def version_dynamic_loaders(script, path):
+    if path == "assets/prices.js":
+        return re.sub(r"(unified-header\.js\?v=)[^\"'#&\s]+",
+                      lambda match: match.group(1) + release_revision, script)
+    if path == "assets/unified-header.js":
+        return re.sub(r"""(\bvar\s+version\s*=\s*)(["'])[^"']*\2""",
+                      lambda match: match.group(1) + match.group(2) + release_revision + match.group(2),
+                      script, count=1)
+    return script
+
+
 def main():
     files = [p for p in ROOT.rglob("*") if p.is_file() and p.suffix.lower() in TRANSFORM_EXTS]
     transformed = Counter()
     changed_html = []
     normalized_count = 0
+    versioned_count = 0
     directories = {"/" + p.parent.relative_to(ROOT).as_posix() for p in ROOT.rglob("index.html")
                    if p.parent != ROOT}
     for p in files:
@@ -116,6 +199,10 @@ def main():
         if p.suffix.lower() == ".html":
             updated, changed_links = rewrite_directory_hrefs(updated, p, directories)
             normalized_count += changed_links
+            updated, changed_versions = rewrite_asset_versions(updated, p)
+            versioned_count += changed_versions
+        elif p.suffix.lower() == ".js":
+            updated = version_dynamic_loaders(updated, p.relative_to(ROOT).as_posix())
         if updated != raw:
             if p.suffix.lower() == ".html":
                 changed_html.append(p.relative_to(ROOT).as_posix())
@@ -140,6 +227,8 @@ def main():
     print("SITE_AUDIT attributes_checked =", checked, flush=True)
     print("SITE_AUDIT transformed_files =", dict(transformed), flush=True)
     print("SITE_AUDIT normalized_directory_links =", normalized_count, flush=True)
+    print("SITE_AUDIT release_revision =", release_revision, flush=True)
+    print("SITE_AUDIT versioned_asset_links =", versioned_count, flush=True)
     Path("site-changed-html.json").write_text(json.dumps(changed_html, ensure_ascii=False), encoding="utf-8")
     print("SITE_AUDIT unmatched_local_targets =", len(missing), flush=True)
     for path, count in missing.most_common(70):
@@ -148,6 +237,8 @@ def main():
         "pages": len(page_paths),
         "attributes_checked": checked,
         "rewritten_files_by_extension": dict(transformed),
+        "release_revision": release_revision,
+        "versioned_asset_links": versioned_count,
         "unmatched_local_targets": dict(missing),
         "examples": sample,
     }
