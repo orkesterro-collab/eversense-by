@@ -176,6 +176,15 @@
     }, { passive: true });
   }
   function initialize() {
+    // The mirrored Russian footer used the manufacturer's /ru/#contacts.
+    // Keep that existing label useful for the Belarus site on every page.
+    document.querySelectorAll('a[href]').forEach(function (link) {
+      var url;
+      try { url = new URL(link.href); } catch (_) { return; }
+      var legacy = new URL('ru/', site).pathname.replace(/\/$/, '');
+      var path = url.pathname.replace(/\/index\.html$/, '/').replace(/\/$/, '');
+      if (url.origin === site.origin && path === legacy && url.hash === '#contacts') link.href = route('contacts.html');
+    });
     mount();
     loadBuyerTools();
   }

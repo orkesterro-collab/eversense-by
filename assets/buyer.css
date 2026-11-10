@@ -252,6 +252,10 @@ img.ev-card-image {width:100%;height:auto;object-fit:contain}
 .ev-buyer-path h2 {font-size:clamp(33px,4.2vw,58px);line-height:1.1;max-width:850px;margin:0 0 22px}
 .ev-buyer-path .ev-lead {max-width:780px;font-size:18px}
 .ev-buyer-path .ev-link-grid {margin-top:38px}
+/* Keep the original Tilda link rule from recoloring the added buyer tools. */
+#allrecords .ev-tools-panel a,#allrecords .ev-buyer-path a {color:#343333}
+#allrecords .ev-tools-panel a.ev-button,#allrecords .ev-buyer-path a.ev-button {background:transparent;border-color:#343333;color:#343333}
+#allrecords .ev-tools-panel a.ev-button:hover,#allrecords .ev-buyer-path a.ev-button:hover {background:#343333;border-color:#343333;color:#FFFFFF}
 .ev-footer {background:#292828;color:#FFFFFF;padding:56px 0 28px;margin-top:12px}
 .ev-footer > .ev-wrap,.ev-footer-grid {display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:35px 65px}
 .ev-footer h2,.ev-footer h3,.ev-footer strong {font-size:14px;font-weight:600;letter-spacing:0;margin:0 0 16px;color:#FFFFFF}

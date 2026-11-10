@@ -473,6 +473,36 @@ def main():
                 return {"matched": 2, "room_explanation": "kitchen"}
             case("finder-design-and-room", finder_test, 390, 844)
 
+            def faq_expanded_test(page, context):
+                goto(page, "faq.html")
+                questions = page.locator("main details")
+                require(questions.count() >= 2, "FAQ questions are missing")
+                first = questions.first
+                first.locator("summary").click()
+                require(first.evaluate("el=>el.open"), "First FAQ item did not expand")
+                require(first.locator("p").first.is_visible() and len(first.locator("p").first.inner_text().strip()) > 30,
+                        "First FAQ answer is not visible")
+                long_answer = questions.filter(has=page.locator("summary", has_text="тёплый пол")).first
+                require(long_answer.count() == 1, "Expected long installation / underfloor-heating FAQ")
+                long_answer.locator("summary").click()
+                require(long_answer.evaluate("el=>el.open"), "Long installation FAQ did not expand")
+                require(long_answer.locator("p").first.is_visible() and len(long_answer.locator("p").first.inner_text().strip()) > 180,
+                        "Long installation answer is truncated or not visible")
+                targets = []
+                for answer in [first, long_answer]:
+                    link = answer.locator("a[href]").first
+                    require(link.count() == 1 and link.is_visible(), "Expanded FAQ is missing its useful next-step link")
+                    target = link.get_attribute("href")
+                    absolute = link.evaluate("el=>el.href")
+                    require(absolute.startswith(base + "/"), f"FAQ points outside the staged site: {absolute}")
+                    response = context.request.get(absolute, timeout=10000)
+                    require(response.ok, f"Expanded FAQ link is broken: {target} ({response.status})")
+                    targets.append(urlparse(absolute).path)
+                metrics = layout_metrics(page)
+                shot(page, "faq-expanded-mobile")
+                return {"first_expanded": True, "long_answer_expanded": True, "valid_links": targets, "layout": metrics}
+            case("faq-expanded-mobile", faq_expanded_test, 390, 844)
+
             def header_test(page, context, device):
                 goto(page, "about.html")
                 toggle = page.locator(".ev-header-toggle")
@@ -508,10 +538,24 @@ def main():
                     case("layout-" + device + "-" + path.replace("/", "-"),
                          lambda p, c, path=path, d=device: layout_test(p, c, path, d), width, height)
 
-            def product_tools_metrics(page, product):
+            def product_tools_metrics(page, product, check_hover=False):
                 sku = product["sku"]
                 page.wait_for_selector("#ev-product-tools", state="attached", timeout=20000)
                 require(page.locator("#ev-product-tools").count() == 1, f"{sku}: product tools missing or duplicated")
+                placement = page.evaluate("""() => {
+                  const tools=document.getElementById('ev-product-tools'),previous=tools?.previousElementSibling;
+                  const support=document.getElementById('ev-product-support'),footer=document.getElementById('t-footer');
+                  return {
+                    followsGallery:!!(previous?.matches('.t-rec')&&previous.querySelector('[role="img"]')),
+                    previousId:previous?.id||null,supportCount:document.querySelectorAll('#ev-product-support').length,
+                    footerCount:document.querySelectorAll('#t-footer').length,
+                    supportBeforeFooter:!!(support&&footer&&(support.compareDocumentPosition(footer)&Node.DOCUMENT_POSITION_FOLLOWING))
+                  };
+                }""")
+                require(placement["followsGallery"], f"{sku}: product tools are before the gallery or detached from it: {placement}")
+                require(placement["supportCount"] == 1, f"{sku}: support section missing or duplicated")
+                require(placement["footerCount"] == 1 and placement["supportBeforeFooter"],
+                        f"{sku}: support content is after the Tilda footer: {placement}")
                 favorite = page.locator("#ev-product-tools [data-ev-favorite]")
                 comparison = page.locator("#ev-product-tools [data-ev-compare]")
                 require(favorite.count() == 1 and favorite.get_attribute("data-ev-favorite") == sku,
@@ -529,18 +573,51 @@ def main():
                 require("45,90" in price and "BYN" in price, f"{sku}: mocked product price missing: {price}")
                 page.evaluate("()=>{EversensePrices.render();EversensePrices.render();}")
                 require(page.locator("#ev-product-tools").count() == 1, f"{sku}: price rerender duplicated product tools")
-                return {"sku": sku, "tools_count": 1, "price": price, "calculator_link_has_sku": True}
+                styles = None
+                if sku == "EL1052":
+                    styles = page.locator("#ev-product-tools").evaluate("""el=>({
+                      background:getComputedStyle(el).backgroundColor,
+                      anchors:[...el.querySelectorAll('a')].map(a=>({text:a.innerText,color:getComputedStyle(a).color,background:getComputedStyle(a).backgroundColor}))
+                    })""")
+                    allowed_backgrounds = {"rgb(255, 255, 255)", "rgba(0, 0, 0, 0)"}
+                    require(styles["background"] in allowed_backgrounds, f"Product tools panel is not white: {styles}")
+                    require(all(a["color"] == "rgb(52, 51, 51)" and a["background"] in allowed_backgrounds for a in styles["anchors"]),
+                            f"Tilda styles override product tools link palette: {styles['anchors']}")
+                    if check_hover:
+                        primary = page.locator("#ev-product-tools a.ev-button--primary")
+                        try:
+                            primary.hover()
+                            page.wait_for_function("""()=>{
+                              const css=getComputedStyle(document.querySelector('#ev-product-tools a.ev-button--primary'));
+                              return css.color==='rgb(255, 255, 255)'&&css.backgroundColor==='rgb(52, 51, 51)';
+                            }""")
+                            styles["primary_hover"] = primary.evaluate("el=>({color:getComputedStyle(el).color,background:getComputedStyle(el).backgroundColor})")
+                        finally:
+                            page.mouse.move(0, 0)
+                return {"sku": sku, "tools_count": 1, "price": price, "calculator_link_has_sku": True,
+                        "placement": placement, "styles": styles}
 
             def mirrored_test(page, context, path, device, product=False):
                 goto(page, path)
                 tools = None
                 if product:
-                    tools = product_tools_metrics(page, by_sku["EL1052"])
+                    tools = product_tools_metrics(page, by_sku["EL1052"], check_hover=device == "desktop")
                     page.locator('#ev-product-tools [data-ev-favorite="EL1052"]').click()
                     require("EL1052" in page.evaluate("key=>localStorage.getItem(key)", FAVORITES), "Mirrored product favorite is broken")
                 loaded = images(page)
                 page.evaluate("window.scrollTo(0,0)")
                 shot(page, ("existing-product" if product else "existing-home") + "-" + device, full=False)
+                if product and device == "mobile":
+                    page.mouse.move(0, 0)
+                    for selector, label in [("#ev-product-tools", "tools"), ("#ev-product-support", "support")]:
+                        page.locator(selector).evaluate("""async el=>{
+                          const top=el.getBoundingClientRect().top+scrollY;
+                          const header=document.getElementById('ev-global-header')?.getBoundingClientRect().height||0;
+                          window.scrollTo({left:0,top:Math.max(0,top-header-12),behavior:'instant'});
+                          await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+                        }""")
+                        shot(page, "existing-product-" + label + "-mobile", full=False)
+                    page.evaluate("window.scrollTo({left:0,top:0,behavior:'instant'})")
                 return {"images": loaded, "layout": layout_metrics(page, check_style=False), "dynamic_product_tools": product, "product_tools": tools}
             for device, width, height in DEVICES[:2]:
                 case("existing-home-" + device, lambda p, c, d=device: mirrored_test(p, c, "index.html", d), width, height)
