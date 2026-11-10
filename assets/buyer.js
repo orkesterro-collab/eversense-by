@@ -39,12 +39,12 @@
   function buttons(p){return '<div class="ev-card-actions"><button class="ev-button" type="button" data-ev-favorite="'+p.sku+'" aria-pressed="false">В избранное</button><button class="ev-button" type="button" data-ev-compare="'+p.sku+'" aria-pressed="false">Сравнить</button></div>';}
   function card(p){return '<article class="ev-card" data-product="'+p.sku+'"><a class="ev-card-image" href="'+route(p.canonicalPath)+'"><img src="'+route(p.productImage)+'" alt="'+esc(fullName(p))+'" loading="lazy" width="640" height="500">'+(p.interiorImage?'<img class="ev-card-interior" src="'+route(p.interiorImage)+'" alt="" loading="lazy" width="640" height="500">':'')+'</a><div class="ev-card-body"><span class="ev-sku">'+p.sku+'</span><h2 class="ev-card-title"><a href="'+route(p.canonicalPath)+'">'+esc(fullName(p))+'</a></h2><p class="ev-card-meta">'+esc(p.collectionName)+' · '+p.lengthMM+' × '+p.widthMM+' мм</p><div class="ev-price-box" data-buyer-price="'+p.sku+'">'+priceHtml(p.sku)+'</div>'+buttons(p)+'</div></article>';}
   function syncButtons(){
-    if(!storageAvailable)document.querySelectorAll('a[href]').forEach(function(a){var u;try{u=new URL(a.href);}catch(e){return;}if(u.origin!==base.origin||!u.pathname.startsWith(base.pathname)||a.getAttribute('href').startsWith('#'))return;if(favorites.length)u.searchParams.set('ev-favorites',favorites.join(','));else u.searchParams.delete('ev-favorites');if(compare.length)u.searchParams.set('ev-compare',compare.join(','));else u.searchParams.delete('ev-compare');a.href=u.href;});
     document.querySelectorAll('[data-ev-favorite]').forEach(function(b){var on=favorites.includes(b.dataset.evFavorite);b.setAttribute('aria-pressed',String(on));b.textContent=on?'В избранном':'В избранное';});
     document.querySelectorAll('[data-ev-compare]').forEach(function(b){var on=compare.includes(b.dataset.evCompare);b.setAttribute('aria-pressed',String(on));b.textContent=b.hasAttribute('data-remove')?'Убрать':(on?'В сравнении':'Сравнить');});
     document.querySelectorAll('[data-favorites-count]').forEach(function(n){n.textContent=String(favorites.length);});
     document.querySelectorAll('[data-compare-count]').forEach(function(n){n.textContent=String(compare.length);});
     document.querySelectorAll('[data-compare-link]').forEach(function(a){a.href=route('compare.html')+(compare.length?'?items='+compare.join(','):'');});
+    if(!storageAvailable)document.querySelectorAll('a[href]').forEach(function(a){var u;try{u=new URL(a.href);}catch(e){return;}if(u.origin!==base.origin||!u.pathname.startsWith(base.pathname)||a.getAttribute('href').startsWith('#'))return;if(favorites.length)u.searchParams.set('ev-favorites',favorites.join(','));else u.searchParams.delete('ev-favorites');if(compare.length)u.searchParams.set('ev-compare',compare.join(','));else u.searchParams.delete('ev-compare');a.href=u.href;});
   }
   function updatePrices(){
     document.querySelectorAll('[data-buyer-price]').forEach(function(n){n.innerHTML=priceHtml(n.dataset.buyerPrice);});
@@ -93,7 +93,7 @@
     var result=core.calculate(form.elements.area.value,form.elements.reserve.value,p.packArea,activePrice(sku));
     if(result.error){root.innerHTML='<p class="ev-error" role="alert">'+esc(result.error)+'</p>';form.dataset.calculated='false';return;}
     form.dataset.calculated='true';
-    root.innerHTML='<span class="ev-eyebrow">'+esc(fullName(p))+' · '+p.sku+'</span><h2>'+result.packs+' <small>уп.</small></h2><dl class="ev-calc-values"><div><dt>С выбранным запасом</dt><dd>'+number(result.neededArea,4)+' м²</dd></div><div><dt>В целых упаковках</dt><dd>'+number(result.purchasedArea,4)+' м²</dd></div><div><dt>В одной упаковке</dt><dd>'+number(p.packArea,4)+' м² / '+p.packCount+' шт.</dd></div><div><dt>Стоимость материала</dt><dd>'+(result.totalCents===null?'Уточнить цену':money(result.totalCents/100)+' BYN')+'</dd></div></dl><p class="ev-note">Расчёт включает только покрытие. Подложка, плинтусы, доставка и монтаж рассчитываются отдельно. Количество уточните по плану помещения и выбранной раскладке.</p><a class="ev-button ev-button--primary" href="'+route('contacts.html')+'?sku='+sku+'&packs='+result.packs+'">Уточнить наличие</a><button class="ev-text-link" type="button" data-share-calculation>Скопировать расчёт</button>';
+    root.innerHTML='<span class="ev-eyebrow">'+esc(fullName(p))+' · '+p.sku+'</span><h2>'+result.packs+' <small>уп.</small></h2><dl class="ev-calc-values"><div><dt>С выбранным запасом</dt><dd>'+number(result.neededArea,4)+' м²</dd></div><div><dt>В целых упаковках</dt><dd>'+number(result.purchasedArea,4)+' м²</dd></div><div><dt>В одной упаковке</dt><dd>'+number(p.packArea,4)+' м² / '+p.packCount+' шт.</dd></div><div><dt>Стоимость материала</dt><dd>'+(result.totalCents===null?'Уточнить цену':money(result.totalCents/100)+' BYN')+'</dd></div></dl><p class="ev-note">Расчёт включает только покрытие. Подложка, плинтусы, доставка и монтаж рассчитываются отдельно. Количество уточните по плану помещения и выбранной раскладке.</p><div class="ev-actions"><a class="ev-button ev-button--primary" href="'+route('contacts.html')+'?sku='+sku+'&packs='+result.packs+'">Уточнить наличие</a><button class="ev-text-link" type="button" data-share-calculation>Скопировать расчёт</button></div>';
     var url=new URL(location.href);url.searchParams.set('sku',sku);url.searchParams.set('area',form.elements.area.value);url.searchParams.set('reserve',form.elements.reserve.value);history.replaceState(null,'',url);
     if(focus){root.focus({preventScroll:true});if(window.innerWidth<750)root.scrollIntoView({behavior:'smooth',block:'start'});}
   }
@@ -112,6 +112,10 @@
   function mountCatalog(){
     var form=document.getElementById('ev-catalog-filters'),root=document.getElementById('ev-catalog-results');if(!form||!root)return;
     var collection=document.body.dataset.collection||'';
+    var filterDetails=form.querySelector('.ev-filter-details');
+    var compact=window.matchMedia('(max-width:760px)');
+    function fitFilters(){if(filterDetails)filterDetails.open=!compact.matches;}fitFilters();
+    if(compact.addEventListener)compact.addEventListener('change',fitFilters);
     ['q','tone','design','sort'].forEach(function(key){if(form.elements[key]&&params.has(key))form.elements[key].value=params.get(key);});
     if(form.elements.collection&&params.has('collection'))form.elements.collection.value=params.get('collection');
     function draw(){

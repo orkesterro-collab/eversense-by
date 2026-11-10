@@ -63,6 +63,10 @@ def main():
     def save():
         summary["passed"] = sum(row["status"] == "passed" for row in summary["checks"])
         summary["failed"] = sum(row["status"] == "failed" for row in summary["checks"])
+        if "canonical_product_mobile_cases" in summary:
+            passed_cases = {row["name"] for row in summary["checks"] if row["status"] == "passed"}
+            summary["canonical_product_mobile_passed"] = sum(
+                name in passed_cases for name in summary["canonical_product_mobile_cases"].values())
         summary["duration_seconds"] = round(time.monotonic() - started, 2)
         summary["ok"] = not summary["fatal_error"] and not summary["failed"]
         (output / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -91,7 +95,7 @@ def main():
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch(headless=True, args=["--no-sandbox", "--disable-dev-shm-usage"])
 
-            def new_context(width=1440, height=1000, feed="ok"):
+            def new_context(width=1440, height=1000, feed="ok", storage_blocked=False):
                 context = browser.new_context(viewport={"width": width, "height": height}, device_scale_factor=1,
                                               locale="ru-RU", timezone_id="Europe/Minsk", reduced_motion="reduce",
                                               ignore_https_errors=True)
@@ -102,6 +106,12 @@ def main():
                       writeText: async text => { window.__qaCopied = text; }
                     }});
                 """)
+                if storage_blocked:
+                    context.add_init_script("""
+                        Object.defineProperty(window, 'localStorage', {configurable:true, get() {
+                          throw new DOMException('Storage blocked by QA fixture', 'SecurityError');
+                        }});
+                    """)
                 def feed_route(route):
                     if feed == "blocked":
                         route.abort("failed")
@@ -130,24 +140,40 @@ def main():
                 page.on("response", response_error)
                 return logs
 
-            def goto(page, path, prices=True):
+            def goto(page, path, prices=True, wait_fonts=True):
                 response = page.goto(base + "/" + path.lstrip("/"), wait_until="domcontentloaded")
                 require(response is not None and response.ok, f"Page returned non-success status: {path}")
                 page.wait_for_selector("#ev-global-header", state="attached")
                 page.wait_for_function("window.EversenseBuyerCore && window.__eversenseBuyerStarted")
                 if prices:
                     page.wait_for_function("window.EversensePrices && window.EversensePrices.isLoaded()")
-                page.evaluate("async () => { await Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,2500))]); }")
+                if wait_fonts:
+                    page.evaluate("async () => { await Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,2500))]); }")
 
             def shot(page, name, full=True):
                 path = output / (re.sub(r"[^a-zA-Z0-9_.-]", "-", name) + ".png")
-                page.screenshot(path=str(path), full_page=full, animations="disabled", timeout=30000)
+                scroll = page.evaluate("({x:scrollX,y:scrollY})") if full else None
+                if full:
+                    page.evaluate("""async () => {
+                      window.scrollTo({left:0,top:0,behavior:'instant'});
+                      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                    }""")
+                try:
+                    page.screenshot(path=str(path), full_page=full, animations="disabled", timeout=30000)
+                finally:
+                    if scroll is not None:
+                        page.evaluate("""async point => {
+                          window.scrollTo({left:point.x,top:point.y,behavior:'instant'});
+                          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                        }""", scroll)
                 summary["screenshots"].append(path.name)
                 return path.name
 
-            def images(page, selector="img", minimum=1):
+            def images(page, selector="img", minimum=1, local_only=False):
                 page.locator(selector).evaluate_all("els => els.forEach(x => {x.loading='eager';})")
-                page.wait_for_function("sel => [...document.querySelectorAll(sel)].filter(x=>x.currentSrc||x.src).every(x=>x.complete)", arg=selector, timeout=20000)
+                page.wait_for_function("""args => [...document.querySelectorAll(args.selector)]
+                  .filter(x => (x.currentSrc||x.src) && (!args.localOnly || (x.currentSrc||x.src).startsWith(args.origin)))
+                  .every(x=>x.complete)""", arg={"selector": selector, "localOnly": local_only, "origin": base + "/"}, timeout=20000)
                 result = page.locator(selector).evaluate_all("els => els.filter(x=>x.currentSrc||x.src).map(x=>({src:x.currentSrc||x.src,width:x.naturalWidth,height:x.naturalHeight,complete:x.complete}))")
                 local = [image for image in result if image["src"].startswith(base + "/")]
                 broken = [image for image in local if not image["complete"] or image["width"] < minimum]
@@ -158,15 +184,17 @@ def main():
                 metrics = page.evaluate("""() => {
                   const visible=e=>!!(e.getClientRects().length && getComputedStyle(e).visibility!=='hidden');
                   const controls=[...document.querySelectorAll('main button,main input,main select,#ev-global-header button')].filter(visible);
+                  const headings=[...document.querySelectorAll('h1')].filter(e=>visible(e)&&(e.innerText||'').trim());
+                  const heading=headings[0];
                   return {
                     viewport:innerWidth, documentWidth:document.documentElement.scrollWidth,bodyWidth:document.body.scrollWidth,
-                    title:document.title,h1:document.querySelector('h1')?.innerText||'',
+                    title:document.title,h1:heading?.innerText||'',visibleH1Count:headings.length,
                     font:getComputedStyle(document.body).fontFamily,fontStatus:document.fonts.status,
                     loadedFonts:[...document.fonts].filter(f=>f.status==='loaded').map(f=>f.family),
                     controls:controls.map(e=>({tag:e.tagName,text:e.getAttribute('aria-label')||e.innerText||e.name||'',
                       height:e.getBoundingClientRect().height,width:e.getBoundingClientRect().width,font:getComputedStyle(e).fontFamily,
                       fontSize:parseFloat(getComputedStyle(e).fontSize),disabled:e.disabled||false})),
-                    h1Width:document.querySelector('h1')?.getBoundingClientRect().width||0,
+                    h1Width:heading?.getBoundingClientRect().width||0,
                     headerCount:document.querySelectorAll('#ev-global-header').length
                   };
                 }""")
@@ -182,8 +210,8 @@ def main():
                     require(not bad, f"Unusable or unstyled controls: {bad[:6]}")
                 return metrics
 
-            def case(name, callback, width=1440, height=1000, feed="ok"):
-                context = new_context(width, height, feed)
+            def case(name, callback, width=1440, height=1000, feed="ok", storage_blocked=False):
+                context = new_context(width, height, feed, storage_blocked)
                 page = context.new_page()
                 logs = attach_logs(page)
                 row = {"name": name, "status": "passed"}
@@ -264,6 +292,48 @@ def main():
                 return {"corrupt_json_recovered": True}
             case("storage-corruption", bad_storage_test)
 
+            def blocked_storage_test(page, context):
+                goto(page, "catalog-ru/")
+                require(page.evaluate("()=>{try{void localStorage;return false;}catch(e){return e.name==='SecurityError';}}"),
+                        "Blocked-storage fixture did not take effect")
+                selected = ["EL1052", "EL1000"]
+                for sku in selected:
+                    page.locator(f'[data-ev-favorite="{sku}"]').click()
+                    page.locator(f'[data-ev-compare="{sku}"]').click()
+                favorites_link = page.locator('main a[href*="favorites.html"]').first
+                favorite_url = favorites_link.get_attribute("href")
+                favorite_query = parse_qs(urlparse(favorite_url).query)
+                require(favorite_query.get("ev-favorites", [""])[0].split(",") == selected,
+                        "Favorites link did not carry selections when storage was blocked")
+                require(favorite_query.get("ev-compare", [""])[0].split(",") == selected,
+                        "Favorites navigation lost comparison fallback state")
+                favorites_link.click()
+                page.wait_for_selector("#ev-favorites .ev-card")
+                require(page.locator("#ev-favorites .ev-card").count() == 2,
+                        "Favorites were lost after navigation with blocked storage")
+                compare_link = page.locator('main [data-compare-link]').first
+                compare_url = compare_link.get_attribute("href")
+                compare_query = parse_qs(urlparse(compare_url).query)
+                require(compare_query.get("items", [""])[0].split(",") == selected,
+                        "Comparison link lost items after fallback link synchronization")
+                require(compare_query.get("ev-favorites", [""])[0].split(",") == selected,
+                        "Comparison navigation lost favorites fallback state")
+                compare_link.click()
+                page.wait_for_selector("#ev-compare table")
+                require(page.locator("#ev-compare thead th").count() == 3,
+                        "Comparison lost its two products with storage blocked")
+                page.reload(wait_until="domcontentloaded")
+                page.wait_for_selector("#ev-compare table")
+                require(page.locator("#ev-compare thead th").count() == 3,
+                        "URL fallback did not survive reload")
+                page.locator('main a[href*="favorites.html"]').first.click()
+                page.wait_for_selector("#ev-favorites .ev-card")
+                restored = page.locator("#ev-favorites .ev-card").evaluate_all("els=>els.map(el=>el.dataset.product)")
+                require(restored == selected, "Return from comparison erased favorite fallback selection")
+                return {"storage_getter_throws": True, "selected": selected,
+                        "favorites_url": favorite_url, "comparison_url": compare_url, "reload_preserved": True}
+            case("storage-blocked-url-navigation", blocked_storage_test, storage_blocked=True)
+
             def compare_test(page, context, device):
                 goto(page, "catalog-ru/")
                 for sku in ["EL1000", "EL1052", "EL153", "EL750"]:
@@ -342,6 +412,40 @@ def main():
                 return values
             case("calculator-without-price-feed", no_price_test, feed="blocked")
 
+            def late_price_update_test(page, context):
+                feed_requests = []
+                page.on("request", lambda request: feed_requests.append(request.url)
+                        if "docs.google.com/spreadsheets/" in request.url and "/gviz/" in request.url else None)
+                changed_payload = {"status": "ok", "table": {"rows": [
+                    {"c": [{"v": p["sku"]}, {"v": 60}, {"v": None}, {"v": None}, {"v": None}]}
+                    for p in products]}}
+                goto(page, "catalog-ru/")
+                price_box = page.locator('[data-buyer-price="EL1052"]')
+                require("45,90" in price_box.inner_text(), "Initial mocked card price missing")
+                requests_before = len(feed_requests)
+                page.evaluate("data=>window.EversensePriceFeed(data)", changed_payload)
+                page.wait_for_function("document.querySelector('[data-buyer-price=\"EL1052\"]').innerText.includes('60,00')")
+                require(len(feed_requests) == requests_before, "Price update unexpectedly issued a feed request")
+                require(page.locator("#ev-catalog-results [data-buyer-price]").evaluate_all(
+                    "els=>els.length===30&&els.every(el=>el.innerText.includes('60,00'))"),
+                    "Not all catalog cards responded to the late price event")
+                goto(page, "calculator.html")
+                before = calculate(page, "EL1052", "20", "10")
+                require(numeric(before["values"]["Стоимость материала"]) == Decimal("1096.09"),
+                        "Initial calculation does not use mocked starting price")
+                requests_before = len(feed_requests)
+                page.evaluate("data=>window.EversensePriceFeed(data)", changed_payload)
+                page.wait_for_function("()=>document.querySelector('#ev-calc-result').innerText.replace(/\\s/g,'').includes('1432,80')")
+                after = calc_values(page)
+                require(after["packs"] == 12 and numeric(after["values"]["В целых упаковках"]) == Decimal("23.88"),
+                        "Price-only update altered package quantities")
+                require(numeric(after["values"]["Стоимость материала"]) == Decimal("1432.80"),
+                        "Calculated total did not react to the new price")
+                require(len(feed_requests) == requests_before, "Calculation refresh unexpectedly requested the feed")
+                return {"updated_card_count": 30, "new_unit_price": 60, "before": before, "after": after,
+                        "update_requested_network": False}
+            case("late-price-event-updates-cards-and-calculation", late_price_update_test)
+
             def storage_tabs_test(page, context):
                 goto(page, "catalog-ru/")
                 page.locator('[data-ev-favorite="EL1052"]').click()
@@ -396,7 +500,7 @@ def main():
                 goto(page, path + suffix)
                 loaded = images(page)
                 metrics = layout_metrics(page)
-                if path in SCREENSHOT_PAGES:
+                if device == "mobile" or path in SCREENSHOT_PAGES:
                     shot(page, path.replace("/index.html", "").replace(".html", "") + "-" + device)
                 return {"path": path, "device": device, "images": loaded, "layout": metrics}
             for device, width, height in DEVICES:
@@ -404,25 +508,66 @@ def main():
                     case("layout-" + device + "-" + path.replace("/", "-"),
                          lambda p, c, path=path, d=device: layout_test(p, c, path, d), width, height)
 
+            def product_tools_metrics(page, product):
+                sku = product["sku"]
+                page.wait_for_selector("#ev-product-tools", state="attached", timeout=20000)
+                require(page.locator("#ev-product-tools").count() == 1, f"{sku}: product tools missing or duplicated")
+                favorite = page.locator("#ev-product-tools [data-ev-favorite]")
+                comparison = page.locator("#ev-product-tools [data-ev-compare]")
+                require(favorite.count() == 1 and favorite.get_attribute("data-ev-favorite") == sku,
+                        f"{sku}: favorite tools mounted with wrong SKU")
+                require(comparison.count() == 1 and comparison.get_attribute("data-ev-compare") == sku,
+                        f"{sku}: comparison tools mounted with wrong SKU")
+                calc_link = page.locator('#ev-product-tools a[href*="calculator.html"]')
+                require(calc_link.count() == 1 and parse_qs(urlparse(calc_link.get_attribute("href")).query).get("sku") == [sku],
+                        f"{sku}: product calculator lost SKU")
+                price_panel = page.locator("#ev-product-price")
+                require(price_panel.count() == 1 and price_panel.get_attribute("data-ev-sku") == sku,
+                        f"{sku}: price panel points to a different product")
+                page.wait_for_selector("#ev-product-price .ev-price-box strong")
+                price = price_panel.locator(".ev-price-box strong").inner_text()
+                require("45,90" in price and "BYN" in price, f"{sku}: mocked product price missing: {price}")
+                page.evaluate("()=>{EversensePrices.render();EversensePrices.render();}")
+                require(page.locator("#ev-product-tools").count() == 1, f"{sku}: price rerender duplicated product tools")
+                return {"sku": sku, "tools_count": 1, "price": price, "calculator_link_has_sku": True}
+
             def mirrored_test(page, context, path, device, product=False):
                 goto(page, path)
+                tools = None
                 if product:
-                    page.wait_for_selector("#ev-product-tools", state="attached", timeout=20000)
-                    require(page.locator("#ev-product-tools").count() == 1, "Product tools missing or duplicated")
-                    require(page.locator('#ev-product-tools [data-ev-favorite="EL1052"]').count() == 1, "Product tools mounted with wrong SKU")
-                    require("sku=EL1052" in page.locator('#ev-product-tools a[href*="calculator.html"]').get_attribute("href"), "Product calculator lost SKU")
-                    page.evaluate("()=>{EversensePrices.render();EversensePrices.render();}")
-                    require(page.locator("#ev-product-tools").count() == 1, "Price rerender duplicated product tools")
+                    tools = product_tools_metrics(page, by_sku["EL1052"])
                     page.locator('#ev-product-tools [data-ev-favorite="EL1052"]').click()
                     require("EL1052" in page.evaluate("key=>localStorage.getItem(key)", FAVORITES), "Mirrored product favorite is broken")
                 loaded = images(page)
                 page.evaluate("window.scrollTo(0,0)")
                 shot(page, ("existing-product" if product else "existing-home") + "-" + device, full=False)
-                return {"images": loaded, "layout": layout_metrics(page, check_style=False), "dynamic_product_tools": product}
+                return {"images": loaded, "layout": layout_metrics(page, check_style=False), "dynamic_product_tools": product, "product_tools": tools}
             for device, width, height in DEVICES[:2]:
                 case("existing-home-" + device, lambda p, c, d=device: mirrored_test(p, c, "index.html", d), width, height)
                 case("existing-product-" + device,
                      lambda p, c, d=device: mirrored_test(p, c, by_sku["EL1052"]["canonicalPath"], d, True), width, height)
+
+            # EL1052 already has this complete mobile coverage in the existing
+            # mirrored-product case above. Check the remaining 29 without a
+            # duplicate visit, and expose an exact SKU-to-case map in the report.
+            summary["canonical_product_mobile_cases"] = {
+                product["sku"]: ("existing-product-mobile" if product["sku"] == "EL1052"
+                                 else "canonical-product-mobile-" + product["sku"])
+                for product in products}
+
+            def canonical_mobile_test(page, context, product):
+                goto(page, product["canonicalPath"], wait_fonts=False)
+                tools = product_tools_metrics(page, product)
+                loaded = images(page, local_only=True)
+                metrics = layout_metrics(page, check_style=False)
+                return {"sku": product["sku"], "canonical_path": product["canonicalPath"],
+                        "product_tools": tools, "images": loaded, "layout": metrics}
+
+            for product in products:
+                if product["sku"] == "EL1052":
+                    continue
+                case(summary["canonical_product_mobile_cases"][product["sku"]],
+                     lambda p, c, product=product: canonical_mobile_test(p, c, product), 390, 844)
             browser.close()
     except Exception as error:
         summary["fatal_error"] = {"message": str(error), "traceback": traceback.format_exc(limit=8)}
