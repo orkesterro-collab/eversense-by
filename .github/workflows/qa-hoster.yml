@@ -6,15 +6,22 @@ on:
       - .github/scripts/check_public_price_feed.py
       - .github/scripts/qa_live_site.py
       - .github/scripts/prepare_hoster_site.py
+  workflow_run:
+    workflows: ["Eversense - verified deployment to hoster.by"]
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   verify:
+    if: ${{ github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push') }}
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
       - name: Stage all public files
         run: |
           mkdir -p _deploy
@@ -23,7 +30,10 @@ jobs:
         run: python3 .github/scripts/prepare_hoster_site.py
       - name: Verify prices anonymously from Google Sheets
         run: python3 .github/scripts/check_public_price_feed.py
+      # Push validates the candidate locally. Live routes are checked only after
+      # successful publication (or an explicit manual live check).
       - name: Check all deployed HTML pages and key resources
+        if: ${{ github.event_name == 'workflow_run' || github.event_name == 'workflow_dispatch' }}
         run: python3 .github/scripts/qa_live_site.py
       - name: Upload link audit
         uses: actions/upload-artifact@v4

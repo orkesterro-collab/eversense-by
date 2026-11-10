@@ -23,10 +23,16 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: false
+      - name: Stage project mirror and repair legacy navigation
+        run: |
+          python3 .github/scripts/test_prepare_pages_site.py
+          mkdir -p _pages
+          rsync -a --exclude='/.git/' --exclude='/.github/' --exclude='/scripts/' --exclude='/reference/' --exclude='/_pages/' --exclude='/_deploy/' --exclude='/buyer-qa/' ./ _pages/
+          python3 .github/scripts/prepare_pages_site.py
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/deploy-hoster.yml"
+      - ".github/scripts/prepare_hoster_site.py"
       - "assets/**"
       - "black-friday/**"
       - "catalog-ru/**"
