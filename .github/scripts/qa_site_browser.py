@@ -35,7 +35,7 @@ with sync_playwright() as playwright:
                     failures.append(f"{device} {path}: HTTP {status}")
                 page.wait_for_timeout(2500)
                 row["title"] = page.title()[:130]
-                row["internal_catalog_anchors"] = page.locator('a[href="/catalog-ru"],a[href="/catalog-ru/"]').count()
+                row["internal_catalog_anchors"] = page.evaluate("() => [...document.querySelectorAll('a[href]')].filter(a => a.origin === location.origin && /^\\/catalog-ru\\/?$/.test(a.pathname)).length")
                 row["price_boxes"] = page.locator(".ev-price-box").count()
                 row["images_loaded"] = page.evaluate(
                     "() => [...document.images].filter(i=>i.complete&&i.naturalWidth>0).length")

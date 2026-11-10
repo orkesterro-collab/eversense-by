@@ -12,6 +12,12 @@ on:
       - "ru/**"
       - "en/**"
       - "*.html"
+      - "content/buyer-guides.json"
+      - "scripts/build_buyer_pages.py"
+      - "scripts/extract_products.py"
+      - "scripts/test_buyer_core.cjs"
+      - "scripts/qa_buyer_tools.py"
+      - ".github/workflows/qa-buyer-tools.yml"
   workflow_dispatch:
     inputs:
       publish:
@@ -28,7 +34,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  buyer-qa:
+    uses: ./.github/workflows/qa-buyer-tools.yml
   deploy:
+    needs: buyer-qa
     runs-on: ubuntu-latest
     steps:
       - name: Check out Eversence
@@ -128,6 +137,7 @@ jobs:
             --exclude='/reference/' \
             --exclude='/README.md' \
             --exclude='/_deploy/' \
+            --exclude='/buyer-qa/' \
             ./ _deploy/
           test -f _deploy/index.html
 

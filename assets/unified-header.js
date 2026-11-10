@@ -7,40 +7,124 @@
   var site = new URL("../", assets);
   var asset = function (path) { return new URL(path, assets).href; };
   var route = function (path) { return new URL(path, site).href; };
+  var version = "20261110b";
+
+  function ensureStyle(filename, marker) {
+    var url = asset(filename + "?v=" + version);
+    var existing = Array.from(document.querySelectorAll('link[rel="stylesheet"]')).find(function (link) {
+      try { return new URL(link.href).pathname === new URL(url).pathname; }
+      catch (_) { return false; }
+    });
+    if (existing) {
+      existing.setAttribute(marker, "true");
+      return;
+    }
+    var css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = url;
+    css.setAttribute(marker, "true");
+    document.head.appendChild(css);
+  }
+
+  function loadBuyerTools() {
+    // Static pages explicitly own their deferred dependency sequence.
+    if (document.documentElement.dataset.buyerStatic === "true" || window.__evBuyerLoaderPromise) return;
+    var dependencies = [
+      { filename: "products-data.js", ready: function () { return Array.isArray(window.EversenseCatalogData); } },
+      { filename: "buyer-core.js", ready: function () { return !!window.EversenseBuyerCore; } },
+      { filename: "buyer.js", ready: function () { return !!window.__eversenseBuyerStarted; } }
+    ];
+    function loadNext(dependency) {
+      if (dependency.ready()) return Promise.resolve();
+      return new Promise(function (resolve, reject) {
+        var url = asset(dependency.filename + "?v=" + version);
+        var existing = Array.from(document.scripts).find(function (item) {
+          if (!item.src) return false;
+          try { return new URL(item.src).pathname === new URL(url).pathname; }
+          catch (_) { return false; }
+        });
+        var element = existing || document.createElement("script");
+        if (element.dataset.evBuyerLoaded === "true") {
+          resolve();
+          return;
+        }
+        element.addEventListener("load", function () {
+          element.dataset.evBuyerLoaded = "true";
+          resolve();
+        }, { once: true });
+        element.addEventListener("error", function () {
+          reject(new Error("Failed to load " + dependency.filename));
+        }, { once: true });
+        if (!existing) {
+          element.src = url;
+          element.async = false;
+          element.dataset.evBuyerAsset = dependency.filename;
+          document.head.appendChild(element);
+        }
+      });
+    }
+    // A subsequent script is appended only after the previous load completes.
+    window.__evBuyerLoaderPromise = dependencies.reduce(function (sequence, dependency) {
+      return sequence.then(function () { return loadNext(dependency); });
+    }, Promise.resolve());
+    window.__evBuyerLoaderPromise.catch(function (error) {
+      if (window.console) console.warn("Eversense buyer tools:", error.message);
+    });
+  }
+
+  ensureStyle("unified-header.css", "data-ev-header-css");
+  ensureStyle("buyer.css", "data-ev-buyer-css");
 
   function mount() {
     if (!document.body || document.getElementById("ev-global-header")) return;
-    var css = document.createElement("link");
-    css.rel = "stylesheet";
-    css.href = asset("unified-header.css?v=20261104a");
-    css.dataset.evHeaderCss = "true";
-    if (!document.querySelector('link[data-ev-header-css]')) document.head.appendChild(css);
 
     var header = document.createElement("header");
     header.id = "ev-global-header";
     header.setAttribute("aria-label", "Навигация EVERSENSE");
-    var menuItems = [
-      ["Главная", ""],
-      ["Каталог", "catalog-ru/"],
-      ["О бренде", "about.html"],
-      ["Где купить", "where-to-buy.html"],
-      ["Укладка и уход", "installation.html"],
-      ["Контакты", "#contacts"]
+    var menuGroups = [
+      { title: "Выбрать", id: "choose", items: [
+        ["Каталог", "catalog-ru/"],
+        ["Помощь с выбором", "choose.html"],
+        ["Интерьеры", "projects.html"],
+        ["Избранное", "favorites.html"],
+        ["Сравнение", "compare.html"],
+        ["Калькулятор", "calculator.html"]
+      ] },
+      { title: "О продукте", id: "product", items: [
+        ["О EVERSENSE", "about.html"],
+        ["Укладка", "installation.html"],
+        ["Уход", "care.html"],
+        ["Гарантия", "warranty.html"],
+        ["Вопросы и ответы", "faq.html"],
+        ["Документы", "downloads.html"]
+      ] },
+      { title: "Купить", id: "buy", items: [
+        ["Где купить", "where-to-buy.html"],
+        ["Контакты", "contacts.html"]
+      ] }
     ];
     var current = location.pathname.replace(/\/index\.html$/, "/");
-    var menuHtml = menuItems.map(function (item) {
-      var target = item[1] === "#contacts" ? route("") + "#contacts" : route(item[1]);
-      var active = item[1] !== "#contacts" && current === new URL(target).pathname;
+    function menuLink(item) {
+      var target = route(item[1]);
+      var active = current.replace(/\/$/, "") === new URL(target).pathname.replace(/\/$/, "");
       return '<a href="' + target + '"' + (active ? ' aria-current="page"' : '') + '>' + item[0] + '</a>';
+    }
+    var menuHtml = menuGroups.map(function (group) {
+      return '<section class="ev-header-menu-group" aria-labelledby="ev-menu-group-' + group.id + '">' +
+        '<h2 id="ev-menu-group-' + group.id + '">' + group.title + '</h2>' +
+        group.items.map(menuLink).join("") + '</section>';
     }).join("");
     header.innerHTML = '<div class="ev-header-inner">' +
       '<a class="ev-header-logo" href="' + route("") + '" aria-label="EVERSENSE, на главную">' +
       '<img src="' + asset("original-tilda/44ef8387add2-Frame_784.svg") + '" alt="EVERSENSE" width="158" height="58"></a>' +
+      '<nav class="ev-header-quick" aria-label="Быстрый переход">' +
+      menuLink(["Каталог", "catalog-ru/"]) + menuLink(["Где купить", "where-to-buy.html"]) + '</nav>' +
       '<button class="ev-header-toggle" type="button" aria-controls="ev-global-menu" aria-expanded="false" aria-label="Открыть меню">' +
       '<span class="ev-header-lines" aria-hidden="true"><span></span><span></span><span></span></span></button>' +
       '</div><nav class="ev-header-menu" id="ev-global-menu" aria-label="Главное меню" hidden>' + menuHtml + '</nav>';
     document.body.insertBefore(header, document.body.firstChild);
     document.body.classList.add("ev-has-global-header");
+    document.dispatchEvent(new CustomEvent('eversense:header-ready'));
 
     var toggle = header.querySelector(".ev-header-toggle");
     var menu = header.querySelector(".ev-header-menu");
@@ -67,6 +151,9 @@
     menu.addEventListener("click", function (event) {
       if (event.target.closest("a")) closeMenu(false);
     });
+    header.addEventListener("focusin", function () {
+      header.classList.remove("ev-header-hidden");
+    });
 
     var lastY = Math.max(0, window.scrollY);
     var travel = 0, direction = 0;
@@ -88,6 +175,10 @@
       if (next < 0 && travel >= 10) header.classList.remove("ev-header-hidden");
     }, { passive: true });
   }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount, { once: true });
-  else mount();
+  function initialize() {
+    mount();
+    loadBuyerTools();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initialize, { once: true });
+  else initialize();
 })();

@@ -5,7 +5,7 @@
   var current = document.currentScript;
   if (!current || !current.src) return;
   var script = document.createElement("script");
-  script.src = new URL("unified-header.js?v=20261104a",current.src).href;
+  script.src = new URL("unified-header.js?v=20261110b",current.src).href;
   script.async = true;
   document.head.appendChild(script);
 })();
@@ -13,6 +13,7 @@
    Схема листа price: sku | name | price | sale_price | sale_until | sale_from */
 (function () {
   "use strict";
+  if(window.EversensePrices)return;
   var SHEET_ID = "1zzypRi-wST20xu0rns-uSnGk7NmikkW2kw44jvsDgBY";
   var table = Object.create(null), loaded = false, timer = null;
 
@@ -162,6 +163,7 @@
       newTable[sku]={price:number(v(1)),sale:number(v(2)),until:date(v(3),f(3)),from:date(v(4),f(4))};
     });
     table=newTable;loaded=true;render();
+    document.dispatchEvent(new CustomEvent('eversense:prices'));
     setTimeout(render,1000);
     setTimeout(render,3500);
   };

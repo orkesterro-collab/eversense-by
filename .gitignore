@@ -1,0 +1,7 @@
+/_deploy/
+/buyer-qa/
+/hoster-browser-qa/
+/site-audit.json
+__pycache__/
+*.pyc
+/site-changed-html.json

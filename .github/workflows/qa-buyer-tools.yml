@@ -1,0 +1,51 @@
+name: QA EVERSENSE buyer tools
+on:
+  push:
+    branches-ignore: [main]
+    paths:
+      - 'assets/buyer*'
+      - 'assets/products-data*'
+      - 'assets/prices.js'
+      - 'assets/unified-header*'
+      - 'content/buyer-guides.json'
+      - 'scripts/build_buyer_pages.py'
+      - 'scripts/extract_products.py'
+      - 'scripts/test_buyer_core.cjs'
+      - 'scripts/qa_buyer_tools.py'
+      - '.github/workflows/qa-buyer-tools.yml'
+      - '*.html'
+      - 'catalog-ru/**'
+  workflow_dispatch:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  buyer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify product data and calculations
+        run: |
+          python3 scripts/extract_products.py --check
+          node scripts/test_buyer_core.cjs
+          node --check assets/buyer.js
+          node --check assets/unified-header.js
+      - name: Stage and audit public files
+        run: |
+          mkdir -p _deploy
+          rsync -a --exclude='/.git/' --exclude='/.github/' --exclude='/scripts/' --exclude='/reference/' --exclude='/_deploy/' --exclude='/buyer-qa/' ./ _deploy/
+          python3 .github/scripts/prepare_hoster_site.py
+      - name: Install browser tester
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Check buyer journeys on desktop and mobile
+        run: python3 scripts/qa_buyer_tools.py
+      - name: Save browser screenshots and checks
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eversense-buyer-qa
+          path: buyer-qa/
+          retention-days: 14
