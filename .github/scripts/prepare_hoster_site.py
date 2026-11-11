@@ -24,6 +24,8 @@ release_revision = os.environ.get("GITHUB_SHA", "20261110b")[:12]
 RELEASE_ASSETS = {
     "/assets/prices.js", "/assets/unified-header.js", "/assets/unified-header.css",
     "/assets/buyer.js", "/assets/buyer.css", "/assets/buyer-core.js", "/assets/products-data.js",
+    "/assets/explore-guides.css", "/assets/explore-product.css", "/assets/explore-product.js",
+    "/assets/explore-interiors.css", "/assets/explore-interiors.js",
 }
 
 

@@ -4,11 +4,14 @@ on:
     branches-ignore: [main]
     paths:
       - 'assets/buyer*'
+      - 'assets/explore-*'
       - 'assets/products-data*'
       - 'assets/prices.js'
       - 'assets/unified-header*'
       - 'content/buyer-guides.json'
       - 'scripts/build_buyer_pages.py'
+      - 'scripts/explore_*.py'
+      - 'scripts/qa_exploration.py'
       - 'scripts/extract_products.py'
       - 'scripts/test_buyer_core.cjs'
       - 'scripts/qa_buyer_tools.py'
@@ -38,6 +41,8 @@ jobs:
           node scripts/test_buyer_core.cjs
           node --check assets/buyer.js
           node --check assets/unified-header.js
+          node --check assets/explore-product.js
+          node --check assets/explore-interiors.js
       - name: Stage and audit public files
         run: |
           mkdir -p _deploy
@@ -49,6 +54,8 @@ jobs:
           python3 -m playwright install --with-deps chromium
       - name: Check buyer journeys on desktop and mobile
         run: python3 scripts/qa_buyer_tools.py
+      - name: Check visual exploration and accessible fallbacks
+        run: python3 scripts/qa_exploration.py
       - name: Save browser screenshots and checks
         if: always()
         uses: actions/upload-artifact@v4

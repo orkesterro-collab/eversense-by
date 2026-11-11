@@ -15,6 +15,8 @@ on:
       - "*.html"
       - "content/buyer-guides.json"
       - "scripts/build_buyer_pages.py"
+      - "scripts/explore_*.py"
+      - "scripts/qa_exploration.py"
       - "scripts/extract_products.py"
       - "scripts/test_buyer_core.cjs"
       - "scripts/qa_buyer_tools.py"

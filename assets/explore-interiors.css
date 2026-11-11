@@ -1,0 +1,109 @@
+/* Original EVERSENSE scenes, with quiet editorial comparison controls. */
+body[data-buyer-page="projects"] .ev-hero {padding:26px 0 30px}
+body[data-buyer-page="projects"] .ev-hero h1 {font-size:clamp(32px,4.2vw,52px);margin-bottom:18px}
+body[data-buyer-page="projects"] .ev-hero .ev-breadcrumb {margin-bottom:20px}
+body[data-buyer-page="projects"] .ev-hero .ev-eyebrow {display:none}
+body[data-buyer-page="projects"] .ev-hero .ev-lead {font-size:17px}
+body[data-buyer-page="projects"] .ev-hero .ev-actions {margin-top:20px}
+.ev-section.ev-interior-intro {padding-block:24px}
+.ev-interior-nav {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:0}
+.ev-interior-nav a {display:flex;align-items:center;gap:15px;min-height:60px;padding:17px 0;border-top:1px solid #9D9D9C;text-decoration:none;font-size:14px;line-height:1.5}
+.ev-interior-nav a > span:first-child {color:#343333;font-size:11px}
+.ev-interior-nav a > span:last-child {margin-left:auto;font-size:20px;color:#343333}
+.ev-interior-nav a:hover {border-color:#343333;text-decoration:underline;text-underline-offset:5px}
+.ev-interior-source {font-size:12px;line-height:1.75;color:#343333;max-width:850px;margin:19px 0 0!important}
+.ev-interior-source a {text-underline-offset:4px}
+.ev-interior-story {scroll-margin-top:calc(var(--ev-header-height,68px) + 24px)}
+.ev-interior-story > .ev-wrap {padding-top:30px;border-top:1px solid #DADADA}
+.ev-interior-heading {display:grid;grid-template-columns:1.25fr 1fr;gap:50px;align-items:end;margin-bottom:22px}
+.ev-interior-heading h2 {max-width:620px;font-size:clamp(30px,3.4vw,46px);line-height:1.16;margin:0}
+.ev-interior-heading .ev-eyebrow {margin-bottom:10px}
+.ev-interior-heading > p {font-size:15px;line-height:1.8;margin:0;max-width:480px}
+.ev-interior-controls {display:flex;align-items:stretch;justify-content:space-between;gap:25px;margin-bottom:20px}
+.ev-interior-options {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;flex:1;max-width:760px}
+.ev-interior-options button {display:flex;align-items:center;gap:12px;min-width:0;min-height:76px;padding:9px;text-align:left;border:1px solid #DADADA;border-radius:0;background:#fff;color:#343333;line-height:1.4}
+.ev-interior-options button > img {width:56px;height:56px;object-fit:cover;flex:0 0 56px}
+.ev-interior-options button > span {display:block;min-width:0}
+.ev-interior-options button b {display:block;font-size:14px;font-weight:600;margin-bottom:4px}
+.ev-interior-options button > span > span {display:block;font-size:11px;line-height:1.5}
+.ev-interior-options button[aria-pressed="true"] {border-color:#343333;box-shadow:inset 0 -2px 0 #343333;background:#F7F4F0}
+.ev-interior-options button:hover {border-color:#343333}
+.ev-interior-view {display:flex;align-items:center;gap:16px;flex-shrink:0}
+.ev-interior-view button {min-height:44px;padding:8px 0;border:0;border-bottom:1px solid transparent;border-radius:0;background:transparent;color:#343333;font-size:12px;line-height:1.6}
+.ev-interior-view button[aria-pressed="true"] {border-bottom-color:#343333;font-weight:700}
+.ev-interior-view button:hover {border-bottom-color:#C0A58C}
+.ev-interior-scene {display:grid;grid-template-columns:minmax(0,1.85fr) minmax(0,1fr);gap:36px;align-items:start;margin-bottom:35px}
+.ev-interior-stories[data-interior-ready="true"] .ev-interior-scene {margin-bottom:0}
+.ev-interior-photo {margin:0;min-width:0}
+.ev-interior-photo > a {display:block;background:#F7F4F0;overflow:hidden;aspect-ratio:4/3}
+.ev-buyer .ev-interior-photo img {display:block;width:100%;height:100%;object-fit:cover}
+.ev-interior-photo img[data-current-view="detail"] {object-fit:contain;background:#F7F4F0}
+.ev-interior-photo figcaption {font-size:11px;line-height:1.6;margin-top:10px}
+.ev-interior-reading {padding-top:3px;min-width:0}
+.ev-interior-reading .ev-eyebrow {font-size:10px;margin-bottom:12px}
+.ev-interior-reading h3 {font-size:clamp(23px,2.2vw,30px);line-height:1.25;margin:0 0 9px}
+.ev-interior-size {font-size:12px;line-height:1.7;margin:0 0 25px!important}
+.ev-interior-observation {border-top:1px solid #DADADA;padding-top:20px}
+.ev-interior-observation > span {display:block;font-size:11px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:9px;font-weight:600}
+.ev-interior-observation h4 {font-size:16px;line-height:1.6;font-weight:600;margin:0 0 9px;text-wrap:balance}
+.ev-interior-observation p {font-size:14px;line-height:1.8;margin-bottom:20px}
+.ev-interior-actions {display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.ev-interior-actions .ev-button {min-height:44px;padding:10px 15px;font-size:12px;letter-spacing:0}
+.ev-interior-actions .ev-text-link {font-size:12px}
+.ev-interior-next {display:flex;justify-content:space-between;align-items:flex-start;gap:32px;margin-top:28px;padding-top:22px;border-top:1px solid #DADADA}
+.ev-interior-next p {max-width:690px;font-size:13px;line-height:1.8;margin:0;flex:1}
+.ev-interior-next strong {font-weight:600}
+.ev-interior-next .ev-text-link {max-width:260px;font-size:12px;min-height:44px;flex:0 1 230px;padding-top:0;align-items:flex-start}
+.ev-interior-status {position:absolute!important;width:1px;height:1px;padding:0!important;margin:-1px!important;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.ev-interior-finish > .ev-wrap {border-top:1px solid #9D9D9C;padding-top:42px}
+.ev-interior-finish > .ev-wrap > div:not(.ev-actions) {display:grid;grid-template-columns:1.1fr 1fr;gap:50px;align-items:start}
+.ev-interior-finish h2 {font-size:clamp(29px,3vw,40px);line-height:1.2;margin:0 0 22px}
+.ev-interior-finish p {font-size:15px;line-height:1.8;max-width:500px}
+.ev-interior-finish .ev-actions {margin-top:15px}
+@media(max-width:1050px){
+  .ev-interior-scene {grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:25px}
+  .ev-interior-controls {flex-wrap:wrap;gap:8px}
+  .ev-interior-options {max-width:none;flex-basis:100%}
+  .ev-interior-view {margin-left:auto}
+}
+@media(max-width:760px){
+  .ev-section.ev-interior-intro {padding-block:18px}
+  .ev-interior-nav {gap:16px;margin-top:0}
+  .ev-interior-nav a {flex-wrap:wrap;gap:6px;align-content:start;font-size:12px;line-height:1.55;padding:12px 0}
+  .ev-interior-nav a > span:first-child {flex-basis:100%}
+  .ev-interior-nav a > span:last-child {display:none}
+  .ev-interior-story > .ev-wrap {padding-top:24px}
+  .ev-interior-heading {grid-template-columns:1fr;gap:12px;margin-bottom:18px}
+  .ev-interior-heading h2 {font-size:32px}
+  .ev-interior-heading > p {font-size:14px;max-width:none}
+  .ev-interior-controls {margin-bottom:13px;gap:3px}
+  .ev-interior-options {gap:9px}
+  .ev-interior-options button {align-items:flex-start;gap:8px;padding:8px;min-height:88px}
+  .ev-interior-options button > img {width:35px;height:42px;flex-basis:35px}
+  .ev-interior-options button b {font-size:12px;line-height:1.4}
+  .ev-interior-options button > span > span {font-size:10px;line-height:1.45}
+  .ev-interior-view {gap:22px}
+  .ev-interior-view button {font-size:12px}
+  .ev-interior-scene {grid-template-columns:1fr;gap:22px}
+  .ev-interior-reading h3 {font-size:26px;max-width:600px}
+  .ev-interior-reading .ev-eyebrow {margin-bottom:8px}
+  .ev-interior-size {margin-bottom:17px!important}
+  .ev-interior-observation {padding-top:16px}
+  .ev-interior-observation > span {margin-bottom:7px}
+  .ev-interior-observation h4 {font-size:16px}
+  .ev-interior-observation p {font-size:14px;line-height:1.75;margin-bottom:14px}
+  .ev-interior-actions {gap:8px 20px}
+  .ev-interior-next {display:block;margin-top:24px;padding-top:19px}
+  .ev-interior-next .ev-text-link {max-width:none;margin-top:9px;padding-block:10px}
+  .ev-interior-source {font-size:11px;margin-top:14px!important}
+  .ev-interior-finish > .ev-wrap {padding-top:30px}
+  .ev-interior-finish > .ev-wrap > div:not(.ev-actions) {grid-template-columns:1fr;gap:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .ev-interior-stories * {scroll-behavior:auto!important;transition:none!important}
+}
+@media print{
+  .ev-interior-stories [data-story-options],.ev-interior-view,.ev-interior-actions button {display:none!important}
+  .ev-interior-stories .ev-interior-scene[hidden] {display:grid!important;margin-top:20px}
+  .ev-interior-story {break-inside:avoid}
+}

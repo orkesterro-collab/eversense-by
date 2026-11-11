@@ -8,13 +8,16 @@ from pathlib import Path
 from html import escape
 import json
 import posixpath
+from explore_product import render_layers
+from explore_interiors import render_interiors
+from explore_guides import render_designs, render_sample, render_situations, render_next
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = json.loads((ROOT / 'assets/products-data.json').read_text())
 PRODUCTS = DATA if isinstance(DATA, list) else DATA['products']
 PRODUCTS.sort(key=lambda p: (['nature','luxury','minimal'].index(p['collectionID']), int(p['sku'][2:])))
 GUIDES = json.loads((ROOT / 'content/buyer-guides.json').read_text())
-VERSION = '20261110b'
+VERSION = '20261111explore'
 COLLECTIONS = [
     ('nature', 'Природная эстетика', 'Спокойные древесные оттенки и выразительные рисунки дуба.'),
     ('luxury', 'Тихая роскошь', 'Натуральные и глубокие тона для интерьера с характером.'),
@@ -50,6 +53,14 @@ def footer(page):
 def write_page(page, title, lead, body, page_type='', collection='', hero_actions='', structured=None):
     canonical = 'https://eversense.by/' + (page[:-10] if page.endswith('index.html') else page)
     schema = structured or {'@context':'https://schema.org','@type':'WebPage','name':title,'description':lead,'url':canonical,'inLanguage':'ru'}
+    extras = []
+    if page_type in ('product', 'choose', 'faq', 'installation', 'care', 'warranty', 'downloads'):
+        extras.append('explore-guides.css')
+    if page_type == 'product':
+        extras.extend(['explore-product.css', 'explore-product.js'])
+    if page_type == 'projects':
+        extras.extend(['explore-interiors.css', 'explore-interiors.js'])
+    extra_assets = '\n'.join(f'<link rel="stylesheet" href="{href("assets/"+file,page)}?v={VERSION}">' if file.endswith('.css') else f'<script src="{href("assets/"+file,page)}?v={VERSION}" defer></script>' for file in extras)
     html = f'''<!doctype html>
 <html lang="ru" data-buyer-static="true"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -59,6 +70,7 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{href('assets/buyer.css',page)}?v={VERSION}" data-ev-buyer-css>
+{extra_assets}
 <script type="application/ld+json">{json.dumps(schema,ensure_ascii=False).replace('<',chr(92)+'u003c')}</script>
 <script src="{href('assets/products-data.js',page)}?v={VERSION}" defer></script>
 <script src="{href('assets/buyer-core.js',page)}?v={VERSION}" defer></script>
@@ -96,20 +108,25 @@ def catalogs():
         write_page(page,title,lead,body,'catalog',collection,actions(page))
 
 def finder(page):
-    return '<section class="ev-section" id="finder"><div class="ev-wrap"><span class="ev-eyebrow">Три ориентира для начала</span><h2>Сузим круг выбора</h2><form id="ev-finder"><div class="ev-filter-row">'+field('Комната','room',[('living','Гостиная'),('bedroom','Спальня'),('kitchen','Кухня'),('hall','Прихожая')])+field('Оттенок','tone',TONE)+field('Рисунок','design',DESIGN)+'</div><button class="ev-button ev-button--primary" type="submit">Показать декоры</button></form><div id="ev-finder-results" class="ev-section" tabindex="-1" hidden></div></div></section>'
+    return '<section class="ev-section" id="finder"><div class="ev-wrap"><span class="ev-eyebrow">02 · От впечатления к вариантам</span><h2>Сузим круг выбора</h2><p class="ev-lead">Оттенок и рисунок определят подборку. Комната подскажет, на что обратить внимание в эксплуатации.</p><form id="ev-finder"><div class="ev-filter-row">'+field('Комната','room',[('living','Гостиная'),('bedroom','Спальня'),('kitchen','Кухня'),('hall','Прихожая')])+field('Оттенок','tone',TONE)+field('Рисунок','design',DESIGN)+'</div><button class="ev-button ev-button--primary" type="submit">Показать декоры</button></form><div id="ev-finder-results" class="ev-section" tabindex="-1" hidden></div></div></section>'
 
 def guides():
     for key, page in [('product','about.html'),('choose','choose.html'),('faq','faq.html'),('installation','installation.html'),('care','care.html'),('warranty','warranty.html'),('downloads','downloads.html')]:
         g = GUIDES[key]
-        toc = '<aside class="ev-toc"><strong>На этой странице</strong><ul>'+''.join('<li>'+link(e(s['title']),'#'+s['id'],page)+'</li>' for s in g['sections'])+'</ul></aside>'
+        sections = [s for s in g['sections'] if key != 'choose' or s['id'] not in COLLECTION_PATHS]
+        toc = '<aside class="ev-toc"><strong>На этой странице</strong><ul>'+''.join('<li>'+link(e(s['title']),'#'+s['id'],page)+'</li>' for s in sections)+'</ul></aside>'
         prose = ''
-        for s in g['sections']:
-            prose += '<section id="'+s['id']+'"><h2>'+e(s['title'])+'</h2>'+''.join('<p>'+e(t)+'</p>' for t in s.get('body',[]))
+        for s in sections:
+            prose += '<section id="'+s['id']+'"><h2>'+e(s['title'])+'</h2>'
             if key == 'product' and s['id'] == 'layers':
-                layers = ['9ecaa5080584-4_balancer-min.webp', '9404692d9a29-3_board-min.webp', 'c9f879219a4a-2_paper-min.webp', '603494132a85-1_overlay-min.webp']
-                visual = '<figure class="ev-layers"><div class="ev-layers-image" role="img" aria-label="Слои панели сверху вниз: защитный оверлей, декоративный слой, древесная плита, стабилизирующий слой">'+''.join('<img src="'+e(href('assets/original-tilda/'+name,page))+'" alt="" width="1680" height="944" loading="lazy">' for name in layers)+'</div><figcaption>Конструкция панели EVERSENSE. Сверху вниз: защитный слой, декор, древесная плита и стабилизирующий слой.</figcaption></figure>'
-                section_start = '<section id="layers"><h2>'+e(s['title'])+'</h2>'
-                prose = prose.replace(section_start, section_start+visual)
+                prose += render_layers(page, href)
+            else:
+                prose += ''.join('<p>'+e(t)+'</p>' for t in s.get('body',[]))
+            if key == 'choose' and s['id'] == 'collections':
+                for collection, title, description in COLLECTIONS:
+                    prose += '<div class="ev-collection-glance" id="'+collection+'"><h3>'+e(title)+'</h3><p>'+e(description)+'</p>'+link('Рассмотреть коллекцию',COLLECTION_PATHS[collection],page,'ev-text-link')+'</div>'
+            if key == 'choose' and s['id'] == 'sample':
+                prose += render_sample()
             if s.get('bullets'):
                 prose += '<ul>'+''.join('<li>'+e(t)+'</li>' for t in s['bullets'])+'</ul>'
             for f in s.get('faqs',[]):
@@ -128,12 +145,14 @@ def guides():
             if s['id'] in COLLECTION_PATHS:
                 prose += link('Смотреть коллекцию',COLLECTION_PATHS[s['id']],page,'ev-text-link')
             prose += '</section>'
-        extra = finder(page) if key=='choose' else ''
+        extra = render_designs(page, PRODUCTS, href) + finder(page) if key=='choose' else ''
         if key=='product':
             p = next(p for p in PRODUCTS if p['sku']=='EL2151')
             extra = '<section class="ev-section"><div class="ev-wrap ev-article-visual"><img src="'+e(href(p['interiorImage'],page))+'" alt="'+e(p['name'])+' в интерьере" width="900" height="650"><div><span class="ev-eyebrow">Дерево · Мрамор · Однотонные декоры</span><h2>Три коллекции.<br>Ваш характер дома.</h2><p class="ev-lead">Выберите настроение, затем оцените материал вживую. Разница видна в рисунке, оттенке и формате.</p>'+link('Посмотреть все декоры','catalog-ru/',page,'ev-button')+'</div></div></section>'
-        body = (extra if key=='choose' else '')+'<section class="ev-section"><div class="ev-wrap ev-article-layout">'+toc+'<div class="ev-prose">'+prose+'</div></div></section>'+ (extra if key=='product' else '') +'<section class="ev-section"><div class="ev-wrap ev-favorites-bar"><p>Остались вопросы по вашему помещению или артикулу?</p><div class="ev-actions">'+link('Уточнить у представителя','contacts.html',page,'ev-button ev-button--primary')+link('Выбрать декор','catalog-ru/',page,'ev-text-link')+'</div></div></section>'
+        body = (extra if key=='choose' else render_situations(key,page,href))+'<section class="ev-section"><div class="ev-wrap ev-article-layout">'+toc+'<div class="ev-prose">'+prose+'</div></div></section>'+ (extra if key=='product' else '') + render_next(key,page,href)
         primary = {
+            'product': ('Посмотреть конструкцию', '#layers'),
+            'choose': ('Посмотреть рисунки', '#designs'),
             'installation': ('Открыть инструкцию PDF', 'https://drive.google.com/file/d/1dImDaWKPtefl-TOjxHiSL3zauqBfHdJH/view'),
             'care': ('Правила ежедневной уборки', '#daily-cleaning'),
             'warranty': ('Запросить условия гарантии', 'contacts.html'),
@@ -159,11 +178,8 @@ def other_pages():
     body='<section class="ev-section"><div class="ev-wrap"><section id="ev-contact-selection" class="ev-note" hidden></section><div class="ev-article-layout"><div><span class="ev-eyebrow">Республика Беларусь</span><h2>ООО «Флорсток»</h2><p>Представитель торговой марки EVERSENSE в Беларуси.</p></div><div class="ev-prose"><section><h2>Обсудим вашу покупку</h2><p>Уточните наличие нужного декора, количество упаковок и возможность посмотреть образец. Если уже выбрали варианты, назовите артикулы или сохраните ссылку на подборку.</p><div class="ev-actions"><a class="ev-button ev-button--primary" href="tel:+375296713971">+375 29 671-39-71</a>'+link('Найти магазин','where-to-buy.html',page,'ev-button')+'</div></section><section><h2>Что подготовить к разговору</h2><ul><li>Артикул или два-три понравившихся декора.</li><li>Площадь помещения и ориентировочное время покупки.</li><li>Тип помещения, наличие подогрева и особенности основания.</li><li>Город, в котором удобно получить покупку или посмотреть образец.</li></ul></section><section><h2>Реквизиты</h2><p>ООО «Флорсток»<br>УНП 192608003<br>220062, Республика Беларусь, г. Минск,<br>пр. Победителей, д. 129, пом. 358</p><p>Перед визитом уточните адрес торговой точки и наличие экспозиции: адрес компании может отличаться от адреса магазина.</p></section></div></div></div></section>'
     write_page(page,'Контакты в Беларуси','Проверить наличие, найти образец и получить ответы по выбранному покрытию.',body,'contacts')
     page='projects.html'
-    chosen=[]
-    for c,_,_ in COLLECTIONS:
-        chosen.extend([p for p in PRODUCTS if p['collectionID']==c][:4])
-    body='<section class="ev-section"><div class="ev-wrap"><div class="ev-room-grid">'+''.join('<article class="ev-room-card">'+link('<img src="'+e(href(p['interiorImage'],page))+'" alt="'+e(p['name'])+' в интерьере" loading="lazy" width="900" height="700">',p['canonicalPath'],page)+'<span class="ev-sku">'+p['sku']+'</span><h2>'+e(p['name'])+'</h2><p>'+e(p['collectionName'])+'</p><div class="ev-actions">'+link('Смотреть декор',p['canonicalPath'],page,'ev-text-link')+'<button class="ev-button" type="button" data-ev-favorite="'+p['sku']+'">В избранное</button></div></article>' for p in chosen)+'</div><p class="ev-note">Интерьерные изображения из каталога производителя помогают оценить рисунок и настроение пола. Оттенок и фактуру выбранного декора уточняйте по реальному образцу.</p>'+link('Посмотреть все 30 декоров','catalog-ru/',page,'ev-button')+'</div></section>'
-    write_page(page,'EVERSENSE в интерьере','Подборка интерьеров: посмотрите, как декор работает на большой площади и сочетается с мебелью, светом и цветом стен.',body,'projects',hero_actions=actions(page))
+    body=render_interiors(page, PRODUCTS, href)
+    write_page(page,'Одна комната — разный характер','Посмотрите, как меняется интерьер с другим рисунком пола. Три комнаты, шесть декоров и детали, которые помогают выбрать свой.',body,'projects',hero_actions='<div class="ev-actions">'+link('Рассмотреть гостиную','#interior-tone',page,'ev-button')+link('Все декоры','catalog-ru/',page,'ev-button')+'</div>')
     page='privacy.html'
     body='<section class="ev-section"><div class="ev-wrap ev-prose"><section><h2>Избранное и сравнение</h2><p>Выбранные артикулы сохраняются локально в вашем браузере. Для этих функций не нужны имя, телефон или регистрация. Удалить выбор можно кнопками в каталоге и сравнении либо очисткой данных сайта в настройках браузера.</p></section><section><h2>Ссылки на подборки</h2><p>При использовании «Скопировать ссылку» артикулы включаются в адрес страницы. Для расчёта в ссылке также сохраняются площадь и запас. Подборка станет доступна тому, кому вы отправите эту ссылку.</p></section><section><h2>Внешние сервисы</h2><p>Сайт загружает цены из публичной таблицы Google, шрифты и материалы производителя. При открытии сторонних сервисов и документов действуют их собственные условия обработки данных.</p></section><section><h2>Контакт по вопросам сайта</h2><p>ООО «Флорсток», УНП 192608003. Телефон: <a href="tel:+375296713971">+375 29 671-39-71</a>.</p></section></div></section>'
     write_page(page,'Конфиденциальность','Как работают сохранение выбора и ссылки на подборки.',body,'privacy')
