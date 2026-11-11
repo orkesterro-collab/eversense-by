@@ -21,7 +21,7 @@ VERSION = '20261111explore'
 COLLECTIONS = [
     ('nature', 'Природная эстетика', 'Спокойные древесные оттенки и выразительные рисунки дуба.'),
     ('luxury', 'Тихая роскошь', 'Натуральные и глубокие тона для интерьера с характером.'),
-    ('minimal', 'Новый минимализм', 'Светлое дерево, однотонные поверхности и рисунок мрамора.'),
+    ('minimal', 'Новый минимализм', 'Светлое дерево, бежевые и серые тона, рисунок мрамора.'),
 ]
 COLLECTION_PATHS = {c: next(p['canonicalPath'].rsplit('/', 2)[0] + '/' for p in PRODUCTS if p['collectionID'] == c) for c, _, _ in COLLECTIONS}
 
@@ -93,7 +93,7 @@ def field(label, name, options, value=''):
     return '<div class="ev-field"><label for="ev-'+name+'">'+label+'</label><select id="ev-'+name+'" name="'+name+'">'+''.join('<option value="'+e(v)+'"'+(' selected' if v==value else '')+'>'+e(t)+'</option>' for v,t in options)+'</select></div>'
 
 TONE = [('', 'Все оттенки'), ('light', 'Светлые'), ('natural', 'Натуральные'), ('gray', 'Серые'), ('brown', 'Коричневые'), ('beige', 'Бежевые')]
-DESIGN = [('', 'Любой рисунок'), ('wood', 'Дерево'), ('stone', 'Мрамор'), ('plain', 'Однотонный')]
+DESIGN = [('', 'Все группы'), ('wood', 'Дубовые декоры'), ('stone', 'Мрамор'), ('plain', 'Песок и серый')]
 
 def catalogs():
     for collection, title, lead, page in [('', 'Каталог декоров', '30 декоров. Найдите свой оттенок, сравните варианты и рассчитайте покупку.', 'catalog-ru/index.html')] + [(c,t,d,COLLECTION_PATHS[c].lstrip('/')+'index.html') for c,t,d in COLLECTIONS]:
@@ -103,12 +103,12 @@ def catalogs():
         if not collection:
             filters += field('Коллекция','collection',[('','Все коллекции')]+[(c,t) for c,t,_ in COLLECTIONS])
         design_options = [(v,t) for v,t in DESIGN if not v or any(p['tags']['design']==v for p in items)]
-        filters += field('Оттенок','tone',TONE)+field('Рисунок','design',design_options)+field('Порядок','sort',[('','По коллекциям'),('name','По названию'),('price-up','Сначала дешевле'),('price-down','Сначала дороже')])+'</div></details><div class="ev-actions"><p id="ev-result-count" class="ev-count" role="status">Найдено декоров: '+str(len(items))+'</p><button type="button" class="ev-text-link" data-reset-filters>Сбросить фильтры</button></div></form>'
+        filters += field('Оттенок','tone',TONE)+field('Группа декоров','design',design_options)+field('Порядок','sort',[('','По коллекциям'),('name','По названию'),('price-up','Сначала дешевле'),('price-down','Сначала дороже')])+'</div></details><div class="ev-actions"><p id="ev-result-count" class="ev-count" role="status">Найдено декоров: '+str(len(items))+'</p><button type="button" class="ev-text-link" data-reset-filters>Сбросить фильтры</button></div></form>'
         body = '<section class="ev-section"><div class="ev-wrap">'+nav+filters+'<div class="ev-grid" id="ev-catalog-results">'+''.join(card(p,page) for p in items)+'</div></div></section><section class="ev-section"><div class="ev-wrap"><p class="ev-note">Оттенок на экране зависит от освещения и настроек устройства. Перед покупкой посмотрите реальный образец. Наличие нужного количества уточняйте у продавца.</p>'+link('Помочь с выбором', 'choose.html', page,'ev-button')+'</div></section>'
         write_page(page,title,lead,body,'catalog',collection,actions(page))
 
 def finder(page):
-    return '<section class="ev-section" id="finder"><div class="ev-wrap"><span class="ev-eyebrow">02 · От впечатления к вариантам</span><h2>Сузим круг выбора</h2><p class="ev-lead">Оттенок и рисунок определят подборку. Комната подскажет, на что обратить внимание в эксплуатации.</p><form id="ev-finder"><div class="ev-filter-row">'+field('Комната','room',[('living','Гостиная'),('bedroom','Спальня'),('kitchen','Кухня'),('hall','Прихожая')])+field('Оттенок','tone',TONE)+field('Рисунок','design',DESIGN)+'</div><button class="ev-button ev-button--primary" type="submit">Показать декоры</button></form><div id="ev-finder-results" class="ev-section" tabindex="-1" hidden></div></div></section>'
+    return '<section class="ev-section" id="finder"><div class="ev-wrap"><span class="ev-eyebrow">02 · От впечатления к вариантам</span><h2>Сузим круг выбора</h2><p class="ev-lead">Оттенок и рисунок определят подборку. Комната подскажет, на что обратить внимание в эксплуатации.</p><form id="ev-finder"><div class="ev-filter-row">'+field('Комната','room',[('living','Гостиная'),('bedroom','Спальня'),('kitchen','Кухня'),('hall','Прихожая')])+field('Оттенок','tone',TONE)+field('Группа декоров','design',DESIGN)+'</div><button class="ev-button ev-button--primary" type="submit">Показать декоры</button></form><div id="ev-finder-results" class="ev-section" tabindex="-1" hidden></div></div></section>'
 
 def guides():
     for key, page in [('product','about.html'),('choose','choose.html'),('faq','faq.html'),('installation','installation.html'),('care','care.html'),('warranty','warranty.html'),('downloads','downloads.html')]:
@@ -148,7 +148,7 @@ def guides():
         extra = render_designs(page, PRODUCTS, href) + finder(page) if key=='choose' else ''
         if key=='product':
             p = next(p for p in PRODUCTS if p['sku']=='EL2151')
-            extra = '<section class="ev-section"><div class="ev-wrap ev-article-visual"><img src="'+e(href(p['interiorImage'],page))+'" alt="'+e(p['name'])+' в интерьере" width="900" height="650"><div><span class="ev-eyebrow">Дерево · Мрамор · Однотонные декоры</span><h2>Три коллекции.<br>Ваш характер дома.</h2><p class="ev-lead">Выберите настроение, затем оцените материал вживую. Разница видна в рисунке, оттенке и формате.</p>'+link('Посмотреть все декоры','catalog-ru/',page,'ev-button')+'</div></div></section>'
+            extra = '<section class="ev-section"><div class="ev-wrap ev-article-visual"><img src="'+e(href(p['interiorImage'],page))+'" alt="'+e(p['name'])+' в интерьере" width="900" height="650"><div><span class="ev-eyebrow">Дуб · Мрамор · Бежевые и серые тона</span><h2>Три коллекции.<br>Ваш характер дома.</h2><p class="ev-lead">Выберите настроение, затем оцените материал вживую. Разница видна в рисунке, оттенке и формате.</p>'+link('Посмотреть все декоры','catalog-ru/',page,'ev-button')+'</div></div></section>'
         body = (extra if key=='choose' else render_situations(key,page,href))+'<section class="ev-section"><div class="ev-wrap ev-article-layout">'+toc+'<div class="ev-prose">'+prose+'</div></div></section>'+ (extra if key=='product' else '') + render_next(key,page,href)
         primary = {
             'product': ('Посмотреть конструкцию', '#layers'),
@@ -159,7 +159,7 @@ def guides():
             'downloads': ('Инструкция по укладке PDF', 'https://drive.google.com/file/d/1dImDaWKPtefl-TOjxHiSL3zauqBfHdJH/view'),
         }.get(key, ('Каталог декоров', 'catalog-ru/'))
         secondary = ('Каталог декоров', 'catalog-ru/') if key in ('installation','care','warranty','downloads') else ('Где посмотреть образец','where-to-buy.html')
-        write_page(page,g['title'],g['lead'],body,key,hero_actions='<div class="ev-actions">'+link(primary[0],primary[1],page,'ev-button ev-button--primary', 'target="_blank" rel="noopener noreferrer"' if primary[1].startswith('https://') else '')+link(secondary[0],secondary[1],page,'ev-button')+'</div>')
+        write_page(page,g['title'],g['lead'],body,key,hero_actions='' if key=='choose' else '<div class="ev-actions">'+link(primary[0],primary[1],page,'ev-button ev-button--primary', 'target="_blank" rel="noopener noreferrer"' if primary[1].startswith('https://') else '')+link(secondary[0],secondary[1],page,'ev-button')+'</div>')
 
 def tools_pages():
     page = 'calculator.html'
@@ -179,7 +179,7 @@ def other_pages():
     write_page(page,'Контакты в Беларуси','Проверить наличие, найти образец и получить ответы по выбранному покрытию.',body,'contacts')
     page='projects.html'
     body=render_interiors(page, PRODUCTS, href)
-    write_page(page,'Одна комната — разный характер','Посмотрите, как меняется интерьер с другим рисунком пола. Три комнаты, шесть декоров и детали, которые помогают выбрать свой.',body,'projects',hero_actions='<div class="ev-actions">'+link('Рассмотреть гостиную','#interior-tone',page,'ev-button')+link('Все декоры','catalog-ru/',page,'ev-button')+'</div>')
+    write_page(page,'Одна комната — разный характер','Три комнаты. Шесть декоров. Посмотрите, как пол меняет интерьер.',body,'projects')
     page='privacy.html'
     body='<section class="ev-section"><div class="ev-wrap ev-prose"><section><h2>Избранное и сравнение</h2><p>Выбранные артикулы сохраняются локально в вашем браузере. Для этих функций не нужны имя, телефон или регистрация. Удалить выбор можно кнопками в каталоге и сравнении либо очисткой данных сайта в настройках браузера.</p></section><section><h2>Ссылки на подборки</h2><p>При использовании «Скопировать ссылку» артикулы включаются в адрес страницы. Для расчёта в ссылке также сохраняются площадь и запас. Подборка станет доступна тому, кому вы отправите эту ссылку.</p></section><section><h2>Внешние сервисы</h2><p>Сайт загружает цены из публичной таблицы Google, шрифты и материалы производителя. При открытии сторонних сервисов и документов действуют их собственные условия обработки данных.</p></section><section><h2>Контакт по вопросам сайта</h2><p>ООО «Флорсток», УНП 192608003. Телефон: <a href="tel:+375296713971">+375 29 671-39-71</a>.</p></section></div></section>'
     write_page(page,'Конфиденциальность','Как работают сохранение выбора и ссылки на подборки.',body,'privacy')

@@ -7,7 +7,7 @@ def render_designs(page, products, href):
     designs = [
         ('wood', 'EL2151', 'Древесный рисунок', 'Рассмотрите волокна и переходы оттенков. Насколько заметным должен быть рисунок в вашей комнате?'),
         ('stone', 'EL1000', 'Рисунок мрамора', 'Посмотрите на прожилки и масштаб рисунка. У этих декоров более широкая панель.'),
-        ('plain', 'EL153', 'Однотонная поверхность', 'Начните с цвета: приложите образец к стене, двери и фасаду мебели.'),
+        ('plain', 'EL153', 'Сдержанная палитра', 'Бежевый песок и Ярко-серый. Рассмотрите оттенок и древесный рисунок рядом с отделкой.'),
     ]
     cards = ''
     for design, sku, title, text in designs:
@@ -15,7 +15,7 @@ def render_designs(page, products, href):
         cards += f'''<a class="ev-design-card" data-design-route="{design}" href="{escape(href('catalog-ru/',page))}?design={design}">
           <img src="{escape(href(p['productImage'],page))}" alt="{escape(p['name'])} — {sku}" width="640" height="480" loading="lazy">
           <span class="ev-sku">{sku} · {escape(p['name'])}</span><h3>{title}</h3><p>{text}</p><span class="ev-text-link">Смотреть декоры <span aria-hidden="true">↗</span></span></a>'''
-    return f'''<section class="ev-section ev-design-entry" id="designs"><div class="ev-wrap"><span class="ev-eyebrow">01 · Какой рисунок вам ближе?</span><h2>Сначала — впечатление</h2><p class="ev-lead">Выберите направление. Дальше сравним оттенки, посмотрим на пол в комнате и проверим выбор на образце.</p><div class="ev-design-grid">{cards}</div><a class="ev-text-link" href="{escape(href('projects.html',page))}">Посмотреть, как разные декоры меняют один интерьер <span aria-hidden="true">↗</span></a></div></section>'''
+    return f'''<section class="ev-section ev-design-entry" id="designs"><div class="ev-wrap"><span class="ev-eyebrow">01 · Какой рисунок вам ближе?</span><h2>Сначала — впечатление</h2><div class="ev-design-grid">{cards}</div><a class="ev-text-link" href="{escape(href('projects.html',page))}">Посмотреть, как разные декоры меняют один интерьер <span aria-hidden="true">↗</span></a></div></section>'''
 
 
 def render_sample():

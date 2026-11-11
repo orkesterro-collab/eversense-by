@@ -212,9 +212,14 @@ def main():
                     title:document.title,h1:heading?.innerText||'',visibleH1Count:headings.length,
                     font:getComputedStyle(document.body).fontFamily,headingFont:heading?getComputedStyle(heading).fontFamily:null,fontStatus:document.fonts.status,
                     loadedFonts:[...document.fonts].filter(f=>f.status==='loaded').map(f=>f.family),
-                    controls:controls.map(e=>({tag:e.tagName,text:e.getAttribute('aria-label')||e.innerText||e.name||'',
-                      height:e.getBoundingClientRect().height,width:e.getBoundingClientRect().width,font:getComputedStyle(e).fontFamily,
-                      fontSize:parseFloat(getComputedStyle(e).fontSize),disabled:e.disabled||false})),
+                    controls:controls.map(e=>{
+                      // A native checkbox's associated wrapping label is its real touch target.
+                      const label=e.matches('input[type="checkbox"],input[type="radio"]')?e.closest('label'):null;
+                      const rect=(label||e).getBoundingClientRect();
+                      return {tag:e.tagName,text:e.getAttribute('aria-label')||e.innerText||e.name||'',
+                        height:rect.height,width:rect.width,font:getComputedStyle(e).fontFamily,
+                        fontSize:parseFloat(getComputedStyle(e).fontSize),disabled:e.disabled||false};
+                    }),
                     h1Width:heading?.getBoundingClientRect().width||0,
                     headerCount:document.querySelectorAll('#ev-global-header').length
                   };

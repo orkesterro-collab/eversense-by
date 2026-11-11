@@ -303,6 +303,8 @@ def main():
                     check.focus()
                     page.keyboard.press("Space")
                     require(check.is_checked(), "Sample observation cannot be checked with keyboard")
+                page.locator('#sample .ev-sample-step').first.locator('strong').click()
+                require(not checks.first.is_checked(), "Full sample label does not toggle its native checkbox")
                 screenshot(page, name + "-sample", "#sample")
                 metrics = layout(page)
                 loaded = images(page)
