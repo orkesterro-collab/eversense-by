@@ -110,7 +110,17 @@ def main():
                       writeText: async text => { window.__qaCopied = text; }
                     }});
                 """)
-                if storage_blocked == "quota":
+                if storage_blocked == "mixed-quota":
+                    context.add_init_script("""
+                        const originalSetItem = Storage.prototype.setItem;
+                        Storage.prototype.setItem = function(key, value) {
+                          const previous = this.getItem(key) || '';
+                          if (key === 'eversense.favorites.v1' && value.length > 10 && value.length > previous.length)
+                            throw new DOMException('Growing favorites exceed QA quota', 'QuotaExceededError');
+                          return originalSetItem.call(this, key, value);
+                        };
+                    """)
+                elif storage_blocked == "quota":
                     context.add_init_script("""
                         window.__qaStorageSetItem = Storage.prototype.setItem;
                         Storage.prototype.setItem = function() {
@@ -368,6 +378,51 @@ def main():
             case("storage-blocked-url-navigation", blocked_storage_test, storage_blocked=True)
             case("storage-quota-url-navigation", lambda p,c: blocked_storage_test(p,c,quota=True), storage_blocked="quota")
 
+            def mixed_quota_test(page, context):
+                goto(page, "catalog-ru/")
+                page.locator('[data-ev-favorite="EL1052"]').click()
+                for sku in ["EL1000", "EL153"]:
+                    page.locator(f'[data-ev-compare="{sku}"]').click()
+                # Growing favorites fails, then shrinking comparison succeeds.
+                page.locator('[data-ev-favorite="EL1000"]').click()
+                page.locator('[data-ev-compare="EL153"]').click()
+                require(json.loads(page.evaluate("key=>localStorage.getItem(key)", FAVORITES)) == ["EL1052"],
+                        "Mixed quota did not reject only the growing favorites write")
+                require(json.loads(page.evaluate("key=>localStorage.getItem(key)", COMPARE)) == ["EL1000"],
+                        "Mixed quota did not allow the shrinking comparison write")
+                carried = parse_qs(urlparse(page.url).query)
+                require(carried.get("ev-favorites") == ["EL1052,EL1000"],
+                        "Successful write to comparison discarded unsaved favorites fallback")
+                page.locator('main a[href*="favorites.html"]').first.click()
+                page.wait_for_selector("#ev-favorites .ev-card")
+                require(page.locator("#ev-favorites .ev-card").count() == 2,
+                        "Successful small probe on next page discarded fallback favorites")
+                page.reload(wait_until="domcontentloaded")
+                page.wait_for_selector("#ev-favorites .ev-card")
+                require(page.locator("#ev-favorites .ev-card").count() == 2,
+                        "Mixed quota favorites lost after reload")
+                page.evaluate("window.addEventListener('storage',e=>{if(e.key==='eversense.favorites.v1')window.__qaStorageEventSeen=true;})")
+                other = context.new_page()
+                try:
+                    goto(other, "catalog-ru/")
+                    other.evaluate("key=>localStorage.removeItem(key)", FAVORITES)
+                    page.wait_for_function("window.__qaStorageEventSeen")
+                    require(page.locator("#ev-favorites .ev-card").count() == 2,
+                            "Cross-tab storage update erased unsaved fallback favorites")
+                finally:
+                    other.close()
+                page.locator('main [data-compare-link]').first.click()
+                page.wait_for_selector("#ev-compare table")
+                require(page.locator('#ev-compare [data-ev-compare]').evaluate_all("els=>els.map(el=>el.dataset.evCompare)") == ["EL1000"],
+                        "Mixed quota navigation lost the surviving comparison")
+                page.locator('main a[href*="favorites.html"]').first.click()
+                page.wait_for_selector("#ev-favorites .ev-card")
+                require(page.locator("#ev-favorites .ev-card").count() == 2,
+                        "Round-trip navigation lost fallback favorites after cross-tab change")
+                return {"growth_rejected": True, "shrink_accepted": True, "probe_recovers": True,
+                        "navigation_reload_and_cross_tab_preserved": True}
+            case("storage-mixed-quota-keeps-unsaved-selection", mixed_quota_test, storage_blocked="mixed-quota")
+
             def compare_test(page, context, device):
                 goto(page, "catalog-ru/")
                 for sku in ["EL1000", "EL1052", "EL153", "EL750"]:
@@ -407,6 +462,8 @@ def main():
                 require(page.locator("#ev-compare thead th").count() == 4, "Shared comparison did not clamp to three")
                 require(json.loads(page.evaluate("key=>localStorage.getItem(key)", COMPARE)) == personal,
                         "Opening shared comparison overwrote personal selection")
+                if page.viewport_size["width"] in (360, 390):
+                    shot(page, "shared-compare-mobile" + str(page.viewport_size["width"]))
                 remove = page.locator('#ev-compare [data-ev-compare="EL750"]')
                 remove.focus()
                 page.keyboard.press("Enter")

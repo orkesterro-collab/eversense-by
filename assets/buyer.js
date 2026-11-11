@@ -15,7 +15,9 @@
   var money=function(n){return n.toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2});};
   var fullName=function(p){return p.name||[p.family,p.shade].filter(Boolean).join(' ');};
   var params=new URLSearchParams(location.search);
-  var storageAvailable=true;
+  // Explicit fallback state stays authoritative even if a tiny probe or a
+  // later single-key write succeeds: another selection may still be unsaved.
+  var storageAvailable=!params.has('ev-favorites')&&!params.has('ev-compare');
   // Readable storage may still reject writes (quota/private mode). Detect that
   // before restoring URL fallback state on the next page.
   try{var probe='eversense.storage-probe.v1',prior=localStorage.getItem(probe);localStorage.setItem(probe,'1');if(prior===null)localStorage.removeItem(probe);else localStorage.setItem(probe,prior);}catch(e){storageAvailable=false;}
@@ -27,7 +29,7 @@
   var pageName=document.body.dataset.buyerPage||'';
   var sharedCompare=pageName==='compare'&&imported!==null?imported.slice(0,3):null;
   function currentCompare(){return sharedCompare!==null?sharedCompare:compare;}
-  function persist(key,value){try{localStorage.setItem(key,JSON.stringify(value));storageAvailable=true;}catch(e){storageAvailable=false;}}
+  function persist(key,value){try{localStorage.setItem(key,JSON.stringify(value));}catch(e){storageAvailable=false;}}
   function announce(text){
     var box=document.getElementById('ev-buyer-status');
     if(!box){box=document.createElement('div');box.id='ev-buyer-status';box.className='ev-live-status';box.setAttribute('role','status');box.setAttribute('aria-live','polite');document.body.appendChild(box);}
@@ -199,7 +201,7 @@
   });
   document.addEventListener('eversense:prices',updatePrices);
   document.addEventListener('eversense:header-ready',syncButtons);
-  window.addEventListener('storage',function(e){if(e.key===null||e.key==='eversense.favorites.v1'){favorites=read('eversense.favorites.v1',30);if(pageName==='favorites'&&imported===null)renderFavorites();}if(e.key===null||e.key==='eversense.compare.v1'){compare=read('eversense.compare.v1',3);if(pageName==='compare')renderCompare();}syncButtons();});
+  window.addEventListener('storage',function(e){if(!storageAvailable)return;if(e.key===null||e.key==='eversense.favorites.v1'){favorites=read('eversense.favorites.v1',30);if(pageName==='favorites'&&imported===null)renderFavorites();}if(e.key===null||e.key==='eversense.compare.v1'){compare=read('eversense.compare.v1',3);if(pageName==='compare')renderCompare();}syncButtons();});
   function boot(){mountCatalog();mountCalculator();mountFinder();mountProduct();mountContact();renderFavorites();if(pageName==='compare')renderCompare();syncButtons();updatePrices();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
