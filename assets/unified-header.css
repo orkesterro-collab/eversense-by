@@ -3,6 +3,11 @@ body.ev-has-global-header #t-header,
 body.ev-has-global-header .site-top,
 body.ev-has-global-header .bf-header,
 body.ev-has-global-header .site-header {display:none!important}
+/* Home slides retain their headings, with navigation only in the shared header. */
+body.ev-has-global-header #rec1068496151,
+body.ev-has-global-header #rec1040271616,
+body.ev-has-global-header #rec1131720891 .tn-elem:not([data-elem-type="text"]),
+body.ev-has-global-header #rec1143456296 .tn-elem:not([data-elem-type="text"]) {display:none!important}
 body.ev-has-global-header .site-top + main {padding-top:var(--ev-header-height)}
 body.ev-has-global-header {--ev-header-height:68px}
 #ev-global-header,#ev-global-header *{box-sizing:border-box}

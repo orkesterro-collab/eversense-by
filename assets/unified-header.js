@@ -7,7 +7,7 @@
   var site = new URL("../", assets);
   var asset = function (path) { return new URL(path, assets).href; };
   var route = function (path) { return new URL(path, site).href; };
-  var version = "20261110b";
+  var version = "20261111header";
 
   function ensureStyle(filename, marker) {
     var url = asset(filename + "?v=" + version);
