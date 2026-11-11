@@ -67,6 +67,10 @@ def main():
             passed_cases = {row["name"] for row in summary["checks"] if row["status"] == "passed"}
             summary["canonical_product_mobile_passed"] = sum(
                 name in passed_cases for name in summary["canonical_product_mobile_cases"].values())
+        if "canonical_product_mobile360_cases" in summary:
+            passed_cases = {row["name"] for row in summary["checks"] if row["status"] == "passed"}
+            summary["canonical_product_mobile360_passed"] = sum(
+                name in passed_cases for name in summary["canonical_product_mobile360_cases"].values())
         summary["duration_seconds"] = round(time.monotonic() - started, 2)
         summary["ok"] = not summary["fatal_error"] and not summary["failed"]
         (output / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -106,7 +110,14 @@ def main():
                       writeText: async text => { window.__qaCopied = text; }
                     }});
                 """)
-                if storage_blocked:
+                if storage_blocked == "quota":
+                    context.add_init_script("""
+                        window.__qaStorageSetItem = Storage.prototype.setItem;
+                        Storage.prototype.setItem = function() {
+                          throw new DOMException('Storage write blocked by QA fixture', 'QuotaExceededError');
+                        };
+                    """)
+                elif storage_blocked:
                     context.add_init_script("""
                         Object.defineProperty(window, 'localStorage', {configurable:true, get() {
                           throw new DOMException('Storage blocked by QA fixture', 'SecurityError');
@@ -189,7 +200,7 @@ def main():
                   return {
                     viewport:innerWidth, documentWidth:document.documentElement.scrollWidth,bodyWidth:document.body.scrollWidth,
                     title:document.title,h1:heading?.innerText||'',visibleH1Count:headings.length,
-                    font:getComputedStyle(document.body).fontFamily,fontStatus:document.fonts.status,
+                    font:getComputedStyle(document.body).fontFamily,headingFont:heading?getComputedStyle(heading).fontFamily:null,fontStatus:document.fonts.status,
                     loadedFonts:[...document.fonts].filter(f=>f.status==='loaded').map(f=>f.family),
                     controls:controls.map(e=>({tag:e.tagName,text:e.getAttribute('aria-label')||e.innerText||e.name||'',
                       height:e.getBoundingClientRect().height,width:e.getBoundingClientRect().width,font:getComputedStyle(e).fontFamily,
@@ -292,10 +303,26 @@ def main():
                 return {"corrupt_json_recovered": True}
             case("storage-corruption", bad_storage_test)
 
-            def blocked_storage_test(page, context):
+            def blocked_storage_test(page, context, quota=False):
                 goto(page, "catalog-ru/")
-                require(page.evaluate("()=>{try{void localStorage;return false;}catch(e){return e.name==='SecurityError';}}"),
-                        "Blocked-storage fixture did not take effect")
+                if quota:
+                    require(page.evaluate("()=>{try{localStorage.getItem('probe');}catch(e){return false;}try{localStorage.setItem('probe','1');return false;}catch(e){return e.name==='QuotaExceededError';}}"),
+                            "Readable-but-unwritable storage fixture did not take effect")
+                else:
+                    require(page.evaluate("()=>{try{void localStorage;return false;}catch(e){return e.name==='SecurityError';}}"),
+                            "Blocked-storage fixture did not take effect")
+                if quota:
+                    page.evaluate("([a,b])=>{window.__qaStorageSetItem.call(localStorage,a,JSON.stringify(['EL750']));window.__qaStorageSetItem.call(localStorage,b,JSON.stringify(['EL750']));const u=new URL(location.href);u.searchParams.delete('ev-favorites');u.searchParams.delete('ev-compare');history.replaceState(null,'',u);}", [FAVORITES, COMPARE])
+                    page.reload(wait_until="domcontentloaded")
+                    page.wait_for_selector('[data-ev-favorite="EL750"]')
+                    page.locator('[data-ev-favorite="EL750"]').click()
+                    page.locator('[data-ev-compare="EL750"]').click()
+                    page.reload(wait_until="domcontentloaded")
+                    page.wait_for_selector('[data-ev-favorite="EL750"]')
+                    require(page.locator('[data-ev-favorite="EL750"]').get_attribute('aria-pressed') == 'false',
+                            'Empty favorites fallback resurrected stale readable storage')
+                    require(page.locator('[data-ev-compare="EL750"]').get_attribute('aria-pressed') == 'false',
+                            'Empty comparison fallback resurrected stale readable storage')
                 selected = ["EL1052", "EL1000"]
                 for sku in selected:
                     page.locator(f'[data-ev-favorite="{sku}"]').click()
@@ -314,8 +341,9 @@ def main():
                 compare_link = page.locator('main [data-compare-link]').first
                 compare_url = compare_link.get_attribute("href")
                 compare_query = parse_qs(urlparse(compare_url).query)
-                require(compare_query.get("items", [""])[0].split(",") == selected,
-                        "Comparison link lost items after fallback link synchronization")
+                require(compare_query.get("ev-compare", [""])[0].split(",") == selected,
+                        "Comparison link lost personal fallback state")
+                require("items" not in compare_query, "Personal navigation incorrectly opens a shared comparison")
                 require(compare_query.get("ev-favorites", [""])[0].split(",") == selected,
                         "Comparison navigation lost favorites fallback state")
                 compare_link.click()
@@ -326,6 +354,11 @@ def main():
                 page.wait_for_selector("#ev-compare table")
                 require(page.locator("#ev-compare thead th").count() == 3,
                         "URL fallback did not survive reload")
+                page.locator('#ev-compare [data-ev-compare="EL1000"]').click()
+                page.reload(wait_until="domcontentloaded")
+                page.wait_for_selector("#ev-compare table")
+                require(page.locator("#ev-compare thead th").count() == 2,
+                        "Reload resurrected a comparison removed with blocked storage")
                 page.locator('main a[href*="favorites.html"]').first.click()
                 page.wait_for_selector("#ev-favorites .ev-card")
                 restored = page.locator("#ev-favorites .ev-card").evaluate_all("els=>els.map(el=>el.dataset.product)")
@@ -333,6 +366,7 @@ def main():
                 return {"storage_getter_throws": True, "selected": selected,
                         "favorites_url": favorite_url, "comparison_url": compare_url, "reload_preserved": True}
             case("storage-blocked-url-navigation", blocked_storage_test, storage_blocked=True)
+            case("storage-quota-url-navigation", lambda p,c: blocked_storage_test(p,c,quota=True), storage_blocked="quota")
 
             def compare_test(page, context, device):
                 goto(page, "catalog-ru/")
@@ -362,6 +396,57 @@ def main():
                 return {"limit": 3, "pack_areas": [str(a) for a in areas], "empty_reload": True}
             for device, width, height in DEVICES[:2]:
                 case("comparison-" + device, lambda p, c, d=device: compare_test(p, c, d), width, height)
+
+            def shared_compare_test(page, context):
+                goto(page, "catalog-ru/")
+                personal = ["EL1000", "EL1052"]
+                for sku in personal:
+                    page.locator(f'[data-ev-compare="{sku}"]').click()
+                page.locator('[data-ev-favorite="EL153"]').click()
+                goto(page, "compare.html?items=EL153,EL750,EL1036,EL1002,UNKNOWN")
+                require(page.locator("#ev-compare thead th").count() == 4, "Shared comparison did not clamp to three")
+                require(json.loads(page.evaluate("key=>localStorage.getItem(key)", COMPARE)) == personal,
+                        "Opening shared comparison overwrote personal selection")
+                remove = page.locator('#ev-compare [data-ev-compare="EL750"]')
+                remove.focus()
+                page.keyboard.press("Enter")
+                require(page.locator('#ev-compare [data-ev-compare="EL1036"]').evaluate("el=>el===document.activeElement"),
+                        "Keyboard focus was lost after removing a comparison")
+                page.reload(wait_until="domcontentloaded")
+                page.wait_for_selector("#ev-compare table")
+                require(page.locator("#ev-compare thead th").count() == 3, "Shared edit did not survive URL reload")
+                require(json.loads(page.evaluate("key=>localStorage.getItem(key)", COMPARE)) == personal,
+                        "Editing or reloading shared comparison overwrote personal selection")
+                page.locator('main [data-compare-link]').first.click()
+                page.wait_for_selector("#ev-compare table")
+                require(page.locator('#ev-compare [data-ev-compare]').evaluate_all("els=>els.map(el=>el.dataset.evCompare)") == personal,
+                        "Personal comparison link did not restore personal selection")
+                goto(page, "compare.html?items=EL153,EL1036")
+                page.locator('[data-save-shared-compare]').click()
+                require(json.loads(page.evaluate("key=>localStorage.getItem(key)", COMPARE)) == ["EL153", "EL1036"],
+                        "Explicitly saving shared comparison did not update personal selection")
+                require("items" not in parse_qs(urlparse(page.url).query), "Adopted comparison remains in shared mode")
+                require(json.loads(page.evaluate("key=>localStorage.getItem(key)", FAVORITES)) == ["EL153"],
+                        "Comparison actions altered independent favorites")
+                return {"personal_preserved_on_open_and_edit": True, "explicit_adoption": True, "keyboard_remove_focus": True}
+            for device, width, height in DEVICES:
+                case("shared-comparison-preserves-personal-" + device, shared_compare_test, width, height)
+
+            def favorites_keyboard_test(page, context):
+                goto(page, "catalog-ru/")
+                for sku in ["EL1000", "EL1052"]:
+                    page.locator(f'[data-ev-favorite="{sku}"]').click()
+                goto(page, "favorites.html")
+                page.locator('#ev-favorites [data-ev-favorite="EL1000"]').focus()
+                page.keyboard.press("Enter")
+                require(page.locator('#ev-favorites [data-ev-favorite="EL1052"]').evaluate("el=>el===document.activeElement"),
+                        "Removing favorite lost keyboard focus")
+                page.keyboard.press("Enter")
+                require(page.locator('#ev-favorites a').evaluate("el=>el===document.activeElement"),
+                        "Removing last favorite did not focus catalog link")
+                return {"next_card_focus": True, "empty_catalog_link_focus": True}
+            for device, width, height in DEVICES:
+                case("favorites-keyboard-removal-" + device, favorites_keyboard_test, width, height)
 
             def calc_values(page):
                 return page.locator("#ev-calc-result").evaluate("el=>({packs:parseInt(el.querySelector('h2').innerText,10),values:Object.fromEntries([...el.querySelectorAll('dl > div')].map(d=>[d.querySelector('dt').innerText,d.querySelector('dd').innerText]))})")
@@ -603,6 +688,15 @@ def main():
                     }""")
                     raise AssertionError(f"{sku}: gallery never reached stable full visible width >= {minimum_visible:.1f}px within 5s; "
                                          + json.dumps(diagnostics, ensure_ascii=False)) from error
+                # Original Tilda body can legitimately retain its browser default.
+                # Verify the visible product heading rather than inferring its font from body.
+                heading_handle = page.wait_for_function("""()=>{
+                  const h=[...document.querySelectorAll('h1')].find(e=>e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden'&&(e.innerText||'').trim());
+                  const font=h?getComputedStyle(h).fontFamily:'';
+                  return font.includes('Manrope')?font:false;
+                }""", timeout=10000)
+                heading_font = heading_handle.json_value()
+                heading_handle.dispose()
                 favorite = page.locator("#ev-product-tools [data-ev-favorite]")
                 comparison = page.locator("#ev-product-tools [data-ev-compare]")
                 require(favorite.count() == 1 and favorite.get_attribute("data-ev-favorite") == sku,
@@ -642,7 +736,7 @@ def main():
                         finally:
                             page.mouse.move(0, 0)
                 return {"sku": sku, "tools_count": 1, "price": price, "calculator_link_has_sku": True,
-                        "placement": placement, "gallery_geometry": gallery_geometry, "styles": styles}
+                        "placement": placement, "gallery_geometry": gallery_geometry, "headingFont": heading_font, "styles": styles}
 
             def mirrored_test(page, context, path, device, product=False):
                 goto(page, path)
@@ -692,6 +786,11 @@ def main():
                     continue
                 case(summary["canonical_product_mobile_cases"][product["sku"]],
                      lambda p, c, product=product: canonical_mobile_test(p, c, product), 390, 844)
+            summary["canonical_product_mobile360_cases"] = {
+                product["sku"]: "canonical-product-mobile360-" + product["sku"] for product in products}
+            for product in products:
+                case(summary["canonical_product_mobile360_cases"][product["sku"]],
+                     lambda p, c, product=product: canonical_mobile_test(p, c, product), 360, 800)
             browser.close()
     except Exception as error:
         summary["fatal_error"] = {"message": str(error), "traceback": traceback.format_exc(limit=8)}
