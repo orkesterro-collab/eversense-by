@@ -65,7 +65,7 @@ def main():
         server = ThreadingHTTPServer(("127.0.0.1", args.port),
                                      functools.partial(QuietHandler, directory=str(site_dir)))
         threading.Thread(target=server.serve_forever, daemon=True).start()
-        from playwright.sync_api import sync_playwright
+        from playwright.sync_api import sync_playwright, expect
 
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch(headless=True, args=["--no-sandbox", "--disable-dev-shm-usage"])
@@ -291,8 +291,9 @@ def main():
                             "Design entrance needs its visible catalog image")
                     tile.click()
                     page.wait_for_selector("#ev-catalog-results .ev-card")
-                    require(page.locator('#ev-catalog-filters [name="design"]').input_value() == design,
-                            "Visual design link did not activate its catalog filter")
+                    # Static fallback cards are visible before deferred catalog initialization.
+                    expect(page.locator('#ev-catalog-filters [name="design"]')).to_have_value(
+                        design, timeout=10000)
                     shown = page.locator("#ev-catalog-results .ev-card").count()
                     require(shown == count, f"Expected {count} {design} decors, found {shown}")
                     goto(page, "choose.html")
