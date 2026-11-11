@@ -59,6 +59,17 @@ with sync_playwright() as playwright:
             assert not page.locator(".partner-card__sub:visible").count(), "Duplicate district caption must be removed"
             assert page.locator('a[href="https://example.com"]').count() == 0, "Demo websites must not be promoted as real links"
 
+            # Map is the default view; the directory remains available on demand.
+            assert page.locator("#partners-map-panel").is_visible(), "Map must be the default view"
+            assert not page.locator("#partners-list").is_visible(), "List must have its own view"
+            assert page.locator("#partners-view-map").get_attribute("aria-pressed") == "true"
+            assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "Horizontal overflow"
+            page.screenshot(path=str(OUT / (label + "-map.png")), full_page=True, animations="disabled")
+            page.click("#partners-view-list")
+            assert page.locator("#partners-list").is_visible(), "List switch did not reveal the directory"
+            assert not page.locator("#partners-map-panel").is_visible()
+            assert page.locator("#partners-view-list").get_attribute("aria-pressed") == "true"
+
             # Expanding partner shows all requested contact fields.
             minsk = page.locator('.city-group[data-city="Минск"]')
             row["minsk_static_section"] = minsk.evaluate("el => el.tagName === 'SECTION'")
@@ -84,8 +95,22 @@ with sync_playwright() as playwright:
             page.wait_for_timeout(300)
             assert page.locator("#partners-reset").is_visible(), "Clear filter must appear when city is selected"
             row["brest_visible"] = page.locator(".partner-card").count()
+            page.click("#partners-view-map")
+            assert page.locator("#partners-city").input_value() == "Брест", "Switching views lost the city filter"
             row["brest_pins"] = page.locator(".leaflet-marker-icon").count()
             assert row["brest_visible"] == 2 and row["brest_pins"] == 2, row
+
+            # A marker opens contacts in place; the explicit link opens the matching list card.
+            page.locator(".leaflet-marker-icon").first.click()
+            page.locator(".ev-popup__details").wait_for(state="visible")
+            assert page.locator("#partners-map-panel").is_visible(), "Marker unexpectedly left the map"
+            page.locator(".ev-popup__details").click()
+            assert page.locator("#partners-list").is_visible()
+            active = page.locator(".partner-card[open]").first
+            assert active.locator(".partner-card__row").count() == 4
+            active.locator("button[data-map-id]").click()
+            assert page.locator("#partners-map-panel").is_visible(), "Show on map did not switch back"
+            page.locator(".ev-popup__details").wait_for(state="visible")
 
             # Rank changes are driven by sort_order, not the Sheet row's physical position.
             # Inject a temporary, in-browser-only response: no Google Sheet writes.
@@ -109,8 +134,15 @@ with sync_playwright() as playwright:
             row["district_search_count"] = page.locator(".partner-card").count()
             assert row["district_search_count"] == 2, row
 
-            page.fill("#partners-search", "")
+            page.fill("#partners-search", "no-such-store-987654")
+            assert page.locator("#partners-empty").is_visible(), "Empty search needs a visible message"
+            assert page.locator(".leaflet-marker-icon").count() == 0
+            assert page.locator(".leaflet-popup").count() == 0, "Empty search retained an old popup"
+            page.click("#partners-map-reset")
+            assert page.locator("#partners-search").input_value() == ""
+            assert page.locator(".leaflet-marker-icon").count() == 40
             assert not page.locator("#partners-reset").is_visible(), "Clear filter must disappear when filters are empty"
+            page.click("#partners-view-list")
             page.screenshot(path=str(OUT / (label + "-directory.png")),
                             full_page=True, animations="disabled", timeout=40000)
             row["js_errors"] = js_errors
@@ -145,5 +177,5 @@ for err in errors:
     print("PARTNER_BROWSER_QA FAIL:", err, flush=True)
 if errors:
     raise SystemExit("Partner browser QA failed")
-print("PASS: 40 partners, always-visible Minsk districts, city filter, marker sync, demo notice,",
-      "contact accordion and numerical ranking in desktop/mobile browser.", flush=True)
+print("PASS: 40 partners, map/list switching, Minsk districts, city filter, popup/list navigation,",
+      "empty search, reset, demo labels, contacts and ranking on desktop/mobile.", flush=True)
