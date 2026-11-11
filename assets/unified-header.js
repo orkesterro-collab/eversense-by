@@ -7,7 +7,7 @@
   var site = new URL("../", assets);
   var asset = function (path) { return new URL(path, assets).href; };
   var route = function (path) { return new URL(path, site).href; };
-  var version = "20261111header";
+  var version = "20261111brandicons";
 
   function ensureStyle(filename, marker) {
     var url = asset(filename + "?v=" + version);
@@ -176,6 +176,22 @@
     }, { passive: true });
   }
   function initialize() {
+    // Brandbook p. 32: use the original 72h, class 34 and 30-year vector marks.
+    // Only the homepage forest benefits block uses this white-on-photo treatment.
+    [
+      ["1744014501662", "water-72h.svg"],
+      ["1744014502871", "class-34.svg"],
+      ["1744014475697", "warranty-30.svg"]
+    ].forEach(function (item) {
+      document.querySelectorAll('#rec1003959231 [data-elem-id="' + item[0] + '"], #rec1040271661 [data-elem-id="' + item[0] + '"]').forEach(function (element) {
+        var image = element.querySelector("img");
+        if (!image) return;
+        var url = asset("brand-icons/" + item[1]);
+        image.setAttribute("src", url);
+        image.setAttribute("data-original", url);
+        element.classList.add("ev-brand-feature-icon");
+      });
+    });
     // The mirrored Russian footer used the manufacturer's /ru/#contacts.
     // Keep that existing label useful for the Belarus site on every page.
     document.querySelectorAll('a[href]').forEach(function (link) {

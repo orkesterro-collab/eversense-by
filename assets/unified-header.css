@@ -9,6 +9,11 @@ body.ev-has-global-header #rec1040271616,
 body.ev-has-global-header #rec1131720891 .tn-elem:not([data-elem-type="text"]),
 body.ev-has-global-header #rec1143456296 .tn-elem:not([data-elem-type="text"]) {display:none!important}
 body.ev-has-global-header .site-top + main {padding-top:var(--ev-header-height)}
+/* Keep the icons' bottom edge clear of the existing feature captions. */
+#rec1003959231 .ev-brand-feature-icon,
+#rec1040271661 .ev-brand-feature-icon {width:40px!important;transform:translateY(-15px)!important}
+#rec1003959231 .ev-brand-feature-icon .tn-atom,
+#rec1040271661 .ev-brand-feature-icon .tn-atom {opacity:1!important}
 body.ev-has-global-header {--ev-header-height:68px}
 #ev-global-header,#ev-global-header *{box-sizing:border-box}
 #ev-global-header{position:fixed;inset:0 0 auto;z-index:2147483000;height:var(--ev-header-height);background:#292828;color:#fff;font-family:Manrope,Arial,sans-serif;box-shadow:0 1px 0 rgba(255,255,255,.08);transform:translate3d(0,0,0);transition:transform .24s ease;will-change:transform}
