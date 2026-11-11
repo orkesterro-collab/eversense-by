@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#203732">
+  <meta name="theme-color" content="#292828">
   <meta name="robots" content="noindex,nofollow">
   <meta name="description" content="Карта и список точек продаж EVERSENSE по городам Беларуси. Контакты, адреса и часы работы партнёров.">
   <title>Где купить EVERSENSE в Беларуси | Карта и партнёры</title>
@@ -11,10 +11,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
-  <link rel="stylesheet" href="/assets/partners.css?v=20261104b">
+  <link rel="stylesheet" href="/assets/partners.css?v=20261111-map">
   <link rel="stylesheet" href="assets/unified-header.css?v=20261104a">
   <script defer src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
-  <script defer src="/assets/partners.js?v=20261104b"></script>
+  <script defer src="/assets/partners.js?v=20261111-map"></script>
   <script defer src="assets/unified-header.js?v=20261104a"></script>
 </head>
 <body>
@@ -34,19 +34,21 @@
     </div>
   </header>
   <main>
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      <div class="page-width"><a href="/">Главная</a><span aria-hidden="true">/</span><span aria-current="page">Где купить</span></div>
+    </nav>
     <section class="intro">
-      <div class="intro__inner">
-        <div>
-          <div class="eyebrow"><span class="eyebrow__dot"></span> EVERSENSE · БЕЛАРУСЬ</div>
-          <h1>Где купить <em>EVERSENSE</em></h1>
-          <p class="intro__lead">Выберите город или найдите салон на карте. Контакты открываются по нажатию.</p>
+      <div class="intro__inner page-width">
+        <h1>Сеть магазинов по продаже продукции Eversense</h1>
+        <div class="view-switch" role="group" aria-label="Вид магазинов">
+          <button type="button" id="partners-view-map" aria-pressed="true" aria-controls="partners-map-panel">Карта</button>
+          <button type="button" id="partners-view-list" aria-pressed="false" aria-controls="partners-list">Список</button>
         </div>
-
       </div>
     </section>
 
     <section class="partners-area" aria-label="Карта и поиск партнёров">
-      <div class="controls" role="search" aria-label="Поиск салона EVERSENSE">
+      <div class="controls page-width" role="search" aria-label="Поиск салона EVERSENSE">
         <label class="search-field" for="partners-search">
           <span class="search-field__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.7"></circle><path d="m16 16 5 5"></path></svg></span>
           <input id="partners-search" type="search" aria-label="Найти салон, город или район" placeholder="Найти салон или город" autocomplete="off">
@@ -57,27 +59,27 @@
         </label>
         <button class="clear-button" id="partners-reset" type="button" hidden>Очистить</button>
       </div>
-      <div class="map-frame">
+      <div id="partners-status" role="status" aria-live="polite" class="status page-width">Загружаем магазины…</div>
+      <div id="partners-empty" class="no-results page-width" role="status" hidden>Ничего не найдено. Измените город или сбросьте поиск.</div>
+      <div class="map-frame" id="partners-map-panel">
         <div id="partners-map" role="region" aria-label="Интерактивная карта расположения партнёров в Беларуси">
           <div class="map-skeleton">Загрузка карты Беларуси…</div>
         </div>
-        <div class="map-note"><span class="map-note__dot"></span><span>Метка соответствует координатам из таблицы partners. Для тестовых точек положение приблизительное.</span></div>
+        <div class="map-note"><span class="map-note__dot"></span><span>Выберите магазин на карте, чтобы посмотреть адрес и контакты.</span></div>
         <button type="button" id="partners-map-reset" class="map-reset" aria-label="Показать всю Беларусь на карте">Вся Беларусь <span aria-hidden="true">↗</span></button>
       </div>
     </section>
 
-    <section class="list-section" id="partners-list">
+    <section class="list-section page-width" id="partners-list" aria-label="Список магазинов">
       <div class="list-heading">
         <div>
-          <span class="eyebrow">АДРЕСА И КОНТАКТЫ</span>
-          <h2>Наши партнёры</h2>
+          <h2>Магазины в Беларуси</h2>
           <p>Выберите город или район. Названия салонов видны сразу, а адрес и контакты раскрываются по нажатию.</p>
         </div>
 
       </div>
-      <div id="partners-status" role="status" aria-live="polite" class="status">Загружаем данные из Google Sheets…</div>
       <div id="partners-groups" class="groups" aria-label="Список партнёров по городам"></div>
-      <div class="list-footnote"><span>Данные обновляются из Google Sheets при открытии страницы и автоматически примерно раз в 15 минут.</span></div>
+      <div class="list-footnote"><span>Перед поездкой уточните наличие нужного декора и образцов в магазине.</span></div>
     </section>
   </main>
   <footer class="footer">

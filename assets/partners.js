@@ -14,8 +14,9 @@
   var layer = null;
   var selectedId = null;
   var loaded = false;
-  var initialCity = "";
-  var initialQuery = "";
+  var currentView = "map";
+  var fitOnShow = false;
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var liveTimer = null;
   var feedTimeout = null;
 
@@ -158,7 +159,7 @@
     var cities = cityNames(items);
     var allExpanded = !!(trim(el("partners-search").value) || el("partners-city").value);
     if (!items.length) {
-      root.innerHTML = '<div class="no-results">По вашему запросу партнёры не найдены. Измените фильтр или сбросьте поиск.</div>';
+      root.innerHTML = "";
       return;
     }
     root.innerHTML = cities.map(function (city) {
@@ -182,15 +183,44 @@
   function icon(p, selected) {
     return window.L.divIcon({
       className: "ev-pin " + (p.demo ? "ev-pin--demo " : "") + (selected ? "ev-pin--selected" : ""),
-      html: '<span class="ev-pin__dot"></span>',
-      iconSize: [30, 30], iconAnchor: [15, 15]
+      html: '<span class="ev-pin__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.1 10.2a1 1 0 0 0 1 .8h9.5a1 1 0 0 0 1-.8L20 7H6"/><circle cx="9" cy="19" r="1.3"/><circle cx="17" cy="19" r="1.3"/></svg></span>',
+      iconSize: [38, 38], iconAnchor: [19, 19], popupAnchor: [0, -20]
     });
   }
   function popupMarkup(p) {
-    return '<div class="ev-popup"><p class="ev-popup__name">' + escapeHTML(p.name) + '</p>' +
+    var tel = p.demo ? null : phoneLink(p.phone);
+    return '<div class="ev-popup"><p class="ev-popup__name">' + escapeHTML(p.name.replace(/^ДЕМО\s*[•·-]\s*/i, "")) + '</p>' +
       '<p class="ev-popup__meta">' + escapeHTML(locationLabel(p)) + '</p>' +
-      (p.demo ? '<div class="ev-popup__note">Условная демо-точка, не действующий дилер</div>' : "") +
-      "</div>";
+      (p.address ? '<p class="ev-popup__address">' + escapeHTML(p.address) + '</p>' : '') +
+      (tel ? '<a class="ev-popup__phone" href="' + escapeHTML(tel) + '">' + escapeHTML(p.phone) + '</a>' : '') +
+      (p.hours ? '<p class="ev-popup__meta">' + escapeHTML(p.hours) + '</p>' : '') +
+      (p.demo ? '<div class="ev-popup__note">Условная демо-точка, не действующий дилер</div>' : '') +
+      '<button type="button" class="ev-popup__details" data-list-id="' + escapeHTML(p.id) + '">Все контакты</button></div>';
+  }
+  function setView(view) {
+    currentView = view === "list" ? "list" : "map";
+    var showMap = currentView === "map";
+    el("partners-map-panel").hidden = !showMap;
+    el("partners-list").hidden = showMap;
+    el("partners-view-map").setAttribute("aria-pressed", String(showMap));
+    el("partners-view-list").setAttribute("aria-pressed", String(!showMap));
+    if (showMap && map) {
+      map.invalidateSize({ pan: false });
+      if (fitOnShow) { fitOnShow = false; renderMap(filtered()); }
+    }
+  }
+  function showPartnerInList(id) {
+    setView("list");
+    var card = Array.from(document.querySelectorAll(".partner-card")).find(function (item) { return item.dataset.partnerId === id; });
+    if (!card) return;
+    var parent = card.parentElement;
+    while (parent && parent !== document.body) {
+      if (parent.tagName === "DETAILS") parent.open = true;
+      parent = parent.parentElement;
+    }
+    card.open = true;
+    card.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
+    card.querySelector("summary").focus({ preventScroll: true });
   }
   function setupMap() {
     if (map || !window.L) return !!map;
@@ -209,9 +239,11 @@
   }
   function renderMap(items) {
     if (!setupMap()) {
-      el("partners-map").innerHTML = '<div class="map-skeleton">Карта временно недоступна. Полный список партнёров приведён ниже.</div>';
+      el("partners-map").innerHTML = '<div class="map-skeleton">Карта временно недоступна. Выберите «Список», чтобы посмотреть адреса и контакты.</div>';
       return;
     }
+    if (currentView !== "map") { fitOnShow = true; return; }
+    map.closePopup();
     layer.clearLayers();
     markers.clear();
     var coords = [];
@@ -224,17 +256,18 @@
       markers.set(p.id, m);
       coords.push([p.lat, p.lng]);
     });
-    if (!coords.length) return;
+    if (!coords.length) { map.setView([53.65, 27.88], 6); return; }
     if (coords.length === 1) {
       map.setView(coords[0], 12, { animate: false });
     } else {
-      map.fitBounds(coords, { padding: [24, 24], maxZoom: el("partners-city").value ? 12 : 7, animate: false });
+      map.fitBounds(coords, { padding: [50, 50], maxZoom: el("partners-city").value ? 12 : 7, animate: false });
     }
     window.setTimeout(function () { map.invalidateSize(); }, 80);
   }
   function focusPartner(id, fromMap) {
     var p = partners.find(function (entry) { return entry.id === id; });
     if (!p) return;
+    if (!fromMap) setView("map");
     selectedId = p.id;
     document.querySelectorAll(".partner-card--selected").forEach(function (card) {
       card.classList.remove("partner-card--selected");
@@ -249,9 +282,6 @@
       }
       card.open = true;
       card.classList.add("partner-card--selected");
-      if (fromMap) {
-        card.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
     }
     markers.forEach(function (marker, markerId) {
       var item = partners.find(function (entry) { return entry.id === markerId; });
@@ -259,16 +289,17 @@
     });
     var marker = markers.get(id);
     if (marker && map) {
-      map.flyTo([p.lat, p.lng], Math.max(map.getZoom(), 11), { duration: 0.5 });
+      map.flyTo([p.lat, p.lng], Math.max(map.getZoom(), 11), { duration: reducedMotion ? 0 : 0.5, animate: !reducedMotion });
       marker.openPopup();
       if (!fromMap) {
-        el("partners-map").scrollIntoView({ behavior: "smooth", block: "center" });
+        el("partners-map").scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
       }
     }
   }
   function render() {
     var list = filtered();
     el("partners-reset").hidden = !(trim(el("partners-search").value) || el("partners-city").value);
+    el("partners-empty").hidden = !loaded || list.length > 0;
     renderList(list);
     renderMap(list);
   }
@@ -295,7 +326,7 @@
   window.EversensePartnersFeed = function (payload) {
     window.clearTimeout(feedTimeout);
     if (!payload || payload.status !== "ok" || !payload.table || !Array.isArray(payload.table.rows)) {
-      if (!loaded) setError("Не удалось прочитать лист partners. Проверьте доступ Google Sheets «Все, у кого есть ссылка → Читатель».");
+      if (!loaded) setError("Список магазинов временно недоступен. Попробуйте обновить страницу или свяжитесь с нами: +375 29 671-39-71.");
       return;
     }
     var next = payload.table.rows.map(parseRow).filter(Boolean);
@@ -325,15 +356,25 @@
     });
     script.src = "https://docs.google.com/spreadsheets/d/" + SHEET_ID + "/gviz/tq?" + params.toString();
     script.onerror = function () {
-      if (!loaded) setError("Не удалось загрузить список партнёров из Google Sheets. Попробуйте обновить страницу.");
+      if (!loaded) setError("Не удалось загрузить магазины. Попробуйте обновить страницу или свяжитесь с нами: +375 29 671-39-71.");
     };
     document.head.appendChild(script);
     window.clearTimeout(feedTimeout);
     feedTimeout = window.setTimeout(function () {
-      if (!loaded) setError("Google Sheets не ответил. Проверьте публичный доступ к таблице.");
+      if (!loaded) setError("Загрузка магазинов занимает больше времени, чем обычно. Обновите страницу или позвоните: +375 29 671-39-71.");
     }, 22000);
   }
   function init() {
+    el("partners-view-map").addEventListener("click", function () { setView("map"); });
+    el("partners-view-list").addEventListener("click", function () { setView("list"); });
+    document.querySelector(".skip").addEventListener("click", function () { setView("list"); });
+    window.addEventListener("hashchange", function () { if (window.location.hash === "#partners-list") setView("list"); });
+    setView(window.location.hash === "#partners-list" ? "list" : "map");
+    setupMap();
+    el("partners-map").addEventListener("click", function (event) {
+      var button = event.target.closest("button[data-list-id]");
+      if (button) showPartnerInList(button.dataset.listId);
+    });
     el("partners-search").addEventListener("input", render);
     el("partners-city").addEventListener("change", render);
     el("partners-reset").addEventListener("click", function () {
@@ -342,7 +383,9 @@
       render();
     });
     el("partners-map-reset").addEventListener("click", function () {
-      if (map && markers.size) renderMap(filtered());
+      el("partners-search").value = "";
+      el("partners-city").value = "";
+      render();
     });
     el("partners-groups").addEventListener("click", function (event) {
       var btn = event.target.closest("button[data-map-id]");
