@@ -27,8 +27,7 @@ from urllib.parse import parse_qs, urlparse
 ROOT = Path(__file__).resolve().parents[1]
 DEVICES = [("desktop", 1440, 1000), ("mobile", 390, 844), ("mobile360", 360, 800)]
 FAVORITES = "eversense.favorites.v1"
-COMPARE = "eversense.compare.v1"
-SCREENSHOT_PAGES = {"catalog-ru/index.html", "choose.html", "about.html", "calculator.html", "compare.html"}
+SCREENSHOT_PAGES = {"catalog-ru/index.html", "choose.html", "about.html", "calculator.html"}
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -309,7 +308,7 @@ def main():
 
             def bad_storage_test(page, context):
                 goto(page, "catalog-ru/")
-                page.evaluate("([a,b])=>{localStorage.setItem(a,'{bad JSON');localStorage.setItem(b,JSON.stringify(['EL1052','EL1052','UNKNOWN',null]));}", [FAVORITES, COMPARE])
+                page.evaluate("key=>localStorage.setItem(key,'{bad JSON')", FAVORITES)
                 page.reload(wait_until="domcontentloaded")
                 page.wait_for_function("window.__eversenseBuyerStarted")
                 require(page.locator("#ev-catalog-results .ev-card").count() == 30, "Corrupt storage broke catalog")
@@ -323,176 +322,50 @@ def main():
                 if quota:
                     require(page.evaluate("()=>{try{localStorage.getItem('probe');}catch(e){return false;}try{localStorage.setItem('probe','1');return false;}catch(e){return e.name==='QuotaExceededError';}}"),
                             "Readable-but-unwritable storage fixture did not take effect")
-                else:
-                    require(page.evaluate("()=>{try{void localStorage;return false;}catch(e){return e.name==='SecurityError';}}"),
-                            "Blocked-storage fixture did not take effect")
-                if quota:
-                    page.evaluate("([a,b])=>{window.__qaStorageSetItem.call(localStorage,a,JSON.stringify(['EL750']));window.__qaStorageSetItem.call(localStorage,b,JSON.stringify(['EL750']));const u=new URL(location.href);u.searchParams.delete('ev-favorites');u.searchParams.delete('ev-compare');history.replaceState(null,'',u);}", [FAVORITES, COMPARE])
+                    page.evaluate("key=>{window.__qaStorageSetItem.call(localStorage,key,JSON.stringify(['EL750']));const u=new URL(location.href);u.searchParams.delete('ev-favorites');history.replaceState(null,'',u);}", FAVORITES)
                     page.reload(wait_until="domcontentloaded")
                     page.wait_for_selector('[data-ev-favorite="EL750"]')
                     page.locator('[data-ev-favorite="EL750"]').click()
-                    page.locator('[data-ev-compare="EL750"]').click()
                     page.reload(wait_until="domcontentloaded")
                     page.wait_for_selector('[data-ev-favorite="EL750"]')
                     require(page.locator('[data-ev-favorite="EL750"]').get_attribute('aria-pressed') == 'false',
-                            'Empty favorites fallback resurrected stale readable storage')
-                    require(page.locator('[data-ev-compare="EL750"]').get_attribute('aria-pressed') == 'false',
-                            'Empty comparison fallback resurrected stale readable storage')
+                            "Empty favorites fallback resurrected stale readable storage")
+                else:
+                    require(page.evaluate("()=>{try{void localStorage;return false;}catch(e){return e.name==='SecurityError';}}"),
+                            "Blocked-storage fixture did not take effect")
                 selected = ["EL1052", "EL1000"]
                 for sku in selected:
                     page.locator(f'[data-ev-favorite="{sku}"]').click()
-                    page.locator(f'[data-ev-compare="{sku}"]').click()
-                favorites_link = page.locator('main a[href*="favorites.html"]').first
-                favorite_url = favorites_link.get_attribute("href")
-                favorite_query = parse_qs(urlparse(favorite_url).query)
-                require(favorite_query.get("ev-favorites", [""])[0].split(",") == selected,
-                        "Favorites link did not carry selections when storage was blocked")
-                require(favorite_query.get("ev-compare", [""])[0].split(",") == selected,
-                        "Favorites navigation lost comparison fallback state")
-                favorites_link.click()
+                favorite_link = page.locator('main a[href*="favorites.html"]').first
+                favorite_url = favorite_link.get_attribute("href")
+                require(parse_qs(urlparse(favorite_url).query).get("ev-favorites", [""])[0].split(",") == selected,
+                        "Favorites link did not carry blocked-storage selections")
+                favorite_link.click()
                 page.wait_for_selector("#ev-favorites .ev-card")
                 require(page.locator("#ev-favorites .ev-card").count() == 2,
-                        "Favorites were lost after navigation with blocked storage")
-                compare_link = page.locator('main [data-compare-link]').first
-                compare_url = compare_link.get_attribute("href")
-                compare_query = parse_qs(urlparse(compare_url).query)
-                require(compare_query.get("ev-compare", [""])[0].split(",") == selected,
-                        "Comparison link lost personal fallback state")
-                require("items" not in compare_query, "Personal navigation incorrectly opens a shared comparison")
-                require(compare_query.get("ev-favorites", [""])[0].split(",") == selected,
-                        "Comparison navigation lost favorites fallback state")
-                compare_link.click()
-                page.wait_for_selector("#ev-compare table")
-                require(page.locator("#ev-compare thead th").count() == 3,
-                        "Comparison lost its two products with storage blocked")
+                        "Favorites were lost after blocked-storage navigation")
                 page.reload(wait_until="domcontentloaded")
-                page.wait_for_selector("#ev-compare table")
-                require(page.locator("#ev-compare thead th").count() == 3,
-                        "URL fallback did not survive reload")
-                page.locator('#ev-compare [data-ev-compare="EL1000"]').click()
-                page.reload(wait_until="domcontentloaded")
-                page.wait_for_selector("#ev-compare table")
-                require(page.locator("#ev-compare thead th").count() == 2,
-                        "Reload resurrected a comparison removed with blocked storage")
-                page.locator('main a[href*="favorites.html"]').first.click()
                 page.wait_for_selector("#ev-favorites .ev-card")
-                restored = page.locator("#ev-favorites .ev-card").evaluate_all("els=>els.map(el=>el.dataset.product)")
-                require(restored == selected, "Return from comparison erased favorite fallback selection")
-                return {"storage_getter_throws": True, "selected": selected,
-                        "favorites_url": favorite_url, "comparison_url": compare_url, "reload_preserved": True}
+                require(page.locator("#ev-favorites .ev-card").count() == 2,
+                        "Blocked-storage favorites did not survive reload")
+                return {"storage_blocked": True, "selected": selected, "favorites_url": favorite_url}
             case("storage-blocked-url-navigation", blocked_storage_test, storage_blocked=True)
             case("storage-quota-url-navigation", lambda p,c: blocked_storage_test(p,c,quota=True), storage_blocked="quota")
 
-            def mixed_quota_test(page, context):
+            def favorites_only_test(page, context, device):
                 goto(page, "catalog-ru/")
-                page.locator('[data-ev-favorite="EL1052"]').click()
-                for sku in ["EL1000", "EL153"]:
-                    page.locator(f'[data-ev-compare="{sku}"]').click()
-                # Growing favorites fails, then shrinking comparison succeeds.
-                page.locator('[data-ev-favorite="EL1000"]').click()
-                page.locator('[data-ev-compare="EL153"]').click()
-                require(json.loads(page.evaluate("key=>localStorage.getItem(key)", FAVORITES)) == ["EL1052"],
-                        "Mixed quota did not reject only the growing favorites write")
-                require(json.loads(page.evaluate("key=>localStorage.getItem(key)", COMPARE)) == ["EL1000"],
-                        "Mixed quota did not allow the shrinking comparison write")
-                carried = parse_qs(urlparse(page.url).query)
-                require(carried.get("ev-favorites") == ["EL1052,EL1000"],
-                        "Successful write to comparison discarded unsaved favorites fallback")
-                page.locator('main a[href*="favorites.html"]').first.click()
-                page.wait_for_selector("#ev-favorites .ev-card")
-                require(page.locator("#ev-favorites .ev-card").count() == 2,
-                        "Successful small probe on next page discarded fallback favorites")
-                page.reload(wait_until="domcontentloaded")
-                page.wait_for_selector("#ev-favorites .ev-card")
-                require(page.locator("#ev-favorites .ev-card").count() == 2,
-                        "Mixed quota favorites lost after reload")
-                page.evaluate("window.addEventListener('storage',e=>{if(e.key==='eversense.favorites.v1')window.__qaStorageEventSeen=true;})")
-                other = context.new_page()
-                try:
-                    goto(other, "catalog-ru/")
-                    other.evaluate("key=>localStorage.removeItem(key)", FAVORITES)
-                    page.wait_for_function("window.__qaStorageEventSeen")
-                    require(page.locator("#ev-favorites .ev-card").count() == 2,
-                            "Cross-tab storage update erased unsaved fallback favorites")
-                finally:
-                    other.close()
-                page.locator('main [data-compare-link]').first.click()
-                page.wait_for_selector("#ev-compare table")
-                require(page.locator('#ev-compare [data-ev-compare]').evaluate_all("els=>els.map(el=>el.dataset.evCompare)") == ["EL1000"],
-                        "Mixed quota navigation lost the surviving comparison")
-                page.locator('main a[href*="favorites.html"]').first.click()
-                page.wait_for_selector("#ev-favorites .ev-card")
-                require(page.locator("#ev-favorites .ev-card").count() == 2,
-                        "Round-trip navigation lost fallback favorites after cross-tab change")
-                return {"growth_rejected": True, "shrink_accepted": True, "probe_recovers": True,
-                        "navigation_reload_and_cross_tab_preserved": True}
-            case("storage-mixed-quota-keeps-unsaved-selection", mixed_quota_test, storage_blocked="mixed-quota")
-
-            def compare_test(page, context, device):
-                goto(page, "catalog-ru/")
-                for sku in ["EL1000", "EL1052", "EL153", "EL750"]:
-                    page.locator(f'[data-ev-compare="{sku}"]').click()
-                chosen = json.loads(page.evaluate("key=>localStorage.getItem(key)", COMPARE))
-                require(chosen == ["EL1000", "EL1052", "EL153"], "Comparison exceeded 3 or silently replaced an item")
-                require("трёх" in page.locator("#ev-buyer-status").inner_text(), "Limit feedback missing")
-                goto(page, "compare.html")
-                require(page.locator("#ev-compare thead th").count() == 4, "Expected three comparison columns")
-                row = page.locator("#ev-compare tbody tr").filter(has=page.locator('th[scope="row"]', has_text="Площадь упаковки"))
-                areas = [numeric(t) for t in row.locator("td").all_inner_texts()]
-                require(areas == [Decimal("2.54"), Decimal("1.99"), Decimal("1.99")], f"Wrong pack comparison: {areas}")
-                require("ev-different" in (row.get_attribute("class") or ""), "Different pack areas are not marked")
-                images(page, "#ev-compare img", minimum=16)
-                shot(page, "compare-result-" + device)
-                layout_metrics(page)
-                remove = page.locator("#ev-compare [data-ev-compare]")
-                while remove.count():
-                    require(remove.first.inner_text().strip() == "Убрать", "Remove button misleadingly says selected")
-                    remove.first.click()
-                require("items" not in parse_qs(urlparse(page.url).query), "Deleted comparison remains in URL")
-                require(page.locator("[data-share-compare]").is_disabled(), "Empty comparison can still be shared")
-                page.reload(wait_until="domcontentloaded")
-                page.wait_for_function("window.__eversenseBuyerStarted")
-                require(page.locator("#ev-compare table").count() == 0, "Reload resurrected removed products")
-                return {"limit": 3, "pack_areas": [str(a) for a in areas], "empty_reload": True}
-            for device, width, height in DEVICES[:2]:
-                case("comparison-" + device, lambda p, c, d=device: compare_test(p, c, d), width, height)
-
-            def shared_compare_test(page, context):
-                goto(page, "catalog-ru/")
-                personal = ["EL1000", "EL1052"]
-                for sku in personal:
-                    page.locator(f'[data-ev-compare="{sku}"]').click()
-                page.locator('[data-ev-favorite="EL153"]').click()
-                goto(page, "compare.html?items=EL153,EL750,EL1036,EL1002,UNKNOWN")
-                require(page.locator("#ev-compare thead th").count() == 4, "Shared comparison did not clamp to three")
-                require(json.loads(page.evaluate("key=>localStorage.getItem(key)", COMPARE)) == personal,
-                        "Opening shared comparison overwrote personal selection")
-                if page.viewport_size["width"] in (360, 390):
-                    shot(page, "shared-compare-mobile" + str(page.viewport_size["width"]))
-                remove = page.locator('#ev-compare [data-ev-compare="EL750"]')
-                remove.focus()
-                page.keyboard.press("Enter")
-                require(page.locator('#ev-compare [data-ev-compare="EL1036"]').evaluate("el=>el===document.activeElement"),
-                        "Keyboard focus was lost after removing a comparison")
-                page.reload(wait_until="domcontentloaded")
-                page.wait_for_selector("#ev-compare table")
-                require(page.locator("#ev-compare thead th").count() == 3, "Shared edit did not survive URL reload")
-                require(json.loads(page.evaluate("key=>localStorage.getItem(key)", COMPARE)) == personal,
-                        "Editing or reloading shared comparison overwrote personal selection")
-                page.locator('main [data-compare-link]').first.click()
-                page.wait_for_selector("#ev-compare table")
-                require(page.locator('#ev-compare [data-ev-compare]').evaluate_all("els=>els.map(el=>el.dataset.evCompare)") == personal,
-                        "Personal comparison link did not restore personal selection")
-                goto(page, "compare.html?items=EL153,EL1036")
-                page.locator('[data-save-shared-compare]').click()
-                require(json.loads(page.evaluate("key=>localStorage.getItem(key)", COMPARE)) == ["EL153", "EL1036"],
-                        "Explicitly saving shared comparison did not update personal selection")
-                require("items" not in parse_qs(urlparse(page.url).query), "Adopted comparison remains in shared mode")
-                require(json.loads(page.evaluate("key=>localStorage.getItem(key)", FAVORITES)) == ["EL153"],
-                        "Comparison actions altered independent favorites")
-                return {"personal_preserved_on_open_and_edit": True, "explicit_adoption": True, "keyboard_remove_focus": True}
+                require(page.locator('[data-ev-compare],[data-compare-link],a[href*="compare.html"]').count() == 0,
+                        "Comparison is still exposed in the catalog")
+                require(page.locator('#ev-catalog-results [data-ev-favorite]').count() == 30,
+                        "Catalog must keep all 30 favorite buttons")
+                columns = page.locator('#ev-catalog-results').evaluate("el=>getComputedStyle(el).gridTemplateColumns.split(' ').filter(Boolean).length")
+                require(columns == (3 if device == "desktop" else 2), f"Wrong catalog columns: {columns}")
+                goto(page, "favorites.html")
+                require(page.locator('[data-ev-compare],[data-compare-link],a[href*="compare.html"]').count() == 0,
+                        "Comparison is still exposed on favorites page")
+                return {"comparison_removed": True, "columns": columns}
             for device, width, height in DEVICES:
-                case("shared-comparison-preserves-personal-" + device, shared_compare_test, width, height)
+                case("favorites-only-" + device, lambda p,c,d=device: favorites_only_test(p,c,d), width, height)
 
             def favorites_keyboard_test(page, context):
                 goto(page, "catalog-ru/")
@@ -658,8 +531,8 @@ def main():
                 menu = page.locator("#ev-global-menu")
                 require(menu.is_visible() and toggle.get_attribute("aria-expanded") == "true", "Keyboard did not open menu")
                 paths = {urlparse(href).path for href in menu.locator("a").evaluate_all("els=>els.map(a=>a.href)")}
-                expected = {"/catalog-ru/", "/choose.html", "/favorites.html", "/compare.html", "/calculator.html", "/about.html", "/downloads.html", "/where-to-buy.html"}
-                require(expected <= paths, f"Header is missing links: {expected-paths}")
+                expected = {"/catalog-ru/", "/choose.html", "/favorites.html", "/calculator.html", "/about.html", "/downloads.html", "/where-to-buy.html"}
+                require(expected <= paths and "/compare.html" not in paths, f"Header missing links or still has comparison: {expected-paths}")
                 require(all(menu.locator("a").nth(i).is_visible() for i in range(menu.locator("a").count())), "Menu contains CSS-hidden navigation")
                 shot(page, "menu-" + device, full=False)
                 page.keyboard.press("Escape")
@@ -671,7 +544,6 @@ def main():
 
             def layout_test(page, context, path, device):
                 suffix = ""
-                if path == "compare.html": suffix = "?items=EL1000,EL1052,EL153"
                 if path == "favorites.html": suffix = "?items=EL1000,EL1052"
                 if path == "calculator.html": suffix = "?sku=EL1052&area=20&reserve=10"
                 goto(page, path + suffix)
@@ -763,8 +635,7 @@ def main():
                 comparison = page.locator("#ev-product-tools [data-ev-compare]")
                 require(favorite.count() == 1 and favorite.get_attribute("data-ev-favorite") == sku,
                         f"{sku}: favorite tools mounted with wrong SKU")
-                require(comparison.count() == 1 and comparison.get_attribute("data-ev-compare") == sku,
-                        f"{sku}: comparison tools mounted with wrong SKU")
+                require(comparison.count() == 0, f"{sku}: comparison button remains on product page")
                 calc_link = page.locator('#ev-product-tools a[href*="calculator.html"]')
                 require(calc_link.count() == 1 and parse_qs(urlparse(calc_link.get_attribute("href")).query).get("sku") == [sku],
                         f"{sku}: product calculator lost SKU")
