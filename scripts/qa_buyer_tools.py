@@ -933,8 +933,14 @@ def main():
                 buttons = root.locator('.ev-sense-toggle')
                 require(buttons.count() == 3, "Expected three sensory panels")
                 images(page, '#ev-senses img', minimum=3, local_only=True)
+                # The surrounding legacy artboards finish measuring after the
+                # buyer scripts are ready. Start only after their layout settles.
+                page.wait_for_timeout(1200)
+                root.scroll_into_view_if_needed()
                 states = []
                 for index, proportions in enumerate(((60, 25, 15), (15, 60, 25), (10, 10, 80))):
+                    # Exclude Playwright's own scroll-to-target from the check.
+                    buttons.nth(index).scroll_into_view_if_needed()
                     before_y = page.evaluate('scrollY')
                     buttons.nth(index).click()
                     page.wait_for_function("""expected => {
@@ -958,7 +964,9 @@ def main():
                     require(abs(metrics['width']-metrics['viewport']) < 2, f"Sensory block is not full width: {metrics}")
                     require(metrics['height'] <= 660, f"Sensory block is too tall: {metrics}")
                     require(metrics['vertical'] == (page.viewport_size['width'] < 640), "Wrong sensory layout direction")
-                    require(abs(page.evaluate('scrollY')-before_y) < 2, "Selecting a sensory panel moved the page")
+                    after_y = page.evaluate('scrollY')
+                    require(abs(after_y-before_y) < 2,
+                            f"Selecting sensory panel {index} moved the page: {before_y} -> {after_y}")
                     for i, panel in enumerate(metrics['panels']):
                         active = i == index
                         require(abs(panel['proportion']-proportions[i]) < .2, f"Wrong panel proportions: {metrics}")
@@ -993,7 +1001,8 @@ def main():
                      lambda p, c, w=width: senses_test(p, c, 'index.html', str(w)), width, 900)
 
             def senses_fallback_test(page, context):
-                context.route('**/home-senses.js*', lambda route: route.abort())
+                context.route('**/home-senses.js*', lambda route: route.fulfill(
+                    status=200, content_type='application/javascript', body='/* script unavailable */'))
                 goto(page, 'index.html', prices=False)
                 root = page.locator('#ev-senses')
                 require(root.get_attribute('data-enhanced') is None, "Fallback test unexpectedly loaded the script")
