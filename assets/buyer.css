@@ -59,6 +59,11 @@ body[data-buyer-page="catalog"] .ev-inline-nav {margin-top:0;margin-bottom:16px}
 .ev-hero .ev-button:hover,.ev-footer .ev-button:hover {background:#FFFFFF;border-color:#FFFFFF;color:#343333}
 .ev-text-link {display:inline-flex;align-items:center;gap:7px;min-height:44px;padding-block:10px;color:inherit;font-size:13px;line-height:1.5;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
 .ev-text-link:hover {color:#343333}
+
+.ev-hero .ev-favorites-link{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:9px 16px;border:1px solid rgba(255,255,255,.62);color:#fff;font-size:14px;font-weight:600;line-height:1.5;text-decoration:none;background:rgba(255,255,255,.07);transition:background-color .18s ease,border-color .18s ease}
+.ev-hero .ev-favorites-link:hover{background:rgba(255,255,255,.16);border-color:#fff}
+.ev-hero .ev-favorites-link .ev-heart-icon{flex:0 0 20px;width:20px;height:20px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ev-hero .ev-favorites-link.has-favorites .ev-heart-icon{stroke:#f05252;fill:#f05252}
 .ev-hero .ev-text-link:hover {color:#C0A58C}
 button.ev-text-link {border:0;border-radius:0;background:transparent;padding-inline:0;text-align:left}
 .ev-toolbar {margin-bottom:32px}

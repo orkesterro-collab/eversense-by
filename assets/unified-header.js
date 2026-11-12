@@ -7,7 +7,7 @@
   var site = new URL("../", assets);
   var asset = function (path) { return new URL(path, assets).href; };
   var route = function (path) { return new URL(path, site).href; };
-  var version = "20261112favorites";
+  var version = "20261112heart";
 
   function ensureStyle(filename, marker) {
     var url = asset(filename + "?v=" + version);
@@ -86,8 +86,7 @@
         ["Каталог", "catalog-ru/"],
         ["Помощь с выбором", "choose.html"],
         ["Интерьеры", "projects.html"],
-        ["Избранное", "favorites.html"],
-        ["Калькулятор", "calculator.html"]
+        ["Избранное", "favorites.html"]
       ] },
       { title: "О продукте", id: "product", items: [
         ["О EVERSENSE", "about.html"],

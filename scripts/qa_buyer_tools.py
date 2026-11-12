@@ -356,11 +356,17 @@ def main():
                 goto(page, "catalog-ru/")
                 require(page.locator('[data-ev-compare],[data-compare-link],a[href*="compare.html"]').count() == 0,
                         "Comparison is still exposed in the catalog")
+                require(page.locator('.ev-hero [data-favorites-link]').count() == 1, "Catalog must show favorites heart")
+                require(page.locator('.ev-hero a[href*="calculator.html"],.ev-hero .ev-eyebrow').count() == 0, "Catalog hero must be uncluttered")
+                require(not page.locator('.ev-hero [data-favorites-link]').first.evaluate("el=>el.classList.contains('has-favorites')"), "Empty heart should be outlined")
                 require(page.locator('#ev-catalog-results [data-ev-favorite]').count() == 30,
                         "Catalog must keep all 30 favorite buttons")
+                page.locator('#ev-catalog-results [data-ev-favorite]').first.click()
+                require(page.locator('.ev-hero [data-favorites-link]').first.evaluate("el=>el.classList.contains('has-favorites')"), "Adding favorite must make heart red")
                 columns = page.locator('#ev-catalog-results').evaluate("el=>getComputedStyle(el).gridTemplateColumns.split(' ').filter(Boolean).length")
                 require(columns == (3 if device == "desktop" else 2), f"Wrong catalog columns: {columns}")
                 goto(page, "favorites.html")
+                require(page.locator('#ev-favorites .ev-card-actions a[href*="calculator.html?sku=EL1036"]').count() == 1, "Saved decor must have calculator with selected SKU")
                 require(page.locator('[data-ev-compare],[data-compare-link],a[href*="compare.html"]').count() == 0,
                         "Comparison is still exposed on favorites page")
                 return {"comparison_removed": True, "columns": columns}
@@ -531,8 +537,8 @@ def main():
                 menu = page.locator("#ev-global-menu")
                 require(menu.is_visible() and toggle.get_attribute("aria-expanded") == "true", "Keyboard did not open menu")
                 paths = {urlparse(href).path for href in menu.locator("a").evaluate_all("els=>els.map(a=>a.href)")}
-                expected = {"/catalog-ru/", "/choose.html", "/favorites.html", "/calculator.html", "/about.html", "/downloads.html", "/where-to-buy.html"}
-                require(expected <= paths and "/compare.html" not in paths, f"Header missing links or still has comparison: {expected-paths}")
+                expected = {"/catalog-ru/", "/choose.html", "/favorites.html", "/about.html", "/downloads.html", "/where-to-buy.html"}
+                require(expected <= paths and "/compare.html" not in paths and "/calculator.html" not in paths, f"Header missing links or still has comparison: {expected-paths}")
                 require(all(menu.locator("a").nth(i).is_visible() for i in range(menu.locator("a").count())), "Menu contains CSS-hidden navigation")
                 shot(page, "menu-" + device, full=False)
                 page.keyboard.press("Escape")
@@ -847,7 +853,8 @@ def main():
                     # Exclude Playwright's own scroll-to-target from the check.
                     buttons.nth(index).scroll_into_view_if_needed()
                     before_y = page.evaluate('scrollY')
-                    buttons.nth(index).click()
+                    # Native click avoids Playwright auto-scroll during responsive artboard changes.
+                    buttons.nth(index).evaluate("button => button.click()")
                     page.wait_for_function("""expected => {
                       const root=document.querySelector('#ev-senses');
                       const panels=[...root.querySelectorAll('.ev-sense-panel')];

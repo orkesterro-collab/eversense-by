@@ -17,7 +17,7 @@ DATA = json.loads((ROOT / 'assets/products-data.json').read_text())
 PRODUCTS = DATA if isinstance(DATA, list) else DATA['products']
 PRODUCTS.sort(key=lambda p: (['nature','luxury','minimal'].index(p['collectionID']), int(p['sku'][2:])))
 GUIDES = json.loads((ROOT / 'content/buyer-guides.json').read_text())
-VERSION = '20261112favorites'
+VERSION = '20261112heart'
 COLLECTIONS = [
     ('nature', 'Природная эстетика', 'Спокойные древесные оттенки и выразительные рисунки дуба.'),
     ('luxury', 'Тихая роскошь', 'Натуральные и глубокие тона для интерьера с характером.'),
@@ -41,14 +41,14 @@ def link(label, target, page, cls='', extra=''):
     return f'<a href="{e(href(target, page))}"' + (f' class="{e(cls)}"' if cls else '') + (f' {extra}' if extra else '') + f'>{label}</a>'
 
 def actions(page):
-    return '<div class="ev-actions">' + link('Избранное (<span data-favorites-count>0</span>)', 'favorites.html', page, 'ev-text-link') + link('Калькулятор', 'calculator.html', page, 'ev-text-link') + '</div>'
+    return '<div class="ev-actions">' + link('<svg class="ev-heart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 4.6c-2.1-2.1-5.5-2.1-7.6 0L12 5.8l-1.2-1.2c-2.1-2.1-5.5-2.1-7.6 0s-2.1 5.5 0 7.6L12 21l8.8-8.8c2.1-2.1 2.1-5.5 0-7.6Z"/></svg>Избранное (<span data-favorites-count>0</span>)', 'favorites.html', page, 'ev-favorites-link', 'data-favorites-link') + '</div>'
 
 def footer(page):
     groups = [
-        ('Выбрать и купить', [('Все декоры', 'catalog-ru/'), ('Помощь с выбором', 'choose.html'), ('Интерьеры', 'projects.html'), ('Калькулятор', 'calculator.html'), ('Где купить', 'where-to-buy.html'), ('Контакты', 'contacts.html')]),
+        ('Выбрать и купить', [('Все декоры', 'catalog-ru/'), ('Помощь с выбором', 'choose.html'), ('Интерьеры', 'projects.html'), ('Где купить', 'where-to-buy.html'), ('Контакты', 'contacts.html')]),
         ('Полезно знать', [('О продукте', 'about.html'), ('Укладка и тёплый пол', 'installation.html'), ('Уход', 'care.html'), ('Гарантия', 'warranty.html'), ('Ответы на вопросы', 'faq.html'), ('Документы', 'downloads.html')]),
     ]
-    return '<footer class="ev-footer"><div class="ev-wrap"><div>' + link('<img class="ev-footer-logo" src="'+e(href('assets/original-tilda/44ef8387add2-Frame_784.svg',page))+'" alt="EVERSENSE" width="220" height="80">', 'index.html', page, 'ev-footer-brand') + '<p>Коллекция ощущений. Напольные покрытия на древесной основе.</p><p>Представитель в Беларуси — ООО «Флорсток».<br>УНП 192608003<br>220062, г. Минск, пр. Победителей, д. 129, пом. 358</p><p><a href="tel:+375296713971">+375 29 671-39-71</a></p></div>' + ''.join('<div><h2>'+title+'</h2><nav aria-label="'+title+'">'+''.join(link(label, url, page) for label, url in items)+'</nav></div>' for title, items in groups) + '<div class="ev-footer-bottom"><span>© EVERSENSE · Беларусь</span>'+link('Все страницы', 'sitemap.html', page)+link('Конфиденциальность', 'privacy.html', page)+'</div></div></footer>'
+    return '<footer class="ev-footer"><div class="ev-wrap"><div>' + link('<img class="ev-footer-logo" src="'+e(href('assets/original-tilda/44ef8387add2-Frame_784.svg',page))+'" alt="EVERSENSE" width="220" height="80">', 'index.html', page, 'ev-footer-brand') + '<p>Напольные покрытия на древесной основе.</p><p>Представитель в Беларуси — ООО «Флорсток».<br>УНП 192608003<br>220062, г. Минск, пр. Победителей, д. 129, пом. 358</p><p><a href="tel:+375296713971">+375 29 671-39-71</a></p></div>' + ''.join('<div><h2>'+title+'</h2><nav aria-label="'+title+'">'+''.join(link(label, url, page) for label, url in items)+'</nav></div>' for title, items in groups) + '<div class="ev-footer-bottom"><span>© EVERSENSE · Беларусь</span>'+link('Все страницы', 'sitemap.html', page)+link('Конфиденциальность', 'privacy.html', page)+'</div></div></footer>'
 
 def write_page(page, title, lead, body, page_type='', collection='', hero_actions='', structured=None):
     canonical = 'https://eversense.by/' + (page[:-10] if page.endswith('index.html') else page)
@@ -78,7 +78,7 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
 <script src="{href('assets/buyer.js',page)}?v={VERSION}" defer></script>
 </head><body class="ev-buyer" data-buyer-page="{e(page_type)}" data-collection="{e(collection)}">
 <a href="#main" class="ev-skip-link">Перейти к содержанию</a>
-<main id="main"><section class="ev-hero"><div class="ev-wrap"><nav class="ev-breadcrumb" aria-label="Хлебные крошки">{link('Главная','index.html',page)}<span aria-hidden="true">/</span><span>{e(title)}</span></nav><span class="ev-eyebrow">EVERSENSE · Коллекция ощущений</span><h1>{e(title)}</h1><p class="ev-lead">{e(lead)}</p>{hero_actions}</div></section>
+<main id="main"><section class="ev-hero"><div class="ev-wrap"><nav class="ev-breadcrumb" aria-label="Хлебные крошки">{link('Главная','index.html',page)}<span aria-hidden="true">/</span><span>{e(title)}</span></nav><h1>{e(title)}</h1><p class="ev-lead">{e(lead)}</p>{hero_actions}</div></section>
 {body}</main>{footer(page)}
 <noscript><div class="ev-wrap ev-note">Для расчёта, фильтров, избранного включите JavaScript. Страницы декоров и полезные материалы доступны по обычным ссылкам.</div></noscript>
 </body></html>'''
@@ -96,7 +96,7 @@ TONE = [('', 'Все оттенки'), ('light', 'Светлые'), ('natural', 
 DESIGN = [('', 'Все группы'), ('wood', 'Дубовые декоры'), ('stone', 'Мрамор'), ('plain', 'Песок и серый')]
 
 def catalogs():
-    for collection, title, lead, page in [('', 'Каталог декоров', '30 декоров. Найдите свой оттенок, сохраните понравившиеся варианты и рассчитайте покупку.', 'catalog-ru/index.html')] + [(c,t,d,COLLECTION_PATHS[c].lstrip('/')+'index.html') for c,t,d in COLLECTIONS]:
+    for collection, title, lead, page in [('', 'Каталог декоров', '30 декоров. Найдите свой оттенок и сохраните понравившиеся варианты.', 'catalog-ru/index.html')] + [(c,t,d,COLLECTION_PATHS[c].lstrip('/')+'index.html') for c,t,d in COLLECTIONS]:
         items = [p for p in PRODUCTS if not collection or p['collectionID']==collection]
         nav = '<nav class="ev-inline-nav" aria-label="Коллекции">'+link('Все декоры', 'catalog-ru/', page, extra='aria-current="page"' if not collection else '')+''.join(link(t, COLLECTION_PATHS[c], page, extra='aria-current="page"' if c==collection else '') for c,t,_ in COLLECTIONS)+'</nav>'
         filters = '<form id="ev-catalog-filters" class="ev-toolbar" role="search"><div class="ev-field"><label for="ev-q">Поиск по названию или артикулу</label><input id="ev-q" name="q" type="search" placeholder="Например, EL1052 или дуб" autocomplete="off"></div><details class="ev-filter-details" open><summary>Фильтры и сортировка</summary><div class="ev-filter-row">'
@@ -168,7 +168,7 @@ def tools_pages():
     write_page(page,'Рассчитать покупку','Площадь комнаты → запас → целые упаковки. Получите расчёт покрытия и сохраните ссылку для продавца.',body,'calculator')
     page='favorites.html'
     body='<section class="ev-section"><div class="ev-wrap"><div class="ev-favorites-bar"><p>В подборке: <b id="ev-favorite-total">0</b></p><div class="ev-actions"><button type="button" class="ev-button" data-share-selection disabled>Скопировать ссылку</button><button type="button" class="ev-text-link" data-print>Распечатать</button></div></div><div id="ev-shared-note" class="ev-note" hidden><p>Вы открыли подборку по ссылке. Её можно сохранить в своём избранном.</p><button type="button" class="ev-button" data-save-shared>Добавить в моё избранное</button></div><div id="ev-favorites"><p>Отметьте понравившиеся декоры в каталоге.</p>'+link('Открыть каталог','catalog-ru/',page,'ev-button')+'</div><p class="ev-note">Избранное хранится в этом браузере. Чтобы открыть подборку на другом устройстве или показать продавцу, скопируйте ссылку.</p></div></section>'
-    write_page(page,'Ваши избранные декоры','Сохраните понравившиеся декоры и покажите подборку в магазине.',body,'favorites',hero_actions=actions(page))
+    write_page(page,'Ваши избранные декоры','Сохраните понравившиеся декоры и покажите подборку в магазине.',body,'favorites',hero_actions='')
 
 def other_pages():
     page='contacts.html'
@@ -184,7 +184,7 @@ def other_pages():
     body = '<section class="ev-section"><div class="ev-wrap ev-prose"><section><h2>До согласования стоимости</h2><p>Покажите мастеру план помещения, выбранный артикул и инструкцию EVERSENSE. Обсудите направление рядов, переходы между комнатами, трубы, дверные проёмы и встроенную мебель. Договоритесь, кто заказывает покрытие и расходные материалы.</p><ul><li>Какие измерения основания нужны: ровность, влажность и готовность подогрева.</li><li>Нужно ли снимать старое покрытие и выравнивать основание.</li><li>Какая подложка и пароизоляция предусмотрены для вашей конструкции.</li><li>Какие работы, профили, плинтусы и вывоз мусора включены в смету.</li></ul></section><section><h2>Перед началом укладки</h2><p>Сверьте количество упаковок с раскладкой и согласованным запасом. Вместе проверьте маркировку и состояние панелей. Попросите зафиксировать результаты измерений основания и уточните, где будут компенсационные зазоры и переходные профили.</p><div class="ev-actions">'+link('Этапы укладки','installation.html',page,'ev-button ev-button--primary')+link('Документы для мастера','downloads.html',page,'ev-button')+'</div></section><section><h2>При приёмке работы</h2><p>Осмотрите поверхность, соединения панелей, примыкания и дверные проёмы при хорошем освещении. Проверьте открывание дверей. Обсудите уход и защиту под мебелью, сохраните оставшиеся целые панели.</p><p>Попросите передать акт работ, сведения о подложке и результаты проверки основания. Этикетки упаковок и документы о покупке храните вместе: они помогут при последующем обращении по покрытию.</p>'+link('Как ухаживать за готовым полом','care.html',page,'ev-text-link')+'</section></div></section>'
     write_page(page,'Подготовка к работе с мастером','Короткий список для обсуждения сметы, подготовки основания и приёмки готового пола.',body,'installers')
     page='sitemap.html'
-    nav=[('Главная','index.html'),('Каталог','catalog-ru/'),('Как выбрать','choose.html'),('О продукте','about.html'),('Интерьеры','projects.html'),('Калькулятор','calculator.html'),('Избранное','favorites.html'),('Укладка','installation.html'),('Уход','care.html'),('Гарантия','warranty.html'),('Вопросы и ответы','faq.html'),('Документы','downloads.html'),('Где купить','where-to-buy.html'),('Контакты','contacts.html'),('Подготовка к работе с мастером','installers.html'),('Конфиденциальность','privacy.html')]
+    nav=[('Главная','index.html'),('Каталог','catalog-ru/'),('Как выбрать','choose.html'),('О продукте','about.html'),('Интерьеры','projects.html'),('Избранное','favorites.html'),('Укладка','installation.html'),('Уход','care.html'),('Гарантия','warranty.html'),('Вопросы и ответы','faq.html'),('Документы','downloads.html'),('Где купить','where-to-buy.html'),('Контакты','contacts.html'),('Подготовка к работе с мастером','installers.html'),('Конфиденциальность','privacy.html')]
     body='<section class="ev-section"><div class="ev-wrap"><div class="ev-link-grid">'+''.join(link('<h2>'+t+'</h2><span aria-hidden="true">↗</span>',u,page,'ev-link-card') for t,u in nav)+'</div><h2>Все декоры</h2><div class="ev-link-grid">'+''.join(link(p['sku']+' · '+e(p['name']),p['canonicalPath'],page,'ev-text-link') for p in PRODUCTS)+'</div></div></section>'
     write_page(page,'Все страницы','Разделы сайта и все декоры EVERSENSE.',body,'sitemap')
 

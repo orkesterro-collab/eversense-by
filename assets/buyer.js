@@ -39,11 +39,12 @@
     if(!p)return '<span class="ev-price-pending">Цена уточняется</span>';
     return (p.sale?'<del>'+money(p.normal)+'</del> ':'')+'<strong>'+money(p.sale||p.normal)+' BYN/м²</strong>'+(p.sale&&p.until?'<small>Акция до '+esc(p.until.split('-').reverse().join('.'))+'</small>':'');
   }
-  function buttons(p){return '<div class="ev-card-actions"><button class="ev-button" type="button" data-ev-favorite="'+p.sku+'" aria-pressed="false">В избранное</button></div>';}
-  function card(p){return '<article class="ev-card" data-product="'+p.sku+'"><a class="ev-card-image" href="'+route(p.canonicalPath)+'"><img src="'+route(p.productImage)+'" alt="'+esc(fullName(p))+'" loading="lazy" width="640" height="500">'+(p.interiorImage?'<img class="ev-card-interior" src="'+route(p.interiorImage)+'" alt="" loading="lazy" width="640" height="500">':'')+'</a><div class="ev-card-body"><span class="ev-sku">'+p.sku+'</span><h2 class="ev-card-title"><a href="'+route(p.canonicalPath)+'">'+esc(fullName(p))+'</a></h2><p class="ev-card-meta">'+esc(p.collectionName)+' · '+p.lengthMM+' × '+p.widthMM+' мм</p><div class="ev-price-box" data-buyer-price="'+p.sku+'">'+priceHtml(p.sku)+'</div>'+buttons(p)+'</div></article>';}
+  function buttons(p,allowCalculate){return '<div class="ev-card-actions"><button class="ev-button" type="button" data-ev-favorite="'+p.sku+'" aria-pressed="false">В избранное</button>'+(allowCalculate?'<a class="ev-button" href="'+route('calculator.html')+'?sku='+encodeURIComponent(p.sku)+'">Рассчитать</a>':'')+'</div>';}
+  function card(p,allowCalculate){return '<article class="ev-card" data-product="'+p.sku+'"><a class="ev-card-image" href="'+route(p.canonicalPath)+'"><img src="'+route(p.productImage)+'" alt="'+esc(fullName(p))+'" loading="lazy" width="640" height="500">'+(p.interiorImage?'<img class="ev-card-interior" src="'+route(p.interiorImage)+'" alt="" loading="lazy" width="640" height="500">':'')+'</a><div class="ev-card-body"><span class="ev-sku">'+p.sku+'</span><h2 class="ev-card-title"><a href="'+route(p.canonicalPath)+'">'+esc(fullName(p))+'</a></h2><p class="ev-card-meta">'+esc(p.collectionName)+' · '+p.lengthMM+' × '+p.widthMM+' мм</p><div class="ev-price-box" data-buyer-price="'+p.sku+'">'+priceHtml(p.sku)+'</div>'+buttons(p,allowCalculate)+'</div></article>';}
   function syncButtons(){
     document.querySelectorAll('[data-ev-favorite]').forEach(function(b){var on=favorites.includes(b.dataset.evFavorite);b.setAttribute('aria-pressed',String(on));b.textContent=on?'В избранном':'В избранное';});
     document.querySelectorAll('[data-favorites-count]').forEach(function(n){n.textContent=String(favorites.length);});
+    document.querySelectorAll('[data-favorites-link]').forEach(function(a){a.classList.toggle('has-favorites',favorites.length>0);});
     if(!storageAvailable)document.querySelectorAll('a[href]').forEach(function(a){var u;try{u=new URL(a.href);}catch(e){return;}if(u.origin!==base.origin||!u.pathname.startsWith(base.pathname)||a.getAttribute('href').startsWith('#'))return;u.searchParams.set('ev-favorites',favorites.join(','));a.href=u.href;});
     if(!storageAvailable){var current=new URL(location.href);current.searchParams.set('ev-favorites',favorites.join(','));history.replaceState(null,'',current);}
   }
@@ -71,7 +72,7 @@
   function renderFavorites(){
     var root=document.getElementById('ev-favorites');if(!root)return;
     var list=selectedList();
-    root.innerHTML=list.length?'<div class="ev-grid">'+list.map(function(s){return card(bySku.get(s));}).join('')+'</div>':'<div class="ev-empty"><h2>Здесь будут ваши декоры</h2><p>Отметьте понравившиеся варианты в каталоге, чтобы вернуться к ним и показать продавцу.</p><a class="ev-button ev-button--primary" href="'+route('catalog-ru/')+'">Выбрать декор</a></div>';
+    root.innerHTML=list.length?'<div class="ev-grid">'+list.map(function(s){return card(bySku.get(s),true);}).join('')+'</div>':'<div class="ev-empty"><h2>Здесь будут ваши декоры</h2><p>Отметьте понравившиеся варианты в каталоге, чтобы вернуться к ним и показать продавцу.</p><a class="ev-button ev-button--primary" href="'+route('catalog-ru/')+'">Выбрать декор</a></div>';
     var shared=document.getElementById('ev-shared-note');if(shared)shared.hidden=imported===null;
     document.querySelectorAll('[data-share-selection]').forEach(function(b){b.disabled=!list.length;});
     var count=document.getElementById('ev-favorite-total');if(count)count.textContent=number(list.length);
