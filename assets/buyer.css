@@ -109,6 +109,36 @@ img.ev-card-image {width:100%;height:auto;object-fit:contain}
 .ev-card-actions {display:flex;gap:8px;align-items:stretch;margin-top:auto;padding-top:15px}
 .ev-card-actions .ev-button {flex:1;min-width:0;min-height:44px;padding:10px 9px;font-size:12px;line-height:1.45;border-color:#9D9D9C;letter-spacing:0}
 .ev-card-actions .ev-button[aria-pressed="true"] {border-color:#343333}
+/* Upright, full-size material previews in the catalog only.
+   Original product photographs show horizontal planks, so rotate the photo itself
+   rather than stretching or replacing the manufacturer's material texture. */
+body[data-buyer-page="catalog"] .ev-wrap {width:min(1220px,calc(100% - 80px))}
+body[data-buyer-page="catalog"] .ev-grid {grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 20px}
+body[data-buyer-page="catalog"] .ev-card-image {aspect-ratio:2/3}
+body[data-buyer-page="catalog"] .ev-card-image > img:not(.ev-card-interior) {
+  position:absolute;top:50%;left:50%;width:150%;height:66.6667%;max-width:none;
+  object-fit:cover;transform-origin:center;
+  transform:translate(-50%,-50%) rotate(90deg)
+}
+@media(hover:hover) and (pointer:fine){
+  body[data-buyer-page="catalog"] .ev-card-image:hover > img:not(.ev-card-interior),
+  body[data-buyer-page="catalog"] .ev-card-image:focus-visible > img:not(.ev-card-interior) {
+    transform:translate(-50%,-50%) rotate(90deg) scale(1.025)
+  }
+}
+@media(max-width:1050px){
+  body[data-buyer-page="catalog"] .ev-grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  body[data-buyer-page="catalog"] .ev-wrap {width:calc(100% - 40px)}
+}
+@media(max-width:600px){
+  body[data-buyer-page="catalog"] .ev-grid {grid-template-columns:minmax(0,1fr);gap:35px}
+  body[data-buyer-page="catalog"] .ev-card-title {font-size:19px}
+  body[data-buyer-page="catalog"] .ev-card-actions {flex-direction:row;gap:9px}
+  body[data-buyer-page="catalog"] .ev-card-actions .ev-button {width:auto;flex:1 1 0}
+}
+
 .ev-empty {padding:42px 28px;background:#FFFFFF;text-align:center;grid-column:1/-1}
 .ev-empty h2,.ev-empty h3 {font-size:26px;line-height:1.25;margin:0 0 12px}
 .ev-empty p {max-width:550px;margin:0 auto 22px;color:#343333}
