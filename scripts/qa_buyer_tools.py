@@ -367,6 +367,20 @@ def main():
                 require(columns == (3 if device == "desktop" else 2), f"Wrong catalog columns: {columns}")
                 goto(page, "favorites.html")
                 require(page.locator('#ev-favorites .ev-card-actions a[href*="calculator.html?sku=EL1036"]').count() == 1, "Saved decor must have calculator with selected SKU")
+                grid = page.locator('#ev-favorites .ev-grid')
+                require(grid.count() == 1, "Favorites must use the same product grid as the catalog")
+                fav_geometry = grid.evaluate("""el=>{
+                    const image=el.querySelector('.ev-card-image'),box=image.getBoundingClientRect();
+                    return {columns:getComputedStyle(el).gridTemplateColumns.split(' ').filter(Boolean).length,
+                            aspect:box.width/box.height,
+                            rotation:getComputedStyle(image.querySelector('img:not(.ev-card-interior)')).transform}
+                }""")
+                require(fav_geometry["columns"] == (3 if device == "desktop" else 2),
+                        f"Favorites grid differs from catalog: {fav_geometry}")
+                require(abs(fav_geometry["aspect"] - 2/3) < .02,
+                        f"Favorites sample is not upright: {fav_geometry}")
+                require(fav_geometry["rotation"] != "none",
+                        "Favorites material photo did not rotate vertically")
                 require(page.locator('[data-ev-compare],[data-compare-link],a[href*="compare.html"]').count() == 0,
                         "Comparison is still exposed on favorites page")
                 return {"comparison_removed": True, "columns": columns}

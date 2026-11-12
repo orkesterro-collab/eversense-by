@@ -114,42 +114,42 @@ img.ev-card-image {width:100%;height:auto;object-fit:contain}
 .ev-card-actions {display:flex;gap:8px;align-items:stretch;margin-top:auto;padding-top:15px}
 .ev-card-actions .ev-button {flex:1;min-width:0;min-height:44px;padding:10px 9px;font-size:12px;line-height:1.45;border-color:#9D9D9C;letter-spacing:0}
 .ev-card-actions .ev-button[aria-pressed="true"] {border-color:#343333}
-/* Upright, full-size material previews in the catalog only.
+/* Upright, full-size material previews in the catalog and favorites.
    Original product photographs show horizontal planks, so rotate the photo itself
    rather than stretching or replacing the manufacturer's material texture. */
-body[data-buyer-page="catalog"] .ev-wrap {width:min(1220px,calc(100% - 80px))}
-body[data-buyer-page="catalog"] .ev-grid {grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 20px}
-body[data-buyer-page="catalog"] .ev-card-image {aspect-ratio:2/3}
-body[data-buyer-page="catalog"] .ev-card-image > img:not(.ev-card-interior) {
+body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-wrap {width:min(1220px,calc(100% - 80px))}
+body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-grid {grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 20px}
+body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-image {aspect-ratio:2/3}
+body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-image > img:not(.ev-card-interior) {
   position:absolute;top:50%;left:50%;width:150%;height:66.6667%;max-width:none;
   object-fit:cover;transform-origin:center;
   transform:translate(-50%,-50%) rotate(90deg)
 }
 @media(hover:hover) and (pointer:fine){
-  body[data-buyer-page="catalog"] .ev-card-image:hover > img:not(.ev-card-interior),
-  body[data-buyer-page="catalog"] .ev-card-image:focus-visible > img:not(.ev-card-interior) {
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-image:hover > img:not(.ev-card-interior),
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-image:focus-visible > img:not(.ev-card-interior) {
     transform:translate(-50%,-50%) rotate(90deg) scale(1.025)
   }
 }
 @media(max-width:1050px){
-  body[data-buyer-page="catalog"] .ev-grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-grid {grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:760px){
-  body[data-buyer-page="catalog"] .ev-wrap {width:calc(100% - 40px)}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-wrap {width:calc(100% - 40px)}
 }
 @media(max-width:600px){
   /* Keep two upright decors visible side by side on phones. */
-  body[data-buyer-page="catalog"] .ev-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 12px}
-  body[data-buyer-page="catalog"] .ev-card-body {padding-top:10px}
-  body[data-buyer-page="catalog"] .ev-sku {font-size:11px}
-  body[data-buyer-page="catalog"] .ev-card-title {font-size:15px;line-height:1.35}
-  body[data-buyer-page="catalog"] .ev-card-meta {font-size:11px;line-height:1.45;margin:5px 0 9px!important}
-  body[data-buyer-page="catalog"] .ev-card .ev-price-box {flex-direction:column;align-items:flex-start;gap:3px}
-  body[data-buyer-page="catalog"] .ev-card .ev-price-normal,
-  body[data-buyer-page="catalog"] .ev-card .ev-price-sale,
-  body[data-buyer-page="catalog"] .ev-card .ev-price-box strong {font-size:14px}
-  body[data-buyer-page="catalog"] .ev-card-actions {flex-direction:column;gap:6px;padding-top:10px}
-  body[data-buyer-page="catalog"] .ev-card-actions .ev-button {width:100%;flex:0 0 auto;min-height:40px;padding:8px 5px;font-size:11px;line-height:1.35}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 12px}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-body {padding-top:10px}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-sku {font-size:11px}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-title {font-size:15px;line-height:1.35}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-meta {font-size:11px;line-height:1.45;margin:5px 0 9px!important}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card .ev-price-box {flex-direction:column;align-items:flex-start;gap:3px}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card .ev-price-normal,
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card .ev-price-sale,
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card .ev-price-box strong {font-size:14px}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-actions {flex-direction:column;gap:6px;padding-top:10px}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-actions .ev-button {width:100%;flex:0 0 auto;min-height:40px;padding:8px 5px;font-size:11px;line-height:1.35}
 }
 
 .ev-empty {padding:42px 28px;background:#FFFFFF;text-align:center;grid-column:1/-1}
