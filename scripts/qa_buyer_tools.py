@@ -909,6 +909,17 @@ def main():
                 page.locator(layer).scroll_into_view_if_needed()
                 shot(page, 'static-home-' + path.replace('/', '-') + '-' + device, full=False)
                 panels = collection_panels(page, path, device)
+                footer = page.locator('#ev-home-footer')
+                require(footer.count() == 1, "Expected one compact homepage footer")
+                require(page.locator('.ev-belarus-legal, #ev-belarus-contact-title, #rec1128306611, #rec1128311571').count() == 0,
+                        "Duplicated homepage footer content remains")
+                footer.scroll_into_view_if_needed()
+                footer_layout = footer.evaluate("""el=>({height:el.getBoundingClientRect().height,
+                  overflow:document.documentElement.scrollWidth>document.documentElement.clientWidth,
+                  links:[...el.querySelectorAll('a')].map(a=>({width:a.getBoundingClientRect().width,text:a.innerText}))})""")
+                require(footer_layout['height'] < 500 and not footer_layout['overflow'],
+                        f"Footer is too large or overflows: {footer_layout}")
+                shot(page, 'footer-' + path.replace('/', '-') + '-' + device, full=False)
                 return {"path": path, "scroll_effects": 0, "overlapping_descriptions": 0, "collections": panels}
 
             for device, width, height in DEVICES[:2]:

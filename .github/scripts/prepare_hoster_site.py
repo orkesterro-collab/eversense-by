@@ -27,6 +27,7 @@ RELEASE_ASSETS = {
     "/assets/explore-guides.css", "/assets/explore-product.css", "/assets/explore-product.js",
     "/assets/explore-interiors.css", "/assets/explore-interiors.js",
     "/assets/home-senses.css", "/assets/home-senses.js",
+    "/assets/home-footer.css",
 }
 
 
