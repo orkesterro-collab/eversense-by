@@ -26,6 +26,7 @@ RELEASE_ASSETS = {
     "/assets/buyer.js", "/assets/buyer.css", "/assets/buyer-core.js", "/assets/products-data.js",
     "/assets/explore-guides.css", "/assets/explore-product.css", "/assets/explore-product.js",
     "/assets/explore-interiors.css", "/assets/explore-interiors.js",
+    "/assets/home-senses.css", "/assets/home-senses.js",
 }
 
 

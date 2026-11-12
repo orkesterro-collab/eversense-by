@@ -4,6 +4,7 @@ from html import escape
 from html.parser import HTMLParser
 from pathlib import Path
 import re
+from home_senses import make_home_senses
 
 HOME_PATHS = ('index.html', 'ru/index.html', 'en/index.html')
 LAYER_RECORDS = ('1002600136', '1040271736')
@@ -96,7 +97,7 @@ def make_static_home(source):
     if carrier_rule not in source:
         source = source.replace('<style id="ev-home-static-style">',
                                 '<style id="ev-home-static-style">' + carrier_rule, 1)
-    return source
+    return make_home_senses(source)
 
 
 if __name__ == '__main__':

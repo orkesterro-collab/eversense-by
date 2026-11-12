@@ -924,6 +924,89 @@ def main():
                 case('collection-breakpoint-' + str(width),
                      lambda p, c, w=width: collection_breakpoint_test(p, c, str(w)), width, 900)
 
+            def senses_test(page, context, path, device):
+                page.emulate_media(reduced_motion="no-preference")
+                goto(page, path, prices=False)
+                root = page.locator('#ev-senses[data-enhanced="true"]')
+                root.scroll_into_view_if_needed()
+                require(root.count() == 1, "Expected one combined sensory block")
+                buttons = root.locator('.ev-sense-toggle')
+                require(buttons.count() == 3, "Expected three sensory panels")
+                images(page, '#ev-senses img', minimum=3, local_only=True)
+                states = []
+                for index, proportions in enumerate(((60, 25, 15), (15, 60, 25), (10, 10, 80))):
+                    before_y = page.evaluate('scrollY')
+                    buttons.nth(index).click()
+                    page.wait_for_function("""expected => {
+                      const root=document.querySelector('#ev-senses');
+                      const panels=[...root.querySelectorAll('.ev-sense-panel')];
+                      return panels.every((p,i)=>Math.abs(Number(getComputedStyle(p).flexGrow)-expected[i])<.01)
+                        && getComputedStyle(root.querySelector('.is-active .ev-sense-copy')).opacity==='1';
+                    }""", arg=proportions)
+                    metrics = root.evaluate("""el=>{
+                      const r=el.getBoundingClientRect(), vertical=getComputedStyle(el).flexDirection==='column';
+                      const panels=[...el.querySelectorAll('.ev-sense-panel')];
+                      return {vertical,width:r.width,height:r.height,viewport:document.documentElement.clientWidth,
+                        panels:panels.map(p=>{const b=p.getBoundingClientRect(),copy=p.querySelector('.ev-sense-copy'),
+                          c=copy.getBoundingClientRect(),button=p.querySelector('button');return {
+                          proportion:100*(vertical?b.height/r.height:b.width/r.width),
+                          expanded:button.getAttribute('aria-expanded'),hidden:copy.getAttribute('aria-hidden'),
+                          visible:getComputedStyle(copy).visibility==='visible' && getComputedStyle(copy).opacity==='1',
+                          copyInside:c.left>=b.left && c.right<=b.right+1 && c.top>=b.top && c.bottom<=b.bottom+1,
+                          transition:getComputedStyle(p).transitionDuration};})};
+                    }""")
+                    require(abs(metrics['width']-metrics['viewport']) < 2, f"Sensory block is not full width: {metrics}")
+                    require(metrics['height'] <= 660, f"Sensory block is too tall: {metrics}")
+                    require(metrics['vertical'] == (page.viewport_size['width'] < 640), "Wrong sensory layout direction")
+                    require(abs(page.evaluate('scrollY')-before_y) < 2, "Selecting a sensory panel moved the page")
+                    for i, panel in enumerate(metrics['panels']):
+                        active = i == index
+                        require(abs(panel['proportion']-proportions[i]) < .2, f"Wrong panel proportions: {metrics}")
+                        require(panel['expanded'] == str(active).lower() and panel['hidden'] == str(not active).lower(),
+                                "Sensory panel accessibility state is inconsistent")
+                        require(panel['visible'] == active, "Inactive sensory copy is visible")
+                        require(not active or panel['copyInside'], f"Sensory copy is clipped: {metrics}")
+                        require(panel['transition'] != '0s', "Panel resizing has no transition")
+                    states.append(metrics)
+                    shot(page, 'senses-' + path.replace('/', '-') + '-' + device + '-' + str(index), full=False)
+                buttons.nth(2).press('Home')
+                require(root.get_attribute('data-active') == '0', "Home key did not select the first panel")
+                buttons.nth(0).press('ArrowRight')
+                require(root.get_attribute('data-active') == '1', "Arrow key did not select the next panel")
+                buttons.nth(1).press('End')
+                require(root.get_attribute('data-active') == '2', "End key did not select the last panel")
+                buttons.nth(0).press('Enter')
+                require(root.get_attribute('data-active') == '0', "Enter did not activate a sensory panel")
+                page.emulate_media(reduced_motion='reduce')
+                buttons.nth(1).click()
+                require(root.locator('.ev-sense-panel').evaluate_all(
+                    "els=>els.every(el=>getComputedStyle(el).transitionDuration==='0s')"),
+                    "Sensory block ignores reduced-motion preference")
+                return {'path': path, 'states': states, 'keyboard': True, 'reduced_motion': True}
+
+            for device, width, height in DEVICES[:2]:
+                for home_path in ('index.html', 'ru/index.html', 'en/index.html'):
+                    case('senses-' + home_path.replace('/', '-') + '-' + device,
+                         lambda p, c, path=home_path, d=device: senses_test(p, c, path, d), width, height)
+            for width in (320, 768):
+                case('senses-breakpoint-' + str(width),
+                     lambda p, c, w=width: senses_test(p, c, 'index.html', str(w)), width, 900)
+
+            def senses_fallback_test(page, context):
+                context.route('**/home-senses.js*', lambda route: route.abort())
+                goto(page, 'index.html', prices=False)
+                root = page.locator('#ev-senses')
+                require(root.get_attribute('data-enhanced') is None, "Fallback test unexpectedly loaded the script")
+                require(root.locator('.ev-sense-copy').evaluate_all(
+                    "els=>els.length===3 && els.every(el=>getComputedStyle(el).visibility==='visible' && getComputedStyle(el).opacity==='1')"),
+                    "Content disappears when the sensory script is unavailable")
+                require(root.locator('.ev-sense-toggle').evaluate_all(
+                    "els=>els.every(el=>getComputedStyle(el).display==='none')"),
+                    "Fallback shows non-functional controls")
+                return {'all_three_captions_visible': True}
+
+            case('senses-script-fallback', senses_fallback_test, 390, 844)
+
             # EL1052 already has this complete mobile coverage in the existing
             # mirrored-product case above. Check the remaining 29 without a
             # duplicate visit, and expose an exact SKU-to-case map in the report.
