@@ -9,6 +9,9 @@ body.ev-has-global-header #rec1040271616,
 body.ev-has-global-header #rec1131720891 .tn-elem:not([data-elem-type="text"]),
 body.ev-has-global-header #rec1143456296 .tn-elem:not([data-elem-type="text"]) {display:none!important}
 body.ev-has-global-header .site-top + main {padding-top:var(--ev-header-height)}
+/* Remove both decorative scrolling strips, including their layout space. */
+#rec1002600006,
+#rec1002600091 {display:none!important}
 /* Keep the icons' bottom edge clear of the existing feature captions. */
 #rec1003959231 .ev-brand-feature-icon,
 #rec1040271661 .ev-brand-feature-icon {width:40px!important;transform:translateY(-15px)!important}
