@@ -14,6 +14,13 @@ body.ev-has-global-header .site-top + main {padding-top:var(--ev-header-height)}
 #rec1002600091,
 #rec1040271671,
 #rec1040271726 {display:none!important}
+/* Empty Tilda spacers after the layer diagram grow with desktop scaling. */
+@media (min-width:1200px) {
+  html.ev-home-static #rec1002600141,
+  html.ev-home-static #rec1002600146,
+  html.ev-home-static #rec1040271741,
+  html.ev-home-static #rec1040271746 {display:none!important}
+}
 /* Keep the icons' bottom edge clear of the existing feature captions. */
 #rec1003959231 .ev-brand-feature-icon,
 #rec1040271661 .ev-brand-feature-icon {width:40px!important;transform:translateY(-15px)!important}

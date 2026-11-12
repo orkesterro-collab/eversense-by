@@ -898,6 +898,24 @@ def main():
                   ).map(b=>[a.text,b.text]));
                 }""")
                 require(not overlap, f"Static layer descriptions overlap: {overlap}")
+                if device == 'desktop':
+                    original_viewport = dict(page.viewport_size)
+                    try:
+                        for width in (1440, 2048):
+                            page.set_viewport_size({"width": width, "height": 1000})
+                            page.wait_for_timeout(500)
+                            spacing = page.locator(layer).evaluate("""el=>{
+                              const summary=el.querySelector('[data-elem-id="1742894294656"]').getBoundingClientRect();
+                              let next=el.nextElementSibling;
+                              while(next&&!next.classList.contains('uc-full1')) next=next.nextElementSibling;
+                              return next?{gap:next.getBoundingClientRect().top-summary.bottom,
+                                overflow:document.documentElement.scrollWidth>document.documentElement.clientWidth}:null;
+                            }""")
+                            require(spacing and 0 <= spacing['gap'] <= 120 and not spacing['overflow'],
+                                    f"Excessive or overlapping space after layers at {width}px: {spacing}")
+                    finally:
+                        page.set_viewport_size(original_viewport)
+                        page.wait_for_timeout(500)
                 require(page.locator('#ev-global-header.ev-header-hidden').count() == 0,
                         "Home navigation still slides away on scroll")
                 fixed = page.locator('#allrecords .tn-atom, #allrecords .t396__carrier').evaluate_all(
