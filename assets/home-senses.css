@@ -1,8 +1,8 @@
 .ev-senses {
-  --sense-one: 60;
-  --sense-two: 25;
-  --sense-three: 15;
-  --sense-ease: cubic-bezier(.22, 1, .36, 1);
+  --sense-one: 80;
+  --sense-two: 10;
+  --sense-three: 10;
+  --sense-ease: cubic-bezier(.45, 0, .2, 1);
   display: flex;
   width: 100%;
   height: clamp(420px, 64svh, 660px);
@@ -10,7 +10,7 @@
   background: #272a28;
   font-family: Manrope, Arial, sans-serif;
 }
-.ev-senses[data-active="1"] { --sense-one: 15; --sense-two: 60; --sense-three: 25; }
+.ev-senses[data-active="1"] { --sense-one: 10; --sense-two: 80; --sense-three: 10; }
 .ev-senses[data-active="2"] { --sense-one: 10; --sense-two: 10; --sense-three: 80; }
 .ev-sense-panel {
   position: relative;
@@ -19,7 +19,7 @@
   isolation: isolate;
   overflow: hidden;
   flex: var(--sense-one) 1 0%;
-  transition: flex-grow 850ms var(--sense-ease);
+  transition: flex-grow 2000ms var(--sense-ease);
   scroll-margin-top: 80px;
 }
 .ev-sense-panel:nth-child(2) { flex-grow: var(--sense-two); }
@@ -52,7 +52,7 @@
   z-index: 2;
   opacity: .55;
   pointer-events: none;
-  transition: opacity 450ms ease;
+  transition: opacity 700ms ease;
 }
 .ev-sense-curve path { fill: none; stroke: #fff; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
 .ev-sense-copy {
@@ -65,7 +65,7 @@
   pointer-events: none;
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 420ms ease 190ms, transform 650ms var(--sense-ease) 150ms, visibility 0s;
+  transition: opacity 650ms ease 700ms, transform 1000ms var(--sense-ease) 650ms, visibility 0s;
 }
 .ev-sense-copy h2 {
   margin: 0 0 20px;
@@ -96,7 +96,7 @@
   letter-spacing: .08em;
   pointer-events: none;
   opacity: 1;
-  transition: opacity 250ms ease 250ms;
+  transition: opacity 350ms ease 850ms;
 }
 .ev-sense-toggle {
   position: absolute;
@@ -121,7 +121,7 @@
   opacity: 0;
   visibility: hidden;
   transform: translateY(14px);
-  transition: opacity 170ms ease, transform 250ms ease, visibility 0s 170ms;
+  transition: opacity 250ms ease, transform 350ms ease, visibility 0s 250ms;
 }
 .ev-senses[data-enhanced] .ev-sense-panel:not(.is-active) .ev-sense-curve { opacity: 0; }
 .ev-senses:not([data-enhanced]) { height: auto; flex-wrap: wrap; }

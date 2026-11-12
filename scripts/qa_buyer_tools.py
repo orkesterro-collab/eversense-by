@@ -938,7 +938,7 @@ def main():
                 page.wait_for_timeout(1200)
                 root.scroll_into_view_if_needed()
                 states = []
-                for index, proportions in enumerate(((60, 25, 15), (15, 60, 25), (10, 10, 80))):
+                for index, proportions in enumerate(((80, 10, 10), (10, 80, 10), (10, 10, 80))):
                     # Exclude Playwright's own scroll-to-target from the check.
                     buttons.nth(index).scroll_into_view_if_needed()
                     before_y = page.evaluate('scrollY')
@@ -974,7 +974,8 @@ def main():
                                 "Sensory panel accessibility state is inconsistent")
                         require(panel['visible'] == active, "Inactive sensory copy is visible")
                         require(not active or panel['copyInside'], f"Sensory copy is clipped: {metrics}")
-                        require(panel['transition'] != '0s', "Panel resizing has no transition")
+                        require(float(panel['transition'].removesuffix('s')) >= 1.8,
+                                "Panel resizing is too fast")
                     states.append(metrics)
                     shot(page, 'senses-' + path.replace('/', '-') + '-' + device + '-' + str(index), full=False)
                 buttons.nth(2).press('Home')
