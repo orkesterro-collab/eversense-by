@@ -7,6 +7,9 @@ import re
 
 HOME_PATHS = ('index.html', 'ru/index.html', 'en/index.html')
 LAYER_RECORDS = ('1002600136', '1040271736')
+COLLECTION_RECORDS = ('1002600161', '1002600166', '1040271761', '1040271766')
+COLLECTION_CONTENT = ('1742824688189', '1742824742704', '1742824688198',
+                      '1742824688204', '1742824688207')
 
 
 def make_static_home(source):
@@ -18,9 +21,13 @@ def make_static_home(source):
     edits = []
 
     class HomeParser(HTMLParser):
+        record = None
+
         def handle_starttag(self, tag, attrs):
             original_attrs = list(attrs)
             values = dict(attrs)
+            if values.get('id', '').startswith('rec'):
+                self.record = values['id'][3:]
             animated = (values.get('data-animate-sbs-event') in ('scroll', 'intoview')
                         or 'data-animate-style' in values)
             if animated:
@@ -43,6 +50,13 @@ def make_static_home(source):
             if values.get('data-elem-id') in tops:
                 attrs = [(key, tops[values['data-elem-id']] if key == 'data-field-top-value' else value)
                          for key, value in attrs]
+            # These two collection panels started 600 px above their artboards;
+            # the removed scroll animation used to bring them into view.
+            if (self.record in COLLECTION_RECORDS
+                    and values.get('data-elem-id') in COLLECTION_CONTENT):
+                attrs = [(key, str(int(value) + 600)
+                          if key == 'data-field-top-value' and int(value) < 0 else value)
+                         for key, value in attrs]
             if attrs != original_attrs:
                 raw = self.get_starttag_text()
                 replacement = '<' + tag + ''.join(' ' + key if value is None else
@@ -61,6 +75,12 @@ def make_static_home(source):
     source = re.sub(r'<script\b[^>]*>\s*SmoothScroll\(\{.*?\}\)\s*;?\s*</script>',
                     '', source, flags=re.S)
     source = re.sub(r'background-attachment\s*:\s*fixed', 'background-attachment:scroll', source)
+    # Keep the pre-initialization CSS in sync with Tilda's layout attributes.
+    collection_top = (r'(#rec(?:' + '|'.join(COLLECTION_RECORDS) +
+                      r')\s+\.tn-elem\[data-elem-id="(?:' + '|'.join(COLLECTION_CONTENT) +
+                      r')"\]\{[^{}]*?\btop:calc\(50vh - 275px \+ )(-\d+)(px\);)')
+    source = re.sub(collection_top,
+                    lambda match: match[1] + str(int(match[2]) + 600) + match[3], source)
     if 'id="ev-home-static-style"' not in source:
         rules = ['html.ev-home-static{scroll-behavior:auto!important;scroll-snap-type:none!important}',
                  'html.ev-home-static #ev-global-header{transition:none}']
@@ -72,6 +92,10 @@ def make_static_home(source):
                          ' .tn-elem[data-elem-id="1742894294656"]{top:610px}}')
         source = source.replace('</head>', '<style id="ev-home-static-style">' +
                                 ''.join(rules) + '</style></head>', 1)
+    carrier_rule = 'html.ev-home-static .t396__carrier{position:absolute!important}'
+    if carrier_rule not in source:
+        source = source.replace('<style id="ev-home-static-style">',
+                                '<style id="ev-home-static-style">' + carrier_rule, 1)
     return source
 
 

@@ -827,6 +827,49 @@ def main():
                 case("existing-product-" + device,
                      lambda p, c, d=device: mirrored_test(p, c, by_sku["EL1052"]["canonicalPath"], d, True), width, height)
 
+            def collection_panels(page, path, device):
+                records = (['1040271756', '1040271761', '1040271766'] if path.startswith('en/')
+                           else ['1002600156', '1002600161', '1002600166'])
+                result = []
+                for record in records:
+                    panel = page.locator('#rec' + record)
+                    panel.scroll_into_view_if_needed()
+                    photo = panel.locator('[data-elem-id="1742824688189"] .tn-atom')
+                    photo.scroll_into_view_if_needed()
+                    page.wait_for_timeout(300)
+                    metrics = panel.evaluate("""panel=>{
+                      const r=panel.getBoundingClientRect();
+                      const within=el=>{const b=el.getBoundingClientRect();return b.width>0 && b.height>0 &&
+                        b.top>=r.top-2 && b.bottom<=r.bottom+2 &&
+                        b.left>=r.left-2 && b.right<=r.right+2;};
+                      const photo=panel.querySelector('[data-elem-id="1742824688189"] .tn-atom');
+                      const texts=[...panel.querySelectorAll('[data-elem-type="text"]')];
+                      const buttons=[...panel.querySelectorAll('[data-elem-type="button"] a')]
+                        .filter(el=>Number(getComputedStyle(el).opacity)>0 && within(el));
+                      const p=photo.getBoundingClientRect();
+                      const hit=document.elementFromPoint(p.x+p.width/2,p.y+p.height/2);
+                      return {photoInside:within(photo),photoVisible:getComputedStyle(photo).opacity==='1',
+                        photoLoaded:photo.classList.contains('loaded') && getComputedStyle(photo).backgroundImage!=='none',
+                        photoUncovered:hit===photo || photo.contains(hit),
+                        textInside:texts.every(within),buttons:buttons.map(a=>a.getAttribute('href'))};
+                    }""")
+                    require(metrics['photoInside'] and metrics['photoVisible'] and metrics['photoLoaded']
+                            and metrics['photoUncovered'], f"Collection photo missing or clipped: {record}: {metrics}")
+                    require(metrics['textInside'], f"Collection copy lies outside its panel: {record}")
+                    require(len(metrics['buttons']) == 1 and '/catalog-' in metrics['buttons'][0],
+                            f"Collection must have one visible catalog button: {record}: {metrics}")
+                    button = panel.locator('[data-elem-type="button"] a').filter(visible=True)
+                    # Tilda keeps a transparent alternate button off-canvas.
+                    for candidate in button.all():
+                        if candidate.evaluate("el=>getComputedStyle(el).opacity==='1'"):
+                            candidate.scroll_into_view_if_needed()
+                            require(candidate.evaluate("""el=>{const r=el.getBoundingClientRect();
+                              const hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
+                              return hit===el || el.contains(hit);}"""), f"Catalog button is covered: {record}")
+                    shot(page, 'collection-' + record + '-' + device, full=False)
+                    result.append(metrics)
+                return result
+
             def static_home_test(page, context, path, device):
                 page.emulate_media(reduced_motion="no-preference")
                 goto(page, path, prices=False)
@@ -860,14 +903,26 @@ def main():
                 fixed = page.locator('#allrecords .tn-atom, #allrecords .t396__carrier').evaluate_all(
                     "els=>els.filter(el=>getComputedStyle(el).backgroundAttachment==='fixed').length")
                 require(fixed == 0, "Fixed/parallax backgrounds remain on home")
+                require(page.locator('#allrecords .t396__carrier').evaluate_all(
+                    "els=>els.every(el=>getComputedStyle(el).position!=='fixed')"),
+                    "Fixed background carriers remain on home")
                 page.locator(layer).scroll_into_view_if_needed()
                 shot(page, 'static-home-' + path.replace('/', '-') + '-' + device, full=False)
-                return {"path": path, "scroll_effects": 0, "overlapping_descriptions": 0}
+                panels = collection_panels(page, path, device)
+                return {"path": path, "scroll_effects": 0, "overlapping_descriptions": 0, "collections": panels}
 
             for device, width, height in DEVICES[:2]:
                 for home_path in ('index.html', 'ru/index.html', 'en/index.html'):
                     case('static-home-' + home_path.replace('/', '-') + '-' + device,
                          lambda p, c, path=home_path, d=device: static_home_test(p, c, path, d), width, height)
+
+            def collection_breakpoint_test(page, context, device):
+                goto(page, 'index.html', prices=False)
+                return collection_panels(page, 'index.html', device)
+
+            for width in (320, 520, 768, 1024):
+                case('collection-breakpoint-' + str(width),
+                     lambda p, c, w=width: collection_breakpoint_test(p, c, str(w)), width, 900)
 
             # EL1052 already has this complete mobile coverage in the existing
             # mirrored-product case above. Check the remaining 29 without a
