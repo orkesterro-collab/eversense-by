@@ -17,7 +17,7 @@ DATA = json.loads((ROOT / 'assets/products-data.json').read_text())
 PRODUCTS = DATA if isinstance(DATA, list) else DATA['products']
 PRODUCTS.sort(key=lambda p: (['nature','luxury','minimal'].index(p['collectionID']), int(p['sku'][2:])))
 GUIDES = json.loads((ROOT / 'content/buyer-guides.json').read_text())
-VERSION = '20261112vertical'
+VERSION = '20261112mobile2'
 COLLECTIONS = [
     ('nature', 'Природная эстетика', 'Спокойные древесные оттенки и выразительные рисунки дуба.'),
     ('luxury', 'Тихая роскошь', 'Натуральные и глубокие тона для интерьера с характером.'),
