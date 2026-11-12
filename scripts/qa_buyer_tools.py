@@ -927,6 +927,11 @@ def main():
             def senses_test(page, context, path, device):
                 page.emulate_media(reduced_motion="no-preference")
                 goto(page, path, prices=False)
+                # A bottom cookie overlay can cover the narrow third mobile
+                # panel and make Playwright scroll while retrying its click.
+                cookie_ok = page.get_by_text('OK', exact=True)
+                if cookie_ok.count() and cookie_ok.first.is_visible():
+                    cookie_ok.first.click()
                 root = page.locator('#ev-senses[data-enhanced="true"]')
                 root.scroll_into_view_if_needed()
                 require(root.count() == 1, "Expected one combined sensory block")
