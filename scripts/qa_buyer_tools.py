@@ -827,6 +827,48 @@ def main():
                 case("existing-product-" + device,
                      lambda p, c, d=device: mirrored_test(p, c, by_sku["EL1052"]["canonicalPath"], d, True), width, height)
 
+            def static_home_test(page, context, path, device):
+                page.emulate_media(reduced_motion="no-preference")
+                goto(page, path, prices=False)
+                page.wait_for_function("document.documentElement.classList.contains('ev-home-static')")
+                require(page.locator('[data-animate-sbs-event="scroll"], [data-animate-sbs-event="intoview"], [data-animate-style]').count() == 0,
+                        "Home still contains scroll/reveal animation triggers")
+                layer = '#rec1040271736' if path.startswith('en/') else '#rec1002600136'
+                page.locator(layer).scroll_into_view_if_needed()
+                page.wait_for_timeout(400)
+                before = page.locator(layer + ' [data-elem-id="1742894294619"]').evaluate("""el=>({
+                  y:el.getBoundingClientRect().top+scrollY,opacity:getComputedStyle(el).opacity,
+                  transform:getComputedStyle(el).transform})""")
+                page.mouse.wheel(0, 240)
+                page.wait_for_timeout(400)
+                after = page.locator(layer + ' [data-elem-id="1742894294619"]').evaluate("""el=>({
+                  y:el.getBoundingClientRect().top+scrollY,opacity:getComputedStyle(el).opacity,
+                  transform:getComputedStyle(el).transform})""")
+                require(abs(after['y'] - before['y']) < 2 and after['opacity'] == '1'
+                        and after['transform'] == before['transform'],
+                        f"Layer heading moves or fades during scrolling: {before} -> {after}")
+                overlap = page.locator(layer + ' [data-elem-type="text"]').evaluate_all("""els=>{
+                  const boxes=els.map(el=>({r:el.getBoundingClientRect(),text:el.innerText})).filter(x=>x.r.width&&x.r.height);
+                  return boxes.flatMap((a,i)=>boxes.slice(i+1).filter(b=>
+                    Math.min(a.r.right,b.r.right)-Math.max(a.r.left,b.r.left)>2 &&
+                    Math.min(a.r.bottom,b.r.bottom)-Math.max(a.r.top,b.r.top)>2
+                  ).map(b=>[a.text,b.text]));
+                }""")
+                require(not overlap, f"Static layer descriptions overlap: {overlap}")
+                require(page.locator('#ev-global-header.ev-header-hidden').count() == 0,
+                        "Home navigation still slides away on scroll")
+                fixed = page.locator('#allrecords .tn-atom, #allrecords .t396__carrier').evaluate_all(
+                    "els=>els.filter(el=>getComputedStyle(el).backgroundAttachment==='fixed').length")
+                require(fixed == 0, "Fixed/parallax backgrounds remain on home")
+                page.locator(layer).scroll_into_view_if_needed()
+                shot(page, 'static-home-' + path.replace('/', '-') + '-' + device, full=False)
+                return {"path": path, "scroll_effects": 0, "overlapping_descriptions": 0}
+
+            for device, width, height in DEVICES[:2]:
+                for home_path in ('index.html', 'ru/index.html', 'en/index.html'):
+                    case('static-home-' + home_path.replace('/', '-') + '-' + device,
+                         lambda p, c, path=home_path, d=device: static_home_test(p, c, path, d), width, height)
+
             # EL1052 already has this complete mobile coverage in the existing
             # mirrored-product case above. Check the remaining 29 without a
             # duplicate visit, and expose an exact SKU-to-case map in the report.
