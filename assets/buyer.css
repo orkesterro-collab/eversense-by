@@ -40,12 +40,12 @@ body.ev-buyer {margin:0;background:var(--ev-cream);padding-top:var(--ev-header-h
 .ev-hero .ev-breadcrumb {color:#DADADA}
 .ev-hero .ev-actions {margin-top:27px}
 .ev-hero :focus-visible,.ev-footer :focus-visible {outline-color:#E1C5A7}
-body:is([data-buyer-page="catalog"],[data-buyer-page="compare"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero {padding:24px 0 28px}
-body:is([data-buyer-page="catalog"],[data-buyer-page="compare"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero h1 {font-size:56px;line-height:1.08;margin-bottom:14px}
-body:is([data-buyer-page="catalog"],[data-buyer-page="compare"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero .ev-lead {font-size:18px;line-height:1.6;max-width:920px}
-body:is([data-buyer-page="catalog"],[data-buyer-page="compare"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero .ev-breadcrumb {margin-bottom:16px}
-body:is([data-buyer-page="catalog"],[data-buyer-page="compare"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero .ev-eyebrow {margin-bottom:12px}
-body:is([data-buyer-page="catalog"],[data-buyer-page="compare"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero .ev-actions {margin-top:10px}
+body:is([data-buyer-page="catalog"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero {padding:24px 0 28px}
+body:is([data-buyer-page="catalog"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero h1 {font-size:56px;line-height:1.08;margin-bottom:14px}
+body:is([data-buyer-page="catalog"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero .ev-lead {font-size:18px;line-height:1.6;max-width:920px}
+body:is([data-buyer-page="catalog"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero .ev-breadcrumb {margin-bottom:16px}
+body:is([data-buyer-page="catalog"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero .ev-eyebrow {margin-bottom:12px}
+body:is([data-buyer-page="catalog"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero .ev-actions {margin-top:10px}
 body[data-buyer-page="catalog"] .ev-section {padding-top:32px}
 body[data-buyer-page="catalog"] .ev-hero h1 {font-size:45px;line-height:1.1;font-weight:600;letter-spacing:0}
 body[data-buyer-page="catalog"] .ev-inline-nav {margin-top:0;margin-bottom:16px}
@@ -204,29 +204,6 @@ body[data-buyer-page="catalog"] .ev-card-image > img:not(.ev-card-interior) {
 .ev-swatch-row a,.ev-swatch-row button {min-width:44px;min-height:44px;border:1px solid #DADADA;background:transparent;padding:4px}
 .ev-swatch-row img {width:50px;height:50px;object-fit:cover}
 .ev-swatch-row [aria-pressed="true"],.ev-swatch-row [aria-current="true"] {outline:2px solid #343333;outline-offset:3px}
-.ev-comparison-wrap {width:100%;min-width:0;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-color:#C0A58C #FFFFFF;scrollbar-width:thin}
-.ev-comparison {border-collapse:collapse;width:100%;min-width:700px;table-layout:fixed;text-align:left;font-size:14px;line-height:1.65}
-.ev-comparison caption {text-align:left;padding:0 0 22px;color:#343333;font-size:13px;line-height:1.7}
-.ev-comparison th,.ev-comparison td {padding:19px 22px;vertical-align:top;border-bottom:1px solid #DADADA;overflow-wrap:anywhere}
-.ev-comparison th {font-weight:500}
-.ev-comparison th .ev-button {margin-top:12px}
-.ev-comparison thead th > a {display:block}
-.ev-comparison thead th > .ev-button {display:inline-flex;margin-top:12px;background:transparent;color:#343333;border:1px solid #9D9D9C}
-.ev-comparison thead th > .ev-button:hover {background:#FFFFFF;border-color:#343333}
-.ev-comparison small {display:block;color:#343333;font-size:11px;line-height:1.6;margin-top:5px}
-.ev-comparison th:first-child,.ev-comparison td:first-child {width:21%;color:#343333;background:#FFFFFF}
-.ev-comparison thead th {background:var(--ev-cream,#FFFFFF);padding-top:0;padding-bottom:28px}
-.ev-comparison thead th:first-child {vertical-align:bottom;background:var(--ev-cream,#FFFFFF)}
-.ev-comparison img {width:100%;height:180px;object-fit:contain;background:#FFFFFF;margin-bottom:17px}
-.ev-comparison h2,.ev-comparison h3 {font-size:20px;line-height:1.3;margin:0 0 8px}
-.ev-comparison a {text-underline-offset:4px}
-.ev-comparison .ev-actions {margin-top:15px}
-.ev-comparison .ev-button {font-size:12px;padding:10px 12px;min-height:44px}
-.ev-comparison .ev-different td,.ev-comparison .ev-different th,.ev-comparison tr[data-different="true"] td {background:#E1C5A7}
-.ev-comparison .ev-price-box {display:flex;flex-wrap:wrap;gap:5px 9px}
-.ev-comparison .ev-price-box strong {font-size:16px;font-weight:600}
-.ev-comparison .ev-price-box del {font-size:12px;color:#343333}
-.ev-comparison .ev-price-box small {flex-basis:100%;margin-top:0}
 .ev-calculator {display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(30px,6vw,80px);align-items:start}
 .ev-calculator > * {min-width:0}
 .ev-calculator form,.ev-calculator .ev-calculator-fields {display:grid;gap:21px}
@@ -328,12 +305,12 @@ body[data-buyer-page="catalog"] .ev-card-image > img:not(.ev-card-interior) {
   .ev-section {padding-block:48px}
   .ev-hero {padding:30px 0 38px}
   .ev-hero h1 {font-size:36px;line-height:1.1}
-  body:is([data-buyer-page="catalog"],[data-buyer-page="compare"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero {padding:20px 0 24px}
-  body:is([data-buyer-page="catalog"],[data-buyer-page="compare"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero h1 {font-size:36px;margin-bottom:12px}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero {padding:20px 0 24px}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero h1 {font-size:36px;margin-bottom:12px}
   body[data-buyer-page="catalog"] .ev-hero h1 {font-size:30px}
-  body:is([data-buyer-page="catalog"],[data-buyer-page="compare"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero .ev-lead {font-size:15px;line-height:1.6}
-  body:is([data-buyer-page="catalog"],[data-buyer-page="compare"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero .ev-actions {flex-wrap:nowrap;overflow-x:auto;max-width:100%;gap:16px;margin-top:8px;scrollbar-width:thin}
-  body:is([data-buyer-page="catalog"],[data-buyer-page="compare"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero .ev-actions > a {flex:0 0 auto;white-space:nowrap;font-size:12px}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero .ev-lead {font-size:15px;line-height:1.6}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero .ev-actions {flex-wrap:nowrap;overflow-x:auto;max-width:100%;gap:16px;margin-top:8px;scrollbar-width:thin}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero .ev-actions > a {flex:0 0 auto;white-space:nowrap;font-size:12px}
   body[data-buyer-page="catalog"] .ev-section {padding-top:24px}
   .ev-inline-nav {max-width:100%;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;gap:8px}
   .ev-inline-nav a {flex:0 0 auto;white-space:nowrap;min-height:44px;padding:10px 12px;font-size:11px}
@@ -377,7 +354,7 @@ body[data-buyer-page="catalog"] .ev-card-image > img:not(.ev-card-interior) {
   .ev-wrap {width:calc(100% - 40px)}
   .ev-hero {padding-top:25px;padding-bottom:32px}
   .ev-hero h1 {font-size:32px;letter-spacing:0;margin-bottom:18px}
-  body:is([data-buyer-page="compare"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero h1 {font-size:32px}
+  body:is([data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero h1 {font-size:32px}
   .ev-hero .ev-lead {font-size:15px;line-height:1.8}
   .ev-eyebrow {font-size:10px;letter-spacing:.04em;margin-bottom:13px}
   .ev-breadcrumb {font-size:11px;gap:6px 9px;margin-bottom:22px}
@@ -440,8 +417,8 @@ body[data-buyer-page="catalog"] .ev-card-image > img:not(.ev-card-interior) {
   .ev-hero {padding:0 0 22pt;background:white!important;color:#343333}
   .ev-hero h1 {font-size:28pt;line-height:1.15;margin-bottom:10pt}
   .ev-hero .ev-lead,.ev-hero .ev-eyebrow {color:#343333;font-size:10pt}
-  body:is([data-buyer-page="catalog"],[data-buyer-page="compare"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero {padding:0 0 22pt}
-  body:is([data-buyer-page="catalog"],[data-buyer-page="compare"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero h1 {font-size:28pt}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero {padding:0 0 22pt}
+  body:is([data-buyer-page="catalog"],[data-buyer-page="calculator"],[data-buyer-page="favorites"]) .ev-hero h1 {font-size:28pt}
   .ev-wrap,.ev-tools-panel {width:100%;margin:0;padding:0}
   .ev-section {padding:0}
   .ev-article-layout,.ev-calculator {display:block}
@@ -451,14 +428,6 @@ body[data-buyer-page="catalog"] .ev-card-image > img:not(.ev-card-interior) {
   .ev-prose h3 {font-size:15pt}
   .ev-prose p,.ev-prose li {font-size:10pt;line-height:1.55}
   .ev-result {position:static;padding:18pt;background:#FFFFFF!important;print-color-adjust:exact}
-  .ev-comparison-wrap {overflow:visible}
-  .ev-comparison {width:100%;min-width:0;table-layout:fixed;font-size:9pt}
-  .ev-comparison th,.ev-comparison td {padding:8pt;border-color:#DADADA;break-inside:avoid}
-  .ev-comparison h2,.ev-comparison h3 {font-size:12pt}
-  .ev-comparison img {height:90pt}
-  .ev-comparison thead {display:table-header-group}
-  .ev-comparison tr {break-inside:avoid}
-  .ev-comparison a,.ev-prose a {color:#343333;text-decoration:none}
   .ev-grid {grid-template-columns:repeat(3,minmax(0,1fr));gap:18pt}
   .ev-card {break-inside:avoid}
   .ev-card-interior {display:none!important}

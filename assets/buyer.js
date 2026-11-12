@@ -17,18 +17,15 @@
   var params=new URLSearchParams(location.search);
   // Explicit fallback state stays authoritative even if a tiny probe or a
   // later single-key write succeeds: another selection may still be unsaved.
-  var storageAvailable=!params.has('ev-favorites')&&!params.has('ev-compare');
+  var storageAvailable=!params.has('ev-favorites');
   // Readable storage may still reject writes (quota/private mode). Detect that
   // before restoring URL fallback state on the next page.
   try{var probe='eversense.storage-probe.v1',prior=localStorage.getItem(probe);localStorage.setItem(probe,'1');if(prior===null)localStorage.removeItem(probe);else localStorage.setItem(probe,prior);}catch(e){storageAvailable=false;}
   function read(key,limit){var raw;try{raw=localStorage.getItem(key)||'[]';}catch(e){storageAvailable=false;return [];}try{return core.cleanItems(JSON.parse(raw),products,limit);}catch(e){return [];}}
   var favorites=read('eversense.favorites.v1',30);
-  var compare=read('eversense.compare.v1',3);
-  if(!storageAvailable){if(params.has('ev-favorites'))favorites=core.cleanItems(params.get('ev-favorites'),products,30);if(params.has('ev-compare'))compare=core.cleanItems(params.get('ev-compare'),products,3);}
+  if(!storageAvailable&&params.has('ev-favorites'))favorites=core.cleanItems(params.get('ev-favorites'),products,30);
   var imported=params.has('items')?core.cleanItems(params.get('items'),products,30):null;
   var pageName=document.body.dataset.buyerPage||'';
-  var sharedCompare=pageName==='compare'&&imported!==null?imported.slice(0,3):null;
-  function currentCompare(){return sharedCompare!==null?sharedCompare:compare;}
   function persist(key,value){try{localStorage.setItem(key,JSON.stringify(value));}catch(e){storageAvailable=false;}}
   function announce(text){
     var box=document.getElementById('ev-buyer-status');
@@ -42,36 +39,32 @@
     if(!p)return '<span class="ev-price-pending">Цена уточняется</span>';
     return (p.sale?'<del>'+money(p.normal)+'</del> ':'')+'<strong>'+money(p.sale||p.normal)+' BYN/м²</strong>'+(p.sale&&p.until?'<small>Акция до '+esc(p.until.split('-').reverse().join('.'))+'</small>':'');
   }
-  function buttons(p){return '<div class="ev-card-actions"><button class="ev-button" type="button" data-ev-favorite="'+p.sku+'" aria-pressed="false">В избранное</button><button class="ev-button" type="button" data-ev-compare="'+p.sku+'" aria-pressed="false">Сравнить</button></div>';}
+  function buttons(p){return '<div class="ev-card-actions"><button class="ev-button" type="button" data-ev-favorite="'+p.sku+'" aria-pressed="false">В избранное</button></div>';}
   function card(p){return '<article class="ev-card" data-product="'+p.sku+'"><a class="ev-card-image" href="'+route(p.canonicalPath)+'"><img src="'+route(p.productImage)+'" alt="'+esc(fullName(p))+'" loading="lazy" width="640" height="500">'+(p.interiorImage?'<img class="ev-card-interior" src="'+route(p.interiorImage)+'" alt="" loading="lazy" width="640" height="500">':'')+'</a><div class="ev-card-body"><span class="ev-sku">'+p.sku+'</span><h2 class="ev-card-title"><a href="'+route(p.canonicalPath)+'">'+esc(fullName(p))+'</a></h2><p class="ev-card-meta">'+esc(p.collectionName)+' · '+p.lengthMM+' × '+p.widthMM+' мм</p><div class="ev-price-box" data-buyer-price="'+p.sku+'">'+priceHtml(p.sku)+'</div>'+buttons(p)+'</div></article>';}
   function syncButtons(){
     document.querySelectorAll('[data-ev-favorite]').forEach(function(b){var on=favorites.includes(b.dataset.evFavorite);b.setAttribute('aria-pressed',String(on));b.textContent=on?'В избранном':'В избранное';});
-    document.querySelectorAll('[data-ev-compare]').forEach(function(b){var on=currentCompare().includes(b.dataset.evCompare);b.setAttribute('aria-pressed',String(on));b.textContent=b.hasAttribute('data-remove')?'Убрать':(on?'В сравнении':'Сравнить');});
     document.querySelectorAll('[data-favorites-count]').forEach(function(n){n.textContent=String(favorites.length);});
-    document.querySelectorAll('[data-compare-count]').forEach(function(n){n.textContent=String(compare.length);});
-    document.querySelectorAll('[data-compare-link]').forEach(function(a){a.href=route('compare.html');});
-    if(!storageAvailable)document.querySelectorAll('a[href]').forEach(function(a){var u;try{u=new URL(a.href);}catch(e){return;}if(u.origin!==base.origin||!u.pathname.startsWith(base.pathname)||a.getAttribute('href').startsWith('#'))return;u.searchParams.set('ev-favorites',favorites.join(','));u.searchParams.set('ev-compare',compare.join(','));a.href=u.href;});
-    if(!storageAvailable){var current=new URL(location.href);current.searchParams.set('ev-favorites',favorites.join(','));current.searchParams.set('ev-compare',compare.join(','));history.replaceState(null,'',current);}
+    if(!storageAvailable)document.querySelectorAll('a[href]').forEach(function(a){var u;try{u=new URL(a.href);}catch(e){return;}if(u.origin!==base.origin||!u.pathname.startsWith(base.pathname)||a.getAttribute('href').startsWith('#'))return;u.searchParams.set('ev-favorites',favorites.join(','));a.href=u.href;});
+    if(!storageAvailable){var current=new URL(location.href);current.searchParams.set('ev-favorites',favorites.join(','));history.replaceState(null,'',current);}
   }
   function updatePrices(){
     document.querySelectorAll('[data-buyer-price]').forEach(function(n){n.innerHTML=priceHtml(n.dataset.buyerPrice);});
     var calc=document.getElementById('ev-calc-form');if(calc&&calc.dataset.calculated==='true')renderCalculation(false);
   }
-  function toggle(action,sku){
+  function toggleFavorite(sku){
     if(!bySku.has(sku))return;
-    var array=action==='favorite'?favorites:currentCompare();
-    var focusRoot=document.getElementById(action==='favorite'?'ev-favorites':'ev-compare');
-    var focusSelector=action==='favorite'?'[data-ev-favorite]':'[data-ev-compare]';
-    var focusIndex=focusRoot?Array.from(focusRoot.querySelectorAll(focusSelector)).indexOf(document.activeElement):-1;
-    var existing=array.indexOf(sku);
-    if(existing>=0)array.splice(existing,1);
-    else {if(action==='compare'&&array.length>=3){announce('Можно сравнить до трёх декоров. Уберите один из выбранных.');return;}array.push(sku);}
-    if(action==='favorite'||sharedCompare===null)persist(action==='favorite'?'eversense.favorites.v1':'eversense.compare.v1',array);
-    if(action==='compare'&&pageName==='compare')renderCompare();
-    if(action==='favorite'&&pageName==='favorites'&&imported===null)renderFavorites();
+    var root=document.getElementById('ev-favorites'),selector='[data-ev-favorite]';
+    var index=root?Array.from(root.querySelectorAll(selector)).indexOf(document.activeElement):-1;
+    var existing=favorites.indexOf(sku);
+    if(existing>=0)favorites.splice(existing,1);else favorites.push(sku);
+    persist('eversense.favorites.v1',favorites);
+    if(pageName==='favorites'&&imported===null)renderFavorites();
     syncButtons();
-    if(focusIndex>=0&&!document.activeElement.closest(focusSelector)){var remaining=focusRoot.querySelectorAll(focusSelector),next=remaining[Math.min(focusIndex,remaining.length-1)]||focusRoot.querySelector('a');if(next)next.focus({preventScroll:true});}
-    announce(existing>=0?'Декор убран '+(action==='favorite'?'из избранного.':'из сравнения.'):'Декор добавлен '+(action==='favorite'?'в избранное.':'в сравнение.'));
+    if(index>=0&&!document.activeElement.closest(selector)){
+      var remaining=root.querySelectorAll(selector),next=remaining[Math.min(index,remaining.length-1)]||root.querySelector('a');
+      if(next)next.focus({preventScroll:true});
+    }
+    announce(existing>=0?'Декор убран из избранного.':'Декор добавлен в избранное.');
     if(!storageAvailable)announce('Выбор сохранён на этой странице. Чтобы не потерять его, скопируйте ссылку на подборку.');
   }
   function selectedList(){return imported!==null?imported:favorites;}
@@ -83,20 +76,6 @@
     document.querySelectorAll('[data-share-selection]').forEach(function(b){b.disabled=!list.length;});
     var count=document.getElementById('ev-favorite-total');if(count)count.textContent=number(list.length);
     syncButtons();
-  }
-  function renderCompare(){
-    var root=document.getElementById('ev-compare');if(!root)return;
-    var selection=currentCompare(),chosen=selection.map(function(s){return bySku.get(s);});
-    var notice=sharedCompare!==null?'<div class="ev-note"><p>Вы смотрите сравнение по ссылке. Ваше личное сравнение сохранено отдельно.</p><button type="button" class="ev-button" data-save-shared-compare>Заменить моё сравнение этой подборкой</button></div>':'';
-    var share=document.querySelector('[data-share-compare]');if(share)share.disabled=!chosen.length;
-    var u=new URL(location.href);if(sharedCompare!==null)u.searchParams.set('items',selection.join(','));else u.searchParams.delete('items');history.replaceState(null,'',u);
-    var add='<a class="ev-button" href="'+route('catalog-ru/')+'">Добавить из каталога</a>';
-    if(!chosen.length){root.innerHTML=notice+'<div class="ev-empty"><h2>Выберите до трёх декоров</h2><p>Сравните внешний вид, формат, размеры и стоимость.</p>'+add+'</div>';return;}
-    var fields=[['Коллекция',function(p){return p.collectionName;}],['Размер панели',function(p){return p.lengthMM+' × '+p.widthMM+' мм';}],['Толщина',function(p){return p.thicknessMM+' мм';}],['Формат',function(p){return p.format;}],['Площадь упаковки',function(p){return number(p.packArea,4)+' м²';}],['Панелей в упаковке',function(p){return String(p.packCount);}],['Замок',function(p){return p.lock;}],['Фаска',function(p){return p.bevel;}]];
-    var html='<div class="ev-comparison-wrap" tabindex="0" aria-label="Таблица сравнения декоров; на небольшом экране прокручивается вправо"><table class="ev-comparison"><caption>Сравнение выбранных декоров EVERSENSE</caption><thead><tr><th scope="col">Параметр</th>'+chosen.map(function(p){return '<th scope="col"><a href="'+route(p.canonicalPath)+'"><img src="'+route(p.productImage)+'" alt="'+esc(fullName(p))+'" width="240" height="170"><span class="ev-sku">'+p.sku+'</span>'+esc(fullName(p))+'</a><button type="button" class="ev-button" data-remove data-ev-compare="'+p.sku+'" aria-label="Убрать '+p.sku+' из сравнения">Убрать</button></th>';}).join('')+'</tr></thead><tbody>';
-    fields.forEach(function(field){var values=chosen.map(field[1]),different=new Set(values).size>1;html+='<tr'+(different?' class="ev-different"':'')+'><th scope="row">'+field[0]+(different?'<small>Есть различия</small>':'')+'</th>'+values.map(function(v){return '<td>'+esc(v)+'</td>';}).join('')+'</tr>';});
-    html+='<tr><th scope="row">Цена за м²</th>'+chosen.map(function(p){return '<td data-buyer-price="'+p.sku+'">'+priceHtml(p.sku)+'</td>';}).join('')+'</tr><tr><th scope="row">Количество</th>'+chosen.map(function(p){return '<td><a class="ev-text-link" href="'+route('calculator.html')+'?sku='+p.sku+'">Рассчитать упаковки</a></td>';}).join('')+'</tr></tbody></table></div><p class="ev-note">Коллекции объединяют декоры по характеру дизайна. Общие показатели бренда не делают одну коллекцию прочнее другой. Оттенок и фактуру лучше проверить на физическом образце.</p>'+add;
-    root.innerHTML=notice+html;
   }
   function renderCalculation(focus){
     var form=document.getElementById('ev-calc-form');if(!form)return;
@@ -167,7 +146,7 @@
       if(document.getElementById('ev-product-tools'))return true;
       var price=document.getElementById('ev-product-price');if(!price)return false;
       var section=document.createElement('section');section.id='ev-product-tools';section.className='ev-tools-panel ev-buyer';
-      section.innerHTML='<div class="ev-wrap"><div class="ev-actions"><a class="ev-button ev-button--primary" href="'+route('contacts.html')+'?sku='+p.sku+'">Уточнить наличие</a><a class="ev-button" href="'+route('calculator.html')+'?sku='+p.sku+'">Рассчитать упаковки</a>'+buttons(p)+'</div><div class="ev-swatch-row"><a href="'+route('compare.html')+'" data-compare-link>Сравнение (<span data-compare-count>0</span>)</a><a href="'+route('favorites.html')+'">Избранное (<span data-favorites-count>0</span>)</a><a href="'+route('choose.html')+'#sample">Как проверить образец</a></div></div>';
+      section.innerHTML='<div class="ev-wrap"><div class="ev-actions"><a class="ev-button ev-button--primary" href="'+route('contacts.html')+'?sku='+p.sku+'">Уточнить наличие</a><a class="ev-button" href="'+route('calculator.html')+'?sku='+p.sku+'">Рассчитать упаковки</a>'+buttons(p)+'</div><div class="ev-swatch-row"><a href="'+route('favorites.html')+'">Избранное (<span data-favorites-count>0</span>)</a><a href="'+route('choose.html')+'#sample">Как проверить образец</a></div></div>';
       var gallery=price.nextElementSibling;
       if(gallery&&gallery.matches('.t-rec')&&gallery.querySelector('[role="img"]'))gallery.insertAdjacentElement('afterend',section);
       else price.insertAdjacentElement('afterend',section);
@@ -188,20 +167,17 @@
   }
   function manualCopy(text){var el=document.getElementById('ev-copy-fallback');if(!el){el=document.createElement('div');el.id='ev-copy-fallback';el.className='ev-copy-box ev-buyer';el.innerHTML='<label>Скопируйте ссылку<input readonly aria-label="Ссылка на подборку"></label><button type="button" class="ev-button" data-close-copy>Закрыть</button>';document.body.appendChild(el);}el.hidden=false;var input=el.querySelector('input');input.value=text;input.focus();input.select();announce('Ссылка готова: выделите и скопируйте её.');}
   document.addEventListener('click',function(e){
-    var favorite=e.target.closest('[data-ev-favorite]'),comp=e.target.closest('[data-ev-compare]');
-    if(favorite){e.preventDefault();toggle('favorite',favorite.dataset.evFavorite);}
-    if(comp){e.preventDefault();toggle('compare',comp.dataset.evCompare);}
+    var favorite=e.target.closest('[data-ev-favorite]');
+    if(favorite){e.preventDefault();toggleFavorite(favorite.dataset.evFavorite);}
     if(e.target.closest('[data-share-selection]'))copy(route('favorites.html')+'?items='+selectedList().join(','));
-    if(e.target.closest('[data-share-compare]'))copy(route('compare.html')+'?items='+currentCompare().join(','));
     if(e.target.closest('[data-share-calculation]'))copy(location.href);
     if(e.target.closest('[data-print]'))window.print();
     if(e.target.closest('[data-close-copy]'))document.getElementById('ev-copy-fallback').hidden=true;
-    if(e.target.closest('[data-save-shared-compare]')&&sharedCompare!==null){compare=sharedCompare.slice();sharedCompare=null;persist('eversense.compare.v1',compare);renderCompare();syncButtons();var first=document.querySelector('#ev-compare button,#ev-compare a');if(first)first.focus({preventScroll:true});announce('Подборка сохранена как ваше сравнение.');}
     if(e.target.closest('[data-save-shared]')){favorites=core.cleanItems(favorites.concat(imported||[]),products,30);persist('eversense.favorites.v1',favorites);syncButtons();announce('Декоры добавлены в ваше избранное.');}
   });
   document.addEventListener('eversense:prices',updatePrices);
   document.addEventListener('eversense:header-ready',syncButtons);
-  window.addEventListener('storage',function(e){if(!storageAvailable)return;if(e.key===null||e.key==='eversense.favorites.v1'){favorites=read('eversense.favorites.v1',30);if(pageName==='favorites'&&imported===null)renderFavorites();}if(e.key===null||e.key==='eversense.compare.v1'){compare=read('eversense.compare.v1',3);if(pageName==='compare')renderCompare();}syncButtons();});
-  function boot(){mountCatalog();mountCalculator();mountFinder();mountProduct();mountContact();renderFavorites();if(pageName==='compare')renderCompare();syncButtons();updatePrices();}
+  window.addEventListener('storage',function(e){if(!storageAvailable)return;if(e.key===null||e.key==='eversense.favorites.v1'){favorites=read('eversense.favorites.v1',30);if(pageName==='favorites'&&imported===null)renderFavorites();}syncButtons();});
+  function boot(){mountCatalog();mountCalculator();mountFinder();mountProduct();mountContact();renderFavorites();syncButtons();updatePrices();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();

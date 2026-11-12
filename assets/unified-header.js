@@ -7,7 +7,7 @@
   var site = new URL("../", assets);
   var asset = function (path) { return new URL(path, assets).href; };
   var route = function (path) { return new URL(path, site).href; };
-  var version = "20261111brandicons";
+  var version = "20261112favorites";
 
   function ensureStyle(filename, marker) {
     var url = asset(filename + "?v=" + version);
@@ -87,7 +87,6 @@
         ["Помощь с выбором", "choose.html"],
         ["Интерьеры", "projects.html"],
         ["Избранное", "favorites.html"],
-        ["Сравнение", "compare.html"],
         ["Калькулятор", "calculator.html"]
       ] },
       { title: "О продукте", id: "product", items: [

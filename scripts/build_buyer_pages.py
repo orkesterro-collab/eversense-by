@@ -17,7 +17,7 @@ DATA = json.loads((ROOT / 'assets/products-data.json').read_text())
 PRODUCTS = DATA if isinstance(DATA, list) else DATA['products']
 PRODUCTS.sort(key=lambda p: (['nature','luxury','minimal'].index(p['collectionID']), int(p['sku'][2:])))
 GUIDES = json.loads((ROOT / 'content/buyer-guides.json').read_text())
-VERSION = '20261112mobile2'
+VERSION = '20261112favorites'
 COLLECTIONS = [
     ('nature', 'Природная эстетика', 'Спокойные древесные оттенки и выразительные рисунки дуба.'),
     ('luxury', 'Тихая роскошь', 'Натуральные и глубокие тона для интерьера с характером.'),
@@ -41,7 +41,7 @@ def link(label, target, page, cls='', extra=''):
     return f'<a href="{e(href(target, page))}"' + (f' class="{e(cls)}"' if cls else '') + (f' {extra}' if extra else '') + f'>{label}</a>'
 
 def actions(page):
-    return '<div class="ev-actions">' + link('Избранное (<span data-favorites-count>0</span>)', 'favorites.html', page, 'ev-text-link') + link('Сравнение (<span data-compare-count>0</span>)', 'compare.html', page, 'ev-text-link', 'data-compare-link') + link('Калькулятор', 'calculator.html', page, 'ev-text-link') + '</div>'
+    return '<div class="ev-actions">' + link('Избранное (<span data-favorites-count>0</span>)', 'favorites.html', page, 'ev-text-link') + link('Калькулятор', 'calculator.html', page, 'ev-text-link') + '</div>'
 
 def footer(page):
     groups = [
@@ -80,14 +80,14 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
 <a href="#main" class="ev-skip-link">Перейти к содержанию</a>
 <main id="main"><section class="ev-hero"><div class="ev-wrap"><nav class="ev-breadcrumb" aria-label="Хлебные крошки">{link('Главная','index.html',page)}<span aria-hidden="true">/</span><span>{e(title)}</span></nav><span class="ev-eyebrow">EVERSENSE · Коллекция ощущений</span><h1>{e(title)}</h1><p class="ev-lead">{e(lead)}</p>{hero_actions}</div></section>
 {body}</main>{footer(page)}
-<noscript><div class="ev-wrap ev-note">Для расчёта, фильтров, избранного и сравнения включите JavaScript. Страницы декоров и полезные материалы доступны по обычным ссылкам.</div></noscript>
+<noscript><div class="ev-wrap ev-note">Для расчёта, фильтров, избранного включите JavaScript. Страницы декоров и полезные материалы доступны по обычным ссылкам.</div></noscript>
 </body></html>'''
     path = ROOT / page
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(html + '\n')
 
 def card(p, page):
-    return f'''<article class="ev-card" data-product="{p['sku']}"><a class="ev-card-image" href="{e(href(p['canonicalPath'],page))}"><img src="{e(href(p['productImage'],page))}" alt="{e(p['name'])}" width="640" height="500" loading="lazy"><img class="ev-card-interior" src="{e(href(p['interiorImage'],page))}" alt="" width="640" height="500" loading="lazy"></a><div class="ev-card-body"><span class="ev-sku">{p['sku']}</span><h2 class="ev-card-title">{link(e(p['name']),p['canonicalPath'],page)}</h2><p class="ev-card-meta">{e(p['collectionName'])} · {p['lengthMM']} × {p['widthMM']} мм</p><div class="ev-price-box" data-buyer-price="{p['sku']}"><span class="ev-price-pending">Цена уточняется</span></div><div class="ev-card-actions"><button type="button" class="ev-button" data-ev-favorite="{p['sku']}" aria-pressed="false">В избранное</button><button type="button" class="ev-button" data-ev-compare="{p['sku']}" aria-pressed="false">Сравнить</button></div></div></article>'''
+    return f'''<article class="ev-card" data-product="{p['sku']}"><a class="ev-card-image" href="{e(href(p['canonicalPath'],page))}"><img src="{e(href(p['productImage'],page))}" alt="{e(p['name'])}" width="640" height="500" loading="lazy"><img class="ev-card-interior" src="{e(href(p['interiorImage'],page))}" alt="" width="640" height="500" loading="lazy"></a><div class="ev-card-body"><span class="ev-sku">{p['sku']}</span><h2 class="ev-card-title">{link(e(p['name']),p['canonicalPath'],page)}</h2><p class="ev-card-meta">{e(p['collectionName'])} · {p['lengthMM']} × {p['widthMM']} мм</p><div class="ev-price-box" data-buyer-price="{p['sku']}"><span class="ev-price-pending">Цена уточняется</span></div><div class="ev-card-actions"><button type="button" class="ev-button" data-ev-favorite="{p['sku']}" aria-pressed="false">В избранное</button></div></div></article>'''
 
 def field(label, name, options, value=''):
     return '<div class="ev-field"><label for="ev-'+name+'">'+label+'</label><select id="ev-'+name+'" name="'+name+'">'+''.join('<option value="'+e(v)+'"'+(' selected' if v==value else '')+'>'+e(t)+'</option>' for v,t in options)+'</select></div>'
@@ -96,7 +96,7 @@ TONE = [('', 'Все оттенки'), ('light', 'Светлые'), ('natural', 
 DESIGN = [('', 'Все группы'), ('wood', 'Дубовые декоры'), ('stone', 'Мрамор'), ('plain', 'Песок и серый')]
 
 def catalogs():
-    for collection, title, lead, page in [('', 'Каталог декоров', '30 декоров. Найдите свой оттенок, сравните варианты и рассчитайте покупку.', 'catalog-ru/index.html')] + [(c,t,d,COLLECTION_PATHS[c].lstrip('/')+'index.html') for c,t,d in COLLECTIONS]:
+    for collection, title, lead, page in [('', 'Каталог декоров', '30 декоров. Найдите свой оттенок, сохраните понравившиеся варианты и рассчитайте покупку.', 'catalog-ru/index.html')] + [(c,t,d,COLLECTION_PATHS[c].lstrip('/')+'index.html') for c,t,d in COLLECTIONS]:
         items = [p for p in PRODUCTS if not collection or p['collectionID']==collection]
         nav = '<nav class="ev-inline-nav" aria-label="Коллекции">'+link('Все декоры', 'catalog-ru/', page, extra='aria-current="page"' if not collection else '')+''.join(link(t, COLLECTION_PATHS[c], page, extra='aria-current="page"' if c==collection else '') for c,t,_ in COLLECTIONS)+'</nav>'
         filters = '<form id="ev-catalog-filters" class="ev-toolbar" role="search"><div class="ev-field"><label for="ev-q">Поиск по названию или артикулу</label><input id="ev-q" name="q" type="search" placeholder="Например, EL1052 или дуб" autocomplete="off"></div><details class="ev-filter-details" open><summary>Фильтры и сортировка</summary><div class="ev-filter-row">'
@@ -166,12 +166,9 @@ def tools_pages():
     opts = [(p['sku'],p['sku']+' · '+p['name']) for p in PRODUCTS]
     body = '<section class="ev-section"><div class="ev-wrap ev-calculator"><form id="ev-calc-form" novalidate>'+field('Декор','sku',opts)+'<div id="ev-calc-product"></div><div class="ev-filter-row"><div class="ev-field"><label for="ev-area">Площадь помещения, м²</label><input type="text" inputmode="decimal" id="ev-area" name="area" placeholder="Например, 20,5" required autocomplete="off"><small>Укажите площадь вместе с нишами и проходами.</small></div><div class="ev-field"><label for="ev-reserve">Запас на подрезку, %</label><input type="text" inputmode="decimal" id="ev-reserve" name="reserve" value="10" required><small>От 0 до 20%. Значение 10% — пример; нужный запас зависит от плана и раскладки.</small></div></div><button type="submit" class="ev-button ev-button--primary">Рассчитать</button><p class="ev-note">Расчёт округляет количество вверх до целых упаковок. Используется площадь упаковки выбранного артикула: 1,99 или 2,54 м².</p></form><section id="ev-calc-result" class="ev-result" aria-live="polite" tabindex="-1"><span class="ev-eyebrow">Ваш расчёт</span><h2>Сколько упаковок нужно?</h2><p>Выберите декор и введите площадь. Здесь появятся количество, площадь покупки и стоимость покрытия по текущей цене.</p></section></div></section>'
     write_page(page,'Рассчитать покупку','Площадь комнаты → запас → целые упаковки. Получите расчёт покрытия и сохраните ссылку для продавца.',body,'calculator')
-    page='compare.html'
-    body='<section class="ev-section"><div class="ev-wrap"><div class="ev-favorites-bar"><p>До трёх декоров в одном сравнении.</p><div class="ev-actions"><button type="button" class="ev-button" data-share-compare disabled>Скопировать ссылку</button><button type="button" class="ev-text-link" data-print>Распечатать</button></div></div><div id="ev-compare"><p>Добавьте декоры из каталога с помощью кнопки «Сравнить».</p>'+link('Открыть каталог','catalog-ru/',page,'ev-button')+'</div></div></section>'
-    write_page(page,'Сравнение декоров','Рассмотрите выбранные варианты рядом: рисунок, формат, размеры, упаковку и текущую цену.',body,'compare',hero_actions=actions(page))
     page='favorites.html'
     body='<section class="ev-section"><div class="ev-wrap"><div class="ev-favorites-bar"><p>В подборке: <b id="ev-favorite-total">0</b></p><div class="ev-actions"><button type="button" class="ev-button" data-share-selection disabled>Скопировать ссылку</button><button type="button" class="ev-text-link" data-print>Распечатать</button></div></div><div id="ev-shared-note" class="ev-note" hidden><p>Вы открыли подборку по ссылке. Её можно сохранить в своём избранном.</p><button type="button" class="ev-button" data-save-shared>Добавить в моё избранное</button></div><div id="ev-favorites"><p>Отметьте понравившиеся декоры в каталоге.</p>'+link('Открыть каталог','catalog-ru/',page,'ev-button')+'</div><p class="ev-note">Избранное хранится в этом браузере. Чтобы открыть подборку на другом устройстве или показать продавцу, скопируйте ссылку.</p></div></section>'
-    write_page(page,'Ваши избранные декоры','Соберите короткий список, сравните варианты и покажите подборку в магазине.',body,'favorites',hero_actions=actions(page))
+    write_page(page,'Ваши избранные декоры','Сохраните понравившиеся декоры и покажите подборку в магазине.',body,'favorites',hero_actions=actions(page))
 
 def other_pages():
     page='contacts.html'
@@ -181,13 +178,13 @@ def other_pages():
     body=render_interiors(page, PRODUCTS, href)
     write_page(page,'Одна комната — разный характер','Три комнаты. Шесть декоров. Посмотрите, как пол меняет интерьер.',body,'projects')
     page='privacy.html'
-    body='<section class="ev-section"><div class="ev-wrap ev-prose"><section><h2>Избранное и сравнение</h2><p>Выбранные артикулы сохраняются локально в вашем браузере. Для этих функций не нужны имя, телефон или регистрация. Удалить выбор можно кнопками в каталоге и сравнении либо очисткой данных сайта в настройках браузера.</p></section><section><h2>Ссылки на подборки</h2><p>При использовании «Скопировать ссылку» артикулы включаются в адрес страницы. Для расчёта в ссылке также сохраняются площадь и запас. Подборка станет доступна тому, кому вы отправите эту ссылку.</p></section><section><h2>Внешние сервисы</h2><p>Сайт загружает цены из публичной таблицы Google, шрифты и материалы производителя. При открытии сторонних сервисов и документов действуют их собственные условия обработки данных.</p></section><section><h2>Контакт по вопросам сайта</h2><p>ООО «Флорсток», УНП 192608003. Телефон: <a href="tel:+375296713971">+375 29 671-39-71</a>.</p></section></div></section>'
+    body='<section class="ev-section"><div class="ev-wrap ev-prose"><section><h2>Избранное</h2><p>Выбранные артикулы сохраняются локально в вашем браузере. Для избранного не нужны имя, телефон или регистрация. Удалить выбор можно кнопками в каталоге или очисткой данных сайта в настройках браузера.</p></section><section><h2>Ссылки на подборки</h2><p>При использовании «Скопировать ссылку» артикулы включаются в адрес страницы. Для расчёта в ссылке также сохраняются площадь и запас. Подборка станет доступна тому, кому вы отправите эту ссылку.</p></section><section><h2>Внешние сервисы</h2><p>Сайт загружает цены из публичной таблицы Google, шрифты и материалы производителя. При открытии сторонних сервисов и документов действуют их собственные условия обработки данных.</p></section><section><h2>Контакт по вопросам сайта</h2><p>ООО «Флорсток», УНП 192608003. Телефон: <a href="tel:+375296713971">+375 29 671-39-71</a>.</p></section></div></section>'
     write_page(page,'Конфиденциальность','Как работают сохранение выбора и ссылки на подборки.',body,'privacy')
     page='installers.html'
     body = '<section class="ev-section"><div class="ev-wrap ev-prose"><section><h2>До согласования стоимости</h2><p>Покажите мастеру план помещения, выбранный артикул и инструкцию EVERSENSE. Обсудите направление рядов, переходы между комнатами, трубы, дверные проёмы и встроенную мебель. Договоритесь, кто заказывает покрытие и расходные материалы.</p><ul><li>Какие измерения основания нужны: ровность, влажность и готовность подогрева.</li><li>Нужно ли снимать старое покрытие и выравнивать основание.</li><li>Какая подложка и пароизоляция предусмотрены для вашей конструкции.</li><li>Какие работы, профили, плинтусы и вывоз мусора включены в смету.</li></ul></section><section><h2>Перед началом укладки</h2><p>Сверьте количество упаковок с раскладкой и согласованным запасом. Вместе проверьте маркировку и состояние панелей. Попросите зафиксировать результаты измерений основания и уточните, где будут компенсационные зазоры и переходные профили.</p><div class="ev-actions">'+link('Этапы укладки','installation.html',page,'ev-button ev-button--primary')+link('Документы для мастера','downloads.html',page,'ev-button')+'</div></section><section><h2>При приёмке работы</h2><p>Осмотрите поверхность, соединения панелей, примыкания и дверные проёмы при хорошем освещении. Проверьте открывание дверей. Обсудите уход и защиту под мебелью, сохраните оставшиеся целые панели.</p><p>Попросите передать акт работ, сведения о подложке и результаты проверки основания. Этикетки упаковок и документы о покупке храните вместе: они помогут при последующем обращении по покрытию.</p>'+link('Как ухаживать за готовым полом','care.html',page,'ev-text-link')+'</section></div></section>'
     write_page(page,'Подготовка к работе с мастером','Короткий список для обсуждения сметы, подготовки основания и приёмки готового пола.',body,'installers')
     page='sitemap.html'
-    nav=[('Главная','index.html'),('Каталог','catalog-ru/'),('Как выбрать','choose.html'),('О продукте','about.html'),('Интерьеры','projects.html'),('Калькулятор','calculator.html'),('Сравнение','compare.html'),('Избранное','favorites.html'),('Укладка','installation.html'),('Уход','care.html'),('Гарантия','warranty.html'),('Вопросы и ответы','faq.html'),('Документы','downloads.html'),('Где купить','where-to-buy.html'),('Контакты','contacts.html'),('Подготовка к работе с мастером','installers.html'),('Конфиденциальность','privacy.html')]
+    nav=[('Главная','index.html'),('Каталог','catalog-ru/'),('Как выбрать','choose.html'),('О продукте','about.html'),('Интерьеры','projects.html'),('Калькулятор','calculator.html'),('Избранное','favorites.html'),('Укладка','installation.html'),('Уход','care.html'),('Гарантия','warranty.html'),('Вопросы и ответы','faq.html'),('Документы','downloads.html'),('Где купить','where-to-buy.html'),('Контакты','contacts.html'),('Подготовка к работе с мастером','installers.html'),('Конфиденциальность','privacy.html')]
     body='<section class="ev-section"><div class="ev-wrap"><div class="ev-link-grid">'+''.join(link('<h2>'+t+'</h2><span aria-hidden="true">↗</span>',u,page,'ev-link-card') for t,u in nav)+'</div><h2>Все декоры</h2><div class="ev-link-grid">'+''.join(link(p['sku']+' · '+e(p['name']),p['canonicalPath'],page,'ev-text-link') for p in PRODUCTS)+'</div></div></section>'
     write_page(page,'Все страницы','Разделы сайта и все декоры EVERSENSE.',body,'sitemap')
 
@@ -196,6 +193,7 @@ def redirect(page, target):
     (ROOT/page).write_text('<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>EVERSENSE — каталог</title><link rel="canonical" href="https://eversense.by/'+target.lstrip('/')+'"><meta http-equiv="refresh" content="0;url='+e(url)+'"></head><body><p>'+link('Перейти к декору или коллекции EVERSENSE',target,page)+'</p><script>location.replace('+json.dumps(url)+'+location.search+location.hash)</script></body></html>\n')
 
 def aliases():
+    redirect('compare.html','favorites.html')
     redirect('catalog.html','catalog-ru/')
     for old,c in [('nature-aesthetic.html','nature'),('quiet-luxury.html','luxury'),('new-minimalism.html','minimal')]:
         redirect(old,COLLECTION_PATHS[c])
@@ -204,4 +202,4 @@ def aliases():
 
 if __name__ == '__main__':
     catalogs();guides();tools_pages();other_pages();aliases()
-    print('Built 4 catalogs, 7 guides, 3 buyer tools, 5 support pages and 34 legacy redirects.')
+    print('Built 4 catalogs, 7 guides, 2 buyer tools, 5 support pages and 34 legacy redirects.')
