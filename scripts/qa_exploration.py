@@ -240,10 +240,10 @@ def main():
                     for later in range(index + 1, stories.count()):
                         require(stories.nth(later).locator('[data-story-scene]:visible').get_attribute("data-story-scene") ==
                                 initial_selections[later], "Scene choice changed another independent story")
-                    comparison = story.locator('a[href*="compare.html?items="]')
-                    require(comparison.count() == 1, "Story is missing its paired comparison link")
-                    pair_in_link = parse_qs(urlparse(comparison.get_attribute("href")).query).get("items", [""])[0].split(",")
-                    require(pair_in_link == pair, "Comparison link does not match the two depicted decors")
+                    selection_link = story.locator('a[href*="favorites.html?items="]')
+                    require(selection_link.count() == 1, "Story is missing its saved-pair link")
+                    pair_in_link = parse_qs(urlparse(selection_link.get_attribute("href")).query).get("items", [""])[0].split(",")
+                    require(pair_in_link == pair, "Saved-pair link does not match the two depicted decors")
                     pairs.append(pair)
                 first = stories.first
                 selected = first.locator('[data-story-scene]:visible')
@@ -257,12 +257,12 @@ def main():
                 image_count = images(page, "[data-interior-stories] img")
                 metrics = layout(page)
                 screenshot(page, name, "[data-interior-stories]")
-                first.locator('a[href*="compare.html?items="]').click()
-                page.wait_for_selector("#ev-compare .ev-comparison")
-                displayed = page.locator("#ev-compare thead .ev-sku").all_text_contents()
-                require(displayed == pairs[0], f"Following comparison opened wrong products: {displayed}")
+                first.locator('a[href*="favorites.html?items="]').click()
+                page.wait_for_selector("#ev-favorites .ev-card")
+                displayed = page.locator("#ev-favorites .ev-card").evaluate_all("els=>els.map(el=>el.dataset.product)")
+                require(displayed == pairs[0], f"Opening saved pair showed wrong products: {displayed}")
                 return {"pairs": pairs, "favorite": sku, "images": image_count, "layout": metrics,
-                        "comparison_followed": displayed}
+                        "saved_pair_opened": displayed}
 
             def interiors_no_js(page, context, name):
                 goto(page, "projects.html", js=False)

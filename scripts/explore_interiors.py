@@ -90,7 +90,7 @@ def render_interiors(page, products, href):
             pieces.append(f'<div class="ev-interior-observation"><span>Что заметить</span><h4>{e(observation_title)}</h4><p>{e(observation)}</p></div>')
             pieces.append(f'<div class="ev-interior-actions"><a class="ev-button" data-story-product href="{url(product["canonicalPath"])}">Смотреть декор</a><button class="ev-text-link" type="button" data-ev-favorite="{sku}" aria-pressed="false">В избранное</button></div></div></article>')
 
-        pieces.append(f'<div class="ev-interior-next"><p><strong>Проверьте на образце.</strong> {e(story["sample"])}</p><a class="ev-text-link" href="{url("compare.html?items=" + ",".join(skus))}">Сравнить характеристики пары <span aria-hidden="true">↗</span></a></div>')
+        pieces.append(f'<div class="ev-interior-next"><p><strong>Проверьте на образце.</strong> {e(story["sample"])}</p><a class="ev-text-link" href="{url("favorites.html?items=" + ",".join(skus))}">Открыть пару в избранном <span aria-hidden="true">↗</span></a></div>')
         if story_id == 'interior-pattern':
             pieces.append(f'<p class="ev-interior-source">Для кухни заранее проверьте условия применения и требования к монтажу. <a href="{url("installation.html")}">Укладка и контакт с водой</a>.</p>')
         pieces.append('</div></section>')
