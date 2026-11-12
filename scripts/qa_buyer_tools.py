@@ -959,16 +959,18 @@ def main():
                       const panels=[...el.querySelectorAll('.ev-sense-panel')];
                       return {vertical,width:r.width,height:r.height,viewport:document.documentElement.clientWidth,
                         panels:panels.map(p=>{const b=p.getBoundingClientRect(),copy=p.querySelector('.ev-sense-copy'),
-                          c=copy.getBoundingClientRect(),button=p.querySelector('button');return {
+                          c=copy.getBoundingClientRect(),label=p.querySelector('.ev-sense-label').getBoundingClientRect(),
+                          button=p.querySelector('button');return {
                           proportion:100*(vertical?b.height/r.height:b.width/r.width),
                           expanded:button.getAttribute('aria-expanded'),hidden:copy.getAttribute('aria-hidden'),
                           visible:getComputedStyle(copy).visibility==='visible' && getComputedStyle(copy).opacity==='1',
                           copyInside:c.left>=b.left && c.right<=b.right+1 && c.top>=b.top && c.bottom<=b.bottom+1,
+                          labelInside:label.left>=b.left && label.right<=b.right+1 && label.top>=b.top && label.bottom<=b.bottom+1,
                           transition:getComputedStyle(p).transitionDuration};})};
                     }""")
                     require(abs(metrics['width']-metrics['viewport']) < 2, f"Sensory block is not full width: {metrics}")
                     require(metrics['height'] <= 660, f"Sensory block is too tall: {metrics}")
-                    require(metrics['vertical'] == (page.viewport_size['width'] < 640), "Wrong sensory layout direction")
+                    require(not metrics['vertical'], "Sensory panels must stay horizontal at every screen width")
                     after_y = page.evaluate('scrollY')
                     require(abs(after_y-before_y) < 2,
                             f"Selecting sensory panel {index} moved the page: {before_y} -> {after_y}")
@@ -979,6 +981,7 @@ def main():
                                 "Sensory panel accessibility state is inconsistent")
                         require(panel['visible'] == active, "Inactive sensory copy is visible")
                         require(not active or panel['copyInside'], f"Sensory copy is clipped: {metrics}")
+                        require(active or panel['labelInside'], f"Collapsed sensory label is clipped: {metrics}")
                         require(float(panel['transition'].removesuffix('s')) >= 1.8,
                                 "Panel resizing is too fast")
                     states.append(metrics)

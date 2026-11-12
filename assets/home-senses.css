@@ -131,11 +131,11 @@
 .ev-senses:not([data-enhanced]) .ev-sense-toggle,
 .ev-senses:not([data-enhanced]) .ev-sense-label { display: none; }
 @media (max-width: 639px) {
-  .ev-senses { flex-direction: column; height: clamp(500px, 76svh, 640px); }
-  .ev-sense-copy { left: 24px; bottom: 28px; width: calc(100vw - 48px); }
-  .ev-sense-copy h2 { max-width: 350px; margin-bottom: 12px; font-size: clamp(27px, 7vw, 36px); }
+  .ev-senses { flex-direction: row; height: clamp(380px, 64svh, 520px); }
+  .ev-sense-copy { left: 20px; bottom: 28px; width: calc(80vw - 40px); }
+  .ev-sense-copy h2 { max-width: 350px; margin-bottom: 12px; font-size: clamp(24px, 6.4vw, 30px); }
   .ev-sense-copy p { max-width: 360px; font-size: 14px; line-height: 1.45; }
-  .ev-sense-label { left: 24px; bottom: 20px; writing-mode: horizontal-tb; transform: none; font-size: 14px; letter-spacing: .04em; }
+  .ev-sense-label { bottom: 24px; font-size: 12px; letter-spacing: .04em; }
   .ev-sense-curve { right: -42%; width: 620px; opacity: .35; }
   .ev-senses:not([data-enhanced]) { display: block; }
   .ev-senses:not([data-enhanced]) .ev-sense-panel { min-height: 320px; }
