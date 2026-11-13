@@ -862,13 +862,53 @@ def main():
                 # buyer scripts are ready. Start only after their layout settles.
                 page.wait_for_timeout(1200)
                 root.scroll_into_view_if_needed()
+                active_size, collapsed_size = (70, 15) if page.viewport_size['width'] <= 639 else (80, 10)
+                expected_states = [tuple(active_size if i == active else collapsed_size for i in range(3))
+                                   for active in range(3)]
+                transition_samples = {}
+
+                def sample_transition(index, preference):
+                    sample = buttons.nth(index).evaluate("""button => new Promise((resolve, reject) => {
+                      const panel=button.closest('.ev-sense-panel'), root=panel.parentElement;
+                      const width=()=>100*panel.getBoundingClientRect().width/root.getBoundingClientRect().width;
+                      const result={before:width()}, started=performance.now();
+                      const midpoint=setTimeout(()=>{result.mid=width();},700);
+                      const timeout=setTimeout(()=>{
+                        panel.removeEventListener('transitionend',finish);
+                        clearTimeout(midpoint);
+                        reject(new Error('Panel resize did not finish with a transition event'));
+                      },4500);
+                      function finish(event) {
+                        if(event.target!==panel || event.propertyName!=='flex-grow') return;
+                        clearTimeout(timeout);
+                        clearTimeout(midpoint);
+                        panel.removeEventListener('transitionend',finish);
+                        result.final=width();
+                        result.duration=event.elapsedTime;
+                        result.wallTime=performance.now()-started;
+                        resolve(result);
+                      }
+                      panel.addEventListener('transitionend',finish);
+                      button.click();
+                    })""")
+                    require(abs(sample['before']-collapsed_size) < .2,
+                            f"Panel did not start collapsed ({preference}): {sample}")
+                    require(collapsed_size+1 < sample.get('mid', 0) < active_size-1,
+                            f"Panel jumps instead of resizing gradually ({preference}): {sample}")
+                    require(abs(sample['final']-active_size) < .2 and 1.8 <= sample['duration'] <= 2.2,
+                            f"Panel resize does not finish at the requested size in two seconds ({preference}): {sample}")
+                    transition_samples[preference] = sample
+
                 states = []
-                for index, proportions in enumerate(((80, 10, 10), (10, 80, 10), (10, 10, 80))):
+                for index, proportions in enumerate(expected_states):
                     # Exclude Playwright's own scroll-to-target from the check.
                     buttons.nth(index).scroll_into_view_if_needed()
                     before_y = page.evaluate('scrollY')
                     # Native click avoids Playwright auto-scroll during responsive artboard changes.
-                    buttons.nth(index).evaluate("button => button.click()")
+                    if path == 'index.html' and device == 'mobile' and index == 1:
+                        sample_transition(index, 'no-preference')
+                    else:
+                        buttons.nth(index).evaluate("button => button.click()")
                     page.wait_for_function("""expected => {
                       const root=document.querySelector('#ev-senses');
                       const panels=[...root.querySelectorAll('.ev-sense-panel')];
@@ -916,11 +956,21 @@ def main():
                 buttons.nth(0).press('Enter')
                 require(root.get_attribute('data-active') == '0', "Enter did not activate a sensory panel")
                 page.emulate_media(reduced_motion='reduce')
-                buttons.nth(1).click()
+                if path == 'index.html' and device == 'mobile':
+                    page.wait_for_function("""expected => [...document.querySelectorAll('#ev-senses .ev-sense-panel')]
+                      .every((p,i)=>Math.abs(Number(getComputedStyle(p).flexGrow)-expected[i])<.01)""",
+                      arg=expected_states[0])
+                    sample_transition(1, 'reduce')
+                else:
+                    buttons.nth(1).evaluate("button => button.click()")
                 require(root.locator('.ev-sense-panel').evaluate_all(
+                    "els=>els.every(el=>getComputedStyle(el).transitionDuration==='2s')"),
+                    "User-triggered panel resizing must stay slow with either motion preference")
+                require(root.locator('.ev-sense-copy, .ev-sense-label, .ev-sense-curve').evaluate_all(
                     "els=>els.every(el=>getComputedStyle(el).transitionDuration==='0s')"),
-                    "Sensory block ignores reduced-motion preference")
-                return {'path': path, 'states': states, 'keyboard': True, 'reduced_motion': True}
+                    "Decorative sensory motion ignores reduced-motion preference")
+                return {'path': path, 'states': states, 'keyboard': True, 'reduced_motion': True,
+                        'transition_samples': transition_samples}
 
             for device, width, height in DEVICES[:2]:
                 for home_path in ('index.html', 'ru/index.html', 'en/index.html'):

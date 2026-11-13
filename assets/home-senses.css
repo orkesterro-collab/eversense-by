@@ -1,7 +1,4 @@
 .ev-senses {
-  --sense-one: 80;
-  --sense-two: 10;
-  --sense-three: 10;
   --sense-ease: cubic-bezier(.45, 0, .2, 1);
   display: flex;
   width: 100%;
@@ -10,20 +7,17 @@
   background: #272a28;
   font-family: Manrope, Arial, sans-serif;
 }
-.ev-senses[data-active="1"] { --sense-one: 10; --sense-two: 80; --sense-three: 10; }
-.ev-senses[data-active="2"] { --sense-one: 10; --sense-two: 10; --sense-three: 80; }
 .ev-sense-panel {
   position: relative;
   min-width: 0;
   min-height: 0;
   isolation: isolate;
   overflow: hidden;
-  flex: var(--sense-one) 1 0%;
+  flex: 10 1 0%;
   transition: flex-grow 2000ms var(--sense-ease);
   scroll-margin-top: 80px;
 }
-.ev-sense-panel:nth-child(2) { flex-grow: var(--sense-two); }
-.ev-sense-panel:nth-child(3) { flex-grow: var(--sense-three); }
+.ev-sense-panel.is-active { flex-grow: 80; }
 .ev-sense-panel::after {
   content: "";
   position: absolute;
@@ -132,7 +126,9 @@
 .ev-senses:not([data-enhanced]) .ev-sense-label { display: none; }
 @media (max-width: 639px) {
   .ev-senses { flex-direction: row; height: clamp(380px, 64svh, 520px); }
-  .ev-sense-copy { left: 20px; bottom: 28px; width: calc(80vw - 40px); }
+  .ev-sense-panel { flex-grow: 15; }
+  .ev-sense-panel.is-active { flex-grow: 70; }
+  .ev-sense-copy { left: 20px; bottom: 28px; width: calc(70vw - 40px); }
   .ev-sense-copy h2 { max-width: 350px; margin-bottom: 12px; font-size: clamp(24px, 6.4vw, 30px); }
   .ev-sense-copy p { max-width: 360px; font-size: 14px; line-height: 1.45; }
   .ev-sense-label { bottom: 24px; font-size: 12px; letter-spacing: .04em; }
@@ -141,5 +137,7 @@
   .ev-senses:not([data-enhanced]) .ev-sense-panel { min-height: 320px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ev-sense-panel, .ev-sense-copy, .ev-sense-label, .ev-sense-curve { transition: none !important; }
+  /* Keep the requested slow, user-triggered panel resize on every device;
+     reduced motion suppresses the decorative effects only. */
+  .ev-sense-copy, .ev-sense-label, .ev-sense-curve { transition: none !important; }
 }
