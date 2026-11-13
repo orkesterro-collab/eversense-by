@@ -89,7 +89,7 @@
  .ev-install-table tbody {display:block;width:100%}
  .ev-install-table tbody tr {display:block;padding:18px 0;border-top:1px solid #DADADA}
  .ev-install-table tbody tr:last-child {border-bottom:1px solid #DADADA}
- .ev-install-table tbody th {display:block;width:100%;padding:0 0 11px;border:0;font-size:15px}
+ .ev-install-table tbody th,.ev-install-table tbody th:first-child {display:block;width:100%;padding:0 0 11px;border:0;font-size:15px}
  .ev-install-table tbody td {display:grid;grid-template-columns:minmax(90px,.8fr) minmax(0,1.4fr);gap:16px;width:100%;padding:8px 0;border:0}
  .ev-install-table-label {display:block;font-size:12px;line-height:1.7;color:#685c51}
  .ev-install-related {padding-top:30px;margin-top:36px}
