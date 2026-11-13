@@ -8,15 +8,18 @@ from pathlib import Path
 from html import escape
 import json
 import posixpath
+import sys
 from explore_product import render_layers
 from explore_interiors import render_interiors
 from explore_guides import render_designs, render_sample, render_situations, render_next
+from installation_guides import render_installation_guide
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = json.loads((ROOT / 'assets/products-data.json').read_text())
 PRODUCTS = DATA if isinstance(DATA, list) else DATA['products']
 PRODUCTS.sort(key=lambda p: (['nature','luxury','minimal'].index(p['collectionID']), int(p['sku'][2:])))
 GUIDES = json.loads((ROOT / 'content/buyer-guides.json').read_text())
+INSTALLATION_GUIDES = json.loads((ROOT / 'content/installation-guides.json').read_text())
 VERSION = '20261112favoriteportrait'
 COLLECTIONS = [
     ('nature', 'Природная эстетика', 'Спокойные древесные оттенки и выразительные рисунки дуба.'),
@@ -56,11 +59,17 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
     extras = []
     if page_type in ('product', 'choose', 'faq', 'installation', 'care', 'warranty', 'downloads'):
         extras.append('explore-guides.css')
+    if page_type == 'installation':
+        extras.append('installation-guides.css')
     if page_type == 'product':
         extras.extend(['explore-product.css', 'explore-product.js'])
     if page_type == 'projects':
         extras.extend(['explore-interiors.css', 'explore-interiors.js'])
     extra_assets = '\n'.join(f'<link rel="stylesheet" href="{href("assets/"+file,page)}?v={VERSION}">' if file.endswith('.css') else f'<script src="{href("assets/"+file,page)}?v={VERSION}" defer></script>' for file in extras)
+    breadcrumb = link('Главная', 'index.html', page) + '<span aria-hidden="true">/</span>'
+    if page_type == 'installation' and page != 'installation.html':
+        breadcrumb += link('Укладка', 'installation.html', page) + '<span aria-hidden="true">/</span>'
+    breadcrumb += '<span>' + e(title) + '</span>'
     html = f'''<!doctype html>
 <html lang="ru" data-buyer-static="true"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -78,7 +87,7 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
 <script src="{href('assets/buyer.js',page)}?v={VERSION}" defer></script>
 </head><body class="ev-buyer" data-buyer-page="{e(page_type)}" data-collection="{e(collection)}">
 <a href="#main" class="ev-skip-link">Перейти к содержанию</a>
-<main id="main"><section class="ev-hero"><div class="ev-wrap"><nav class="ev-breadcrumb" aria-label="Хлебные крошки">{link('Главная','index.html',page)}<span aria-hidden="true">/</span><span>{e(title)}</span></nav><h1>{e(title)}</h1><p class="ev-lead">{e(lead)}</p>{hero_actions}</div></section>
+<main id="main"><section class="ev-hero"><div class="ev-wrap"><nav class="ev-breadcrumb" aria-label="Хлебные крошки">{breadcrumb}</nav><h1>{e(title)}</h1><p class="ev-lead">{e(lead)}</p>{hero_actions}</div></section>
 {body}</main>{footer(page)}
 <noscript><div class="ev-wrap ev-note">Для расчёта, фильтров, избранного включите JavaScript. Страницы декоров и полезные материалы доступны по обычным ссылкам.</div></noscript>
 </body></html>'''
@@ -111,7 +120,7 @@ def finder(page):
     return '<section class="ev-section" id="finder"><div class="ev-wrap"><span class="ev-eyebrow">02 · От впечатления к вариантам</span><h2>Сузим круг выбора</h2><p class="ev-lead">Оттенок и рисунок определят подборку. Комната подскажет, на что обратить внимание в эксплуатации.</p><form id="ev-finder"><div class="ev-filter-row">'+field('Комната','room',[('living','Гостиная'),('bedroom','Спальня'),('kitchen','Кухня'),('hall','Прихожая')])+field('Оттенок','tone',TONE)+field('Группа декоров','design',DESIGN)+'</div><button class="ev-button ev-button--primary" type="submit">Показать декоры</button></form><div id="ev-finder-results" class="ev-section" tabindex="-1" hidden></div></div></section>'
 
 def guides():
-    for key, page in [('product','about.html'),('choose','choose.html'),('faq','faq.html'),('installation','installation.html'),('care','care.html'),('warranty','warranty.html'),('downloads','downloads.html')]:
+    for key, page in [('product','about.html'),('choose','choose.html'),('faq','faq.html'),('care','care.html'),('warranty','warranty.html'),('downloads','downloads.html')]:
         g = GUIDES[key]
         sections = [s for s in g['sections'] if key != 'choose' or s['id'] not in COLLECTION_PATHS]
         toc = '<aside class="ev-toc"><strong>На этой странице</strong><ul>'+''.join('<li>'+link(e(s['title']),'#'+s['id'],page)+'</li>' for s in sections)+'</ul></aside>'
@@ -161,6 +170,12 @@ def guides():
         secondary = ('Каталог декоров', 'catalog-ru/') if key in ('installation','care','warranty','downloads') else ('Где посмотреть образец','where-to-buy.html')
         write_page(page,g['title'],g['lead'],body,key,hero_actions='' if key=='choose' else '<div class="ev-actions">'+link(primary[0],primary[1],page,'ev-button ev-button--primary', 'target="_blank" rel="noopener noreferrer"' if primary[1].startswith('https://') else '')+link(secondary[0],secondary[1],page,'ev-button')+'</div>')
 
+def installation_pages():
+    for key, page in [('installation', 'installation.html'), ('underlay', 'installation-underlay.html'), ('glue', 'installation-glue.html'), ('methods', 'installation-methods.html')]:
+        guide = INSTALLATION_GUIDES[key]
+        body = render_installation_guide(guide, page, href)
+        write_page(page, guide['title'], guide['lead'], body, 'installation')
+
 def tools_pages():
     page = 'calculator.html'
     opts = [(p['sku'],p['sku']+' · '+p['name']) for p in PRODUCTS]
@@ -184,7 +199,7 @@ def other_pages():
     body = '<section class="ev-section"><div class="ev-wrap ev-prose"><section><h2>До согласования стоимости</h2><p>Покажите мастеру план помещения, выбранный артикул и инструкцию EVERSENSE. Обсудите направление рядов, переходы между комнатами, трубы, дверные проёмы и встроенную мебель. Договоритесь, кто заказывает покрытие и расходные материалы.</p><ul><li>Какие измерения основания нужны: ровность, влажность и готовность подогрева.</li><li>Нужно ли снимать старое покрытие и выравнивать основание.</li><li>Какая подложка и пароизоляция предусмотрены для вашей конструкции.</li><li>Какие работы, профили, плинтусы и вывоз мусора включены в смету.</li></ul></section><section><h2>Перед началом укладки</h2><p>Сверьте количество упаковок с раскладкой и согласованным запасом. Вместе проверьте маркировку и состояние панелей. Попросите зафиксировать результаты измерений основания и уточните, где будут компенсационные зазоры и переходные профили.</p><div class="ev-actions">'+link('Этапы укладки','installation.html',page,'ev-button ev-button--primary')+link('Документы для мастера','downloads.html',page,'ev-button')+'</div></section><section><h2>При приёмке работы</h2><p>Осмотрите поверхность, соединения панелей, примыкания и дверные проёмы при хорошем освещении. Проверьте открывание дверей. Обсудите уход и защиту под мебелью, сохраните оставшиеся целые панели.</p><p>Попросите передать акт работ, сведения о подложке и результаты проверки основания. Этикетки упаковок и документы о покупке храните вместе: они помогут при последующем обращении по покрытию.</p>'+link('Как ухаживать за готовым полом','care.html',page,'ev-text-link')+'</section></div></section>'
     write_page(page,'Подготовка к работе с мастером','Короткий список для обсуждения сметы, подготовки основания и приёмки готового пола.',body,'installers')
     page='sitemap.html'
-    nav=[('Главная','index.html'),('Каталог','catalog-ru/'),('Как выбрать','choose.html'),('О продукте','about.html'),('Интерьеры','projects.html'),('Избранное','favorites.html'),('Укладка','installation.html'),('Уход','care.html'),('Гарантия','warranty.html'),('Вопросы и ответы','faq.html'),('Документы','downloads.html'),('Где купить','where-to-buy.html'),('Контакты','contacts.html'),('Подготовка к работе с мастером','installers.html'),('Конфиденциальность','privacy.html')]
+    nav=[('Главная','index.html'),('Каталог','catalog-ru/'),('Как выбрать','choose.html'),('О продукте','about.html'),('Интерьеры','projects.html'),('Избранное','favorites.html'),('Укладка','installation.html'),('Укладка на подложку','installation-underlay.html'),('Укладка на клей','installation-glue.html'),('Способы укладки: плюсы и минусы','installation-methods.html'),('Уход','care.html'),('Гарантия','warranty.html'),('Вопросы и ответы','faq.html'),('Документы','downloads.html'),('Где купить','where-to-buy.html'),('Контакты','contacts.html'),('Подготовка к работе с мастером','installers.html'),('Конфиденциальность','privacy.html')]
     body='<section class="ev-section"><div class="ev-wrap"><div class="ev-link-grid">'+''.join(link('<h2>'+t+'</h2><span aria-hidden="true">↗</span>',u,page,'ev-link-card') for t,u in nav)+'</div><h2>Все декоры</h2><div class="ev-link-grid">'+''.join(link(p['sku']+' · '+e(p['name']),p['canonicalPath'],page,'ev-text-link') for p in PRODUCTS)+'</div></div></section>'
     write_page(page,'Все страницы','Разделы сайта и все декоры EVERSENSE.',body,'sitemap')
 
@@ -201,5 +216,9 @@ def aliases():
         redirect('products/'+p['sku']+'.html',p['canonicalPath'])
 
 if __name__ == '__main__':
-    catalogs();guides();tools_pages();other_pages();aliases()
-    print('Built 4 catalogs, 7 guides, 2 buyer tools, 5 support pages and 34 legacy redirects.')
+    if '--installation-only' in sys.argv:
+        installation_pages()
+        print('Built installation hub, two instructions and comparison article.')
+    else:
+        catalogs();guides();installation_pages();tools_pages();other_pages();aliases()
+        print('Built 4 catalogs, 6 buyer guides, 4 installation pages, 2 buyer tools, 5 support pages and 34 legacy redirects.')

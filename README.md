@@ -6,6 +6,8 @@
 
 Новые покупательские страницы генерируются через `scripts/build_buyer_pages.py`; тексты — `content/buyer-guides.json`, стили — `assets/buyer.css`, поведение — `assets/buyer.js`. Оригинальные страницы Tilda и фотографии сохранены. Старые `assets/eversense.js` / `assets/eversense.css` поддерживают оставшиеся legacy-разделы.
 
+Раздел укладки: `installation.html` ведёт на `installation-underlay.html`, `installation-glue.html` и `installation-methods.html`. Тексты этих четырёх страниц — `content/installation-guides.json`, шаблон статьи — `scripts/installation_guides.py`, стили — `assets/installation-guides.css`. После редактирования достаточно выполнить `python3 scripts/build_buyer_pages.py --installation-only`. Источники и границы допуска клеевой системы зафиксированы в `reference/installation-research.md`.
+
 **Статус: предварительная версия.** В `index.html` и зеркале исходных страниц Tilda используются доступные публичные оригинальные изображения и видео. Цены BYN загружаются из публичной таблицы ниже. Список магазинов требует подтверждения; индексация пока закрыта.
 
 ### Представитель торговой марки в Республике Беларусь

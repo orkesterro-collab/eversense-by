@@ -329,6 +329,25 @@ def main():
                 visited = {}
                 for path in ["care.html", "installation.html"]:
                     goto(page, path)
+                    if path == "installation.html":
+                        links = page.locator(".ev-install-navigation a")
+                        require(links.count() == 3, "Expected separate installation and comparison pages")
+                        targets = [link.get_attribute("href") for link in links.all()]
+                        for target in targets:
+                            goto(page, path)
+                            page.locator('.ev-install-navigation a[href="' + target + '"]').click()
+                            require(urlparse(page.url).path.endswith(target), "Installation route did not open: " + target)
+                            require(page.locator(".ev-install-article").is_visible(), "Installation article is hidden")
+                            require(page.locator('.ev-install-navigation [aria-current="page"]').count() == 1,
+                                    "Installation navigation did not identify the current page")
+                            layout(page)
+                            article_name = name + '-' + target.removesuffix('.html')
+                            screenshot(page, article_name + '-intro', '.ev-install-intro')
+                            table = '#comparison .ev-install-table-wrap' if target == 'installation-methods.html' else '#moisture .ev-install-table-wrap'
+                            require(page.locator(table).is_visible(), "Required comparison or moisture table is hidden")
+                            screenshot(page, article_name + '-table', table)
+                        visited[path] = {"targets": targets, "layout": layout(page)}
+                        continue
                     links = page.locator(".ev-situations .ev-link-card")
                     require(links.count() == 3, "Expected three useful situation entry points on " + path)
                     targets = []
