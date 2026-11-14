@@ -521,42 +521,42 @@
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 65
+        "line": 62
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 65
+        "line": 62
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 65
+        "line": 62
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 65
+        "line": 62
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 65
+        "line": 62
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 65
+        "line": 62
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 65
+        "line": 62
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Природная эстетика",
-        "line": 71
+        "line": 68
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -564,7 +564,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 64,
+        "line": 62,
         "htmlValue": "../../../assets/original-tilda/6c4cb656294c-EL1036____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild3763-6161-4636-b332-346439663133/EL1036____ver1_top-m.jpg"
       },
