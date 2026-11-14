@@ -40,10 +40,19 @@ def inspect_card(page):
         const interior = s.querySelector('.ev-designer-card__interior');
         const sr = s.getBoundingClientRect();
         const next = s.nextElementSibling;
-        const catalogLink = next && [...next.querySelectorAll('a')]
-            .find(a => /^В каталог$/i.test(text(a)));
-        const visible = el => el.getClientRects().length &&
-            getComputedStyle(el).visibility !== 'hidden';
+        // Tilda renders the label and its clickable background as separate nodes.
+        const catalogHeading = next && [...next.querySelectorAll('h1,h2,h3,h4,a')]
+            .find(el => /^В каталог$/i.test(text(el)));
+        const catalogLink = next && [...next.querySelectorAll('a[href]')].find(a => {
+            const url = new URL(a.getAttribute('href'), document.baseURI);
+            return url.origin === location.origin &&
+                url.pathname.replace(/\/index\.html$/, '/').replace(/\/+$/, '') === '/catalog-ru';
+        });
+        const visible = el => {
+            const rect = el.getBoundingClientRect();
+            return rect.width > 0 && rect.height > 0 &&
+                getComputedStyle(el).visibility !== 'hidden';
+        };
         const overflow = [...s.querySelectorAll('*')].filter(visible).filter(el => {
             const r = el.getBoundingClientRect();
             return r.left < sr.left - 1 || r.right > sr.right + 1 ||
@@ -72,8 +81,14 @@ def inspect_card(page):
             ownWidth: s.clientWidth,
             ownScrollWidth: s.scrollWidth,
             overflow,
-            beforeNavigation: Boolean(catalogLink && visible(catalogLink) &&
-                next.getBoundingClientRect().top >= sr.bottom - 1),
+            navigationRecord: next && next.id,
+            navigationHeading: catalogHeading && text(catalogHeading),
+            navigationHref: catalogLink && catalogLink.getAttribute('href'),
+            beforeNavigation: Boolean(next && next.matches('.r.t-rec') &&
+                catalogHeading && visible(catalogHeading) && catalogLink && visible(catalogLink) &&
+                next.getBoundingClientRect().top >= sr.bottom - 1 &&
+                catalogHeading.getBoundingClientRect().top >= sr.bottom - 1 &&
+                catalogLink.getBoundingClientRect().top >= sr.bottom - 1),
             documentWidth: document.documentElement.scrollWidth,
             viewport: innerWidth
         };

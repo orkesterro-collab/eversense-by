@@ -14,12 +14,15 @@ on:
       - "en/**"
       - "*.html"
       - "content/buyer-guides.json"
+      - "content/designer-cards.json"
       - "scripts/build_buyer_pages.py"
+      - "scripts/designer_cards.py"
       - "scripts/explore_*.py"
       - "scripts/qa_exploration.py"
       - "scripts/extract_products.py"
       - "scripts/test_buyer_core.cjs"
       - "scripts/qa_buyer_tools.py"
+      - "scripts/qa_designer_cards.py"
       - ".github/workflows/qa-buyer-tools.yml"
   workflow_dispatch:
     inputs:
