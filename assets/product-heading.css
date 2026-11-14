@@ -1,0 +1,15 @@
+/* A shared, naturally sized title for all Russian product cards. */
+.ev-product-heading,.ev-product-breadcrumb{background:#292828;color:#fff;font-family:Manrope,Arial,sans-serif;box-sizing:border-box}
+.ev-product-breadcrumb{padding:16px 40px 0!important}
+.ev-product-breadcrumb .t-container,.ev-product-breadcrumb .t-col{width:100%!important;max-width:none!important;margin:0!important;padding:0!important}
+.ev-product-heading .ev-heading-inner{padding:24px 40px 32px;box-sizing:border-box}
+.ev-product-heading .ev-product-sku{position:static!important;display:block!important;transform:none!important;zoom:1!important;opacity:1!important;width:auto!important;height:auto!important;margin:0 0 8px;font-size:14px;line-height:1.4;font-weight:400}
+.ev-product-heading h1{display:block;margin:0;font-family:Manrope,Arial,sans-serif;font-size:clamp(16px,5vw,42px);font-weight:600;line-height:1.25;letter-spacing:-.02em;white-space:nowrap;text-wrap:nowrap}
+.ev-product-heading .tn-atom{display:inline!important;font:inherit;color:inherit;line-height:inherit}
+.ev-product-heading .ev-heading-shade{text-transform:lowercase}
+.ev-product-heading [hidden]{display:none!important}
+@media(max-width:639px){
+ .ev-product-breadcrumb{padding:16px 16px 0!important}
+ .ev-product-heading .ev-heading-inner{padding:20px 16px 28px}
+ .ev-product-heading .ev-product-sku{font-size:12px;margin-bottom:8px}
+}

@@ -679,6 +679,24 @@ def main():
                 calc_link = page.locator('#ev-product-tools a[href*="calculator.html"]')
                 require(calc_link.count() == 1 and parse_qs(urlparse(calc_link.get_attribute("href")).query).get("sku") == [sku],
                         f"{sku}: product calculator lost SKU")
+                heading = page.locator('.ev-product-heading h1')
+                require(heading.count() == 1 and heading.inner_text().strip() == product['name'],
+                        f"{sku}: heading must include the complete product name")
+                heading_geometry = heading.evaluate("""el=>{
+                  const range=document.createRange();range.selectNodeContents(el);
+                  const text=range.getBoundingClientRect(),box=el.getBoundingClientRect();
+                  const css=getComputedStyle(el),parent=el.closest('.ev-product-heading');
+                  const sku=parent.querySelector('.ev-product-sku').getBoundingClientRect();
+                  const crumbs=parent.previousElementSibling.getBoundingClientRect();
+                  return {textWidth:text.width,width:box.width,height:box.height,lineHeight:parseFloat(css.lineHeight),
+                    gap:sku.top-crumbs.bottom,left:box.left,right:box.right,viewport:innerWidth};
+                }""")
+                require(heading_geometry['textWidth'] <= heading_geometry['width'] + 1 and
+                        heading_geometry['height'] <= heading_geometry['lineHeight'] + 1 and
+                        heading_geometry['right'] <= heading_geometry['viewport'] + 1,
+                        f"{sku}: heading wraps or overflows: {heading_geometry}")
+                require(16 <= heading_geometry['gap'] <= 28,
+                        f"{sku}: incorrect breadcrumb gap: {heading_geometry}")
                 price_panel = page.locator("#ev-product-price")
                 require(page.locator("#ev-product-tools #ev-product-price").count() == 1,
                         f"{sku}: price must be in the purchase block below the gallery")
