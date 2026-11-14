@@ -506,57 +506,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1036",
-        "line": 49
+        "line": 61
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Вирдиа",
-        "line": 49
+        "line": 61
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Светлый",
-        "line": 49
+        "line": 61
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 64
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 64
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 64
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 64
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 64
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 64
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 64
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Природная эстетика",
-        "line": 58
+        "line": 70
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -564,7 +564,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 63,
         "htmlValue": "../../../assets/original-tilda/6c4cb656294c-EL1036____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild3763-6161-4636-b332-346439663133/EL1036____ver1_top-m.jpg"
       },
@@ -574,7 +574,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 61,
         "htmlValue": "../../../assets/original-tilda/71bae444c7a8-__-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3238-3662-4664-b632-366234653938/__-min.jpg"
       },
