@@ -1039,6 +1039,526 @@
         "width": 1536,
         "height": 1024
       }
+    },
+    {
+      "sku": "EL153",
+      "name": "Бежевый песок",
+      "page": "catalog-ru/new-minimalism-ru/jura-ru/index.html",
+      "materials": [
+        {
+          "code": "H3146 ST19",
+          "name": "Дуб Лоренцо бежево-серый",
+          "role": "Высокие шкафы, открытая ниша и стол",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H3146-ST19.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "R009 MS",
+          "name": "Тёплый серый",
+          "role": "Верхние фасады",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R009-MS.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "R014 MS",
+          "name": "Светлый кофе",
+          "role": "Фасады острова и нижних шкафов",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R014-MS.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U717 TM",
+          "name": "Дакар серый",
+          "role": "Столешница и фартук",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U717-TM.webp",
+            "width": 707,
+            "height": 1000
+          }
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL153.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL750",
+      "name": "Ярко-серый",
+      "page": "catalog-ru/new-minimalism-ru/taupe-grey-ru/index.html",
+      "materials": [
+        {
+          "code": "H1142 ST36",
+          "name": "Дуб Сакраменто коричневый",
+          "role": "Высокие шкафы, открытая ниша и стол",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H1142-ST36.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "R016 MS",
+          "name": "Зелёный кипарис",
+          "role": "Верхние фасады",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R016-MS.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U740 TM",
+          "name": "Серо-коричневый тёмный",
+          "role": "Столешница и фартук",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U740-TM.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U750 TM",
+          "name": "Ярко-серый",
+          "role": "Фасады острова и нижних шкафов",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U750-TM.webp",
+            "width": 707,
+            "height": 1000
+          }
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL750.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL1000",
+      "name": "Мрамор светлый",
+      "page": "catalog-ru/new-minimalism-ru/marble-light-ru/index.html",
+      "materials": [
+        {
+          "code": "AU502 ST9",
+          "name": "Синий дымчатый",
+          "role": "Верхние фасады",
+          "image": {
+            "src": "/assets/designer-cards/swatches/AU502-ST9.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "H1225 ST10",
+          "name": "Ясень Тронхейм",
+          "role": "Высокие шкафы, открытая ниша и стол",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H1225-ST10.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "R010 MS",
+          "name": "Серый графитовый",
+          "role": "Столешница и фартук",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R010-MS.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "R012 MS",
+          "name": "Серо-голубой",
+          "role": "Фасады острова и нижних шкафов",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R012-MS.webp",
+            "width": 707,
+            "height": 1000
+          }
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1000.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL1002",
+      "name": "Мрамор серый",
+      "page": "catalog-ru/new-minimalism-ru/marble-grey-ru/index.html",
+      "materials": [
+        {
+          "code": "H305 ST12",
+          "name": "Дуб Тонсберг натуральный",
+          "role": "Высокие шкафы, открытая ниша и стол",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H305-ST12.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "R010 MS",
+          "name": "Серый графитовый",
+          "role": "Верхние фасады",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R010-MS.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "R013 MS",
+          "name": "Розовый классический",
+          "role": "Фасады острова и нижних шкафов",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R013-MS.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U961 PM",
+          "name": "Чёрный графит",
+          "role": "Столешница и фартук",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U961-PM.webp",
+            "width": 707,
+            "height": 1000
+          }
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1002.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL1040",
+      "name": "Дуб Тичино белый",
+      "page": "catalog-ru/new-minimalism-ru/white-ticino-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "AU502 ST9",
+          "name": "Синий дымчатый",
+          "role": "Фасады острова и нижних шкафов",
+          "image": {
+            "src": "/assets/designer-cards/swatches/AU502-ST9.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "H3197 ST19",
+          "name": "Файнлайн средне-серый",
+          "role": "Высокие шкафы, открытая ниша и стол",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H3197-ST19.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U420 TM",
+          "name": "Лиловый",
+          "role": "Верхние фасады",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U420-TM.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U608 TM",
+          "name": "Зелёный фисташковый",
+          "role": "Фартук",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U608-TM.webp",
+            "width": 707,
+            "height": 1000
+          }
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1040.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL1045",
+      "name": "Дуб Лаваредо серый",
+      "page": "catalog-ru/new-minimalism-ru/grey-lavaredo-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "H3195 ST19",
+          "name": "Файнлайн белый",
+          "role": "Высокие шкафы, открытая ниша и стол",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H3195-ST19.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U702 ST9",
+          "name": "Кашемир серый",
+          "role": "Фасады острова и нижних шкафов",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U702-ST9.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U750 TM",
+          "name": "Ярко-серый",
+          "role": "Столешница и фартук",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U750-TM.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U788 ST9",
+          "name": "Арктика серый",
+          "role": "Верхние фасады",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U788-ST9.webp",
+            "width": 707,
+            "height": 1000
+          }
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1045.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL1049",
+      "name": "Дуб Виктория белый",
+      "page": "catalog-ru/new-minimalism-ru/victoria-oak-white-ru/index.html",
+      "materials": [
+        {
+          "code": "H1225 ST10",
+          "name": "Ясень Тронхейм",
+          "role": "Высокие шкафы, открытая ниша и стол",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H1225-ST10.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U201 TM",
+          "name": "Серая галька",
+          "role": "Столешница и фартук",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U201-TM.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U211 ST9",
+          "name": "Миндаль бежевый",
+          "role": "Верхние фасады",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U211-ST9.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U335 TM",
+          "name": "Красно-коричневый",
+          "role": "Фасады острова и нижних шкафов",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U335-TM.webp",
+            "width": 707,
+            "height": 1000
+          }
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1049.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL1050",
+      "name": "Дуб Виктория светло-серый",
+      "page": "catalog-ru/new-minimalism-ru/light-gray-victoria-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "H1362 ST12",
+          "name": "Дуб Барония светлый",
+          "role": "Высокие шкафы, открытая ниша и стол",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H1362-ST12.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "R007 MS",
+          "name": "Белый натуральный",
+          "role": "Верхние фасады",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R007-MS.webp",
+            "width": 636,
+            "height": 900
+          }
+        },
+        {
+          "code": "U335 TM",
+          "name": "Красно-коричневый",
+          "role": "Фасады острова и нижних шкафов",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U335-TM.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U740 TM",
+          "name": "Серо-коричневый тёмный",
+          "role": "Столешницы и фартук",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U740-TM.webp",
+            "width": 707,
+            "height": 1000
+          }
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1050.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL1053",
+      "name": "Дуб Виктория серый",
+      "page": "catalog-ru/new-minimalism-ru/grey-victoria-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "F243 ST10",
+          "name": "Мрамор Кандела светло-серый",
+          "role": "Столешницы и фартук",
+          "image": {
+            "src": "/assets/designer-cards/swatches/F243-ST10.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "R014 MS",
+          "name": "Светлый кофе",
+          "role": "Высокие шкафы, открытая ниша и стол",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R014-MS.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U420 TM",
+          "name": "Лиловый",
+          "role": "Верхние фасады",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U420-TM.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U640 TM",
+          "name": "Зелёный оливковый",
+          "role": "Фасады острова и нижних шкафов",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U640-TM.webp",
+            "width": 707,
+            "height": 1000
+          }
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1053.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL1054",
+      "name": "Дуб Шерман белый",
+      "page": "catalog-ru/new-minimalism-ru/white-sherman-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "H3003 ST19",
+          "name": "Дуб Норидж",
+          "role": "Высокие шкафы, открытая ниша и стол",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H3003-ST19.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U727 ST9",
+          "name": "Серый камень",
+          "role": "Фасады острова и нижних шкафов",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U727-ST9.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U740 TM",
+          "name": "Серо-коричневый тёмный",
+          "role": "Столешницы и фартук",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U740-TM.webp",
+            "width": 707,
+            "height": 1000
+          }
+        },
+        {
+          "code": "U763 ST9",
+          "name": "Серый перламутровый",
+          "role": "Верхние фасады",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U763-ST9.webp",
+            "width": 707,
+            "height": 1000
+          }
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1054.webp",
+        "width": 1536,
+        "height": 1024
+      }
     }
   ]
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the twenty designer cards at desktop and mobile widths on the staged site.
+"""Check all thirty designer cards at desktop and mobile widths on the staged site.
 
 Uses Playwright's bundled Chromium and a temporary loopback HTTP server.
 Screenshots and a machine-readable summary go to buyer-qa/designer-cards.
@@ -20,7 +20,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DEVICES = [(1440, 1000), (360, 800)]
-PRODUCT_COUNT = 20
+PRODUCT_COUNT = 30
 SELECTOR = "#ev-designer-card"
 
 
