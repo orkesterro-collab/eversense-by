@@ -4,14 +4,17 @@ on:
     branches-ignore: [main]
     paths:
       - 'assets/buyer*'
+      - 'assets/designer-cards**'
       - 'assets/explore-*'
       - 'assets/products-data*'
       - 'assets/prices.js'
       - 'assets/unified-header*'
       - 'content/buyer-guides.json'
+      - 'content/designer-cards.json'
       - 'scripts/build_buyer_pages.py'
       - 'scripts/explore_*.py'
       - 'scripts/qa_exploration.py'
+      - 'scripts/qa_designer_cards.py'
       - 'scripts/extract_products.py'
       - 'scripts/test_buyer_core.cjs'
       - 'scripts/qa_buyer_tools.py'
@@ -56,6 +59,8 @@ jobs:
         run: python3 scripts/qa_buyer_tools.py
       - name: Check visual exploration and accessible fallbacks
         run: python3 scripts/qa_exploration.py
+      - name: Check designer cards on desktop and mobile
+        run: python3 scripts/qa_designer_cards.py
       - name: Save browser screenshots and checks
         if: always()
         uses: actions/upload-artifact@v4

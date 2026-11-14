@@ -1,0 +1,91 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&display=swap");
+/* Scoped addition only: existing product, Tilda records and global styles stay intact. */
+#ev-designer-card {
+  --ev-dc-ink: #343333;
+  --ev-dc-muted: #716d68;
+  --ev-dc-sand: #c0a58c;
+  --ev-dc-line: #dadada;
+  display: block;
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 80px 0 76px;
+  border: 0;
+  background: #fff;
+  color: var(--ev-dc-ink);
+  font-family: Manrope, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: normal;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+}
+#ev-designer-card,
+#ev-designer-card *,
+#ev-designer-card *::before,
+#ev-designer-card *::after { box-sizing: border-box; }
+#ev-designer-card .ev-designer-card__inner { width: min(1120px, calc(100% - 80px)); min-width: 0; margin: 0 auto; }
+#ev-designer-card .ev-designer-card__header { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .85fr); align-items: end; gap: 48px; margin: 0 0 32px; padding: 0; }
+#ev-designer-card .ev-designer-card__heading { min-width: 0; }
+#ev-designer-card .ev-designer-card__eyebrow { margin: 0 0 15px; padding: 0; color: var(--ev-dc-muted); font-size: 11px; font-weight: 500; line-height: 1.6; letter-spacing: .09em; text-transform: uppercase; }
+#ev-designer-card h2 { margin: 0 0 17px; padding: 0; color: var(--ev-dc-ink); font-size: clamp(32px, 3.8vw, 47px); font-weight: 500; line-height: 1.14; letter-spacing: -.025em; overflow-wrap: anywhere; }
+#ev-designer-card .ev-designer-card__floor { display: flex; flex-wrap: wrap; gap: 7px 16px; align-items: baseline; margin: 0; padding: 0; color: var(--ev-dc-ink); font-size: 16px; font-weight: 400; line-height: 1.65; }
+#ev-designer-card .ev-designer-card__floor span { color: var(--ev-dc-muted); font-size: 13px; letter-spacing: .03em; }
+#ev-designer-card .ev-designer-card__intro { max-width: 390px; margin: 0 0 1px; padding: 0; color: var(--ev-dc-muted); font-size: 15px; font-weight: 400; line-height: 1.8; }
+#ev-designer-card figure { display: block; margin: 0; padding: 0; }
+#ev-designer-card .ev-designer-card__interior-image { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; object-position: 50% 60%; margin: 0; padding: 0; border: 0; border-radius: 0; background: #f2eeea; }
+#ev-designer-card .ev-designer-card__interior > figcaption { display: flex; flex-wrap: wrap; gap: 7px 22px; justify-content: space-between; margin: 13px 0 0; padding: 0; color: var(--ev-dc-muted); font-size: 11px; font-weight: 400; line-height: 1.65; }
+#ev-designer-card .ev-designer-card__caption-title { color: var(--ev-dc-ink); }
+#ev-designer-card .ev-designer-card__materials-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px 32px; margin: 46px 0 23px; padding: 0; }
+#ev-designer-card h3 { margin: 0; padding: 0; color: var(--ev-dc-ink); font-size: 24px; font-weight: 500; line-height: 1.35; letter-spacing: -.015em; }
+#ev-designer-card .ev-designer-card__materials-heading > p { margin: 0; padding: 0; color: var(--ev-dc-muted); font-size: 12px; line-height: 1.75; }
+#ev-designer-card .ev-designer-card__materials { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; list-style: none; margin: 0; padding: 0; }
+#ev-designer-card .ev-designer-card__material { display: block; min-width: 0; list-style: none; margin: 0; padding: 0; }
+#ev-designer-card .ev-designer-card__swatch { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; margin: 0; padding: 0; border: 0; border-radius: 0; background: #f2eeea; }
+#ev-designer-card .ev-designer-card__material figcaption { display: block; margin: 16px 0 0; padding: 0; }
+#ev-designer-card .ev-designer-card__code { display: block; margin: 0 0 6px; padding: 0; color: var(--ev-dc-muted); font-size: 12px; font-weight: 500; line-height: 1.55; letter-spacing: .025em; overflow-wrap: anywhere; }
+#ev-designer-card h4 { margin: 0 0 7px; padding: 0; color: var(--ev-dc-ink); font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: normal; overflow-wrap: anywhere; }
+#ev-designer-card .ev-designer-card__role { margin: 0; padding: 0; color: var(--ev-dc-muted); font-size: 12px; font-weight: 400; line-height: 1.75; }
+#ev-designer-card .ev-designer-card__note { max-width: 700px; margin: 28px 0 0; padding: 0; color: var(--ev-dc-muted); font-size: 11px; font-weight: 400; line-height: 1.75; }
+@media (max-width: 959px) {
+  #ev-designer-card { padding: 64px 0; }
+  #ev-designer-card .ev-designer-card__header { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  #ev-designer-card .ev-designer-card__intro { max-width: 600px; }
+  #ev-designer-card .ev-designer-card__materials { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; }
+}
+@media (max-width: 639px) {
+  #ev-designer-card { padding: 42px 0 46px; }
+  #ev-designer-card .ev-designer-card__inner { width: calc(100% - 40px); }
+  #ev-designer-card .ev-designer-card__header { gap: 16px; margin-bottom: 24px; }
+  #ev-designer-card .ev-designer-card__eyebrow { margin-bottom: 12px; font-size: 10px; }
+  #ev-designer-card h2 { margin-bottom: 14px; font-size: clamp(29px, 7.8vw, 36px); line-height: 1.15; letter-spacing: -.025em; }
+  #ev-designer-card .ev-designer-card__floor { gap: 4px 12px; font-size: 14px; }
+  #ev-designer-card .ev-designer-card__floor span { font-size: 12px; }
+  #ev-designer-card .ev-designer-card__intro { font-size: 14px; line-height: 1.8; }
+  #ev-designer-card .ev-designer-card__interior > figcaption { gap: 5px 12px; justify-content: flex-start; font-size: 10px; }
+  #ev-designer-card .ev-designer-card__materials-heading { gap: 9px; margin: 32px 0 18px; }
+  #ev-designer-card h3 { font-size: 21px; line-height: 1.4; }
+  #ev-designer-card .ev-designer-card__materials-heading > p { font-size: 12px; }
+  #ev-designer-card .ev-designer-card__materials { gap: 27px 14px; }
+  #ev-designer-card .ev-designer-card__swatch { aspect-ratio: 1; }
+  #ev-designer-card .ev-designer-card__material figcaption { margin-top: 12px; }
+  #ev-designer-card .ev-designer-card__code { margin-bottom: 5px; font-size: 11px; }
+  #ev-designer-card h4 { font-size: 16px; line-height: 1.45; }
+  #ev-designer-card .ev-designer-card__role { font-size: 11px; line-height: 1.7; }
+  #ev-designer-card .ev-designer-card__note { margin-top: 25px; font-size: 11px; }
+}
+@media print {
+  #ev-designer-card { padding-block: 24px; }
+  #ev-designer-card .ev-designer-card__inner { width: 100%; }
+  #ev-designer-card .ev-designer-card__header { break-after: avoid; }
+  #ev-designer-card figure { break-inside: avoid; }
+  #ev-designer-card .ev-designer-card__materials { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Palette comes first, as requested. */
+#ev-designer-card .ev-designer-card__materials-heading{margin:28px 0 20px}
+#ev-designer-card .ev-designer-card__interior{margin-top:42px}
+#ev-designer-card .ev-designer-card__swatch{border:1px solid #e7e3df}
+@media(max-width:639px){#ev-designer-card .ev-designer-card__interior{margin-top:30px}#ev-designer-card .ev-designer-card__eyebrow,#ev-designer-card .ev-designer-card__interior>figcaption{font-size:11px}}
