@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the ten designer cards at desktop and mobile widths on the staged site.
+"""Check the twenty designer cards at desktop and mobile widths on the staged site.
 
 Uses Playwright's bundled Chromium and a temporary loopback HTTP server.
 Screenshots and a machine-readable summary go to buyer-qa/designer-cards.
@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import functools
 import json
+import math
 import threading
 import time
 import traceback
@@ -19,7 +20,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DEVICES = [(1440, 1000), (360, 800)]
-PRODUCT_COUNT = 10
+PRODUCT_COUNT = 20
 SELECTOR = "#ev-designer-card"
 
 
@@ -115,6 +116,17 @@ def check_card(page, product, width, base, local_failures):
     page.evaluate("""async () => {
         await Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 3000))]);
     }""")
+    # Tilda's desktop entrance fade starts after DOMContentLoaded. is_visible()
+    # alone accepts opacity:0, so wait for the actual page content to appear.
+    page.wait_for_function("""selector => {
+        for (let el = document.querySelector(selector); el; el = el.parentElement) {
+            const style = getComputedStyle(el);
+            if (Number(style.opacity) < 0.99 || style.visibility === 'hidden' ||
+                style.display === 'none') return false;
+        }
+        return true;
+    }""", arg=SELECTOR, timeout=15000)
+    section.locator('img').evaluate_all("els => Promise.all(els.map(el => el.decode()))")
     details = inspect_card(page)
     errors = []
 
@@ -145,6 +157,22 @@ def check_card(page, product, width, base, local_failures):
           "Content overflows the designer block")
     check(details['beforeNavigation'], "Designer block is not before the catalog navigation")
     return details, errors
+
+
+def screenshot_card(page, path, timeout=30000):
+    """Capture the whole card at its tested width, clear of fixed page overlays."""
+    section = page.locator(SELECTOR)
+    height = math.ceil(section.bounding_box()['height'])
+    # Functional checks use the original viewport. Only the capture is taller,
+    # allowing all card pixels to paint and leaving room for the header/cookies.
+    page.set_viewport_size({'width': page.viewport_size['width'], 'height': height + 320})
+    section.evaluate("""el => {
+        document.documentElement.style.scrollBehavior = 'auto';
+        document.body.style.scrollBehavior = 'auto';
+        window.scrollTo({top: el.getBoundingClientRect().top + scrollY - 100, behavior: 'instant'});
+    }""")
+    page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+    section.screenshot(path=str(path), animations='disabled', timeout=timeout)
 
 
 def main():
@@ -215,8 +243,7 @@ def main():
                                 row['details'], errors = check_card(page, product, width, base, local_failures)
                                 require(not errors, '; '.join(errors))
                                 screenshot = f"{product['sku']}-{width}.png"
-                                page.locator(SELECTOR).screenshot(path=str(output / screenshot),
-                                    animations='disabled', timeout=30000)
+                                screenshot_card(page, output / screenshot)
                                 row.update(status='passed', screenshot=screenshot)
                                 summary['screenshots'].append(screenshot)
                             except Exception as error:
@@ -224,8 +251,7 @@ def main():
                                 screenshot = f"{product['sku']}-{width}-failure.png"
                                 try:
                                     if page.locator(SELECTOR).count() == 1 and page.locator(SELECTOR).is_visible():
-                                        page.locator(SELECTOR).screenshot(path=str(output / screenshot),
-                                            animations='disabled', timeout=15000)
+                                        screenshot_card(page, output / screenshot, timeout=15000)
                                     else:
                                         page.screenshot(path=str(output / screenshot), animations='disabled', timeout=15000)
                                     row['screenshot'] = screenshot

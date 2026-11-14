@@ -519,6 +519,526 @@
         "width": 1536,
         "height": 1024
       }
+    },
+    {
+      "sku": "EL1038",
+      "name": "Дуб Вирдиа натуральный",
+      "page": "catalog-ru/quiet-luxury-ru/natural-virdia-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "AU504 ST9",
+          "name": "Альпийское озеро",
+          "image": {
+            "src": "/assets/designer-cards/swatches/AU504-ST9.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Фасады острова и нижних шкафов"
+        },
+        {
+          "code": "H3317 ST28",
+          "name": "Дуб Кунео коричневый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H3317-ST28.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Высокие шкафы, открытая ниша и стол"
+        },
+        {
+          "code": "R016 MS",
+          "name": "Зелёный кипарис",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R016-MS.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Верхние фасады"
+        },
+        {
+          "code": "U961 ST7",
+          "name": "Черный графит",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U961-ST7.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Столешница и фартук"
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1038.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL1039",
+      "name": "Дуб Вирдиа коричневый",
+      "page": "catalog-ru/quiet-luxury-ru/brown-virdia-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "AU665 ST9",
+          "name": "Зелёный камень",
+          "image": {
+            "src": "/assets/designer-cards/swatches/AU665-ST9.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Фасады острова и нижних шкафов"
+        },
+        {
+          "code": "H3154 ST36",
+          "name": "Дуб Чарльстон тёмно-коричневый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H3154-ST36.webp",
+            "width": 703,
+            "height": 1000
+          },
+          "role": "Высокие шкафы, открытая ниша и стол"
+        },
+        {
+          "code": "R017 MS",
+          "name": "Серо-синий корунд",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R017-MS.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Верхние фасады"
+        },
+        {
+          "code": "U699 TM",
+          "name": "Зеленый еловый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U699-TM.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Столешница и фартук"
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1039.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL1043",
+      "name": "Дуб Тичино натуральный",
+      "page": "catalog-ru/quiet-luxury-ru/natural-ticino-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "H3133 ST9",
+          "name": "Дуб Давос трюфель",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H3133-ST9.webp",
+            "width": 702,
+            "height": 1000
+          },
+          "role": "Высокие шкафы, открытая ниша и стол"
+        },
+        {
+          "code": "R009 MS",
+          "name": "Тёплый серый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R009-MS.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Верхние фасады"
+        },
+        {
+          "code": "R012 MS",
+          "name": "Серо-голубой",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R012-MS.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Фасады острова и нижних шкафов"
+        },
+        {
+          "code": "R015 MS",
+          "name": "Фанго коричневый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R015-MS.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Столешница и фартук"
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1043.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL1044",
+      "name": "Дуб Тичино коричневый",
+      "page": "catalog-ru/quiet-luxury-ru/brown-ticino-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "F528 ST20",
+          "name": "Металл брашированный бронзовый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/F528-ST20.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Столешницы острова и рабочей зоны, фартук"
+        },
+        {
+          "code": "H1303 ST12",
+          "name": "Дуб Бельмонт коричневый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H1303-ST12.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Высокие шкафы и открытая ниша"
+        },
+        {
+          "code": "U399 PM",
+          "name": "Красный гранат",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U399-PM.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Фасады острова и нижних шкафов"
+        },
+        {
+          "code": "U699 TM",
+          "name": "Зеленый еловый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U699-TM.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Верхние фасады"
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1044.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL1047",
+      "name": "Дуб Лаваредо натуральный",
+      "page": "catalog-ru/quiet-luxury-ru/natural-lavaredo-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "AU163 ST9",
+          "name": "Карри жёлтый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/AU163-ST9.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Фасады острова и нижних шкафов"
+        },
+        {
+          "code": "AU604 ST9",
+          "name": "Зелёный эвкалипт",
+          "image": {
+            "src": "/assets/designer-cards/swatches/AU604-ST9.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Верхние фасады"
+        },
+        {
+          "code": "H3359 ST32",
+          "name": "Дуб Давенпорт натуральный светлый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H3359-ST32.webp",
+            "width": 703,
+            "height": 1000
+          },
+          "role": "Высокие шкафы и открытая ниша"
+        },
+        {
+          "code": "U963 ST9",
+          "name": "Диамант серый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U963-ST9.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Столешницы острова и рабочей зоны, фартук"
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1047.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL1048",
+      "name": "Дуб Лаваредо коричневый",
+      "page": "catalog-ru/quiet-luxury-ru/brown-lavaredo-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "AF800 ST9",
+          "name": "Мрамор Кристалл",
+          "image": {
+            "src": "/assets/designer-cards/swatches/AF800-ST9.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Фасады и боковины острова"
+        },
+        {
+          "code": "F206 ST9",
+          "name": "Камень Пьетра Гриджиа чёрный",
+          "image": {
+            "src": "/assets/designer-cards/swatches/F206-ST9.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Столешницы острова и рабочей зоны, фартук"
+        },
+        {
+          "code": "H1307 ST19",
+          "name": "Орех Вармия коричневый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H1307-ST19.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Высокие шкафы и открытая ниша"
+        },
+        {
+          "code": "R018 MS",
+          "name": "Кирпичный красный",
+          "image": {
+            "src": "/assets/designer-cards/swatches/R018-MS.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Верхние и нижние фасады рабочей зоны"
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1048.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL1052",
+      "name": "Дуб Виктория натуральный",
+      "page": "catalog-ru/quiet-luxury-ru/natural-victoria-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "AU604 ST9",
+          "name": "Зелёный эвкалипт",
+          "image": {
+            "src": "/assets/designer-cards/swatches/AU604-ST9.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Высокие шкафы, открытая ниша и нижние шкафы у стены"
+        },
+        {
+          "code": "F685 ST10",
+          "name": "Акапулько",
+          "image": {
+            "src": "/assets/designer-cards/swatches/F685-ST10.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Верхние фасады"
+        },
+        {
+          "code": "U545 TM",
+          "name": "Синий балтийский",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U545-TM.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Фасады острова"
+        },
+        {
+          "code": "U780 TM",
+          "name": "Серый монументальный",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U780-TM.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Столешницы и фартук"
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL1052.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL2152",
+      "name": "Дуб Каселла натуральный",
+      "page": "catalog-ru/quiet-luxury-ru/natural-casella-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "AU665 ST9",
+          "name": "Зелёный камень",
+          "image": {
+            "src": "/assets/designer-cards/swatches/AU665-ST9.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Фасады острова и нижние шкафы у стены"
+        },
+        {
+          "code": "F416 ST10",
+          "name": "Текстиль бежевый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/F416-ST10.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Верхние фасады"
+        },
+        {
+          "code": "H1385 ST40",
+          "name": "Дуб Каселла натуральный",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H1385-ST40.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Высокие шкафы и открытая ниша"
+        },
+        {
+          "code": "U963 ST9",
+          "name": "Диамант серый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U963-ST9.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Столешницы и фартук"
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL2152.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL2153",
+      "name": "Дуб Каселла коричневый",
+      "page": "catalog-ru/quiet-luxury-ru/brown-casella-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "AU665 ST9",
+          "name": "Зелёный камень",
+          "image": {
+            "src": "/assets/designer-cards/swatches/AU665-ST9.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Фасады острова и нижние шкафы у стены"
+        },
+        {
+          "code": "F323 ST20",
+          "name": "Кобра бронза",
+          "image": {
+            "src": "/assets/designer-cards/swatches/F323-ST20.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Столешницы и фартук"
+        },
+        {
+          "code": "F528 ST20",
+          "name": "Металл брашированный бронзовый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/F528-ST20.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Верхние фасады"
+        },
+        {
+          "code": "H1386 ST40",
+          "name": "Дуб Каселла коричневый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H1386-ST40.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Высокие шкафы и открытая ниша"
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL2153.webp",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "sku": "EL2190",
+      "name": "Дуб Турин",
+      "page": "catalog-ru/quiet-luxury-ru/turin-oak-ru/index.html",
+      "materials": [
+        {
+          "code": "F235 ST10",
+          "name": "Сланец Скиваро",
+          "image": {
+            "src": "/assets/designer-cards/swatches/F235-ST10.webp",
+            "width": 636,
+            "height": 900
+          },
+          "role": "Столешницы и фартук"
+        },
+        {
+          "code": "F528 ST20",
+          "name": "Металл брашированный бронзовый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/F528-ST20.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Верхние фасады"
+        },
+        {
+          "code": "H1303 ST12",
+          "name": "Дуб Бельмонт коричневый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/H1303-ST12.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Высокие шкафы и открытая ниша"
+        },
+        {
+          "code": "U335 TM",
+          "name": "Красно-коричневый",
+          "image": {
+            "src": "/assets/designer-cards/swatches/U335-TM.webp",
+            "width": 707,
+            "height": 1000
+          },
+          "role": "Фасады острова и нижние шкафы у стены"
+        }
+      ],
+      "interior": {
+        "src": "/assets/designer-cards/interiors/EL2190.webp",
+        "width": 1536,
+        "height": 1024
+      }
     }
   ]
 }
