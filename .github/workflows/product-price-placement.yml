@@ -1,4 +1,5 @@
 name: Publish product prices below galleries
+# Release planned stock text from the price sheet.
 
 on:
   push:

@@ -87,7 +87,7 @@ def main():
         require(len(pages) >= 15, f"Expected all new buyer pages, found {len(pages)}")
         summary["new_pages"] = pages
         payload = {"status": "ok", "table": {"rows": [
-            {"c": [{"v": p["sku"]}, {"v": 45.90}, {"v": None}, {"v": None}, {"v": None}]}
+            {"c": [{"v": p["sku"]}, {"v": 45.90}, {"v": None}, {"v": None}, {"v": None}, {"v": 100}]}
             for p in products]}}
         jsonp = "window.EversensePriceFeed(" + json.dumps(payload, ensure_ascii=False) + ");"
         server = ThreadingHTTPServer(("127.0.0.1", args.port), functools.partial(QuietHandler, directory=str(site_dir)))
@@ -486,6 +486,26 @@ def main():
                         "update_requested_network": False}
             case("late-price-event-updates-cards-and-calculation", late_price_update_test)
 
+            def stock_feed_update_test(page, context):
+                goto(page, by_sku["EL1052"]["canonicalPath"])
+                for value in [250, None, 125]:
+                    changed = json.loads(json.dumps(payload))
+                    for row in changed["table"]["rows"]:
+                        if row["c"][0]["v"] == "EL1052":
+                            row["c"][5]["v"] = value
+                    page.evaluate("data=>window.EversensePriceFeed(data)", changed)
+                    stock = page.locator("#ev-product-tools p.ev-stock-plan")
+                    if value is None:
+                        require(stock.count() == 0, "Empty stock cell must hide planned stock")
+                    else:
+                        require(stock.count() == 1 and f"более {value} м²" in stock.inner_text(),
+                                "Product stock did not update from its SKU row")
+                    require("45,90" in page.locator("#ev-product-price .ev-price-box").inner_text(),
+                            "Stock-only update changed product price")
+                return {"stock_changes": [250, None, 125], "price_preserved": True}
+            case("planned-stock-refresh-and-empty-cell", stock_feed_update_test, 390, 844)
+
+
             def storage_tabs_test(page, context):
                 goto(page, "catalog-ru/")
                 page.locator('[data-ev-favorite="EL1052"]').click()
@@ -674,6 +694,11 @@ def main():
                 price = price_panel.locator(".ev-price-box strong").inner_text()
                 require("45,90" in price and "BYN" in price, f"{sku}: mocked product price missing: {price}")
                 page.evaluate("()=>{EversensePrices.render();EversensePrices.render();}")
+                stock = price_panel.locator("p.ev-stock-plan")
+                require(stock.count() == 1 and stock.inner_text() == "На складе в Минске планово поддерживается более 100 м².",
+                        f"{sku}: planned stock from feed missing or duplicated")
+                require(page.locator('#ev-product-tools a[href*="contacts.html"]').count() == 0,
+                        f"{sku}: availability button still present")
                 require(page.locator("#ev-product-tools").count() == 1, f"{sku}: price rerender duplicated product tools")
                 styles = None
                 if sku == "EL1052":

@@ -10,7 +10,7 @@
   document.head.appendChild(script);
 })();
 /* EVERSENSE Беларусь: публичный прайс Google Sheets. Не хранит ключей/паролей.
-   Схема листа price: sku | name | price | sale_price | sale_until | sale_from */
+   Схема листа price: sku | name | price | sale_price | sale_until | sale_from | Плановый запас, м² */
 (function () {
   "use strict";
   if(window.EversensePrices)return;
@@ -78,6 +78,12 @@
   function tildaSkuNodes() {
     return document.querySelectorAll(".t396__elem[data-elem-type='text'] > .tn-atom, .t396__elem[data-elem-type='text'] > h2.tn-atom");
   }
+  function renderStock(panel,sku) {
+    var old=panel.querySelector('.ev-stock-plan');if(old)old.remove();
+    var row=table[String(sku||'').toUpperCase()];
+    if(!row||!row.stockPlan)return;
+    panel.append(el('p','ev-stock-plan','На складе в Минске планово поддерживается более '+row.stockPlan.toLocaleString('ru-RU',{maximumFractionDigits:2})+' м².'));
+  }
   function renderTilda() {
     var nodes=tildaSkuNodes(), isProduct=/\/catalog-(ru|en)\/[^/]+\/[^/]+\/?(?:index\.html)?$/.test(location.pathname);
     if (isProduct) {
@@ -87,6 +93,7 @@
         var existingBox=existingPanel.querySelector(".ev-price-box");
         if (existingBox) existingBox.remove();
         existingPanel.append(block(existingPanel.dataset.evSku,"product"));
+        renderStock(existingPanel,existingPanel.dataset.evSku);
         return;
       }
       var match=null, sku=null;
@@ -110,6 +117,7 @@
           var old=panel.querySelector(".ev-price-box");
           if(old) old.remove();
           panel.append(block(sku,"product"));
+          renderStock(panel,sku);
         }
       }
       return;
@@ -163,7 +171,7 @@
       var c=row.c||[],v=function(i){return c[i]&&c[i].v;},f=function(i){return c[i]&&c[i].f;};
       var sku=String(v(0)||"").trim().toUpperCase();
       if(!/^EL\d{3,4}$/.test(sku))return;
-      newTable[sku]={price:number(v(1)),sale:number(v(2)),until:date(v(3),f(3)),from:date(v(4),f(4))};
+      newTable[sku]={price:number(v(1)),sale:number(v(2)),until:date(v(3),f(3)),from:date(v(4),f(4)),stockPlan:number(v(5))};
     });
     table=newTable;loaded=true;render();
     document.dispatchEvent(new CustomEvent('eversense:prices'));
@@ -178,7 +186,7 @@
     s.src="https://docs.google.com/spreadsheets/d/"+SHEET_ID+
       "/gviz/tq?"+new URLSearchParams({
         tqx:"out:json;responseHandler:EversensePriceFeed",
-        sheet:"price",headers:"1",tq:"select A,C,D,E,F",
+        sheet:"price",headers:"1",tq:"select A,C,D,E,F,G",
         nonce:String(Date.now())
       }).toString();
     s.onerror=function(){console.warn("EVERSENSE: нет доступа к опубликованной таблице price");};

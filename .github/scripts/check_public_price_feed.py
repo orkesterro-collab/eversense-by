@@ -9,7 +9,7 @@ from pathlib import Path
 SHEET = "1zzypRi-wST20xu0rns-uSnGk7NmikkW2kw44jvsDgBY"
 url = "https://docs.google.com/spreadsheets/d/" + SHEET + "/gviz/tq?" + urlencode({
     "tqx": "out:json;responseHandler:EversensePriceFeed",
-    "sheet": "price", "headers": "1", "tq": "select A,C,D,E,F",
+    "sheet": "price", "headers": "1", "tq": "select A,C,D,E,F,G",
 })
 req = Request(url, headers={"User-Agent": "Mozilla/5.0", "Accept": "*/*"})
 with urlopen(req, timeout=35) as response:

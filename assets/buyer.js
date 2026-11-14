@@ -147,7 +147,7 @@
       if(document.getElementById('ev-product-tools'))return true;
       var price=document.getElementById('ev-product-price');if(!price)return false;
       var section=document.createElement('section');section.id='ev-product-tools';section.className='ev-tools-panel ev-buyer';
-      section.innerHTML='<div class="ev-wrap"><div class="ev-actions"><a class="ev-button ev-button--primary" href="'+route('contacts.html')+'?sku='+p.sku+'">Уточнить наличие</a><a class="ev-button" href="'+route('calculator.html')+'?sku='+p.sku+'">Рассчитать упаковки</a>'+buttons(p)+'</div><div class="ev-swatch-row"><a href="'+route('favorites.html')+'">Избранное (<span data-favorites-count>0</span>)</a><a href="'+route('choose.html')+'#sample">Как проверить образец</a></div></div>';
+      section.innerHTML='<div class="ev-wrap"><div class="ev-actions"><a class="ev-button ev-button--primary" href="'+route('calculator.html')+'?sku='+p.sku+'">Рассчитать упаковки</a>'+buttons(p)+'</div><div class="ev-swatch-row"><a href="'+route('favorites.html')+'">Избранное (<span data-favorites-count>0</span>)</a><a href="'+route('choose.html')+'#sample">Как проверить образец</a></div></div>';
       var gallery=price.previousElementSibling;
       // Accept both current and cached versions of the price loader.
       if(!gallery||!gallery.matches('.t-rec')||!gallery.querySelector('[role="img"]'))gallery=price.nextElementSibling;
