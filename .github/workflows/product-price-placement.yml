@@ -1,5 +1,5 @@
 name: Publish product prices below galleries
-# Release single-line product headings with spacing below the shared header.
+# Publish the verified product heading layout and its shared stylesheet.
 
 on:
   push:
