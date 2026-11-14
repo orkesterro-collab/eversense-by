@@ -148,9 +148,12 @@
       var price=document.getElementById('ev-product-price');if(!price)return false;
       var section=document.createElement('section');section.id='ev-product-tools';section.className='ev-tools-panel ev-buyer';
       section.innerHTML='<div class="ev-wrap"><div class="ev-actions"><a class="ev-button ev-button--primary" href="'+route('contacts.html')+'?sku='+p.sku+'">Уточнить наличие</a><a class="ev-button" href="'+route('calculator.html')+'?sku='+p.sku+'">Рассчитать упаковки</a>'+buttons(p)+'</div><div class="ev-swatch-row"><a href="'+route('favorites.html')+'">Избранное (<span data-favorites-count>0</span>)</a><a href="'+route('choose.html')+'#sample">Как проверить образец</a></div></div>';
-      var gallery=price.nextElementSibling;
+      var gallery=price.previousElementSibling;
+      // Accept both current and cached versions of the price loader.
+      if(!gallery||!gallery.matches('.t-rec')||!gallery.querySelector('[role="img"]'))gallery=price.nextElementSibling;
       if(gallery&&gallery.matches('.t-rec')&&gallery.querySelector('[role="img"]'))gallery.insertAdjacentElement('afterend',section);
       else price.insertAdjacentElement('afterend',section);
+      section.querySelector('.ev-wrap').prepend(price);
       var support=document.createElement('section');support.id='ev-product-support';support.className='ev-tools-panel ev-buyer';support.innerHTML='<div class="ev-wrap"><span class="ev-eyebrow">Перед покупкой</span><h2>Всё важное об этом покрытии</h2><div class="ev-link-grid">'+[['Конструкция и свойства','about.html','Из чего состоит EVERSENSE и что важно в эксплуатации.'],['Укладка и тёплый пол','installation.html','Основание, подложка и подготовка к монтажу.'],['Уход и гарантия','care.html','Ежедневный уход и обращение при повреждении.']].map(function(a){return '<a class="ev-link-card" href="'+route(a[1])+'"><h3>'+a[0]+'</h3><p>'+a[2]+'</p><span aria-hidden="true">↗</span></a>';}).join('')+'</div><div class="ev-actions"><a class="ev-text-link" href="'+route('downloads.html')+'">Документы EVERSENSE</a><a class="ev-text-link" href="'+route('warranty.html')+'">Условия гарантии</a><a class="ev-text-link" href="'+route('faq.html')+'">Ответы на вопросы</a></div></div>';
       var footer=document.querySelector('#t-footer,.t-footer');if(footer)footer.before(support);else document.body.appendChild(support);
       syncButtons();return true;

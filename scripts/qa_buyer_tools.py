@@ -660,6 +660,14 @@ def main():
                 require(calc_link.count() == 1 and parse_qs(urlparse(calc_link.get_attribute("href")).query).get("sku") == [sku],
                         f"{sku}: product calculator lost SKU")
                 price_panel = page.locator("#ev-product-price")
+                require(page.locator("#ev-product-tools #ev-product-price").count() == 1,
+                        f"{sku}: price must be in the purchase block below the gallery")
+                require(page.evaluate("""() => {
+                  const price=document.getElementById('ev-product-price');
+                  const actions=document.querySelector('#ev-product-tools .ev-actions');
+                  return !!(price.compareDocumentPosition(actions)&Node.DOCUMENT_POSITION_FOLLOWING) &&
+                    price.getBoundingClientRect().bottom <= actions.getBoundingClientRect().top + 1;
+                }"""), f"{sku}: price must precede the purchase actions")
                 require(price_panel.count() == 1 and price_panel.get_attribute("data-ev-sku") == sku,
                         f"{sku}: price panel points to a different product")
                 page.wait_for_selector("#ev-product-price .ev-price-box strong")

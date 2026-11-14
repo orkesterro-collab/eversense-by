@@ -1,0 +1,155 @@
+name: Publish product prices below galleries
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/product-price-placement.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: eversence-hoster-deploy
+  cancel-in-progress: true
+
+jobs:
+  buyer-qa:
+    uses: ./.github/workflows/qa-buyer-tools.yml
+  deploy:
+    needs: buyer-qa
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Eversence
+        uses: actions/checkout@v4
+
+      - name: Inspect FTPS certificate without using credentials
+        shell: bash
+        run: |
+          timeout 12 openssl s_client -connect vh108.hoster.by:21 -starttls ftp -servername vh108.hoster.by -showcerts </dev/null > /tmp/eversence-tls.txt 2>&1 || true
+          sed -n '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/p' /tmp/eversence-tls.txt | sed -n '1,/-----END CERTIFICATE-----/p' > /tmp/eversence-server.crt
+          if [ ! -s /tmp/eversence-server.crt ]; then
+            echo "No FTPS certificate was returned"
+            tail -25 /tmp/eversence-tls.txt
+            exit 1
+          fi
+          openssl x509 -in /tmp/eversence-server.crt -noout -subject -issuer -dates -fingerprint -sha256
+          actual="$(openssl x509 -in /tmp/eversence-server.crt -noout -fingerprint -sha256 | cut -d= -f2)"
+          expected="25:32:7D:62:99:47:12:DD:70:35:3A:3F:2C:3B:7F:35:66:60:73:CC:C9:50:A0:47:85:A3:7D:4E:5E:8E:C9:BB"
+          if [ "$actual" != "$expected" ]; then
+            echo "::error::FTPS server certificate does not match the pinned fingerprint. Refusing to send credentials."
+            exit 1
+          fi
+          cp /tmp/eversence-server.crt "$RUNNER_TEMP/eversence-ftps.crt"
+
+      - name: Check FTP password is configured
+        env:
+          FTP_PASSWORD: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
+        run: |
+          if [ -z "$FTP_PASSWORD" ]; then
+            echo "::error::Add EVERSENCE_FTP_PASSWORD under Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+
+      - name: Discover and verify new Eversense web root
+        env:
+          FTP_PASSWORD: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
+          FTP_CA: ${{ runner.temp }}/eversence-ftps.crt
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import ftplib, io, os, secrets, ssl, subprocess
+          context = ssl.create_default_context(cafile=os.environ["FTP_CA"])
+          candidates = [".", "../eversense.by", "/eversense.by", "eversense.by",
+                        "/www/eversense.by", "www/eversense.by",
+                        "../../eversense.by", "../../www/eversense.by"]
+          marker = "eversense-directory-probe-" + secrets.token_hex(12) + ".txt"
+          token = "eversense-verified-" + secrets.token_hex(20)
+          found = None
+          with ftplib.FTP_TLS(context=context, timeout=30) as ftp:
+              ftp.connect("vh108.hoster.by", 21)
+              ftp.login("eversense-deploy", os.environ["FTP_PASSWORD"])
+              ftp.prot_p()
+              for candidate in candidates:
+                  try:
+                      ftp.cwd("/")
+                      ftp.cwd(candidate)
+                  except ftplib.all_errors:
+                      print("Directory unavailable:", candidate, flush=True)
+                      continue
+                  print("Testing FTP directory:", candidate, flush=True)
+                  try:
+                      ftp.storbinary("STOR " + marker, io.BytesIO(token.encode("ascii")))
+                  except ftplib.all_errors:
+                      print("Cannot write candidate:", candidate, flush=True)
+                      continue
+                  try:
+                      matches = []
+                      for hostname in ("eversense.by", "www.eversense.by"):
+                          r = subprocess.run(
+                              ["curl", "-ksSL", "--max-time", "15", "--resolve",
+                               hostname + ":443:87.232.64.108",
+                               "https://" + hostname + "/" + marker],
+                              capture_output=True, text=True, timeout=25)
+                          if r.returncode == 0 and r.stdout.strip() == token:
+                              matches.append(hostname)
+                      if len(matches) == 2:
+                          found = candidate
+                          print("Verified both domains for FTP directory:", candidate, flush=True)
+                          break
+                      print("Not the correct web directory:", candidate, flush=True)
+                  finally:
+                      ftp.delete(marker)
+          if found is None:
+              raise SystemExit("No verified FTP directory found for eversense.by; no site files were changed.")
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as stream:
+              stream.write("FTP_TARGET_DIR=" + found + "\n")
+          PY
+
+      - name: Stage public website files only
+        shell: bash
+        run: |
+          mkdir -p _deploy
+          rsync -a \
+            --exclude='/.git/' \
+            --exclude='/.github/' \
+            --exclude='/scripts/' \
+            --exclude='/reference/' \
+            --exclude='/README.md' \
+            --exclude='/_deploy/' \
+            --exclude='/buyer-qa/' \
+            ./ _deploy/
+          test -f _deploy/index.html
+
+      - name: Fix legacy root links and audit all HTML pages
+        run: python3 .github/scripts/prepare_hoster_site.py
+
+      - name: Confirm Google Sheets prices are publicly readable
+        run: python3 .github/scripts/check_public_price_feed.py
+
+      - name: Publish verified shared price placement
+        env:
+          FTP_PASSWORD: ${{ secrets.EVERSENCE_FTP_PASSWORD }}
+          FTP_CA: ${{ runner.temp }}/eversence-ftps.crt
+        run: |
+          python3 - <<'PYDEPLOY'
+          import importlib.util, pathlib, subprocess
+          spec = importlib.util.spec_from_file_location("deploy", ".github/scripts/deploy_ftps.py")
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          paths = ["assets/prices.css", "assets/buyer.js", "assets/prices.js"]
+          paths += sorted(p.relative_to("_deploy").as_posix() for p in pathlib.Path("_deploy").rglob("*.html"))
+          with module.connect() as ftp:
+              for path in paths:
+                  with open("_deploy/" + path, "rb") as stream:
+                      ftp.storbinary("STOR " + path, stream)
+                  print("Published", path)
+          for path in paths:
+              expected = pathlib.Path("_deploy/" + path).read_bytes()
+              for hostname in ("eversense.by", "www.eversense.by"):
+                  result = subprocess.run(["curl", "-fsSL", "--max-time", "30", "https://" + hostname + "/" + path], capture_output=True, check=True)
+                  if result.stdout != expected:
+                      raise SystemExit("Readback differs: " + hostname + "/" + path)
+                  print("Verified", hostname, path)
+          PYDEPLOY

@@ -101,7 +101,10 @@
           if (!panel) {
             panel=el("section","ev-product-price-strip");panel.id="ev-product-price";
             panel.append(el("span","ev-price-caption","Цена за 1 м²"));
-            record.insertAdjacentElement("afterend",panel);
+            // Keep the price below the complete gallery, including before buyer.js mounts.
+            var gallery=record.nextElementSibling;
+            if(gallery&&gallery.matches('.t-rec')&&gallery.querySelector('[role="img"]'))gallery.insertAdjacentElement("afterend",panel);
+            else record.insertAdjacentElement("afterend",panel);
           }
           panel.dataset.evSku=sku;
           var old=panel.querySelector(".ev-price-box");

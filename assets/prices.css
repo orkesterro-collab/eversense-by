@@ -23,3 +23,7 @@
 .catalog-product>.ev-price-box--tile .ev-price-until{font-size:11px}
 .product-summary>.ev-price-box--alternate{margin:14px 0 22px}
 @media(max-width:600px){.ev-product-price-strip{padding:15px 20px 17px;min-height:65px}.ev-product-price-strip .ev-price-normal{font-size:21px}.ev-product-price-strip .ev-price-sale{font-size:23px}.ev-product-price-strip .ev-price-before{font-size:14px}.t396__elem>.ev-price-box--tile{padding:3px 4px;max-width:200px;white-space:normal;gap:2px 6px}.t396__elem>.ev-price-box--tile .ev-price-normal{font-size:12px}.t396__elem>.ev-price-box--tile .ev-price-sale{font-size:13px}}
+
+/* Price belongs to the decision block below the gallery. */
+#ev-product-tools .ev-product-price-strip{padding:0;margin:0 0 22px;background:transparent;border:0;min-height:0}
+#ev-product-tools .ev-price-caption{margin-bottom:6px}
