@@ -1,5 +1,5 @@
 name: Publish product prices below galleries
-# Release single-line product headings and compact breadcrumb spacing.
+# Release single-line product headings with spacing below the shared header.
 
 on:
   push:

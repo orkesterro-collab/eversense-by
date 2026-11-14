@@ -13,3 +13,6 @@
  .ev-product-heading .ev-heading-inner{padding:20px 16px 28px}
  .ev-product-heading .ev-product-sku{font-size:12px;margin-bottom:8px}
 }
+/* Match the legacy spacer to the actual shared navigation height. */
+.r.t-rec:has(+ .ev-product-breadcrumb){height:var(--ev-header-height,68px)!important;background:#292828;overflow:hidden}
+.r.t-rec:has(+ .ev-product-breadcrumb)>.t396{display:none!important}
