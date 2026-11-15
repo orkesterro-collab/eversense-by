@@ -44,8 +44,9 @@ try:
             for route in ('/', '/ru/'):
                 page.goto(base + route, wait_until='domcontentloaded')
                 page.wait_for_timeout(1500)
-                links = page.locator('.ev-home-article-link')
-                assert links.count() == 7
+                # The looping Tilda carousel clones slides; verify the original records.
+                links = page.locator('#rec1003959231 .ev-home-article-link, #rec1028577716 .ev-home-article-link, #rec1028577721 .ev-home-article-link')
+                assert links.count() == 7, links.evaluate_all('(es) => es.map(e => ({text: e.textContent, href: e.href}))')
                 targets = links.evaluate_all('(es) => es.map(e => new URL(e.href).hash)')
                 assert targets.count('#classes') == 4 and targets.count('#impact-resistance') == 3
                 # The visible class link above the carousel must remain a real click target.
