@@ -30,6 +30,7 @@ RELEASE_ASSETS = {
     "/assets/home-senses.css", "/assets/home-senses.js",
     "/assets/home-footer.css",
     "/assets/installation-guides.css",
+    "/assets/production.css", "/assets/home-production.css",
 }
 
 

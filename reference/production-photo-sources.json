@@ -1,0 +1,118 @@
+{
+  "images": [
+    {
+      "file": "assets/production/gagarin-aerial.webp",
+      "source_url": "https://cdn.egger.com/img/cms/ff58d5b2-cb11-41dc-ba72-5cec737f1c8a/dbf5f736-9623-48a7-9f7f-996214ff0f41/ORIGINAL/gen_plant_aerial_gag.png",
+      "source_page": "https://www.egger.com/en/about-us/who-we-are-briefly/",
+      "caption_ru": "Завод EGGER в Гагарине, Смоленская область. Вид с воздуха. Фото: EGGER.",
+      "place": "Gagarin, Russia",
+      "credit": "© EGGER",
+      "width": 2000,
+      "height": 1543,
+      "bytes": 573452,
+      "checked": "2026-11-15",
+      "processing": "Resize and WebP compression only; no generated content"
+    },
+    {
+      "file": "assets/production/st-johann-aerial.webp",
+      "source_url": "https://cdn.egger.com/img/cms/ff58d5b2-cb11-41dc-ba72-5cec737f1c8a/f2a78e40-8cf2-478e-9d25-9e705e6d4557/ORIGINAL/gen_sjo_plant_aerial.jpg",
+      "source_page": "https://www.egger.com/en/about-us/who-we-are-briefly/",
+      "caption_ru": "Завод EGGER в Санкт-Йоханне-ин-Тироль, Австрия. Фото: EGGER.",
+      "place": "St. Johann in Tirol, Austria",
+      "credit": "© EGGER",
+      "width": 2000,
+      "height": 1125,
+      "bytes": 485862,
+      "checked": "2026-11-15",
+      "processing": "Resize and WebP compression only; no generated content"
+    },
+    {
+      "file": "assets/production/st-johann-1961.webp",
+      "source_url": "https://cdn.egger.com/img/cms/ff58d5b2-cb11-41dc-ba72-5cec737f1c8a/1e599b22-97b2-496c-948a-c98b0f0afa26/FALLBACK/gen_production_black_and_white_sjo.jpg?cachekey=169951",
+      "source_page": "https://www.egger.com/en/about-us/who-we-are-briefly/",
+      "caption_ru": "Санкт-Йоханн-ин-Тироль, 1961 год: начало истории EGGER. Архивное фото: EGGER.",
+      "place": "St. Johann in Tirol, Austria, 1961",
+      "credit": "© EGGER",
+      "width": 1536,
+      "height": 1241,
+      "bytes": 296340,
+      "checked": "2026-11-15",
+      "processing": "Resize and WebP compression only; no generated content"
+    },
+    {
+      "file": "assets/production/wood-yard.webp",
+      "source_url": "https://cdn.egger.com/img/cms/ff58d5b2-cb11-41dc-ba72-5cec737f1c8a/37297ea7-bf0b-4126-b2ba-342415137f72/FALLBACK/ae_sustainability_wheel_loader_lumber_yard_sjo_chips.jpg?cachekey=166800",
+      "source_page": "https://www.egger.com/en/press/",
+      "caption_ru": "Древесное сырьё на площадке EGGER в Санкт-Йоханне-ин-Тироль. Фото: EGGER.",
+      "place": "St. Johann in Tirol, Austria",
+      "credit": "© EGGER",
+      "width": 1536,
+      "height": 1152,
+      "bytes": 412406,
+      "checked": "2026-11-15",
+      "processing": "Resize and WebP compression only; no generated content"
+    },
+    {
+      "file": "assets/production/board-production.webp",
+      "source_url": "https://cdn.egger.com/img/cms/ff58d5b2-cb11-41dc-ba72-5cec737f1c8a/5b47afbf-f35f-425d-8a62-2f5efd12ae90/FALLBACK/gen_furniture_components_production_bue.jpg?cachekey=65223",
+      "source_page": "https://www.egger.com/en/press/",
+      "caption_ru": "Автоматизированное производство компонентов EGGER в Бюнде, Германия. Фото: EGGER.",
+      "place": "Bünde, Germany; furniture components, not EVERSENSE flooring",
+      "credit": "© EGGER",
+      "width": 1536,
+      "height": 1025,
+      "bytes": 381796,
+      "checked": "2026-11-15",
+      "processing": "Resize and WebP compression only; no generated content"
+    },
+    {
+      "file": "assets/production/biomass-energy.webp",
+      "source_url": "https://cdn.egger.com/img/cms/ff58d5b2-cb11-41dc-ba72-5cec737f1c8a/2c225494-787c-4d73-8e5e-a9ead5843b78/FALLBACK/ae_history_biomass_plant_sjo.jpg?cachekey=168078",
+      "source_page": "https://www.egger.com/en/about-us/who-we-are-briefly/",
+      "caption_ru": "Энергетическая инфраструктура завода EGGER в Санкт-Йоханне-ин-Тироль. Фото: EGGER.",
+      "place": "St. Johann in Tirol, Austria",
+      "credit": "© EGGER",
+      "width": 1536,
+      "height": 864,
+      "bytes": 202314,
+      "checked": "2026-11-15",
+      "processing": "Resize and WebP compression only; no generated content"
+    },
+    {
+      "file": "assets/production/st-johann-conti.webp",
+      "source_url": "https://cdn.egger.com/img/cms/ff58d5b2-cb11-41dc-ba72-5cec737f1c8a/ff35c729-2f9b-4e7b-b070-c62c72ae1979/FALLBACK/ae_history_50_years_conti_sjo.jpg?cachekey=168049",
+      "source_page": "https://www.egger.com/en/about-us/who-we-are-briefly/",
+      "caption_ru": "Первый непрерывный пресс в Санкт-Йоханне-ин-Тироль: производственная история EGGER. Архивное фото: EGGER.",
+      "place": "St. Johann in Tirol, Austria; historic, not Gagarin",
+      "credit": "© EGGER",
+      "width": 1536,
+      "height": 1222,
+      "bytes": 223368,
+      "checked": "2026-11-15",
+      "processing": "Resize and WebP compression only; no generated content"
+    }
+  ],
+  "rights_context": {
+    "press_page": "https://www.egger.com/en/press/",
+    "press_statement": "Here you will find images on various topics from the world of EGGER for editorial use.",
+    "press_items": [
+      "wood-yard",
+      "board-production",
+      "st-johann-aerial"
+    ],
+    "archive_press_release": "https://downloads.egger.com/press/PR_1221_60_years_EGGER_EN_US.pdf?country=US",
+    "archive_statement": "PHOTOS: EGGER Holzwerkstoffe, reprints naming the copyright owner are free of charge",
+    "notes": "All photographs are public official EGGER assets. Press page provides editorial imagery. Celum press collection returned internal errors; specific collection membership for about-us photos was not verified. Do not label European factory photos as Gagarin or as EVERSENSE manufacturing. Do not label imagery as Creative Commons/public domain."
+  },
+  "font": {
+    "family": "Manrope",
+    "file": "assets/production/Manrope-Variable.ttf",
+    "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/manrope/Manrope%5Bwght%5D.ttf",
+    "source_repository": "https://github.com/google/fonts/tree/main/ofl/manrope",
+    "license": "SIL Open Font License 1.1",
+    "license_file": "assets/production/OFL.txt",
+    "license_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/manrope/OFL.txt",
+    "downloaded": "2026-11-15",
+    "modifications": "None; original variable TTF from Google Fonts repository"
+  }
+}

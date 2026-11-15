@@ -1,0 +1,20 @@
+@font-face{font-family:'EVERSENSE Manrope';src:url('production/Manrope-Variable.ttf') format('truetype');font-weight:200 800;font-style:normal;font-display:swap}
+/* Production feature: EVERSENSE brandbook palette, Manrope, rectangular CTA. */
+#ev-production-feature{background:#343333;color:#fff;font-family:"EVERSENSE Manrope",Manrope,Arial,sans-serif;padding:88px 0;position:relative;z-index:1000;scroll-margin-top:90px}
+#ev-production-feature,#ev-production-feature *{box-sizing:border-box}
+.ev-production-feature-inner{width:min(1280px,calc(100% - 80px));margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+#ev-production-feature .ev-production-feature-kicker{font-size:11px;letter-spacing:.13em;line-height:1.6;color:#E1C5A7;margin:0 0 24px}
+#ev-production-feature h2{font-size:clamp(30px,3.1vw,46px);font-weight:500;letter-spacing:-.025em;line-height:1.16;margin:0 0 24px;text-wrap:balance;color:#fff}
+#ev-production-feature .ev-production-feature-lead{font-size:16px;line-height:1.8;color:#DADADA;margin:0 0 26px;max-width:520px}
+#ev-production-feature ul{display:flex;flex-wrap:wrap;gap:10px 22px;list-style:none;margin:0 0 32px;padding:20px 0;border-top:1px solid #666260;border-bottom:1px solid #666260;font-size:12px;line-height:1.6;color:#E1C5A7}
+#ev-production-feature li{padding:0;margin:0}
+#ev-production-feature a.ev-production-feature-button{display:inline-flex;align-items:center;justify-content:space-between;gap:26px;min-height:48px;border:1px solid #C0A58C;border-radius:0;padding:13px 20px;color:#fff!important;font-size:14px;line-height:1.5;letter-spacing:.3px;text-decoration:none!important;transition:background .2s,color .2s}
+#ev-production-feature a.ev-production-feature-button:hover{background:#E1C5A7;color:#343333!important}
+#ev-production-feature a:focus-visible{outline:2px solid #E1C5A7;outline-offset:5px}
+#ev-production-feature figure{margin:0;min-width:0}
+#ev-production-feature figure a{display:block}
+#ev-production-feature img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:55% center}
+#ev-production-feature figcaption{font-size:11px;line-height:1.7;color:#DADADA;padding-top:12px}
+@media(max-width:900px){.ev-production-feature-inner{gap:30px;width:calc(100% - 48px)}#ev-production-feature img{aspect-ratio:3/4}}
+@media(max-width:640px){#ev-production-feature{padding:48px 0}.ev-production-feature-inner{width:calc(100% - 40px);grid-template-columns:1fr;gap:30px}#ev-production-feature h2{font-size:32px}#ev-production-feature img{aspect-ratio:4/3}#ev-production-feature ul{display:grid;gap:8px}#ev-production-feature .ev-production-feature-lead{font-size:15px}#ev-production-feature a.ev-production-feature-button{font-size:13px;padding:13px 16px;gap:14px}}
+@media(prefers-reduced-motion:reduce){#ev-production-feature a{transition:none!important}}

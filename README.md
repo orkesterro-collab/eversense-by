@@ -1,5 +1,7 @@
 # EVERSENSE Беларусь
 
+Статья о производстве: `production.html`, шаблон `scripts/production_article.py`, оформление `assets/production.css`. Факты и источники — `reference/production-research.md`; происхождение фотографий и лицензия шрифта — `reference/production-photo-sources.json`. Локальные фотографии EGGER и Manrope находятся в `assets/production/`. Для обновления статьи и блока на обеих русских главных выполните `python3 scripts/build_buyer_pages.py --production-only`. Блок главной поддерживается `scripts/home_production.py`, включая пересборку зеркала. Проверка: `python3 scripts/qa_production.py` после подготовки `_deploy`; в GitHub Actions она входит в обязательную проверку перед публикацией.
+
 Адаптивный статический сайт на HTML, CSS и JavaScript. Структура построена по официальному каталогу EVERSENSE и адаптирована для Беларуси.
 
 Страницы: главная, каталог и три коллекции, 30 карточек декоров, помощь с выбором, о продукте, интерьеры, калькулятор, сравнение, избранное, FAQ, укладка, уход, гарантия, чеклист мастера, магазины, контакты, документы и карта сайта.

@@ -19,6 +19,12 @@ on:
       - 'scripts/test_buyer_core.cjs'
       - 'scripts/qa_buyer_tools.py'
       - 'scripts/qa_laminate_classes.py'
+      - 'scripts/qa_production.py'
+      - 'scripts/production_article.py'
+      - 'scripts/home_production.py'
+      - 'assets/production.css'
+      - 'assets/home-production.css'
+      - 'assets/production/**'
       - 'scripts/laminate_classes.py'
       - 'scripts/home_article_links.py'
       - 'assets/laminate-classes.css'
@@ -66,6 +72,8 @@ jobs:
         run: python3 scripts/qa_buyer_tools.py
       - name: Check laminate article and PDF downloads
         run: python3 scripts/qa_laminate_classes.py
+      - name: Check production article and homepage feature
+        run: python3 scripts/qa_production.py
       - name: Check visual exploration and accessible fallbacks
         run: python3 scripts/qa_exploration.py
       - name: Check designer cards on desktop and mobile
