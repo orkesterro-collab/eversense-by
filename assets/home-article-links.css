@@ -1,0 +1,19 @@
+/* Keep the existing carousel type, colour and dimensions; expose real links. */
+.tn-atom .ev-home-article-link {
+  color: inherit !important;
+  font: inherit;
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: .2em;
+  text-decoration-color: currentColor;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, .12);
+}
+.tn-atom .ev-home-article-link:hover {
+  text-decoration-thickness: 2px !important;
+}
+.tn-atom .ev-home-article-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 2px;
+}

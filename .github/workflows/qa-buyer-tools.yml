@@ -57,6 +57,8 @@ jobs:
           python3 -m playwright install --with-deps chromium
       - name: Check buyer journeys on desktop and mobile
         run: python3 scripts/qa_buyer_tools.py
+      - name: Check laminate article and PDF downloads
+        run: python3 scripts/qa_laminate_classes.py
       - name: Check visual exploration and accessible fallbacks
         run: python3 scripts/qa_exploration.py
       - name: Check designer cards on desktop and mobile

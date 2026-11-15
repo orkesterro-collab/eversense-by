@@ -1,0 +1,30 @@
+/* Classification article: the same quiet reading layout as the installation guides. */
+.ev-laminate-guide {padding-top:28px}
+.ev-laminate-guide .ev-install-article > section:first-child {padding-top:0}
+.ev-laminate-guide .ev-class-table th:first-child {width:24%}
+.ev-laminate-guide #classes .ev-class-table th:first-child {width:12%}
+.ev-laminate-guide .ev-class-highlight {background:#f1eae2}
+.ev-laminate-guide .ev-class-highlight th {padding-left:14px}
+.ev-class-documents {display:flex;flex-direction:column;margin:24px 0 30px;border-top:1px solid #dadada}
+.ev-class-documents a {display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 0;border-bottom:1px solid #dadada;font-size:13px;line-height:1.65;text-decoration:none}
+.ev-class-documents a:hover > span:first-child {text-decoration:underline;text-underline-offset:4px}
+.ev-class-document-meta {flex-shrink:0;font-size:11px;color:#685c51;white-space:nowrap}
+.ev-class-subsection {margin:24px 0}
+.ev-class-subsection h3 {margin:0 0 10px}
+.ev-class-sources {padding-left:20px;font-size:13px;line-height:1.8}
+.ev-laminate-guide .ev-class-sources li {font-size:13px}
+.ev-class-related {display:flex;flex-wrap:wrap;gap:16px 28px;padding:28px 0 0;border-top:1px solid #dadada}
+.ev-class-related a {font-size:14px;min-height:44px;display:flex;align-items:center;text-underline-offset:5px}
+.ev-laminate-guide a:focus-visible {outline:2px solid #665344;outline-offset:5px;border-radius:2px}
+@media(max-width:760px){
+ .ev-laminate-guide {padding-top:16px}
+ .ev-class-documents a {align-items:flex-start;flex-direction:column;gap:6px;padding:16px 0;font-size:13px}
+ .ev-laminate-guide .ev-class-table th:first-child,.ev-laminate-guide #classes .ev-class-table th:first-child {width:100%}
+ .ev-laminate-guide .ev-class-highlight {padding-inline:16px}
+ .ev-laminate-guide .ev-class-highlight th {padding-left:0}
+ .ev-class-related {gap:8px 24px}
+}
+@media print{
+ .ev-class-documents,.ev-class-related {display:none}
+ .ev-laminate-guide {padding:0}
+}
