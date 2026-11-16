@@ -45,7 +45,7 @@ def link(label, target, page, cls='', extra=''):
     return f'<a href="{e(href(target, page))}"' + (f' class="{e(cls)}"' if cls else '') + (f' {extra}' if extra else '') + f'>{label}</a>'
 
 def actions(page):
-    return '<div class="ev-actions">' + link('<svg class="ev-heart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 4.6c-2.1-2.1-5.5-2.1-7.6 0L12 5.8l-1.2-1.2c-2.1-2.1-5.5-2.1-7.6 0s-2.1 5.5 0 7.6L12 21l8.8-8.8c2.1-2.1 2.1-5.5 0-7.6Z"/></svg>Избранное (<span data-favorites-count>0</span>)', 'favorites.html', page, 'ev-favorites-link', 'data-favorites-link') + '</div>'
+    return '<div class="ev-actions">' + link('<svg class="ev-heart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 4.6c-2.1-2.1-5.5-2.1-7.6 0L12 5.8l-1.2-1.2c-2.1-2.1-5.5-2.1-7.6 0s-2.1 5.5 0 7.6L12 21l8.8-8.8c2.1-2.1 2.1-5.5 0-7.6Z"/></svg><span data-favorites-summary>Избранное - пока пусто</span>', 'favorites.html', page, 'ev-favorites-link', 'data-favorites-link') + '</div>'
 
 def footer(page):
     groups = [
