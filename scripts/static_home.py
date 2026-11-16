@@ -16,6 +16,8 @@ COLLECTION_CONTENT = ('1742824688189', '1742824742704', '1742824688198',
 
 
 def make_static_home(source):
+    # Shorter layer block after removal of the final standalone sentence.
+    layer_height = "690" if re.search(r'data-elem-id=[\"\']1742894294656[\"\']', source) else "660"
     offsets = []
     position = 0
     for line in source.splitlines(keepends=True):
@@ -47,7 +49,7 @@ def make_static_home(source):
             # The summary used to replace the layer descriptions during scrolling.
             # Keep both visible, placing the summary below them on wide screens.
             if values.get('data-artboard-recid') in LAYER_RECORDS:
-                attrs = [(key, '690' if key == 'data-artboard-height' else value)
+                attrs = [(key, layer_height if key == 'data-artboard-height' else value)
                          for key, value in attrs]
             tops = {'1744017596970': '490', '1742894294656': '610'}
             if values.get('data-elem-id') in tops:
@@ -90,11 +92,14 @@ def make_static_home(source):
         for record in LAYER_RECORDS:
             root = '#rec' + record
             rules.append('@media(min-width:1200px){' + root + ' .t396__artboard,' + root +
-                         ' .t396__filter,' + root + ' .t396__carrier{height:690px}' + root +
+                         ' .t396__filter,' + root + ' .t396__carrier{height:' + layer_height + 'px}' + root +
                          ' .tn-elem[data-elem-id="1744017596970"]{top:490px}' + root +
                          ' .tn-elem[data-elem-id="1742894294656"]{top:610px}}')
         source = source.replace('</head>', '<style id="ev-home-static-style">' +
                                 ''.join(rules) + '</style></head>', 1)
+    source = re.sub(r'(<style id="ev-home-static-style">)(.*?)(</style>)',
+                    lambda match: match[1] + re.sub(r'height:(?:660|690)px',
+                        'height:' + layer_height + 'px', match[2]) + match[3], source, flags=re.S)
     carrier_rule = 'html.ev-home-static .t396__carrier{position:absolute!important}'
     if carrier_rule not in source:
         source = source.replace('<style id="ev-home-static-style">',
