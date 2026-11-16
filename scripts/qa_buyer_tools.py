@@ -797,6 +797,12 @@ def main():
                      lambda p, c, d=device: mirrored_test(p, c, by_sku["EL1052"]["canonicalPath"], d, True), width, height)
 
             def collection_panels(page, path, device):
+                # Complete the visible cookie notice before testing catalog controls.
+                # At tablet widths it can cover a button scrolled to the viewport edge.
+                cookie_ok = page.locator('.t886__btn:visible')
+                if cookie_ok.count():
+                    cookie_ok.first.click()
+                    page.locator('.t886__btn:visible').wait_for(state='hidden')
                 records = (['1040271756', '1040271761', '1040271766'] if path.startswith('en/')
                            else ['1002600156', '1002600161', '1002600166'])
                 result = []
