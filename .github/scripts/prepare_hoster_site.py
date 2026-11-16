@@ -33,6 +33,7 @@ RELEASE_ASSETS = {
     "/assets/installation-guides.css",
     "/assets/performance.js",
     "/assets/designer-cards.css",
+    "/assets/product-scroll.css",
 }
 
 

@@ -6,6 +6,7 @@ on:
       - '.htaccess'
       - 'assets/buyer*'
       - 'assets/performance.js'
+      - 'assets/product-scroll.css'
       - 'assets/responsive/**'
       - 'assets/vendor/**'
       - 'assets/video/**'
@@ -13,6 +14,8 @@ on:
       - 'content/image-optimization.json'
       - 'scripts/optimize_delivery.py'
       - 'scripts/qa_performance.py'
+      - 'scripts/static_product.py'
+      - 'scripts/qa_product_scroll.py'
       - 'assets/designer-cards**'
       - 'assets/explore-*'
       - 'assets/products-data*'
@@ -45,6 +48,7 @@ on:
       - '.github/workflows/qa-buyer-tools.yml'
       - '*.html'
       - 'catalog-ru/**'
+      - 'catalog-en/**'
   workflow_dispatch:
   workflow_call:
 permissions:
@@ -85,6 +89,8 @@ jobs:
         run: python3 scripts/qa_designer_cards.py
       - name: Check lazy media and local runtime on desktop and mobile
         run: python3 scripts/qa_performance.py
+      - name: Check native scrolling on all product details
+        run: python3 scripts/qa_product_scroll.py
       - name: Save browser screenshots and checks
         if: always()
         uses: actions/upload-artifact@v4

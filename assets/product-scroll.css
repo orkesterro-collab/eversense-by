@@ -1,0 +1,25 @@
+/* Product details use browser scrolling without Tilda scroll timelines. */
+html.ev-product-static,
+html.ev-product-static body,
+html.ev-product-static * {
+  scroll-behavior: auto !important;
+  scroll-snap-type: none !important;
+}
+html.ev-product-static .t396__carrier,
+html.ev-product-static .tn-atom {
+  background-attachment: scroll !important;
+}
+html.ev-product-static .t396__carrier { position: absolute !important; }
+html.ev-product-static #t-header .t396__artboard {
+  position: relative !important;
+  transform: none !important;
+  top: auto !important;
+}
+html.ev-product-static #ev-global-header {
+  transition: none !important;
+  will-change: auto;
+}
+html.ev-product-static #ev-global-header.ev-header-hidden {
+  transform: none !important;
+  pointer-events: auto !important;
+}
