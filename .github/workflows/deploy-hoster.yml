@@ -4,9 +4,14 @@ on:
   push:
     branches: [main]
     paths:
+      - ".htaccess"
       - ".github/workflows/deploy-hoster.yml"
       - ".github/scripts/prepare_hoster_site.py"
       - "assets/**"
+      - "content/runtime-assets.json"
+      - "content/image-optimization.json"
+      - "scripts/optimize_delivery.py"
+      - "scripts/qa_performance.py"
       - "black-friday/**"
       - "catalog-ru/**"
       - "catalog-en/**"
