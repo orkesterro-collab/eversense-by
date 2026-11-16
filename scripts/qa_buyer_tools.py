@@ -363,6 +363,16 @@ def main():
                         "Catalog must keep all 30 favorite buttons")
                 page.locator('#ev-catalog-results [data-ev-favorite]').first.click()
                 require(page.locator('.ev-hero [data-favorites-link]').first.evaluate("el=>el.classList.contains('has-favorites')"), "Adding favorite must make heart red")
+                if device != 'desktop':
+                    nav = page.locator('.ev-inline-nav')
+                    require(nav.evaluate("el=>el.scrollWidth<=el.clientWidth+1"), "Collection choices must fit without horizontal scrolling")
+                    require(nav.locator('a').count() == 4, "All collection choices must stay available")
+                    for choice in nav.locator('a').all():
+                        bounds = choice.bounding_box()
+                        require(bounds and bounds['x'] >= 0 and bounds['x']+bounds['width'] <= page.viewport_size['width'], "Collection choice extends beyond phone")
+                        require(choice.evaluate("el=>el.scrollWidth<=el.clientWidth+1"), "Collection name is clipped")
+                reset = page.locator('#ev-catalog-filters [data-reset-filters]')
+                require(reset.inner_text() == '×' and reset.get_attribute('aria-label') == 'Сбросить фильтры', "Reset must be an accessible cross button")
                 header_favorite = page.locator('#ev-global-header [data-favorites-link]')
                 require(header_favorite.count() == 1, "Header favorites shortcut missing")
                 require(header_favorite.get_attribute('aria-label') == 'Избранное - 1 шт.', "Header accessible count is wrong")
