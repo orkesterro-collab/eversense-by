@@ -846,6 +846,11 @@ def main():
                 require(page.locator('[data-animate-sbs-event="scroll"], [data-animate-sbs-event="intoview"], [data-animate-style]').count() == 0,
                         "Home still contains scroll/reveal animation triggers")
                 layer = '#rec1040271736' if path.startswith('en/') else '#rec1002600136'
+                if not path.startswith('en/'):
+                    require(page.locator(layer + ' [data-elem-id="1742894294656"]').count() == 0,
+                            "Removed concluding warmth phrase returned")
+                    require(page.locator(layer + ' [data-elem-id="1744017596970"]').is_visible(),
+                            "Remaining layer summary is missing")
                 page.locator(layer).scroll_into_view_if_needed()
                 page.wait_for_timeout(400)
                 before = page.locator(layer + ' [data-elem-id="1742894294619"]').evaluate("""el=>({
@@ -874,10 +879,16 @@ def main():
                             page.set_viewport_size({"width": width, "height": 1000})
                             page.wait_for_timeout(500)
                             spacing = page.locator(layer).evaluate("""el=>{
-                              const summary=el.querySelector('[data-elem-id="1742894294656"]').getBoundingClientRect();
+                              // Measure remaining visible copy, not a sentence the editor may remove.
+                              const copy=[...el.querySelectorAll('[data-elem-type="text"]')]
+                                .filter(node=>node.innerText.trim() && getComputedStyle(node).visibility!=='hidden'
+                                  && getComputedStyle(node).display!=='none')
+                                .map(node=>node.getBoundingClientRect()).filter(rect=>rect.width&&rect.height);
+                              if(!copy.length) return null;
+                              const copyBottom=Math.max(...copy.map(rect=>rect.bottom));
                               let next=el.nextElementSibling;
                               while(next&&!next.classList.contains('uc-full1')) next=next.nextElementSibling;
-                              return next?{gap:next.getBoundingClientRect().top-summary.bottom,
+                              return next?{gap:next.getBoundingClientRect().top-copyBottom,
                                 overflow:document.documentElement.scrollWidth>document.documentElement.clientWidth}:null;
                             }""")
                             require(spacing and 0 <= spacing['gap'] <= 120 and not spacing['overflow'],
