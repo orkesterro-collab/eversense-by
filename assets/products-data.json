@@ -19,7 +19,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "plain"
+      "design": "plain",
+      "tones": [
+        "light",
+        "beige"
+      ]
     },
     "sourcePath": "catalog-ru/new-minimalism-ru/jura-ru/index.html",
     "sourceEvidence": {
@@ -115,7 +119,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -139,7 +144,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "plain"
+      "design": "plain",
+      "tones": [
+        "light",
+        "gray"
+      ]
     },
     "sourcePath": "catalog-ru/new-minimalism-ru/taupe-grey-ru/index.html",
     "sourceEvidence": {
@@ -235,7 +244,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -259,7 +269,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "stone"
+      "design": "stone",
+      "tones": [
+        "light",
+        "gray"
+      ]
     },
     "sourcePath": "catalog-ru/new-minimalism-ru/marble-light-ru/index.html",
     "sourceEvidence": {
@@ -355,7 +369,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -379,7 +394,10 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "stone"
+      "design": "stone",
+      "tones": [
+        "gray"
+      ]
     },
     "sourcePath": "catalog-ru/new-minimalism-ru/marble-grey-ru/index.html",
     "sourceEvidence": {
@@ -475,7 +493,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -499,7 +518,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "beige"
+      ]
     },
     "sourcePath": "catalog-ru/nature-aesthetic-ru/light-virdia-oak-ru/index.html",
     "sourceEvidence": {
@@ -595,7 +618,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -619,7 +643,12 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "natural",
+        "beige"
+      ]
     },
     "sourcePath": "catalog-ru/nature-aesthetic-ru/light-natural-virdia-oak-ru/index.html",
     "sourceEvidence": {
@@ -715,7 +744,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -739,7 +769,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "natural",
+        "brown"
+      ]
     },
     "sourcePath": "catalog-ru/quiet-luxury-ru/natural-virdia-oak-ru/index.html",
     "sourceEvidence": {
@@ -835,7 +869,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -859,7 +894,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "dark",
+        "brown"
+      ]
     },
     "sourcePath": "catalog-ru/quiet-luxury-ru/brown-virdia-oak-ru/index.html",
     "sourceEvidence": {
@@ -955,7 +994,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -979,7 +1019,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "white"
+      ]
     },
     "sourcePath": "catalog-ru/new-minimalism-ru/white-ticino-oak-ru/index.html",
     "sourceEvidence": {
@@ -1075,7 +1119,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -1099,7 +1144,12 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "natural",
+        "beige"
+      ]
     },
     "sourcePath": "catalog-ru/nature-aesthetic-ru/light-natural-ticino-oak-ru/index.html",
     "sourceEvidence": {
@@ -1195,7 +1245,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -1219,7 +1270,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "natural",
+        "brown"
+      ]
     },
     "sourcePath": "catalog-ru/quiet-luxury-ru/natural-ticino-oak-ru/index.html",
     "sourceEvidence": {
@@ -1315,7 +1370,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -1339,7 +1395,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "dark",
+        "brown"
+      ]
     },
     "sourcePath": "catalog-ru/quiet-luxury-ru/brown-ticino-oak-ru/index.html",
     "sourceEvidence": {
@@ -1435,7 +1495,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -1459,7 +1520,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "gray"
+      ]
     },
     "sourcePath": "catalog-ru/new-minimalism-ru/grey-lavaredo-oak-ru/index.html",
     "sourceEvidence": {
@@ -1555,7 +1620,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -1579,7 +1645,12 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "natural",
+        "beige"
+      ]
     },
     "sourcePath": "catalog-ru/nature-aesthetic-ru/light-natural-lavaredo-oak-ru/index.html",
     "sourceEvidence": {
@@ -1675,7 +1746,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -1699,7 +1771,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "natural",
+        "brown"
+      ]
     },
     "sourcePath": "catalog-ru/quiet-luxury-ru/natural-lavaredo-oak-ru/index.html",
     "sourceEvidence": {
@@ -1795,7 +1871,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -1819,7 +1896,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "dark",
+        "brown"
+      ]
     },
     "sourcePath": "catalog-ru/quiet-luxury-ru/brown-lavaredo-oak-ru/index.html",
     "sourceEvidence": {
@@ -1915,7 +1996,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -1939,7 +2021,12 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "white",
+        "gray"
+      ]
     },
     "sourcePath": "catalog-ru/new-minimalism-ru/victoria-oak-white-ru/index.html",
     "sourceEvidence": {
@@ -2035,7 +2122,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -2059,7 +2147,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "gray"
+      ]
     },
     "sourcePath": "catalog-ru/new-minimalism-ru/light-gray-victoria-oak-ru/index.html",
     "sourceEvidence": {
@@ -2155,7 +2247,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -2179,7 +2272,12 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "natural",
+        "beige"
+      ]
     },
     "sourcePath": "catalog-ru/nature-aesthetic-ru/light-natural-victoria-oak-ru/index.html",
     "sourceEvidence": {
@@ -2275,7 +2373,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -2299,7 +2398,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "natural",
+        "brown"
+      ]
     },
     "sourcePath": "catalog-ru/quiet-luxury-ru/natural-victoria-oak-ru/index.html",
     "sourceEvidence": {
@@ -2395,7 +2498,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -2419,7 +2523,10 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "gray"
+      ]
     },
     "sourcePath": "catalog-ru/new-minimalism-ru/grey-victoria-oak-ru/index.html",
     "sourceEvidence": {
@@ -2515,7 +2622,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -2539,7 +2647,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "white"
+      ]
     },
     "sourcePath": "catalog-ru/new-minimalism-ru/white-sherman-oak-ru/index.html",
     "sourceEvidence": {
@@ -2635,7 +2747,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -2659,7 +2772,12 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "white",
+        "beige"
+      ]
     },
     "sourcePath": "catalog-ru/nature-aesthetic-ru/white-casella-oak-ru/index.html",
     "sourceEvidence": {
@@ -2755,7 +2873,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -2779,7 +2898,12 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "natural",
+        "beige"
+      ]
     },
     "sourcePath": "catalog-ru/nature-aesthetic-ru/light-natural-casella-oak-ru/index.html",
     "sourceEvidence": {
@@ -2875,7 +2999,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -2899,7 +3024,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "natural",
+        "brown"
+      ]
     },
     "sourcePath": "catalog-ru/quiet-luxury-ru/natural-casella-oak-ru/index.html",
     "sourceEvidence": {
@@ -2995,7 +3124,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -3019,7 +3149,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "dark",
+        "brown"
+      ]
     },
     "sourcePath": "catalog-ru/quiet-luxury-ru/brown-casella-oak-ru/index.html",
     "sourceEvidence": {
@@ -3115,7 +3249,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -3139,7 +3274,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "beige"
+      ]
     },
     "sourcePath": "catalog-ru/nature-aesthetic-ru/light-padua-oak-ru/index.html",
     "sourceEvidence": {
@@ -3235,7 +3374,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -3259,7 +3399,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "natural",
+        "brown"
+      ]
     },
     "sourcePath": "catalog-ru/nature-aesthetic-ru/natural-padua-oak-ru/index.html",
     "sourceEvidence": {
@@ -3355,7 +3499,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -3379,7 +3524,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "gray",
+        "beige"
+      ]
     },
     "sourcePath": "catalog-ru/nature-aesthetic-ru/grey-padua-oak-ru/index.html",
     "sourceEvidence": {
@@ -3475,7 +3624,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   },
@@ -3499,7 +3649,11 @@
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "dark",
+        "brown"
+      ]
     },
     "sourcePath": "catalog-ru/quiet-luxury-ru/turin-oak-ru/index.html",
     "sourceEvidence": {
@@ -3591,7 +3745,8 @@
           "family",
           "shade"
         ],
-        "purpose": "UI classification; null tone means name does not state lightness"
+        "purpose": "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim.",
+        "filterSnapshot": "content/catalog-filters.json"
       }
     }
   }

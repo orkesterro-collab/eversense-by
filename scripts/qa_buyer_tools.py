@@ -278,6 +278,42 @@ def main():
                 return {"cards": 30, "images": loaded, "stone": 2, "sku_search": "EL1052"}
             case("catalog-filter-real-images", catalog_test)
 
+            def editable_filter_test(page, context):
+                goto(page, "catalog-ru/")
+                form=page.locator('#ev-catalog-filters')
+                require(form.locator('details,summary,[name="sort"]').count()==0, "Filter accordion or sorting remains")
+                require(form.locator('[name="tone"]').is_visible() and form.locator('[name="design"]').is_visible(), "Filters hidden on mobile")
+                require(form.locator('[name="design"] option').all_text_contents()==['Все группы','Древесные','Однотонные','Под камень'], "Wrong decor groups")
+                cards=page.locator('#ev-catalog-results .ev-card')
+                for tone in ['light','beige']:
+                    form.locator('[name="tone"]').select_option(tone)
+                    require(page.locator('#ev-catalog-results [data-product="EL153"]').count()==1, "Multi-tone fallback lost EL153")
+                # Feed-only fixture change: no real Sheet values are written by QA.
+                page.evaluate("""() => window.EversensePriceFeed({status:'ok',table:{rows:[{c:[{v:'EL153'},{v:45.9},{v:null},{v:null},{v:null},{v:100},{v:'Серый; Светлый'},{v:'Под камень'}]}]}})""")
+                require(page.locator('#ev-catalog-results [data-product="EL153"]').count()==0, "Sheet correction did not redraw catalog")
+                form.locator('[name="tone"]').select_option('gray')
+                form.locator('[name="design"]').select_option('stone')
+                require(page.locator('#ev-catalog-results [data-product="EL153"]').count()==1, "Live tone/group override missing")
+                require(page.locator('[data-buyer-price="EL153"]').inner_text().find('45,90')>=0, "Taxonomy changed price parsing")
+                form.locator('[data-reset-filters]').click()
+                require(cards.count()==30, "Reset after sheet update lost catalog")
+                metrics=layout_metrics(page)
+                shot(page,'catalog-visible-filters-'+str(page.viewport_size['width']),full=False)
+                return {'multiple_tones':True,'sheet_override':True,'reset':30,'layout':metrics}
+            case('editable-catalog-filter-mobile',editable_filter_test,390,844)
+            case('editable-catalog-filter-small',editable_filter_test,360,800)
+            case('editable-catalog-filter-desktop',editable_filter_test)
+
+            def legacy_collection_filter(page,context):
+                goto(page,'catalog-ru/?collection=luxury&sort=price-up')
+                require(page.locator('#ev-catalog-results .ev-card').count()==10,'Legacy collection query lost')
+                require('sort=' not in page.url,'Obsolete sorting query retained')
+                page.locator('#ev-catalog-filters [data-reset-filters]').click()
+                require(page.locator('#ev-catalog-results .ev-card').count()==30,'Legacy collection not reset')
+                require('collection=' not in page.url,'Reset left collection query')
+                return {'legacy_query_preserved':True,'reset':30}
+            case('catalog-legacy-collection-query',legacy_collection_filter,360,800)
+
             def favorite_test(page, context):
                 goto(page, "catalog-ru/")
                 personal = ["EL1052", "EL1000", "EL153", "EL750"]

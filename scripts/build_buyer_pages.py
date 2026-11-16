@@ -21,7 +21,7 @@ PRODUCTS = DATA if isinstance(DATA, list) else DATA['products']
 PRODUCTS.sort(key=lambda p: (['nature','luxury','minimal'].index(p['collectionID']), int(p['sku'][2:])))
 GUIDES = json.loads((ROOT / 'content/buyer-guides.json').read_text())
 INSTALLATION_GUIDES = json.loads((ROOT / 'content/installation-guides.json').read_text())
-VERSION = '20261112favoriteportrait'
+VERSION = '20261116sheetfilters'
 COLLECTIONS = [
     ('nature', 'Природная эстетика', 'Спокойные древесные оттенки и выразительные рисунки дуба.'),
     ('luxury', 'Тихая роскошь', 'Натуральные и глубокие тона для интерьера с характером.'),
@@ -104,26 +104,26 @@ def card(p, page):
 def field(label, name, options, value=''):
     return '<div class="ev-field"><label for="ev-'+name+'">'+label+'</label><select id="ev-'+name+'" name="'+name+'">'+''.join('<option value="'+e(v)+'"'+(' selected' if v==value else '')+'>'+e(t)+'</option>' for v,t in options)+'</select></div>'
 
-TONE = [('', 'Все оттенки'), ('light', 'Светлые'), ('natural', 'Натуральные'), ('gray', 'Серые'), ('brown', 'Коричневые'), ('beige', 'Бежевые')]
-DESIGN = [('', 'Все группы'), ('wood', 'Дубовые декоры'), ('stone', 'Мрамор'), ('plain', 'Песок и серый')]
+TONE = [('', 'Все оттенки'), ('light', 'Светлые'), ('white', 'Белые'), ('dark', 'Тёмные'), ('natural', 'Натуральные'), ('gray', 'Серые'), ('brown', 'Коричневые'), ('beige', 'Бежевые')]
+DESIGN = [('', 'Все группы'), ('wood', 'Древесные'), ('plain', 'Однотонные'), ('stone', 'Под камень')]
 
 def catalogs():
     for collection, title, lead, page in [('', 'Каталог декоров', '30 декоров. Найдите свой оттенок и сохраните понравившиеся варианты.', 'catalog-ru/index.html')] + [(c,t,d,COLLECTION_PATHS[c].lstrip('/')+'index.html') for c,t,d in COLLECTIONS]:
         items = [p for p in PRODUCTS if not collection or p['collectionID']==collection]
         nav = '<nav class="ev-inline-nav" aria-label="Коллекции">'+link('Все декоры', 'catalog-ru/', page, extra='aria-current="page"' if not collection else '')+''.join(link(t, COLLECTION_PATHS[c], page, extra='aria-current="page"' if c==collection else '') for c,t,_ in COLLECTIONS)+'</nav>'
-        filters = '<form id="ev-catalog-filters" class="ev-toolbar" role="search"><div class="ev-field"><label for="ev-q">Поиск по названию или артикулу</label><input id="ev-q" name="q" type="search" placeholder="Например, EL1052 или дуб" autocomplete="off"></div><details class="ev-filter-details" open><summary>Фильтры и сортировка</summary><div class="ev-filter-row">'
-        if not collection:
-            filters += field('Коллекция','collection',[('','Все коллекции')]+[(c,t) for c,t,_ in COLLECTIONS])
-        design_options = [(v,t) for v,t in DESIGN if not v or any(p['tags']['design']==v for p in items)]
-        filters += field('Оттенок','tone',TONE)+field('Группа декоров','design',design_options)+field('Порядок','sort',[('','По коллекциям'),('name','По названию'),('price-up','Сначала дешевле'),('price-down','Сначала дороже')])+'</div></details><div class="ev-actions"><p id="ev-result-count" class="ev-count" role="status">Найдено декоров: '+str(len(items))+'</p><button type="button" class="ev-reset-filters" data-reset-filters aria-label="Сбросить фильтры" title="Сбросить фильтры"><span aria-hidden="true">×</span></button></div></form>'
+        filters = '<form id="ev-catalog-filters" class="ev-toolbar" role="search"><div class="ev-field"><label for="ev-q">Поиск по названию или артикулу</label><input id="ev-q" name="q" type="search" placeholder="Например, EL1052 или дуб" autocomplete="off"></div><div class="ev-filter-row ev-catalog-filter-row">'
+        # Collection navigation above already provides this choice.
+        filters += field('Оттенок','tone',TONE)+field('Группа декоров','design',DESIGN)+'</div><div class="ev-actions"><p id="ev-result-count" class="ev-count" role="status">Найдено декоров: '+str(len(items))+'</p><button type="button" class="ev-reset-filters" data-reset-filters aria-label="Сбросить фильтры" title="Сбросить фильтры"><span aria-hidden="true">×</span></button></div></form>'
         body = '<section class="ev-section"><div class="ev-wrap">'+nav+filters+'<div class="ev-grid" id="ev-catalog-results">'+''.join(card(p,page) for p in items)+'</div></div></section><section class="ev-section"><div class="ev-wrap"><p class="ev-note">Оттенок на экране зависит от освещения и настроек устройства. Перед покупкой посмотрите реальный образец. Наличие нужного количества уточняйте у продавца.</p>'+link('Помочь с выбором', 'choose.html', page,'ev-button')+'</div></section>'
         write_page(page,title,lead,body,'catalog',collection,actions(page))
 
 def finder(page):
     return '<section class="ev-section" id="finder"><div class="ev-wrap"><span class="ev-eyebrow">02 · От впечатления к вариантам</span><h2>Сузим круг выбора</h2><p class="ev-lead">Оттенок и рисунок определят подборку. Комната подскажет, на что обратить внимание в эксплуатации.</p><form id="ev-finder"><div class="ev-filter-row">'+field('Комната','room',[('living','Гостиная'),('bedroom','Спальня'),('kitchen','Кухня'),('hall','Прихожая')])+field('Оттенок','tone',TONE)+field('Группа декоров','design',DESIGN)+'</div><button class="ev-button ev-button--primary" type="submit">Показать декоры</button></form><div id="ev-finder-results" class="ev-section" tabindex="-1" hidden></div></div></section>'
 
-def guides():
+def guides(only=None):
     for key, page in [('product','about.html'),('choose','choose.html'),('faq','faq.html'),('care','care.html'),('warranty','warranty.html'),('downloads','downloads.html')]:
+        if only and key != only:
+            continue
         g = GUIDES[key]
         sections = [s for s in g['sections'] if key != 'choose' or s['id'] not in COLLECTION_PATHS]
         toc = '<aside class="ev-toc"><strong>На этой странице</strong><ul>'+''.join('<li>'+link(e(s['title']),'#'+s['id'],page)+'</li>' for s in sections)+'</ul></aside>'
@@ -225,7 +225,11 @@ def aliases():
         redirect('products/'+p['sku']+'.html',p['canonicalPath'])
 
 if __name__ == '__main__':
-    if '--classes-only' in sys.argv:
+    if '--catalog-only' in sys.argv:
+        catalogs()
+        guides('choose')
+        print('Built catalogs and buyer guides.')
+    elif '--classes-only' in sys.argv:
         laminate_classes_page()
         print('Built laminate classes and strength testing article.')
     elif '--installation-only' in sys.argv:

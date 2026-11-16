@@ -103,22 +103,22 @@
     form.elements.sku.addEventListener('change',preview);preview();
     if(params.has('area'))renderCalculation(false);
   }
-  function matchesTone(p,tone){if(!tone)return true;if(tone==='light')return p.tags.tone==='light';var patterns={natural:/натуральн/i,gray:/сер/i,brown:/коричнев/i,beige:/беж/i};return !!(patterns[tone]&&patterns[tone].test(p.shade||''));}
+  function filterTags(p){
+    var live=window.EversensePrices&&window.EversensePrices.getFilters&&window.EversensePrices.getFilters(p.sku);
+    return {tones:live&&live.tones?live.tones:(p.tags.tones||[p.tags.tone].filter(Boolean)),design:live&&live.design?live.design:p.tags.design};
+  }
+  function matchesTone(p,tone){return !tone||filterTags(p).tones.includes(tone);}
+  function matchesDesign(p,design){return !design||filterTags(p).design===design;}
   function mountCatalog(){
     var form=document.getElementById('ev-catalog-filters'),root=document.getElementById('ev-catalog-results');if(!form||!root)return;
     var collection=document.body.dataset.collection||'';
-    var filterDetails=form.querySelector('.ev-filter-details');
-    var compact=window.matchMedia('(max-width:760px)');
-    function fitFilters(){if(filterDetails)filterDetails.open=!compact.matches;}fitFilters();
-    if(compact.addEventListener)compact.addEventListener('change',fitFilters);
-    ['q','tone','design','sort'].forEach(function(key){if(form.elements[key]&&params.has(key))form.elements[key].value=params.get(key);});
+    var legacyCollection=['nature','luxury','minimal'].includes(params.get('collection'))?params.get('collection'):'';
+    ['q','tone','design'].forEach(function(key){if(form.elements[key]&&params.has(key))form.elements[key].value=params.get(key);});
     if(form.elements.collection&&params.has('collection'))form.elements.collection.value=params.get('collection');
     function draw(){
       var search=form.elements.q.value.toLocaleLowerCase('ru').trim();
-      var f=function(k){return form.elements[k]?form.elements[k].value:'';};
-      var items=products.filter(function(p){return (!collection||p.collectionID===collection)&&(!f('collection')||p.collectionID===f('collection'))&&matchesTone(p,f('tone'))&&(!f('design')||p.tags.design===f('design'))&&(!search||(p.sku+' '+fullName(p)+' '+p.collectionName).toLocaleLowerCase('ru').includes(search));});
-      var sort=f('sort');if(sort==='name')items.sort(function(a,b){return fullName(a).localeCompare(fullName(b),'ru');});
-      if(sort==='price-up'||sort==='price-down')items.sort(function(a,b){var x=activePrice(a.sku),y=activePrice(b.sku);if(x===null)return y===null?0:1;if(y===null)return -1;return sort==='price-up'?x-y:y-x;});
+      var f=function(k){return form.elements[k]?form.elements[k].value:(k==='collection'?legacyCollection:'');};
+      var items=products.filter(function(p){return (!collection||p.collectionID===collection)&&(!f('collection')||p.collectionID===f('collection'))&&matchesTone(p,f('tone'))&&matchesDesign(p,f('design'))&&(!search||(p.sku+' '+fullName(p)+' '+p.collectionName).toLocaleLowerCase('ru').includes(search));});
       root.innerHTML=items.length?items.map(card).join(''):'<div class="ev-empty"><h2>Таких декоров не найдено</h2><p>Попробуйте другой оттенок или уберите часть фильтров.</p><button type="button" class="ev-button" data-reset-filters>Сбросить фильтры</button></div>';
       document.getElementById('ev-result-count').textContent='Найдено декоров: '+items.length;
       var u=new URL(location.href);['q','collection','tone','design','sort'].forEach(function(k){var v=f(k);if(v)u.searchParams.set(k,v);else u.searchParams.delete(k);});history.replaceState(null,'',u);
@@ -126,20 +126,23 @@
     }
     form.addEventListener('submit',function(e){e.preventDefault();draw();});
     form.addEventListener('input',draw);form.addEventListener('change',draw);
-    document.addEventListener('click',function(e){if(e.target.closest('[data-reset-filters]')){form.reset();draw();}});
-    document.addEventListener('eversense:prices',function(){if(/^price/.test(form.elements.sort.value))draw();});
+    document.addEventListener('click',function(e){if(e.target.closest('[data-reset-filters]')){form.reset();legacyCollection='';draw();}});
+    document.addEventListener('eversense:prices',draw);
     draw();
   }
   function mountFinder(){
     var form=document.getElementById('ev-finder');if(!form)return;
-    form.addEventListener('submit',function(e){e.preventDefault();
+    function findResults(focus){
+      form.dataset.searched='true';
       var data=new FormData(form),tone=data.get('tone'),design=data.get('design'),room=data.get('room');
-      var matches=products.filter(function(p){return matchesTone(p,tone)&&(!design||p.tags.design===design);});
+      var matches=products.filter(function(p){return matchesTone(p,tone)&&matchesDesign(p,design);});
       var root=document.getElementById('ev-finder-results');
       var roomAdvice={kitchen:'Для кухни особенно важны правильная укладка и быстрое удаление пролитой жидкости.',hall:'В прихожей предусмотрите грязезащитный коврик: песок и мелкие камни могут повреждать поверхность.',bedroom:'Оцените оттенок при вечернем освещении и проверьте совместимость покрытия с подложкой.',living:'Сравните несколько планок рядом с мебелью: отдельный образец не показывает весь рисунок пола.'};
       root.innerHTML='<h2>Декоры по вашим предпочтениям</h2><p>'+esc(roomAdvice[room]||'Оцените выбранные декоры на физическом образце.')+' Подбор учитывает дизайн и оттенок; требования к монтажу и эксплуатации остаются общими для продукта.</p>'+(matches.length?'<div class="ev-grid">'+matches.slice(0,6).map(card).join('')+'</div><a class="ev-button" href="'+route('catalog-ru/')+'?tone='+encodeURIComponent(tone||'')+'&design='+encodeURIComponent(design||'')+'">Все подходящие декоры ('+matches.length+')</a>':'<p>Точного сочетания сейчас нет. Попробуйте изменить один из параметров.</p>');
-      root.hidden=false;syncButtons();root.focus({preventScroll:true});root.scrollIntoView({behavior:'smooth',block:'start'});
-    });
+      root.hidden=false;syncButtons();if(focus){root.focus({preventScroll:true});root.scrollIntoView({behavior:'smooth',block:'start'});}
+    }
+    form.addEventListener('submit',function(e){e.preventDefault();findResults(true);});
+    document.addEventListener('eversense:prices',function(){if(form.dataset.searched==='true')findResults(false);});
   }
   function mountProduct(){
     var path=location.pathname.replace(/\/index\.html$/,'/');

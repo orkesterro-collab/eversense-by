@@ -17,6 +17,8 @@ on:
       - 'scripts/qa_designer_cards.py'
       - 'scripts/extract_products.py'
       - 'scripts/test_buyer_core.cjs'
+      - 'scripts/test_filter_feed.cjs'
+      - 'content/catalog-filters.json'
       - 'scripts/qa_buyer_tools.py'
       - 'scripts/qa_laminate_classes.py'
       - 'scripts/laminate_classes.py'
@@ -49,6 +51,7 @@ jobs:
           python3 .github/scripts/test_prepare_pages_site.py
           python3 scripts/extract_products.py --check
           node scripts/test_buyer_core.cjs
+          node scripts/test_filter_feed.cjs
           node --check assets/buyer.js
           node --check assets/unified-header.js
           node --check assets/explore-product.js
