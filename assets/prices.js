@@ -10,7 +10,7 @@
   document.head.appendChild(script);
 })();
 /* EVERSENSE Беларусь: публичный прайс Google Sheets. Не хранит ключей/паролей.
-   Схема листа price: sku | name | price | sale_price | sale_until | sale_from | Плановый запас, м² */
+   Схема листа price: sku | name | price | sale_price | sale_until | sale_from | Плановый запас, м² | Оттенки | Группа декора */
 (function () {
   "use strict";
   if(window.EversensePrices)return;
@@ -41,6 +41,25 @@
     }).formatToParts(new Date()), data={};
     parts.forEach(function (p) { data[p.type]=p.value; });
     return data.year+"-"+data.month+"-"+data.day;
+  }
+  var toneKeys={белый:'white',белые:'white',светлый:'light',светлые:'light',тёмный:'dark',темный:'dark',тёмные:'dark',темные:'dark',натуральный:'natural',натуральные:'natural',серый:'gray',серые:'gray',коричневый:'brown',коричневые:'brown',бежевый:'beige',бежевые:'beige'};
+  var designKeys={древесные:'wood',однотонные:'plain','под камень':'stone'};
+  function parseTones(value,sku){
+    var tokens=String(value==null?'':value).toLocaleLowerCase('ru').split(/[,;\n]+/).map(function(t){return t.trim();}).filter(Boolean);
+    return Array.from(new Set(tokens.map(function(token){
+      var key=toneKeys[token];
+      if(!key)console.warn('EVERSENSE: неизвестный оттенок в H',sku,token);
+      return key;
+    }).filter(Boolean)));
+  }
+  function parseDesign(value,sku){
+    var token=String(value==null?'':value).trim().toLocaleLowerCase('ru'),key=designKeys[token];
+    if(token&&!key)console.warn('EVERSENSE: неизвестная группа декора в I',sku,token);
+    return key||'';
+  }
+  function filtersFor(sku){
+    var row=table[String(sku||'').toUpperCase()];
+    return row?{tones:row.tones,design:row.design}:null;
   }
   function activePrice(sku) {
     var d=table[String(sku||"").toUpperCase()];
@@ -166,12 +185,12 @@
       console.warn("EVERSENSE: цены Google Sheets временно недоступны",payload&&payload.errors);
       return;
     }
-    var newTable=Object.create(null);
+    var newTable=Object.create(null),cols=payload.table.cols;
     payload.table.rows.forEach(function(row){
       var c=row.c||[],v=function(i){return c[i]&&c[i].v;},f=function(i){return c[i]&&c[i].f;};
       var sku=String(v(0)||"").trim().toUpperCase();
       if(!/^EL\d{3,4}$/.test(sku))return;
-      newTable[sku]={price:number(v(1)),sale:number(v(2)),until:date(v(3),f(3)),from:date(v(4),f(4)),stockPlan:number(v(5))};
+      newTable[sku]={price:number(v(1)),sale:number(v(2)),until:date(v(3),f(3)),from:date(v(4),f(4)),stockPlan:number(v(5)),tones:(Array.isArray(cols)?cols.length:c.length)>6?parseTones(v(6),sku):null,design:(Array.isArray(cols)?cols.length:c.length)>7?parseDesign(v(7),sku):null};
     });
     table=newTable;loaded=true;render();
     document.dispatchEvent(new CustomEvent('eversense:prices'));
@@ -186,7 +205,7 @@
     s.src="https://docs.google.com/spreadsheets/d/"+SHEET_ID+
       "/gviz/tq?"+new URLSearchParams({
         tqx:"out:json;responseHandler:EversensePriceFeed",
-        sheet:"price",headers:"1",tq:"select A,C,D,E,F,G",
+        sheet:"price",headers:"1",tq:"select A,C,D,E,F,G,H,I",
         nonce:String(Date.now())
       }).toString();
     s.onerror=function(){console.warn("EVERSENSE: нет доступа к опубликованной таблице price");};
@@ -197,5 +216,5 @@
   requestFeed();
   // Re-read without reloading the page; Google may cache its response for a few minutes.
   timer=setInterval(requestFeed,15*60*1000);
-  window.EversensePrices={get:activePrice,render:render,refresh:requestFeed,isLoaded:function(){return loaded;}};
+  window.EversensePrices={get:activePrice,getFilters:filtersFor,render:render,refresh:requestFeed,isLoaded:function(){return loaded;}};
 })();

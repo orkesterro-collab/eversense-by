@@ -20,7 +20,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "plain"
+      "design": "plain",
+      "tones": [
+        "light",
+        "beige"
+      ]
     }
   },
   {
@@ -43,7 +47,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "plain"
+      "design": "plain",
+      "tones": [
+        "light",
+        "gray"
+      ]
     }
   },
   {
@@ -66,7 +74,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "stone"
+      "design": "stone",
+      "tones": [
+        "light",
+        "gray"
+      ]
     }
   },
   {
@@ -89,7 +101,10 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "stone"
+      "design": "stone",
+      "tones": [
+        "gray"
+      ]
     }
   },
   {
@@ -112,7 +127,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "beige"
+      ]
     }
   },
   {
@@ -135,7 +154,12 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "natural",
+        "beige"
+      ]
     }
   },
   {
@@ -158,7 +182,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "natural",
+        "brown"
+      ]
     }
   },
   {
@@ -181,7 +209,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "dark",
+        "brown"
+      ]
     }
   },
   {
@@ -204,7 +236,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "white"
+      ]
     }
   },
   {
@@ -227,7 +263,12 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "natural",
+        "beige"
+      ]
     }
   },
   {
@@ -250,7 +291,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "natural",
+        "brown"
+      ]
     }
   },
   {
@@ -273,7 +318,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "dark",
+        "brown"
+      ]
     }
   },
   {
@@ -296,7 +345,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "gray"
+      ]
     }
   },
   {
@@ -319,7 +372,12 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "natural",
+        "beige"
+      ]
     }
   },
   {
@@ -342,7 +400,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "natural",
+        "brown"
+      ]
     }
   },
   {
@@ -365,7 +427,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "dark",
+        "brown"
+      ]
     }
   },
   {
@@ -388,7 +454,12 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "white",
+        "gray"
+      ]
     }
   },
   {
@@ -411,7 +482,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "gray"
+      ]
     }
   },
   {
@@ -434,7 +509,12 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "natural",
+        "beige"
+      ]
     }
   },
   {
@@ -457,7 +537,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "natural",
+        "brown"
+      ]
     }
   },
   {
@@ -480,7 +564,10 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "gray"
+      ]
     }
   },
   {
@@ -503,7 +590,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "white"
+      ]
     }
   },
   {
@@ -526,7 +617,12 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "white",
+        "beige"
+      ]
     }
   },
   {
@@ -549,7 +645,12 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "natural",
+        "beige"
+      ]
     }
   },
   {
@@ -572,7 +673,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "natural",
+        "brown"
+      ]
     }
   },
   {
@@ -595,7 +700,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "dark",
+        "brown"
+      ]
     }
   },
   {
@@ -618,7 +727,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": "light",
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "light",
+        "beige"
+      ]
     }
   },
   {
@@ -641,7 +754,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "natural",
+        "brown"
+      ]
     }
   },
   {
@@ -664,7 +781,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "gray",
+        "beige"
+      ]
     }
   },
   {
@@ -687,7 +808,11 @@ window.EversenseCatalogData = [
     "lock": "CLIC it!",
     "tags": {
       "tone": null,
-      "design": "wood"
+      "design": "wood",
+      "tones": [
+        "dark",
+        "brown"
+      ]
     }
   }
 ];

@@ -264,6 +264,20 @@ def main() -> None:
     if len(sources) != 30:
         raise ValueError(f"Expected 30 product sources, found {len(sources)}")
     products = [extract(source, media_by_url, media_by_local) for source in sources]
+    # Editable merchandising classification, independent of official technical facts.
+    filters = json.loads((ROOT / "content/catalog-filters.json").read_text(encoding="utf-8"))
+    tone_codes = {"Светлый":"light", "Тёмный":"dark", "Натуральный":"natural", "Серый":"gray", "Коричневый":"brown", "Бежевый":"beige", "Белый":"white"}
+    group_codes = {"Древесные":"wood", "Однотонные":"plain", "Под камень":"stone"}
+    if set(filters) != {product["sku"] for product in products}:
+        raise ValueError("Filter snapshot must cover exactly the 30 known SKUs")
+    for product in products:
+        entry = filters[product["sku"]]
+        if not entry["tones"] or len(set(entry["tones"])) != len(entry["tones"]):
+            raise ValueError("Each decor needs unique nonempty filter tones")
+        product["tags"]["tones"] = [tone_codes[tone] for tone in entry["tones"]]
+        product["tags"]["design"] = group_codes[entry["group"]]
+        product["sourceEvidence"]["tags"]["filterSnapshot"] = "content/catalog-filters.json"
+        product["sourceEvidence"]["tags"]["purpose"] = "Editable merchandising classification; live price-sheet H:I overrides fallback tones/design. Not a technical claim."
     products.sort(key=lambda product: int(product["sku"][2:]))
     if len({product["sku"] for product in products}) != 30:
         raise ValueError("Duplicate product SKUs")
