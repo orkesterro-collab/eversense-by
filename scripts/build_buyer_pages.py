@@ -45,7 +45,7 @@ def link(label, target, page, cls='', extra=''):
     return f'<a href="{e(href(target, page))}"' + (f' class="{e(cls)}"' if cls else '') + (f' {extra}' if extra else '') + f'>{label}</a>'
 
 def actions(page):
-    return '<div class="ev-actions">' + link('<svg class="ev-heart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 4.6c-2.1-2.1-5.5-2.1-7.6 0L12 5.8l-1.2-1.2c-2.1-2.1-5.5-2.1-7.6 0s-2.1 5.5 0 7.6L12 21l8.8-8.8c2.1-2.1 2.1-5.5 0-7.6Z"/></svg>Избранное (<span data-favorites-count>0</span>)', 'favorites.html', page, 'ev-favorites-link', 'data-favorites-link') + '</div>'
+    return '<div class="ev-actions">' + link('<svg class="ev-heart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 4.6c-2.1-2.1-5.5-2.1-7.6 0L12 5.8l-1.2-1.2c-2.1-2.1-5.5-2.1-7.6 0s-2.1 5.5 0 7.6L12 21l8.8-8.8c2.1-2.1 2.1-5.5 0-7.6Z"/></svg><span data-favorites-summary>Избранное - пока пусто</span>', 'favorites.html', page, 'ev-favorites-link', 'data-favorites-link') + '</div>'
 
 def footer(page):
     groups = [
@@ -115,7 +115,7 @@ def catalogs():
         if not collection:
             filters += field('Коллекция','collection',[('','Все коллекции')]+[(c,t) for c,t,_ in COLLECTIONS])
         design_options = [(v,t) for v,t in DESIGN if not v or any(p['tags']['design']==v for p in items)]
-        filters += field('Оттенок','tone',TONE)+field('Группа декоров','design',design_options)+field('Порядок','sort',[('','По коллекциям'),('name','По названию'),('price-up','Сначала дешевле'),('price-down','Сначала дороже')])+'</div></details><div class="ev-actions"><p id="ev-result-count" class="ev-count" role="status">Найдено декоров: '+str(len(items))+'</p><button type="button" class="ev-text-link" data-reset-filters>Сбросить фильтры</button></div></form>'
+        filters += field('Оттенок','tone',TONE)+field('Группа декоров','design',design_options)+field('Порядок','sort',[('','По коллекциям'),('name','По названию'),('price-up','Сначала дешевле'),('price-down','Сначала дороже')])+'</div></details><div class="ev-actions"><p id="ev-result-count" class="ev-count" role="status">Найдено декоров: '+str(len(items))+'</p><button type="button" class="ev-reset-filters" data-reset-filters aria-label="Сбросить фильтры" title="Сбросить фильтры"><span aria-hidden="true">×</span></button></div></form>'
         body = '<section class="ev-section"><div class="ev-wrap">'+nav+filters+'<div class="ev-grid" id="ev-catalog-results">'+''.join(card(p,page) for p in items)+'</div></div></section><section class="ev-section"><div class="ev-wrap"><p class="ev-note">Оттенок на экране зависит от освещения и настроек устройства. Перед покупкой посмотрите реальный образец. Наличие нужного количества уточняйте у продавца.</p>'+link('Помочь с выбором', 'choose.html', page,'ev-button')+'</div></section>'
         write_page(page,title,lead,body,'catalog',collection,actions(page))
 

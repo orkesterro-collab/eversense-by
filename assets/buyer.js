@@ -43,8 +43,10 @@
   function card(p,allowCalculate){return '<article class="ev-card" data-product="'+p.sku+'"><a class="ev-card-image" href="'+route(p.canonicalPath)+'"><img src="'+route(p.productImage)+'" alt="'+esc(fullName(p))+'" loading="lazy" width="640" height="500">'+(p.interiorImage?'<img class="ev-card-interior" src="'+route(p.interiorImage)+'" alt="" loading="lazy" width="640" height="500">':'')+'</a><div class="ev-card-body"><span class="ev-sku">'+p.sku+'</span><h2 class="ev-card-title"><a href="'+route(p.canonicalPath)+'">'+esc(fullName(p))+'</a></h2><p class="ev-card-meta">'+esc(p.collectionName)+' · '+p.lengthMM+' × '+p.widthMM+' мм</p><div class="ev-price-box" data-buyer-price="'+p.sku+'">'+priceHtml(p.sku)+'</div>'+buttons(p,allowCalculate)+'</div></article>';}
   function syncButtons(){
     document.querySelectorAll('[data-ev-favorite]').forEach(function(b){var on=favorites.includes(b.dataset.evFavorite);b.setAttribute('aria-pressed',String(on));b.textContent=on?'В избранном':'В избранное';});
+    var favoriteSummary='Избранное - '+(favorites.length?favorites.length+' шт.':'пока пусто');
+    document.querySelectorAll('[data-favorites-summary]').forEach(function(n){n.textContent=favoriteSummary;});
     document.querySelectorAll('[data-favorites-count]').forEach(function(n){n.textContent=String(favorites.length);});
-    document.querySelectorAll('[data-favorites-link]').forEach(function(a){a.classList.toggle('has-favorites',favorites.length>0);});
+    document.querySelectorAll('[data-favorites-link]').forEach(function(a){a.classList.toggle('has-favorites',favorites.length>0);a.setAttribute('aria-label',favoriteSummary);});
     if(!storageAvailable)document.querySelectorAll('a[href]').forEach(function(a){var u;try{u=new URL(a.href);}catch(e){return;}if(u.origin!==base.origin||!u.pathname.startsWith(base.pathname)||a.getAttribute('href').startsWith('#'))return;u.searchParams.set('ev-favorites',favorites.join(','));a.href=u.href;});
     if(!storageAvailable){var current=new URL(location.href);current.searchParams.set('ev-favorites',favorites.join(','));history.replaceState(null,'',current);}
   }
@@ -147,7 +149,7 @@
       if(document.getElementById('ev-product-tools'))return true;
       var price=document.getElementById('ev-product-price');if(!price)return false;
       var section=document.createElement('section');section.id='ev-product-tools';section.className='ev-tools-panel ev-buyer';
-      section.innerHTML='<div class="ev-wrap"><div class="ev-actions"><a class="ev-button ev-button--primary" href="'+route('calculator.html')+'?sku='+p.sku+'">Рассчитать упаковки</a>'+buttons(p)+'</div><div class="ev-swatch-row"><a href="'+route('favorites.html')+'">Избранное (<span data-favorites-count>0</span>)</a><a href="'+route('choose.html')+'#sample">Как проверить образец</a></div></div>';
+      section.innerHTML='<div class="ev-wrap"><div class="ev-actions"><a class="ev-button ev-button--primary" href="'+route('calculator.html')+'?sku='+p.sku+'">Рассчитать упаковки</a>'+buttons(p)+'</div><div class="ev-swatch-row"><a href="'+route('favorites.html')+'"><span data-favorites-summary>Избранное - пока пусто</span></a><a href="'+route('choose.html')+'#sample">Как проверить образец</a></div></div>';
       var gallery=price.previousElementSibling;
       // Accept both current and cached versions of the price loader.
       if(!gallery||!gallery.matches('.t-rec')||!gallery.querySelector('[role="img"]'))gallery=price.nextElementSibling;
@@ -181,6 +183,7 @@
   });
   document.addEventListener('eversense:prices',updatePrices);
   document.addEventListener('eversense:header-ready',syncButtons);
+  window.addEventListener('pageshow',function(){if(storageAvailable)favorites=read('eversense.favorites.v1',30);if(pageName==='favorites'&&imported===null)renderFavorites();syncButtons();});
   window.addEventListener('storage',function(e){if(!storageAvailable)return;if(e.key===null||e.key==='eversense.favorites.v1'){favorites=read('eversense.favorites.v1',30);if(pageName==='favorites'&&imported===null)renderFavorites();}syncButtons();});
   function boot(){mountCatalog();mountCalculator();mountFinder();mountProduct();mountContact();renderFavorites();syncButtons();updatePrices();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
