@@ -15,6 +15,7 @@ from pathlib import Path
 import posixpath
 import re
 from urllib.parse import unquote, urlsplit
+from static_product import make_static_product
 
 ROOT = Path(__file__).resolve().parents[1]
 HOMES = {'index.html', 'ru/index.html', 'en/index.html'}
@@ -48,6 +49,7 @@ def tag_html(tag, attrs):
 
 def optimize_html(source, page, runtime, responsive, video_manifest):
     counts = Counter()
+    source = make_static_product(source, page)
     # These four layer photographs used lossless PNG for photographic content.
     for name in PNG_NAMES:
         source = source.replace(name + '.png', name + '.webp')

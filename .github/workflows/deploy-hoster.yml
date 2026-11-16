@@ -14,6 +14,8 @@ on:
       - "content/image-optimization.json"
       - "scripts/optimize_delivery.py"
       - "scripts/qa_performance.py"
+      - "scripts/static_product.py"
+      - "scripts/qa_product_scroll.py"
       - "black-friday/**"
       - "catalog-ru/**"
       - "catalog-en/**"

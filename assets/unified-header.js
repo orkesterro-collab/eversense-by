@@ -154,8 +154,8 @@
       header.classList.remove("ev-header-hidden");
     });
 
-    // The home page uses ordinary scrolling, including a stationary navigation bar.
-    if (document.documentElement.classList.contains("ev-home-static")) return;
+    // Static home and product pages keep navigation stationary while scrolling.
+    if (document.documentElement.matches(".ev-home-static, .ev-product-static")) return;
     var lastY = Math.max(0, window.scrollY);
     var travel = 0, direction = 0;
     window.addEventListener("scroll", function () {
