@@ -157,6 +157,8 @@ def optimize_html(source, page, runtime, responsive, video_manifest):
                     attrs['srcset'] = ', '.join(f'{url} {width}w' for width, url in candidates)
                     # Gallery details keep their full-size source. Catalog
                     # cards choose an appropriately small file on each screen.
+                    if 'ev-gallery-image' in attrs.get('class', '').split():
+                        attrs['sizes'] = '100vw'
                     attrs.setdefault('sizes', CARD_SIZES if 'ev-card' in attrs.get('class', '') or attrs.get('width') == '640'
                                      else '(max-width: 960px) 100vw, 900px')
                     counts['responsive_images'] += 1

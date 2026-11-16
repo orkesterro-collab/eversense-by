@@ -32,6 +32,7 @@ RELEASE_ASSETS = {
     "/assets/home-footer.css",
     "/assets/installation-guides.css",
     "/assets/performance.js",
+    "/assets/designer-cards.css",
 }
 
 
