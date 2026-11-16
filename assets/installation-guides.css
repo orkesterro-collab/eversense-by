@@ -36,6 +36,18 @@
 .ev-install-steps > li > h3 {margin:0 0 10px}
 .ev-install-steps > li > p {margin:0}
 .ev-install-steps > li > ul {margin-top:12px;margin-bottom:0}
+.ev-install-method-nav {display:flex;flex-wrap:wrap;gap:12px 28px;margin:32px 0 12px}
+.ev-install-method-nav a {display:inline-flex;align-items:center;min-height:44px;font-size:14px;font-weight:600}
+.ev-install-article .ev-install-diagram-help {font-size:13px;line-height:1.7;color:#685c51;margin:0 0 28px}
+.ev-install-method {min-width:0;padding-top:28px;margin-top:32px;border-top:1px solid #DADADA;scroll-margin-top:calc(var(--ev-header-height,68px) + 24px)}
+.ev-install-method > h3 {margin:0 0 14px}
+.ev-install-method-steps {margin:18px 0 24px}
+.ev-install-method-figure {margin:24px 0 16px}
+.ev-install-diagrams {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.ev-install-diagrams a {display:block;min-width:0;line-height:0;outline-offset:4px}
+.ev-install-diagrams img {display:block;width:100%;height:auto;background:#fff}
+.ev-install-method-figure figcaption {font-size:12px;line-height:1.7;color:#685c51;margin-top:12px}
+.ev-install-article .ev-install-method-note {font-size:14px;line-height:1.8;padding-left:16px;border-left:2px solid #C0A58C;margin:18px 0 0}
 .ev-install-tradeoffs {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px;margin-top:25px}
 .ev-install-tradeoffs-group {min-width:0;padding-top:18px;border-top:2px solid #C0A58C}
 .ev-install-tradeoffs-group:last-child {border-top-color:#9d9d9c}
@@ -61,6 +73,7 @@
  .ev-install-layout {grid-template-columns:190px minmax(0,1fr);gap:32px}
  .ev-install-checks {grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 24px}
  .ev-install-tradeoffs {grid-template-columns:1fr;gap:24px}
+ .ev-install-diagrams {grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:760px){
  .ev-install-guide {padding-bottom:44px}
@@ -111,4 +124,7 @@
  .ev-install-article h2,.ev-install-article h3 {break-after:avoid}
  .ev-install-table tr {break-inside:avoid}
  .ev-install-article section {break-inside:auto}
+ .ev-install-method-nav,.ev-install-diagram-help {display:none}
+ .ev-install-diagrams {grid-template-columns:repeat(4,minmax(0,1fr))}
+ .ev-install-method-figure {break-inside:avoid}
 }

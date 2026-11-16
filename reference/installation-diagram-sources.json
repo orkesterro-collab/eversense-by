@@ -1,0 +1,321 @@
+{
+  "source_url": "https://drive.google.com/file/d/1dImDaWKPtefl-TOjxHiSL3zauqBfHdJH/view",
+  "source_sha256": "ab26a3d8b1f0c4b3e605f1e3cd79ce1bc04ce641487ffcce9fe7bc1cb4b82143",
+  "checked": "2026-11-16",
+  "credit": "EVERSENSE / ЭГГЕР Древпродукт Гагарин. Инструкция по укладке, раздел 4.2, печатные страницы 9–12.",
+  "processing": "Иллюстрации извлечены из PDF с исходными обозначениями; геометрия и последовательность не перерисовывались. Рендер 4 px/pt, WebP quality 92.",
+  "images": [
+    {
+      "src": "assets/installation/clic-it/a-01.webp",
+      "alt": "Способ A, E1: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 492,
+      "height": 339,
+      "pdf_page": 5,
+      "clip_pt": [
+        651.434,
+        640.946,
+        774.149,
+        725.385
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/a-02.webp",
+      "alt": "Способ A, E2: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 492,
+      "height": 339,
+      "pdf_page": 5,
+      "clip_pt": [
+        776.556,
+        640.946,
+        899.271,
+        725.385
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/a-03.webp",
+      "alt": "Способ A, E3: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 492,
+      "height": 339,
+      "pdf_page": 5,
+      "clip_pt": [
+        901.676,
+        640.946,
+        1024.392,
+        725.385
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/a-04.webp",
+      "alt": "Способ A, E4: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 492,
+      "height": 339,
+      "pdf_page": 5,
+      "clip_pt": [
+        1026.795,
+        640.946,
+        1149.511,
+        725.385
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/a-05.webp",
+      "alt": "Способ A, E5: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 492,
+      "height": 315,
+      "pdf_page": 6,
+      "clip_pt": [
+        41.52,
+        116.265,
+        164.281,
+        194.843
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/a-06.webp",
+      "alt": "Способ A, E6: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 492,
+      "height": 315,
+      "pdf_page": 6,
+      "clip_pt": [
+        166.62,
+        116.265,
+        289.382,
+        194.843
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/a-07.webp",
+      "alt": "Способ A, E7: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 492,
+      "height": 315,
+      "pdf_page": 6,
+      "clip_pt": [
+        291.72,
+        116.265,
+        414.484,
+        194.843
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/a-08.webp",
+      "alt": "Способ A, E8: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 492,
+      "height": 315,
+      "pdf_page": 6,
+      "clip_pt": [
+        416.821,
+        116.265,
+        539.583,
+        194.843
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/b-01.webp",
+      "alt": "Способ B, C1: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 491,
+      "height": 317,
+      "pdf_page": 6,
+      "clip_pt": [
+        650.969,
+        280.657,
+        773.419,
+        359.546
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/b-02.webp",
+      "alt": "Способ B, C2: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 491,
+      "height": 317,
+      "pdf_page": 6,
+      "clip_pt": [
+        776.169,
+        280.657,
+        898.612,
+        359.546
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/b-03.webp",
+      "alt": "Способ B, C3: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 491,
+      "height": 317,
+      "pdf_page": 6,
+      "clip_pt": [
+        901.377,
+        280.658,
+        1023.828,
+        359.547
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/b-04.webp",
+      "alt": "Способ B, C4: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 491,
+      "height": 317,
+      "pdf_page": 6,
+      "clip_pt": [
+        1026.581,
+        280.657,
+        1149.031,
+        359.546
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/b-05.webp",
+      "alt": "Способ B, C5: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 491,
+      "height": 317,
+      "pdf_page": 6,
+      "clip_pt": [
+        650.969,
+        363.13,
+        773.411,
+        442.02
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/b-06.webp",
+      "alt": "Способ B, C6: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 491,
+      "height": 317,
+      "pdf_page": 6,
+      "clip_pt": [
+        776.169,
+        363.13,
+        898.617,
+        442.02
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/b-07.webp",
+      "alt": "Способ B, C7: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 491,
+      "height": 317,
+      "pdf_page": 6,
+      "clip_pt": [
+        901.375,
+        363.13,
+        1023.825,
+        442.02
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/b-08.webp",
+      "alt": "Способ B, деталь торцевого соединения: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 491,
+      "height": 315,
+      "pdf_page": 6,
+      "clip_pt": [
+        1026.581,
+        363.13,
+        1149.031,
+        441.511
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/c-01.webp",
+      "alt": "Способ C, D1: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 492,
+      "height": 339,
+      "pdf_page": 7,
+      "clip_pt": [
+        41.513,
+        180.175,
+        164.395,
+        264.727
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/c-02.webp",
+      "alt": "Способ C, D2: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 492,
+      "height": 339,
+      "pdf_page": 7,
+      "clip_pt": [
+        166.327,
+        180.175,
+        289.208,
+        264.727
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/c-03.webp",
+      "alt": "Способ C, D3: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 493,
+      "height": 339,
+      "pdf_page": 7,
+      "clip_pt": [
+        291.725,
+        180.175,
+        414.608,
+        264.727
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/c-04.webp",
+      "alt": "Способ C, D4: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 493,
+      "height": 339,
+      "pdf_page": 7,
+      "clip_pt": [
+        416.707,
+        180.175,
+        539.589,
+        264.727
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/c-05.webp",
+      "alt": "Способ C, D5: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 492,
+      "height": 339,
+      "pdf_page": 7,
+      "clip_pt": [
+        41.513,
+        268.328,
+        164.395,
+        352.882
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/c-06.webp",
+      "alt": "Способ C, D6: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 493,
+      "height": 339,
+      "pdf_page": 7,
+      "clip_pt": [
+        166.14,
+        268.328,
+        289.021,
+        352.882
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/c-07.webp",
+      "alt": "Способ C, D7: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 493,
+      "height": 339,
+      "pdf_page": 7,
+      "clip_pt": [
+        291.725,
+        268.328,
+        414.608,
+        352.882
+      ]
+    },
+    {
+      "src": "assets/installation/clic-it/c-08.webp",
+      "alt": "Способ C, D8: схема соединения CLIC it! из инструкции EVERSENSE",
+      "width": 493,
+      "height": 339,
+      "pdf_page": 7,
+      "clip_pt": [
+        416.707,
+        268.328,
+        539.589,
+        352.882
+      ]
+    }
+  ]
+}

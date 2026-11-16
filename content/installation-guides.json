@@ -267,10 +267,209 @@
       },
       {
         "id": "click-installation",
-        "title": "Соберите покрытие CLIC it!",
+        "title": "Три способа сборки CLIC it!",
         "paragraphs": [
-          "В общей инструкции EVERSENSE приведены три последовательности соединения CLIC it!. Используйте схему, соответствующую замку на ваших панелях, и сверяйтесь с рисунками полного PDF. Укладка на подложку остаётся плавающей: приклеивать или привинчивать панели к основанию нельзя."
+          "Выберите один из трёх способов, описанных в инструкции EVERSENSE. Ниже — последовательность соединения и схемы производителя. При укладке на подложку панели соединяют между собой, сохраняя плавающую конструкцию пола."
         ],
+        "links": [
+          {
+            "label": "Полная инструкция EVERSENSE: способы A, B и C, раздел 4.2",
+            "url": "https://drive.google.com/file/d/1dImDaWKPtefl-TOjxHiSL3zauqBfHdJH/view"
+          }
+        ],
+        "assembly_methods": [
+          {
+            "id": "clic-it-a",
+            "code": "A",
+            "title": "По одной панели под углом",
+            "description": "Сначала соединяют торцы соседних панелей, затем замыкают длинную сторону.",
+            "steps": [
+              "Введите торцевой гребень новой панели в паз предыдущей под углом и опустите панель.",
+              "Слегка приподнимите её вдоль длинной стороны вместе с соседней панелью. Введите продольный гребень в паз уложенного ряда и опустите до фиксации.",
+              "Проверьте плотность обоих соединений перед следующей панелью."
+            ],
+            "caption": "Способ A: рисунки E1–E8 из инструкции EVERSENSE, раздел 4.2.1, страницы 9–10.",
+            "diagrams": [
+              {
+                "src": "assets/installation/clic-it/a-01.webp",
+                "alt": "Способ A, E1: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 492,
+                "height": 339
+              },
+              {
+                "src": "assets/installation/clic-it/a-02.webp",
+                "alt": "Способ A, E2: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 492,
+                "height": 339
+              },
+              {
+                "src": "assets/installation/clic-it/a-03.webp",
+                "alt": "Способ A, E3: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 492,
+                "height": 339
+              },
+              {
+                "src": "assets/installation/clic-it/a-04.webp",
+                "alt": "Способ A, E4: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 492,
+                "height": 339
+              },
+              {
+                "src": "assets/installation/clic-it/a-05.webp",
+                "alt": "Способ A, E5: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 492,
+                "height": 315
+              },
+              {
+                "src": "assets/installation/clic-it/a-06.webp",
+                "alt": "Способ A, E6: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 492,
+                "height": 315
+              },
+              {
+                "src": "assets/installation/clic-it/a-07.webp",
+                "alt": "Способ A, E7: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 492,
+                "height": 315
+              },
+              {
+                "src": "assets/installation/clic-it/a-08.webp",
+                "alt": "Способ A, E8: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 492,
+                "height": 315
+              }
+            ]
+          },
+          {
+            "id": "clic-it-b",
+            "code": "B",
+            "title": "Под углом с подбиванием торца",
+            "description": "Длинную сторону соединяют под углом, торец — лёгким горизонтальным подбиванием.",
+            "steps": [
+              "Введите продольный гребень в паз предыдущего ряда. Подвиньте наклонённую панель к торцу соседней.",
+              "Опустите панель и проверьте высоту торцевого гребня относительно паза.",
+              "Замкните торец лёгкими ударами через подбивочный брусок. Первые два ряда можно собирать попеременно, сохраняя смещение торцов не менее 20 см."
+            ],
+            "note": "Не бейте молотком прямо по кромке. Сильные удары могут повредить замок; если соединение не закрывается, проверьте положение и чистоту профиля.",
+            "caption": "Способ B: рисунки C1–C7 и увеличенная деталь торца из инструкции EVERSENSE, раздел 4.2.2, страница 11.",
+            "diagrams": [
+              {
+                "src": "assets/installation/clic-it/b-01.webp",
+                "alt": "Способ B, C1: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 491,
+                "height": 317
+              },
+              {
+                "src": "assets/installation/clic-it/b-02.webp",
+                "alt": "Способ B, C2: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 491,
+                "height": 317
+              },
+              {
+                "src": "assets/installation/clic-it/b-03.webp",
+                "alt": "Способ B, C3: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 491,
+                "height": 317
+              },
+              {
+                "src": "assets/installation/clic-it/b-04.webp",
+                "alt": "Способ B, C4: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 491,
+                "height": 317
+              },
+              {
+                "src": "assets/installation/clic-it/b-05.webp",
+                "alt": "Способ B, C5: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 491,
+                "height": 317
+              },
+              {
+                "src": "assets/installation/clic-it/b-06.webp",
+                "alt": "Способ B, C6: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 491,
+                "height": 317
+              },
+              {
+                "src": "assets/installation/clic-it/b-07.webp",
+                "alt": "Способ B, C7: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 491,
+                "height": 317
+              },
+              {
+                "src": "assets/installation/clic-it/b-08.webp",
+                "alt": "Способ B, деталь торцевого соединения: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 491,
+                "height": 315
+              }
+            ]
+          },
+          {
+            "id": "clic-it-c",
+            "code": "C",
+            "title": "Целыми рядами",
+            "description": "Сначала соединяют торцы панелей одного ряда, затем замыкают его длинную сторону.",
+            "steps": [
+              "Заведите первую панель нового ряда в продольный паз предыдущего, пока не замыкая соединение полностью.",
+              "Присоедините остальные панели нового ряда по торцам под углом.",
+              "Последовательно приподнимайте и замыкайте продольное соединение слева направо, пока весь ряд не окажется в одной плоскости. Не допускайте сдвига торцевых стыков."
+            ],
+            "caption": "Способ C: рисунки D1–D8 из инструкции EVERSENSE, раздел 4.2.3, страница 12.",
+            "diagrams": [
+              {
+                "src": "assets/installation/clic-it/c-01.webp",
+                "alt": "Способ C, D1: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 492,
+                "height": 339
+              },
+              {
+                "src": "assets/installation/clic-it/c-02.webp",
+                "alt": "Способ C, D2: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 492,
+                "height": 339
+              },
+              {
+                "src": "assets/installation/clic-it/c-03.webp",
+                "alt": "Способ C, D3: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 493,
+                "height": 339
+              },
+              {
+                "src": "assets/installation/clic-it/c-04.webp",
+                "alt": "Способ C, D4: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 493,
+                "height": 339
+              },
+              {
+                "src": "assets/installation/clic-it/c-05.webp",
+                "alt": "Способ C, D5: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 492,
+                "height": 339
+              },
+              {
+                "src": "assets/installation/clic-it/c-06.webp",
+                "alt": "Способ C, D6: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 493,
+                "height": 339
+              },
+              {
+                "src": "assets/installation/clic-it/c-07.webp",
+                "alt": "Способ C, D7: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 493,
+                "height": 339
+              },
+              {
+                "src": "assets/installation/clic-it/c-08.webp",
+                "alt": "Способ C, D8: схема соединения CLIC it! из инструкции EVERSENSE",
+                "width": 493,
+                "height": 339
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "assembly-checks",
+        "title": "Общие правила сборки",
         "steps": [
           {
             "title": "Выставьте первый ряд",
@@ -291,12 +490,6 @@
           {
             "title": "Завершите примыкания",
             "text": "После сборки удалите распорки и установите плинтусы и профили. Ни один крепёж не должен жёстко связывать плавающий пол с основанием."
-          }
-        ],
-        "links": [
-          {
-            "label": "Схемы сборки CLIC it! в инструкции EVERSENSE",
-            "url": "https://drive.google.com/file/d/1dImDaWKPtefl-TOjxHiSL3zauqBfHdJH/view"
           }
         ]
       },

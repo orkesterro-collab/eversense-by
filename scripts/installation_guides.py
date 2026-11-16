@@ -70,6 +70,29 @@ def _steps(steps):
     return '<ol class="ev-install-steps">' + ''.join(result) + '</ol>'
 
 
+def _assembly_methods(methods, page, href):
+    if not methods:
+        return ''
+    navigation = '<nav class="ev-install-method-nav" aria-label="Способы сборки CLIC it!">' + ''.join(
+        '<a href="#' + _e(method['id']) + '">Способ ' + _e(method['code']) + '</a>'
+        for method in methods
+    ) + '</nav>'
+    result = []
+    for method in methods:
+        method_id = _e(method['id'])
+        title = 'Способ ' + _e(method['code']) + '. ' + _e(method['title'])
+        images = []
+        for diagram in method['diagrams']:
+            src = _e(href(diagram['src'], page))
+            alt = _e(diagram['alt'])
+            images.append('<a href="' + src + '" target="_blank" rel="noopener noreferrer" aria-label="Увеличить: ' + alt + '"><img src="' + src + '" alt="' + alt + '" width="' + str(int(diagram['width'])) + '" height="' + str(int(diagram['height'])) + '" loading="lazy" decoding="async"></a>')
+        steps = '<ol class="ev-install-method-steps">' + ''.join('<li>' + _e(step) + '</li>' for step in method['steps']) + '</ol>'
+        figure = '<figure class="ev-install-method-figure"><div class="ev-install-diagrams">' + ''.join(images) + '</div><figcaption>' + _e(method['caption']) + '</figcaption></figure>'
+        note = '<p class="ev-install-method-note">' + _e(method['note']) + '</p>' if method.get('note') else ''
+        result.append('<div class="ev-install-method" id="' + method_id + '" role="group" aria-labelledby="' + method_id + '-heading"><h3 id="' + method_id + '-heading">' + title + '</h3><p>' + _e(method['description']) + '</p>' + steps + figure + note + '</div>')
+    return navigation + '<p class="ev-install-diagram-help">На схемах сохранены обозначения производителя. Нажмите на рисунок, чтобы открыть его крупнее в новой вкладке.</p>' + ''.join(result)
+
+
 def _pros_cons(section):
     groups = []
     for key, title in [('pros', 'Преимущества'), ('cons', 'Ограничения')]:
@@ -82,7 +105,8 @@ def render_installation_guide(guide, page, href):
     """Return the article body using the site's existing relative-link helper.
 
     Expected fields are navigation, quick_checks, notice, sections and related.
-    Sections accept paragraphs, bullets, steps, table, notice, links, pros and cons.
+    Sections accept paragraphs, bullets, steps, assembly_methods, table, notice,
+    links, pros and cons.
     Every text value is escaped; editorial content cannot inject markup.
     """
     navigation = ''
@@ -113,6 +137,7 @@ def render_installation_guide(guide, page, href):
         section_body += _list(section.get('bullets', []))
         section_body += _table(section.get('table', {}), section['title'])
         section_body += _steps(section.get('steps', []))
+        section_body += _assembly_methods(section.get('assembly_methods', []), page, href)
         section_body += _pros_cons(section)
         if section.get('links'):
             section_body += '<div class="ev-install-links">' + ''.join(
