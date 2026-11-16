@@ -194,8 +194,21 @@ def main():
                     require("/assets/responsive/" in state["chosen"] and state["width"] <= 960,
                             "Catalog loaded oversized original: " + str(state))
                     require(state["chosen"] != state["fallback"], "Responsive candidate was not selected")
+                    page.screenshot(path=str(output / (device + "-catalog.png")))
                     return state
                 case("catalog selects a smaller responsive image", responsive)
+
+                def gallery_resolution():
+                    response = page.goto(base + "/catalog-ru/nature-aesthetic-ru/light-virdia-oak-ru/", wait_until="load")
+                    require(response and response.ok, "Product gallery did not load")
+                    image = page.locator('img.ev-gallery-image[fetchpriority="high"][srcset]')
+                    page.wait_for_function("()=>{const i=document.querySelector('img.ev-gallery-image[fetchpriority=high][srcset]');return i&&i.complete&&i.naturalWidth>0}")
+                    state = image.evaluate("e=>({chosen:e.currentSrc,width:e.naturalWidth,slot:e.getBoundingClientRect().width,sizes:e.sizes})")
+                    require(state["width"] + 1 >= state["slot"],
+                            "Full-width product texture would be enlarged from an undersized candidate: " + str(state))
+                    page.screenshot(path=str(output / (device + "-product.png")))
+                    return state
+                case("full-width product texture retains its resolution", gallery_resolution)
 
                 def clean():
                     require(not errors, "JavaScript errors: " + str(errors))
@@ -204,7 +217,6 @@ def main():
                     return {"javascript_errors": errors, "failed_resources": failed, "cdn_requests": cdn,
                             "retained_analytics": sorted(RETAINED_ANALYTICS)}
                 case("local assets and scripts load without errors", clean)
-                page.screenshot(path=str(output / (device + "-catalog.png")))
                 context.close()
             browser.close()
     except Exception as error:
