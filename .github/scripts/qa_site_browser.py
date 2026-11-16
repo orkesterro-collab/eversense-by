@@ -61,7 +61,7 @@ with sync_playwright() as playwright:
                 row["page_errors"] = errors[:8]
                 page.screenshot(path=str(OUT / (label + "-" + device + ".png")),
                                 full_page=False, animations="disabled", timeout=30000)
-                # The static homepage keeps its header visible; other pages hide it on scroll.
+                # Home and product details use native scrolling with a stationary header.
                 header = page.locator("#ev-global-header")
                 header.wait_for(state="visible", timeout=12000)
                 row["shared_header_visible"] = True
@@ -81,7 +81,7 @@ with sync_playwright() as playwright:
                 page.evaluate("window.scrollTo({top: 500, behavior: 'instant'})")
                 page.wait_for_timeout(450)
                 row["header_hides_down"] = "ev-header-hidden" in (header.get_attribute("class") or "")
-                if row["header_hides_down"] != (label != "home"):
+                if row["header_hides_down"] != (label not in ("home", "product")):
                     failures.append(f"{device} {path}: unexpected header behavior on downward scroll")
                 page.evaluate("window.scrollTo({top: 180, behavior: 'instant'})")
                 page.wait_for_timeout(450)
