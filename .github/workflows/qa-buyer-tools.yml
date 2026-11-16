@@ -35,6 +35,8 @@ on:
       - 'content/laminate-classes.json'
       - 'downloads/documents/**'
       - '.github/scripts/prepare_hoster_site.py'
+      - '.github/scripts/deploy_ftps.py'
+      - '.github/scripts/test_deploy_ftps.py'
       - '.github/scripts/prepare_pages_site.py'
       - '.github/scripts/test_prepare_pages_site.py'
       - '.github/workflows/deploy-pages.yml'
@@ -56,6 +58,7 @@ jobs:
       - name: Verify product data and calculations
         run: |
           python3 .github/scripts/test_prepare_pages_site.py
+          python3 .github/scripts/test_deploy_ftps.py
           python3 scripts/extract_products.py --check
           node scripts/test_buyer_core.cjs
           node --check assets/buyer.js

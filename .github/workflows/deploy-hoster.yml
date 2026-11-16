@@ -7,6 +7,8 @@ on:
       - ".htaccess"
       - ".github/workflows/deploy-hoster.yml"
       - ".github/scripts/prepare_hoster_site.py"
+      - ".github/scripts/deploy_ftps.py"
+      - ".github/scripts/test_deploy_ftps.py"
       - "assets/**"
       - "content/runtime-assets.json"
       - "content/image-optimization.json"
@@ -53,6 +55,8 @@ jobs:
     steps:
       - name: Check out Eversence
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 5
 
       - name: Inspect FTPS certificate without using credentials
         shell: bash
