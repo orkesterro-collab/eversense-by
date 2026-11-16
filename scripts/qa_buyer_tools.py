@@ -295,6 +295,17 @@ def main():
                 form.locator('[name="design"]').select_option('stone')
                 require(page.locator('#ev-catalog-results [data-product="EL153"]').count()==1, "Live tone/group override missing")
                 require(page.locator('[data-buyer-price="EL153"]').inner_text().find('45,90')>=0, "Taxonomy changed price parsing")
+                # Explicit blanks must clear tags, not revive the checked-in classification.
+                page.evaluate("""() => window.EversensePriceFeed({status:'ok',table:{cols:Array(8).fill({}),rows:[{c:[{v:'EL153'},{v:45.9}]}]}})""")
+                require(page.locator('#ev-catalog-results [data-product="EL153"]').count()==0, "Blank group revived fallback")
+                form.locator('[name="design"]').select_option('')
+                for tone in ['light','beige']:
+                    form.locator('[name="tone"]').select_option(tone)
+                    require(page.locator('#ev-catalog-results [data-product="EL153"]').count()==0, "Blank tones revived fallback")
+                page.evaluate("""() => window.EversensePriceFeed({status:'ok',table:{rows:[{c:[{v:'EL153'},{v:45.9},{},{},{},{},{v:'Бежевый, неизвестный; '},{v:'invalid'}]}]}})""")
+                require(page.locator('#ev-catalog-results [data-product="EL153"]').count()==1, "Known mixed token discarded")
+                form.locator('[name="design"]').select_option('plain')
+                require(page.locator('#ev-catalog-results [data-product="EL153"]').count()==0, "Invalid group revived fallback")
                 form.locator('[data-reset-filters]').click()
                 require(cards.count()==30, "Reset after sheet update lost catalog")
                 metrics=layout_metrics(page)

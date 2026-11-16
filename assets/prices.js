@@ -44,11 +44,18 @@
   }
   var toneKeys={белый:'white',белые:'white',светлый:'light',светлые:'light',тёмный:'dark',темный:'dark',тёмные:'dark',темные:'dark',натуральный:'natural',натуральные:'natural',серый:'gray',серые:'gray',коричневый:'brown',коричневые:'brown',бежевый:'beige',бежевые:'beige'};
   var designKeys={древесные:'wood',однотонные:'plain','под камень':'stone'};
-  function parseTones(value){
-    if(typeof value!=='string'||!value.trim())return null;
-    var tokens=value.toLocaleLowerCase('ru').split(/[,;\n]+/).map(function(t){return toneKeys[t.trim()];});
-    // Ignore a malformed field, keeping the checked-in fallback instead of silently losing tags.
-    return tokens.length&&tokens.every(Boolean)?Array.from(new Set(tokens)):null;
+  function parseTones(value,sku){
+    var tokens=String(value==null?'':value).toLocaleLowerCase('ru').split(/[,;\n]+/).map(function(t){return t.trim();}).filter(Boolean);
+    return Array.from(new Set(tokens.map(function(token){
+      var key=toneKeys[token];
+      if(!key)console.warn('EVERSENSE: неизвестный оттенок в H',sku,token);
+      return key;
+    }).filter(Boolean)));
+  }
+  function parseDesign(value,sku){
+    var token=String(value==null?'':value).trim().toLocaleLowerCase('ru'),key=designKeys[token];
+    if(token&&!key)console.warn('EVERSENSE: неизвестная группа декора в I',sku,token);
+    return key||'';
   }
   function filtersFor(sku){
     var row=table[String(sku||'').toUpperCase()];
@@ -178,12 +185,12 @@
       console.warn("EVERSENSE: цены Google Sheets временно недоступны",payload&&payload.errors);
       return;
     }
-    var newTable=Object.create(null);
+    var newTable=Object.create(null),cols=payload.table.cols;
     payload.table.rows.forEach(function(row){
       var c=row.c||[],v=function(i){return c[i]&&c[i].v;},f=function(i){return c[i]&&c[i].f;};
       var sku=String(v(0)||"").trim().toUpperCase();
       if(!/^EL\d{3,4}$/.test(sku))return;
-      newTable[sku]={price:number(v(1)),sale:number(v(2)),until:date(v(3),f(3)),from:date(v(4),f(4)),stockPlan:number(v(5)),tones:parseTones(v(6)),design:designKeys[String(v(7)||'').trim().toLocaleLowerCase('ru')]||null};
+      newTable[sku]={price:number(v(1)),sale:number(v(2)),until:date(v(3),f(3)),from:date(v(4),f(4)),stockPlan:number(v(5)),tones:(Array.isArray(cols)?cols.length:c.length)>6?parseTones(v(6),sku):null,design:(Array.isArray(cols)?cols.length:c.length)>7?parseDesign(v(7),sku):null};
     });
     table=newTable;loaded=true;render();
     document.dispatchEvent(new CustomEvent('eversense:prices'));

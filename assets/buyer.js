@@ -105,7 +105,7 @@
   }
   function filterTags(p){
     var live=window.EversensePrices&&window.EversensePrices.getFilters&&window.EversensePrices.getFilters(p.sku);
-    return {tones:live&&live.tones?live.tones:(p.tags.tones||[p.tags.tone].filter(Boolean)),design:live&&live.design?live.design:p.tags.design};
+    return {tones:live&&live.tones!=null?live.tones:(p.tags.tones||[p.tags.tone].filter(Boolean)),design:live&&live.design!=null?live.design:p.tags.design};
   }
   function matchesTone(p,tone){return !tone||filterTags(p).tones.includes(tone);}
   function matchesDesign(p,design){return !design||filterTags(p).design===design;}
