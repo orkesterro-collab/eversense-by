@@ -874,7 +874,12 @@ def main():
                             page.set_viewport_size({"width": width, "height": 1000})
                             page.wait_for_timeout(500)
                             spacing = page.locator(layer).evaluate("""el=>{
-                              const summary=el.querySelector('[data-elem-id="1742894294656"]').getBoundingClientRect();
+                              // Russian homes intentionally omit the old final slogan.
+                              // In that case check the gap after the rendered artboard.
+                              const summaryElement=el.querySelector('[data-elem-id="1742894294656"]') ||
+                                el.querySelector('.t396__artboard');
+                              if(!summaryElement) return null;
+                              const summary=summaryElement.getBoundingClientRect();
                               let next=el.nextElementSibling;
                               while(next&&!next.classList.contains('uc-full1')) next=next.nextElementSibling;
                               return next?{gap:next.getBoundingClientRect().top-summary.bottom,

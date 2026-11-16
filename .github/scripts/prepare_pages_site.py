@@ -4,6 +4,7 @@ from html import escape, unescape
 from html.parser import HTMLParser
 from pathlib import Path
 import re
+import sys
 from urllib.parse import urlsplit, urlunsplit
 
 PREFIX = '/eversense-by'
@@ -62,6 +63,9 @@ def main():
     root = Path('_pages')
     if not (root / 'index.html').is_file():
         raise SystemExit('Stage the website in _pages first')
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'scripts'))
+    from optimize_delivery import optimize_site
+    optimize_site(root)
     count = 0
     for path in root.rglob('*.html'):
         original = path.read_text(encoding='utf-8')

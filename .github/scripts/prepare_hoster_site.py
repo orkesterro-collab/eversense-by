@@ -14,6 +14,7 @@ import json
 import os
 import posixpath
 import re
+import sys
 
 ROOT = Path("_deploy")
 PREFIX = "/eversense-by/"
@@ -30,6 +31,7 @@ RELEASE_ASSETS = {
     "/assets/home-senses.css", "/assets/home-senses.js",
     "/assets/home-footer.css",
     "/assets/installation-guides.css",
+    "/assets/performance.js",
 }
 
 
@@ -40,8 +42,12 @@ class Resources(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         for key, value in attrs:
-            if value and key in {"href", "src", "action", "poster", "data-original", "data-src"}:
+            if value and key in {"href", "src", "action", "poster", "data-original", "data-src", "data-ev-src", "data-ev-background"}:
                 self.links.append((key, value))
+            elif value and key == "srcset":
+                for candidate in value.split(","):
+                    if candidate.strip():
+                        self.links.append((key, candidate.strip().split()[0]))
 
 
 def resolve(source, url):
@@ -186,6 +192,9 @@ def version_dynamic_loaders(script, path):
 
 
 def main():
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
+    from optimize_delivery import optimize_site
+    optimize_site(ROOT)
     files = [p for p in ROOT.rglob("*") if p.is_file() and p.suffix.lower() in TRANSFORM_EXTS]
     transformed = Counter()
     changed_html = []

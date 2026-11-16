@@ -1,0 +1,3752 @@
+{
+  "description": "Same dimensions and ICC profiles; checksum guard prevents repeated lossy encoding.",
+  "minimum_saving_percent": 15.0,
+  "totals": {
+    "optimized_files": 187,
+    "source_bytes": 58092175,
+    "output_bytes": 43498982
+  },
+  "images": {
+    "assets/designer-cards/interiors/EL1037.webp": {
+      "source_sha256": "fa4f8f84af4f5e43acba90a3c27b11eb41e64c58e636ad892465b7c3b35b3136",
+      "output_sha256": "7c1107f2aace73a9b3b60a9d8f52d66d755b0588d1bcdcb60a3e8a4538270aab",
+      "output": "assets/designer-cards/interiors/EL1037.webp",
+      "source_bytes": 180704,
+      "output_bytes": 95326,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/interiors/EL1048.webp": {
+      "source_sha256": "48fcd9b5c606f4024dae1e0adacc3615a5bb6a2ea5e6c4594b6c3e20896a80a9",
+      "output_sha256": "0478d684bcc4e8dcd446339af81c4420c036dfbc96586618306986ed1e440331",
+      "output": "assets/designer-cards/interiors/EL1048.webp",
+      "source_bytes": 183462,
+      "output_bytes": 113326,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/interiors/EL1052.webp": {
+      "source_sha256": "7dc308650b7c3b005886c0c5efe72640b70717dfecec48555977c694b9f2582b",
+      "output_sha256": "b272bd696e45305fb7d3cb8090ae6cbf3ac1cc9e5c5f92c840823ef1cf153ee9",
+      "output": "assets/designer-cards/interiors/EL1052.webp",
+      "source_bytes": 185996,
+      "output_bytes": 126652,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/interiors/EL2152.webp": {
+      "source_sha256": "3fec72457894e94f044055d359e1832b99c002d2d5077ece42363356de5c9527",
+      "output_sha256": "fc264e535942347e1238bf95c0e957ff4a487c571a882fa624f7f2acfd4f4c16",
+      "output": "assets/designer-cards/interiors/EL2152.webp",
+      "source_bytes": 169668,
+      "output_bytes": 103490,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/interiors/EL2153.webp": {
+      "source_sha256": "af823adea75cedddbaca350ef602679cd3207cc0e8dec8a80b96b2da0a920d10",
+      "output_sha256": "b205a5a11eab37a7dbbf33b61d36c0573b8126e0f20c136b5a1c323b3f6b7fd1",
+      "output": "assets/designer-cards/interiors/EL2153.webp",
+      "source_bytes": 180188,
+      "output_bytes": 114196,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/interiors/EL2190.webp": {
+      "source_sha256": "ab855073b99b44d61221547a65a4e3c694cb807802f6e5acac8866e56ff0f089",
+      "output_sha256": "1bdee7d22ba8cbb7a1edcc0a5e564bf24b549c9242dd8fae31aef842bc2146a6",
+      "output": "assets/designer-cards/interiors/EL2190.webp",
+      "source_bytes": 196758,
+      "output_bytes": 127978,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/F206-ST9.webp": {
+      "source_sha256": "e40c54b43e0a3b3c6a920609a86140116c5af607385c2a1748504a2a4436b09e",
+      "output_sha256": "d5fde8a973956f19305a2ea6487db906d92c91f056261e811b06d186b4c92957",
+      "output": "assets/designer-cards/swatches/F206-ST9.webp",
+      "source_bytes": 186220,
+      "output_bytes": 127850,
+      "dimensions": [
+        707,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/F243-ST10.webp": {
+      "source_sha256": "9b77b527b43e4db3e317bea71aa9de063bd0b4cdab0bbcbecdbb155222907c6b",
+      "output_sha256": "255c88a41f6499a7bb35138cf110dfe9c540e9428e5390bb1dccd44e49639930",
+      "output": "assets/designer-cards/swatches/F243-ST10.webp",
+      "source_bytes": 237660,
+      "output_bytes": 180248,
+      "dimensions": [
+        707,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/F323-ST20.webp": {
+      "source_sha256": "c117d11874e73d7f382678dcf5246e1d0ff8f3ca145f91c5c775f39bd6d30753",
+      "output_sha256": "700992f42e7e91839918d3d47a517a3e9a0ea0c77c2756d7caca3a9c53e6fcf6",
+      "output": "assets/designer-cards/swatches/F323-ST20.webp",
+      "source_bytes": 201176,
+      "output_bytes": 135420,
+      "dimensions": [
+        707,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/F416-ST10.webp": {
+      "source_sha256": "5f38e2b548ab7dd809b7c4eed0d07c6f03338c4c6e13cf24ea14377f300d6cdf",
+      "output_sha256": "ffca12b2a9caf4a6cd14419557a784388061802dd0bcdf2f1da88eaff9572565",
+      "output": "assets/designer-cards/swatches/F416-ST10.webp",
+      "source_bytes": 272960,
+      "output_bytes": 212740,
+      "dimensions": [
+        707,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/F685-ST10.webp": {
+      "source_sha256": "aeb48e6019a2ad693adb7a8c36e4664a6fdf87c8b3565d28a53c04acacdc417c",
+      "output_sha256": "fd22065937683143c14ddab76f01b7a16f49a1179398324ce40efb3823b2acea",
+      "output": "assets/designer-cards/swatches/F685-ST10.webp",
+      "source_bytes": 387012,
+      "output_bytes": 284870,
+      "dimensions": [
+        707,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/H1142-ST36.webp": {
+      "source_sha256": "d4790952955d0c43cf10978ccd392f074cbbd9bd2735984d62abb2bd0f143d9e",
+      "output_sha256": "ebe96fa3723b9cdd5a129f56ffdd60a479eb43ee6806ec3025d3cb4cfc5267be",
+      "output": "assets/designer-cards/swatches/H1142-ST36.webp",
+      "source_bytes": 229256,
+      "output_bytes": 168292,
+      "dimensions": [
+        707,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/H1242-ST10.webp": {
+      "source_sha256": "f2292471aa9735aa13de062088262bd81ab0a016e612dfa1d3355c112ebec875",
+      "output_sha256": "86d9568f503c5f5082365b8ef3c377bb8b46599959ab1e6ba988de0532a41517",
+      "output": "assets/designer-cards/swatches/H1242-ST10.webp",
+      "source_bytes": 167690,
+      "output_bytes": 115062,
+      "dimensions": [
+        707,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/H1303-ST12.webp": {
+      "source_sha256": "b951c7c3684de2e3f6ba68db86edf2004e2e412e9a079c40998ac21ab952e7c5",
+      "output_sha256": "99ac364fa926e9ee075308cb1f00f85ba6ddc99e99a71a5c897c4512abb4e596",
+      "output": "assets/designer-cards/swatches/H1303-ST12.webp",
+      "source_bytes": 262934,
+      "output_bytes": 189118,
+      "dimensions": [
+        707,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/H1307-ST19.webp": {
+      "source_sha256": "c47e7483a7d1e72781c2885b75a3416c214c69ce97daa7e97839cfd8880826cd",
+      "output_sha256": "49ba34c0f6568445f4bb146420589af0db8c127b76548b44e2d0970076b0d711",
+      "output": "assets/designer-cards/swatches/H1307-ST19.webp",
+      "source_bytes": 175210,
+      "output_bytes": 114188,
+      "dimensions": [
+        707,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/H1362-ST12.webp": {
+      "source_sha256": "94e12cfec57a12eac9d8859eefef80a72487b793ec7c90f460f3f93e369754c3",
+      "output_sha256": "9c340547149d3bc729d7f43ec52f44e8209d2a702cb10ab73bf7546085318fe3",
+      "output": "assets/designer-cards/swatches/H1362-ST12.webp",
+      "source_bytes": 163958,
+      "output_bytes": 115788,
+      "dimensions": [
+        707,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/H1386-ST40.webp": {
+      "source_sha256": "f2b45dc6ecfa44e186435bccedc8db347e3045b20ab1c87050e4eebee9a37152",
+      "output_sha256": "45b60c428cf24da5bef4f8328fd163293aea470529a7feb121eaeba5e248f32a",
+      "output": "assets/designer-cards/swatches/H1386-ST40.webp",
+      "source_bytes": 167702,
+      "output_bytes": 115436,
+      "dimensions": [
+        707,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/H3003-ST19.webp": {
+      "source_sha256": "eb14d90184a2dc9b1ca8048fb2bec0cc260049c67d82d17e405031fb971f62c9",
+      "output_sha256": "8259f8f95601e45b05326bd6a8781e2f37ac83174d9f41c921d0f570436be50b",
+      "output": "assets/designer-cards/swatches/H3003-ST19.webp",
+      "source_bytes": 211196,
+      "output_bytes": 155984,
+      "dimensions": [
+        707,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/H3133-ST9.webp": {
+      "source_sha256": "82e3eb08d8016ed2de8645fa5e26a765131d390cc29be080a699920b3441b4be",
+      "output_sha256": "83b240b647ae496ca8c94e4660b440aab11f57634b11f8f1478ab6554b783190",
+      "output": "assets/designer-cards/swatches/H3133-ST9.webp",
+      "source_bytes": 218860,
+      "output_bytes": 156624,
+      "dimensions": [
+        702,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/H3146-ST19.webp": {
+      "source_sha256": "9cb8677a010849b68026f417cae14da80e1bcde8023397c180f624cd197b840e",
+      "output_sha256": "ee3fc81e9a44b2af751073fc0b04d3f73a4ce993c9b4ce5765bd63b6e35f845d",
+      "output": "assets/designer-cards/swatches/H3146-ST19.webp",
+      "source_bytes": 189350,
+      "output_bytes": 132332,
+      "dimensions": [
+        707,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/H3154-ST36.webp": {
+      "source_sha256": "3732c1082906ab7d734fd3931d2b878ffb3c94cd1ac733522604977d0455f773",
+      "output_sha256": "2b313b328c0ffbd9130d8561a55a4bfa68e11b8bb14935aecd5bc916c33d5cd8",
+      "output": "assets/designer-cards/swatches/H3154-ST36.webp",
+      "source_bytes": 209710,
+      "output_bytes": 150624,
+      "dimensions": [
+        703,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/H3317-ST28.webp": {
+      "source_sha256": "4d22ca043aae20f8fc8642c508280820f30c24d734dd54725b137a10ab0543d3",
+      "output_sha256": "6e530cd62ce42ece3e09bc44e79ee838803ab3ff2ac005f2414d2d9b30991604",
+      "output": "assets/designer-cards/swatches/H3317-ST28.webp",
+      "source_bytes": 193362,
+      "output_bytes": 138580,
+      "dimensions": [
+        707,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/designer-cards/swatches/H3359-ST32.webp": {
+      "source_sha256": "7178caf00e88fbbbc57a09be896347ddf087bc967780170d14a62b6c2627d939",
+      "output_sha256": "d552be07ff9db4ed36b563ad048e09d2d67d9afbba6eaa7f6418ee227c67574a",
+      "output": "assets/designer-cards/swatches/H3359-ST32.webp",
+      "source_bytes": 169712,
+      "output_bytes": 123490,
+      "dimensions": [
+        703,
+        1000
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/img/bark.webp": {
+      "source_sha256": "c3dd78544a2dcb12d5315053673258a4175a15620991d416026f4f39850b603a",
+      "output_sha256": "c3dd78544a2dcb12d5315053673258a4175a15620991d416026f4f39850b603a",
+      "output": "assets/img/bark.webp",
+      "source_bytes": 383474,
+      "output_bytes": 383474,
+      "dimensions": [
+        1920,
+        1076
+      ],
+      "status": "kept-original"
+    },
+    "assets/img/forest-dark.webp": {
+      "source_sha256": "0d0811ac2ea27191935b81f556299df784625248f4740ba6495991f4274ea622",
+      "output_sha256": "0d0811ac2ea27191935b81f556299df784625248f4740ba6495991f4274ea622",
+      "output": "assets/img/forest-dark.webp",
+      "source_bytes": 467622,
+      "output_bytes": 467622,
+      "dimensions": [
+        1920,
+        1272
+      ],
+      "status": "kept-original"
+    },
+    "assets/img/tree-core.webp": {
+      "source_sha256": "36e26fa775ab2a4084fb764bd19f66b37f5fc17ca6576275c8f00556c0fff883",
+      "output_sha256": "36e26fa775ab2a4084fb764bd19f66b37f5fc17ca6576275c8f00556c0fff883",
+      "output": "assets/img/tree-core.webp",
+      "source_bytes": 780250,
+      "output_bytes": 780250,
+      "dimensions": [
+        1920,
+        1312
+      ],
+      "status": "kept-original"
+    },
+    "assets/img/tree-rings.webp": {
+      "source_sha256": "f6339d03b5de29f176e17860aaf1858453574ee92d2b49716d498e7c0d2a8a8f",
+      "output_sha256": "f6339d03b5de29f176e17860aaf1858453574ee92d2b49716d498e7c0d2a8a8f",
+      "output": "assets/img/tree-rings.webp",
+      "source_bytes": 818326,
+      "output_bytes": 818326,
+      "dimensions": [
+        1920,
+        1280
+      ],
+      "status": "kept-original"
+    },
+    "assets/original-tilda/0013b948834a-_1-min.webp": {
+      "source_sha256": "d0f949a185748020706b82c92102d502f8ade27bc46fdd587dccdaa4a06bdd3d",
+      "output_sha256": "546b7160aa5446113394e7824ce94f5078f5c199ada11a7cf55b24748cc10ff0",
+      "output": "assets/original-tilda/0013b948834a-_1-min.webp",
+      "source_bytes": 201238,
+      "output_bytes": 163338,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/01a5c5f16366-EL2190___ver1_top-mi.webp": {
+      "source_sha256": "e3ebce73205fd534966acec3ca1b8aed51c3b07abcae5243f230a3ec38d6217d",
+      "output_sha256": "68f0b8f9f5af1da956a2aa375b29d8ea05e898eee1146ffb8ea8399f49ea8809",
+      "output": "assets/original-tilda/01a5c5f16366-EL2190___ver1_top-mi.webp",
+      "source_bytes": 585708,
+      "output_bytes": 482886,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/06315fb1f0a1-Frame_795-min.webp": {
+      "source_sha256": "fa4bc833902263a1fb818ee4724b228a22c8f728a2f4e24e6be6273ce1823a85",
+      "output_sha256": "4b031a3a0e641bbec8c932dbc70a9b14f1585c1625501060f491c3eb45e1d6b2",
+      "output": "assets/original-tilda/06315fb1f0a1-Frame_795-min.webp",
+      "source_bytes": 391120,
+      "output_bytes": 317638,
+      "dimensions": [
+        1680,
+        578
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/07d87b8312a9-__-min.webp": {
+      "source_sha256": "61485edccc76acef21dbfb95c2c0d69e7217963d9a5b1459d8ebbdb9447efe5d",
+      "output_sha256": "0aeb6ea6a8d8e6c3c0d0c6659d9143ab341556061bb126357c4f6af85821f86a",
+      "output": "assets/original-tilda/07d87b8312a9-__-min.webp",
+      "source_bytes": 253654,
+      "output_bytes": 189362,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/08e44b74d793-_4-min.webp": {
+      "source_sha256": "190c09c4a70a9f27a3f7f30864097108e8bb10c4bd993e56cf0c832d749c8a27",
+      "output_sha256": "9bd3d35fe587b5a424671a7b1fc1fb060081c643a3686b556d477b341482249b",
+      "output": "assets/original-tilda/08e44b74d793-_4-min.webp",
+      "source_bytes": 260692,
+      "output_bytes": 211124,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/090e417cb291-_01-min.webp": {
+      "source_sha256": "f2e4b34a2b0ef86ba2d19fe490a0c0789871a342ae7eab0532293c657d18350c",
+      "output_sha256": "caa0d73a5fd3c85c2d4f6dd0df213b5cb896f63e79a9666050b21f54796c8ec9",
+      "output": "assets/original-tilda/090e417cb291-_01-min.webp",
+      "source_bytes": 316230,
+      "output_bytes": 254480,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/093994b01a43-_01-min.webp": {
+      "source_sha256": "357bfd63dc6f45691d2d006c55173f7144ba3d0661a450e68e63c2eaa592c103",
+      "output_sha256": "a639bf916ecc1a77a28811313a2b665af8d935d559021edc61622db8564a0ebb",
+      "output": "assets/original-tilda/093994b01a43-_01-min.webp",
+      "source_bytes": 273562,
+      "output_bytes": 226262,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/0a4b0bb325f2-_01-min.webp": {
+      "source_sha256": "243f1944873fc873b10c652aa8a5159ad5c26b86e6d26d5ed8cf66ea2f28faa9",
+      "output_sha256": "df096fd73750f75d603aa196f2c1626af1313830321d62f1d04859711d80b6a3",
+      "output": "assets/original-tilda/0a4b0bb325f2-_01-min.webp",
+      "source_bytes": 247632,
+      "output_bytes": 198654,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/0c228f6e6d3a-_-1-min.webp": {
+      "source_sha256": "d6e31960efc3032b44435f0a7fac5e9fa238dcc498e5bc019d98aa9b518c3e72",
+      "output_sha256": "c4f6a0255ff50fcfda71d619b54c7e303e8d0186204d1fd2ed869e68cf2bb5e8",
+      "output": "assets/original-tilda/0c228f6e6d3a-_-1-min.webp",
+      "source_bytes": 215140,
+      "output_bytes": 172728,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/0d091c4d3b41-_2-min.webp": {
+      "source_sha256": "81169ea1a38cc3c8d65948492c804b0e1a0b6643e7d006f35e3552f677759f09",
+      "output_sha256": "245dffe9b715076991b742d482552cf8b8c729f789ca6a9bac0af61c39f3f0bc",
+      "output": "assets/original-tilda/0d091c4d3b41-_2-min.webp",
+      "source_bytes": 229330,
+      "output_bytes": 186668,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/0d30c92f0714-_3-min.webp": {
+      "source_sha256": "7729202303e304dd11977aa7b17f7c87da8f28a7ccb30d9ca31412fbf803d61a",
+      "output_sha256": "5b10ab571292ecce0c70ce16e549909b207c4673757043d90baa689afc28b682",
+      "output": "assets/original-tilda/0d30c92f0714-_3-min.webp",
+      "source_bytes": 256662,
+      "output_bytes": 210330,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/0e171125bb3c-_-1-min.webp": {
+      "source_sha256": "a084e89ccfec4f2f3540c773dfa1873a5c65465692064e5711abe6511c97a961",
+      "output_sha256": "369c71027215d657d4c485ee65024a05d311bfb7c49a964b97752ccc0079da38",
+      "output": "assets/original-tilda/0e171125bb3c-_-1-min.webp",
+      "source_bytes": 330184,
+      "output_bytes": 251390,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/1-overlay-corundum-v2.png": {
+      "source_sha256": "492cd52b88071ef7ad6bb037f50740bc01cdec3e17a5d049129121565b2e52e9",
+      "output_sha256": "ca660abe83dd3ad4d11fcbfcbaa8aa15fe494d30a023ce25e0e6662c62e3b69f",
+      "output": "assets/original-tilda/1-overlay-corundum-v2.webp",
+      "source_bytes": 373495,
+      "output_bytes": 81532,
+      "dimensions": [
+        1673,
+        940
+      ],
+      "quality": 88,
+      "status": "optimized"
+    },
+    "assets/original-tilda/1-overlay-corundum-v3.png": {
+      "source_sha256": "5ba8bea97dee18ee5812651c204941197ddfe660dfa60fe5e06b7467f7e09c82",
+      "output_sha256": "f0aae4ddbd1175e2eaabbc810e9648f3556c2b539923ea4ae44ce654a4ee0c27",
+      "output": "assets/original-tilda/1-overlay-corundum-v3.webp",
+      "source_bytes": 324973,
+      "output_bytes": 39212,
+      "dimensions": [
+        1673,
+        940
+      ],
+      "quality": 88,
+      "status": "optimized"
+    },
+    "assets/original-tilda/102a0149d479-_1-min.webp": {
+      "source_sha256": "d9f7bd4f0ac302823483da4acdee0c4063dec16e313c66a356920b5abe2e0fab",
+      "output_sha256": "30b5e72f07485f08a5b7f96f1cdba7dde7407155031a258b75b48ee1fa4b5bce",
+      "output": "assets/original-tilda/102a0149d479-_1-min.webp",
+      "source_bytes": 448628,
+      "output_bytes": 352236,
+      "dimensions": [
+        1680,
+        1820
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/15f2b2143e0f-_-3-min.webp": {
+      "source_sha256": "9d299257d901547b53f3188338e32a67be9283faeb0d26c9c01b914f1a400449",
+      "output_sha256": "5ab3ccdb17b9793fe1a92938b6c77e1d30afe36d9096866fe741779719164461",
+      "output": "assets/original-tilda/15f2b2143e0f-_-3-min.webp",
+      "source_bytes": 177464,
+      "output_bytes": 131436,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/188a91ad894e-_-1-min.webp": {
+      "source_sha256": "20d12a9dfe1d584e4992545691f3e98a35f94a719b759338acc6cec675ef367b",
+      "output_sha256": "4d9084bdd0c459b1749993baaf0ef94b1ea4fe0bdbba6572c0d5376d3a259aaf",
+      "output": "assets/original-tilda/188a91ad894e-_-1-min.webp",
+      "source_bytes": 385866,
+      "output_bytes": 301328,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/1a4ba098d6f2-_-1-min.webp": {
+      "source_sha256": "0917d13f3a5720e7d25bf7e89ce0337e20ec248f8edcb0fbbab270af2d8df45b",
+      "output_sha256": "82d0268cb4020c8d47eed0420ed8064444c669d41b8bd7de3f0771ef9bb96bdd",
+      "output": "assets/original-tilda/1a4ba098d6f2-_-1-min.webp",
+      "source_bytes": 281750,
+      "output_bytes": 224760,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/1b601a353610-_3-min.webp": {
+      "source_sha256": "77e9edc6f79c900c44484dbf0a773caa9f1ce3a976a0be4991c2f7c9b070fb58",
+      "output_sha256": "4a58b3238fbea838daddcd28b1fd4e90276ccc21683ace312880e944557253b0",
+      "output": "assets/original-tilda/1b601a353610-_3-min.webp",
+      "source_bytes": 258612,
+      "output_bytes": 209950,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/1ef10c3ab55e-_1-min.webp": {
+      "source_sha256": "7594c377bf316c89eb755a1bf6d37f844df8f3ebcec77a15030ed9e3500c0076",
+      "output_sha256": "b5cd0878087a9f41cde9723b6ae73e8366c8088be6d5d1d7bb2963da359915a9",
+      "output": "assets/original-tilda/1ef10c3ab55e-_1-min.webp",
+      "source_bytes": 548222,
+      "output_bytes": 351700,
+      "dimensions": [
+        2400,
+        1800
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/1fb5a47aeb94-_-min.webp": {
+      "source_sha256": "42b3ca42bf3d419c0d4e4f2c96efb8515e32e2c6f7e07b60e74220820a2cc796",
+      "output_sha256": "6896f4c53b0efdbd18f358e7346157029cbeee27b8dc1a24830b7c0b8bf1b275",
+      "output": "assets/original-tilda/1fb5a47aeb94-_-min.webp",
+      "source_bytes": 531322,
+      "output_bytes": 434858,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/2-decor-brown-casella-v2.png": {
+      "source_sha256": "88dd5bbc2f29310728f56d4c3168e86e015d3cfa7317209baecfa940040dc80c",
+      "output_sha256": "1e5de70eea31289fbbd914361c45e92137b89c8240699f203b1d9b9ca8b96435",
+      "output": "assets/original-tilda/2-decor-brown-casella-v2.webp",
+      "source_bytes": 700301,
+      "output_bytes": 100346,
+      "dimensions": [
+        1674,
+        940
+      ],
+      "quality": 88,
+      "status": "optimized"
+    },
+    "assets/original-tilda/221462659c8d-EL1047____ver1_top-m.webp": {
+      "source_sha256": "8da9500ec9ed4ca2e68ec4ddfeb0f59bf74b29bb1409c02d4f5f31d202507b8d",
+      "output_sha256": "7f5d2d88822e9899e8ece188ab67bb687f7dfcd4f18e1806ce2593b6900e052a",
+      "output": "assets/original-tilda/221462659c8d-EL1047____ver1_top-m.webp",
+      "source_bytes": 565350,
+      "output_bytes": 451964,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/225f9fe43060-_2-min.webp": {
+      "source_sha256": "eef7f00c775b4434e5f247d8ab69ea705b210d401cf709daba0d1b877ce99d4a",
+      "output_sha256": "3e9f7d66ae0429f66ca59de9e908671de90aca7050b9408059ed5cb3886bdbb7",
+      "output": "assets/original-tilda/225f9fe43060-_2-min.webp",
+      "source_bytes": 232340,
+      "output_bytes": 191032,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/23693b25db96-__-1-min.webp": {
+      "source_sha256": "d060a55716384c458b1251efc182f0055f8aad3a0e794cee00331e00da7c62e2",
+      "output_sha256": "1a454c5b47a666448143d350ba6e80939032e481fc28a1eb32cb1e7ea8741a81",
+      "output": "assets/original-tilda/23693b25db96-__-1-min.webp",
+      "source_bytes": 222322,
+      "output_bytes": 138930,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/2527900129e7-_1-min.webp": {
+      "source_sha256": "900f9f172c61d8613699fbc219889253f074a8aec99db5284ba8b2aea1482b61",
+      "output_sha256": "69ad0637f63e5d7571f93c7bfd86606b6fb6ee8cad1e6dcec0ae7390a3dc455e",
+      "output": "assets/original-tilda/2527900129e7-_1-min.webp",
+      "source_bytes": 187710,
+      "output_bytes": 146454,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/2627c6aebc9e-_-1-min.webp": {
+      "source_sha256": "937734d42c66cd5d04cd80b81c3220ad5714503c2fdad758abed4ee1041f5f91",
+      "output_sha256": "cd5c58bc0587871ffe366da9afab21e930ca14a23007a0beefc90e49ed5f00a8",
+      "output": "assets/original-tilda/2627c6aebc9e-_-1-min.webp",
+      "source_bytes": 250346,
+      "output_bytes": 179376,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/276c5c954956-_-1-min.webp": {
+      "source_sha256": "be1a2d5010cad1cb9bce5ac7ecc678aea8cd6487af979bb638cd96621377313e",
+      "output_sha256": "0fc05fba19d04b387370dc245d24cf7ee7db03a71d2cd3c639b31125c0faca5f",
+      "output": "assets/original-tilda/276c5c954956-_-1-min.webp",
+      "source_bytes": 236510,
+      "output_bytes": 176432,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/2800fd938464-image_54-min.webp": {
+      "source_sha256": "22308967e6da44056330e64bb5dabe1264c656fa66be6f8f16ccf01f064d6ee7",
+      "output_sha256": "1d5e1181ddb30f8572578048b2ff0e652fe84be03fcfa58a9c754b9634dddde7",
+      "output": "assets/original-tilda/2800fd938464-image_54-min.webp",
+      "source_bytes": 234466,
+      "output_bytes": 176228,
+      "dimensions": [
+        1680,
+        910
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/2958945c9e13-EL1050___-_ver1_top-.webp": {
+      "source_sha256": "d49f5eea1239dcbaafa08c5d741b57e5bd8134208c727807bc299488a427ab0c",
+      "output_sha256": "2fb9eeb94a2d623306941e084c6182095a0cb6f73e33100232ab24d64ba965d2",
+      "output": "assets/original-tilda/2958945c9e13-EL1050___-_ver1_top-.webp",
+      "source_bytes": 540124,
+      "output_bytes": 435742,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/2aaaa4339bae-EL1038____ver1_top-m.webp": {
+      "source_sha256": "f429211f427fb12c0b46034f586652f1718aa357a9921b9ae7c63759a33666b6",
+      "output_sha256": "27957c0818eaa22f66b484c209921f8bd4148042bbf95a9544acb723cc8c6214",
+      "output": "assets/original-tilda/2aaaa4339bae-EL1038____ver1_top-m.webp",
+      "source_bytes": 447050,
+      "output_bytes": 365832,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/2ac32b3cd7fa-_-min.webp": {
+      "source_sha256": "b07840eac9b105c98763f802e8f20f74111459f5e543c39bc76b0414b396defd",
+      "output_sha256": "3777d0760c02238f05116a8d716e37a6d12c6aef686d89e6670884a3ae5acff9",
+      "output": "assets/original-tilda/2ac32b3cd7fa-_-min.webp",
+      "source_bytes": 274856,
+      "output_bytes": 212732,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/2b89b7e0e63a-_2-min.webp": {
+      "source_sha256": "2f2b7c1812ce41578ab45104533eebdc73d5430f4ff4eb26e1d942a0c5e99544",
+      "output_sha256": "66f807194dd1c4da6d2a5f319310f7c334fc42bef2d7ce77205da7f0286c1fc2",
+      "output": "assets/original-tilda/2b89b7e0e63a-_2-min.webp",
+      "source_bytes": 242804,
+      "output_bytes": 185528,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/2fa89b57af21-_-min.webp": {
+      "source_sha256": "8c136d929d47a58a667dd27db90636540b0466629b4c6ae70259531b34d6e4b7",
+      "output_sha256": "655decc42f3ffc157d0a9234d8441bf8274d4c0bfb8f2ac083754f610ea650d7",
+      "output": "assets/original-tilda/2fa89b57af21-_-min.webp",
+      "source_bytes": 207076,
+      "output_bytes": 131066,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/3-hdf-core-v2.png": {
+      "source_sha256": "34b57a82022114a0c6ff5cf0ebe204627e2dfb2e38bd9bb0b046c13312bc2770",
+      "output_sha256": "e707dc176cc353d585b3e6ef25e4e5ee3124a8afcd3d2e3e84c4a1d1883e3aac",
+      "output": "assets/original-tilda/3-hdf-core-v2.webp",
+      "source_bytes": 774710,
+      "output_bytes": 95846,
+      "dimensions": [
+        1674,
+        940
+      ],
+      "quality": 88,
+      "status": "optimized"
+    },
+    "assets/original-tilda/30ad52e3d4e3-EL1039____ver1_top-m.webp": {
+      "source_sha256": "81e702acdc4e52b6ee07c831f747f724244b1fcb0f1a6aee9de79e79d5e09bb4",
+      "output_sha256": "b1555b5e62c56047d8ba997249e35323d3c05cfb838ac94cc339e508276958a3",
+      "output": "assets/original-tilda/30ad52e3d4e3-EL1039____ver1_top-m.webp",
+      "source_bytes": 468844,
+      "output_bytes": 383678,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/313d56a1a5fa-_--min.webp": {
+      "source_sha256": "647368f7289e299ba0f8685c3acfc7f44f17f9012b9f44d616d895414e0d21e9",
+      "output_sha256": "800c11828c3626a2869e3e62309f21c8fe14eb94047fa06b964294b3dfe8d286",
+      "output": "assets/original-tilda/313d56a1a5fa-_--min.webp",
+      "source_bytes": 165382,
+      "output_bytes": 105104,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/339a7503c611-_01-min.webp": {
+      "source_sha256": "587bba35b8941df9fad20df6e5cd981dd6d6be48cb0a727ee6f97e8129ec3dc7",
+      "output_sha256": "58543a569d07ec2df7f0676e7f10dc376b06c500d3c570a228d5b0a45ce277e2",
+      "output": "assets/original-tilda/339a7503c611-_01-min.webp",
+      "source_bytes": 206988,
+      "output_bytes": 167016,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/37835d711a52-_-min.webp": {
+      "source_sha256": "e89940107cb476e5152da0bdd8ba1467252c5624dc38cb05def32ce852e10db5",
+      "output_sha256": "3bc91b11df3fb49203d3b08a46e96ccf2db14e9d54e1f3ed0dbfe4db23d5cec9",
+      "output": "assets/original-tilda/37835d711a52-_-min.webp",
+      "source_bytes": 215082,
+      "output_bytes": 148184,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/39eccaaf7460-EL2150____ver1_top-m.webp": {
+      "source_sha256": "9a14101a507be3331db4ed30a141555c2509d1e8ab1b7761fbdd2f80746e7d1f",
+      "output_sha256": "ed6bd1df6df61c2393ee9f0dd87b72764e1772857d0ee246d807b3dcd0db054a",
+      "output": "assets/original-tilda/39eccaaf7460-EL2150____ver1_top-m.webp",
+      "source_bytes": 364288,
+      "output_bytes": 294668,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/3a6b3a059c22-_01-min.webp": {
+      "source_sha256": "f2e4b34a2b0ef86ba2d19fe490a0c0789871a342ae7eab0532293c657d18350c",
+      "output_sha256": "caa0d73a5fd3c85c2d4f6dd0df213b5cb896f63e79a9666050b21f54796c8ec9",
+      "output": "assets/original-tilda/3a6b3a059c22-_01-min.webp",
+      "source_bytes": 316230,
+      "output_bytes": 254480,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/3ea3f19ecbe7-_2-min.webp": {
+      "source_sha256": "2f2b7c1812ce41578ab45104533eebdc73d5430f4ff4eb26e1d942a0c5e99544",
+      "output_sha256": "66f807194dd1c4da6d2a5f319310f7c334fc42bef2d7ce77205da7f0286c1fc2",
+      "output": "assets/original-tilda/3ea3f19ecbe7-_2-min.webp",
+      "source_bytes": 242804,
+      "output_bytes": 185528,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/42b15a2389da-__-1-min.webp": {
+      "source_sha256": "3136778bc8230052ed21956e6dbc82c5f56ed995bcd1deb7f1107e4d0dc00817",
+      "output_sha256": "bb18f485f0000b5a9fb00406dda700652d1184621a5bfbc4b378d0af83e26a7c",
+      "output": "assets/original-tilda/42b15a2389da-__-1-min.webp",
+      "source_bytes": 298594,
+      "output_bytes": 237744,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/49451b4835d1-_2-min.webp": {
+      "source_sha256": "81169ea1a38cc3c8d65948492c804b0e1a0b6643e7d006f35e3552f677759f09",
+      "output_sha256": "245dffe9b715076991b742d482552cf8b8c729f789ca6a9bac0af61c39f3f0bc",
+      "output": "assets/original-tilda/49451b4835d1-_2-min.webp",
+      "source_bytes": 229330,
+      "output_bytes": 186668,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/499ec01afd79-_01-min.webp": {
+      "source_sha256": "78b330f1cf67041da32f614f7eda4e83f6ac79d5ba3c54c1decdc851090c3361",
+      "output_sha256": "34318591273316ea0973d9eff8800aec7fb54a81bc26c150d8905752ea32616a",
+      "output": "assets/original-tilda/499ec01afd79-_01-min.webp",
+      "source_bytes": 210236,
+      "output_bytes": 167294,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/49ed3c13e0cd-Frame_769-min.webp": {
+      "source_sha256": "430215798d6bd0a52aad5195619f39e8eec7d456cc463c7ba5676019e7de7d82",
+      "output_sha256": "44c8be4b6c3189d1bcf12d3970c6febf754a5419c6a21d1a45705c22bc90df80",
+      "output": "assets/original-tilda/49ed3c13e0cd-Frame_769-min.webp",
+      "source_bytes": 201818,
+      "output_bytes": 166088,
+      "dimensions": [
+        1360,
+        1600
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/4c664ac9cb19-_-min.webp": {
+      "source_sha256": "30a7b31f7f7c2e550a04dbf7ecacae401d3862cd3933bf194de055677873da09",
+      "output_sha256": "73a9c10012e7395896c135df5649f0c5b6f179ad0d29f9f09c8edee62c19aa97",
+      "output": "assets/original-tilda/4c664ac9cb19-_-min.webp",
+      "source_bytes": 462152,
+      "output_bytes": 362788,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/4caa4bb36b50-_4-min.webp": {
+      "source_sha256": "190c09c4a70a9f27a3f7f30864097108e8bb10c4bd993e56cf0c832d749c8a27",
+      "output_sha256": "9bd3d35fe587b5a424671a7b1fc1fb060081c643a3686b556d477b341482249b",
+      "output": "assets/original-tilda/4caa4bb36b50-_4-min.webp",
+      "source_bytes": 260692,
+      "output_bytes": 211124,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/4ce42be00044-_--1-min.webp": {
+      "source_sha256": "b13ff5bca3a96984f9183c18da09e1b3b20e8fde1dbcb5bac41f03f1e95d64bf",
+      "output_sha256": "eb7dad26b0f12e3b2bde9fc2d8224db141b893eac92e3f06bc17f74a9a37e6b0",
+      "output": "assets/original-tilda/4ce42be00044-_--1-min.webp",
+      "source_bytes": 322660,
+      "output_bytes": 257374,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/52def62a3a48-_-min.webp": {
+      "source_sha256": "144a82ed229436346fcdacc63f0b4bda00f132ed9fd6c4461bc072a0e1306d10",
+      "output_sha256": "bda2dc1603267b93f0e2c4f08f9ce91a6fe898b2dc39f3adc4932e377933d9b2",
+      "output": "assets/original-tilda/52def62a3a48-_-min.webp",
+      "source_bytes": 312322,
+      "output_bytes": 248388,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/556de8378502-_-_4-min.webp": {
+      "source_sha256": "1c4c217135213a33ed6f84961cd2d12753f8698e7c757c682cdd94c528ec8c7d",
+      "output_sha256": "ca6bd8ad554e7a8f73d7da571aa0214ce09ffbd0e2335b56c7aae0ef34980ffe",
+      "output": "assets/original-tilda/556de8378502-_-_4-min.webp",
+      "source_bytes": 293512,
+      "output_bytes": 240968,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/5752cbf8286d-EL1048____ver1_top-m.webp": {
+      "source_sha256": "c9d5541dbe2d8e20afebcb283ae5694ef0402f4c3212f8f0d47de1bf309a3ff4",
+      "output_sha256": "e15c26ad73fbcf8d11a6eb87a0e9660cd3b399822ce493f3759a543284348ad8",
+      "output": "assets/original-tilda/5752cbf8286d-EL1048____ver1_top-m.webp",
+      "source_bytes": 616506,
+      "output_bytes": 494976,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/58d2f8b7ecc0-__-min.webp": {
+      "source_sha256": "d682cd40b2e9df858ef1405826d2c164ea0c892db430c88e1227ec351b832020",
+      "output_sha256": "f989b34fcfdb1a5907ec60631b78c11dc8a0d99b730ccc3512ba4a1a940b264f",
+      "output": "assets/original-tilda/58d2f8b7ecc0-__-min.webp",
+      "source_bytes": 423174,
+      "output_bytes": 342666,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/59c866ccd6f5-EL2170____ver1_top-m.webp": {
+      "source_sha256": "668b75dd5e3d1dca408eda852d6c6732cdda22df5c6d5f19c2879d7ae9ce657a",
+      "output_sha256": "b68605d44e61d596a6c18e537fab71363e29cfd6b3053801a02a3249bdc80001",
+      "output": "assets/original-tilda/59c866ccd6f5-EL2170____ver1_top-m.webp",
+      "source_bytes": 427072,
+      "output_bytes": 337444,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/59ca17cfb340-_-min.webp": {
+      "source_sha256": "7e965a20d25a5aff348240017016dac0a39587025f94f680e839b62c5ba76705",
+      "output_sha256": "1bd3a8b62f351e0e5726fe96c7b861a3a9eb30532c1ceae0ba4fcf057bcc0da5",
+      "output": "assets/original-tilda/59ca17cfb340-_-min.webp",
+      "source_bytes": 178268,
+      "output_bytes": 109166,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/5acbd074aa57-_-min.webp": {
+      "source_sha256": "09e6740846de422dacac170033af67af5e6265bf0f9f2fc9c9cacf3d74eaf80e",
+      "output_sha256": "dd9caecfcc5c4ca702222d7ddd5d2c0de5b090c7326437a59321643c9c501459",
+      "output": "assets/original-tilda/5acbd074aa57-_-min.webp",
+      "source_bytes": 381706,
+      "output_bytes": 255762,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/5ad9152f894a-_2-min.webp": {
+      "source_sha256": "81169ea1a38cc3c8d65948492c804b0e1a0b6643e7d006f35e3552f677759f09",
+      "output_sha256": "245dffe9b715076991b742d482552cf8b8c729f789ca6a9bac0af61c39f3f0bc",
+      "output": "assets/original-tilda/5ad9152f894a-_2-min.webp",
+      "source_bytes": 229330,
+      "output_bytes": 186668,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/5b45d88e0333-EL1041_____ver1_top-.webp": {
+      "source_sha256": "7579ab2d92b6a6ede2a9f084089baa2c3fdefd0dba0ff2bef8a84296fe254d82",
+      "output_sha256": "fd3384081fb99189713e7000f3d62853a87d7421d8f6a4cf27314ef8cd73a322",
+      "output": "assets/original-tilda/5b45d88e0333-EL1041_____ver1_top-.webp",
+      "source_bytes": 471430,
+      "output_bytes": 374910,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/5d1e1b11c2d8-_2-min.webp": {
+      "source_sha256": "5eb4619282e1a1c1c36fb0027d9d3a5714b833d61fd789bfdd11b360c8bfa60b",
+      "output_sha256": "707ae21f14210462b29ce665def858a35b3fb6c1d72ed934afb23c95add5630a",
+      "output": "assets/original-tilda/5d1e1b11c2d8-_2-min.webp",
+      "source_bytes": 282036,
+      "output_bytes": 227066,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/62ed51dbc0df-_-1-min.webp": {
+      "source_sha256": "b8bfa216ede9bb729e8d0c399c18b36f23ed65e5d006b7223013ead6dde7d0c1",
+      "output_sha256": "6593c1e04051766216d99457a46c6dcc33c71d821cf79ae1f328cdf30695b7c6",
+      "output": "assets/original-tilda/62ed51dbc0df-_-1-min.webp",
+      "source_bytes": 232178,
+      "output_bytes": 160182,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/633c0a812fab-_-_5-min.webp": {
+      "source_sha256": "a17494fa4b338616b6ee753a30e2072221d911d832164af49bfe4e7d051373c0",
+      "output_sha256": "d0f07dc2b50978f2bc126edf904d2af5f08d2afe2167bb6070ad7e258b584c44",
+      "output": "assets/original-tilda/633c0a812fab-_-_5-min.webp",
+      "source_bytes": 297618,
+      "output_bytes": 242536,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/638ccb044618-_-_01-min.webp": {
+      "source_sha256": "57ac5e012fcd952425f9df72b2de9b24add2ed845858facd960c47436a3c7000",
+      "output_sha256": "0db9d1c09550d800f621a313be67c9d18322781f16866da442c80dcc5eed732d",
+      "output": "assets/original-tilda/638ccb044618-_-_01-min.webp",
+      "source_bytes": 317808,
+      "output_bytes": 258842,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/64055da78844-_1-min.webp": {
+      "source_sha256": "ef5c4cbc3d890ff0d95462632b4cc6c02ab8b08a654e0e129b01d778c64aff91",
+      "output_sha256": "cfb3a0a7719a4ff7545bbf518a613acc83b133b4ffb7744b78bf4014061e2b03",
+      "output": "assets/original-tilda/64055da78844-_1-min.webp",
+      "source_bytes": 187846,
+      "output_bytes": 151866,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/65deed6251b7-_01-min.webp": {
+      "source_sha256": "357bfd63dc6f45691d2d006c55173f7144ba3d0661a450e68e63c2eaa592c103",
+      "output_sha256": "a639bf916ecc1a77a28811313a2b665af8d935d559021edc61622db8564a0ebb",
+      "output": "assets/original-tilda/65deed6251b7-_01-min.webp",
+      "source_bytes": 273562,
+      "output_bytes": 226262,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/6704e626746e-_-_01-min.webp": {
+      "source_sha256": "9834c68a1908b91b6b0e433a3105bc276ac1e6228fa99e9fa78f08168e7cdb8e",
+      "output_sha256": "7aa8c03e622c03923ab6892955afdfd7a9030df385219bcfa483e9fdbc744df2",
+      "output": "assets/original-tilda/6704e626746e-_-_01-min.webp",
+      "source_bytes": 200836,
+      "output_bytes": 166270,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/685df1918c6f-_1-min.webp": {
+      "source_sha256": "d0f949a185748020706b82c92102d502f8ade27bc46fdd587dccdaa4a06bdd3d",
+      "output_sha256": "546b7160aa5446113394e7824ce94f5078f5c199ada11a7cf55b24748cc10ff0",
+      "output": "assets/original-tilda/685df1918c6f-_1-min.webp",
+      "source_bytes": 201238,
+      "output_bytes": 163338,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/68926a6287cd-_EL750_-2-min.webp": {
+      "source_sha256": "2e630be9112ee02d4c5700a91a0b54e90f3e30afe8f4bc5f8ee33451562eedb5",
+      "output_sha256": "a557ae1a4907ed2b0c8d916718c8709f29d5a5ea29ae9c2ba52bd2c2811bd60e",
+      "output": "assets/original-tilda/68926a6287cd-_EL750_-2-min.webp",
+      "source_bytes": 230496,
+      "output_bytes": 169308,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/69a2bd1029cc-EL2151_____ver1_top-.webp": {
+      "source_sha256": "84db2142eb318002e390737e94f3c318824be9c0fa8b817f10d56d685056dc4e",
+      "output_sha256": "b7054e3b762ea1cd1024962dda17b295f95ae95dc70f95360fe02e4cf915399c",
+      "output": "assets/original-tilda/69a2bd1029cc-EL2151_____ver1_top-.webp",
+      "source_bytes": 461886,
+      "output_bytes": 370508,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/6b5ec6aa3c3a-EL1002___ver1_top-mi.webp": {
+      "source_sha256": "d33053cc73fbcac5134b9955935fa2eef481b948ddb8f1850714a6578989984f",
+      "output_sha256": "3eea93be80542506ed63679705a227f959f4252175c0b76870c61b41f53b853d",
+      "output": "assets/original-tilda/6b5ec6aa3c3a-EL1002___ver1_top-mi.webp",
+      "source_bytes": 521164,
+      "output_bytes": 403560,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/6c4cb656294c-EL1036____ver1_top-m.webp": {
+      "source_sha256": "7d859b845f7772f9e0eccf306dc68b17e27b98ac65d91d61d6e2c386fb9134bb",
+      "output_sha256": "7529439d71367f39606b58e156294f2f08141731bae514911d3b5ecba4355e8a",
+      "output": "assets/original-tilda/6c4cb656294c-EL1036____ver1_top-m.webp",
+      "source_bytes": 362666,
+      "output_bytes": 285850,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/6e9fe83a853f-__-min.webp": {
+      "source_sha256": "b62fbf9a20fd800a781e028a0cd89d34d8d34f0e733308455c227fb5282a3920",
+      "output_sha256": "d3090c3e300067eef30c5e69e55b91dcbc25f63e5e60f539a023215ed4469604",
+      "output": "assets/original-tilda/6e9fe83a853f-__-min.webp",
+      "source_bytes": 297174,
+      "output_bytes": 240046,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/6eef62f94cd4-EL1053____ver1_top-m.webp": {
+      "source_sha256": "2724ab2aa967c5323bbf3414964788a45e0952472e7b4ae4949263e9056218cc",
+      "output_sha256": "51fa1de5df239191aedc444ec583edceea0a64733b8be703cfaff275f7243c01",
+      "output": "assets/original-tilda/6eef62f94cd4-EL1053____ver1_top-m.webp",
+      "source_bytes": 605434,
+      "output_bytes": 492860,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/71352dd80e48-_1-min.webp": {
+      "source_sha256": "ef5c4cbc3d890ff0d95462632b4cc6c02ab8b08a654e0e129b01d778c64aff91",
+      "output_sha256": "cfb3a0a7719a4ff7545bbf518a613acc83b133b4ffb7744b78bf4014061e2b03",
+      "output": "assets/original-tilda/71352dd80e48-_1-min.webp",
+      "source_bytes": 187846,
+      "output_bytes": 151866,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/71790aee3dc2-EL1044____ver1_top-m.webp": {
+      "source_sha256": "a207d1030ff4678b48b91350d9c04cff6be1c7f638a734d431d39148edaa0cd7",
+      "output_sha256": "6272337aee5b757ece4dd861d92497b73380de4527f4427bd658c31d571db359",
+      "output": "assets/original-tilda/71790aee3dc2-EL1044____ver1_top-m.webp",
+      "source_bytes": 546360,
+      "output_bytes": 453644,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/71bae444c7a8-__-min.webp": {
+      "source_sha256": "7e5787a049cd5da06c47c98d230db71aee290b645ed26070611ba6231cb3f26c",
+      "output_sha256": "0a359d7827b1e1806a50e00e5246f6eb1048aab796beed92008a226d84eb8ee9",
+      "output": "assets/original-tilda/71bae444c7a8-__-min.webp",
+      "source_bytes": 284384,
+      "output_bytes": 193378,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/721f541908b5-__-1-min.webp": {
+      "source_sha256": "bd4b073a6dae63fd0ff454e3d8d8999bc056cac3be8e26f6e954040af39fff75",
+      "output_sha256": "259430afb423c51248450aae5ec297c48ece77e80897c4e2cc64b9bed3a7681e",
+      "output": "assets/original-tilda/721f541908b5-__-1-min.webp",
+      "source_bytes": 373204,
+      "output_bytes": 295682,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/738e46285c65-_-_-min.webp": {
+      "source_sha256": "7e47c81cf683030ee4353c2cf029ba11a98ae37c27c334c1dabb7e135a0825d5",
+      "output_sha256": "2166def04e690df174607e0f34fbe454a8d2adfc8397ed33cc9e1847bab00abb",
+      "output": "assets/original-tilda/738e46285c65-_-_-min.webp",
+      "source_bytes": 178290,
+      "output_bytes": 128038,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/763344ea013e-__EL750_-_3-min.webp": {
+      "source_sha256": "2a0b75f6a64e7417e65d0a9c15dc0f595f5abcdb4db939e0dc1a9fc1223a8504",
+      "output_sha256": "4e9bd9ba8f0d537a6ca236411522ed19327ffbcf829eef9ccbb8dd35b3fcf77d",
+      "output": "assets/original-tilda/763344ea013e-__EL750_-_3-min.webp",
+      "source_bytes": 287858,
+      "output_bytes": 186994,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/793f54aaa5b5-textures_2000_1.webp": {
+      "source_sha256": "49c32a216771b089aad7d2d4c189ff0e8b81beec8d1df1c322f7f8796266a76b",
+      "output_sha256": "ec031ae7b353437ac3e8ea1449965ec96afb4647d97b35c2792d7532194233b1",
+      "output": "assets/original-tilda/793f54aaa5b5-textures_2000_1.webp",
+      "source_bytes": 188162,
+      "output_bytes": 125556,
+      "dimensions": [
+        2000,
+        750
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/7aac44435d31-_-1-min.webp": {
+      "source_sha256": "a5028fd488f45ea33119ee85a25d515e6883b6a9e20d5f59daa4465e3b78f660",
+      "output_sha256": "7e654f1b5626a738856c79dcb091b578340320dc145d9112c7d01cbcb0f7e0f3",
+      "output": "assets/original-tilda/7aac44435d31-_-1-min.webp",
+      "source_bytes": 448094,
+      "output_bytes": 355280,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/80332a77f107-_2-min.webp": {
+      "source_sha256": "498cda4266fcfda0d8845941e25c86200d2d21d21710b45606522ebf505b6875",
+      "output_sha256": "02d8860d7c9de7a76a00927fef6ae23e52b77df8c7e1588b6fb4350392a8301e",
+      "output": "assets/original-tilda/80332a77f107-_2-min.webp",
+      "source_bytes": 515356,
+      "output_bytes": 426604,
+      "dimensions": [
+        1360,
+        1600
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/824da7b32934-__-1-min.webp": {
+      "source_sha256": "d839a03cc45e06934907c53d5900d9eab61b88121dbaf7e57724b3319919f239",
+      "output_sha256": "45102079b937f5d892f414c29d193e8e1e02c52385aaa046da1ff543ed9be90d",
+      "output": "assets/original-tilda/824da7b32934-__-1-min.webp",
+      "source_bytes": 222566,
+      "output_bytes": 155192,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/84381cdd6e89-_3-min.webp": {
+      "source_sha256": "7729202303e304dd11977aa7b17f7c87da8f28a7ccb30d9ca31412fbf803d61a",
+      "output_sha256": "5b10ab571292ecce0c70ce16e549909b207c4673757043d90baa689afc28b682",
+      "output": "assets/original-tilda/84381cdd6e89-_3-min.webp",
+      "source_bytes": 256662,
+      "output_bytes": 210330,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/8528d0440ac0-EL1000___ver1_top-mi.webp": {
+      "source_sha256": "05e8cf3fd10119c7fc5993a9810d945de1e8cb9c40cf0916d5c106da0a61578b",
+      "output_sha256": "8db67a79451d5990e45db36c5edd8f816e3fa97cd6f1a23b4f4bb3ca970c6580",
+      "output": "assets/original-tilda/8528d0440ac0-EL1000___ver1_top-mi.webp",
+      "source_bytes": 380720,
+      "output_bytes": 297954,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/8613c6c7dc0f-_-min.webp": {
+      "source_sha256": "a44fb07e762a4dbbdf36d785aac2b49a2cb1cd1869a30f1140796d8b6c0d7d85",
+      "output_sha256": "fbcf61f3c9a450a9da147129ce3c6f20d496ab19e45f249f0cb3166c5e26b01d",
+      "output": "assets/original-tilda/8613c6c7dc0f-_-min.webp",
+      "source_bytes": 284642,
+      "output_bytes": 204796,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/86a2371a094d-EL2152____ver1_top-m.webp": {
+      "source_sha256": "4a94104b65a6e4ce990628bfdd482782782b8f46ece96e4341a5e91dddefe4f6",
+      "output_sha256": "5849d3e8aae8e95e0756371ba5c00db95d6af49ff8faf09e4a8afbf227a4e8f3",
+      "output": "assets/original-tilda/86a2371a094d-EL2152____ver1_top-m.webp",
+      "source_bytes": 552924,
+      "output_bytes": 445824,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/8bdd7b9eaba5-_3-min.webp": {
+      "source_sha256": "5bcc837596e2b7b46344aebfea090ba16604c59037831aa7f49728feeb151829",
+      "output_sha256": "0b778682230e979872bf7733628e3ef76bc6f3137a2e62d7ffdb07337bab489a",
+      "output": "assets/original-tilda/8bdd7b9eaba5-_3-min.webp",
+      "source_bytes": 283748,
+      "output_bytes": 210842,
+      "dimensions": [
+        1680,
+        1820
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/8ce9a355c101-EL1046_____ver1_top-.webp": {
+      "source_sha256": "22b511ed08e4998ba60040e9e3c6f375c2a7ed53d7d6736ffa1164513d3f0284",
+      "output_sha256": "590bd031b134e81d1e940acec1e1032d4d8b12fe6ad3576cad276cb182a71e9d",
+      "output": "assets/original-tilda/8ce9a355c101-EL1046_____ver1_top-.webp",
+      "source_bytes": 459186,
+      "output_bytes": 361454,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/8f2f91961524-EL1049____ver1_top-m.webp": {
+      "source_sha256": "433c5ff416c353de0a72d6f11f5c3b90ee0ac37d0d6a3dbc42d2d8dedf0a03f5",
+      "output_sha256": "3f2ebde92ebe3537c329c31179e2c86e21b51051c3a650c79525fe317b547e82",
+      "output": "assets/original-tilda/8f2f91961524-EL1049____ver1_top-m.webp",
+      "source_bytes": 452340,
+      "output_bytes": 376906,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/8fc02255b386-_4-min.webp": {
+      "source_sha256": "68a48be2fcf70de0d13317fff549e40e281aace7652fb4bc9b6bb5f480abb208",
+      "output_sha256": "9e126313f46a12a0b1198e4dec1db547242a1f51be70ad8f7439f76be8e92324",
+      "output": "assets/original-tilda/8fc02255b386-_4-min.webp",
+      "source_bytes": 253624,
+      "output_bytes": 199376,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/907dde1e9ced-_4-min.webp": {
+      "source_sha256": "6756247f4f6db18c3216c7e3443f4dc93792e7e26ab638b4bc95151031a97965",
+      "output_sha256": "543350a35f36c29031ae9a911c34c44f72999c2cf03af69f08f812646876d7f2",
+      "output": "assets/original-tilda/907dde1e9ced-_4-min.webp",
+      "source_bytes": 198544,
+      "output_bytes": 160242,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/9172533304ae-_-1-min.webp": {
+      "source_sha256": "df4616a0d3012826b17b6e6060296e66ce6acccbaca34574f7494d40aadb328d",
+      "output_sha256": "fc61127d7c8698c840bd5f0b8d0a1869506bc4268ac194a764faa4c0b0912080",
+      "output": "assets/original-tilda/9172533304ae-_-1-min.webp",
+      "source_bytes": 178032,
+      "output_bytes": 135298,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/92efb304b574-_-min.webp": {
+      "source_sha256": "82454c4e833762f8678b853c532531ea0e6547c9d8da0e25c0d28ebc9f258bc8",
+      "output_sha256": "9dd9ac2e9661fb3015d28d3ed0a4504a9369ff952f41b5eb11ad816dab88bb1e",
+      "output": "assets/original-tilda/92efb304b574-_-min.webp",
+      "source_bytes": 499460,
+      "output_bytes": 404776,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/9319855e8cff-_2-min.webp": {
+      "source_sha256": "543877134ecf343fd880989c2213a8a5f5772bb1a48669b3d98bfbd573b8d329",
+      "output_sha256": "d70037054ea9433fb7b64825d3895af96ab0d6445a610fb604b6f5c470798b4c",
+      "output": "assets/original-tilda/9319855e8cff-_2-min.webp",
+      "source_bytes": 348682,
+      "output_bytes": 273194,
+      "dimensions": [
+        1680,
+        1820
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/931ff57d7f49-_3-min.webp": {
+      "source_sha256": "17a9f05ea4f15a33f5fb1970705e9f8035d5fc0a10b6b7d9733d2cce3a12946c",
+      "output_sha256": "97e50ae250057c3c6dabeb2aadc6d98ed612b43c741aa6a0f74fdf075c9a8bcc",
+      "output": "assets/original-tilda/931ff57d7f49-_3-min.webp",
+      "source_bytes": 282676,
+      "output_bytes": 223456,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/935e11546197-_-min.webp": {
+      "source_sha256": "2770333b035675d6ed07ec14f58f0e7fd8db846f39e3e92c5d22c850a133ba78",
+      "output_sha256": "0cf6f7cdf191e6040ce9b19723b698b180bf806b5a59dfc479bc469a001e40ea",
+      "output": "assets/original-tilda/935e11546197-_-min.webp",
+      "source_bytes": 177880,
+      "output_bytes": 138054,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/949ff8687005-_3-min.webp": {
+      "source_sha256": "737f72878ba7af210b05d6b0ed0e4fc776de499def4b370d3fce223727e0cab0",
+      "output_sha256": "96dc10570f6529616a552883719168a26d83642f5e8cf3c4f395890c68d473af",
+      "output": "assets/original-tilda/949ff8687005-_3-min.webp",
+      "source_bytes": 221864,
+      "output_bytes": 180046,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/9640adc39e1d-_-min.webp": {
+      "source_sha256": "1a08b6f1031ab188a65a3e89537d87de89c51053697224348dcd833bfcce6534",
+      "output_sha256": "ebce92b17fff4442643e01e6198ea0d9a11f3c32e95728ae72746b3f8d9a7178",
+      "output": "assets/original-tilda/9640adc39e1d-_-min.webp",
+      "source_bytes": 239904,
+      "output_bytes": 181192,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/966256f782e6-_3-min.webp": {
+      "source_sha256": "7729202303e304dd11977aa7b17f7c87da8f28a7ccb30d9ca31412fbf803d61a",
+      "output_sha256": "5b10ab571292ecce0c70ce16e549909b207c4673757043d90baa689afc28b682",
+      "output": "assets/original-tilda/966256f782e6-_3-min.webp",
+      "source_bytes": 256662,
+      "output_bytes": 210330,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/9b60d4d34a96-_-min.webp": {
+      "source_sha256": "76fe2af59fd8c0c6960ebaddb20d9436f1f64e58c82d1ab943c7b2537d62ffc8",
+      "output_sha256": "c22f829b937768bbfb0927cc26ea40adef4d0c5bd33d621f410e5f74227cda98",
+      "output": "assets/original-tilda/9b60d4d34a96-_-min.webp",
+      "source_bytes": 238390,
+      "output_bytes": 161316,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/9db832bb8968-EL1040____ver1_top-m.webp": {
+      "source_sha256": "437a743f644164206b5e5ccababe6d7d6fc06f4d9fed912b5bdf6c3233d9d54e",
+      "output_sha256": "c0ce979ada6bad5551d203fbb9077763d33bba0b64f74d4c3e8609721a735d78",
+      "output": "assets/original-tilda/9db832bb8968-EL1040____ver1_top-m.webp",
+      "source_bytes": 318772,
+      "output_bytes": 252436,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/9ed3596d0c39-EL1049_R1049_Kitchen.webp": {
+      "source_sha256": "0fad5940f816c3e2cacba8fcd7657b7e84e25a2c9bea562b03b9b5987827fc30",
+      "output_sha256": "0d63d10addbd34ecee41a7df72e570103a3450ed6c7988591541346edc082ad6",
+      "output": "assets/original-tilda/9ed3596d0c39-EL1049_R1049_Kitchen.webp",
+      "source_bytes": 262456,
+      "output_bytes": 187314,
+      "dimensions": [
+        1680,
+        1260
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/a3061e70133a-EL1045____ver1_top-m.webp": {
+      "source_sha256": "fdf2eda698b678284f35f050c90644a42aee687f5af528d7fd04db400fb4b334",
+      "output_sha256": "93793db6ae24dfaacf2ad37ebd8052fa0c93596118f1249053fdd376244ff651",
+      "output": "assets/original-tilda/a3061e70133a-EL1045____ver1_top-m.webp",
+      "source_bytes": 463064,
+      "output_bytes": 380002,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/a4e61edb12c0-A2190_Bedroom04_fron.webp": {
+      "source_sha256": "213e9e0ac6c19cc801884f5c07cef0ff55808db4d0e46e87e17fbf37b00bc6bd",
+      "output_sha256": "cd76faca6e0efac5f51fcc5dd88080446e601d716e64984832a4c9fd4f9e8825",
+      "output": "assets/original-tilda/a4e61edb12c0-A2190_Bedroom04_fron.webp",
+      "source_bytes": 182488,
+      "output_bytes": 136070,
+      "dimensions": [
+        1680,
+        1260
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/a56daf776111-_1-min.webp": {
+      "source_sha256": "79e6345e4990ef7c3df8a3da7e09b0cf4433ee79e214cdaa538e77d9d5241507",
+      "output_sha256": "ef5d4361ddcb93112a8fbba00e7cb3569da10020824793d5846cb32a59553db6",
+      "output": "assets/original-tilda/a56daf776111-_1-min.webp",
+      "source_bytes": 321882,
+      "output_bytes": 254992,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/a6152eb83895-EL2171____ver1_top-m.webp": {
+      "source_sha256": "eddae2803b91e60f9ac6a990194027a18c03144dc967572efaa1b06cda9d05df",
+      "output_sha256": "18a3050b741115397c8c27eb6faba06e108ca778ea4849e44c3ac13393318675",
+      "output": "assets/original-tilda/a6152eb83895-EL2171____ver1_top-m.webp",
+      "source_bytes": 540388,
+      "output_bytes": 428364,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/a6908199fe1b-EL1054____ver1_top-m.webp": {
+      "source_sha256": "e6477629d4091a7859b600e86026ddc70d03ced8688bbca85b9ca41e7a523eac",
+      "output_sha256": "390d1e699345f587bffdadc620f57bd67a9166f8d20a2ac36a0ba29260c3dfd7",
+      "output": "assets/original-tilda/a6908199fe1b-EL1054____ver1_top-m.webp",
+      "source_bytes": 353246,
+      "output_bytes": 285776,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/a8b5af07a038-image_25-min.webp": {
+      "source_sha256": "2b279650034ad58193c1f5c2534f78fcf8cc2420f1d85b118a58f4337e388924",
+      "output_sha256": "0b841dd27f7996201924d30441ea2b23fd8364162adae1152db77377aefbf48e",
+      "output": "assets/original-tilda/a8b5af07a038-image_25-min.webp",
+      "source_bytes": 437080,
+      "output_bytes": 337954,
+      "dimensions": [
+        1680,
+        941
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/ab3f20695cde-_3-min.webp": {
+      "source_sha256": "77e9edc6f79c900c44484dbf0a773caa9f1ce3a976a0be4991c2f7c9b070fb58",
+      "output_sha256": "4a58b3238fbea838daddcd28b1fd4e90276ccc21683ace312880e944557253b0",
+      "output": "assets/original-tilda/ab3f20695cde-_3-min.webp",
+      "source_bytes": 258612,
+      "output_bytes": 209950,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/ad0c6e75f260-_-min.webp": {
+      "source_sha256": "79ee55dbd513cfe03fd4da53ed68edc6b2d42108ee8ab27b297d9de3559e72ba",
+      "output_sha256": "e96ec91bd8b4b49ae289cd9d36a06e20c4c255455e3b2f163a69ba24bc9ff964",
+      "output": "assets/original-tilda/ad0c6e75f260-_-min.webp",
+      "source_bytes": 301748,
+      "output_bytes": 232828,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/ae6078497b99-R1043_Living05_detai.webp": {
+      "source_sha256": "b0a5436c71b14fc1993d68b6cdca445012fe95efd630d7590087309eac662670",
+      "output_sha256": "c15a667199c54dbbc7659887d335903774082fadadfdb6c528ae2d16dba196e8",
+      "output": "assets/original-tilda/ae6078497b99-R1043_Living05_detai.webp",
+      "source_bytes": 524912,
+      "output_bytes": 387538,
+      "dimensions": [
+        1920,
+        1160
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/af4f55fe4449-_-1-min.webp": {
+      "source_sha256": "d5325275643ca3a3d20ddb2a17c9a229a42565229981253a3d5b5b0f363e5053",
+      "output_sha256": "8ae2d3ab5ec5c30d22180ed9269a6e47f72a14ae1e6fc47226a05b0f47d492fa",
+      "output": "assets/original-tilda/af4f55fe4449-_-1-min.webp",
+      "source_bytes": 231370,
+      "output_bytes": 183388,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/b07fb52f913a-_-min.webp": {
+      "source_sha256": "f58a32bd6917e832cf72f2b91dea83982d39033c9f0b8a161ec8cb21c03e59f4",
+      "output_sha256": "ac4572ebf9021d3798711ecb7dee1baf5f91b6b91baaa3e91dfe4fd44ac5190b",
+      "output": "assets/original-tilda/b07fb52f913a-_-min.webp",
+      "source_bytes": 289778,
+      "output_bytes": 224614,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/b265134826f4-_4-min.webp": {
+      "source_sha256": "aba9a264e682ccd974a48cd2961fa7ab99cd250fa5b068e4d0e452c610fb606d",
+      "output_sha256": "da6f60d3eb61f6faaea3477b873a8326bb7a6a3e8f25838ac81d159098b84791",
+      "output": "assets/original-tilda/b265134826f4-_4-min.webp",
+      "source_bytes": 253622,
+      "output_bytes": 204634,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/b43c3df596a6-EL1037_____ver1_top-.webp": {
+      "source_sha256": "836ce8be3b099f8b4307670737298bb5381c8327adbf2d13bcdbf6d81a243a8f",
+      "output_sha256": "9cf3ecf11f6ff01b204dbebe40927e85010497b53db2c4efdc3d6e7383b3e849",
+      "output": "assets/original-tilda/b43c3df596a6-EL1037_____ver1_top-.webp",
+      "source_bytes": 393962,
+      "output_bytes": 322792,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/b572561dead9-__-min.webp": {
+      "source_sha256": "1128d5e20bf1ba00bcf1d469893e587243b1147ea1d817f9778e2e54ec55ae2b",
+      "output_sha256": "15c3c2104d60ef5018f149edba6799a86b754a9e2d0107ca9df2533767a6feb3",
+      "output": "assets/original-tilda/b572561dead9-__-min.webp",
+      "source_bytes": 222526,
+      "output_bytes": 158060,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/b60441f43650-_-1-min.webp": {
+      "source_sha256": "72780dda1a4f107bba054f4f32d4d6dfa232b9ea4179a551e1aee0c5280ee8a4",
+      "output_sha256": "4c7d5bffc9ca29e84680fa8df27b9d7b77c3bf6aad15c0ac74b36827f67c940d",
+      "output": "assets/original-tilda/b60441f43650-_-1-min.webp",
+      "source_bytes": 254656,
+      "output_bytes": 176286,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/b730150b9db2-_3-min.webp": {
+      "source_sha256": "ac36f55adbd1c928160994f269a24a02433f141b962e27352d4fd18acdf947ef",
+      "output_sha256": "1c432afb261402d261b26a19feae74dcf43820ad3061d6b280dd2cd1886a56e5",
+      "output": "assets/original-tilda/b730150b9db2-_3-min.webp",
+      "source_bytes": 217898,
+      "output_bytes": 177540,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/bba0287e4a5a-_-1-min.webp": {
+      "source_sha256": "05c22b0060338df841c1cac39a62e78a40e206d34f645389c855a98f52eb08d9",
+      "output_sha256": "d9d7c9216415bd32826e43eb5747cff4ffdf6f78ed57ae750f8a4f805b5066d9",
+      "output": "assets/original-tilda/bba0287e4a5a-_-1-min.webp",
+      "source_bytes": 277204,
+      "output_bytes": 203836,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/bd7566fa3aea-_1-min.webp": {
+      "source_sha256": "900f9f172c61d8613699fbc219889253f074a8aec99db5284ba8b2aea1482b61",
+      "output_sha256": "69ad0637f63e5d7571f93c7bfd86606b6fb6ee8cad1e6dcec0ae7390a3dc455e",
+      "output": "assets/original-tilda/bd7566fa3aea-_1-min.webp",
+      "source_bytes": 187710,
+      "output_bytes": 146454,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/bfa6df098c47-_3-min.webp": {
+      "source_sha256": "429cc0801b431afc04dbcb6a172354d71a7122b39eb4129e8ed39cb3562da447",
+      "output_sha256": "99b538684187ef2b7a14a514fa79718b3ca60dfd4ad6da964c9ff7a4a2908740",
+      "output": "assets/original-tilda/bfa6df098c47-_3-min.webp",
+      "source_bytes": 629834,
+      "output_bytes": 411134,
+      "dimensions": [
+        2400,
+        1800
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/bfd854ede1c4-_-1-min.webp": {
+      "source_sha256": "bd956763f2dddd9cda6c3fbca684e85ead032e38b53d0eb15c08d2b95ca7ebd7",
+      "output_sha256": "aaaafe7dd118031e73ff78a7b0147f0c992fbfba0295c16e0b378e8976b56f43",
+      "output": "assets/original-tilda/bfd854ede1c4-_-1-min.webp",
+      "source_bytes": 334598,
+      "output_bytes": 258484,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/c14b532c2ef9-_1-min.webp": {
+      "source_sha256": "79e6345e4990ef7c3df8a3da7e09b0cf4433ee79e214cdaa538e77d9d5241507",
+      "output_sha256": "ef5d4361ddcb93112a8fbba00e7cb3569da10020824793d5846cb32a59553db6",
+      "output": "assets/original-tilda/c14b532c2ef9-_1-min.webp",
+      "source_bytes": 321882,
+      "output_bytes": 254992,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/c2de9d8b2136-EL1043____ver1_top-m.webp": {
+      "source_sha256": "0eb39ab2c493d455726c3561fb38de0ed21c8c618b5413948115220b7e2543a7",
+      "output_sha256": "76c696428f2f7f0ce474962b876ef9c32ea3fae5bfedb8d8dd6492f1b30f4e47",
+      "output": "assets/original-tilda/c2de9d8b2136-EL1043____ver1_top-m.webp",
+      "source_bytes": 542868,
+      "output_bytes": 448658,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/c47abfe6b9e4-_2-min.webp": {
+      "source_sha256": "5eb4619282e1a1c1c36fb0027d9d3a5714b833d61fd789bfdd11b360c8bfa60b",
+      "output_sha256": "707ae21f14210462b29ce665def858a35b3fb6c1d72ed934afb23c95add5630a",
+      "output": "assets/original-tilda/c47abfe6b9e4-_2-min.webp",
+      "source_bytes": 282036,
+      "output_bytes": 227066,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/c6ad2cc6a1bc-_4-min.webp": {
+      "source_sha256": "19c0b51b39ddb83e5cb955b0c26e90e7cf3438c7c1a15a9316c55784219a6a94",
+      "output_sha256": "6b881a744fed9605facfbc6a8bcdd9490de4785652439118beb2c7a4bd152103",
+      "output": "assets/original-tilda/c6ad2cc6a1bc-_4-min.webp",
+      "source_bytes": 252424,
+      "output_bytes": 202388,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/c7ce7777ef6b-_-1-min.webp": {
+      "source_sha256": "bf23364a504f9463b8b697876413e2f9872100713c7d4ef6b4d5c28da4ec1a17",
+      "output_sha256": "24f995663951ec3dcf196151fba0437c1721031b79a2514c23da663e8ced7567",
+      "output": "assets/original-tilda/c7ce7777ef6b-_-1-min.webp",
+      "source_bytes": 375546,
+      "output_bytes": 297512,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/c7eac3869003-__-min.webp": {
+      "source_sha256": "e89d70ba375a5249f8c0e0fd71ae188cd8840df3a006bf1ba7f2078452306885",
+      "output_sha256": "aaeddb947e7829df7d19391a5901c1f6af3ed86f05ae9698e7517ac0e7696610",
+      "output": "assets/original-tilda/c7eac3869003-__-min.webp",
+      "source_bytes": 294036,
+      "output_bytes": 189948,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/c83ba932a5b8-_4-min.webp": {
+      "source_sha256": "aba9a264e682ccd974a48cd2961fa7ab99cd250fa5b068e4d0e452c610fb606d",
+      "output_sha256": "da6f60d3eb61f6faaea3477b873a8326bb7a6a3e8f25838ac81d159098b84791",
+      "output": "assets/original-tilda/c83ba932a5b8-_4-min.webp",
+      "source_bytes": 253622,
+      "output_bytes": 204634,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/c992124790e2--min.webp": {
+      "source_sha256": "16f7e9e1064c5fab051c89211e4fe8c2351a8fd0b84f55c893b3aa9e15816489",
+      "output_sha256": "068a592186e17b697e54c5798ec395ac7a5b89a2ebb49f1b8ef59687ed71feae",
+      "output": "assets/original-tilda/c992124790e2--min.webp",
+      "source_bytes": 206952,
+      "output_bytes": 143770,
+      "dimensions": [
+        1680,
+        1260
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/caf9f0ec9c58-EL1049_R1049_Kitchen.webp": {
+      "source_sha256": "06ccf48faa76a7199799ac23799f4bdaa86e6a4aff510a97c842c3785328f5d6",
+      "output_sha256": "b0a88dc1de168587d40eceeb8f94207870d4963a59aa89562af4958dab773962",
+      "output": "assets/original-tilda/caf9f0ec9c58-EL1049_R1049_Kitchen.webp",
+      "source_bytes": 402954,
+      "output_bytes": 327954,
+      "dimensions": [
+        1680,
+        1260
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/cc97b871809e-_-_2-min.webp": {
+      "source_sha256": "46b20c6f39438269a1510a6432e6bbbb4bd1b958ee4d2005cad69cd6a9101028",
+      "output_sha256": "42244dc7cadc9987cbebb0eac7b432b66b69b755563fffbc52cfc060dd8586ff",
+      "output": "assets/original-tilda/cc97b871809e-_-_2-min.webp",
+      "source_bytes": 210072,
+      "output_bytes": 171102,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/ce635ae9f66a-EL153___ver1_top-min.webp": {
+      "source_sha256": "2dbbc72691f5a88188f7f9c9aa49823b3d7b24786265b398a7d65163e523585e",
+      "output_sha256": "0257d81b329ed27643afbbbb0fac2806a2f9190d27012f4c72fc795d581cfe7d",
+      "output": "assets/original-tilda/ce635ae9f66a-EL153___ver1_top-min.webp",
+      "source_bytes": 364744,
+      "output_bytes": 287736,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/cec22f73f49e-_01-min.webp": {
+      "source_sha256": "357bfd63dc6f45691d2d006c55173f7144ba3d0661a450e68e63c2eaa592c103",
+      "output_sha256": "a639bf916ecc1a77a28811313a2b665af8d935d559021edc61622db8564a0ebb",
+      "output": "assets/original-tilda/cec22f73f49e-_01-min.webp",
+      "source_bytes": 273562,
+      "output_bytes": 226262,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/cf62865e7dbb-_-1-min.webp": {
+      "source_sha256": "3512d3621f1b01e979d806b8995f61fbcb81803900cfd5f40b76be08c98ce453",
+      "output_sha256": "35849e065a8811cbd6faa60b7dc20f30ff88d3e44bd7f933ac5812802b1f3fe5",
+      "output": "assets/original-tilda/cf62865e7dbb-_-1-min.webp",
+      "source_bytes": 192922,
+      "output_bytes": 132156,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/cf8d4a4bf1a2-El1052____ver1_top-m.webp": {
+      "source_sha256": "e5bee50ae756e2101c742f3fcae2a6cd1c95e91bb7179b3fc0ab31e2423328f3",
+      "output_sha256": "d56dca6ce63e93dbd3b2438364b4bca0f3c395405fca128bde0194f28f8f5691",
+      "output": "assets/original-tilda/cf8d4a4bf1a2-El1052____ver1_top-m.webp",
+      "source_bytes": 597392,
+      "output_bytes": 483916,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/d00a2b3e4818-_-min.webp": {
+      "source_sha256": "dfd530faab2729a9330c6c6b9088915d49a8510fde6f38afb8173a74eec4b807",
+      "output_sha256": "b66c49378463e225d6079451adb001acc61e6f496626f5a22590b1df45687992",
+      "output": "assets/original-tilda/d00a2b3e4818-_-min.webp",
+      "source_bytes": 193572,
+      "output_bytes": 143730,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/d055377b4d0a-__-1-min.webp": {
+      "source_sha256": "d7adb735e0d826216832e0d905f80754926f56eff72649c11d3a6ff59b53ad97",
+      "output_sha256": "65d0ef44391ab5098958ea27aa413880d36ed6095d794ec20e4b01a654bd29cc",
+      "output": "assets/original-tilda/d055377b4d0a-__-1-min.webp",
+      "source_bytes": 218268,
+      "output_bytes": 152962,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/d084af5384fa-_-_4-min.webp": {
+      "source_sha256": "905a0708753b3a9234e6e4ff4439a2eafe4c9a55b08c514e82687399c7bbbdcc",
+      "output_sha256": "7940fe39d340c0a0f081f85651af72f7138eaeb198b8790d489a5b301cf2146c",
+      "output": "assets/original-tilda/d084af5384fa-_-_4-min.webp",
+      "source_bytes": 291548,
+      "output_bytes": 238094,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/d2be96f1b147-_-_2-min.webp": {
+      "source_sha256": "92c5f8dc144c054e74ef37ef602e7ca510477bed572101f91626ba07ce7dff1d",
+      "output_sha256": "a5fd362eae9a316c2b87f59aa3dc2ef6e2f50ca41a2a2dcea3cde24ffbfc8cd7",
+      "output": "assets/original-tilda/d2be96f1b147-_-_2-min.webp",
+      "source_bytes": 266616,
+      "output_bytes": 213658,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/d4692f2d0ed9-_-min.webp": {
+      "source_sha256": "fa456e4e6c797204f63b5e3488d0c15e1163719c627c419d910d0f6182026e09",
+      "output_sha256": "0b0e0a1b4e3b5c4c1b74f0bdb9ecd59709edd869ba9b6d2fba5bcfaea9ec2898",
+      "output": "assets/original-tilda/d4692f2d0ed9-_-min.webp",
+      "source_bytes": 246048,
+      "output_bytes": 178886,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/d6c616cbac8c-__-min.webp": {
+      "source_sha256": "8d1ace56c799f4d79a2e86d3a58dd60fcdae2924054ced4e19ef50ac1b8e6e79",
+      "output_sha256": "a7b218a9d69523b17f83993d0e543e3ead65ed0518e62b4f09d2e075907394a8",
+      "output": "assets/original-tilda/d6c616cbac8c-__-min.webp",
+      "source_bytes": 302810,
+      "output_bytes": 241682,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/dcee34ddfac8-_3-min.webp": {
+      "source_sha256": "6c54ddf2640f1f0c3120c25a1a778f08e4310aafdaeca5a4f457005a3350e4e2",
+      "output_sha256": "545f89751bf72b6c0a1f18f72e01674e42dc99b8ec75ce85615da9979faa92b8",
+      "output": "assets/original-tilda/dcee34ddfac8-_3-min.webp",
+      "source_bytes": 292696,
+      "output_bytes": 237520,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/dd54ca1ff1e9-_-min.webp": {
+      "source_sha256": "d0429596093b07cf275a27d808f191834f25a33e0624b3e3edadc69ae8349e2d",
+      "output_sha256": "6b6eb860f046c048c2cda10eb92920a7a74a7473937ef388c28d203cbd1edafb",
+      "output": "assets/original-tilda/dd54ca1ff1e9-_-min.webp",
+      "source_bytes": 303960,
+      "output_bytes": 241314,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/df9143140a4b-_-1-min.webp": {
+      "source_sha256": "aa0f48953716f8da337436fc4a4c13815ac15d7084a54b6a30034df4e4f0c221",
+      "output_sha256": "264a727f66cacc29f7299079a2ac8ede0c904d1a5d52d86e0d06715198a00d18",
+      "output": "assets/original-tilda/df9143140a4b-_-1-min.webp",
+      "source_bytes": 296198,
+      "output_bytes": 239258,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/e28a36bdc6ed-_4-min.webp": {
+      "source_sha256": "45819b0e09ef8171ced3d2bc679ea201ae35b6de5f71030ce9807e46ec35fde4",
+      "output_sha256": "90b25fda12f93123cd9d65346348a45ad524f6102b1d9e4d3d91b5506f045552",
+      "output": "assets/original-tilda/e28a36bdc6ed-_4-min.webp",
+      "source_bytes": 198772,
+      "output_bytes": 160140,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/e35797186861-__-1-min.webp": {
+      "source_sha256": "374d0bb044f9feddc6ef5e395396164e077efedc00a042e3f55802b0320aba29",
+      "output_sha256": "043d71c1c628156bff5508c3462fc7c49a4825a6b66ee4185bc8d5466f3c53a9",
+      "output": "assets/original-tilda/e35797186861-__-1-min.webp",
+      "source_bytes": 210778,
+      "output_bytes": 158614,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/e372bc8d16d5-_2-min.webp": {
+      "source_sha256": "2e3c5542a3ca7c52833d00dee64649783c01100cc3f01e132bf84618e9c5b6a8",
+      "output_sha256": "2f28dd67f19defddb5e5b6fb4cf897312be7074ba2f8f71d3bf3181f140b1b8c",
+      "output": "assets/original-tilda/e372bc8d16d5-_2-min.webp",
+      "source_bytes": 302470,
+      "output_bytes": 240228,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/e3a6f9e74d54-_3-min.webp": {
+      "source_sha256": "09c9f4f13ff859fd7b45a4f9f82635ff3a9335be81113a57afaffe5e2888ef3d",
+      "output_sha256": "98c483e7aec9f9b161d363939527bc29146f17b061d986252dc8a34122727cac",
+      "output": "assets/original-tilda/e3a6f9e74d54-_3-min.webp",
+      "source_bytes": 310574,
+      "output_bytes": 248062,
+      "dimensions": [
+        1360,
+        1600
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/e52e5803e60a-_5-min.webp": {
+      "source_sha256": "4a8018bd39984e94e61649a61e40258c984e0ca1b1e08a1d753c573ba5f1b244",
+      "output_sha256": "f2a176ae7573f0cb7bdd3ced14c5beb6e84a35557efe397dbcd03f8f13a907bf",
+      "output": "assets/original-tilda/e52e5803e60a-_5-min.webp",
+      "source_bytes": 210824,
+      "output_bytes": 148226,
+      "dimensions": [
+        1680,
+        1820
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/e9b728226e33-_-_3-min.webp": {
+      "source_sha256": "0ca63389f9d7b11098a1f756494f7e6e9768e1b1733dafde5a4cfab4c6214382",
+      "output_sha256": "ccb99498de6304a55afaf88d30a30f89d97df5fae9a7f7595a211b29774f2861",
+      "output": "assets/original-tilda/e9b728226e33-_-_3-min.webp",
+      "source_bytes": 306072,
+      "output_bytes": 252628,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/ea69fbde8dca-_4-min.webp": {
+      "source_sha256": "c8bf8b5f9ec8950ff27f6a65b47f3aed589977f0ba2d6a3b78a5eb64588e867c",
+      "output_sha256": "c666bcb60d7f4d3dc9a8e7500444193fb76e48e549f946f9c8e50561804f1ddb",
+      "output": "assets/original-tilda/ea69fbde8dca-_4-min.webp",
+      "source_bytes": 249244,
+      "output_bytes": 179342,
+      "dimensions": [
+        1680,
+        1820
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/ea8bc4a8f7ef-_-1-min.webp": {
+      "source_sha256": "a916f375dab6a1aedbc16bd845521e59416535f622eb009fdce7b4641e6ca620",
+      "output_sha256": "30cbb73ad1b7221f48bd2d51b450e366b515796a6976a763cc0b0f1c54dff635",
+      "output": "assets/original-tilda/ea8bc4a8f7ef-_-1-min.webp",
+      "source_bytes": 221610,
+      "output_bytes": 143178,
+      "dimensions": [
+        1680,
+        1261
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/eca4b333e6ee-A2190_Bedroom04_deta.webp": {
+      "source_sha256": "f626d70faaf31d0a8b3e82f5ac71c05f633d3479732d40af1351bdedc0dace8b",
+      "output_sha256": "9e30500212ee32d5cdf0d6ee37cf17364717a801d1940b5657b6fd686183e3ea",
+      "output": "assets/original-tilda/eca4b333e6ee-A2190_Bedroom04_deta.webp",
+      "source_bytes": 454044,
+      "output_bytes": 340492,
+      "dimensions": [
+        1680,
+        1260
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/ed642c78d089-EL2153____ver1_top-m.webp": {
+      "source_sha256": "9e74dd8bd31a60eecf47c6d696738f880235b88974c20b5798d86f6a7016c795",
+      "output_sha256": "d6c0b017c5fd23e82c23f6f033b6268d037399d46248730e9dbc772010b23517",
+      "output": "assets/original-tilda/ed642c78d089-EL2153____ver1_top-m.webp",
+      "source_bytes": 598766,
+      "output_bytes": 479470,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/edfc00e28d92-_4-min.webp": {
+      "source_sha256": "aba9a264e682ccd974a48cd2961fa7ab99cd250fa5b068e4d0e452c610fb606d",
+      "output_sha256": "da6f60d3eb61f6faaea3477b873a8326bb7a6a3e8f25838ac81d159098b84791",
+      "output": "assets/original-tilda/edfc00e28d92-_4-min.webp",
+      "source_bytes": 253622,
+      "output_bytes": 204634,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/f0c52f55e751-_2-min.webp": {
+      "source_sha256": "2e3c5542a3ca7c52833d00dee64649783c01100cc3f01e132bf84618e9c5b6a8",
+      "output_sha256": "2f28dd67f19defddb5e5b6fb4cf897312be7074ba2f8f71d3bf3181f140b1b8c",
+      "output": "assets/original-tilda/f0c52f55e751-_2-min.webp",
+      "source_bytes": 302470,
+      "output_bytes": 240228,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/f41c2d5d4ba1-EL1051_____ver1_top-.webp": {
+      "source_sha256": "973238a62554a9a7f781de79757e116ef74cf21a629670b3c460c54dca4e0284",
+      "output_sha256": "626de7874c14437f9bce16b8eba433439d282ef989c0f7e4cde88793fd579c1d",
+      "output": "assets/original-tilda/f41c2d5d4ba1-EL1051_____ver1_top-.webp",
+      "source_bytes": 544462,
+      "output_bytes": 459628,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/f53a461239a4-_3-min.webp": {
+      "source_sha256": "77e9edc6f79c900c44484dbf0a773caa9f1ce3a976a0be4991c2f7c9b070fb58",
+      "output_sha256": "4a58b3238fbea838daddcd28b1fd4e90276ccc21683ace312880e944557253b0",
+      "output": "assets/original-tilda/f53a461239a4-_3-min.webp",
+      "source_bytes": 258612,
+      "output_bytes": 209950,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/f6cf2b0be5d4-_2-min.webp": {
+      "source_sha256": "cee86277ecf1e4d34f424a027bf1a2aac8db9205b840678e706936f33fd5ab1d",
+      "output_sha256": "00258459954fbd5bc6a2554bf9ef6853a42f5eac7c60dd9a53c3aeb4f5955566",
+      "output": "assets/original-tilda/f6cf2b0be5d4-_2-min.webp",
+      "source_bytes": 690710,
+      "output_bytes": 440060,
+      "dimensions": [
+        2400,
+        1800
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/f9cbba8d1844-__EL750_-_ver1__top-.webp": {
+      "source_sha256": "49d23a8acc4df3b4a28f699be0e190685ace6e2274d5af5acbd75c58d4ea3b0e",
+      "output_sha256": "248eef41049165086a500d7db66c1c76d250cf097111f0a794278ff3db1d011a",
+      "output": "assets/original-tilda/f9cbba8d1844-__EL750_-_ver1__top-.webp",
+      "source_bytes": 379250,
+      "output_bytes": 298710,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/fd319871513a-_3-min.webp": {
+      "source_sha256": "17a9f05ea4f15a33f5fb1970705e9f8035d5fc0a10b6b7d9733d2cce3a12946c",
+      "output_sha256": "97e50ae250057c3c6dabeb2aadc6d98ed612b43c741aa6a0f74fdf075c9a8bcc",
+      "output": "assets/original-tilda/fd319871513a-_3-min.webp",
+      "source_bytes": 282676,
+      "output_bytes": 223456,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/ff23b8576315-EL2173____ver1_top-m.webp": {
+      "source_sha256": "527638fb39d9b3996374b1a79d32bc7947c315057cba3a94e061aebdb9285dc7",
+      "output_sha256": "1b616b1f1adbf9bd6c4c32bc6c61320c0e1f79432b86cae30cc21c4329032501",
+      "output": "assets/original-tilda/ff23b8576315-EL2173____ver1_top-m.webp",
+      "source_bytes": 469050,
+      "output_bytes": 382742,
+      "dimensions": [
+        1680,
+        1120
+      ],
+      "quality": 82,
+      "status": "optimized"
+    },
+    "assets/original-tilda/ff9323e70b2f-_2-min.webp": {
+      "source_sha256": "cb0ceb45b9244fa73566d8c576e5297bb3aa10e3f0339330138e13596f1ba4b5",
+      "output_sha256": "18755bd7fc21665f58e4c7d84254dc378a2642af61e2582474427046ea52c8aa",
+      "output": "assets/original-tilda/ff9323e70b2f-_2-min.webp",
+      "source_bytes": 291020,
+      "output_bytes": 241756,
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "quality": 82,
+      "status": "optimized"
+    }
+  },
+  "responsive": {
+    "/assets/original-tilda/01a5c5f16366-EL2190___ver1_top-mi.webp": {
+      "source_sha256": "e3ebce73205fd534966acec3ca1b8aed51c3b07abcae5243f230a3ec38d6217d",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/01a5c5f16366-EL2190___ver1_top-mi-480.webp",
+          "bytes": 26970,
+          "sha256": "0b8a9d1c5e7023778122916509e29a177dfca4c006d0b60e14d323a8eeb9bf9f"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/01a5c5f16366-EL2190___ver1_top-mi-960.webp",
+          "bytes": 139698,
+          "sha256": "57114e777d22bcccd7fab9794399dcc37e089604bbbb7f932c7dd531db589e59"
+        }
+      ]
+    },
+    "/assets/original-tilda/07d87b8312a9-__-min.webp": {
+      "source_sha256": "61485edccc76acef21dbfb95c2c0d69e7217963d9a5b1459d8ebbdb9447efe5d",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/07d87b8312a9-__-min-480.webp",
+          "bytes": 18534,
+          "sha256": "e78bda0bbc905f5c601580479bc0d7ed2658b1fcc08e8224f6e38d4b1a76a360"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/07d87b8312a9-__-min-960.webp",
+          "bytes": 62688,
+          "sha256": "3a85ccccedbac51af858292e54150f62f8c5d5b4f3fb5579dc0095832ad3287c"
+        }
+      ]
+    },
+    "/assets/original-tilda/0c228f6e6d3a-_-1-min.webp": {
+      "source_sha256": "d6e31960efc3032b44435f0a7fac5e9fa238dcc498e5bc019d98aa9b518c3e72",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/0c228f6e6d3a-_-1-min-480.webp",
+          "bytes": 12738,
+          "sha256": "4e28d2417faddcf11d9f9efbd188bcfad6a500ca39c3b61d32ba044a89376de1"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/0c228f6e6d3a-_-1-min-960.webp",
+          "bytes": 44536,
+          "sha256": "a28fd5bdfbb8f8dbb5765a892920617929c13158d84563bc14280c6f9671fb53"
+        }
+      ]
+    },
+    "/assets/original-tilda/0e171125bb3c-_-1-min.webp": {
+      "source_sha256": "a084e89ccfec4f2f3540c773dfa1873a5c65465692064e5711abe6511c97a961",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/0e171125bb3c-_-1-min-480.webp",
+          "bytes": 20162,
+          "sha256": "8f26aa10367ee9f0e29a4493248e546f6500a8e34ac18253e532645278dcf283"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/0e171125bb3c-_-1-min-960.webp",
+          "bytes": 72110,
+          "sha256": "b2b16a7fe42bfe846efa87456de3609f78ceaab5f37e49c030c63ce4c10e0ea7"
+        }
+      ]
+    },
+    "/assets/original-tilda/15f2b2143e0f-_-3-min.webp": {
+      "source_sha256": "9d299257d901547b53f3188338e32a67be9283faeb0d26c9c01b914f1a400449",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/15f2b2143e0f-_-3-min-480.webp",
+          "bytes": 14320,
+          "sha256": "0f2e04456595611d1e032430dd40a4922857ea88988741163d255e459fd60629"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/15f2b2143e0f-_-3-min-960.webp",
+          "bytes": 45672,
+          "sha256": "3d5c7a447d4b7e87d9f31c4bd557929d9805887977c90a5663a3a82a759d1eeb"
+        }
+      ]
+    },
+    "/assets/original-tilda/188a91ad894e-_-1-min.webp": {
+      "source_sha256": "20d12a9dfe1d584e4992545691f3e98a35f94a719b759338acc6cec675ef367b",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/188a91ad894e-_-1-min-480.webp",
+          "bytes": 22178,
+          "sha256": "d36b582fcd478a8a888cca79c1268aaaf502fa6f1b5d3c90e430130826cfb89b"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/188a91ad894e-_-1-min-960.webp",
+          "bytes": 91092,
+          "sha256": "bd1a9517bd6d64cfbf4380b8fefd79543e803dd529e533ab1cc67d2e65ded14a"
+        }
+      ]
+    },
+    "/assets/original-tilda/221462659c8d-EL1047____ver1_top-m.webp": {
+      "source_sha256": "8da9500ec9ed4ca2e68ec4ddfeb0f59bf74b29bb1409c02d4f5f31d202507b8d",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/221462659c8d-EL1047____ver1_top-m-480.webp",
+          "bytes": 25256,
+          "sha256": "cc2af88f624d01df5af359193d52ea81330c10a34f8bcae854a2305cfaaf690f"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/221462659c8d-EL1047____ver1_top-m-960.webp",
+          "bytes": 129842,
+          "sha256": "2ccc2c35f8977ef8d4f812f62fdd603b150fa234aa040152376d9add3998759b"
+        }
+      ]
+    },
+    "/assets/original-tilda/2627c6aebc9e-_-1-min.webp": {
+      "source_sha256": "937734d42c66cd5d04cd80b81c3220ad5714503c2fdad758abed4ee1041f5f91",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/2627c6aebc9e-_-1-min-480.webp",
+          "bytes": 17166,
+          "sha256": "ed2b22962d8875005072d423c524ebd2c2e64a60261f7c1d6f24c21584e5d6dc"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/2627c6aebc9e-_-1-min-960.webp",
+          "bytes": 58754,
+          "sha256": "a5f33c0e2713c85ac0188d632408090aa46ec1000e0cf94e6c5fb4286349d693"
+        }
+      ]
+    },
+    "/assets/original-tilda/276c5c954956-_-1-min.webp": {
+      "source_sha256": "be1a2d5010cad1cb9bce5ac7ecc678aea8cd6487af979bb638cd96621377313e",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/276c5c954956-_-1-min-480.webp",
+          "bytes": 14070,
+          "sha256": "39e10074583ea25471d14a7975d98bd9eb6eb871d994a7abe203d005c4396a51"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/276c5c954956-_-1-min-960.webp",
+          "bytes": 50682,
+          "sha256": "e10939c81c8180e454d3142b37cfbda464d4c0faab6bc4dc47c7d45636618048"
+        }
+      ]
+    },
+    "/assets/original-tilda/2958945c9e13-EL1050___-_ver1_top-.webp": {
+      "source_sha256": "d49f5eea1239dcbaafa08c5d741b57e5bd8134208c727807bc299488a427ab0c",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/2958945c9e13-EL1050___-_ver1_top--480.webp",
+          "bytes": 26730,
+          "sha256": "976cd6dc0592b7160517cb09e343fa2ef5abfb52b0f2aaf1e093f6d8fd110703"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/2958945c9e13-EL1050___-_ver1_top--960.webp",
+          "bytes": 132540,
+          "sha256": "faaf0de6255f379e59dfce17486a088d424fe6a50723fc10b51fc7657e127099"
+        }
+      ]
+    },
+    "/assets/original-tilda/2aaaa4339bae-EL1038____ver1_top-m.webp": {
+      "source_sha256": "f429211f427fb12c0b46034f586652f1718aa357a9921b9ae7c63759a33666b6",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/2aaaa4339bae-EL1038____ver1_top-m-480.webp",
+          "bytes": 18024,
+          "sha256": "a4be43656c8b7c35023685a51d9b5e73994f6469966ab7243140c88f080459f4"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/2aaaa4339bae-EL1038____ver1_top-m-960.webp",
+          "bytes": 88586,
+          "sha256": "a653aa76c8cdb7ae92fcde48bfc2f0a2194d97d8f3fb00dcf9c05e003315c3be"
+        }
+      ]
+    },
+    "/assets/original-tilda/30ad52e3d4e3-EL1039____ver1_top-m.webp": {
+      "source_sha256": "81e702acdc4e52b6ee07c831f747f724244b1fcb0f1a6aee9de79e79d5e09bb4",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/30ad52e3d4e3-EL1039____ver1_top-m-480.webp",
+          "bytes": 17038,
+          "sha256": "9c7f9a87c0a2de2062fa829d45a41fab9fec8bad39e9a83cdb7562ef63f47a56"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/30ad52e3d4e3-EL1039____ver1_top-m-960.webp",
+          "bytes": 96278,
+          "sha256": "4b00e53807d482fac95bcdbc0ca2bbbf5015404e5783315db8b05f2f738cf035"
+        }
+      ]
+    },
+    "/assets/original-tilda/313d56a1a5fa-_--min.webp": {
+      "source_sha256": "647368f7289e299ba0f8685c3acfc7f44f17f9012b9f44d616d895414e0d21e9",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/313d56a1a5fa-_--min-480.webp",
+          "bytes": 16056,
+          "sha256": "4602e716455142f5961af25519e42f22b66fb49919ff67de13386584eaaa598f"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/313d56a1a5fa-_--min-960.webp",
+          "bytes": 44434,
+          "sha256": "609e33de3b4899123dde0f34e70a013eebd543f5c2b70dcc6aed0993ac2fd265"
+        }
+      ]
+    },
+    "/assets/original-tilda/39eccaaf7460-EL2150____ver1_top-m.webp": {
+      "source_sha256": "9a14101a507be3331db4ed30a141555c2509d1e8ab1b7761fbdd2f80746e7d1f",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/39eccaaf7460-EL2150____ver1_top-m-480.webp",
+          "bytes": 13582,
+          "sha256": "a40574731f72e57bd8064cb61ee873239dce192ca40ddbf0e3c5e40eb3bed37f"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/39eccaaf7460-EL2150____ver1_top-m-960.webp",
+          "bytes": 74316,
+          "sha256": "eaa4d27b5cc30e18c92290b48dce33dadc235d985965ca0c0b10dec9044a1891"
+        }
+      ]
+    },
+    "/assets/original-tilda/5752cbf8286d-EL1048____ver1_top-m.webp": {
+      "source_sha256": "c9d5541dbe2d8e20afebcb283ae5694ef0402f4c3212f8f0d47de1bf309a3ff4",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/5752cbf8286d-EL1048____ver1_top-m-480.webp",
+          "bytes": 24456,
+          "sha256": "270f9cc83d6a09e54438aceec12948f10e74f7979b69d57dc74b047b087eebb7"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/5752cbf8286d-EL1048____ver1_top-m-960.webp",
+          "bytes": 136498,
+          "sha256": "085fd1503dc45b83f2a712901172307e94d417670abdc29eef710f1b1711a0cc"
+        }
+      ]
+    },
+    "/assets/original-tilda/59c866ccd6f5-EL2170____ver1_top-m.webp": {
+      "source_sha256": "668b75dd5e3d1dca408eda852d6c6732cdda22df5c6d5f19c2879d7ae9ce657a",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/59c866ccd6f5-EL2170____ver1_top-m-480.webp",
+          "bytes": 17198,
+          "sha256": "546728d309ccfb48820aae7441b426a4a4765ccada70ab69f647d7ae2682b146"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/59c866ccd6f5-EL2170____ver1_top-m-960.webp",
+          "bytes": 92100,
+          "sha256": "03131596adb3cd04821ddaf9dacbedf64dc037001e2b6ad9e21533e5f2ecd753"
+        }
+      ]
+    },
+    "/assets/original-tilda/59ca17cfb340-_-min.webp": {
+      "source_sha256": "7e965a20d25a5aff348240017016dac0a39587025f94f680e839b62c5ba76705",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/59ca17cfb340-_-min-480.webp",
+          "bytes": 10076,
+          "sha256": "a407944e572516d925996bd3e12e457b0622f6a8117337a5f10afb7a35d908d7"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/59ca17cfb340-_-min-960.webp",
+          "bytes": 34884,
+          "sha256": "0640a5fc88f0f709bdcd5e93e34f26777719fb5a88e5f226d49eadcb7ec29244"
+        }
+      ]
+    },
+    "/assets/original-tilda/5b45d88e0333-EL1041_____ver1_top-.webp": {
+      "source_sha256": "7579ab2d92b6a6ede2a9f084089baa2c3fdefd0dba0ff2bef8a84296fe254d82",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/5b45d88e0333-EL1041_____ver1_top--480.webp",
+          "bytes": 16136,
+          "sha256": "42cd184af192b724183df7a3817af4d827cd450391a730968c97ae55688ed9db"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/5b45d88e0333-EL1041_____ver1_top--960.webp",
+          "bytes": 93880,
+          "sha256": "ca4f1b9cb4d2769d832d22e65d396e46fc8442876f43eeebea311f5a9b86ffc2"
+        }
+      ]
+    },
+    "/assets/original-tilda/62ed51dbc0df-_-1-min.webp": {
+      "source_sha256": "b8bfa216ede9bb729e8d0c399c18b36f23ed65e5d006b7223013ead6dde7d0c1",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/62ed51dbc0df-_-1-min-480.webp",
+          "bytes": 18824,
+          "sha256": "4369b8417027a22f166a9dce32f993581e26a349cea0d5dd8c37d713d91d2dbb"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/62ed51dbc0df-_-1-min-960.webp",
+          "bytes": 61910,
+          "sha256": "69da595c03e2b3e3215a5a4e9bfa1cda7e67e51e4fe25ec9fa92cc0ff3e1e090"
+        }
+      ]
+    },
+    "/assets/original-tilda/68926a6287cd-_EL750_-2-min.webp": {
+      "source_sha256": "2e630be9112ee02d4c5700a91a0b54e90f3e30afe8f4bc5f8ee33451562eedb5",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/68926a6287cd-_EL750_-2-min-480.webp",
+          "bytes": 17766,
+          "sha256": "9bda77691c24060171e43b0678d9288f064929c7dec1e33686770c0c3f45cfce"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/68926a6287cd-_EL750_-2-min-960.webp",
+          "bytes": 58760,
+          "sha256": "93bf1f99de9e3747a5055b524db19afcfd64440c7f335b3bed3baba400dc8406"
+        }
+      ]
+    },
+    "/assets/original-tilda/69a2bd1029cc-EL2151_____ver1_top-.webp": {
+      "source_sha256": "84db2142eb318002e390737e94f3c318824be9c0fa8b817f10d56d685056dc4e",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/69a2bd1029cc-EL2151_____ver1_top--480.webp",
+          "bytes": 18416,
+          "sha256": "799faa77a122b1752bc91326394c315198bda2d760649c057d0322a8b53dac1e"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/69a2bd1029cc-EL2151_____ver1_top--960.webp",
+          "bytes": 102274,
+          "sha256": "fcddb4de27b90db2451738ddfd186709fc0091adc7982dad30238720c6c8c571"
+        }
+      ]
+    },
+    "/assets/original-tilda/6b5ec6aa3c3a-EL1002___ver1_top-mi.webp": {
+      "source_sha256": "d33053cc73fbcac5134b9955935fa2eef481b948ddb8f1850714a6578989984f",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/6b5ec6aa3c3a-EL1002___ver1_top-mi-480.webp",
+          "bytes": 17142,
+          "sha256": "5863df9e9086c4ef29105d96318cfec983e7e5216bc5c42e1b353d220209c885"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/6b5ec6aa3c3a-EL1002___ver1_top-mi-960.webp",
+          "bytes": 104004,
+          "sha256": "5df3aef4d67d5cf5cd42d820da9988bb56991dc4d2e5a957e2f7c9084a5b53ed"
+        }
+      ]
+    },
+    "/assets/original-tilda/6c4cb656294c-EL1036____ver1_top-m.webp": {
+      "source_sha256": "7d859b845f7772f9e0eccf306dc68b17e27b98ac65d91d61d6e2c386fb9134bb",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/6c4cb656294c-EL1036____ver1_top-m-480.webp",
+          "bytes": 12534,
+          "sha256": "cd3e682d5ee1a5ec52d57152e27bb158eae5a9d812af4a1eab201ede3a02854f"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/6c4cb656294c-EL1036____ver1_top-m-960.webp",
+          "bytes": 65454,
+          "sha256": "b3936908e635a9df2d6c707ddd3a521e674796fa024b88963435073dd287b675"
+        }
+      ]
+    },
+    "/assets/original-tilda/6eef62f94cd4-EL1053____ver1_top-m.webp": {
+      "source_sha256": "2724ab2aa967c5323bbf3414964788a45e0952472e7b4ae4949263e9056218cc",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/6eef62f94cd4-EL1053____ver1_top-m-480.webp",
+          "bytes": 28690,
+          "sha256": "36da987355900696a5613d202659b87f13b245079e0dd0624059fec88a7afb7f"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/6eef62f94cd4-EL1053____ver1_top-m-960.webp",
+          "bytes": 142308,
+          "sha256": "7742e2b2136193ad1a6376748202871bc5727efefd3c2a0a0b3411b085cd2af8"
+        }
+      ]
+    },
+    "/assets/original-tilda/71790aee3dc2-EL1044____ver1_top-m.webp": {
+      "source_sha256": "a207d1030ff4678b48b91350d9c04cff6be1c7f638a734d431d39148edaa0cd7",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/71790aee3dc2-EL1044____ver1_top-m-480.webp",
+          "bytes": 19454,
+          "sha256": "cc84b694f0b9a30523bdf3063ed7f448434f57b66ff5d5c5ce4af1f8a3e3d4f1"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/71790aee3dc2-EL1044____ver1_top-m-960.webp",
+          "bytes": 112964,
+          "sha256": "052ba3978d185f67ca041d6e54c06113274fe0186469437aa506398e77f597ce"
+        }
+      ]
+    },
+    "/assets/original-tilda/71bae444c7a8-__-min.webp": {
+      "source_sha256": "7e5787a049cd5da06c47c98d230db71aee290b645ed26070611ba6231cb3f26c",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/71bae444c7a8-__-min-480.webp",
+          "bytes": 14454,
+          "sha256": "06d76c9faa3d4cc864a3654d63b42bc7516d9161ce500fddec4da68bf0a28947"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/71bae444c7a8-__-min-960.webp",
+          "bytes": 59394,
+          "sha256": "76d6777e794bed81be0555e5be83e2691368264de4fdad5812c3bff423517377"
+        }
+      ]
+    },
+    "/assets/original-tilda/824da7b32934-__-1-min.webp": {
+      "source_sha256": "d839a03cc45e06934907c53d5900d9eab61b88121dbaf7e57724b3319919f239",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/824da7b32934-__-1-min-480.webp",
+          "bytes": 15008,
+          "sha256": "c0a4deea7fd017336683898a16e658f39f1b91bb082adb6a51783a74ba59ca56"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/824da7b32934-__-1-min-960.webp",
+          "bytes": 52482,
+          "sha256": "de23e1b135b4ef4f2e144df5ee4ff4fdf2013c9dd43d911b8b3f346075095621"
+        }
+      ]
+    },
+    "/assets/original-tilda/8528d0440ac0-EL1000___ver1_top-mi.webp": {
+      "source_sha256": "05e8cf3fd10119c7fc5993a9810d945de1e8cb9c40cf0916d5c106da0a61578b",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/8528d0440ac0-EL1000___ver1_top-mi-480.webp",
+          "bytes": 11744,
+          "sha256": "ca438a67bbda353fbce9f2d320c3a37d30c4ab9b308e8e8ffcd4daa63180340e"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/8528d0440ac0-EL1000___ver1_top-mi-960.webp",
+          "bytes": 67312,
+          "sha256": "091fe367f31e05b2f393b390d1ca22394c207ab28a3a6b447e4aa0122b589ce2"
+        }
+      ]
+    },
+    "/assets/original-tilda/8613c6c7dc0f-_-min.webp": {
+      "source_sha256": "a44fb07e762a4dbbdf36d785aac2b49a2cb1cd1869a30f1140796d8b6c0d7d85",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/8613c6c7dc0f-_-min-480.webp",
+          "bytes": 15904,
+          "sha256": "00b4c78b3921a8cbf60327a3039a92d159d678f6d4a10b82dfe80bc13d7b20e3"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/8613c6c7dc0f-_-min-960.webp",
+          "bytes": 60002,
+          "sha256": "be7d8af18adda5c6377e8ed2cc8b5a4678016b7d009c3f4842b9be3161f6db2f"
+        }
+      ]
+    },
+    "/assets/original-tilda/86a2371a094d-EL2152____ver1_top-m.webp": {
+      "source_sha256": "4a94104b65a6e4ce990628bfdd482782782b8f46ece96e4341a5e91dddefe4f6",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/86a2371a094d-EL2152____ver1_top-m-480.webp",
+          "bytes": 22340,
+          "sha256": "6f57d752a799eb9568d0770f54c3db21e14b15a4eaaca239894ca2e2c01e1364"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/86a2371a094d-EL2152____ver1_top-m-960.webp",
+          "bytes": 127790,
+          "sha256": "da3d3c6cde717c1d5b55ca93c7210cd7d5e01c31c3ce9a8d3674d7f13934fd68"
+        }
+      ]
+    },
+    "/assets/original-tilda/8ce9a355c101-EL1046_____ver1_top-.webp": {
+      "source_sha256": "22b511ed08e4998ba60040e9e3c6f375c2a7ed53d7d6736ffa1164513d3f0284",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/8ce9a355c101-EL1046_____ver1_top--480.webp",
+          "bytes": 18750,
+          "sha256": "e112df99ec5e343a4b6a3b9d496cd03f7eae1312e270dd3ed28cee4e410d89ab"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/8ce9a355c101-EL1046_____ver1_top--960.webp",
+          "bytes": 103276,
+          "sha256": "0262c4c8ef0aaee50ec65f031f8ade2480cea39c98f489ec2152c86bc8729a7a"
+        }
+      ]
+    },
+    "/assets/original-tilda/8f2f91961524-EL1049____ver1_top-m.webp": {
+      "source_sha256": "433c5ff416c353de0a72d6f11f5c3b90ee0ac37d0d6a3dbc42d2d8dedf0a03f5",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/8f2f91961524-EL1049____ver1_top-m-480.webp",
+          "bytes": 23554,
+          "sha256": "c20e711cd2ff9beb875d3f28a1f50db1dc9863a50b1222ec36cec43cecca4378"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/8f2f91961524-EL1049____ver1_top-m-960.webp",
+          "bytes": 108358,
+          "sha256": "fd3393300dae74a71e1b93690842aa7b4e446462f4a7228ce8cceafb656f1f35"
+        }
+      ]
+    },
+    "/assets/original-tilda/9172533304ae-_-1-min.webp": {
+      "source_sha256": "df4616a0d3012826b17b6e6060296e66ce6acccbaca34574f7494d40aadb328d",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/9172533304ae-_-1-min-480.webp",
+          "bytes": 16194,
+          "sha256": "ff8d97c8e6708178dcd829eee26ea1c8382ca4df2ae8b4fdb7976fb5c883c135"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/9172533304ae-_-1-min-960.webp",
+          "bytes": 48620,
+          "sha256": "bdd5d22c5cd9885860d2bf70e342bdf68d757f78525c7d1d506b92fd9c617267"
+        }
+      ]
+    },
+    "/assets/original-tilda/935e11546197-_-min.webp": {
+      "source_sha256": "2770333b035675d6ed07ec14f58f0e7fd8db846f39e3e92c5d22c850a133ba78",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/935e11546197-_-min-480.webp",
+          "bytes": 12120,
+          "sha256": "b1ae0c8a78d31be526001ac92fa8a1dcfb4592021707ad0f72e9e1cf33fb8917"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/935e11546197-_-min-960.webp",
+          "bytes": 40512,
+          "sha256": "ddbb486110de0c2e1f9c48be3097b58e93636fa74f14ff0e05fa9af501efc343"
+        }
+      ]
+    },
+    "/assets/original-tilda/9b60d4d34a96-_-min.webp": {
+      "source_sha256": "76fe2af59fd8c0c6960ebaddb20d9436f1f64e58c82d1ab943c7b2537d62ffc8",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/9b60d4d34a96-_-min-480.webp",
+          "bytes": 14838,
+          "sha256": "1005faabb95adf6c7ce06f60754539ead61d615b54784aaeecbaa92a4bad2828"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/9b60d4d34a96-_-min-960.webp",
+          "bytes": 49698,
+          "sha256": "b609d07b6ea3d9d64b018438445cf532879167fb39e04b003ddf1cebd9805bf5"
+        }
+      ]
+    },
+    "/assets/original-tilda/9db832bb8968-EL1040____ver1_top-m.webp": {
+      "source_sha256": "437a743f644164206b5e5ccababe6d7d6fc06f4d9fed912b5bdf6c3233d9d54e",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/9db832bb8968-EL1040____ver1_top-m-480.webp",
+          "bytes": 10150,
+          "sha256": "6c942345cbdb769fffe8059964aa1c9d3618331864e8233aa8ba9ff92761a0fc"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/9db832bb8968-EL1040____ver1_top-m-960.webp",
+          "bytes": 56398,
+          "sha256": "202c4591124f443ae7bfef588054c083f24baa518471afdd6d432840842eebb8"
+        }
+      ]
+    },
+    "/assets/original-tilda/a3061e70133a-EL1045____ver1_top-m.webp": {
+      "source_sha256": "fdf2eda698b678284f35f050c90644a42aee687f5af528d7fd04db400fb4b334",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/a3061e70133a-EL1045____ver1_top-m-480.webp",
+          "bytes": 19598,
+          "sha256": "facb1e5f1e471aec3d81e7a2620907c78c944b614cbddec5b3982fe3c295f3d0"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/a3061e70133a-EL1045____ver1_top-m-960.webp",
+          "bytes": 104670,
+          "sha256": "329e111130906ebc046346f98d94ee5d3546cd75b63cd689b1a2c919154b8001"
+        }
+      ]
+    },
+    "/assets/original-tilda/a4e61edb12c0-A2190_Bedroom04_fron.webp": {
+      "source_sha256": "213e9e0ac6c19cc801884f5c07cef0ff55808db4d0e46e87e17fbf37b00bc6bd",
+      "source_width": 1680,
+      "source_height": 1260,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/a4e61edb12c0-A2190_Bedroom04_fron-480.webp",
+          "bytes": 11458,
+          "sha256": "c113666ec3b926baf8dd1d5863eb4b9c578beb4845084a36c1f5b1b3d3f9d265"
+        },
+        {
+          "width": 960,
+          "height": 720,
+          "path": "/assets/responsive/a4e61edb12c0-A2190_Bedroom04_fron-960.webp",
+          "bytes": 37892,
+          "sha256": "e8b6575b96ec1d87096e3872c381fd04ba242a0b9069211a2a18c9a214cd84db"
+        }
+      ]
+    },
+    "/assets/original-tilda/a6152eb83895-EL2171____ver1_top-m.webp": {
+      "source_sha256": "eddae2803b91e60f9ac6a990194027a18c03144dc967572efaa1b06cda9d05df",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/a6152eb83895-EL2171____ver1_top-m-480.webp",
+          "bytes": 23672,
+          "sha256": "4b0b2fd48bb829865e8bd78b6d897519bfc5d90df92ee150149de68c497a8e96"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/a6152eb83895-EL2171____ver1_top-m-960.webp",
+          "bytes": 124590,
+          "sha256": "1c900a4626388bbc2ab62a2381f87df33cef0fefee64b0988cea3dbb9e0bd36e"
+        }
+      ]
+    },
+    "/assets/original-tilda/a6908199fe1b-EL1054____ver1_top-m.webp": {
+      "source_sha256": "e6477629d4091a7859b600e86026ddc70d03ced8688bbca85b9ca41e7a523eac",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/a6908199fe1b-EL1054____ver1_top-m-480.webp",
+          "bytes": 11856,
+          "sha256": "c8fecd0088d54f3560e3ef6750212ced7395ffda61c500542f0ab14e12721024"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/a6908199fe1b-EL1054____ver1_top-m-960.webp",
+          "bytes": 71464,
+          "sha256": "031ee674b5581e34f26c57d129cbed2a4a05b0b2e25030800644aa8727a91c10"
+        }
+      ]
+    },
+    "/assets/original-tilda/ad0c6e75f260-_-min.webp": {
+      "source_sha256": "79ee55dbd513cfe03fd4da53ed68edc6b2d42108ee8ab27b297d9de3559e72ba",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/ad0c6e75f260-_-min-480.webp",
+          "bytes": 22682,
+          "sha256": "0f513f8e705de0e1cb0e661715f7c1154451f8ad255a982d112212b0ced71cde"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/ad0c6e75f260-_-min-960.webp",
+          "bytes": 77306,
+          "sha256": "a32dab147a344058c3f08405cd883c31e98b99f6376f2e473cd9b38c15c5aa19"
+        }
+      ]
+    },
+    "/assets/original-tilda/b07fb52f913a-_-min.webp": {
+      "source_sha256": "f58a32bd6917e832cf72f2b91dea83982d39033c9f0b8a161ec8cb21c03e59f4",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/b07fb52f913a-_-min-480.webp",
+          "bytes": 19902,
+          "sha256": "fab47bbe68471bc8f11837c74ebdf5f9f0ac4045d8975c326930bf1da9effa6e"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/b07fb52f913a-_-min-960.webp",
+          "bytes": 67958,
+          "sha256": "f5ac4c1f97373304521a0a59cb98cc52b45672f51097105a56d2c3e8895dd06d"
+        }
+      ]
+    },
+    "/assets/original-tilda/b43c3df596a6-EL1037_____ver1_top-.webp": {
+      "source_sha256": "836ce8be3b099f8b4307670737298bb5381c8327adbf2d13bcdbf6d81a243a8f",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/b43c3df596a6-EL1037_____ver1_top--480.webp",
+          "bytes": 16158,
+          "sha256": "e787e453b5933ed99cac04d021eb50e9eddecb9c18fefce9ea0aa9e4faef73ba"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/b43c3df596a6-EL1037_____ver1_top--960.webp",
+          "bytes": 81252,
+          "sha256": "29df09dd4cd41c3f00dff9c09e053adc13a88a09062535ac81fdc7b60b12ab55"
+        }
+      ]
+    },
+    "/assets/original-tilda/b572561dead9-__-min.webp": {
+      "source_sha256": "1128d5e20bf1ba00bcf1d469893e587243b1147ea1d817f9778e2e54ec55ae2b",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/b572561dead9-__-min-480.webp",
+          "bytes": 13384,
+          "sha256": "1887f994ee9cf13786d9718ff826d23d871741313b3cdb54c0eff79e213eac3e"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/b572561dead9-__-min-960.webp",
+          "bytes": 48090,
+          "sha256": "04660272b8c7bf16b26cc24dcb5276d77eb3cb6b34bb48d5b8ff3e30bad72262"
+        }
+      ]
+    },
+    "/assets/original-tilda/bba0287e4a5a-_-1-min.webp": {
+      "source_sha256": "05c22b0060338df841c1cac39a62e78a40e206d34f645389c855a98f52eb08d9",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/bba0287e4a5a-_-1-min-480.webp",
+          "bytes": 18474,
+          "sha256": "379bfada7707df834a7e598ccb6ce4aeb6720196f77ea3fa546234b579a239f2"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/bba0287e4a5a-_-1-min-960.webp",
+          "bytes": 63654,
+          "sha256": "e8fa97c1d3baddce00c438e36829a388bf25237a31b80b412cd52e74b6228804"
+        }
+      ]
+    },
+    "/assets/original-tilda/be59eb1ec84c-_-1-min.webp": {
+      "source_sha256": "60fd4e33a4be3302dc5e99a8747e3e2efe6e36e0aaa691e155eda629ea8139a4",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/be59eb1ec84c-_-1-min-480.webp",
+          "bytes": 12562,
+          "sha256": "67db2679c0b6431beaff57dfd8e40121caca0055b3e2505062d6859b328839b1"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/be59eb1ec84c-_-1-min-960.webp",
+          "bytes": 36430,
+          "sha256": "b529c335c3deb92af617c39e050ca1499defc917774b34e0d323300df007da34"
+        }
+      ]
+    },
+    "/assets/original-tilda/bfd854ede1c4-_-1-min.webp": {
+      "source_sha256": "bd956763f2dddd9cda6c3fbca684e85ead032e38b53d0eb15c08d2b95ca7ebd7",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/bfd854ede1c4-_-1-min-480.webp",
+          "bytes": 24624,
+          "sha256": "acd40509e4d99bf07001dd835b7fc2c130756b08dc3c28f551522dde43c2e39b"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/bfd854ede1c4-_-1-min-960.webp",
+          "bytes": 86842,
+          "sha256": "83f69ff437f63aa6cb577e24835d933bfb35c70c9c3eb5da2aeaeb25ae9e2544"
+        }
+      ]
+    },
+    "/assets/original-tilda/c2de9d8b2136-EL1043____ver1_top-m.webp": {
+      "source_sha256": "0eb39ab2c493d455726c3561fb38de0ed21c8c618b5413948115220b7e2543a7",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/c2de9d8b2136-EL1043____ver1_top-m-480.webp",
+          "bytes": 18372,
+          "sha256": "f7cbe5dfde57ba03700df0f13471d06f4e06e69253d921829189beb8d2a8ad6d"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/c2de9d8b2136-EL1043____ver1_top-m-960.webp",
+          "bytes": 112638,
+          "sha256": "8bd7f7f39e63c002c9aeae62ea2030a0f70b1aff20c54f3b29ae02328f931961"
+        }
+      ]
+    },
+    "/assets/original-tilda/caf9f0ec9c58-EL1049_R1049_Kitchen.webp": {
+      "source_sha256": "06ccf48faa76a7199799ac23799f4bdaa86e6a4aff510a97c842c3785328f5d6",
+      "source_width": 1680,
+      "source_height": 1260,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/caf9f0ec9c58-EL1049_R1049_Kitchen-480.webp",
+          "bytes": 22816,
+          "sha256": "4942bd5fba4704e598c4bcc407804b871fafc68902968efb3e440230fc3fef40"
+        },
+        {
+          "width": 960,
+          "height": 720,
+          "path": "/assets/responsive/caf9f0ec9c58-EL1049_R1049_Kitchen-960.webp",
+          "bytes": 94444,
+          "sha256": "6a6e6f30acc05a02864d29145e5bec0400109453dcd3babeb68ba9d85411f949"
+        }
+      ]
+    },
+    "/assets/original-tilda/ce635ae9f66a-EL153___ver1_top-min.webp": {
+      "source_sha256": "2dbbc72691f5a88188f7f9c9aa49823b3d7b24786265b398a7d65163e523585e",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/ce635ae9f66a-EL153___ver1_top-min-480.webp",
+          "bytes": 14060,
+          "sha256": "9316df542c727dc1ef32954c55fde1d3246c866e58aaa60d3208cb278a64f075"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/ce635ae9f66a-EL153___ver1_top-min-960.webp",
+          "bytes": 72558,
+          "sha256": "a3fd5c18464378de6ca4c1d9c81c5bbdef01d90605563376f7eaaf4e727e7226"
+        }
+      ]
+    },
+    "/assets/original-tilda/cf62865e7dbb-_-1-min.webp": {
+      "source_sha256": "3512d3621f1b01e979d806b8995f61fbcb81803900cfd5f40b76be08c98ce453",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/cf62865e7dbb-_-1-min-480.webp",
+          "bytes": 14392,
+          "sha256": "f1100557e729f8786907f439d59c159768ed0fb92967038444dd4f8c8ade98af"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/cf62865e7dbb-_-1-min-960.webp",
+          "bytes": 44354,
+          "sha256": "9887ff350f5072163465eb9854c00cd34e3475c524461d1ac95a5e598bca0382"
+        }
+      ]
+    },
+    "/assets/original-tilda/cf8d4a4bf1a2-El1052____ver1_top-m.webp": {
+      "source_sha256": "e5bee50ae756e2101c742f3fcae2a6cd1c95e91bb7179b3fc0ab31e2423328f3",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/cf8d4a4bf1a2-El1052____ver1_top-m-480.webp",
+          "bytes": 29844,
+          "sha256": "1b62d39b1be8fdc2afba159384a16815342387e92c17c51f090db825fd21c1a3"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/cf8d4a4bf1a2-El1052____ver1_top-m-960.webp",
+          "bytes": 145332,
+          "sha256": "cd97b9533b4d7f9eb8d12ebc4bc2c6884d53450b4bcc6cc98d9ea7ebb8e690a9"
+        }
+      ]
+    },
+    "/assets/original-tilda/d00a2b3e4818-_-min.webp": {
+      "source_sha256": "dfd530faab2729a9330c6c6b9088915d49a8510fde6f38afb8173a74eec4b807",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/d00a2b3e4818-_-min-480.webp",
+          "bytes": 12238,
+          "sha256": "1ac6c68889f8c40436843f9f21f409601baa8b4a0f24e5374930420bcdc1973a"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/d00a2b3e4818-_-min-960.webp",
+          "bytes": 40380,
+          "sha256": "4c6ca52f9ae107857f4e42a97f067ee6703a22fa4406ce0f295dd8155d7238ea"
+        }
+      ]
+    },
+    "/assets/original-tilda/d055377b4d0a-__-1-min.webp": {
+      "source_sha256": "d7adb735e0d826216832e0d905f80754926f56eff72649c11d3a6ff59b53ad97",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/d055377b4d0a-__-1-min-480.webp",
+          "bytes": 12348,
+          "sha256": "9d053f2c200f1d08266e263189e16ccbf538ebd9ed64dfa3c24e1d5a365d7daa"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/d055377b4d0a-__-1-min-960.webp",
+          "bytes": 44466,
+          "sha256": "d5fdab8b10bb265630f175a7193d0200de7d6c634fd41649fd3a886d6680dd5c"
+        }
+      ]
+    },
+    "/assets/original-tilda/e35797186861-__-1-min.webp": {
+      "source_sha256": "374d0bb044f9feddc6ef5e395396164e077efedc00a042e3f55802b0320aba29",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/e35797186861-__-1-min-480.webp",
+          "bytes": 16376,
+          "sha256": "cb51340246c31310aadf5a6729361be6804376ccc8b3a0159f7c270883ae10a7"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/e35797186861-__-1-min-960.webp",
+          "bytes": 53504,
+          "sha256": "b91fc04defcaa15ecffa147322a7d587b28fd875aecd9384f134fb98e4962f93"
+        }
+      ]
+    },
+    "/assets/original-tilda/ed642c78d089-EL2153____ver1_top-m.webp": {
+      "source_sha256": "9e74dd8bd31a60eecf47c6d696738f880235b88974c20b5798d86f6a7016c795",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/ed642c78d089-EL2153____ver1_top-m-480.webp",
+          "bytes": 23118,
+          "sha256": "1e3053131adbad142754cbbf85e9d40c4f090dc8c2889b69806310357a57ac30"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/ed642c78d089-EL2153____ver1_top-m-960.webp",
+          "bytes": 129990,
+          "sha256": "2cfca56bbfb7796afc601330946b48f03fcd930791a6cb1ab15ff0358dd651f2"
+        }
+      ]
+    },
+    "/assets/original-tilda/f30cf85356ba-__-1-min.webp": {
+      "source_sha256": "aca4b01fea2f6072856e3b4794c89a14f2ed0ef458b5bddb271895ccdbcb1300",
+      "source_width": 1680,
+      "source_height": 1261,
+      "variants": [
+        {
+          "width": 480,
+          "height": 360,
+          "path": "/assets/responsive/f30cf85356ba-__-1-min-480.webp",
+          "bytes": 13792,
+          "sha256": "79ad00bf4615d181ff3d6cebbf0bf2af4c83aec181b3d9a16673688af0d3015c"
+        },
+        {
+          "width": 960,
+          "height": 721,
+          "path": "/assets/responsive/f30cf85356ba-__-1-min-960.webp",
+          "bytes": 39966,
+          "sha256": "179833eceab9f223e2da9258ad0f0a6040b5f791601650e423e4cf2dc6a08913"
+        }
+      ]
+    },
+    "/assets/original-tilda/f41c2d5d4ba1-EL1051_____ver1_top-.webp": {
+      "source_sha256": "973238a62554a9a7f781de79757e116ef74cf21a629670b3c460c54dca4e0284",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/f41c2d5d4ba1-EL1051_____ver1_top--480.webp",
+          "bytes": 27390,
+          "sha256": "e430859d91670e8a53d9f522113cd19011704826939dead2b5be1c7c138baf7a"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/f41c2d5d4ba1-EL1051_____ver1_top--960.webp",
+          "bytes": 132926,
+          "sha256": "095fabcf0f3152207aaf77d8306b7f0951506e7122a411438845eecd9dd76bae"
+        }
+      ]
+    },
+    "/assets/original-tilda/f9cbba8d1844-__EL750_-_ver1__top-.webp": {
+      "source_sha256": "49d23a8acc4df3b4a28f699be0e190685ace6e2274d5af5acbd75c58d4ea3b0e",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/f9cbba8d1844-__EL750_-_ver1__top--480.webp",
+          "bytes": 13608,
+          "sha256": "d46e8423d963093baf4eb9d055336c7363d5dbf7d67b55510eb87c5f97ef6687"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/f9cbba8d1844-__EL750_-_ver1__top--960.webp",
+          "bytes": 74564,
+          "sha256": "8459701fc929290c9473fa9605679e5f52626838865030122257af48667569ce"
+        }
+      ]
+    },
+    "/assets/original-tilda/ff23b8576315-EL2173____ver1_top-m.webp": {
+      "source_sha256": "527638fb39d9b3996374b1a79d32bc7947c315057cba3a94e061aebdb9285dc7",
+      "source_width": 1680,
+      "source_height": 1120,
+      "variants": [
+        {
+          "width": 480,
+          "height": 320,
+          "path": "/assets/responsive/ff23b8576315-EL2173____ver1_top-m-480.webp",
+          "bytes": 20740,
+          "sha256": "f2933bb89c602df5acf90a92a16afe1aed8f9d00701c9ea3099861d4b9e4d88d"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "path": "/assets/responsive/ff23b8576315-EL2173____ver1_top-m-960.webp",
+          "bytes": 104950,
+          "sha256": "015539fd30553d4cfb1b28930ce05b94279ac251c6de8ad2ca68aae128bbd284"
+        }
+      ]
+    }
+  }
+}

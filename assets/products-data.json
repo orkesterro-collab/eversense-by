@@ -26,57 +26,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL153",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Однотонные",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Бежевый песок",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Новый минимализм",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -84,7 +84,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/ce635ae9f66a-EL153___ver1_top-min.webp",
         "originalURL": "https://static.tildacdn.com/tild6663-3665-4832-a261-646632326361/EL153___ver1_top-min.jpg"
       },
@@ -94,7 +94,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/ad0c6e75f260-_-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3039-3963-4261-b434-356466366436/_-min.jpg"
       },
@@ -146,57 +146,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL750",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Однотонные",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Ярко-серый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Новый минимализм",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -204,7 +204,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/f9cbba8d1844-__EL750_-_ver1__top-.webp",
         "originalURL": "https://static.tildacdn.com/tild3665-6166-4366-a136-623763643161/__EL750_-_ver1__top-.jpg"
       },
@@ -214,7 +214,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/68926a6287cd-_EL750_-2-min.webp",
         "originalURL": "https://static.tildacdn.com/tild6661-3463-4662-a532-633133346165/_EL750_-2-min.jpg"
       },
@@ -266,57 +266,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1000",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Мрамор",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Светлый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Large",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "2,54 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 246 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Новый минимализм",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -324,7 +324,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/8528d0440ac0-EL1000___ver1_top-mi.webp",
         "originalURL": "https://static.tildacdn.com/tild6364-6136-4363-b738-366536396131/EL1000___ver1_top-mi.jpg"
       },
@@ -334,7 +334,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/8613c6c7dc0f-_-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3061-3934-4239-b835-393665353632/_-min.jpg"
       },
@@ -386,57 +386,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1002",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Мрамор",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Серый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Large",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "2,54 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 246 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Новый минимализм",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -444,7 +444,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/6b5ec6aa3c3a-EL1002___ver1_top-mi.webp",
         "originalURL": "https://static.tildacdn.com/tild3236-6262-4634-b232-363436616666/EL1002___ver1_top-mi.jpg"
       },
@@ -454,7 +454,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/15f2b2143e0f-_-3-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3334-6232-4062-b065-643564306330/_-3-min.jpg"
       },
@@ -506,57 +506,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1036",
-        "line": 62
+        "line": 50
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Вирдиа",
-        "line": 62
+        "line": 50
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Светлый",
-        "line": 62
+        "line": 50
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 62
+        "line": 50
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 62
+        "line": 50
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 62
+        "line": 50
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 62
+        "line": 50
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 62
+        "line": 50
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 62
+        "line": 50
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 62
+        "line": 50
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Природная эстетика",
-        "line": 68
+        "line": 56
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -564,7 +564,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 62,
+        "line": 50,
         "htmlValue": "../../../assets/original-tilda/6c4cb656294c-EL1036____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild3763-6161-4636-b332-346439663133/EL1036____ver1_top-m.jpg"
       },
@@ -574,7 +574,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 62,
+        "line": 50,
         "htmlValue": "../../../assets/original-tilda/71bae444c7a8-__-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3238-3662-4664-b632-366234653938/__-min.jpg"
       },
@@ -626,57 +626,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1037",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Вирдиа",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Натуральный светлый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Природная эстетика",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -684,7 +684,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/b43c3df596a6-EL1037_____ver1_top-.webp",
         "originalURL": "https://static.tildacdn.com/tild3264-6634-4733-b133-373434323436/EL1037_____ver1_top-.jpg"
       },
@@ -694,7 +694,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/f30cf85356ba-__-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3765-6538-4466-b838-333336333061/__-1-min.jpg"
       },
@@ -746,57 +746,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1038",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Вирдиа",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Натуральный",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Тихая роскошь",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -804,7 +804,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/2aaaa4339bae-EL1038____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild3561-6564-4161-a235-613264643437/EL1038____ver1_top-m.jpg"
       },
@@ -814,7 +814,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/9172533304ae-_-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3438-3231-4637-b334-643735346334/_-1-min.jpg"
       },
@@ -866,57 +866,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1039",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Вирдиа",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Коричневый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Тихая роскошь",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -924,7 +924,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/30ad52e3d4e3-EL1039____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild3735-3337-4461-a631-663964386539/EL1039____ver1_top-m.jpg"
       },
@@ -934,7 +934,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/bfd854ede1c4-_-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3463-3763-4531-b438-613264613066/_-1-min.jpg"
       },
@@ -986,57 +986,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1040",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Тичино",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Белый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Новый минимализм",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -1044,7 +1044,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/9db832bb8968-EL1040____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild3361-3138-4335-a133-356533643038/EL1040____ver1_top-m.jpg"
       },
@@ -1054,7 +1054,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/59ca17cfb340-_-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3530-3033-4561-b036-343435626665/_-min.jpg"
       },
@@ -1106,57 +1106,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1041",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Тичино",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Натуральный светлый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Природная эстетика",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -1164,7 +1164,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/5b45d88e0333-EL1041_____ver1_top-.webp",
         "originalURL": "https://static.tildacdn.com/tild3637-3237-4032-b431-636662623866/EL1041_____ver1_top-.jpg"
       },
@@ -1174,7 +1174,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/07d87b8312a9-__-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3865-6463-4531-b737-633030373834/__-min.jpg"
       },
@@ -1226,57 +1226,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1043",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Тичино",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Натуральный",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Тихая роскошь",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -1284,7 +1284,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/c2de9d8b2136-EL1043____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild6636-3663-4434-a331-343662643733/EL1043____ver1_top-m.jpg"
       },
@@ -1294,7 +1294,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/b07fb52f913a-_-min.webp",
         "originalURL": "https://static.tildacdn.com/tild6434-3630-4533-a561-303536363864/_-min.jpg"
       },
@@ -1346,57 +1346,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1044",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Тичино",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Коричневый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Тихая роскошь",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -1404,7 +1404,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/71790aee3dc2-EL1044____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild6331-3763-4333-b332-323366383266/EL1044____ver1_top-m.jpg"
       },
@@ -1414,7 +1414,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/bba0287e4a5a-_-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3661-6138-4262-a462-323933663937/_-1-min.jpg"
       },
@@ -1466,57 +1466,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1045",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Лаваредо",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Серый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Новый минимализм",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -1524,7 +1524,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/a3061e70133a-EL1045____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild3730-6139-4136-b965-646537623230/EL1045____ver1_top-m.jpg"
       },
@@ -1534,7 +1534,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/935e11546197-_-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3338-3436-4638-b037-333365646130/_-min.jpg"
       },
@@ -1586,57 +1586,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1046",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Лаваредо",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Натуральный светлый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Природная эстетика",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -1644,7 +1644,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/8ce9a355c101-EL1046_____ver1_top-.webp",
         "originalURL": "https://static.tildacdn.com/tild6339-6466-4237-b836-323465646337/EL1046_____ver1_top-.jpg"
       },
@@ -1654,7 +1654,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/e35797186861-__-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild6266-6265-4361-a639-373965366438/__-1-min.jpg"
       },
@@ -1706,57 +1706,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1047",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Лаваредо",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Натуральный",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Тихая роскошь",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -1764,7 +1764,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/221462659c8d-EL1047____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild3261-3036-4034-a636-303766313266/EL1047____ver1_top-m.jpg"
       },
@@ -1774,7 +1774,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/0e171125bb3c-_-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild6139-6238-4462-a435-323861613361/_-1-min.jpg"
       },
@@ -1826,57 +1826,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1048",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Лаваредо",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Коричневый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Тихая роскошь",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -1884,7 +1884,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/5752cbf8286d-EL1048____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild3565-6235-4266-b635-643564373963/EL1048____ver1_top-m.jpg"
       },
@@ -1894,7 +1894,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/2627c6aebc9e-_-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3131-3663-4462-a237-623261323331/_-1-min.jpg"
       },
@@ -1946,57 +1946,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1049",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Виктория",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Белый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Новый минимализм",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -2004,7 +2004,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/8f2f91961524-EL1049____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild6436-3239-4434-b133-363337663938/EL1049____ver1_top-m.jpg"
       },
@@ -2014,7 +2014,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/caf9f0ec9c58-EL1049_R1049_Kitchen.webp",
         "originalURL": "https://static.tildacdn.com/tild3237-3966-4665-a632-366635373336/EL1049_R1049_Kitchen.jpg"
       },
@@ -2066,57 +2066,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1050",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Виктория",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Светло-серый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Новый минимализм",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -2124,7 +2124,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/2958945c9e13-EL1050___-_ver1_top-.webp",
         "originalURL": "https://static.tildacdn.com/tild6263-3464-4465-a362-633537623530/EL1050___-_ver1_top-.jpg"
       },
@@ -2134,7 +2134,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/313d56a1a5fa-_--min.webp",
         "originalURL": "https://static.tildacdn.com/tild3338-6139-4466-a136-323365363734/_--min.jpg"
       },
@@ -2186,57 +2186,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1051",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Виктория",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Натуральный светлый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Природная эстетика",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -2244,7 +2244,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/f41c2d5d4ba1-EL1051_____ver1_top-.webp",
         "originalURL": "https://static.tildacdn.com/tild3931-3462-4966-b266-353965656330/EL1051_____ver1_top-.jpg"
       },
@@ -2254,7 +2254,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/d055377b4d0a-__-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild6430-6561-4161-b763-333738616639/__-1-min.jpg"
       },
@@ -2306,57 +2306,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1052",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Виктория",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Натуральный",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Тихая роскошь",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -2364,7 +2364,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/cf8d4a4bf1a2-El1052____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild3862-3964-4962-b930-633064326334/El1052____ver1_top-m.jpg"
       },
@@ -2374,7 +2374,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/cf62865e7dbb-_-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3462-3261-4264-a161-336130363362/_-1-min.jpg"
       },
@@ -2426,57 +2426,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1053",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Виктория",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Серый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Новый минимализм",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -2484,7 +2484,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/6eef62f94cd4-EL1053____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild6364-3964-4162-b765-616263653439/EL1053____ver1_top-m.jpg"
       },
@@ -2494,7 +2494,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/62ed51dbc0df-_-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild6332-6162-4566-b432-363533373839/_-1-min.jpg"
       },
@@ -2546,57 +2546,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL1054",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Шерман",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Белый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Новый минимализм",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -2604,7 +2604,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/a6908199fe1b-EL1054____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild6439-6636-4362-a265-303237646439/EL1054____ver1_top-m.jpg"
       },
@@ -2614,7 +2614,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/188a91ad894e-_-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild6231-6366-4236-b032-313561363132/_-1-min.jpg"
       },
@@ -2666,57 +2666,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL2150",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Каселла",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Белый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Природная эстетика",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -2724,7 +2724,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/39eccaaf7460-EL2150____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild3165-3964-4135-a234-386365313361/EL2150____ver1_top-m.jpg"
       },
@@ -2734,7 +2734,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/9b60d4d34a96-_-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3234-6432-4232-a438-373133613964/_-min.jpg"
       },
@@ -2786,57 +2786,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL2151",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Каселла",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Натуральный светлый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Природная эстетика",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -2844,7 +2844,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/69a2bd1029cc-EL2151_____ver1_top-.webp",
         "originalURL": "https://static.tildacdn.com/tild3439-6439-4161-a230-343935336338/EL2151_____ver1_top-.jpg"
       },
@@ -2854,7 +2854,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/b572561dead9-__-min.webp",
         "originalURL": "https://static.tildacdn.com/tild6230-3939-4164-b331-346534363339/__-min.jpg"
       },
@@ -2906,57 +2906,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL2152",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Каселла",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Натуральный",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Тихая роскошь",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -2964,7 +2964,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/86a2371a094d-EL2152____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild3430-3265-4437-a164-353237623361/EL2152____ver1_top-m.jpg"
       },
@@ -2974,7 +2974,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/276c5c954956-_-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild6365-3630-4231-b761-613033303937/_-1-min.jpg"
       },
@@ -3026,57 +3026,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL2153",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Каселла",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Коричневый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Тихая роскошь",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -3084,7 +3084,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/ed642c78d089-EL2153____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild6639-3536-4833-b265-373363653339/EL2153____ver1_top-m.jpg"
       },
@@ -3094,7 +3094,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/be59eb1ec84c-_-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3735-3533-4863-a632-383736643333/_-1-min.jpg"
       },
@@ -3146,57 +3146,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL2170",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Падуа",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Светлый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Природная эстетика",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -3204,7 +3204,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/59c866ccd6f5-EL2170____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild3966-3437-4238-b538-326531656663/EL2170____ver1_top-m.jpg"
       },
@@ -3214,7 +3214,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/d00a2b3e4818-_-min.webp",
         "originalURL": "https://static.tildacdn.com/tild6230-6132-4738-b266-336633323136/_-min.jpg"
       },
@@ -3266,57 +3266,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL2171",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Падуа",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Натуральный",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Природная эстетика",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -3324,7 +3324,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/a6152eb83895-EL2171____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild3838-3930-4665-b866-643064373836/EL2171____ver1_top-m.jpg"
       },
@@ -3334,7 +3334,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/0c228f6e6d3a-_-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3634-6336-4934-a165-363332353539/_-1-min.jpg"
       },
@@ -3386,57 +3386,57 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL2173",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Падуа",
-        "line": 49
+        "line": 37
       },
       "shade": {
         "selector": "[data-elem-id=\"1751030332684\"] .tn-atom",
         "text": "Серый",
-        "line": 49
+        "line": 37
       },
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Природная эстетика",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -3444,7 +3444,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/ff23b8576315-EL2173____ver1_top-m.webp",
         "originalURL": "https://static.tildacdn.com/tild6531-3234-4762-b665-616365336664/EL2173____ver1_top-m.jpg"
       },
@@ -3454,7 +3454,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/824da7b32934-__-1-min.webp",
         "originalURL": "https://static.tildacdn.com/tild3436-3633-4761-b839-323236386632/__-1-min.jpg"
       },
@@ -3506,53 +3506,53 @@
       "sku": {
         "selector": "[data-elem-id=\"1750765893201\"] .tn-atom",
         "text": "EL2190",
-        "line": 49
+        "line": 37
       },
       "family": {
         "selector": "[data-elem-id=\"1750102435070\"] .tn-atom",
         "text": "Дуб Турин",
-        "line": 49
+        "line": 37
       },
       "shade": null,
       "packCount": {
         "selector": "[data-elem-id=\"1747661627970\"] .tn-atom",
         "text": "8 штук",
-        "line": 52
+        "line": 40
       },
       "thicknessMM": {
         "selector": "[data-elem-id=\"1747661626846\"] .tn-atom",
         "text": "8 мм",
-        "line": 52
+        "line": 40
       },
       "format": {
         "selector": "[data-elem-id=\"1747661625679\"] .tn-atom",
         "text": "Classic",
-        "line": 52
+        "line": 40
       },
       "lock": {
         "selector": "[data-elem-id=\"1747661463573\"] .tn-atom",
         "text": "CLIC it!",
-        "line": 52
+        "line": 40
       },
       "bevel": {
         "selector": "[data-elem-id=\"1747661630185\"] .tn-atom",
         "text": "V4",
-        "line": 52
+        "line": 40
       },
       "packArea": {
         "selector": "[data-elem-id=\"1747661629031\"] .tn-atom",
         "text": "1,99 м²",
-        "line": 52
+        "line": 40
       },
       "dimensions": {
         "selector": "[data-elem-id=\"1750097974649\"] .tn-atom",
         "text": "1292 х 193 мм",
-        "line": 52
+        "line": 40
       },
       "collectionName": {
         "selector": "[data-elem-id=\"1750943995919\"] .tn-atom",
         "text": "Тихая роскошь",
-        "line": 58
+        "line": 46
       },
       "productImage": {
         "elementID": "1747407968428",
@@ -3560,7 +3560,7 @@
         "top": "0",
         "width": "100",
         "attribute": "style/background-image",
-        "line": 51,
+        "line": 39,
         "htmlValue": "../../../assets/original-tilda/01a5c5f16366-EL2190___ver1_top-mi.webp",
         "originalURL": "https://static.tildacdn.com/tild3739-6666-4364-a632-316562363461/EL2190___ver1_top-mi.jpg"
       },
@@ -3570,7 +3570,7 @@
         "top": "500",
         "width": "50",
         "attribute": "style/background-image",
-        "line": 49,
+        "line": 37,
         "htmlValue": "../../../assets/original-tilda/a4e61edb12c0-A2190_Bedroom04_fron.webp",
         "originalURL": "https://static.tildacdn.com/tild3064-3162-4562-b335-636161643564/A2190_Bedroom04_fron.jpg"
       },
