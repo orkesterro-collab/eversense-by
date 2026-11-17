@@ -919,6 +919,64 @@ def main():
                     case('static-home-' + home_path.replace('/', '-') + '-' + device,
                          lambda p, c, path=home_path, d=device: static_home_test(p, c, path, d), width, height)
 
+            def compact_benefits_test(page, context, width):
+                goto(page, 'index.html', prices=False)
+                root = page.locator('#rec445068037nlm')
+                root.wait_for(state='visible')
+                root.scroll_into_view_if_needed()
+                wrapper = root.locator('.t-slds__items-wrapper')
+                result = []
+                for index in range(1, 6):
+                    active = root.locator('.t-slds__item_active:not([aria-hidden="true"])')
+                    active.locator(f'.ev-benefit-controls a[href="#bullet{index}"]').click()
+                    page.wait_for_function("""index => document.querySelector(
+                      '#rec445068037nlm .t-slds__items-wrapper').getAttribute('data-slider-pos') === String(index)""", arg=index)
+                    page.wait_for_timeout(450)
+                    metrics = active.evaluate("""el => {
+                      const root=el.closest('.t-rec'), r=root.getBoundingClientRect();
+                      const controls=el.querySelector('.ev-benefit-controls'), n=controls.getBoundingClientRect();
+                      const texts=[...el.querySelectorAll('.ev-benefit-copy > .tn-elem')]
+                        .filter(e=>e.getClientRects().length && getComputedStyle(e).visibility!=='hidden');
+                      const boxes=texts.map(e=>({text:e.innerText,r:e.getBoundingClientRect()}));
+                      const within=b=>b.top>=r.top-2 && b.bottom<=n.top+1 && b.left>=r.left-2 && b.right<=r.right+2;
+                      const overlap=boxes.flatMap((a,i)=>boxes.slice(i+1).filter(b=>
+                        Math.min(a.r.right,b.r.right)-Math.max(a.r.left,b.r.left)>2 &&
+                        Math.min(a.r.bottom,b.r.bottom)-Math.max(a.r.top,b.r.top)>2).map(b=>[a.text,b.text]));
+                      const w=document.documentElement.clientWidth;
+                      const oldHeight=w>=1200?Math.max(innerHeight,550*w/1200):
+                        w>=960?550*w/960:w>=640?844*w/640:w>=480?714*w/480:655*w/320;
+                      const hit=e=>{const b=e.getBoundingClientRect();
+                        const target=document.elementFromPoint(b.x+b.width/2,b.y+b.height/2);
+                        return target===e||e.contains(target);};
+                      return {height:r.height,expected:oldHeight*.75,centerError:Math.abs(n.x+n.width/2-r.x-r.width/2),
+                        copyInside:boxes.every(b=>within(b.r)),overlap,
+                        navInside:n.top>=r.top&&n.bottom<=r.bottom+1,
+                        arrows:[...el.querySelectorAll('.ev-benefit-prev,.ev-benefit-next')].map(e=>({
+                          width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height,hit:hit(e)})),
+                        overflow:document.documentElement.scrollWidth>w};
+                    }""")
+                    require(abs(metrics['height'] - metrics['expected']) < 3,
+                            f"Benefits carousel height is not 25% smaller at {width}: {metrics}")
+                    require(metrics['copyInside'] and not metrics['overlap'],
+                            f"Benefits copy clips or overlaps on slide {index} at {width}: {metrics}")
+                    require(metrics['navInside'] and metrics['centerError'] < 2 and not metrics['overflow'],
+                            f"Benefits controls are outside/beside the carousel at {width}: {metrics}")
+                    require(all(a['width'] >= 44 and a['height'] >= 44 and a['hit'] for a in metrics['arrows']),
+                            f"Benefits arrows cannot be clicked at {width}: {metrics}")
+                    if index == 1:
+                        shot(page, 'compact-benefits-' + str(width), full=False)
+                    result.append(metrics)
+                active.locator('.ev-benefit-next').click()
+                page.wait_for_function("document.querySelector('#rec445068037nlm .t-slds__items-wrapper').getAttribute('data-slider-pos') === '1'")
+                page.wait_for_timeout(450)
+                active.locator('.ev-benefit-prev').click()
+                page.wait_for_function("document.querySelector('#rec445068037nlm .t-slds__items-wrapper').getAttribute('data-slider-pos') === '5'")
+                return result
+
+            for width in (320, 390, 520, 768, 1024, 1440, 2048):
+                case('compact-benefits-' + str(width),
+                     lambda p, c, w=width: compact_benefits_test(p, c, w), width, 1000)
+
             def collection_breakpoint_test(page, context, device):
                 goto(page, 'index.html', prices=False)
                 return collection_panels(page, 'index.html', device)

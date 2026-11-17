@@ -1,0 +1,121 @@
+/* Compact only the five-slide benefits carousel, including its loop clones. */
+.ev-benefit-slide .t396__artboard { overflow: hidden !important; }
+.ev-benefit-copy {
+  position: absolute;
+  z-index: 4;
+  inset: 0 50% 88px 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px clamp(24px, 3.33vw, 68px);
+}
+.ev-benefit-copy > .tn-elem {
+  position: relative !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  flex: none;
+  zoom: 1 !important;
+  transform: none !important;
+}
+.ev-benefit-copy .tn-atom {
+  margin: 0 !important;
+  line-height: 1.3 !important;
+}
+.ev-benefit-copy .ev-benefit-brand .tn-atom,
+.ev-benefit-copy .ev-benefit-heading .tn-atom {
+  font-size: clamp(26px, 2.5vw, 42px) !important;
+}
+.ev-benefit-copy .ev-benefit-subheading .tn-atom {
+  font-size: clamp(20px, 2.08vw, 34px) !important;
+}
+.ev-benefit-copy .ev-benefit-body .tn-atom {
+  font-size: clamp(14px, 1vw, 18px) !important;
+  line-height: 1.45 !important;
+}
+.ev-benefit-copy > .ev-benefit-icon {
+  width: 50px !important;
+  height: 50px !important;
+  margin-bottom: 12px;
+}
+.ev-benefit-slide .ev-benefit-photo {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: 50% !important;
+  height: 100% !important;
+  zoom: 1 !important;
+  transform: none !important;
+}
+.ev-benefit-photo > .tn-atom { height: 100%; }
+.ev-benefit-controls {
+  position: absolute;
+  z-index: 10;
+  bottom: 16px;
+  left: 50%;
+  width: 280px;
+  height: 48px;
+  transform: translateX(-50%);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, .94);
+}
+.ev-benefit-controls > .tn-elem {
+  position: absolute !important;
+  top: 2px !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 44px !important;
+  height: 44px !important;
+  zoom: 1 !important;
+  transform: none !important;
+}
+.ev-benefit-controls .ev-benefit-prev { left: 8px !important; }
+.ev-benefit-controls .ev-benefit-next { left: 228px !important; }
+.ev-benefit-controls > .ev-benefit-prev-icon,
+.ev-benefit-controls > .ev-benefit-next-icon {
+  top: 14px !important;
+  width: 20px !important;
+  height: 20px !important;
+  pointer-events: none;
+}
+.ev-benefit-controls .ev-benefit-prev-icon { left: 20px !important; }
+.ev-benefit-controls .ev-benefit-next-icon { left: 240px !important; }
+.ev-benefit-controls > .ev-benefit-dot { width: 32px !important; }
+.ev-benefit-controls .ev-benefit-dot:has(a[href="#bullet1"]) { left: 64px !important; }
+.ev-benefit-controls .ev-benefit-dot:has(a[href="#bullet2"]) { left: 94px !important; }
+.ev-benefit-controls .ev-benefit-dot:has(a[href="#bullet3"]) { left: 124px !important; }
+.ev-benefit-controls .ev-benefit-dot:has(a[href="#bullet4"]) { left: 154px !important; }
+.ev-benefit-controls .ev-benefit-dot:has(a[href="#bullet5"]) { left: 184px !important; }
+.ev-benefit-controls .ev-benefit-dot > .tn-atom {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.ev-benefit-controls .ev-benefit-dot img { width: 16px; height: 20px; }
+.ev-benefit-controls a:focus-visible { outline: 2px solid #ae8c6e; outline-offset: -2px; }
+@media (min-width: 1200px) { .ev-benefit-copy > .ev-benefit-hidden-1200 { display: none !important; } }
+@media (min-width: 960px) and (max-width: 1199px) { .ev-benefit-copy > .ev-benefit-hidden-960 { display: none !important; } }
+@media (max-width: 959px) {
+  .ev-benefit-copy {
+    inset: 35% 0 64px;
+    gap: 8px;
+    padding: 12px clamp(20px, 4vw, 40px);
+  }
+  .ev-benefit-copy .ev-benefit-brand .tn-atom,
+  .ev-benefit-copy .ev-benefit-heading .tn-atom { font-size: clamp(21px, 5vw, 28px) !important; }
+  .ev-benefit-copy .ev-benefit-subheading .tn-atom { font-size: clamp(16px, 3.6vw, 22px) !important; }
+  .ev-benefit-copy .ev-benefit-body .tn-atom { font-size: clamp(14px, 3.2vw, 16px) !important; }
+  .ev-benefit-copy > .ev-benefit-icon { width: 40px !important; height: 40px !important; margin-bottom: 0; }
+  .ev-benefit-slide .ev-benefit-photo { width: 100% !important; height: 35% !important; }
+  .ev-benefit-controls { bottom: 10px; }
+}
+@media (min-width: 640px) and (max-width: 959px) { .ev-benefit-copy > .ev-benefit-hidden-640 { display: none !important; } }
+@media (min-width: 480px) and (max-width: 639px) { .ev-benefit-copy > .ev-benefit-hidden-480 { display: none !important; } }
+@media (max-width: 479px) { .ev-benefit-copy > .ev-benefit-hidden-320 { display: none !important; } }
