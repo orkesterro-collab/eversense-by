@@ -1,0 +1,50 @@
+/* Isolated history teaser; leave the original Tilda records and footer alone. */
+#ev-history-banner,
+#ev-history-banner * {box-sizing:border-box}
+#ev-history-banner {
+  position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;
+  min-height:460px;background:#343333;color:#fff;font-family:Manrope,Arial,sans-serif;
+  font-weight:400;font-size:16px;line-height:1.7;letter-spacing:normal;text-align:left;
+}
+#ev-history-banner::after {
+  content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(28,28,28,.95) 0%,rgba(28,28,28,.78) 42%,rgba(28,28,28,.14) 100%);
+}
+#ev-history-banner .ev-history-banner__image {
+  position:absolute;z-index:-2;inset:0;display:block;width:100%;height:100%;max-width:none;
+  object-fit:cover;object-position:58% 57%;
+}
+#ev-history-banner .ev-history-banner__inner {
+  width:min(1120px,calc(100% - 80px));margin:0 auto;padding:55px 0;
+}
+#ev-history-banner .ev-history-banner__eyebrow {
+  margin:0 0 21px;color:#E1C5A7;font-size:12px;line-height:1.5;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+}
+#ev-history-banner h2 {
+  max-width:810px;margin:0 0 25px;color:#fff;font-family:inherit;font-size:clamp(36px,4.4vw,58px);
+  line-height:1.17;font-weight:500;letter-spacing:0;text-wrap:balance;
+}
+#ev-history-banner .ev-history-banner__lead {
+  max-width:580px;margin:0 0 28px;color:#f1eeeb;font-size:16px;line-height:1.8;
+}
+#ev-history-banner .ev-history-banner__link {
+  display:inline-flex;align-items:center;justify-content:space-between;gap:32px;min-height:48px;
+  padding:12px 21px;border:1px solid #fff;color:#fff!important;background:transparent;
+  font-size:14px;font-weight:400;line-height:1.6;text-decoration:none!important;
+  transition:background-color .18s,color .18s;
+}
+#ev-history-banner .ev-history-banner__link:hover {background:#fff;color:#343333!important}
+#ev-history-banner .ev-history-banner__link:focus-visible {outline:2px solid #E1C5A7;outline-offset:5px}
+#ev-history-banner .ev-history-banner__link span {font-size:23px;line-height:1}
+@media(max-width:640px) {
+  #ev-history-banner {min-height:400px;align-items:flex-end}
+  #ev-history-banner::after {background:linear-gradient(0deg,rgba(28,28,28,.97),rgba(28,28,28,.80) 47%,rgba(28,28,28,.18))}
+  #ev-history-banner .ev-history-banner__inner {width:calc(100% - 40px);padding:45px 0 35px}
+  #ev-history-banner h2 {font-size:clamp(30px,7.5vw,42px);line-height:1.2;margin-bottom:22px}
+  #ev-history-banner .ev-history-banner__lead {font-size:15px;line-height:1.75}
+  #ev-history-banner .ev-history-banner__link {max-width:100%;gap:20px}
+}
+@media(prefers-reduced-motion:reduce) {
+  #ev-history-banner .ev-history-banner__link {transition:none}
+}

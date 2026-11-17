@@ -1,0 +1,91 @@
+{
+  "prepared_at": "2026-11-17",
+  "selected_images": [
+    {
+      "file": "factory-gagarin.webp",
+      "source_page": "https://madeinsmolensk.com/katalog/lesopromyshlennyj-kompleks/ooo-egger-drevprodukt-gagarin/",
+      "file_url": "https://madeinsmolensk.com/files/gallery/878/big/eg1_1738156805.jpg",
+      "publisher": "Электронный каталог экспортного центра «Сделано в Смоленске»",
+      "description": "Автоматизированная линия перемещения древесных плит на заводе в Гагарине.",
+      "use": "Первый экран статьи и баннер главной.",
+      "caveat": "Фото подтверждает вид оборудования предприятия; выпуск конкретной партии EVERSENSE в кадре не подтверждён.",
+      "width": 1600,
+      "height": 901,
+      "bytes": 231486,
+      "processing": "WebP, уменьшение до размера для сайта, без ретуши."
+    },
+    {
+      "file": "factory-aerial.webp",
+      "source_page": "https://vestametall.ru/o-nas/ooo-egger-drevprodukt-gagarin/",
+      "file_url": "https://vestametall.ru/assets/images/content/geography/gagarin.jpg",
+      "publisher": "Веста Металл",
+      "description": "Панорама промплощадки и склада древесины в Гагарине.",
+      "use": "Иллюстрация масштаба производственной площадки.",
+      "caveat": "Дата съёмки в публикации не указана.",
+      "width": 1600,
+      "height": 1234,
+      "bytes": 486094,
+      "processing": "WebP, уменьшение до размера для сайта, без ретуши."
+    },
+    {
+      "file": "moscow-launch.webp",
+      "source_page": "https://www.eversense.moscow/ru/news/info/169",
+      "file_url": "https://www.eversense.moscow/upload/20250414/79e413d11ecca0305c5db54c9f9bfb40.jpg",
+      "publisher": "Официальный дистрибьютор EVERSENSE, ООО «НикА»",
+      "event_date": "27–28 февраля 2025, Москва, MJ Hall",
+      "description": "Зал и гости на презентации коллекции EVERSENSE.",
+      "use": "Фотоотчёт о запуске коллекции.",
+      "width": 1199,
+      "height": 800,
+      "bytes": 98666,
+      "processing": "WebP, уменьшение до размера для сайта, без ретуши."
+    },
+    {
+      "file": "moscow-exhibition.webp",
+      "source_page": "https://www.eversense.moscow/ru/news/info/169",
+      "file_url": "https://www.eversense.moscow/upload/20250414/35c2a0fe634a3f8bead0bf465cd25874.jpg",
+      "publisher": "Официальный дистрибьютор EVERSENSE, ООО «НикА»",
+      "event_date": "27–28 февраля 2025, Москва, MJ Hall",
+      "description": "Образцы декоров в выставочных рамах.",
+      "use": "Фотоотчёт о запуске коллекции.",
+      "width": 1199,
+      "height": 800,
+      "bytes": 31376,
+      "processing": "WebP, уменьшение до размера для сайта, без ретуши."
+    }
+  ],
+  "launch_evidence": {
+    "url": "https://t.me/egger_ru/2459",
+    "preview_url": "https://t.me/s/egger_ru?q=MJ%20Hall",
+    "publication_date": "2025-03-07T13:57:01+00:00",
+    "event_date": "2025-02-27",
+    "exact_excerpt": "27 февраля в легендарном особняке MJ Hall в Москве мы представили 30 трендовых декоров с натуральной текстурой древесины.",
+    "summary": "Официальный пост сообщает о московской презентации коллекции, 30 декорах, двух годах разработки и новых декорах/структурах. Полный текст доступен по ссылке; слово EVERSENCE в тексте поста написано иначе, чем стандартное EVERSENSE.",
+    "distributor_confirmation_url": "https://www.eversense.moscow/ru/news/info/169",
+    "distributor_confirmation": "Дистрибьютор датирует московскую презентацию 27–28 февраля 2025 года. Из его галереи выбраны снимки зала и экспозиции."
+  },
+  "production_evidence": {
+    "url": "https://t.me/egger_ru/3017",
+    "publication_date": "2025-11-05T15:45:17+00:00",
+    "summary": "Подпись официального альбома прямо описывает промо-тур на завод в Гагарине в конце октября 2025 и посещение цехов/производственных линий.",
+    "corroboration_url": "https://ardexpert.ru/article/28462"
+  },
+  "rights": {
+    "license_found": false,
+    "note": "Открытой лицензии на повторную публикацию изображений не обнаружено. Официальный источник подтверждает происхождение; дилерское разрешение или медиапакет правообладателя нужны для прав использования. Логотипы/водяные знаки не удалялись.",
+    "credit_recommendation": "Источник фото хранится в этом реестре; публичную подпись и обязательную атрибуцию согласовать с правообладателем."
+  },
+  "rejected_official_tour": {
+    "landing_url": "https://egger-russia.ru/about-us/our-group/locations/plants/gag/",
+    "tour_url": "https://media.egger.com/Elearning/Planttour_GAG/story.html?country=RU",
+    "reason": "Нужные производственные планы существуют, но в JPEG-постеры и видеокадры встроены egger.com и английские субтитры. Не использованы, чтобы не удалять надписи и не смешивать фото с кадрами видео."
+  },
+  "award_evidence": {
+    "organizer_url": "https://bestfor.life/2025",
+    "brand_url": "https://ever-home.ru/",
+    "award": "Best for Life Design 2025",
+    "nomination": "Продукт года",
+    "category": "Напольные покрытия",
+    "award_image": "https://static.tildacdn.com/tild3036-3364-4838-b462-323664323432/photo_2025-12-17_15-.jpg"
+  }
+}

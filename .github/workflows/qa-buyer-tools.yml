@@ -35,6 +35,12 @@ on:
       - 'scripts/home_article_links.py'
       - 'assets/laminate-classes.css'
       - 'assets/home-article-links.css'
+      - 'assets/history*'
+      - 'assets/history/**'
+      - 'content/history-article.html.in'
+      - 'scripts/history.py'
+      - 'scripts/history_banner.py'
+      - 'scripts/qa_history.py'
       - 'content/laminate-classes.json'
       - 'downloads/documents/**'
       - '.github/scripts/prepare_hoster_site.py'
@@ -83,6 +89,8 @@ jobs:
         run: python3 scripts/qa_buyer_tools.py
       - name: Check laminate article and PDF downloads
         run: python3 scripts/qa_laminate_classes.py
+      - name: Check history article and homepage teaser
+        run: python3 scripts/qa_history.py --site-dir _deploy
       - name: Check visual exploration and accessible fallbacks
         run: python3 scripts/qa_exploration.py
       - name: Check designer cards on desktop and mobile
