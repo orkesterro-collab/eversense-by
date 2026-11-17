@@ -5,16 +5,15 @@ import re
 
 START = '<!-- EVERSENSE HISTORY BANNER START -->'
 END = '<!-- EVERSENSE HISTORY BANNER END -->'
-CSS = '<link rel="stylesheet" href="assets/history-banner.css?v=20261117brand2">'
+CSS = '<link rel="stylesheet" href="assets/history-banner.css?v=20261117brand3">'
 
 BANNER = '''<section id="ev-history-banner" aria-labelledby="ev-history-banner-title">
-  <img class="ev-history-banner__image" src="assets/history/production-hall.jpg" alt="Оборудование производственного комплекса в Гагарине" width="800" height="533" loading="lazy" decoding="async">
+  <img class="ev-history-banner__image" src="assets/history/factory-gagarin.webp" alt="Автоматизированная линия обработки древесных плит на заводе в Гагарине" width="1600" height="901" loading="lazy" decoding="async">
   <div class="ev-history-banner__inner">
     <p class="ev-history-banner__eyebrow">Наша история</p>
-    <h2 id="ev-history-banner-title">За EVERSENSE —<br>большое производство.</h2>
-    <p class="ev-history-banner__lead">Европейская школа, полный цикл в Гагарине и внимание к каждой детали — от древесной основы до рельефа поверхности.</p>
-    <a class="ev-history-banner__link" href="history.html">Познакомиться с производством <span aria-hidden="true">→</span></a>
-    <p class="ev-history-banner__credit">Производственная площадка в Гагарине</p>
+    <h2 id="ev-history-banner-title">Как делают EVERSENSE</h2>
+    <p class="ev-history-banner__lead">Производство полного цикла в Гагарине. От отбора древесины до проверки готового покрытия.</p>
+    <a class="ev-history-banner__link" href="history.html">Читать о производстве <span aria-hidden="true">→</span></a>
   </div>
 </section>'''
 

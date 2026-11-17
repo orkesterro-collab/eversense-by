@@ -42,9 +42,11 @@ def main():
                 page.goto(base + '/history.html', wait_until='networkidle')
                 page.evaluate('document.fonts.ready')
                 assert page.locator('h1').count() == 1
-                assert page.locator('.chapter').count() == 7
+                assert page.locator('.chapter').count() == 5
                 assert page.locator('.production-route li').count() == 6
-                assert page.locator('.experience-timeline b').all_text_contents() == ['2025', '2016', '1995', '1961']
+                hero_image = page.locator('.hero-img img').get_attribute('src')
+                assert hero_image == 'assets/history/factory-gagarin.webp'
+                assert page.locator('.launch-gallery img').count() == 2
                 article_text = page.locator('main').inner_text().lower()
                 assert 'egger' not in article_text and 'эггер' not in article_text and 'шуя' not in article_text
                 assert 'продукт года' in article_text and 'best for life design' in article_text
@@ -68,6 +70,7 @@ def main():
                 assert not page.evaluate('document.documentElement.scrollWidth > innerWidth + 1'), f'Homepage overflows at {width}px'
                 assert page.locator('#ev-home-footer').inner_text().find('192608003') >= 0
                 image = banner.locator('img')
+                assert image.get_attribute('src') == hero_image
                 page.wait_for_function('(img) => img.complete && img.naturalWidth > 0', arg=image.element_handle())
                 banner.screenshot(path=str(args.output / f'banner-{width}.png'))
                 banner.get_by_role('link').click()
@@ -78,9 +81,9 @@ def main():
             context = browser.new_context(java_script_enabled=False, viewport={'width': 390, 'height': 844})
             page = context.new_page()
             page.goto(base + '/history.html')
-            assert page.locator('.chapter').count() == 7
+            assert page.locator('.chapter').count() == 5
             page.locator('#sources summary').click()
-            assert page.locator('#source-10').is_visible()
+            assert page.locator('#source-8').is_visible()
             results.append({'javascript': False, 'status': 'passed'})
             context.close()
             browser.close()

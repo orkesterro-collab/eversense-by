@@ -7,17 +7,15 @@ body.ev-history-page{background:#FFFFFF;color:#343333;font-family:Manrope,Arial,
 .ev-history-page #main p{margin-bottom:20px}
 .ev-history-page .history-masthead{padding:30px 0;border-bottom:1px solid #dadada;display:flex;justify-content:space-between;gap:20px;font-size:12px}
 .ev-history-page .history-masthead nav{display:flex;gap:12px;align-items:center}
-.ev-history-page .hero-img img{height:660px;object-fit:cover;object-position:63%}
+.ev-history-page .hero-img img{height:clamp(390px,42vw,560px);object-fit:cover;object-position:53% center}
 .ev-history-page .factory-photo img{aspect-ratio:1.65;object-fit:cover;object-position:50% 53%}
-.ev-history-page .stat:last-child b{font-size:43px;line-height:57px}
 .ev-history-page .ev-footer{margin-top:20px}
 .ev-history-page .ev-footer p{font-family:Manrope,Arial,sans-serif}
 .ev-history-page .reading-progress{background:#C0A58C;z-index:1100}
 .ev-history-page .timeline-nav{top:100px}
 .ev-history-page .chapter{scroll-margin-top:10px}
 .ev-history-page .ref{color:#755c44;scroll-margin-top:100px}
-@media(max-width:1100px){.ev-history-page .hero-img img{height:570px}.ev-history-page .stat:last-child b{font-size:36px;line-height:48px}}
-@media(max-width:760px){.ev-history-page .hero-img img{height:420px}.ev-history-page .factory-photo img{aspect-ratio:1.1;object-position:60%}.ev-history-page .history-masthead>span{display:none}.ev-history-page .stat:last-child b{font-size:26px;line-height:45px}.ev-history-page .final-year{font-size:clamp(48px,14vw,72px)}.ev-history-page .timeline-nav{top:auto}}
+@media(max-width:760px){.ev-history-page .hero-img img{height:auto;aspect-ratio:4/3}.ev-history-page .factory-photo img{aspect-ratio:1.25}.ev-history-page .timeline-nav{top:auto}}
 
 @media(max-width:760px){.ev-history-page .hero h1{font-size:clamp(38px,11.3vw,50px)}}
 /* The revised story follows the material, with a compact history inside it. */
@@ -28,12 +26,10 @@ body.ev-history-page{background:#FFFFFF;color:#343333;font-family:Manrope,Arial,
 .ev-history-page .design-pair{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:36px;margin:38px 0 5px}
 .ev-history-page .design-pair figure{margin:0}
 .ev-history-page .design-pair img{width:100%;height:440px;object-fit:cover}
-.ev-history-page .design-story .eyebrow{margin-bottom:16px}
 .ev-history-page .design-story h3{font-size:36px}
 .ev-history-page .design-story p{font-size:16px}
-.ev-history-page .production-route{list-style:none;counter-reset:route;padding:0;margin:38px 0;display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
-.ev-history-page .production-route li{display:flex;gap:18px;padding:27px 0;border-top:1px solid #dadada;min-width:0}
-.ev-history-page .route-number{font-size:11px;color:#80674f;padding-top:5px}
+.ev-history-page .production-route{list-style:none;padding:0;margin:38px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
+.ev-history-page .production-route li{padding:25px 0 8px;border-top:1px solid #dadada}
 .ev-history-page .production-route h3{font-size:27px;line-height:1.18;margin-bottom:16px}
 .ev-history-page .production-route p{font-size:15px;line-height:1.75}
 .ev-history-page .proof-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px;margin:35px 0}
@@ -45,15 +41,11 @@ body.ev-history-page{background:#FFFFFF;color:#343333;font-family:Manrope,Arial,
 .ev-history-page .document-pair span{font-size:15px;font-weight:600}
 .ev-history-page .document-pair small{font-size:11px;grid-column:1;line-height:1.6;color:#62615f}
 .ev-history-page .document-pair b{grid-column:2;grid-row:1;font-size:21px;font-weight:400}
-.ev-history-page .experience-timeline{border-left:1px solid #C0A58C;margin:38px 0;padding-left:28px}
-.ev-history-page .experience-timeline>div{position:relative;display:grid;grid-template-columns:100px 1fr;gap:24px;padding:0 0 24px}
-.ev-history-page .experience-timeline>div:before{content:'';position:absolute;left:-32px;top:13px;width:7px;height:7px;border-radius:50%;background:#9a7a5b}
-.ev-history-page .experience-timeline b{font-family:Georgia,serif;font-size:38px;font-weight:400;letter-spacing:-.04em;line-height:1.2}
-.ev-history-page .experience-timeline p{font-size:16px;padding-top:6px}
-.ev-history-page .award-panel{padding:42px 38px;background:#f2ede7;margin:35px 0}
-.ev-history-page .award-panel .award-title{font-family:Georgia,serif;font-size:clamp(45px,5vw,70px);line-height:1.1;letter-spacing:-.04em;margin:25px 0}
-.ev-history-page .launch-photo img{width:100%;max-height:610px;object-fit:cover}
+.ev-history-page .launch-gallery{margin:28px 0}
+.ev-history-page .launch-gallery>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .ev-history-page .closing-actions{display:flex;gap:22px 40px;flex-wrap:wrap}
-.ev-history-page .stats .stat b{font-size:57px;line-height:1.1}
-@media(max-width:1100px){.ev-history-page .proof-grid{grid-template-columns:1fr}.ev-history-page .proof-grid h3{font-size:40px}.ev-history-page .design-pair{grid-template-columns:1fr}.ev-history-page .design-pair img{height:420px}.ev-history-page .stats .stat b{font-size:48px}}
-@media(max-width:760px){.ev-history-page .production-route,.ev-history-page .document-pair{grid-template-columns:1fr}.ev-history-page .production-route li{padding:23px 0}.ev-history-page .production-route h3{font-size:28px}.ev-history-page .proof-grid{gap:10px}.ev-history-page .experience-timeline>div{grid-template-columns:75px 1fr;gap:15px}.ev-history-page .experience-timeline{padding-left:20px}.ev-history-page .experience-timeline>div:before{left:-24px}.ev-history-page .experience-timeline b{font-size:31px}.ev-history-page .experience-timeline p{font-size:15px;padding-top:0}.ev-history-page .award-panel{padding:30px 22px}.ev-history-page .award-panel .eyebrow{line-height:1.7}.ev-history-page .award-ribbon{margin-top:22px}.ev-history-page .stats .stat b{font-size:43px}}
+.ev-history-page .plant-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ev-history-page .plant-stats .stat b{font-size:clamp(32px,4vw,57px);line-height:1.1}
+@media(max-width:1100px){.ev-history-page .proof-grid{grid-template-columns:1fr}.ev-history-page .design-pair{grid-template-columns:1fr}.ev-history-page .design-pair img{height:420px}}
+@media(max-width:760px){.ev-history-page .production-route,.ev-history-page .document-pair{grid-template-columns:1fr}.ev-history-page .design-pair img{height:auto}.ev-history-page .proof-grid{gap:10px}.ev-history-page .award-ribbon{margin-top:22px}}
+@media(max-width:540px){.ev-history-page .launch-gallery>div{grid-template-columns:1fr}}

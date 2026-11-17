@@ -1,99 +1,143 @@
 <article>
-<header class="hero">
- <div class="hero-copy"><div class="eyebrow">Наша история · Характер EVERSENSE</div><h1>Большой опыт.<br>Тонкая работа.</h1><p>EVERSENSE создаётся на крупном производстве полного цикла в Гагарине. Европейская школа работы с древесиной здесь получает новое выражение: в специально разработанных поверхностях, выразительных декорах и характеристиках для насыщенной повседневной жизни.</p><a class="award-ribbon" href="#recognition"><span>Best for Life Design 2025</span><strong>Продукт года</strong><small>Категория «Напольные покрытия»</small></a><a class="arrow-link" href="#character">Узнать, что стоит за EVERSENSE <span aria-hidden="true">↓</span></a></div>
- <figure class="hero-img"><img src="assets/history/brand-detail.jpg" alt="Светлый интерьер с напольным покрытием EVERSENSE" width="1680" height="981" fetchpriority="high"><figcaption>Пол, который задаёт настроение дому. Интерьерные материалы EVERSENSE.</figcaption></figure>
-</header>
-<div class="intro"><div class="eyebrow">Новый бренд.<br>Зрелое мастерство.</div><p>Чтобы создать новое ощущение дерева, мало выбрать красивый рисунок. Нужно знать материал изнутри — от волокна в основе до мельчайшего рельефа на поверхности. EVERSENSE вырос из этого опыта.</p></div>
-<div class="story-layout">
-<nav class="timeline-nav" aria-label="Разделы статьи"><p class="eyebrow">Что стоит за полом</p><ol>
-<li><a href="#character" aria-current="true">Характер <span>Самостоятельный бренд</span></a></li>
-<li><a href="#surface">Поверхность <span>Дизайн и тиснение</span></a></li>
-<li><a href="#full-cycle">Производство <span>Полный цикл</span></a></li>
-<li><a href="#quality">Качество <span>Измеримые свойства</span></a></li>
-<li><a href="#roots">Опыт <span>Европейские корни</span></a></li>
-<li><a href="#recognition">Признание <span>Премия 2025</span></a></li>
-<li><a href="#your-choice">Ваш выбор <span>Увидеть и почувствовать</span></a></li>
-</ol><p class="direction">От первого впечатления —<br>к тому, как оно создано ↓</p></nav>
-<div class="timeline">
-<section class="chapter" id="character">
- <div class="date"><b>01</b><span>Самостоятельный характер</span></div><h2>Опыт производства<br>становится новым продуктом.</h2>
- <p class="lead">У EVERSENSE своя задача: соединить выразительность деревянного пола с возможностями современного производства. Чтобы покрытие хотелось рассматривать при дневном свете, трогать рукой и выбирать для дома на долгие годы.</p>
- <p>Над коллекцией работали два года. Это время понадобилось для новых декоров, структур и нового сочетания эксплуатационных свойств. В феврале 2025 года EVERSENSE представили в Москве как отдельную историю дизайна и ощущений.<a class="ref" href="#source-1" aria-label="Источник 1">[1]</a></p>
- <div class="stats" aria-label="Характеристики EVERSENSE"><div class="stat"><b>34</b><span>класс использования</span></div><div class="stat"><b>72</b><span>часа контакта с водой*</span></div><div class="stat"><b>30</b><span>декоров в коллекции</span></div></div>
- <p class="stats-note">*Характеристики указаны производителем. Условия применения, монтажа и ухода приведены в документации покрытия.<a class="ref" href="#source-2">[2]</a></p>
- <p>Матовая поверхность, спокойные и глубокие оттенки, рельеф древесины — всё работает на цельное впечатление. А за этим впечатлением стоит конструкция, в которой декоративный слой, защитная поверхность, древесная основа и замок решают свои задачи вместе.</p>
-</section>
-<section class="chapter" id="surface">
- <div class="date"><b>02</b><span>Рисунок, свет и прикосновение</span></div><h2>У красивой фактуры<br>есть свой инструмент.</h2>
- <p class="lead">Проведите ладонью по доске. То, что вы чувствуете, — результат такой же точной работы, как рисунок, который видите.</p>
- <p>Фактуру создаёт тиснение: при прессовании специальная металлическая пластина переносит на поверхность свой рельеф. На производстве такой инструмент называют клише. Оно задаёт рисунок пор, углублений и прожилок. Поэтому работа над поверхностью продолжается и после того, как выбран её цвет.<a class="ref" href="#source-3">[3]</a></p>
- <p>Для EVERSENSE специально разработали ультраматовые структуры. Они поддерживают естественный характер декоров: например, у «Дуба Лаваредо» есть трещинки, которые ощущаются при прикосновении. В серии «Тихая роскошь» рисунок и рельеф согласованы — видимые сучки и кольца получают продолжение в фактуре.<a class="ref" href="#source-4">[4]</a><a class="ref" href="#source-2">[2]</a></p>
- <div class="pullquote"><p>Дизайн здесь можно оценить дважды:<br>сначала взглядом, затем рукой.</p></div>
- <div class="design-pair"><figure><img src="assets/original-tilda/0e171125bb3c-_-1-min.webp" alt="Дуб Лаваредо натуральный EVERSENSE в интерьере" width="1680" height="945" loading="lazy"><figcaption>Дуб Лаваредо натуральный · EL1047</figcaption></figure><div class="design-story"><div class="eyebrow">Откуда берётся рисунок</div><h3>Вспомнить движение воды.</h3><p>У «Дуба Тичино» другой образ: его линии вдохновлены течением горной реки Северной Италии. Рисунок воспринимается мягко, словно сохраняет неспешное движение воды. Так у декора появляется настроение, которое выходит за пределы простого выбора оттенка.<a class="ref" href="#source-4">[4]</a></p><a class="arrow-link" href="catalog-ru/quiet-luxury-ru/">Рассмотреть декоры <span aria-hidden="true">↗</span></a></div></div>
-</section>
-<section class="chapter" id="full-cycle">
- <div class="date"><b>03</b><span>Гагарин · Производство полного цикла</span></div><h2>История доски начинается<br>с самой древесины.</h2>
- <p class="lead">В Гагарине объединены производство древесной основы и выпуск готовых напольных покрытий. Здесь умеют работать с материалом задолго до того, как на нём появляется рисунок дуба.<a class="ref" href="#source-5">[5]</a></p>
- <figure class="factory-photo"><img src="assets/history/production-hall.jpg" alt="Оборудование производственного комплекса в Гагарине" width="800" height="533" loading="lazy"><figcaption>За кулисами готового покрытия: производственная площадка в Гагарине.</figcaption></figure>
- <p>Полный цикл позволяет связать все решения об одном продукте: выбор древесины, свойства плиты, декоративную поверхность, обработку кромок и готовую доску. Производство отвечает за эту цепочку целиком. Для покупателя это означает, что внешний вид пола и его поведение в доме проектируются вместе.</p>
- <ol class="production-route" aria-label="Путь от древесины к готовому покрытию">
-  <li><span class="route-number">01</span><div><h3>Выбрать древесину</h3><p>Качество начинается с сырья и его происхождения. Для EVERSENSE производитель указывает осину и берёзу; легальность происхождения древесины проверяется третьей стороной по ISO 38200.<a class="ref" href="#source-2">[2]</a></p></div></li>
-  <li><span class="route-number">02</span><div><h3>Создать собственную основу</h3><p>Подготовленные древесные волокна становятся плитой. Собственное производство MDF/HDF позволяет работать с основой покрытия внутри одного промышленного комплекса.<a class="ref" href="#source-5">[5]</a></p></div></li>
-  <li><span class="route-number">03</span><div><h3>Подготовить поверхность</h3><p>Декоративный слой проходит специальную пропитку. Собственная линия импрегнирования — ещё одно звено производственной цепочки в Гагарине.<a class="ref" href="#source-6">[6]</a></p></div></li>
-  <li><span class="route-number">04</span><div><h3>Соединить слои и рельеф</h3><p>Прессование объединяет конструкцию покрытия. Специальный инструмент формирует фактуру — ту самую поверхность, которую вы будете видеть и чувствовать каждый день.</p></div></li>
-  <li><span class="route-number">05</span><div><h3>Придать доске точную форму</h3><p>Раскрой и обработка кромок превращают материал в готовую панель. Замок CLIC it! соединяет доски, а фаска подчёркивает их рисунок в уложенном полу.<a class="ref" href="#source-7">[7]</a></p></div></li>
-  <li><span class="route-number">06</span><div><h3>Проверить и упаковать</h3><p>Проверка готового покрытия завершает путь к упаковке и отгрузке. За маркировкой на пачке стоит работа с материалом на всех предшествующих этапах.</p></div></li>
- </ol>
- <aside class="fact"><p class="eyebrow">Деталь большого производства</p><h3>Почти 50 метров работы с основой.</h3><p>В 2016 году на площадке появилась линия MDF/HDF с непрерывным прессом длиной 48,7 метра. Ему дали имя Frida. Такой масштаб нужен для производства самой плиты — в том числе основы для напольных покрытий.<a class="ref" href="#source-5">[5]</a></p></aside>
-</section>
-<section class="chapter" id="quality">
- <div class="date"><b>04</b><span>Характеристики, которые можно проверить</span></div><h2>Уверенность должна<br>быть измеримой.</h2>
- <p class="lead">Красивый пол хочется сохранить красивым. Поэтому в EVERSENSE впечатление от поверхности поддержано конкретными эксплуатационными свойствами.</p>
- <div class="proof-grid"><div><span class="eyebrow">Нагрузка</span><h3>34 класс</h3><p>Класс использования указан в техническом свидетельстве EVERSENSE. Для дома это запас по интенсивности эксплуатации — полезный аргумент, когда пол выбирают для активной жизни.</p></div><div><span class="eyebrow">Повседневная влага</span><h3>72 часа</h3><p>Производитель заявляет устойчивость к контакту с водой до 72 часов. Эта характеристика работает вместе с правильным монтажом и уходом; пролитую жидкость следует убирать сразу.</p></div><div><span class="eyebrow">Испытания поверхности</span><h3>AC6</h3><p>В техническом свидетельстве для испытанного образца указан AC6 и среднее число оборотов IP — 8500. Это измеримый результат стойкости к истиранию по методике испытания.<a class="ref" href="#source-8">[8]</a></p></div></div>
- <p>В приложениях к техническому свидетельству есть и другие проверки: геометрии, ударной нагрузки, стойкости к пятнам, воздействия мебельных ножек и роликов стула. За словом «качество» появляются параметры, которые можно прочитать и сопоставить с задачами своего дома.<a class="ref" href="#source-8">[8]</a></p>
- <figure class="wide-photo"><img src="assets/history/production-line.jpg" alt="Знакомство с оборудованием и плитными материалами на производственной площадке в Гагарине" width="1102" height="658" loading="lazy"><figcaption>Производственные линии и материалы: репортаж с площадки в Гагарине, 2025 год.</figcaption></figure>
- <div class="document-pair"><a href="downloads/documents/eversense-technical-certificate-06-2282-25.pdf" target="_blank" rel="noopener"><span>Техническое свидетельство EVERSENSE</span><small>Характеристики, результаты испытаний и условия применения · PDF</small><b aria-hidden="true">↗</b></a><a href="laminate-classes.html"><span>Как читать 34 класс и AC6</span><small>Понятное объяснение методов и результатов испытаний</small><b aria-hidden="true">↗</b></a></div>
- <p class="source-note">Лабораторные значения приведены для образца «Дуб Виктория Натуральный», указанного в документе. Полные условия применения выбранного покрытия приведены в технической документации.</p>
-</section>
-<section class="chapter" id="roots">
- <div class="date"><b>05</b><span>Европейские корни · Накопленный опыт</span></div><h2>Новому бренду<br>есть на что опереться.</h2>
- <p class="lead">Производственная школа, из которой вырос EVERSENSE, формировалась десятилетиями. Её истоки — в австрийском Тироле, где ещё в 1961 году начали превращать древесину в современные плитные материалы.<a class="ref" href="#source-9">[9]</a></p>
- <p>В этой истории постепенно соединялись знания о древесном волокне, декоративных поверхностях, прессовании и напольных покрытиях. Сегодня этот опыт получает развитие в Гагарине — на производственной площадке полного цикла, где выпускается EVERSENSE.</p>
- <div class="experience-timeline" aria-label="Вехи производственного опыта от настоящего к истокам">
-  <div><b>2025</b><p>Появление EVERSENSE: самостоятельный бренд с новой коллекцией, структурами и характером.<a class="ref" href="#source-1">[1]</a></p></div>
-  <div><b>2016</b><p>Развитие производства в Гагарине: собственная MDF/HDF-основа и готовые напольные покрытия в одном комплексе.<a class="ref" href="#source-5">[5]</a><a class="ref" href="#source-6">[6]</a></p></div>
-  <div><b>1995</b><p>Начало выпуска ламината в европейской производственной истории, на которую опирается сегодняшний опыт.<a class="ref" href="#source-9">[9]</a></p></div>
-  <div><b>1961</b><p>Тироль, Австрия. Начало школы работы с древесными плитами, из которой выросли последующие технологии и компетенции.<a class="ref" href="#source-9">[9]</a></p></div>
- </div>
- <div class="pullquote"><p>EVERSENSE — новая глава.<br>Мастерство, которое за ней стоит, формировалось десятилетиями.</p></div>
-</section>
-<section class="chapter" id="recognition">
- <div class="date"><b>06</b><span>Продукт года · 2025</span></div><h2>Дизайн получил<br>профессиональное признание.</h2>
- <div class="award-panel"><span class="eyebrow">Best for Life Design Award · 2025</span><p class="award-title">Продукт года</p><p>EVERSENSE · Категория «Напольные покрытия»<br>Блок Interior Design</p><a class="arrow-link" href="https://bestfor.life/2025" target="_blank" rel="noopener">Официальный список лауреатов <span aria-hidden="true">↗</span></a></div>
- <p>В 2025 году EVERSENSE стал лауреатом Best for Life Design. Премия отмечает решения, которые делают дизайн частью повседневной жизни. Для коллекции, построенной вокруг фактуры, света и ощущения материала, это точное профессиональное признание.<a class="ref" href="#source-10">[10]</a></p>
- <figure class="launch-photo"><img src="assets/history/brand-launch.jpg" alt="Презентация коллекции EVERSENSE в Москве, 2025 год" width="800" height="533" loading="lazy"><figcaption>Представление EVERSENSE в Москве · Февраль 2025.</figcaption></figure>
- <p>Коллекцию впервые показали партнёрам в московском MJ Hall 27 февраля 2025 года. Новые декоры и поверхности стали результатом двух лет разработки. На презентации материал можно было оценить именно так, как стоит выбирать будущий пол: рассмотреть вблизи и почувствовать прикосновением.<a class="ref" href="#source-1">[1]</a></p>
-</section>
-<section class="chapter" id="your-choice">
- <div class="date"><b>07</b><span>Выбрать своим ощущением</span></div><h2>Теперь посмотрите<br>на пол чуть внимательнее.</h2>
- <p class="lead">Положите образец горизонтально. Дайте свету пройти вдоль поверхности. Проведите ладонью по рисунку. Именно в таких деталях становится понятным, ради чего создавался EVERSENSE.</p>
- <p>Здесь встречаются несколько причин для выбора: самостоятельный дизайн, специально разработанные структуры, собственная древесная основа, полный производственный цикл и подтверждённые свойства готового покрытия. Вместе они дают тот характер материала, который останется с домом надолго.</p>
- <figure class="wide-photo"><img src="assets/history/brand-room.jpg" alt="Интерьер с природными фактурами из коллекции EVERSENSE" width="1680" height="910" loading="lazy"><figcaption>От производственной идеи — к пространству, в котором хочется жить. Материалы EVERSENSE.</figcaption></figure>
-</section>
-</div></div>
-<div class="story-layout"><div></div><div>
-<section class="closing"><div class="eyebrow">EVERSENSE · Чувствовать качество</div><h2>Большой опыт.<br>Ваш личный выбор.</h2><p>Выберите свой рисунок дерева, почувствуйте поверхность и представьте её в своём доме.</p><div class="closing-actions"><a class="arrow-link" href="catalog-ru/">Посмотреть коллекцию <span aria-hidden="true">↗</span></a><a class="arrow-link" href="where-to-buy.html">Найти образец <span aria-hidden="true">↗</span></a></div></section>
-<details class="sources" id="sources"><summary>Материалы, документы и источники</summary><ol>
-<li id="source-1"><a href="https://t.me/egger_ru/2459" target="_blank" rel="noopener">Официальное сообщение о представлении EVERSENSE в Москве</a>. 27 февраля 2025, MJ Hall; два года разработки, новые декоры и структуры. <a href="https://www.eversense.moscow/ru/news/info/169" target="_blank" rel="noopener">Фоторепортаж официального дистрибьютора с презентации</a>.</li>
-<li id="source-2"><a href="https://ever-home.ru/" target="_blank" rel="noopener">Официальная презентация EVERSENSE</a>: конструкция, сырьё, происхождение древесины, 34 класс, 72 часа контакта с водой, особенности серии «Тихая роскошь». <a href="https://ever-home.ru/catalog-ru" target="_blank" rel="noopener">Каталог декоров</a>.</li>
-<li id="source-3"><a href="https://www.egger.com/en/support/blog/explore-technology?country=US" target="_blank" rel="noopener">Как прессовальная пластина создаёт рельеф поверхности</a>. Общее объяснение технологии тиснения; не спецификация оборудования конкретного декора EVERSENSE.</li>
-<li id="source-4"><a href="https://t.me/egger_ru/2832" target="_blank" rel="noopener">Специально разработанные ультраматовые структуры EVERSENSE</a>; <a href="https://t.me/egger_ru/2817" target="_blank" rel="noopener">история декора «Дуб Тичино»</a>. Официальные сообщения о разработке коллекции.</li>
-<li id="source-5"><a href="https://downloads.egger.com/static/group/Customer_Magazine_MORE_9_en.pdf" target="_blank" rel="noopener">Производственный архив: линия MDF/HDF в Гагарине и пресс Frida</a>. Материал о запуске 2016 года, длина пресса 48,7 м, изготовление основы для напольных покрытий.</li>
-<li id="source-6"><a href="https://downloads.egger.com/archive/credit_relations/reports/2016_17/Jahresfinanzbericht_2016_17.pdf" target="_blank" rel="noopener">Отчёт о развитии производственного комплекса</a>: собственное импрегнирование и выпуск напольных покрытий в Гагарине. <a href="https://ardexpert.ru/article/27943" target="_blank" rel="noopener">Репортаж с производства, апрель 2025</a>: описание технологической цепочки. <a href="https://ardexpert.ru/article/28462" target="_blank" rel="noopener">Фоторепортаж с площадки, ноябрь 2025</a>.</li>
-<li id="source-7"><a href="https://ever-home.ru/catalog-ru/quiet-luxury-ru/natural-virdia-oak-ru" target="_blank" rel="noopener">EVERSENSE «Дуб Вирдиа натуральный»</a>. Официальная карточка: CLIC it!, геометрия, фаска и характеристики.</li>
-<li id="source-8"><a href="downloads/documents/eversense-technical-certificate-06-2282-25.pdf" target="_blank" rel="noopener">Техническое свидетельство ТС 06.2282.25</a>. EVERSENSE 34 класса, приложения с результатами испытаний образца «Дуб Виктория Натуральный». <a href="downloads/documents/eversense-class-34-certificate.pdf" target="_blank" rel="noopener">Сертификат соответствия классов покрытия</a>.</li>
-<li id="source-9"><a href="https://www.egger.com/get_download/fcc12080-2a28-46d7-9550-53e8c6a64cce/Corporate_brochure.pdf" target="_blank" rel="noopener">Корпоративный архив производственной истории</a>. Истоки в Тироле в 1961 году, начало выпуска ламината в 1995-м, развитие Гагарина в 2016-м. Эти вехи относятся к производственному опыту, на который опирается бренд.</li>
-<li id="source-10"><a href="https://bestfor.life/2025" target="_blank" rel="noopener">Best for Life Design: официальный список лауреатов 2025 года</a>. EVERSENSE — «Продукт года», категория «Напольные покрытия», блок Interior Design.</li>
-</ol><p class="source-note">Интерьерные изображения — презентационные материалы EVERSENSE. Производственные фотографии показывают площадку в Гагарине; материалы презентации — событие в Москве в феврале 2025 года. Подробные сведения о происхождении иллюстраций сохранены в редакционном архиве проекта.</p></details>
-</div></div>
+  <header class="hero">
+    <div class="hero-copy">
+      <h1>Как создаётся EVERSENSE</h1>
+      <p>Ламинат EVERSENSE выпускают в Гагарине на крупном предприятии полного цикла. Завод отвечает за весь путь от выбора древесины до проверки готовой доски. Накопленный здесь опыт позволил создать флагманскую коллекцию с новыми декорами и фактурами.</p>
+      <a class="award-ribbon" href="#recognition">
+        <span>Best for Life Design 2025</span>
+        <strong>Продукт года</strong>
+        <small>Категория «Напольные покрытия»</small>
+      </a>
+      <a class="arrow-link" href="#full-cycle">Как устроено производство <span aria-hidden="true">↓</span></a>
+    </div>
+    <figure class="hero-img">
+      <img src="assets/history/factory-gagarin.webp" alt="Автоматизированная линия обработки древесных плит на заводе в Гагарине" width="1600" height="901" fetchpriority="high">
+      <figcaption>Производственный цех в Гагарине, Смоленская область.</figcaption>
+    </figure>
+  </header>
+
+  <div class="story-layout">
+    <nav class="timeline-nav" aria-label="Разделы статьи">
+      <ol>
+        <li><a href="#full-cycle" aria-current="true">Полный цикл</a></li>
+        <li><a href="#roots">Опыт производства</a></li>
+        <li><a href="#surface">Декоры и фактуры</a></li>
+        <li><a href="#quality">Проверка качества</a></li>
+        <li><a href="#recognition">Презентация и премия</a></li>
+      </ol>
+    </nav>
+    <div class="timeline">
+      <section class="chapter" id="full-cycle">
+        <h2>От древесины до готовой доски</h2>
+        <p class="lead">Завод сам делает древесноволокнистую основу ламината, подготавливает декоративный слой, прессует плиты и профилирует замки. На той же площадке контролируют свойства плиты и геометрию доски. От неё зависит, насколько плотно панели стыкуются при укладке.<a class="ref" href="#source-1" aria-label="Источник 1">[1]</a></p>
+        <div class="stats plant-stats" aria-label="Масштаб предприятия по данным на 2025 год">
+          <div class="stat"><b>3</b><span>линии напольных покрытий</span></div>
+          <div class="stat"><b>22 млн</b><span>м² напольных покрытий в год</span></div>
+        </div>
+        <p class="stats-note">Данные по предприятию на 2025 год.<a class="ref" href="#source-1" aria-label="Источник 1">[1]</a></p>
+        <ol class="production-route" role="list">
+          <li>
+            <h3>Выбор древесины</h3><p>На заводе проверяют происхождение и качество сырья. Для основы EVERSENSE используют осину и берёзу.<a class="ref" href="#source-2" aria-label="Источник 2">[2]</a></p>
+          </li>
+          <li>
+            <h3>Изготовление основы</h3><p>Древесину перерабатывают в волокно и прессуют во влагостойкую плиту высокой плотности (HDF).</p>
+          </li>
+          <li>
+            <h3>Подготовка декора</h3><p>На площадке пропитывают декоративную бумагу смолой. Этот слой задаёт цвет и рисунок пола.</p>
+          </li>
+          <li>
+            <h3>Прессование и тиснение</h3><p>В прессе соединяют основу, декор, защитный и стабилизирующий слои. Тогда же покрытие получает рельеф.</p>
+          </li>
+          <li>
+            <h3>Раскрой и замки</h3><p>Плиту режут на доски, а фрезы формируют замки на длинных и коротких сторонах.</p>
+          </li>
+          <li>
+            <h3>Проверка и упаковка</h3><p>На выходе с линии доски сортируют и маркируют перед упаковкой. Заводская лаборатория проверяет сырьё и образцы готовой продукции.<a class="ref" href="#source-1" aria-label="Источник 1">[1]</a></p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="chapter" id="roots">
+        <h2>Европейские корни производства</h2>
+        <p>У производственной школы, на которую опирается EVERSENSE, австрийские корни. Её история началась в Тироле в 1961 году с выпуска древесных плит.<a class="ref" href="#source-3" aria-label="Источник 3">[3]</a></p>
+        <p>В Гагарине первую линию напольных покрытий запустили в 2015 году. Годом позже здесь начали выпускать и древесноволокнистую основу. К запуску EVERSENSE команда уже почти десять лет выпускала напольные покрытия на этой площадке.<a class="ref" href="#source-4" aria-label="Источник 4">[4]</a></p>
+        <figure class="factory-photo">
+          <img src="assets/history/factory-aerial.webp" alt="Вид сверху на деревообрабатывающий комплекс в Гагарине" width="1600" height="1234" loading="lazy" decoding="async">
+          <figcaption>Промышленная площадка в Гагарине.</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" id="surface">
+        <h2>Фактура, которую можно почувствовать</h2>
+        <p id="character" class="lead">Над EVERSENSE работали два года. Для коллекции создали новые декоры и ультраматовые поверхности.<a class="ref" href="#source-5" aria-label="Источник 5">[5]</a></p>
+        <p>Декор передаёт цвет древесины и рисунок волокон. Фактуру создаёт пресс-пластина, или клише. Для EVERSENSE используют новые пластины, которые при прессовании переносят на покрытие мелкие поры и углубления. В серии «Тихая роскошь» рельеф совпадает с рисунком дерева, поэтому сучки и линии волокон можно ощутить пальцами.<a class="ref" href="#source-6" aria-label="Источник 6">[6]</a></p>
+        <div class="design-pair">
+          <figure>
+            <img src="assets/original-tilda/0e171125bb3c-_-1-min.webp" alt="Ламинат EVERSENSE Дуб Лаваредо натуральный в интерьере" width="1680" height="1261" loading="lazy" decoding="async">
+            <figcaption>Дуб Лаваредо натуральный · EL1047</figcaption>
+          </figure>
+          <div class="design-story">
+            <h3>Дуб Лаваредо</h3>
+            <p>На этом декоре чувствуются даже тонкие трещинки. Посмотрите на образец при боковом дневном свете и проведите ладонью вдоль волокон. Так легче оценить глубину рисунка и матовость поверхности.<a class="ref" href="#source-5" aria-label="Источник 5">[5]</a></p>
+            <a class="arrow-link" href="catalog-ru/quiet-luxury-ru/">Посмотреть серию «Тихая роскошь» <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="quality">
+        <h2>Свойства, которые проверяют</h2>
+        <p>В испытаниях готового покрытия оценивают геометрию, стойкость к истиранию, пятнам и ударам. Практические свойства можно сверить с техническим свидетельством и инструкцией.<a class="ref" href="#source-7" aria-label="Источник 7">[7]</a></p>
+        <div class="proof-grid">
+          <div><h3>34 класс</h3><p>Класс использования для помещений с интенсивной нагрузкой.</p></div>
+          <div><h3>AC6</h3><p>Стойкость защитного слоя к истиранию по результатам испытания декора «Дуб Виктория натуральный».</p></div>
+          <div><h3>До 72 часов</h3><p>Заявленная устойчивость к контакту с водой при соблюдении условий монтажа и эксплуатации. Пролитую воду следует убрать сразу.<a class="ref" href="#source-2" aria-label="Источник 2">[2]</a></p></div>
+        </div>
+        <div class="document-pair">
+          <a href="downloads/documents/eversense-technical-certificate-06-2282-25.pdf" target="_blank" rel="noopener">
+            <span>Техническое свидетельство EVERSENSE</span><small>Характеристики и результаты испытаний · PDF</small><b aria-hidden="true">↗</b>
+          </a>
+          <a href="installation.html">
+            <span>Условия монтажа</span><small>Инструкция по укладке и эксплуатации</small><b aria-hidden="true">↗</b>
+          </a>
+        </div>
+      </section>
+
+      <section class="chapter" id="recognition">
+        <h2>От московской презентации до «Продукта года»</h2>
+        <p>27–28 февраля 2025 года EVERSENSE представили в московском MJ Hall. Декоры выставили как в галерее, чтобы гости могли сравнить цвет, рисунок и рельеф образцов.<a class="ref" href="#source-8" aria-label="Источник 8">[8]</a></p>
+        <figure class="launch-gallery">
+          <div>
+            <img src="assets/history/moscow-launch.webp" alt="Гости на презентации EVERSENSE в московском MJ Hall" width="1199" height="800" loading="lazy" decoding="async">
+            <img src="assets/history/moscow-exhibition.webp" alt="Образцы декоров EVERSENSE в выставочных рамах" width="1199" height="800" loading="lazy" decoding="async">
+          </div>
+          <figcaption>Презентация EVERSENSE и экспозиция декоров, Москва, февраль 2025 года.</figcaption>
+        </figure>
+        <p>В том же году EVERSENSE стал лауреатом премии Best for Life Design в номинации «Продукт года», категория «Напольные покрытия». <a href="https://bestfor.life/2025" target="_blank" rel="noopener">Официальный список лауреатов</a>.</p>
+      </section>
+
+      <section class="closing" id="your-choice">
+        <h2>Сравните декоры вживую</h2>
+        <p>Сравните оттенки при дневном свете и посмотрите, как выглядит стык двух досок. Так проще подобрать покрытие под мебель и освещение вашего дома.</p>
+        <div class="closing-actions">
+          <a class="arrow-link" href="catalog-ru/">Посмотреть коллекцию <span aria-hidden="true">↗</span></a>
+          <a class="arrow-link" href="where-to-buy.html">Где посмотреть образцы <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <details class="sources" id="sources">
+        <summary>Источники и фотографии</summary>
+        <ol>
+          <li id="source-1">Этапы производства, лаборатория и выпуск напольных покрытий в 2025 году. <a href="https://ardexpert.ru/article/27943" target="_blank" rel="noopener">Репортаж с завода в Гагарине</a>.</li>
+          <li id="source-2">Состав древесной основы, конструкция и защита от воды. <a href="https://ever-home.ru/" target="_blank" rel="noopener">Материалы EVERSENSE</a>.</li>
+          <li id="source-3">Начало производства древесных плит в австрийском Тироле в 1961 году. <a href="https://www.egger.com/en/about-us/who-we-are-briefly/" target="_blank" rel="noopener">История производственной группы</a>.</li>
+          <li id="source-4">Начало выпуска напольных покрытий в 2015 году и древесноволокнистых плит в 2016-м. <a href="https://alestech.ru/factory/86-yegger-drevprodukt-gagarin" target="_blank" rel="noopener">Карточка предприятия</a>, <a href="https://downloads.egger.com/static/group/Customer_Magazine_MORE_9_en.pdf" target="_blank" rel="noopener">архив производства · PDF</a>.</li>
+          <li id="source-5">Разработка коллекции и ультраматовых фактур. <a href="https://t.me/egger_ru/2459" target="_blank" rel="noopener">Анонс коллекции</a>, <a href="https://t.me/egger_ru/2832" target="_blank" rel="noopener">описание поверхности «Дуб Лаваредо»</a>.</li>
+          <li id="source-6">Принцип тиснения и совпадение рисунка с рельефом. <a href="https://www.egger.com/en/support/blog/explore-technology?country=US" target="_blank" rel="noopener">Как создают рельеф пресс-пластиной</a>, <a href="https://ever-home.ru/catalog-ru" target="_blank" rel="noopener">каталог EVERSENSE</a>.</li>
+          <li id="source-7">Класс использования и результаты испытаний. <a href="downloads/documents/eversense-technical-certificate-06-2282-25.pdf" target="_blank" rel="noopener">Техническое свидетельство ТС 06.2282.25</a>.</li>
+          <li id="source-8">Московская презентация и фотографии экспозиции. <a href="https://www.eversense.moscow/ru/news/info/169" target="_blank" rel="noopener">Фотоотчёт дистрибьютора</a>, <a href="https://snap.moscow/eversense-2025-02-27" target="_blank" rel="noopener">материалы организатора</a>.</li>
+        </ol>
+        <p class="source-note">Фотографии завода. <a href="https://madeinsmolensk.com/katalog/lesopromyshlennyj-kompleks/ooo-egger-drevprodukt-gagarin/" target="_blank" rel="noopener">Сделано в Смоленске</a>, <a href="https://vestametall.ru/o-nas/ooo-egger-drevprodukt-gagarin/" target="_blank" rel="noopener">Веста Металл</a>.</p>
+      </details>
+    </div>
+  </div>
 </article>

@@ -7,16 +7,17 @@ import json
 
 
 def write_history_page(root, footer_html):
-    title = 'Наша история: большой опыт и характер EVERSENSE'
-    description = ('Европейские корни, производство полного цикла в Гагарине, '
-                   'новые поверхности и декоры EVERSENSE. Как опыт работы с деревом '
-                   'становится премиальным напольным покрытием.')
+    title = 'Как создаётся EVERSENSE'
+    description = ('От выбора древесины до готового пола. Производство полного цикла '
+                   'в Гагарине, новые декоры и фактуры флагманской коллекции '
+                   'EVERSENSE, лауреата Best for Life Design 2025.')
     url = 'https://eversense.by/history.html'
+    image = 'https://eversense.by/assets/history/factory-gagarin.webp'
     body = (root / 'content/history-article.html.in').read_text(encoding='utf-8')
     schema = {'@context': 'https://schema.org', '@type': 'Article',
               'headline': title, 'description': description,
               'mainEntityOfPage': url, 'inLanguage': 'ru',
-              'image': 'https://eversense.by/assets/history/production-hall.jpg'}
+              'image': image}
     html = f'''<!doctype html>
 <html lang="ru" data-buyer-static="true"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -25,10 +26,10 @@ def write_history_page(root, footer_html):
 <link rel="canonical" href="{url}">
 <meta property="og:type" content="article"><meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="{title}"><meta property="og:description" content="{description}">
-<meta property="og:url" content="{url}"><meta property="og:image" content="https://eversense.by/assets/history/production-hall.jpg">
+<meta property="og:url" content="{url}"><meta property="og:image" content="{image}">
 <link rel="stylesheet" href="assets/vendor/fonts/manrope.css">
 <link rel="stylesheet" href="assets/buyer.css" data-ev-buyer-css>
-<link rel="stylesheet" href="assets/history.css?v=20261117brand2">
+<link rel="stylesheet" href="assets/history.css?v=20261117brand3">
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
 <script src="assets/products-data.js" defer></script>
 <script src="assets/buyer-core.js" defer></script>
@@ -39,7 +40,7 @@ def write_history_page(root, footer_html):
 <a class="ev-skip-link" href="#main">Перейти к содержанию</a>
 <div class="reading-progress" aria-hidden="true"></div>
 <main id="main"><div class="wrap">
-<div class="history-masthead"><nav aria-label="Хлебные крошки"><a href="index.html">Главная</a><span aria-hidden="true">/</span><span>Наша история</span></nav><span class="eyebrow">Материалы · Люди · Технологии</span></div>
+<div class="history-masthead"><nav aria-label="Хлебные крошки"><a href="index.html">Главная</a><span aria-hidden="true">/</span><span>Наша история</span></nav></div>
 {body}
 </div></main>{footer_html}
 </body></html>
