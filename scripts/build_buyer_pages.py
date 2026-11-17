@@ -228,7 +228,7 @@ def aliases():
 if __name__ == '__main__':
     if '--history-only' in sys.argv:
         write_history_page(ROOT, footer('history.html'))
-        print('Built the EVERSENSE / EGGER history article.')
+        print('Built the EVERSENSE brand and production story.')
     elif '--classes-only' in sys.argv:
         laminate_classes_page()
         print('Built laminate classes and strength testing article.')

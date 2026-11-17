@@ -5,16 +5,16 @@ import re
 
 START = '<!-- EVERSENSE HISTORY BANNER START -->'
 END = '<!-- EVERSENSE HISTORY BANNER END -->'
-CSS = '<link rel="stylesheet" href="assets/history-banner.css?v=20261117">'
+CSS = '<link rel="stylesheet" href="assets/history-banner.css?v=20261117brand2">'
 
 BANNER = '''<section id="ev-history-banner" aria-labelledby="ev-history-banner-title">
-  <img class="ev-history-banner__image" src="assets/history/gagarin.jpg" alt="Завод EGGER в Гагарине, официальный вид с воздуха" width="1944" height="1500" loading="lazy" decoding="async">
+  <img class="ev-history-banner__image" src="assets/history/production-hall.jpg" alt="Оборудование производственного комплекса в Гагарине" width="800" height="533" loading="lazy" decoding="async">
   <div class="ev-history-banner__inner">
     <p class="ev-history-banner__eyebrow">Наша история</p>
-    <h2 id="ev-history-banner-title">История, которая<br>привела к EVERSENSE.</h2>
-    <p class="ev-history-banner__lead">От первой плиты в Тироле до современного производства в Гагарине. Познакомьтесь с опытом EGGER, который стоит за новым именем.</p>
-    <a class="ev-history-banner__link" href="history.html">Узнать нашу историю <span aria-hidden="true">→</span></a>
-    <p class="ev-history-banner__credit">Завод в Гагарине · Фото EGGER</p>
+    <h2 id="ev-history-banner-title">За EVERSENSE —<br>большое производство.</h2>
+    <p class="ev-history-banner__lead">Европейская школа, полный цикл в Гагарине и внимание к каждой детали — от древесной основы до рельефа поверхности.</p>
+    <a class="ev-history-banner__link" href="history.html">Познакомиться с производством <span aria-hidden="true">→</span></a>
+    <p class="ev-history-banner__credit">Производственная площадка в Гагарине</p>
   </div>
 </section>'''
 

@@ -42,20 +42,23 @@ def main():
                 page.goto(base + '/history.html', wait_until='networkidle')
                 page.evaluate('document.fonts.ready')
                 assert page.locator('h1').count() == 1
-                assert page.locator('.chapter').count() == 12
-                assert page.locator('.chapter .date b').all_text_contents() == [
-                    'Сегодня', '2021', '2016', '2014', '2011', '2005',
-                    '1999', '1995', '1993', '1988', '1971', '1961']
+                assert page.locator('.chapter').count() == 7
+                assert page.locator('.production-route li').count() == 6
+                assert page.locator('.experience-timeline b').all_text_contents() == ['2025', '2016', '1995', '1961']
+                article_text = page.locator('main').inner_text().lower()
+                assert 'egger' not in article_text and 'эггер' not in article_text and 'шуя' not in article_text
+                assert 'продукт года' in article_text and 'best for life design' in article_text
+                assert page.locator('a[href*="eversense-technical-certificate"]').count() >= 1
                 overflow = page.evaluate('document.documentElement.scrollWidth > innerWidth + 1')
                 assert not overflow, f'History page overflows at {width}px'
                 page.screenshot(path=str(args.output / f'history-{width}-top.png'))
                 for image in page.locator('main img').all():
                     image.scroll_into_view_if_needed()
                     page.wait_for_function('(img) => img.complete && img.naturalWidth > 0', arg=image.element_handle())
-                page.locator('.timeline-nav a[href="#year-1961"]').click()
-                page.wait_for_function('document.querySelector(".timeline-nav a[aria-current=true]").hash === "#year-1961"')
-                page.screenshot(path=str(args.output / f'history-{width}-archive.png'))
-                page.locator('#year-1961 .ref').first.click()
+                page.locator('.timeline-nav a[href="#roots"]').click()
+                page.wait_for_function('document.querySelector(".timeline-nav a[aria-current=true]").hash === "#roots"')
+                page.screenshot(path=str(args.output / f'history-{width}-roots.png'))
+                page.locator('#roots .ref').first.click()
                 page.wait_for_function('document.querySelector("#sources").open')
                 page.goto(base + '/index.html', wait_until='domcontentloaded')
                 banner = page.locator('#ev-history-banner')
@@ -75,9 +78,9 @@ def main():
             context = browser.new_context(java_script_enabled=False, viewport={'width': 390, 'height': 844})
             page = context.new_page()
             page.goto(base + '/history.html')
-            assert page.locator('.chapter').count() == 12
+            assert page.locator('.chapter').count() == 7
             page.locator('#sources summary').click()
-            assert page.locator('#source-12').is_visible()
+            assert page.locator('#source-10').is_visible()
             results.append({'javascript': False, 'status': 'passed'})
             context.close()
             browser.close()
