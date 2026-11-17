@@ -12,6 +12,7 @@ from urllib.request import Request,urlopen
 from urllib.error import HTTPError
 from static_home import HOME_PATHS, make_static_home
 from static_product import make_static_product
+from history_banner import make_history_banner
 
 BASE='https://ever-home.ru'
 PUBLIC_BASE='/'
@@ -148,6 +149,8 @@ def rewrite_page(page):
  h=h.replace('</body>',"<section class=\"ev-belarus-legal\" aria-label=\"Реквизиты представителя EVERSENSE в Беларуси\"><div class=\"ev-belarus-legal__inner\"><div><p class=\"ev-belarus-legal__eyebrow\">EVERSENSE · Беларусь</p><h2 class=\"ev-belarus-legal__heading\">Представитель торговой марки EVERSENSE<br>на территории Республики Беларусь</h2></div><div><p class=\"ev-belarus-legal__detail\"><strong>ООО «Флорсток»</strong></p><p class=\"ev-belarus-legal__detail\">УНП 192608003</p><p class=\"ev-belarus-legal__detail\">220062, Республика Беларусь, г. Минск,<br>пр. Победителей, д. 129, пом. 358</p><p class=\"ev-belarus-legal__detail\">Тел.: <a class=\"ev-belarus-legal__phone\" href=\"tel:+375296713971\">+375 29 671-39-71</a></p></div></div><p class=\"ev-belarus-legal__note\">Информационный сайт EVERSENSE в Республике Беларусь.</p></section>"+'</body>')
  if dest.relative_to(ROOT).as_posix() in HOME_PATHS:
   h=make_static_home(h)
+ if dest==ROOT/'index.html':
+  h=make_history_banner(h)
  h=make_static_product(h,dest.relative_to(ROOT).as_posix())
  dest.write_text(h,encoding='utf-8')
  return {'url':url,'path':str(dest),'status':'saved','bytes':len(h.encode('utf8')),'asset_replacements':replacements}

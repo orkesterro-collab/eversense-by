@@ -27,6 +27,16 @@
 
 Главная страница: старая строка копирайта Tilda с подписью агентства скрыта через `assets/home-footer-trim.css`. Основной навигационный подвал и юридические реквизиты ООО «Флорсток» сохранены.
 
+## Наша история
+
+`history.html` — журнальная статья об истории производства EGGER и EVERSENSE с 12 вехами в обратной хронологии: от современного продукта до первой плиты 1961 года. Фотографии, короткие главы, выносы и вертикальная линия времени дополняются ссылками на 12 официальных источников.
+
+Текст: `content/history-article.html.in`; оболочка: `scripts/history.py`; стили и поведение: `assets/history.css` и `assets/history.js`. После правок выполнить `python3 scripts/build_buyer_pages.py --history-only`. Полная пересборка также создаёт статью. Брендовые шапка и юридический футер используют существующие компоненты сайта.
+
+Баннер внизу главной перед `#ev-home-footer` сохраняется через `scripts/history_banner.py` и вызывается генератором зеркала. Отдельный запуск: `python3 scripts/history_banner.py`. Фотографии и их источники: `assets/history/` и `reference/history-research.md`.
+
+Проверка: `python3 scripts/qa_history.py --site-dir _deploy` после подготовки публикации. Локально можно указать системный браузер: `--executable /usr/bin/chromium`. Проверяются четыре размера экрана, чтение без JavaScript, фотографии, переходы по годам и источникам, положение баннера и сохранность реквизитов.
+
 ## Цены EVERSENSE из Google Sheets
 
 Источник: https://docs.google.com/spreadsheets/d/1zzypRi-wST20xu0rns-uSnGk7NmikkW2kw44jvsDgBY/edit
