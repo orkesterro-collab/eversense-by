@@ -29,7 +29,7 @@ def write_history_page(root, footer_html):
 <meta property="og:url" content="{url}"><meta property="og:image" content="{image}">
 <link rel="stylesheet" href="assets/vendor/fonts/manrope.css">
 <link rel="stylesheet" href="assets/buyer.css" data-ev-buyer-css>
-<link rel="stylesheet" href="assets/history.css?v=20261117brand3">
+<link rel="stylesheet" href="assets/history.css?v=20261117brand4">
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
 <script src="assets/products-data.js" defer></script>
 <script src="assets/buyer-core.js" defer></script>
@@ -39,7 +39,7 @@ def write_history_page(root, footer_html):
 </head><body class="ev-buyer ev-history-page" data-buyer-page="history">
 <a class="ev-skip-link" href="#main">Перейти к содержанию</a>
 <div class="reading-progress" aria-hidden="true"></div>
-<main id="main"><div class="wrap">
+<main id="main"><div class="ev-wrap">
 <div class="history-masthead"><nav aria-label="Хлебные крошки"><a href="index.html">Главная</a><span aria-hidden="true">/</span><span>Наша история</span></nav></div>
 {body}
 </div></main>{footer_html}
