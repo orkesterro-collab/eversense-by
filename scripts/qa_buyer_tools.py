@@ -1119,8 +1119,8 @@ def main():
                     next_center_y = next_box['y'] + next_box['height'] / 2
                     require(abs(next_center_y - hint_box['y'] - hint_box['height'] / 2) < 1,
                             'Next arrow should sit at the opening arrow height')
-                    require(abs(next_center_y - close_box['y'] - close_box['height'] / 2 - 10 * 96 / 25.4) < 1,
-                            'Close icon should sit 10 mm above the next arrow')
+                    require(abs(next_center_y - close_box['y'] - close_box['height'] / 2 - 16 * 96 / 25.4) < 1,
+                            'Close icon should sit 16 mm above the next arrow')
                     if index == 0:
                         favorite = slides.first.locator('[data-ev-favorite]')
                         saved_sku = favorite.get_attribute('data-ev-favorite')
@@ -1140,13 +1140,25 @@ def main():
                       return el.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));}""",
                                            arg=first_next.element_handle())
                     next_box = first_next.bounding_box()
+                    started = time.monotonic()
                     page.mouse.click(next_box['x'] + next_box['width'] / 2, next_box['y'] + next_box['height'] / 2)
+                    page.wait_for_function("""el=>el.scrollLeft>el.clientWidth*.1 &&
+                      el.scrollLeft<el.clientWidth*.9""", arg=track.element_handle())
+                    require(close.is_visible(), 'The close control should stay visible during the transition')
                     page.wait_for_function("""el=>Math.abs(el.scrollLeft-el.clientWidth)<1 &&
                       el.children[1].getAttribute('aria-hidden')==='false'""", arg=track.element_handle())
+                    duration = time.monotonic() - started
+                    require(1.8 <= duration <= 2.7, f'Arrow transition should take two seconds, took {duration:.2f}s')
                     require(slides.locator('img[src]').count() == 3, 'The next interior was not loaded on demand')
-                    require(not close.is_visible(), 'The close control belongs on the first frame')
+                    later_close_box = close.bounding_box()
+                    require(later_close_box and abs(later_close_box['x'] - close_box['x']) < 1
+                            and abs(later_close_box['y'] - close_box['y']) < 1,
+                            'The close control should stay in place on later photos')
                     track.press('ArrowLeft')
                     page.wait_for_function("el=>el.scrollLeft<1 && el.children[0].getAttribute('aria-hidden')==='false'", arg=track.element_handle())
+                    track.press('ArrowRight')
+                    page.wait_for_function("""el=>Math.abs(el.scrollLeft-el.clientWidth)<1 &&
+                      el.children[1].getAttribute('aria-hidden')==='false'""", arg=track.element_handle())
 
                     cta.scroll_into_view_if_needed()
                     require(cta.evaluate("""el=>{const r=el.getBoundingClientRect();

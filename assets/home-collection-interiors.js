@@ -29,6 +29,7 @@
     const announcement = gallery.querySelector('.ev-interiors__announcement');
     let selected = 0;
     let scrollFrame = 0;
+    let slideFrame = 0;
 
     function loadPreview() {
       if (!preview.hasAttribute('src')) preview.src = preview.dataset.src;
@@ -58,13 +59,56 @@
       loadSlide(selected + 1);
       loadSlide(selected - 1);
       previous.disabled = selected === 0;
-      close.hidden = selected !== 0;
       announcement.textContent = slides[selected].querySelector('figcaption').textContent;
     }
 
-    function move(direction) {
+    function stopSlideAnimation() {
+      if (!slideFrame) return;
+      cancelAnimationFrame(slideFrame);
+      slideFrame = 0;
+      track.classList.remove('is-animating');
+    }
+
+    function animateToSlide(index) {
+      const style = getComputedStyle(sheet);
+      const duration = parseFloat(style.transitionDuration) * 1000;
+      // Use the opening transition's easing to drive the real scroll position.
+      const timing = new Animation(new KeyframeEffect(null, [], {
+        duration,
+        easing: style.transitionTimingFunction,
+        fill: 'both',
+      }));
+      const from = track.scrollLeft;
+      const started = performance.now();
+      if (slides[selected].contains(document.activeElement)) track.focus({ preventScroll: true });
+      loadSlide(index);
+      track.classList.add('is-animating');
+
+      function step(now) {
+        const elapsed = Math.max(0, now - started);
+        timing.currentTime = elapsed;
+        const progress = timing.effect.getComputedTiming().progress;
+        const target = index * track.clientWidth;
+        track.scrollTo({ left: from + (target - from) * progress, behavior: 'instant' });
+        if (elapsed < duration) {
+          slideFrame = requestAnimationFrame(step);
+          return;
+        }
+        stopSlideAnimation();
+        selectSlide(index);
+      }
+
+      slideFrame = requestAnimationFrame(step);
+    }
+
+    function move(direction, animate = false) {
       const index = selected + direction;
       if (!slides[index]) return;
+      if (animate) {
+        if (!slideFrame) animateToSlide(index);
+        return;
+      }
+      stopSlideAnimation();
       track.scrollTo({ left: index * track.clientWidth, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
     }
 
@@ -83,6 +127,7 @@
     });
 
     function closeGallery() {
+      stopSlideAnimation();
       gallery.classList.remove('is-open');
       sheet.inert = true;
       announcement.textContent = '';
@@ -98,13 +143,19 @@
     });
 
     track.addEventListener('scroll', () => {
-      if (scrollFrame) return;
+      if (scrollFrame || slideFrame) return;
       scrollFrame = requestAnimationFrame(() => {
         scrollFrame = 0;
-        if (!track.clientWidth) return;
+        if (slideFrame || !gallery.classList.contains('is-open') || !track.clientWidth) return;
         const index = Math.round(track.scrollLeft / track.clientWidth);
         if (slides[index] && index !== selected) selectSlide(index);
       });
+    }, { passive: true });
+    track.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'touch' && !event.target.closest('button')) stopSlideAnimation();
+    }, { passive: true });
+    track.addEventListener('wheel', event => {
+      if (event.deltaX) stopSlideAnimation();
     }, { passive: true });
     track.addEventListener('keydown', event => {
       if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
@@ -112,9 +163,9 @@
       move(event.key === 'ArrowRight' ? 1 : -1);
     });
     track.addEventListener('click', event => {
-      if (event.target.closest('.ev-interiors__next')) move(1);
+      if (event.target.closest('.ev-interiors__next')) move(1, true);
     });
-    previous.addEventListener('click', () => move(-1));
+    previous.addEventListener('click', () => move(-1, true));
 
     board.classList.add('ev-interiors-artboard');
     gallery.hidden = false;

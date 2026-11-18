@@ -103,6 +103,7 @@
 }
 .ev-interiors__track::-webkit-scrollbar { display: none; }
 .ev-interiors.is-open .ev-interiors__track { visibility: visible; transition-delay: 0s; }
+.ev-interiors__track.is-animating { scroll-snap-type: none; }
 .ev-interiors__slide {
   position: relative;
   flex: 0 0 100%;
@@ -158,8 +159,8 @@
   color: #fff;
   cursor: pointer;
 }
-.ev-interiors__close { top: calc(50% - 10mm); }
-.ev-interiors.is-open .ev-interiors__close:not([hidden]),
+.ev-interiors__close { top: calc(50% - 16mm); }
+.ev-interiors.is-open .ev-interiors__close,
 .ev-interiors.is-open .ev-interiors__next { display: grid; }
 .ev-interiors__close::before, .ev-interiors__close::after {
   content: "";
