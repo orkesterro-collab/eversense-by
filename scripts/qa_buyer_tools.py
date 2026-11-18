@@ -1063,6 +1063,8 @@ def main():
                     slides = gallery.locator('.ev-interiors__slide')
                     require(set(slides.locator('figcaption').all_text_contents()) == {p['name'] for p in products_in_collection}
                             and slides.count() == len(products_in_collection), 'Interior captions do not match their collection')
+                    require(all(slide.locator('.ev-interiors__next').count() == int(i < len(products_in_collection) - 1)
+                                for i, slide in enumerate(slides.all())), 'Only the last interior should omit the next arrow')
                     require(gallery.locator('a').count() == 0, 'Interior captions should be plain text')
                     gallery.evaluate("el=>el.scrollIntoView({block:'center',behavior:'instant'})")
                     preview = gallery.locator('.ev-interiors__preview').element_handle()
@@ -1110,8 +1112,15 @@ def main():
                             'Interior name should be small and appear directly on the photo')
                     close = gallery.locator('.ev-interiors__close')
                     close_box = close.bounding_box()
-                    require(close_box and abs(close_box['y'] + close_box['height']/2 - hint_box['y'] - hint_box['height']/2) < 1,
-                            'Close icon should align vertically with the opening arrow')
+                    first_next = slides.first.locator('.ev-interiors__next')
+                    next_box = first_next.bounding_box()
+                    require(close_box and next_box and abs(close_box['x'] - next_box['x']) < 1,
+                            'Close and next controls should share the same right inset')
+                    next_center_y = next_box['y'] + next_box['height'] / 2
+                    require(abs(next_center_y - hint_box['y'] - hint_box['height'] / 2) < 1,
+                            'Next arrow should sit at the opening arrow height')
+                    require(abs(next_center_y - close_box['y'] - close_box['height'] / 2 - 10 * 96 / 25.4) < 1,
+                            'Close icon should sit 10 mm above the next arrow')
                     if index == 0:
                         favorite = slides.first.locator('[data-ev-favorite]')
                         saved_sku = favorite.get_attribute('data-ev-favorite')
@@ -1127,11 +1136,13 @@ def main():
                         require(gallery.evaluate('el=>Math.abs(el.getBoundingClientRect().left)<1'),
                                 'Focusing the favorite must not pan the homepage sideways')
 
-                    if mobile:
-                        track.press('ArrowRight')
-                    else:
-                        gallery.locator('.ev-interiors__next').click()
-                    page.wait_for_function("el=>el.children[1].getAttribute('aria-hidden')==='false'", arg=track.element_handle())
+                    page.wait_for_function("""el=>{const r=el.getBoundingClientRect();
+                      return el.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));}""",
+                                           arg=first_next.element_handle())
+                    next_box = first_next.bounding_box()
+                    page.mouse.click(next_box['x'] + next_box['width'] / 2, next_box['y'] + next_box['height'] / 2)
+                    page.wait_for_function("""el=>Math.abs(el.scrollLeft-el.clientWidth)<1 &&
+                      el.children[1].getAttribute('aria-hidden')==='false'""", arg=track.element_handle())
                     require(slides.locator('img[src]').count() == 3, 'The next interior was not loaded on demand')
                     require(not close.is_visible(), 'The close control belongs on the first frame')
                     track.press('ArrowLeft')

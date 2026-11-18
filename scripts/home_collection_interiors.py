@@ -18,7 +18,7 @@ RECORDS = {'nature': '1002600156', 'luxury': '1002600161', 'minimal': '100260016
 ASSET_DIR = 'assets/collection-interiors'
 STYLE = 'home-collection-interiors.css'
 SCRIPT = 'home-collection-interiors.js'
-VERSION = '2'
+VERSION = '3'
 HEART_ICON = '<svg class="ev-heart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 4.6c-2.1-2.1-5.5-2.1-7.6 0L12 5.8l-1.2-1.2c-2.1-2.1-5.5-2.1-7.6 0s-2.1 5.5 0 7.6L12 21l8.8-8.8c2.1-2.1 2.1-5.5 0-7.6Z"/></svg>'
 MARKUP = re.compile(r'\n<!-- ev-collection-interiors -->.*?<!-- /ev-collection-interiors -->', re.S)
 ASSETS = re.compile(r'<link\b[^>]*\bid="ev-collection-interiors-css"[^>]*>|'
@@ -39,7 +39,7 @@ def collection_data():
         yield key, record, items, centers
 
 
-def picture_markup(product, asset_url, responsive, close_button):
+def picture_markup(product, asset_url, responsive, navigation):
     source = product['interiorImage']
     image = responsive[source]
     candidates = [(variant['path'], variant['width']) for variant in image['variants']]
@@ -51,7 +51,7 @@ def picture_markup(product, asset_url, responsive, close_button):
       <picture>
         <source media="(max-width: 639px)" data-srcset="{asset_url(f'{ASSET_DIR}/mobile/{sku}.webp')}">
         <img alt="" decoding="async" loading="eager" sizes="min(100vw, 100vh)" data-srcset="{srcset}" data-src="{asset_url(source)}">
-      </picture>{close_button}
+      </picture>{navigation}
       <button class="ev-card-favorite ev-interiors__favorite" type="button" data-ev-favorite="{escape(sku)}" aria-pressed="false" aria-label="Избранное — {name}">{HEART_ICON}</button>
       <figcaption>{name}</figcaption>
     </figure>'''
@@ -82,8 +82,12 @@ def make_home_collection_interiors(source, page, responsive):
             raise ValueError(f'Collection artboard {record} missing from {page}')
         gallery_id = f'ev-interiors-{key}'
         close_button = f'\n      <button class="ev-interiors__close" type="button" aria-label="Закрыть интерьеры коллекции «{collection}»" aria-controls="{gallery_id}" hidden></button>'
-        panels = '\n'.join(picture_markup(product, asset_url, responsive, close_button if index == 0 else '')
-                           for index, product in enumerate(items))
+        next_button = f'\n      <button class="ev-interiors__next" type="button" aria-label="Следующий интерьер" aria-controls="{gallery_id}"></button>'
+        panels = '\n'.join(
+            picture_markup(product, asset_url, responsive,
+                           (close_button if index == 0 else '') + (next_button if index < len(items) - 1 else ''))
+            for index, product in enumerate(items)
+        )
         block = f'''
 <!-- ev-collection-interiors -->
 <div class="ev-interiors" hidden>
@@ -94,7 +98,6 @@ def make_home_collection_interiors(source, page, responsive):
     </div>
     <div class="ev-interiors__controls">
       <button class="ev-interiors__previous" type="button" aria-label="Предыдущий интерьер" aria-controls="{gallery_id}" disabled></button>
-      <button class="ev-interiors__next" type="button" aria-label="Следующий интерьер" aria-controls="{gallery_id}"></button>
     </div>
   </div>
   <button class="ev-interiors__opener" type="button" aria-label="Посмотреть интерьеры коллекции «{collection}»" aria-controls="{gallery_id}" aria-expanded="false">

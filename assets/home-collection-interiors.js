@@ -25,7 +25,6 @@
     const track = gallery.querySelector('.ev-interiors__track');
     const slides = Array.from(track.children);
     const previous = gallery.querySelector('.ev-interiors__previous');
-    const next = gallery.querySelector('.ev-interiors__next');
     const close = gallery.querySelector('.ev-interiors__close');
     const announcement = gallery.querySelector('.ev-interiors__announcement');
     let selected = 0;
@@ -48,8 +47,10 @@
     }
 
     function selectSlide(index) {
-      slides[selected].setAttribute('aria-hidden', 'true');
-      slides[selected].inert = true;
+      const outgoing = slides[selected];
+      if (outgoing.contains(document.activeElement)) track.focus({ preventScroll: true });
+      outgoing.setAttribute('aria-hidden', 'true');
+      outgoing.inert = true;
       selected = index;
       slides[selected].setAttribute('aria-hidden', 'false');
       slides[selected].inert = false;
@@ -57,7 +58,6 @@
       loadSlide(selected + 1);
       loadSlide(selected - 1);
       previous.disabled = selected === 0;
-      next.disabled = selected === slides.length - 1;
       close.hidden = selected !== 0;
       announcement.textContent = slides[selected].querySelector('figcaption').textContent;
     }
@@ -111,8 +111,10 @@
       event.preventDefault();
       move(event.key === 'ArrowRight' ? 1 : -1);
     });
+    track.addEventListener('click', event => {
+      if (event.target.closest('.ev-interiors__next')) move(1);
+    });
     previous.addEventListener('click', () => move(-1));
-    next.addEventListener('click', () => move(1));
 
     board.classList.add('ev-interiors-artboard');
     gallery.hidden = false;
