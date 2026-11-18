@@ -1,11 +1,21 @@
+/* Clip the Tilda wrapper without making it a second horizontal scroller. */
+#allrecords { overflow: clip; }
 .ev-interiors-artboard { isolation: isolate; }
-.ev-interiors-artboard > [data-elem-type="button"] { z-index: 21 !important; }
-.ev-interiors-artboard.has-open-interiors > [data-elem-type="button"] .tn-atom {
-  background-color: rgba(41, 39, 38, .78) !important;
-  color: #fff !important;
+.ev-interiors-artboard > [data-elem-type="button"] {
+  z-index: 21 !important;
+  top: auto !important;
+  bottom: 24px;
+}
+/* The artboards have separate catalog buttons below and above the 960px breakpoint. */
+@media (max-width: 959px) {
+  .ev-interiors-artboard > [data-elem-id="1742824742704"] { display: none !important; }
+}
+@media (min-width: 960px) {
+  .ev-interiors-artboard > [data-elem-type="button"]:not([data-elem-id="1742824742704"]) { display: none !important; }
 }
 
 .ev-interiors {
+  --interiors-duration: 2000ms;
   --interiors-peek: 5%;
   position: absolute;
   inset: 0;
@@ -16,15 +26,15 @@
   color: #fff;
   font-family: Manrope, Arial, sans-serif;
 }
-.ev-interiors[hidden], .ev-interiors__opener[hidden] { display: none; }
+.ev-interiors[hidden], .ev-interiors [hidden] { display: none; }
 .ev-interiors__sheet {
   position: absolute;
   inset: 0;
   background: #292726;
-  transform: translateX(calc(100% - var(--interiors-peek)));
-  transition: transform 2000ms cubic-bezier(.45, 0, .2, 1);
+  transform: translate3d(calc(100% - var(--interiors-peek)), 0, 0);
+  transition: transform var(--interiors-duration) cubic-bezier(.45, 0, .2, 1);
 }
-.ev-interiors.is-open .ev-interiors__sheet { transform: none; pointer-events: auto; }
+.ev-interiors.is-open .ev-interiors__sheet { transform: translate3d(0, 0, 0); pointer-events: auto; }
 .ev-interiors__preview {
   position: absolute;
   inset: 0;
@@ -47,7 +57,8 @@
   pointer-events: auto;
 }
 .ev-interiors__opener:focus-visible, .ev-interiors__track:focus-visible,
-.ev-interiors__controls button:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+.ev-interiors__controls button:focus-visible, .ev-interiors__close:focus-visible,
+.ev-interiors__favorite:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
 .ev-interiors__hint {
   position: absolute;
   top: 50%;
@@ -57,10 +68,9 @@
   place-items: center;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  background: rgba(36, 34, 32, .72);
   opacity: 0;
 }
+.ev-interiors__hint::before { filter: drop-shadow(0 1px 2px #292726); }
 .ev-interiors__hint::before, .ev-interiors__controls button::before {
   content: "";
   display: block;
@@ -86,9 +96,10 @@
   overscroll-behavior-x: contain;
   scrollbar-width: none;
   visibility: hidden;
+  transition: visibility 0s linear var(--interiors-duration);
 }
 .ev-interiors__track::-webkit-scrollbar { display: none; }
-.ev-interiors.is-open .ev-interiors__track { visibility: visible; }
+.ev-interiors.is-open .ev-interiors__track { visibility: visible; transition-delay: 0s; }
 .ev-interiors__slide {
   position: relative;
   flex: 0 0 100%;
@@ -98,9 +109,15 @@
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
-.ev-interiors__slide:first-child:not(.is-loaded) { background: transparent; }
+.ev-interiors__slide:first-child { background: transparent; }
 .ev-interiors__slide picture, .ev-interiors__slide img { display: block; width: 100%; height: 100%; }
-.ev-interiors__slide img { object-fit: contain; object-position: center top; opacity: 0; }
+.ev-interiors__slide img {
+  object-fit: contain;
+  object-position: center top;
+  background: #292726;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
 .ev-interiors__slide.is-loaded img { opacity: 1; }
 .ev-interiors__slide figcaption {
   position: absolute;
@@ -108,15 +125,48 @@
   left: 50%;
   transform: translateX(-50%);
   box-sizing: border-box;
-  max-width: calc(100% - 150px);
-  padding: 8px 13px;
-  background: rgba(41, 39, 38, .82);
-  font-size: 15px;
-  font-weight: 600;
+  max-width: calc(100% - 320px);
+  font-size: 12px;
+  font-weight: 500;
   line-height: 1.4;
   text-align: center;
+  text-shadow: 0 1px 3px #292726, 0 0 8px #292726;
 }
-.ev-interiors__controls { position: absolute; top: 20px; right: 20px; display: none; gap: 8px; }
+.ev-interiors .ev-interiors__favorite {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: #fff;
+  cursor: pointer;
+}
+.ev-interiors__favorite .ev-heart-icon { filter: drop-shadow(0 1px 2px #292726); }
+.ev-interiors__close {
+  position: absolute;
+  top: 50%;
+  right: calc(var(--interiors-peek) + 1px);
+  transform: translateY(-50%);
+  display: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+.ev-interiors.is-open .ev-interiors__close:not([hidden]) { display: grid; }
+.ev-interiors__close::before, .ev-interiors__close::after {
+  content: "";
+  grid-area: 1 / 1;
+  width: 21px;
+  height: 2px;
+  background: currentColor;
+  filter: drop-shadow(0 1px 2px #292726);
+  transform: rotate(45deg);
+}
+.ev-interiors__close::after { transform: rotate(-45deg); }
+.ev-interiors__controls { position: absolute; top: 16px; right: 68px; display: none; gap: 8px; }
 .ev-interiors.is-open .ev-interiors__controls { display: flex; }
 .ev-interiors__controls button {
   display: grid;
@@ -141,19 +191,20 @@
 }
 
 @media (max-width: 639px) {
+  .ev-interiors-artboard > [data-elem-type="button"] { bottom: 16px; }
   .ev-interiors__slide img { object-fit: cover; object-position: center bottom; }
   .ev-interiors__slide figcaption {
-    top: 18px;
+    top: 29px;
     left: 20px;
-    max-width: calc(100% - 40px);
+    max-width: calc(100% - 84px);
     transform: none;
-    font-size: 14px;
     text-align: left;
   }
   .ev-interiors.is-open .ev-interiors__controls { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ev-interiors__sheet { transition: none; }
+  /* Keep the deliberate two-second opening. Suppress decorative fades. */
+  .ev-interiors__slide img { transition: none; }
   .ev-interiors.is-hinting .ev-interiors__hint { animation: ev-interiors-hint-still 5400ms step-end both; }
 }
 @keyframes ev-interiors-hint-still {

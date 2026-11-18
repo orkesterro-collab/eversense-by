@@ -26,6 +26,7 @@
     const slides = Array.from(track.children);
     const previous = gallery.querySelector('.ev-interiors__previous');
     const next = gallery.querySelector('.ev-interiors__next');
+    const close = gallery.querySelector('.ev-interiors__close');
     const announcement = gallery.querySelector('.ev-interiors__announcement');
     let selected = 0;
     let scrollFrame = 0;
@@ -48,13 +49,16 @@
 
     function selectSlide(index) {
       slides[selected].setAttribute('aria-hidden', 'true');
+      slides[selected].inert = true;
       selected = index;
       slides[selected].setAttribute('aria-hidden', 'false');
+      slides[selected].inert = false;
       loadSlide(selected);
       loadSlide(selected + 1);
       loadSlide(selected - 1);
       previous.disabled = selected === 0;
       next.disabled = selected === slides.length - 1;
+      close.hidden = selected !== 0;
       announcement.textContent = slides[selected].querySelector('figcaption').textContent;
     }
 
@@ -66,13 +70,32 @@
 
     opener.addEventListener('click', () => {
       loadPreview();
+      track.scrollLeft = 0;
       selectSlide(0);
       sheet.inert = false;
+      // Establish the starting transform before revealing the sheet.
+      sheet.getBoundingClientRect();
       gallery.classList.add('is-open');
-      board.classList.add('has-open-interiors');
+      opener.setAttribute('aria-expanded', 'true');
+      hint.hidden = true;
       track.focus({ preventScroll: true });
       opener.hidden = true;
-    }, { once: true });
+    });
+
+    function closeGallery() {
+      gallery.classList.remove('is-open');
+      sheet.inert = true;
+      announcement.textContent = '';
+      opener.hidden = false;
+      opener.setAttribute('aria-expanded', 'false');
+      opener.focus({ preventScroll: true });
+    }
+    close.addEventListener('click', closeGallery);
+    gallery.addEventListener('keydown', event => {
+      if (event.key !== 'Escape' || !gallery.classList.contains('is-open')) return;
+      event.preventDefault();
+      closeGallery();
+    });
 
     track.addEventListener('scroll', () => {
       if (scrollFrame) return;

@@ -1046,8 +1046,8 @@ def main():
                      lambda p, c, w=width: collection_breakpoint_test(p, c, str(w)), width, 900)
 
             def collection_interiors_test(page, context, device):
-                mobile = device == 'mobile'
-                if mobile:
+                mobile = device != 'desktop'
+                if device == 'mobile':
                     page.emulate_media(reduced_motion='no-preference')
                 goto(page, 'index.html' if mobile else 'ru/', prices=False)
                 cookie_ok = page.get_by_text('OK', exact=True)
@@ -1056,6 +1056,7 @@ def main():
                 galleries = page.locator('.ev-interiors')
                 require(galleries.count() == 3, 'Expected three collection galleries')
                 require(galleries.locator('img[src]').count() == 0, 'Interiors loaded before their collections approached the viewport')
+                saved_sku = None
                 for index, collection in enumerate(('nature', 'luxury', 'minimal')):
                     gallery = galleries.nth(index)
                     products_in_collection = [p for p in products if p['collectionID'] == collection]
@@ -1072,20 +1073,51 @@ def main():
                       return (box.right-el.querySelector('.ev-interiors__sheet').getBoundingClientRect().left)/box.width;
                     }""")
                     require(abs(peek - .05) < .005, f'Incorrect closed gallery reveal: {peek}')
+                    cta = gallery.locator('..').get_by_role('link', name=products_in_collection[0]['collectionName'], exact=True)
+                    require(cta.count() == 1, 'Expected one catalog link at each breakpoint')
+                    cta_style = cta.evaluate("""el=>({
+                      gap:el.closest('.ev-interiors-artboard').getBoundingClientRect().bottom-el.getBoundingClientRect().bottom,
+                      background:getComputedStyle(el).backgroundColor,
+                      blur:getComputedStyle(el.parentElement).backdropFilter
+                    })""")
+                    require(12 <= cta_style['gap'] <= 36 and 'blur(' in cta_style['blur'], f'Catalog link should sit lower with its original blur: {cta_style}')
 
-                    if mobile and index == 0:
-                        hint = gallery.locator('.ev-interiors__hint').element_handle()
+                    hint = gallery.locator('.ev-interiors__hint').element_handle()
+                    hint_box = hint.bounding_box()
+                    require(hint.evaluate("el=>getComputedStyle(el).backgroundColor==='rgba(0, 0, 0, 0)'"), 'Opening arrow should not have a circle')
+                    if device == 'mobile' and index == 0:
                         page.wait_for_function("el=>getComputedStyle(el).animationIterationCount==='3'", arg=hint)
                         hint.evaluate('el=>el.getAnimations()[0].finish()')
                         require(hint.evaluate("el=>getComputedStyle(el).opacity==='0'"), 'Opening hint should disappear after three pulses')
-                    gallery.locator('.ev-interiors__opener').press('Enter')
+                    opener = gallery.locator('.ev-interiors__opener')
+                    opener.press('Enter')
                     track = gallery.locator('.ev-interiors__track')
                     require(track.evaluate('el=>el===document.activeElement'), 'Opening through the keyboard should focus the gallery')
+                    sheet = gallery.locator('.ev-interiors__sheet').element_handle()
+                    require(sheet.evaluate("el=>getComputedStyle(el).transitionDuration==='2s'"), 'Deliberate opening should take two seconds, including with reduced motion')
+                    if index == 0:
+                        page.wait_for_function("el=>{const x=el.getBoundingClientRect().left;return x > el.clientWidth*.1 && x < el.clientWidth*.8;}", arg=sheet)
+                    page.wait_for_function("el=>Math.abs(el.getBoundingClientRect().left-el.parentElement.getBoundingClientRect().left)<1", arg=sheet)
                     first = slides.first.locator('img').element_handle()
                     page.wait_for_function('el=>el.complete&&el.naturalWidth>0', arg=first)
                     require(('/collection-interiors/mobile/' in first.evaluate('el=>el.currentSrc')) == mobile,
                             'Gallery selected an incorrect image format for the viewport')
                     require(slides.locator('img[src]').count() == 2, 'Opening should load the first frame and its neighbor')
+                    caption = slides.first.locator('figcaption')
+                    require(caption.evaluate("el=>{const s=getComputedStyle(el);return parseFloat(s.fontSize)<=12&&s.backgroundColor==='rgba(0, 0, 0, 0)';}"),
+                            'Interior name should be small and appear directly on the photo')
+                    close = gallery.locator('.ev-interiors__close')
+                    close_box = close.bounding_box()
+                    require(close_box and abs(close_box['y'] + close_box['height']/2 - hint_box['y'] - hint_box['height']/2) < 1,
+                            'Close icon should align vertically with the opening arrow')
+                    if index == 0:
+                        favorite = slides.first.locator('[data-ev-favorite]')
+                        saved_sku = favorite.get_attribute('data-ev-favorite')
+                        favorite.click()
+                        require(favorite.get_attribute('aria-pressed') == 'true' and favorite.locator('svg').count() == 1,
+                                'Photo heart must save the decor and keep its icon')
+                        require(gallery.evaluate('el=>Math.abs(el.getBoundingClientRect().left)<1'),
+                                'Focusing the favorite must not pan the homepage sideways')
 
                     if mobile:
                         track.press('ArrowRight')
@@ -1093,18 +1125,27 @@ def main():
                         gallery.locator('.ev-interiors__next').click()
                     page.wait_for_function("el=>el.children[1].getAttribute('aria-hidden')==='false'", arg=track.element_handle())
                     require(slides.locator('img[src]').count() == 3, 'The next interior was not loaded on demand')
+                    require(not close.is_visible(), 'The close control belongs on the first frame')
                     track.press('ArrowLeft')
                     page.wait_for_function("el=>el.children[0].getAttribute('aria-hidden')==='false'", arg=track.element_handle())
 
-                    cta = gallery.locator('..').get_by_role('link', name=products_in_collection[0]['collectionName'], exact=True)
-                    cta = next(link for link in cta.all() if link.evaluate("el=>getComputedStyle(el).opacity==='1'"))
                     cta.scroll_into_view_if_needed()
                     require(cta.evaluate("""el=>{const r=el.getBoundingClientRect();
                       return el.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));}"""),
                             'Opened interiors covered the catalog link')
+                    require(cta.evaluate('el=>getComputedStyle(el).backgroundColor') == cta_style['background'],
+                            'Catalog link gained a darker background over the photo')
+                    close.press('Enter')
+                    require(opener.get_attribute('aria-expanded') == 'false' and opener.evaluate('el=>el===document.activeElement'),
+                            'Closing should return to the photo strip and restore focus')
+                    page.wait_for_function("el=>getComputedStyle(el).visibility==='hidden'", arg=track.element_handle())
+                    require(hint.evaluate('el=>el.hidden && el.getAnimations().length===0'), 'The opening hint replayed after closing')
+                goto(page, 'favorites.html')
+                require(page.locator(f'#ev-favorites [data-product="{saved_sku}"]').count() == 1,
+                        'The decor saved from the home gallery should appear in Favorites')
                 return {'galleries': 3, 'captions': len(products), 'mobile_images': mobile}
 
-            for device, width, height in DEVICES[:2]:
+            for device, width, height in DEVICES:
                 case('collection-interiors-' + device, lambda p, c, d=device: collection_interiors_test(p, c, d), width, height)
 
             def senses_test(page, context, path, device):

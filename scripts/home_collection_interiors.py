@@ -18,7 +18,11 @@ RECORDS = {'nature': '1002600156', 'luxury': '1002600161', 'minimal': '100260016
 ASSET_DIR = 'assets/collection-interiors'
 STYLE = 'home-collection-interiors.css'
 SCRIPT = 'home-collection-interiors.js'
+VERSION = '2'
+HEART_ICON = '<svg class="ev-heart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 4.6c-2.1-2.1-5.5-2.1-7.6 0L12 5.8l-1.2-1.2c-2.1-2.1-5.5-2.1-7.6 0s-2.1 5.5 0 7.6L12 21l8.8-8.8c2.1-2.1 2.1-5.5 0-7.6Z"/></svg>'
 MARKUP = re.compile(r'\n<!-- ev-collection-interiors -->.*?<!-- /ev-collection-interiors -->', re.S)
+ASSETS = re.compile(r'<link\b[^>]*\bid="ev-collection-interiors-css"[^>]*>|'
+                    r'<script\b[^>]*\bid="ev-collection-interiors-js"[^>]*>\s*</script>')
 
 
 def collection_data():
@@ -35,19 +39,21 @@ def collection_data():
         yield key, record, items, centers
 
 
-def picture_markup(product, asset_url, responsive):
+def picture_markup(product, asset_url, responsive, close_button):
     source = product['interiorImage']
     image = responsive[source]
     candidates = [(variant['path'], variant['width']) for variant in image['variants']]
     candidates.append((source, image['source_width']))
     srcset = ', '.join(f'{asset_url(path)} {width}w' for path, width in candidates)
     sku = product['sku']
-    return f'''    <figure class="ev-interiors__slide" data-sku="{escape(sku)}" aria-hidden="true">
+    name = escape(product['name'])
+    return f'''    <figure class="ev-interiors__slide" data-sku="{escape(sku)}" aria-hidden="true" inert>
       <picture>
         <source media="(max-width: 639px)" data-srcset="{asset_url(f'{ASSET_DIR}/mobile/{sku}.webp')}">
         <img alt="" decoding="async" loading="eager" sizes="min(100vw, 100vh)" data-srcset="{srcset}" data-src="{asset_url(source)}">
-      </picture>
-      <figcaption>{escape(product['name'])}</figcaption>
+      </picture>{close_button}
+      <button class="ev-card-favorite ev-interiors__favorite" type="button" data-ev-favorite="{escape(sku)}" aria-pressed="false" aria-label="Избранное — {name}">{HEART_ICON}</button>
+      <figcaption>{name}</figcaption>
     </figure>'''
 
 
@@ -74,8 +80,10 @@ def make_home_collection_interiors(source, page, responsive):
         filter_tag = f'<div class="t396__filter" data-artboard-recid="{record}"></div>'
         if source.count(filter_tag) != 1:
             raise ValueError(f'Collection artboard {record} missing from {page}')
-        panels = '\n'.join(picture_markup(product, asset_url, responsive) for product in items)
         gallery_id = f'ev-interiors-{key}'
+        close_button = f'\n      <button class="ev-interiors__close" type="button" aria-label="Закрыть интерьеры коллекции «{collection}»" aria-controls="{gallery_id}" hidden></button>'
+        panels = '\n'.join(picture_markup(product, asset_url, responsive, close_button if index == 0 else '')
+                           for index, product in enumerate(items))
         block = f'''
 <!-- ev-collection-interiors -->
 <div class="ev-interiors" hidden>
@@ -89,7 +97,7 @@ def make_home_collection_interiors(source, page, responsive):
       <button class="ev-interiors__next" type="button" aria-label="Следующий интерьер" aria-controls="{gallery_id}"></button>
     </div>
   </div>
-  <button class="ev-interiors__opener" type="button" aria-label="Посмотреть интерьеры коллекции «{collection}»" aria-controls="{gallery_id}">
+  <button class="ev-interiors__opener" type="button" aria-label="Посмотреть интерьеры коллекции «{collection}»" aria-controls="{gallery_id}" aria-expanded="false">
     <span class="ev-interiors__hint" aria-hidden="true"></span>
   </button>
   <span class="ev-interiors__announcement" role="status"></span>
@@ -97,11 +105,9 @@ def make_home_collection_interiors(source, page, responsive):
 <!-- /ev-collection-interiors -->'''
         source = source.replace(filter_tag, filter_tag + block, 1)
 
-    if 'id="ev-collection-interiors-css"' not in source:
-        assets = (f'<link id="ev-collection-interiors-css" rel="stylesheet" href="{asset_url(f"assets/{STYLE}")}?v=1">'
-                  f'<script id="ev-collection-interiors-js" src="{asset_url(f"assets/{SCRIPT}")}?v=1" defer></script>')
-        source = source.replace('</head>', assets + '</head>', 1)
-    return source
+    assets = (f'<link id="ev-collection-interiors-css" rel="stylesheet" href="{asset_url(f"assets/{STYLE}")}?v={VERSION}">'
+              f'<script id="ev-collection-interiors-js" src="{asset_url(f"assets/{SCRIPT}")}?v={VERSION}" defer></script>')
+    return ASSETS.sub('', source).replace('</head>', assets + '</head>', 1)
 
 
 def make_mobile_images():
