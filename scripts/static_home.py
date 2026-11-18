@@ -15,6 +15,60 @@ COLLECTION_CONTENT = ('1742824688189', '1742824742704', '1742824688198',
                       '1742824688204', '1742824688207')
 
 
+def compact_collection_panels(source):
+    """Reduce the three collection artboards and their vertical layout to 75%."""
+    marker = '<!-- ev-compact-collections -->'
+    if marker in source:
+        return source
+    records = ('1002600156', '1040271756', *COLLECTION_RECORDS)
+    record_ids = '|'.join(records)
+    photo = '1742824688189'
+    background = '1740571858587'
+    second_paragraph = '1742824688207'
+
+    def scale(number):
+        return format(float(number) * .75, 'g')
+
+    def scale_attributes(tag):
+        attrs = tag[0]
+        if f'data-elem-id="{background}"' in attrs:
+            return attrs
+        if 'data-artboard-recid=' in attrs:
+            fields = r'data-artboard-height(?:_vh)?(?:-res-\d+)?'
+        else:
+            fields = r'data-field-top(?:-res-\d+)?-value'
+            if f'data-elem-id="{photo}"' in attrs:
+                fields = r'data-field-(?:top|height|width)(?:-res-\d+)?-value'
+        return re.sub(r'(' + fields + r'=")(-?\d+(?:\.\d+)?)(")',
+                      lambda value: value[1] + scale(value[2]) + value[3], attrs)
+
+    def scale_rule(rule):
+        selector, declarations = rule[1], rule[2]
+        if '.tn-elem' in selector:
+            if f'data-elem-id="{background}"' in selector:
+                return rule[0]
+            fields = 'top|height|width' if f'data-elem-id="{photo}"' in selector else 'top'
+        else:
+            fields = 'min-height|height'
+        declarations = re.sub(
+            r'(^|;)(\s*(?:' + fields + r'):[^;}]+)',
+            lambda field: field[1] + re.sub(r'(-?\d+(?:\.\d+)?)(px|vh)',
+                                            lambda n: scale(n[1]) + n[2], field[2]),
+            declarations)
+        return selector + '{' + declarations + '}'
+
+    source = re.sub(r'(#rec(?:' + record_ids +
+                    r') (?:\.t396__(?:artboard|filter|carrier)\b|\.tn-elem\[data-elem-id="\d+"\])'
+                    r'[^{}<>]*)\{([^{}<>]*)\}', scale_rule, source)
+    source = re.sub(r'<div\b[^>]*data-artboard-recid="(?:' + record_ids +
+                    r')"[^>]*>|<div\b[^>]*\btn-elem__(?:' + record_ids + r')\d+[^>]*>',
+                    scale_attributes, source)
+    paragraphs = ','.join(
+        f'#rec{record} [data-elem-id="{second_paragraph}"]' for record in records)
+    spacing = f'<style>@media(max-width:959px){{{paragraphs}{{margin-top:12px}}}}</style>'
+    return source.replace('</head>', marker + spacing + '</head>', 1)
+
+
 def make_static_home(source):
     offsets = []
     position = 0
