@@ -1045,6 +1045,68 @@ def main():
                 case('collection-breakpoint-' + str(width),
                      lambda p, c, w=width: collection_breakpoint_test(p, c, str(w)), width, 900)
 
+            def collection_interiors_test(page, context, device):
+                mobile = device == 'mobile'
+                if mobile:
+                    page.emulate_media(reduced_motion='no-preference')
+                goto(page, 'index.html' if mobile else 'ru/', prices=False)
+                cookie_ok = page.get_by_text('OK', exact=True)
+                if cookie_ok.count() and cookie_ok.first.is_visible():
+                    cookie_ok.first.click()
+                galleries = page.locator('.ev-interiors')
+                require(galleries.count() == 3, 'Expected three collection galleries')
+                require(galleries.locator('img[src]').count() == 0, 'Interiors loaded before their collections approached the viewport')
+                for index, collection in enumerate(('nature', 'luxury', 'minimal')):
+                    gallery = galleries.nth(index)
+                    products_in_collection = [p for p in products if p['collectionID'] == collection]
+                    slides = gallery.locator('.ev-interiors__slide')
+                    require(set(slides.locator('figcaption').all_text_contents()) == {p['name'] for p in products_in_collection}
+                            and slides.count() == len(products_in_collection), 'Interior captions do not match their collection')
+                    require(gallery.locator('a').count() == 0, 'Interior captions should be plain text')
+                    gallery.evaluate("el=>el.scrollIntoView({block:'center',behavior:'instant'})")
+                    preview = gallery.locator('.ev-interiors__preview').element_handle()
+                    page.wait_for_function('el=>el.complete&&el.naturalWidth>0', arg=preview)
+                    require(slides.locator('img[src]').count() == 0, 'Full gallery images loaded before opening')
+                    peek = gallery.evaluate("""el=>{
+                      const box=el.getBoundingClientRect();
+                      return (box.right-el.querySelector('.ev-interiors__sheet').getBoundingClientRect().left)/box.width;
+                    }""")
+                    require(abs(peek - .05) < .005, f'Incorrect closed gallery reveal: {peek}')
+
+                    if mobile and index == 0:
+                        hint = gallery.locator('.ev-interiors__hint').element_handle()
+                        page.wait_for_function("el=>getComputedStyle(el).animationIterationCount==='3'", arg=hint)
+                        hint.evaluate('el=>el.getAnimations()[0].finish()')
+                        require(hint.evaluate("el=>getComputedStyle(el).opacity==='0'"), 'Opening hint should disappear after three pulses')
+                    gallery.locator('.ev-interiors__opener').press('Enter')
+                    track = gallery.locator('.ev-interiors__track')
+                    require(track.evaluate('el=>el===document.activeElement'), 'Opening through the keyboard should focus the gallery')
+                    first = slides.first.locator('img').element_handle()
+                    page.wait_for_function('el=>el.complete&&el.naturalWidth>0', arg=first)
+                    require(('/collection-interiors/mobile/' in first.evaluate('el=>el.currentSrc')) == mobile,
+                            'Gallery selected an incorrect image format for the viewport')
+                    require(slides.locator('img[src]').count() == 2, 'Opening should load the first frame and its neighbor')
+
+                    if mobile:
+                        track.press('ArrowRight')
+                    else:
+                        gallery.locator('.ev-interiors__next').click()
+                    page.wait_for_function("el=>el.children[1].getAttribute('aria-hidden')==='false'", arg=track.element_handle())
+                    require(slides.locator('img[src]').count() == 3, 'The next interior was not loaded on demand')
+                    track.press('ArrowLeft')
+                    page.wait_for_function("el=>el.children[0].getAttribute('aria-hidden')==='false'", arg=track.element_handle())
+
+                    cta = gallery.locator('..').get_by_role('link', name=products_in_collection[0]['collectionName'], exact=True)
+                    cta = next(link for link in cta.all() if link.evaluate("el=>getComputedStyle(el).opacity==='1'"))
+                    cta.scroll_into_view_if_needed()
+                    require(cta.evaluate("""el=>{const r=el.getBoundingClientRect();
+                      return el.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));}"""),
+                            'Opened interiors covered the catalog link')
+                return {'galleries': 3, 'captions': len(products), 'mobile_images': mobile}
+
+            for device, width, height in DEVICES[:2]:
+                case('collection-interiors-' + device, lambda p, c, d=device: collection_interiors_test(p, c, d), width, height)
+
             def senses_test(page, context, path, device):
                 page.emulate_media(reduced_motion="no-preference")
                 goto(page, path, prices=False)
