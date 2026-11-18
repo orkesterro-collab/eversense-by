@@ -1097,7 +1097,9 @@ def main():
                     require(sheet.evaluate("el=>getComputedStyle(el).transitionDuration==='2s'"), 'Deliberate opening should take two seconds, including with reduced motion')
                     if index == 0:
                         page.wait_for_function("el=>{const x=el.getBoundingClientRect().left;return x > el.clientWidth*.1 && x < el.clientWidth*.8;}", arg=sheet)
-                    page.wait_for_function("el=>Math.abs(el.getBoundingClientRect().left-el.parentElement.getBoundingClientRect().left)<1", arg=sheet)
+                    page.wait_for_function("""el=>
+                      Math.abs(el.getBoundingClientRect().left-el.parentElement.getBoundingClientRect().left)<1 &&
+                      !el.getAnimations().some(animation=>animation.playState==='running')""", arg=sheet)
                     first = slides.first.locator('img').element_handle()
                     page.wait_for_function('el=>el.complete&&el.naturalWidth>0', arg=first)
                     require(('/collection-interiors/mobile/' in first.evaluate('el=>el.currentSrc')) == mobile,
@@ -1113,7 +1115,13 @@ def main():
                     if index == 0:
                         favorite = slides.first.locator('[data-ev-favorite]')
                         saved_sku = favorite.get_attribute('data-ev-favorite')
-                        favorite.click()
+                        gallery.evaluate("el=>el.scrollIntoView({block:'center',behavior:'instant'})")
+                        # A visible pointer tap does not programmatically scroll the snap gallery to the button.
+                        page.wait_for_function("""el=>{const r=el.getBoundingClientRect();
+                          return el.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));}""",
+                                               arg=favorite.element_handle())
+                        heart_box = favorite.bounding_box()
+                        page.mouse.click(heart_box['x'] + heart_box['width']/2, heart_box['y'] + heart_box['height']/2)
                         require(favorite.get_attribute('aria-pressed') == 'true' and favorite.locator('svg').count() == 1,
                                 'Photo heart must save the decor and keep its icon')
                         require(gallery.evaluate('el=>Math.abs(el.getBoundingClientRect().left)<1'),
@@ -1127,7 +1135,7 @@ def main():
                     require(slides.locator('img[src]').count() == 3, 'The next interior was not loaded on demand')
                     require(not close.is_visible(), 'The close control belongs on the first frame')
                     track.press('ArrowLeft')
-                    page.wait_for_function("el=>el.children[0].getAttribute('aria-hidden')==='false'", arg=track.element_handle())
+                    page.wait_for_function("el=>el.scrollLeft<1 && el.children[0].getAttribute('aria-hidden')==='false'", arg=track.element_handle())
 
                     cta.scroll_into_view_if_needed()
                     require(cta.evaluate("""el=>{const r=el.getBoundingClientRect();
