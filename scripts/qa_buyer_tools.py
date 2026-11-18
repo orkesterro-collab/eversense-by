@@ -266,6 +266,8 @@ def main():
                 reset = page.locator("#ev-catalog-filters [data-reset-filters]")
                 search = page.locator('#ev-catalog-filters [name="q"]')
                 require(cards.count() == 30, f"Catalog count is {cards.count()}")
+                fields = page.locator('#ev-catalog-filters [name]').evaluate_all("els=>els.map(el=>el.name)")
+                require(fields == ["q", "tone", "design"], "Collection choices should only appear above the filters")
                 require("sort" not in parse_qs(urlparse(page.url).query), "Old price sort is still applied")
                 require(not reset.is_visible(), "Reset is visible without filters")
                 require(set(cards.evaluate_all("xs=>xs.map(x=>x.dataset.product)")) == set(by_sku), "Catalog SKU differs from data")
@@ -283,6 +285,10 @@ def main():
                 require(set(cards.evaluate_all("xs=>xs.map(x=>x.dataset.product)")) == {"EL1000", "EL1002"}, "Wrong stone SKU")
                 reset.click()
                 require(cards.count() == 30 and not reset.is_visible(), "Reset does not restore catalog")
+                page.goto(base + "/catalog-ru/?collection=nature&q=EL2151", wait_until="commit")
+                page.wait_for_url("**/catalog-ru/nature-aesthetic-ru/?q=EL2151", wait_until="domcontentloaded")
+                page.wait_for_function("document.querySelectorAll('#ev-catalog-results .ev-card:not([hidden])').length === 1")
+                require(cards.first.get_attribute("data-product") == "EL2151", "Old collection links must preserve search")
                 return {"cards": 30, "images": loaded, "stone": 2, "sku_search": "EL1052"}
             case("catalog-filter-real-images", catalog_test)
 
@@ -371,10 +377,18 @@ def main():
                 hearts = page.locator('#ev-catalog-results [data-ev-favorite]')
                 require(hearts.count() == 30, "Catalog must keep all 30 favorite buttons")
                 require(hearts.first.locator('svg').evaluate("el=>getComputedStyle(el).fill") == 'none', "Empty card heart should be outlined")
+                first_card = page.locator('#ev-catalog-results .ev-card').first
                 heart_box = hearts.first.bounding_box()
-                price_box = page.locator('#ev-catalog-results .ev-price-box').first.bounding_box()
-                require(heart_box and heart_box['width'] >= 44 and heart_box['height'] >= 44
-                        and heart_box['x'] + heart_box['width'] <= price_box['x'], "Card heart must be a touch target left of the price")
+                card_box = first_card.bounding_box()
+                size_box = first_card.locator('.ev-card-size').bounding_box()
+                price_box = first_card.locator('.ev-price-box').bounding_box()
+                require(heart_box and card_box and size_box and price_box, "Missing catalog card details")
+                require(heart_box['width'] >= 44 and heart_box['height'] >= 44, "Card heart touch target is too small")
+                require(abs(heart_box['x'] + heart_box['width'] - card_box['x'] - card_box['width']) < 1
+                        and heart_box['y'] + heart_box['height'] <= price_box['y'] + 1
+                        and heart_box['y'] <= size_box['y'] < heart_box['y'] + heart_box['height'],
+                        "Card heart should sit at the right edge beside the size and above the price")
+                require(abs(price_box['x'] - card_box['x']) < 1, "Price should align with the card's left edge")
                 hearts.first.click()
                 require(hearts.first.get_attribute('aria-pressed') == 'true'
                         and hearts.first.locator('svg').evaluate("el=>getComputedStyle(el).fill") == 'rgb(240, 82, 82)',

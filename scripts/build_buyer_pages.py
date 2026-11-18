@@ -23,7 +23,7 @@ PRODUCTS.sort(key=lambda p: (['nature','luxury','minimal'].index(p['collectionID
 GUIDES = json.loads((ROOT / 'content/buyer-guides.json').read_text())
 INSTALLATION_GUIDES = json.loads((ROOT / 'content/installation-guides.json').read_text())
 VERSION = '20261112favoriteportrait'
-CATALOG_VERSION = '20261118catalog'
+CATALOG_VERSION = '20261118catalogdetails'
 HEART_ICON = '<svg class="ev-heart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 4.6c-2.1-2.1-5.5-2.1-7.6 0L12 5.8l-1.2-1.2c-2.1-2.1-5.5-2.1-7.6 0s-2.1 5.5 0 7.6L12 21l8.8-8.8c2.1-2.1 2.1-5.5 0-7.6Z"/></svg>'
 COLLECTIONS = [
     ('nature', 'Природная эстетика', 'Спокойные древесные оттенки и выразительные рисунки дуба.'),
@@ -114,11 +114,11 @@ def catalog_card(product, page, show_collection):
   </a>
   <span class="ev-sku">{sku}</span>
   <h2 class="ev-card-title"><a href="{url}">{name}</a></h2>
-  <p class="ev-card-meta">{collection}<span class="ev-card-size">{size}</span></p>
-  <div class="ev-card-price">
+  <div class="ev-card-details">
+    <p class="ev-card-meta">{collection}<span class="ev-card-size">{size}</span></p>
     <button type="button" class="ev-card-favorite" data-ev-favorite="{sku}" aria-pressed="false" aria-label="Избранное: {name}">{HEART_ICON}</button>
-    <div class="ev-price-box" data-buyer-price="{sku}"><span class="ev-price-pending">Цена уточняется</span></div>
   </div>
+  <div class="ev-price-box" data-buyer-price="{sku}"><span class="ev-price-pending">Цена уточняется</span></div>
 </article>'''
 
 def field(label, name, options, value=''):
@@ -132,17 +132,13 @@ def catalogs():
         items = [p for p in PRODUCTS if not collection or p['collectionID']==collection]
         nav = '<nav class="ev-inline-nav" aria-label="Коллекции">'+link('Все декоры', 'catalog-ru/', page, extra='aria-current="page"' if not collection else '')+''.join(link(t, COLLECTION_PATHS[c], page, extra='aria-current="page"' if c==collection else '') for c,t,_ in COLLECTIONS)+'</nav>'
         design_options = [(v,t) for v,t in DESIGN if not v or any(p['tags']['design']==v for p in items)]
-        collection_filter = ''
-        if not collection:
-            collection_options = [('', 'Все коллекции')] + [(c,t) for c,t,_ in COLLECTIONS]
-            collection_filter = '\n  ' + field('Коллекция', 'collection', collection_options)
         cards = '\n'.join(catalog_card(p, page, show_collection=not collection) for p in items)
         body = f'''<section class="ev-section"><div class="ev-wrap">
 {nav}
 <form id="ev-catalog-filters" role="search">
   <div class="ev-field"><label for="ev-q">Поиск по названию или артикулу</label><input id="ev-q" name="q" type="search" placeholder="Например, EL1052 или дуб" autocomplete="off"></div>
   {field('Оттенок', 'tone', TONE)}
-  {field('Группа декоров', 'design', design_options)}{collection_filter}
+  {field('Группа декоров', 'design', design_options)}
   <button type="button" class="ev-text-link" data-reset-filters hidden>Сбросить фильтры</button>
 </form>
 <p class="ev-sr-only" id="ev-catalog-status" role="status"></p>

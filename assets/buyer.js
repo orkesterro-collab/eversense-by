@@ -127,7 +127,20 @@
   function matchesTone(p,tone){if(!tone)return true;if(tone==='light')return p.tags.tone==='light';var patterns={natural:/натуральн/i,gray:/сер/i,brown:/коричнев/i,beige:/беж/i};return !!(patterns[tone]&&patterns[tone].test(p.shade||''));}
   function mountCatalog(){
     var form=document.getElementById('ev-catalog-filters'),root=document.getElementById('ev-catalog-results');if(!form||!root)return;
-    var keys=['q','collection','tone','design'];
+    // Keep links saved from the former collection dropdown working through the collection pages.
+    var legacyCollection=params.get('collection');
+    if(legacyCollection&&!document.body.dataset.collection){
+      var collectionProduct=products.find(function(product){return product.collectionID===legacyCollection;});
+      if(collectionProduct){
+        var collectionUrl=new URL(location.href);
+        collectionUrl.pathname=new URL('../',route(collectionProduct.canonicalPath)).pathname;
+        collectionUrl.searchParams.delete('collection');
+        location.replace(collectionUrl.href);
+        return;
+      }
+    }
+
+    var keys=['q','tone','design'];
     var cards=Array.from(root.querySelectorAll('[data-product]'));
     var empty=document.getElementById('ev-catalog-empty');
     var status=document.getElementById('ev-catalog-status');
@@ -144,19 +157,18 @@
     function draw(){
       var filters=new FormData(form);
       var search=filters.get('q').trim().toLocaleLowerCase('ru');
-      var collection=filters.get('collection'),tone=filters.get('tone'),design=filters.get('design');
+      var tone=filters.get('tone'),design=filters.get('design');
       var count=0;
       cards.forEach(function(card){
         var product=bySku.get(card.dataset.product);
         var searchable=(product.sku+' '+fullName(product)+' '+product.collectionName).toLocaleLowerCase('ru');
-        var matches=(!collection||product.collectionID===collection)&&
-          matchesTone(product,tone)&&(!design||product.tags.design===design)&&
+        var matches=matchesTone(product,tone)&&(!design||product.tags.design===design)&&
           searchable.includes(search);
         card.hidden=!matches;
         if(matches)count++;
       });
       empty.hidden=count>0;
-      reset.hidden=!(search||collection||tone||design);
+      reset.hidden=!(search||tone||design);
       var message=reset.hidden?'':count?'Декоров в выдаче: '+count:'Таких декоров не найдено';
       if(status.textContent!==message)status.textContent=message;
 
@@ -165,6 +177,7 @@
         var value=(filters.get(key)||'').trim();
         if(value)url.searchParams.set(key,value);else url.searchParams.delete(key);
       });
+      url.searchParams.delete('collection');
       url.searchParams.delete('sort');
       if(url.href!==location.href)history.replaceState(history.state,'',url);
     }

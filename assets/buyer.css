@@ -75,9 +75,6 @@ button.ev-text-link {border:0;border-radius:0;background:transparent;padding-inl
 #ev-catalog-filters {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px;max-width:840px;margin-bottom:24px;align-items:end}
 #ev-catalog-filters > :first-child,#ev-catalog-filters > [data-reset-filters] {grid-column:1/-1}
 #ev-catalog-filters > [data-reset-filters] {justify-self:start}
-@media(min-width:761px){
-  [data-collection=""] #ev-catalog-filters {grid-template-columns:repeat(3,minmax(0,1fr))}
-}
 .ev-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:42px 26px}
 .ev-grid > * {min-width:0}
 .ev-card {display:flex;flex-direction:column;min-width:0;color:#343333;background:transparent;position:relative}
@@ -111,8 +108,9 @@ img.ev-card-image {width:100%;height:auto;object-fit:contain}
 #ev-catalog-results .ev-sku {margin-top:12px}
 #ev-catalog-results .ev-card-meta span {display:block}
 #ev-catalog-results .ev-card-size {white-space:nowrap}
-.ev-card-price {display:grid;grid-template-columns:44px minmax(0,1fr);align-items:start}
-.ev-card-favorite {display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;background:transparent;color:#343333}
+.ev-card-details {display:flex;align-items:flex-end;justify-content:space-between;gap:4px}
+.ev-card-details .ev-card-meta {min-width:0}
+.ev-card-favorite {display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:0;background:transparent;color:#343333}
 .ev-card-favorite:focus-visible {outline-offset:-2px}
 .ev-card-favorite .ev-heart-icon {width:22px;height:22px;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none}
 .ev-card-favorite[aria-pressed="true"] .ev-heart-icon {stroke:#f05252;fill:#f05252}
@@ -326,7 +324,6 @@ body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-imag
   .ev-inline-nav {max-width:100%;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;gap:8px}
   .ev-inline-nav a {flex:0 0 auto;white-space:nowrap;min-height:44px;padding:10px 12px;font-size:11px}
   #ev-catalog-filters {gap:10px 12px;margin-bottom:20px}
-  #ev-catalog-filters > .ev-field:has(#ev-collection) {grid-column:1/-1}
   #ev-catalog-filters select {padding-inline:10px;text-overflow:ellipsis}
   .ev-breadcrumb {margin-bottom:24px}
   .ev-article-layout {grid-template-columns:minmax(0,1fr);gap:32px}
@@ -440,7 +437,6 @@ body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-imag
   .ev-card-interior {display:none!important}
   .ev-card-title {font-size:12pt}
   .ev-card-meta,.ev-sku {font-size:9pt}
-  .ev-card-price {display:block}
 }
 
 /* Keep every collection visible on phones. */
