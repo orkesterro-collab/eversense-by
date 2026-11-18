@@ -8,12 +8,12 @@ RECORD = re.compile(r'<div id="rec(1002599976|1040271666)"\s[^>]*>\s*'
 COPY = {
     '1002599976': (
         'Дерево в основе',
-        'Основу EVERSENSE делают из волокон берёзы и осины, добавляя немного связующего.',
+        'Основу EVERSENSE делают из волокон берёзы и осины в пропорции 50:50, добавляя немного связующего.',
         'Как и паркет, такой пол помогает сглаживать перепады влажности в помещении.',
     ),
     '1040271666': (
         'Wood at the core',
-        'The EVERSENSE core is made from birch and aspen fibres with a small amount of binder.',
+        'The EVERSENSE core uses a 50:50 mix of birch and aspen fibres with a small amount of binder.',
         'Like parquet, the flooring helps moderate fluctuations in indoor humidity.',
     ),
 }
