@@ -18,13 +18,20 @@
     });
     video.dataset.evLoaded = 'true';
     video.muted = true;
+    video.playsInline = true;
     video.load();
   }
 
   function play(video) {
     if (document.hidden || reducedMotion.matches || saveData) return;
     var promise = video.play();
-    if (promise) promise.catch(function () { video.controls = true; });
+    if (promise) {
+      promise.then(function () {
+        video.controls = false;
+      }, function (error) {
+        if (error.name !== 'AbortError') video.controls = true;
+      });
+    }
   }
 
   function start() {
@@ -32,7 +39,11 @@
     var backgrounds = document.querySelectorAll('[data-ev-background]');
     if (!('IntersectionObserver' in window)) {
       backgrounds.forEach(background);
-      videos.forEach(function (video) { prepareVideo(video); video.controls = true; });
+      videos.forEach(function (video) {
+        prepareVideo(video);
+        if (reducedMotion.matches || saveData) video.controls = true;
+        else play(video);
+      });
       return;
     }
     var images = new IntersectionObserver(function (entries) {
@@ -58,14 +69,14 @@
         // geometry so a temporary position at y=0 cannot fetch an entire MP4.
         video.evVisibilityTimer = setTimeout(function () {
           var rect = video.getBoundingClientRect();
-          if (!rect.width || !rect.height || rect.bottom < -200 || rect.top > innerHeight + 200) return;
+          if (!rect.width || !rect.height || rect.bottom <= 0 || rect.top >= window.innerHeight) return;
           video.dataset.evVisible = 'true';
           prepareVideo(video);
           if (reducedMotion.matches || saveData) video.controls = true;
           else play(video);
         }, 250);
       });
-    }, { rootMargin: '200px 0px' });
+    }, { threshold: [0, 0.01] });
     videos.forEach(function (video) {
       var board = video.closest('.t396__artboard');
       if (board && !board.classList.contains('rendered')) {

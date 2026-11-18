@@ -136,6 +136,7 @@ def optimize_html(source, page, runtime, responsive, video_manifest):
                 self.scripts.add(url)
                 if 'assets/performance.js' in url:
                     self.has_media_runtime = True
+                    attrs['src'] = url.split('?', 1)[0] + '?v=20261118'
             if tag == 'link':
                 rel = attrs.get('rel', '').lower()
                 url = attrs.get('href', '')
@@ -200,7 +201,7 @@ def optimize_html(source, page, runtime, responsive, video_manifest):
     for start, end, replacement in sorted(edits, reverse=True):
         source = source[:start] + replacement + source[end:]
     if (video_edits or noscript_backgrounds or 'data-ev-lazy-video' in source) and not parser.has_media_runtime:
-        url = relative_url('/assets/performance.js', page)
+        url = relative_url('/assets/performance.js', page) + '?v=20261118'
         source = source.replace('</head>', '<script defer src="' + url + '"></script></head>', 1)
     if noscript_backgrounds:
         source = source.replace('</body>', '<noscript><style>' + ''.join(noscript_backgrounds) + '</style></noscript></body>', 1)

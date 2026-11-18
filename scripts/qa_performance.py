@@ -64,8 +64,7 @@ def main():
         from playwright.sync_api import sync_playwright
 
         with sync_playwright() as playwright:
-            launch = {"headless": True, "args": ["--no-sandbox", "--disable-dev-shm-usage",
-                                                     "--autoplay-policy=no-user-gesture-required"]}
+            launch = {"headless": True, "args": ["--no-sandbox", "--disable-dev-shm-usage"]}
             if args.browser_executable:
                 launch["executable_path"] = args.browser_executable
             browser = playwright.chromium.launch(**launch)
