@@ -290,12 +290,9 @@ def main():
                     require(tile.is_visible() and tile.locator("img").count() == 1,
                             "Design entrance needs its visible catalog image")
                     tile.click()
-                    page.wait_for_selector("#ev-catalog-results .ev-card")
-                    # Static fallback cards are visible before deferred catalog initialization.
                     expect(page.locator('#ev-catalog-filters [name="design"]')).to_have_value(
                         design, timeout=10000)
-                    shown = page.locator("#ev-catalog-results .ev-card").count()
-                    require(shown == count, f"Expected {count} {design} decors, found {shown}")
+                    expect(page.locator("#ev-catalog-results .ev-card:visible")).to_have_count(count)
                     goto(page, "choose.html")
                 checks = page.locator('#sample .ev-sample-step input[type="checkbox"]')
                 require(checks.count() == 4, "Sample guide needs four observations")
