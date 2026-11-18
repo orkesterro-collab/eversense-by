@@ -13,6 +13,7 @@ on:
       - "content/runtime-assets.json"
       - "content/image-optimization.json"
       - "scripts/optimize_delivery.py"
+      - "scripts/home_wood.py"
       - "scripts/qa_performance.py"
       - "scripts/static_product.py"
       - "scripts/qa_product_scroll.py"

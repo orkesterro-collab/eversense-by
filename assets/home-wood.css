@@ -1,0 +1,79 @@
+.ev-home-wood {
+  display: grid;
+  grid-template-areas: "visual copy";
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-height: max(341px, 34.4vw);
+}
+
+.ev-home-wood__copy {
+  grid-area: copy;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: clamp(48px, 6vw, 88px) clamp(20px, 5vw, 100px);
+  background: #fff;
+  color: #343333;
+  font: 400 clamp(16px, 1.3vw, 22px)/1.45 Manrope, Arial, sans-serif;
+}
+
+.ev-home-wood__copy h2 {
+  margin: 0 0 16px;
+  font-size: clamp(27px, 2.5vw, 44px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.ev-home-wood__copy p {
+  max-width: 52ch;
+  margin: 0;
+}
+
+.ev-home-wood__copy .ev-home-wood__lead {
+  margin-bottom: 8px;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.ev-home-wood__visual {
+  grid-area: visual;
+  display: grid;
+  position: relative;
+  place-items: center;
+  overflow: hidden;
+  background: #513322;
+}
+
+.ev-home-wood__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ev-home-wood__logo {
+  position: relative;
+  width: 55%;
+  max-width: 500px;
+  height: auto;
+}
+
+@media (max-width: 959px) {
+  .ev-home-wood {
+    grid-template-areas: "copy" "visual";
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .ev-home-wood__visual { aspect-ratio: 640 / 372; }
+  .ev-home-wood__logo { width: min(71%, 330px); }
+}
+
+@media (max-width: 639px) {
+  .ev-home-wood__visual { aspect-ratio: 480 / 329; }
+}
+
+@media (max-width: 479px) {
+  .ev-home-wood__visual { aspect-ratio: 320 / 273; }
+}

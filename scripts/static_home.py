@@ -7,6 +7,7 @@ import re
 from home_senses import make_home_senses
 from home_footer import make_home_footer
 from home_article_links import make_home_article_links
+from home_wood import make_home_wood
 
 HOME_PATHS = ('index.html', 'ru/index.html', 'en/index.html')
 LAYER_RECORDS = ('1002600136', '1040271736')
@@ -153,7 +154,10 @@ def make_static_home(source):
     if carrier_rule not in source:
         source = source.replace('<style id="ev-home-static-style">',
                                 '<style id="ev-home-static-style">' + carrier_rule, 1)
-    return make_home_article_links(make_home_footer(make_home_senses(source)))
+    source = make_home_senses(source)
+    source = make_home_footer(source)
+    source = make_home_article_links(source)
+    return make_home_wood(source)
 
 
 if __name__ == '__main__':
