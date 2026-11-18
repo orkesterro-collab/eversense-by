@@ -797,6 +797,9 @@ def main():
                      lambda p, c, d=device: mirrored_test(p, c, by_sku["EL1052"]["canonicalPath"], d, True), width, height)
 
             def collection_panels(page, path, device):
+                cookie_ok = page.get_by_text('OK', exact=True)
+                if cookie_ok.count() and cookie_ok.first.is_visible():
+                    cookie_ok.first.click()
                 records = (['1040271756', '1040271761', '1040271766'] if path.startswith('en/')
                            else ['1002600156', '1002600161', '1002600166'])
                 result = []
