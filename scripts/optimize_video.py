@@ -18,6 +18,7 @@ OUTPUT = ROOT / "assets/video"
 MANIFEST = OUTPUT / "manifest.json"
 SOURCES = ("7633391bb438-1", "fa4db5586248-2")
 RECIPE = "h264-1920-crf23-medium-yuv420p-faststart-muted-v1;poster-1280-webp80-t1"
+MOBILE_RECIPE = "h264-960-baseline-crf26-maxrate760k-faststart-muted-v1"
 
 
 def sha(path: Path) -> str:
@@ -48,6 +49,16 @@ def probe(path: Path) -> dict:
         "-of", "json", str(path)], text=True))
 
 
+def verify_delivery(path: Path, original: dict, max_width: int) -> dict:
+    encoded = probe(path)
+    assert abs(float(original["format"]["duration"]) - float(encoded["format"]["duration"])) < 0.05
+    assert len(encoded["streams"]) == 1, "Delivery copy should contain only video"
+    assert encoded["streams"][0]["width"] <= max_width
+    order = atoms(path)
+    assert order.index("moov") < order.index("mdat"), "Video must support progressive playback"
+    return encoded
+
+
 def main() -> None:
     OUTPUT.mkdir(exist_ok=True)
     previous = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {}
@@ -55,6 +66,7 @@ def main() -> None:
     for stem in SOURCES:
         source = ROOT / "assets/original-tilda" / (stem + ".mp4")
         video, poster = OUTPUT / (stem + "-1080p.mp4"), OUTPUT / (stem + "-poster.webp")
+        mobile = OUTPUT / (stem + "-540p.mp4")
         fingerprint = sha(source)
         old = previous.get("videos", {}).get(str(source.relative_to(ROOT)), {})
         if not (old.get("source_sha256") == fingerprint and previous.get("recipe") == RECIPE
@@ -69,23 +81,32 @@ def main() -> None:
                 "ffmpeg", "-v", "error", "-y", "-ss", "1", "-i", str(source),
                 "-frames:v", "1", "-vf", "scale='min(1280,iw)':-2:flags=lanczos",
                 "-c:v", "libwebp", "-quality", "80", "-threads", "2", str(poster)], check=True)
-        original, encoded = probe(source), probe(video)
-        assert abs(float(original["format"]["duration"]) - float(encoded["format"]["duration"])) < 0.05
-        assert encoded["streams"][0]["width"] <= 1920
-        order = atoms(video)
-        assert order.index("moov") < order.index("mdat"), "Video must support progressive playback"
-        assert len(encoded["streams"]) == 1, "Delivery copy should contain only video"
+        if not (old.get("source_sha256") == fingerprint and previous.get("mobile_recipe") == MOBILE_RECIPE
+                and mobile.exists() and old.get("mobile_sha256") == sha(mobile)):
+            subprocess.run([
+                "ffmpeg", "-v", "error", "-y", "-i", str(source),
+                "-map", "0:v:0", "-an", "-vf", "scale='min(960,iw)':-2:flags=lanczos",
+                "-c:v", "libx264", "-profile:v", "baseline", "-level:v", "3.1",
+                "-crf", "26", "-maxrate", "760k", "-bufsize", "950k", "-g", "50",
+                "-preset", "medium", "-threads", "4",
+                "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(mobile)], check=True)
+        original = probe(source)
+        encoded = verify_delivery(video, original, 1920)
+        verify_delivery(mobile, original, 960)
         records[str(source.relative_to(ROOT))] = {
-            "video": str(video.relative_to(ROOT)), "poster": str(poster.relative_to(ROOT)),
+            "video": str(video.relative_to(ROOT)), "mobile": str(mobile.relative_to(ROOT)),
+            "poster": str(poster.relative_to(ROOT)),
             "source_sha256": fingerprint, "video_sha256": sha(video), "poster_sha256": sha(poster),
+            "mobile_sha256": sha(mobile),
             "source_bytes": source.stat().st_size, "video_bytes": video.stat().st_size,
+            "mobile_bytes": mobile.stat().st_size,
             "poster_bytes": poster.stat().st_size,
             "duration_seconds": float(encoded["format"]["duration"]),
             "width": encoded["streams"][0]["width"], "height": encoded["streams"][0]["height"],
             "faststart": True,
         }
-        print(f"{source.name}: {source.stat().st_size:,} → {video.stat().st_size:,} bytes; poster {poster.stat().st_size:,}")
-    MANIFEST.write_text(json.dumps({"recipe": RECIPE, "videos": records}, indent=2) + "\n")
+        print(f"{source.name}: {video.stat().st_size:,} bytes at 1080p, {mobile.stat().st_size:,} at 540p")
+    MANIFEST.write_text(json.dumps({"recipe": RECIPE, "mobile_recipe": MOBILE_RECIPE, "videos": records}, indent=2) + "\n")
 
 
 if __name__ == "__main__":

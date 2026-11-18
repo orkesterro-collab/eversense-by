@@ -45,7 +45,10 @@ class Resources(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         for key, value in attrs:
-            if value and key in {"href", "src", "action", "poster", "data-original", "data-src", "data-ev-src", "data-ev-background"}:
+            if value and key in {
+                "href", "src", "action", "poster", "data-original", "data-src",
+                "data-ev-src", "data-ev-mobile-src", "data-ev-background",
+            }:
                 self.links.append((key, value))
             elif value and key == "srcset":
                 for candidate in value.split(","):

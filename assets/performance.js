@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var saveData = navigator.connection && navigator.connection.saveData;
+  var smallScreen = window.matchMedia('(max-width: 959px)');
 
   function background(element) {
     element.style.backgroundImage = 'url(' + JSON.stringify(element.dataset.evBackground) + ')';
@@ -12,26 +12,40 @@
 
   function prepareVideo(video) {
     if (video.dataset.evLoaded) return;
+    var useMobileSource = smallScreen.matches || (navigator.connection && navigator.connection.saveData);
+    video.defaultMuted = true;
+    video.muted = true;
+    video.playsInline = true;
     video.querySelectorAll('source[data-ev-src]').forEach(function (source) {
-      source.src = source.dataset.evSrc;
+      var mobileSource = useMobileSource && source.dataset.evMobileSrc;
+      source.src = mobileSource || source.dataset.evSrc;
       source.removeAttribute('data-ev-src');
     });
     video.dataset.evLoaded = 'true';
-    video.muted = true;
-    video.playsInline = true;
     video.load();
   }
 
   function play(video) {
-    if (document.hidden || reducedMotion.matches || saveData) return;
+    if (document.hidden) return;
+    video.autoplay = !reducedMotion.matches;
+    prepareVideo(video);
+    if (!video.autoplay) {
+      video.controls = true;
+      return;
+    }
     var promise = video.play();
     if (promise) {
       promise.then(function () {
         video.controls = false;
       }, function (error) {
-        if (error.name !== 'AbortError') video.controls = true;
+        if (video.autoplay && error.name !== 'AbortError') video.controls = true;
       });
     }
+  }
+
+  function pause(video) {
+    video.autoplay = false;
+    video.pause();
   }
 
   function start() {
@@ -39,11 +53,7 @@
     var backgrounds = document.querySelectorAll('[data-ev-background]');
     if (!('IntersectionObserver' in window)) {
       backgrounds.forEach(background);
-      videos.forEach(function (video) {
-        prepareVideo(video);
-        if (reducedMotion.matches || saveData) video.controls = true;
-        else play(video);
-      });
+      videos.forEach(play);
       return;
     }
     var images = new IntersectionObserver(function (entries) {
@@ -64,16 +74,14 @@
         var video = entry.target;
         clearTimeout(video.evVisibilityTimer);
         video.dataset.evVisible = 'false';
-        if (!entry.isIntersecting) { video.pause(); return; }
+        if (!entry.isIntersecting) { pause(video); return; }
         // Tilda moves zero blocks after parsing. Recheck their settled
         // geometry so a temporary position at y=0 cannot fetch an entire MP4.
         video.evVisibilityTimer = setTimeout(function () {
           var rect = video.getBoundingClientRect();
           if (!rect.width || !rect.height || rect.bottom <= 0 || rect.top >= window.innerHeight) return;
           video.dataset.evVisible = 'true';
-          prepareVideo(video);
-          if (reducedMotion.matches || saveData) video.controls = true;
-          else play(video);
+          play(video);
         }, 250);
       });
     }, { threshold: [0, 0.01] });
@@ -85,7 +93,7 @@
     });
     document.addEventListener('visibilitychange', function () {
       videos.forEach(function (video) {
-        if (document.hidden) video.pause();
+        if (document.hidden) pause(video);
         else if (video.dataset.evVisible === 'true') play(video);
       });
     });

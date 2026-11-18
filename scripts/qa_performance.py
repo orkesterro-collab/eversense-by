@@ -71,7 +71,12 @@ def main():
             for device, width, height in [("desktop", 1440, 1000), ("mobile", 390, 844)]:
                 context = browser.new_context(viewport={"width": width, "height": height},
                     device_scale_factor=1, is_mobile=width < 500, has_touch=width < 500,
+                    user_agent=playwright.devices["Pixel 7"]["user_agent"] if device == "mobile" else None,
                     locale="ru-RU", reduced_motion="no-preference")
+                if device == "mobile":
+                    context.add_init_script("""if (navigator.connection) {
+                        Object.defineProperty(navigator.connection, 'saveData', {get: () => true});
+                    }""")
                 context.set_default_timeout(15000)
                 context.route("https://docs.google.com/spreadsheets/**/gviz/**",
                     lambda route: route.fulfill(status=200, content_type="application/javascript", body=feed))
@@ -108,16 +113,59 @@ def main():
 
                 response = page.goto(base + "/", wait_until="load")
                 require(response and response.ok, "Homepage did not load")
-                page.wait_for_function("window.nlm087obj && window.nlm087obj.isSlidersLoaded['413064765']")
                 # Dwell past the observer's layout debounce without user input.
                 page.wait_for_timeout(1000)
 
+                cdp = context.new_cdp_session(page)
+
+                def without_gesture(expression):
+                    # Playwright's normal evaluation can grant user activation
+                    # even if the test never taps or clicks.
+                    result = cdp.send("Runtime.evaluate", {
+                        "expression": expression, "returnByValue": True,
+                        "awaitPromise": True, "userGesture": False,
+                    })
+                    require("exceptionDetails" not in result, str(result.get("exceptionDetails")))
+                    return result["result"]["value"]
+
                 def initial_media():
-                    state = page.locator("video").evaluate_all("els=>els.map(e=>({src:e.currentSrc,preload:e.preload,poster:e.poster}))")
-                    require(state and not media and all(not video["src"] for video in state),
+                    state = without_gesture("""Array.from(document.querySelectorAll('video[data-ev-lazy-video]'),
+                        v => ({src: v.currentSrc, preload: v.preload, poster: v.poster}))""")
+                    require(len(state) == 2 and not media and all(not video["src"] for video in state),
                             f"Video started loading before scrolling: {media}; {state}")
                     return state
                 case("videos stay unloaded before scrolling", initial_media)
+
+                def videos():
+                    details = []
+                    for index in range(2):
+                        state = without_gesture(f"""(async () => {{
+                            const video = document.querySelectorAll('video[data-ev-lazy-video]')[{index}];
+                            const waitFor = async condition => {{
+                                const deadline = performance.now() + 10000;
+                                while (!condition() && performance.now() < deadline)
+                                    await new Promise(resolve => setTimeout(resolve, 100));
+                            }};
+                            video.scrollIntoView({{block: 'center', behavior: 'instant'}});
+                            await waitFor(() => video.currentTime > .1 || video.error || video.controls);
+                            const state = {{src: video.currentSrc, time: video.currentTime,
+                                muted: video.muted, playing: !video.paused, controls: video.controls,
+                                activated: navigator.userActivation.hasBeenActive}};
+                            window.scrollTo({{top: 0, behavior: 'instant'}});
+                            await waitFor(() => video.paused);
+                            state.pausedOffscreen = video.paused;
+                            return state;
+                        }})()""")
+                        resolution = "-540p.mp4" if device == "mobile" else "-1080p.mp4"
+                        require(state["src"].endswith(resolution) and state["time"] > .1 and
+                                state["muted"] and state["playing"] and not state["controls"] and
+                                not state["activated"] and state["pausedOffscreen"],
+                                f"Video {index + 1} did not autoplay without a gesture and pause offscreen: {state}")
+                        details.append(state)
+                    return details
+                case("videos autoplay without a gesture and pause offscreen", videos)
+
+                page.wait_for_function("window.nlm087obj && window.nlm087obj.isSlidersLoaded['413064765']")
 
                 def menu():
                     toggle = page.locator(".ev-header-toggle")
@@ -148,19 +196,6 @@ def main():
                     page.wait_for_function("before=>document.querySelector('#rec413064765nlm .t-slds__items-wrapper').dataset.sliderPos!==before", arg=before)
                     return {"before": before, "after": wrapper.get_attribute("data-slider-pos")}
                 case("hero next slide works", slider)
-
-                def videos():
-                    details = []
-                    for index in range(page.locator("video").count()):
-                        video = page.locator("video").nth(index)
-                        video.scroll_into_view_if_needed()
-                        page.wait_for_function("i=>{const v=document.querySelectorAll('video')[i];return !!v.currentSrc&&!v.paused&&v.readyState>=2}", arg=index)
-                        state = video.evaluate("e=>({src:e.currentSrc,paused:e.paused,readyState:e.readyState})")
-                        page.evaluate("scrollTo(0,0)")
-                        page.wait_for_function("i=>document.querySelectorAll('video')[i].paused", arg=index)
-                        details.append(state)
-                    return details
-                case("videos play in view and pause offscreen", videos)
 
                 def scroll_images():
                     total = page.evaluate("document.documentElement.scrollHeight")
