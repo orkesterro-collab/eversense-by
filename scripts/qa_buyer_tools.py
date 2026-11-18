@@ -935,10 +935,12 @@ def main():
                     metrics = active.evaluate("""el => {
                       const root=el.closest('.t-rec'), r=root.getBoundingClientRect();
                       const controls=el.querySelector('.ev-benefit-controls'), n=controls.getBoundingClientRect();
+                      const photo=el.querySelector('.ev-benefit-photo').getBoundingClientRect();
+                      const copy=el.querySelector('.ev-benefit-copy').getBoundingClientRect();
                       const texts=[...el.querySelectorAll('.ev-benefit-copy > .tn-elem')]
                         .filter(e=>e.getClientRects().length && getComputedStyle(e).visibility!=='hidden');
                       const boxes=texts.map(e=>({text:e.innerText,r:e.getBoundingClientRect()}));
-                      const within=b=>b.top>=r.top-2 && b.bottom<=n.top+1 && b.left>=r.left-2 && b.right<=r.right+2;
+                      const within=b=>b.top>=copy.top-2 && b.bottom<=Math.min(copy.bottom,n.top)+1 && b.left>=copy.left-2 && b.right<=copy.right+2;
                       const overlap=boxes.flatMap((a,i)=>boxes.slice(i+1).filter(b=>
                         Math.min(a.r.right,b.r.right)-Math.max(a.r.left,b.r.left)>2 &&
                         Math.min(a.r.bottom,b.r.bottom)-Math.max(a.r.top,b.r.top)>2).map(b=>[a.text,b.text]));
@@ -948,7 +950,8 @@ def main():
                       const hit=e=>{const b=e.getBoundingClientRect();
                         const target=document.elementFromPoint(b.x+b.width/2,b.y+b.height/2);
                         return target===e||e.contains(target);};
-                      return {height:r.height,expected:oldHeight*.75,centerError:Math.abs(n.x+n.width/2-r.x-r.width/2),
+                      return {height:r.height,expected:Math.max(oldHeight*.75,w<960?750:0),
+                        photoShare:w<960?photo.height/r.height:photo.width/r.width,centerError:Math.abs(n.x+n.width/2-r.x-r.width/2),
                         copyInside:boxes.every(b=>within(b.r)),overlap,
                         navInside:n.top>=r.top&&n.bottom<=r.bottom+1,
                         arrows:[...el.querySelectorAll('.ev-benefit-prev,.ev-benefit-next')].map(e=>({
@@ -956,7 +959,9 @@ def main():
                         overflow:document.documentElement.scrollWidth>w};
                     }""")
                     require(abs(metrics['height'] - metrics['expected']) < 3,
-                            f"Benefits carousel height is not 25% smaller at {width}: {metrics}")
+                            f"Benefits carousel height is incorrect at {width}: {metrics}")
+                    require(abs(metrics['photoShare'] - .6) < .002,
+                            f"Benefits photo is not 60% of slide {index} at {width}: {metrics}")
                     require(metrics['copyInside'] and not metrics['overlap'],
                             f"Benefits copy clips or overlaps on slide {index} at {width}: {metrics}")
                     require(metrics['navInside'] and metrics['centerError'] < 2 and not metrics['overflow'],
