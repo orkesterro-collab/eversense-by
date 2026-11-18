@@ -37,7 +37,14 @@
   function priceHtml(sku){
     var p=window.EversensePrices&&window.EversensePrices.get(sku);
     if(!p)return '<span class="ev-price-pending">Цена уточняется</span>';
-    return (p.sale?'<del>'+money(p.normal)+'</del> ':'')+'<strong>'+money(p.sale||p.normal)+' BYN/м²</strong>'+(p.sale&&p.until?'<small>Акция до '+esc(p.until.split('-').reverse().join('.'))+'</small>':'');
+    var current=money(p.sale||p.normal)+' BYN/м²';
+    var previous=p.sale?'<del>'+money(p.normal)+'</del> ':'';
+    var until=p.sale&&p.until?'<small>Акция до '+esc(p.until.split('-').reverse().join('.'))+'</small>':'';
+    if(pageName==='catalog'){
+      var priceClass=p.sale?'ev-price-sale':'ev-price-normal';
+      return '<strong class="'+priceClass+'">'+current+'</strong>'+previous+until;
+    }
+    return previous+'<strong>'+current+'</strong>'+until;
   }
   function buttons(p,allowCalculate){return '<div class="ev-card-actions"><button class="ev-button" type="button" data-ev-favorite="'+p.sku+'" aria-pressed="false">В избранное</button>'+(allowCalculate?'<a class="ev-button" href="'+route('calculator.html')+'?sku='+encodeURIComponent(p.sku)+'">Рассчитать</a>':'')+'</div>';}
   /* EV_RESPONSIVE_START */
@@ -52,7 +59,11 @@
   }
   function card(p,allowCalculate){return '<article class="ev-card" data-product="'+p.sku+'"><a class="ev-card-image" href="'+route(p.canonicalPath)+'"><img src="'+route(p.productImage)+'"'+imageAttrs(p.productImage,'(max-width: 640px) calc(100vw - 40px), (max-width: 1050px) calc((100vw - 64px) / 2), 400px')+' alt="'+esc(fullName(p))+'" loading="lazy" width="640" height="500">'+(p.interiorImage?'<img class="ev-card-interior" src="'+route(p.interiorImage)+'"'+imageAttrs(p.interiorImage,'(max-width: 640px) calc(100vw - 40px), (max-width: 1050px) calc((100vw - 64px) / 2), 400px')+' alt="" loading="lazy" width="640" height="500">':'')+'</a><div class="ev-card-body"><span class="ev-sku">'+p.sku+'</span><h2 class="ev-card-title"><a href="'+route(p.canonicalPath)+'">'+esc(fullName(p))+'</a></h2><p class="ev-card-meta">'+esc(p.collectionName)+' · '+p.lengthMM+' × '+p.widthMM+' мм</p><div class="ev-price-box" data-buyer-price="'+p.sku+'">'+priceHtml(p.sku)+'</div>'+buttons(p,allowCalculate)+'</div></article>';}
   function syncButtons(){
-    document.querySelectorAll('[data-ev-favorite]').forEach(function(b){var on=favorites.includes(b.dataset.evFavorite);b.setAttribute('aria-pressed',String(on));b.textContent=on?'В избранном':'В избранное';});
+    document.querySelectorAll('[data-ev-favorite]').forEach(function(button){
+      var on=favorites.includes(button.dataset.evFavorite);
+      button.setAttribute('aria-pressed',String(on));
+      if(!button.classList.contains('ev-card-favorite'))button.textContent=on?'В избранном':'В избранное';
+    });
     var favoriteSummary='Избранное - '+(favorites.length?favorites.length+' шт.':'пока пусто');
     document.querySelectorAll('[data-favorites-summary]').forEach(function(n){n.textContent=favoriteSummary;});
     document.querySelectorAll('[data-favorites-count]').forEach(function(n){n.textContent=String(favorites.length);});
@@ -116,28 +127,55 @@
   function matchesTone(p,tone){if(!tone)return true;if(tone==='light')return p.tags.tone==='light';var patterns={natural:/натуральн/i,gray:/сер/i,brown:/коричнев/i,beige:/беж/i};return !!(patterns[tone]&&patterns[tone].test(p.shade||''));}
   function mountCatalog(){
     var form=document.getElementById('ev-catalog-filters'),root=document.getElementById('ev-catalog-results');if(!form||!root)return;
-    var collection=document.body.dataset.collection||'';
-    var filterDetails=form.querySelector('.ev-filter-details');
-    var compact=window.matchMedia('(max-width:760px)');
-    function fitFilters(){if(filterDetails)filterDetails.open=!compact.matches;}fitFilters();
-    if(compact.addEventListener)compact.addEventListener('change',fitFilters);
-    ['q','tone','design','sort'].forEach(function(key){if(form.elements[key]&&params.has(key))form.elements[key].value=params.get(key);});
-    if(form.elements.collection&&params.has('collection'))form.elements.collection.value=params.get('collection');
+    var keys=['q','collection','tone','design'];
+    var cards=Array.from(root.querySelectorAll('[data-product]'));
+    var empty=document.getElementById('ev-catalog-empty');
+    var status=document.getElementById('ev-catalog-status');
+    var reset=form.querySelector('[data-reset-filters]');
+    if(!empty||!status||!reset)return;
+
+    keys.forEach(function(key){
+      var field=form.elements.namedItem(key);
+      if(!field||!params.has(key))return;
+      field.value=params.get(key);
+      if(field.selectedIndex===-1)field.selectedIndex=0;
+    });
+
     function draw(){
-      var search=form.elements.q.value.toLocaleLowerCase('ru').trim();
-      var f=function(k){return form.elements[k]?form.elements[k].value:'';};
-      var items=products.filter(function(p){return (!collection||p.collectionID===collection)&&(!f('collection')||p.collectionID===f('collection'))&&matchesTone(p,f('tone'))&&(!f('design')||p.tags.design===f('design'))&&(!search||(p.sku+' '+fullName(p)+' '+p.collectionName).toLocaleLowerCase('ru').includes(search));});
-      var sort=f('sort');if(sort==='name')items.sort(function(a,b){return fullName(a).localeCompare(fullName(b),'ru');});
-      if(sort==='price-up'||sort==='price-down')items.sort(function(a,b){var x=activePrice(a.sku),y=activePrice(b.sku);if(x===null)return y===null?0:1;if(y===null)return -1;return sort==='price-up'?x-y:y-x;});
-      root.innerHTML=items.length?items.map(card).join(''):'<div class="ev-empty"><h2>Таких декоров не найдено</h2><p>Попробуйте другой оттенок или уберите часть фильтров.</p><button type="button" class="ev-button" data-reset-filters>Сбросить фильтры</button></div>';
-      document.getElementById('ev-result-count').textContent='Найдено декоров: '+items.length;
-      var u=new URL(location.href);['q','collection','tone','design','sort'].forEach(function(k){var v=f(k);if(v)u.searchParams.set(k,v);else u.searchParams.delete(k);});history.replaceState(null,'',u);
-      syncButtons();
+      var filters=new FormData(form);
+      var search=filters.get('q').trim().toLocaleLowerCase('ru');
+      var collection=filters.get('collection'),tone=filters.get('tone'),design=filters.get('design');
+      var count=0;
+      cards.forEach(function(card){
+        var product=bySku.get(card.dataset.product);
+        var searchable=(product.sku+' '+fullName(product)+' '+product.collectionName).toLocaleLowerCase('ru');
+        var matches=(!collection||product.collectionID===collection)&&
+          matchesTone(product,tone)&&(!design||product.tags.design===design)&&
+          searchable.includes(search);
+        card.hidden=!matches;
+        if(matches)count++;
+      });
+      empty.hidden=count>0;
+      reset.hidden=!(search||collection||tone||design);
+      var message=reset.hidden?'':count?'Декоров в выдаче: '+count:'Таких декоров не найдено';
+      if(status.textContent!==message)status.textContent=message;
+
+      var url=new URL(location.href);
+      keys.forEach(function(key){
+        var value=(filters.get(key)||'').trim();
+        if(value)url.searchParams.set(key,value);else url.searchParams.delete(key);
+      });
+      url.searchParams.delete('sort');
+      if(url.href!==location.href)history.replaceState(history.state,'',url);
     }
+
     form.addEventListener('submit',function(e){e.preventDefault();draw();});
     form.addEventListener('input',draw);form.addEventListener('change',draw);
-    document.addEventListener('click',function(e){if(e.target.closest('[data-reset-filters]')){form.reset();draw();}});
-    document.addEventListener('eversense:prices',function(){if(/^price/.test(form.elements.sort.value))draw();});
+    reset.addEventListener('click',function(){
+      form.reset();
+      form.elements.q.focus({preventScroll:true});
+      draw();
+    });
     draw();
   }
   function mountFinder(){

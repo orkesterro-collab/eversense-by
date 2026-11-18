@@ -23,6 +23,8 @@ PRODUCTS.sort(key=lambda p: (['nature','luxury','minimal'].index(p['collectionID
 GUIDES = json.loads((ROOT / 'content/buyer-guides.json').read_text())
 INSTALLATION_GUIDES = json.loads((ROOT / 'content/installation-guides.json').read_text())
 VERSION = '20261112favoriteportrait'
+CATALOG_VERSION = '20261118catalog'
+HEART_ICON = '<svg class="ev-heart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 4.6c-2.1-2.1-5.5-2.1-7.6 0L12 5.8l-1.2-1.2c-2.1-2.1-5.5-2.1-7.6 0s-2.1 5.5 0 7.6L12 21l8.8-8.8c2.1-2.1 2.1-5.5 0-7.6Z"/></svg>'
 COLLECTIONS = [
     ('nature', 'Природная эстетика', 'Спокойные древесные оттенки и выразительные рисунки дуба.'),
     ('luxury', 'Тихая роскошь', 'Натуральные и глубокие тона для интерьера с характером.'),
@@ -45,9 +47,6 @@ def href(target, page):
 def link(label, target, page, cls='', extra=''):
     return f'<a href="{e(href(target, page))}"' + (f' class="{e(cls)}"' if cls else '') + (f' {extra}' if extra else '') + f'>{label}</a>'
 
-def actions(page):
-    return '<div class="ev-actions">' + link('<svg class="ev-heart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 4.6c-2.1-2.1-5.5-2.1-7.6 0L12 5.8l-1.2-1.2c-2.1-2.1-5.5-2.1-7.6 0s-2.1 5.5 0 7.6L12 21l8.8-8.8c2.1-2.1 2.1-5.5 0-7.6Z"/></svg><span data-favorites-summary>Избранное - пока пусто</span>', 'favorites.html', page, 'ev-favorites-link', 'data-favorites-link') + '</div>'
-
 def footer(page):
     groups = [
         ('Выбрать и купить', [('Все декоры', 'catalog-ru/'), ('Помощь с выбором', 'choose.html'), ('Интерьеры', 'projects.html'), ('Где купить', 'where-to-buy.html'), ('Контакты', 'contacts.html')]),
@@ -58,6 +57,7 @@ def footer(page):
 def write_page(page, title, lead, body, page_type='', collection='', hero_actions='', structured=None):
     canonical = 'https://eversense.by/' + (page[:-10] if page.endswith('index.html') else page)
     schema = structured or {'@context':'https://schema.org','@type':'WebPage','name':title,'description':lead,'url':canonical,'inLanguage':'ru'}
+    version = CATALOG_VERSION if page_type == 'catalog' else VERSION
     extras = []
     if page_type in ('product', 'choose', 'faq', 'installation', 'care', 'warranty', 'downloads'):
         extras.append('explore-guides.css')
@@ -82,25 +82,44 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
 <link rel="canonical" href="{canonical}"><meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:title" content="{e(title)} — EVERSENSE"><meta property="og:description" content="{e(lead)}"><meta property="og:url" content="{canonical}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{href('assets/buyer.css',page)}?v={VERSION}" data-ev-buyer-css>
+<link rel="stylesheet" href="{href('assets/buyer.css',page)}?v={version}" data-ev-buyer-css>
 {extra_assets}
 <script type="application/ld+json">{json.dumps(schema,ensure_ascii=False).replace('<',chr(92)+'u003c')}</script>
 <script src="{href('assets/products-data.js',page)}?v={VERSION}" defer></script>
 <script src="{href('assets/buyer-core.js',page)}?v={VERSION}" defer></script>
-<script src="{href('assets/prices.js',page)}?v={VERSION}" defer></script>
-<script src="{href('assets/buyer.js',page)}?v={VERSION}" defer></script>
+<script src="{href('assets/prices.js',page)}?v={version}" defer></script>
+<script src="{href('assets/buyer.js',page)}?v={version}" defer></script>
 </head><body class="ev-buyer" data-buyer-page="{e(page_type)}" data-collection="{e(collection)}">
 <a href="#main" class="ev-skip-link">Перейти к содержанию</a>
 <main id="main"><section class="ev-hero"><div class="ev-wrap"><nav class="ev-breadcrumb" aria-label="Хлебные крошки">{breadcrumb}</nav><h1>{e(title)}</h1><p class="ev-lead">{e(lead)}</p>{hero_actions}</div></section>
 {body}</main>{footer(page)}
-<noscript><div class="ev-wrap ev-note">Для расчёта, фильтров, избранного включите JavaScript. Страницы декоров и полезные материалы доступны по обычным ссылкам.</div></noscript>
+<noscript><div class="ev-wrap ev-note">Для расчёта, фильтров и избранного включите JavaScript. Страницы декоров и полезные материалы доступны по обычным ссылкам.</div></noscript>
 </body></html>'''
     path = ROOT / page
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(html + '\n')
 
-def card(p, page):
-    return f'''<article class="ev-card" data-product="{p['sku']}"><a class="ev-card-image" href="{e(href(p['canonicalPath'],page))}"><img src="{e(href(p['productImage'],page))}" alt="{e(p['name'])}" width="640" height="500" loading="lazy"><img class="ev-card-interior" src="{e(href(p['interiorImage'],page))}" alt="" width="640" height="500" loading="lazy"></a><div class="ev-card-body"><span class="ev-sku">{p['sku']}</span><h2 class="ev-card-title">{link(e(p['name']),p['canonicalPath'],page)}</h2><p class="ev-card-meta">{e(p['collectionName'])} · {p['lengthMM']} × {p['widthMM']} мм</p><div class="ev-price-box" data-buyer-price="{p['sku']}"><span class="ev-price-pending">Цена уточняется</span></div><div class="ev-card-actions"><button type="button" class="ev-button" data-ev-favorite="{p['sku']}" aria-pressed="false">В избранное</button></div></div></article>'''
+def catalog_card(product, page, show_collection):
+    sku = e(product['sku'])
+    name = e(product['name'])
+    url = e(href(product['canonicalPath'], page))
+    photo = e(href(product['productImage'], page))
+    interior = e(href(product['interiorImage'], page))
+    collection = f'<span>{e(product["collectionName"])}</span>' if show_collection else ''
+    size = f'{product["lengthMM"]} × {product["widthMM"]} мм'
+    return f'''<article class="ev-card" data-product="{sku}">
+  <a class="ev-card-image" href="{url}">
+    <img src="{photo}" alt="{name}" width="640" height="500" loading="lazy">
+    <img class="ev-card-interior" src="{interior}" alt="" width="640" height="500" loading="lazy">
+  </a>
+  <span class="ev-sku">{sku}</span>
+  <h2 class="ev-card-title"><a href="{url}">{name}</a></h2>
+  <p class="ev-card-meta">{collection}<span class="ev-card-size">{size}</span></p>
+  <div class="ev-card-price">
+    <button type="button" class="ev-card-favorite" data-ev-favorite="{sku}" aria-pressed="false" aria-label="Избранное: {name}">{HEART_ICON}</button>
+    <div class="ev-price-box" data-buyer-price="{sku}"><span class="ev-price-pending">Цена уточняется</span></div>
+  </div>
+</article>'''
 
 def field(label, name, options, value=''):
     return '<div class="ev-field"><label for="ev-'+name+'">'+label+'</label><select id="ev-'+name+'" name="'+name+'">'+''.join('<option value="'+e(v)+'"'+(' selected' if v==value else '')+'>'+e(t)+'</option>' for v,t in options)+'</select></div>'
@@ -112,13 +131,27 @@ def catalogs():
     for collection, title, lead, page in [('', 'Каталог декоров', '30 декоров. Найдите свой оттенок и сохраните понравившиеся варианты.', 'catalog-ru/index.html')] + [(c,t,d,COLLECTION_PATHS[c].lstrip('/')+'index.html') for c,t,d in COLLECTIONS]:
         items = [p for p in PRODUCTS if not collection or p['collectionID']==collection]
         nav = '<nav class="ev-inline-nav" aria-label="Коллекции">'+link('Все декоры', 'catalog-ru/', page, extra='aria-current="page"' if not collection else '')+''.join(link(t, COLLECTION_PATHS[c], page, extra='aria-current="page"' if c==collection else '') for c,t,_ in COLLECTIONS)+'</nav>'
-        filters = '<form id="ev-catalog-filters" class="ev-toolbar" role="search"><div class="ev-field"><label for="ev-q">Поиск по названию или артикулу</label><input id="ev-q" name="q" type="search" placeholder="Например, EL1052 или дуб" autocomplete="off"></div><details class="ev-filter-details" open><summary>Фильтры и сортировка</summary><div class="ev-filter-row">'
-        if not collection:
-            filters += field('Коллекция','collection',[('','Все коллекции')]+[(c,t) for c,t,_ in COLLECTIONS])
         design_options = [(v,t) for v,t in DESIGN if not v or any(p['tags']['design']==v for p in items)]
-        filters += field('Оттенок','tone',TONE)+field('Группа декоров','design',design_options)+field('Порядок','sort',[('','По коллекциям'),('name','По названию'),('price-up','Сначала дешевле'),('price-down','Сначала дороже')])+'</div></details><div class="ev-actions"><p id="ev-result-count" class="ev-count" role="status">Найдено декоров: '+str(len(items))+'</p><button type="button" class="ev-reset-filters" data-reset-filters aria-label="Сбросить фильтры" title="Сбросить фильтры"><span aria-hidden="true">×</span></button></div></form>'
-        body = '<section class="ev-section"><div class="ev-wrap">'+nav+filters+'<div class="ev-grid" id="ev-catalog-results">'+''.join(card(p,page) for p in items)+'</div></div></section><section class="ev-section"><div class="ev-wrap"><p class="ev-note">Оттенок на экране зависит от освещения и настроек устройства. Перед покупкой посмотрите реальный образец. Наличие нужного количества уточняйте у продавца.</p>'+link('Помочь с выбором', 'choose.html', page,'ev-button')+'</div></section>'
-        write_page(page,title,lead,body,'catalog',collection,actions(page))
+        collection_filter = ''
+        if not collection:
+            collection_options = [('', 'Все коллекции')] + [(c,t) for c,t,_ in COLLECTIONS]
+            collection_filter = '\n  ' + field('Коллекция', 'collection', collection_options)
+        cards = '\n'.join(catalog_card(p, page, show_collection=not collection) for p in items)
+        body = f'''<section class="ev-section"><div class="ev-wrap">
+{nav}
+<form id="ev-catalog-filters" role="search">
+  <div class="ev-field"><label for="ev-q">Поиск по названию или артикулу</label><input id="ev-q" name="q" type="search" placeholder="Например, EL1052 или дуб" autocomplete="off"></div>
+  {field('Оттенок', 'tone', TONE)}
+  {field('Группа декоров', 'design', design_options)}{collection_filter}
+  <button type="button" class="ev-text-link" data-reset-filters hidden>Сбросить фильтры</button>
+</form>
+<p class="ev-sr-only" id="ev-catalog-status" role="status"></p>
+<div class="ev-grid" id="ev-catalog-results">
+{cards}
+  <div class="ev-empty" id="ev-catalog-empty" hidden><h2>Таких декоров не найдено</h2><p>Попробуйте другой запрос или сбросьте фильтры.</p></div>
+</div></div></section>
+<section class="ev-section"><div class="ev-wrap"><p class="ev-note">Оттенок на экране зависит от освещения и настроек устройства. Перед покупкой посмотрите реальный образец. Наличие нужного количества уточняйте у продавца.</p>{link('Помочь с выбором', 'choose.html', page, 'ev-button')}</div></section>'''
+        write_page(page, title, lead, body, 'catalog', collection)
 
 def finder(page):
     return '<section class="ev-section" id="finder"><div class="ev-wrap"><span class="ev-eyebrow">02 · От впечатления к вариантам</span><h2>Сузим круг выбора</h2><p class="ev-lead">Оттенок и рисунок определят подборку. Комната подскажет, на что обратить внимание в эксплуатации.</p><form id="ev-finder"><div class="ev-filter-row">'+field('Комната','room',[('living','Гостиная'),('bedroom','Спальня'),('kitchen','Кухня'),('hall','Прихожая')])+field('Оттенок','tone',TONE)+field('Группа декоров','design',DESIGN)+'</div><button class="ev-button ev-button--primary" type="submit">Показать декоры</button></form><div id="ev-finder-results" class="ev-section" tabindex="-1" hidden></div></div></section>'

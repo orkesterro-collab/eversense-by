@@ -5,7 +5,7 @@
   var current = document.currentScript;
   if (!current || !current.src) return;
   var script = document.createElement("script");
-  script.src = new URL("unified-header.js?v=20261110b",current.src).href;
+  script.src = new URL("unified-header.js?v=20261118catalog",current.src).href;
   script.async = true;
   document.head.appendChild(script);
 })();

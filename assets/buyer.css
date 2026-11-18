@@ -60,13 +60,8 @@ body[data-buyer-page="catalog"] .ev-inline-nav {margin-top:0;margin-bottom:16px}
 .ev-text-link {display:inline-flex;align-items:center;gap:7px;min-height:44px;padding-block:10px;color:inherit;font-size:13px;line-height:1.5;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
 .ev-text-link:hover {color:#343333}
 
-.ev-hero .ev-favorites-link{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:9px 16px;border:1px solid rgba(255,255,255,.62);color:#fff;font-size:14px;font-weight:600;line-height:1.5;text-decoration:none;background:rgba(255,255,255,.07);transition:background-color .18s ease,border-color .18s ease}
-.ev-hero .ev-favorites-link:hover{background:rgba(255,255,255,.16);border-color:#fff}
-.ev-hero .ev-favorites-link .ev-heart-icon{flex:0 0 20px;width:20px;height:20px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.ev-hero .ev-favorites-link.has-favorites .ev-heart-icon{stroke:#f05252;fill:#f05252}
 .ev-hero .ev-text-link:hover {color:#C0A58C}
 button.ev-text-link {border:0;border-radius:0;background:transparent;padding-inline:0;text-align:left}
-.ev-toolbar {margin-bottom:32px}
 .ev-filter-row {display:grid;grid-template-columns:1.6fr repeat(3,minmax(0,1fr));gap:16px;align-items:end;margin-bottom:21px}
 .ev-field {display:flex;flex-direction:column;gap:7px;min-width:0;font-size:13px;line-height:1.5}
 .ev-field > label,.ev-field > span:first-child {color:#343333;font-size:12px;font-weight:600}
@@ -77,18 +72,12 @@ button.ev-text-link {border:0;border-radius:0;background:transparent;padding-inl
 .ev-field [aria-invalid="true"] {border-color:#9C4C3A;background:#FFFFFF}
 .ev-field small {color:var(--ev-muted,#343333);font-size:12px;line-height:1.6}
 .ev-field .ev-error {color:#9C4C3A;font-size:13px}
-.ev-count {margin:0;color:#343333;font-size:13px;line-height:1.7}
-.ev-toolbar .ev-actions {justify-content:space-between}
-.ev-toolbar .ev-actions .ev-actions {justify-content:flex-start}
-#ev-catalog-filters {display:grid;grid-template-columns:minmax(220px,1.25fr) minmax(0,4fr);gap:12px 16px;margin-bottom:24px;align-items:end}
-#ev-catalog-filters > .ev-field {max-width:600px}
-#ev-catalog-filters > .ev-actions {grid-column:1/-1}
-.ev-filter-details {min-width:0}
-.ev-filter-details > summary {min-height:44px;align-items:center;gap:10px;padding:8px 0;list-style:none;cursor:pointer;font-size:13px;line-height:1.6;text-decoration:underline;text-underline-offset:5px}
-.ev-filter-details > summary::-webkit-details-marker {display:none}
-.ev-filter-details > summary:after {content:"+";margin-left:auto;font-size:20px;line-height:1}
-.ev-filter-details[open] > summary:after {content:"−"}
-.ev-filter-details .ev-filter-row {grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:0}
+#ev-catalog-filters {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px;max-width:840px;margin-bottom:24px;align-items:end}
+#ev-catalog-filters > :first-child,#ev-catalog-filters > [data-reset-filters] {grid-column:1/-1}
+#ev-catalog-filters > [data-reset-filters] {justify-self:start}
+@media(min-width:761px){
+  [data-collection=""] #ev-catalog-filters {grid-template-columns:repeat(3,minmax(0,1fr))}
+}
 .ev-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:42px 26px}
 .ev-grid > * {min-width:0}
 .ev-card {display:flex;flex-direction:column;min-width:0;color:#343333;background:transparent;position:relative}
@@ -114,6 +103,25 @@ img.ev-card-image {width:100%;height:auto;object-fit:contain}
 .ev-card-actions {display:flex;gap:8px;align-items:stretch;margin-top:auto;padding-top:15px}
 .ev-card-actions .ev-button {flex:1;min-width:0;min-height:44px;padding:10px 9px;font-size:12px;line-height:1.45;border-color:#9D9D9C;letter-spacing:0}
 .ev-card-actions .ev-button[aria-pressed="true"] {border-color:#343333}
+
+/* Share each card's image, SKU, title, details and price tracks with its neighbors. */
+@supports (grid-template-rows:subgrid){
+  #ev-catalog-results > .ev-card {display:grid;grid-row:span 5;grid-template-rows:subgrid;row-gap:0}
+}
+#ev-catalog-results .ev-sku {margin-top:12px}
+#ev-catalog-results .ev-card-meta span {display:block}
+#ev-catalog-results .ev-card-size {white-space:nowrap}
+.ev-card-price {display:grid;grid-template-columns:44px minmax(0,1fr);align-items:start}
+.ev-card-favorite {display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;background:transparent;color:#343333}
+.ev-card-favorite:focus-visible {outline-offset:-2px}
+.ev-card-favorite .ev-heart-icon {width:22px;height:22px;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.ev-card-favorite[aria-pressed="true"] .ev-heart-icon {stroke:#f05252;fill:#f05252}
+#ev-catalog-results .ev-price-box {display:block;margin:0;min-width:0}
+#ev-catalog-results .ev-price-box > :is(strong,.ev-price-pending) {display:flex;align-items:center;min-height:44px;line-height:1.35}
+#ev-catalog-results .ev-price-box strong {font-size:17px;font-weight:700}
+#ev-catalog-results .ev-price-box .ev-price-sale {color:#b43a36}
+#ev-catalog-results .ev-price-box > :is(del,small) {display:block;color:#626161}
+
 /* Upright, full-size material previews in the catalog and favorites.
    Original product photographs show horizontal planks, so rotate the photo itself
    rather than stretching or replacing the manufacturer's material texture. */
@@ -150,6 +158,8 @@ body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-imag
   body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card .ev-price-box strong {font-size:14px}
   body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-actions {flex-direction:column;gap:6px;padding-top:10px}
   body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-actions .ev-button {width:100%;flex:0 0 auto;min-height:40px;padding:8px 5px;font-size:11px;line-height:1.35}
+  #ev-catalog-results .ev-sku {margin-top:10px}
+  #ev-catalog-results .ev-price-box strong {font-size:clamp(12px,3.7vw,14px)}
 }
 
 .ev-empty {padding:42px 28px;background:#FFFFFF;text-align:center;grid-column:1/-1}
@@ -300,10 +310,6 @@ body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-imag
   .ev-link-grid {gap:22px}
   .ev-footer > .ev-wrap,.ev-footer-grid {gap:30px}
   .ev-tools-panel {width:calc(100% - 80px)}
-  #ev-catalog-filters {grid-template-columns:minmax(0,1fr)}
-}
-@media(min-width:761px){
-  .ev-filter-details > summary {display:none}
 }
 @media(max-width:760px){
   .ev-wrap,.ev-tools-panel {width:calc(100% - 40px)}
@@ -319,11 +325,9 @@ body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-imag
   body[data-buyer-page="catalog"] .ev-section {padding-top:24px}
   .ev-inline-nav {max-width:100%;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;gap:8px}
   .ev-inline-nav a {flex:0 0 auto;white-space:nowrap;min-height:44px;padding:10px 12px;font-size:11px}
-  #ev-catalog-filters {gap:6px;margin-bottom:18px}
-  #ev-catalog-filters > .ev-field {max-width:none}
-  .ev-filter-details > summary {display:flex;border-bottom:1px solid #DADADA}
-  .ev-filter-details .ev-filter-row {grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-top:16px;padding-bottom:12px}
-  .ev-filter-details .ev-filter-row > :first-child {grid-column:auto}
+  #ev-catalog-filters {gap:10px 12px;margin-bottom:20px}
+  #ev-catalog-filters > .ev-field:has(#ev-collection) {grid-column:1/-1}
+  #ev-catalog-filters select {padding-inline:10px;text-overflow:ellipsis}
   .ev-breadcrumb {margin-bottom:24px}
   .ev-article-layout {grid-template-columns:minmax(0,1fr);gap:32px}
   .ev-toc {position:static;padding:0 0 16px;border-bottom:1px solid #DADADA}
@@ -367,8 +371,6 @@ body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-imag
   .ev-filter-row {gap:12px}
   .ev-filter-row > :first-child {grid-column:1/-1}
   .ev-filter-row .ev-field {font-size:12px}
-  .ev-toolbar {margin-bottom:25px}
-  .ev-toolbar .ev-actions {align-items:flex-start;gap:10px}
   .ev-grid {gap:29px 12px}
   .ev-card-image {aspect-ratio:3/2}
   .ev-card-body {padding-top:12px}
@@ -418,7 +420,7 @@ body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-imag
 }
 @media print{
   body.ev-buyer {padding:0!important;background:white;color:#343333;font-size:11pt}
-  #ev-global-header,.ev-buyer .ev-breadcrumb,.ev-buyer .ev-toc,.ev-buyer .ev-toolbar,.ev-buyer .ev-filter-row,.ev-buyer .ev-actions,.ev-buyer form,.ev-buyer .ev-card-actions,.ev-buyer .ev-favorites-bar,.ev-buyer .ev-footer,.ev-buyer .ev-skip-link,.ev-live-status,.ev-copy-box,.ev-inline-nav {display:none!important}
+  #ev-global-header,.ev-buyer .ev-breadcrumb,.ev-buyer .ev-toc,.ev-buyer .ev-filter-row,.ev-buyer .ev-actions,.ev-buyer form,.ev-buyer .ev-card-actions,.ev-card-favorite,.ev-buyer .ev-favorites-bar,.ev-buyer .ev-footer,.ev-buyer .ev-skip-link,.ev-live-status,.ev-copy-box,.ev-inline-nav {display:none!important}
   .ev-hero {padding:0 0 22pt;background:white!important;color:#343333}
   .ev-hero h1 {font-size:28pt;line-height:1.15;margin-bottom:10pt}
   .ev-hero .ev-lead,.ev-hero .ev-eyebrow {color:#343333;font-size:10pt}
@@ -438,13 +440,10 @@ body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-imag
   .ev-card-interior {display:none!important}
   .ev-card-title {font-size:12pt}
   .ev-card-meta,.ev-sku {font-size:9pt}
+  .ev-card-price {display:block}
 }
 
-/* Compact, discoverable reset; keep every collection visible on phones. */
-#ev-catalog-filters .ev-reset-filters{display:inline-flex;align-items:center;justify-content:center;flex:0 0 44px;width:44px;height:44px;min-height:44px;padding:0;border:1px solid #9D9D9C;background:#fff;color:#343333;font-family:inherit;font-size:28px;line-height:1;cursor:pointer}
-#ev-catalog-filters .ev-reset-filters:hover{background:#343333;color:#fff}
-#ev-catalog-filters .ev-reset-filters:focus-visible{outline:2px solid #343333;outline-offset:3px}
-#ev-catalog-filters .ev-actions{flex-wrap:nowrap;align-items:center}
+/* Keep every collection visible on phones. */
 @media(max-width:640px){
  body[data-buyer-page="catalog"] .ev-inline-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;gap:8px}
  body[data-buyer-page="catalog"] .ev-inline-nav a{min-width:0;white-space:normal;text-align:center;overflow-wrap:break-word;padding:9px 8px;font-size:12px;line-height:1.4}
