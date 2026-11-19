@@ -990,12 +990,11 @@ def main():
                     case('static-home-' + home_path.replace('/', '-') + '-' + device,
                          lambda p, c, path=home_path, d=device: static_home_test(p, c, path, d), width, height)
 
-            def compact_benefits_test(page, context, width):
-                goto(page, 'index.html', prices=False)
+            def compact_benefits_test(page, context, width, path='index.html'):
+                goto(page, path, prices=False)
                 root = page.locator('#rec445068037nlm')
                 root.wait_for(state='visible')
                 root.scroll_into_view_if_needed()
-                wrapper = root.locator('.t-slds__items-wrapper')
                 result = []
                 for index in range(1, 6):
                     active = root.locator('.t-slds__item_active:not([aria-hidden="true"])')
@@ -1003,27 +1002,52 @@ def main():
                     page.wait_for_function("""index => document.querySelector(
                       '#rec445068037nlm .t-slds__items-wrapper').getAttribute('data-slider-pos') === String(index)""", arg=index)
                     page.wait_for_timeout(450)
+                    if width < 960:
+                        active.locator('.ev-benefit-mobile-image img').evaluate('img => img.decode()')
                     metrics = active.evaluate("""el => {
-                      const root=el.closest('.t-rec'), r=root.getBoundingClientRect();
+                      const root=el.closest('#rec445068037nlm'), r=root.getBoundingClientRect();
                       const controls=el.querySelector('.ev-benefit-controls'), n=controls.getBoundingClientRect();
                       const photo=el.querySelector('.ev-benefit-photo').getBoundingClientRect();
-                      const copy=el.querySelector('.ev-benefit-copy').getBoundingClientRect();
-                      const texts=[...el.querySelectorAll('.ev-benefit-copy > .tn-elem')]
-                        .filter(e=>e.getClientRects().length && getComputedStyle(e).visibility!=='hidden');
-                      const boxes=texts.map(e=>({text:e.innerText,r:e.getBoundingClientRect()}));
+                      const caption=el.querySelector('.ev-benefit-copy'), copy=caption.getBoundingClientRect();
+                      const w=document.documentElement.clientWidth, mobile=w<960;
+                      const image=el.querySelector('.ev-benefit-mobile-image img');
+                      const imageBox=image.getBoundingClientRect();
                       const within=b=>b.top>=copy.top-2 && b.bottom<=Math.min(copy.bottom,n.top)+1 && b.left>=copy.left-2 && b.right<=copy.right+2;
-                      const overlap=boxes.flatMap((a,i)=>boxes.slice(i+1).filter(b=>
-                        Math.min(a.r.right,b.r.right)-Math.max(a.r.left,b.r.left)>2 &&
-                        Math.min(a.r.bottom,b.r.bottom)-Math.max(a.r.top,b.r.top)>2).map(b=>[a.text,b.text]));
-                      const w=document.documentElement.clientWidth;
+                      let copyInside, overlap=[];
+                      if (mobile) {
+                        // Multiline inline links and titles can share a line. Measure the
+                        // text on each line, including bold spans inside the original markup.
+                        const walker=document.createTreeWalker(caption,NodeFilter.SHOW_TEXT);
+                        const range=document.createRange(), lines=[];
+                        while (walker.nextNode()) {
+                          const node=walker.currentNode;
+                          if (!node.textContent.trim() || !node.parentElement.checkVisibility({checkVisibilityCSS:true})) continue;
+                          range.selectNodeContents(node);
+                          lines.push(...Array.from(range.getClientRects()).filter(b=>b.width && b.height));
+                        }
+                        copyInside=lines.length>0 && lines.every(within);
+                      } else {
+                        const fields=[...caption.children].filter(e=>e.getClientRects().length && getComputedStyle(e).visibility!=='hidden');
+                        const boxes=fields.map(e=>({text:e.innerText,r:e.getBoundingClientRect()}));
+                        copyInside=boxes.every(b=>within(b.r));
+                        overlap=boxes.flatMap((a,i)=>boxes.slice(i+1).filter(b=>
+                          Math.min(a.r.right,b.r.right)-Math.max(a.r.left,b.r.left)>2 &&
+                          Math.min(a.r.bottom,b.r.bottom)-Math.max(a.r.top,b.r.top)>2).map(b=>[a.text,b.text]));
+                      }
                       const oldHeight=w>=1200?Math.max(innerHeight,550*w/1200):
                         w>=960?550*w/960:w>=640?844*w/640:w>=480?714*w/480:655*w/320;
+                      const english=!!el.querySelector('.ev-benefit-original-size');
+                      const expected=mobile?(english?oldHeight:Math.max(oldHeight*.75,750))*.25:oldHeight*.75;
                       const hit=e=>{const b=e.getBoundingClientRect();
                         const target=document.elementFromPoint(b.x+b.width/2,b.y+b.height/2);
                         return target===e||e.contains(target);};
-                      return {height:r.height,expected:Math.max(oldHeight*.75,w<960?750:0),
-                        photoShare:w<960?photo.height/r.height:photo.width/r.width,centerError:Math.abs(n.x+n.width/2-r.x-r.width/2),
-                        copyInside:boxes.every(b=>within(b.r)),overlap,
+                      return {height:r.height,expected,
+                        photoShare:mobile?photo.height/r.height:photo.width/r.width,centerError:Math.abs(n.x+n.width/2-r.x-r.width/2),
+                        copyInside,overlap,
+                        stacked:Math.abs(copy.top-r.top)<1 && Math.abs(photo.top-copy.bottom)<1 &&
+                          Math.abs(copy.height-photo.height)<1 && Math.abs(photo.width-r.width)<1,
+                        mobilePhoto:image.currentSrc===new URL(image.previousElementSibling.srcset, document.baseURI).href &&
+                          image.naturalWidth>1 && Math.abs(imageBox.height-photo.height)<1 && getComputedStyle(image).objectFit==='cover',
                         navInside:n.top>=r.top&&n.bottom<=r.bottom+1,
                         arrows:[...el.querySelectorAll('.ev-benefit-prev,.ev-benefit-next')].map(e=>({
                           width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height,hit:hit(e)})),
@@ -1031,8 +1055,11 @@ def main():
                     }""")
                     require(abs(metrics['height'] - metrics['expected']) < 3,
                             f"Benefits carousel height is incorrect at {width}: {metrics}")
-                    require(abs(metrics['photoShare'] - .6) < .002,
-                            f"Benefits photo is not 60% of slide {index} at {width}: {metrics}")
+                    require(abs(metrics['photoShare'] - (.5 if width < 960 else .6)) < .002,
+                            f"Wrong photo share on slide {index} at {width}: {metrics}")
+                    if width < 960:
+                        require(metrics['stacked'] and metrics['mobilePhoto'],
+                                f"Expected text above the mobile photograph on slide {index} at {width}: {metrics}")
                     require(metrics['copyInside'] and not metrics['overlap'],
                             f"Benefits copy clips or overlaps on slide {index} at {width}: {metrics}")
                     require(metrics['navInside'] and metrics['centerError'] < 2 and not metrics['overflow'],
@@ -1040,7 +1067,7 @@ def main():
                     require(all(a['width'] >= 44 and a['height'] >= 44 and a['hit'] for a in metrics['arrows']),
                             f"Benefits arrows cannot be clicked at {width}: {metrics}")
                     if index == 1:
-                        shot(page, 'compact-benefits-' + str(width), full=False)
+                        shot(page, 'compact-benefits-' + path.replace('/', '-') + '-' + str(width), full=False)
                     result.append(metrics)
                 active.locator('.ev-benefit-next').click()
                 page.wait_for_function("document.querySelector('#rec445068037nlm .t-slds__items-wrapper').getAttribute('data-slider-pos') === '1'")
@@ -1052,6 +1079,9 @@ def main():
             for width in (320, 390, 520, 768, 1024, 1440, 2048):
                 case('compact-benefits-' + str(width),
                      lambda p, c, w=width: compact_benefits_test(p, c, w), width, 1000)
+            for path in ('ru/index.html', 'en/index.html'):
+                case('compact-benefits-' + path.split('/')[0] + '-320',
+                     lambda p, c, path=path: compact_benefits_test(p, c, 320, path), 320, 1000)
 
             def collection_breakpoint_test(page, context, device):
                 goto(page, 'index.html', prices=False)

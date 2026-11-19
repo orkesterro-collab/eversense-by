@@ -15,6 +15,7 @@ from pathlib import Path
 import posixpath
 import re
 from urllib.parse import unquote, urlsplit
+from home_benefits import make_home_benefits
 from home_collection_interiors import make_home_collection_interiors
 from home_wood import make_home_wood
 from static_home import compact_collection_panels
@@ -55,6 +56,7 @@ def optimize_html(source, page, runtime, responsive, video_manifest):
     counts = Counter()
     source = make_static_product(source, page)
     if page in HOMES:
+        source = make_home_benefits(source, page)
         source = compact_collection_panels(source)
         source = make_home_wood(source)
         source = make_home_collection_interiors(source, page, responsive)

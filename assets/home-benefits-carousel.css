@@ -106,19 +106,146 @@
 @media (min-width: 1200px) { .ev-benefit-copy > .ev-benefit-hidden-1200 { display: none !important; } }
 @media (min-width: 960px) and (max-width: 1199px) { .ev-benefit-copy > .ev-benefit-hidden-960 { display: none !important; } }
 @media (max-width: 959px) {
-  .ev-benefit-slide .t396__artboard { min-height: 750px !important; }
-  .ev-benefit-copy {
-    inset: var(--ev-benefit-photo-share) 0 64px;
-    gap: 5px;
-    padding: 8px clamp(20px, 4vw, 40px);
+  /* The published RU slides were at least 750px tall. Above 758px the
+     640px artboard scaled its 633px height with the viewport. */
+  .ev-benefit-slide { --ev-benefit-height: max(187.5px, 24.7265625vw); }
+  .ev-benefit-original-size { --ev-benefit-height: 51.171875vw; }
+  #allrecords .ev-benefit-slide :is(.t396__artboard, .t396__carrier, .t396__filter) {
+    height: var(--ev-benefit-height) !important;
+    min-height: 0 !important;
   }
-  .ev-benefit-copy .ev-benefit-brand .tn-atom,
-  .ev-benefit-copy .ev-benefit-heading .tn-atom { font-size: clamp(21px, 5vw, 28px) !important; }
-  .ev-benefit-copy .ev-benefit-subheading .tn-atom { font-size: clamp(16px, 3.6vw, 22px) !important; }
-  .ev-benefit-copy .ev-benefit-body .tn-atom { font-size: clamp(14px, 3.2vw, 16px) !important; }
-  .ev-benefit-copy > .ev-benefit-icon { width: 30px !important; height: 30px !important; margin-bottom: 0; }
-  .ev-benefit-slide .ev-benefit-photo { width: 100% !important; height: var(--ev-benefit-photo-share) !important; }
-  .ev-benefit-controls { bottom: 10px; }
+  .ev-benefit-copy {
+    inset: 0 0 auto;
+    height: 50%;
+    display: block;
+    align-content: center;
+    padding: 0 clamp(12px, 3.6vw, 32px);
+    font: 400 14px/1.15 Manrope, Arial, sans-serif;
+  }
+  .ev-benefit-copy > .tn-elem,
+  .ev-benefit-copy .tn-atom {
+    display: inline !important;
+    position: static !important;
+    font: inherit;
+    vertical-align: baseline !important;
+    line-height: inherit !important;
+  }
+  .ev-benefit-copy .ev-benefit-brand .tn-atom {
+    margin-right: 5px !important;
+    font-size: 10px !important;
+    font-weight: 600;
+    letter-spacing: .04em;
+  }
+  .ev-benefit-copy .ev-benefit-heading .tn-atom,
+  .ev-benefit-copy .ev-benefit-subheading .tn-atom {
+    font-size: clamp(17px, 4.35vw, 23px) !important;
+    line-height: 1.12 !important;
+  }
+  .ev-benefit-heading::after { content: ""; display: block; height: 2px; }
+  .ev-benefit-copy .ev-benefit-body .tn-atom {
+    font-size: 14px !important;
+    line-height: 1.15 !important;
+  }
+  .ev-benefit-body::after { content: " "; }
+  .ev-benefit-copy > .ev-benefit-icon {
+    position: absolute !important;
+    inset: calc(100% + 5px) 8px auto auto !important;
+    width: 24px !important;
+    height: 24px !important;
+    margin: 0;
+    background: #fff;
+    border-radius: 3px;
+  }
+  .ev-benefit-copy .ev-benefit-icon .tn-atom {
+    display: block !important;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+  }
+  .ev-benefit-slide .ev-benefit-photo {
+    display: block !important;
+    overflow: hidden;
+    z-index: 1 !important;
+    top: 50% !important;
+    width: 100% !important;
+    height: 50% !important;
+  }
+  .ev-benefit-photo > .tn-atom { display: none !important; }
+  .ev-benefit-mobile-image[hidden], .ev-benefit-mobile-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .ev-benefit-mobile-image img { object-fit: cover; object-position: 50% var(--ev-photo-focus, 70%); }
+  [data-ev-benefit="warranty"] { --ev-photo-focus: 80%; }
+  [data-ev-benefit="water"] { --ev-photo-focus: 50%; }
+  [data-ev-benefit="wear"] { --ev-photo-focus: 86%; }
+  [data-ev-benefit="impact"] { --ev-photo-focus: 8%; }
+
+  .ev-benefit-controls {
+    inset: 50% 0 0;
+    width: auto;
+    height: auto;
+    transform: none;
+    background: transparent;
+    pointer-events: none;
+  }
+  .ev-benefit-controls::before {
+    content: "";
+    position: absolute;
+    bottom: 7px;
+    left: 50%;
+    width: 126px;
+    height: 18px;
+    transform: translateX(-50%);
+    border-radius: 12px;
+    background: rgba(255,255,255,.94);
+  }
+  .ev-benefit-controls > .ev-benefit-prev, .ev-benefit-controls > .ev-benefit-next {
+    top: calc(50% - 22px) !important;
+    pointer-events: auto;
+  }
+  .ev-benefit-controls .ev-benefit-prev { left: 2px !important; }
+  .ev-benefit-controls .ev-benefit-next { left: auto !important; right: 2px !important; }
+  .ev-benefit-controls .ev-benefit-prev::before, .ev-benefit-controls .ev-benefit-next::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.94);
+  }
+  .ev-benefit-controls > .ev-benefit-prev-icon, .ev-benefit-controls > .ev-benefit-next-icon {
+    top: calc(50% - 10px) !important;
+  }
+  .ev-benefit-controls .ev-benefit-prev-icon { left: 14px !important; }
+  .ev-benefit-controls .ev-benefit-next-icon { left: auto !important; right: 14px !important; }
+  .ev-benefit-controls > .ev-benefit-dot {
+    top: auto !important;
+    bottom: 0 !important;
+    width: 24px !important;
+    height: 32px !important;
+    pointer-events: auto;
+  }
+  .ev-benefit-controls .ev-benefit-dot:has(a[href="#bullet1"]) { left: calc(50% - 60px) !important; }
+  .ev-benefit-controls .ev-benefit-dot:has(a[href="#bullet2"]) { left: calc(50% - 36px) !important; }
+  .ev-benefit-controls .ev-benefit-dot:has(a[href="#bullet3"]) { left: calc(50% - 12px) !important; }
+  .ev-benefit-controls .ev-benefit-dot:has(a[href="#bullet4"]) { left: calc(50% + 12px) !important; }
+  .ev-benefit-controls .ev-benefit-dot:has(a[href="#bullet5"]) { left: calc(50% + 36px) !important; }
+  /* These fields are duplicate copies for individual Tilda breakpoints. */
+  [data-ev-benefit="wear"] .ev-benefit-copy > [data-elem-id="1746691721257"],
+  .ev-benefit-original-size[data-ev-benefit="impact"] [data-elem-id="1742902620663"] { display: none !important; }
+  /* Use the same wear copy at every mobile width so its long link wraps naturally. */
+  [data-ev-benefit="wear"] .ev-benefit-copy > [data-elem-id="1742902620666"] { display: inline !important; }
+}
+@media (max-width: 359px) {
+  .ev-benefit-copy { padding-inline: 10px; font-size: 13px; line-height: 1.1; }
+  .ev-benefit-copy .ev-benefit-body .tn-atom { font-size: 13px !important; line-height: 1.1 !important; }
+}
+@media (min-width: 480px) and (max-width: 639px) {
+  .ev-benefit-original-size { --ev-benefit-height: 37.1875vw; }
+}
+@media (min-width: 640px) and (max-width: 959px) {
+  .ev-benefit-original-size { --ev-benefit-height: 32.96875vw; }
 }
 @media (min-width: 640px) and (max-width: 959px) { .ev-benefit-copy > .ev-benefit-hidden-640 { display: none !important; } }
 @media (min-width: 480px) and (max-width: 639px) { .ev-benefit-copy > .ev-benefit-hidden-480 { display: none !important; } }
