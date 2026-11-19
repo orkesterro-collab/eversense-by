@@ -1,17 +1,21 @@
-"""Prepare the mobile artwork and captions of the five homepage benefits."""
+"""Link the five original homepage photographs to their buyer guides."""
 import posixpath
 import re
 
 
 RU_RECORDS = ('1028577696', '1028577701', '1028577706', '1028577716', '1028577721')
 EN_RECORDS = ('1040271696', '1040271701', '1040271706', '1040271711', '1040271716')
-# All photographs come from the site's existing EVERSENSE imagery.
-MOBILE_PHOTOS = (
-    ('intro', '793f54aaa5b5-textures_2000_1.webp'),
-    ('warranty', '9319855e8cff-_2-min.webp'),
-    ('water', '6e9fe83a853f-__-min.webp'),
-    ('wear', 'c7ca08eeb95d-_1_2-min.webp'),
-    ('impact', 'e52e5803e60a-_5-min.webp'),
+BENEFITS = (
+    ('intro', '102a0149d479-_1-min.webp', 'about.html#surface',
+     'Как оценить фактуру и цвет пола', 'How to judge the texture and colour of flooring'),
+    ('warranty', '9319855e8cff-_2-min.webp', 'warranty.html',
+     'Условия гарантии EVERSENSE', 'EVERSENSE warranty terms'),
+    ('water', '8bdd7b9eaba5-_3-min.webp', 'water-resistance.html',
+     'Влагостойкость EVERSENSE и 72 часа контакта с водой', 'Water resistance and the 72-hour claim'),
+    ('wear', 'ea69fbde8dca-_4-min.webp', 'laminate-classes.html#abrasion',
+     'Как проверяют стойкость пола к истиранию', 'How flooring is tested for wear'),
+    ('impact', 'e52e5803e60a-_5-min.webp', 'laminate-classes.html#impact-resistance',
+     'Как проверяют ударопрочность пола', 'How flooring is tested for impact resistance'),
 )
 COPY = {'1746691102171': 'heading', '1746691102174': 'subheading',
         '1744019111686': 'brand', '1742902620650': 'heading',
@@ -20,7 +24,13 @@ COPY = {'1746691102171': 'heading', '1746691102174': 'subheading',
 ELEMENT = re.compile(r"""<div\b(?=[^>]*\bdata-elem-id=['"](?P<id>\d+)['"])[^>]+>\s*"""
                      r"""<(?P<atom>div|a|h[1-6])\b[^>]*\bclass=['"]tn-atom['"][^>]*>.*?</(?P=atom)>\s*</div>""", re.S)
 END_BOARD = re.compile(r"""\s*</div>\s*</div>\s*<script>t_onFuncLoad\('t396_initialScale'""")
-TRANSPARENT = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+UNLINKED_TITLE = re.compile(r"""(<h2\b[^>]*\bfield=['"]tn_text_(?:1746691102171|1742902620650)['"][^>]*>)"""
+                            r"""(?!\s*<a\b)(.*?)(</h2>)""", re.S)
+# Match the original photo atom, including the alternate mobile picture in
+# the compact export. Preserve the outer Tilda element and its desktop geometry.
+PHOTO_CONTENT = re.compile(
+    r"""(<div\b[^>]*\bdata-elem-id=['"]1742902666215['"][^>]*>)\s*"""
+    r"""<(div|a)\b[^>]*>.*?</\2>\s*(?:<picture\b[^>]*>.*?</picture>\s*)?(?=</div>)""", re.S)
 
 
 def with_role(node, role):
@@ -60,13 +70,12 @@ def group_original_elements(body, english):
 
 def make_home_benefits(source, page):
     english = page == 'en/index.html'
-    assets = posixpath.relpath('assets', posixpath.dirname(page) or '.')
-    for record, (kind, filename) in zip(EN_RECORDS if english else RU_RECORDS, MOBILE_PHOTOS):
+    directory = posixpath.dirname(page) or '.'
+    assets = posixpath.relpath('assets', directory)
+    for record, (kind, filename, article, ru_label, en_label) in zip(EN_RECORDS if english else RU_RECORDS, BENEFITS):
         record_start = source.index(f'<div id="rec{record}"')
         tag_end = source.index('>', record_start) + 1
         tag = source[record_start:tag_end]
-        if 'data-ev-benefit=' in tag:
-            continue
         marker = f'<div class="t396__filter" data-artboard-recid="{record}"></div>'
         start = source.index(marker, tag_end) + len(marker)
         end = END_BOARD.search(source, start).start()
@@ -75,16 +84,19 @@ def make_home_benefits(source, page):
             body = group_original_elements(body, english)
             tag = tag.replace('class="r t-rec', 'class="r t-rec ev-benefit-slide ev-benefit-original-size', 1)
 
-        # Keep the desktop background. A hidden, lazy native picture also selects
-        # the right mobile source in the carousel's cloned slides and on rotation.
-        picture = (f'<picture class="ev-benefit-mobile-image" hidden aria-hidden="true">'
-                   f'<source media="(max-width: 959px)" srcset="{assets}/original-tilda/{filename}">'
-                   f'<img src="{TRANSPARENT}" alt="" loading="lazy" decoding="async"></picture>')
-        photo = next(element for element in ELEMENT.finditer(body) if element['id'] == '1742902666215')
-        insert = body.rindex('</div>', photo.start(), photo.end())
-        body = body[:insert] + picture + body[insert:]
-        source = (source[:record_start] + tag[:-1] + f' data-ev-benefit="{kind}">' +
-                  source[tag_end:start] + body + source[end:])
+        if 'data-ev-benefit=' not in tag:
+            tag = tag[:-1] + f' data-ev-benefit="{kind}">'
+        label = en_label + ' (in Russian)' if english else ru_label
+        target = posixpath.relpath(article, directory)
+        title_link = f'<a class="ev-home-article-link" href="{target}" hreflang="ru" aria-label="{label}">'
+        body = UNLINKED_TITLE.sub(lambda m: m[1] + title_link + m[2] + '</a>' + m[3], body)
+        photo = (f'<a class="tn-atom ev-benefit-article" href="{target}" hreflang="ru">'
+                 f'<img src="{assets}/original-tilda/{filename}" alt="{label}" '
+                 f'width="1680" height="1820" loading="lazy" decoding="async" draggable="false"></a>')
+        body, count = PHOTO_CONTENT.subn(lambda match: match[1] + photo, body)
+        if count != 1:
+            raise ValueError(f'Expected one photograph in benefit {record}, found {count}')
+        source = source[:record_start] + tag + source[tag_end:start] + body + source[end:]
 
     if 'home-benefits-carousel.css' not in source:
         # Tilda sets the desktop scale on direct children. The original EN
@@ -94,5 +106,8 @@ def make_home_benefits(source, page):
                   f'<link rel="stylesheet" media="(max-width: 959px)" '
                   f'href="{assets}/home-benefits-carousel.css?v=20261119mobile">')
         source = source.replace('</head>', styles + '</head>', 1)
-    source = re.sub(r'(home-benefits-carousel\.css\?v=)[\w-]+', r'\g<1>20261119mobile', source)
+    if 'id="ev-home-article-links-css"' not in source:
+        source = source.replace('</head>', f'<link id="ev-home-article-links-css" rel="stylesheet" '
+                                f'href="{assets}/home-article-links.css?v=20261119photos"></head>', 1)
+    source = re.sub(r'(home-(?:benefits-carousel|article-links)\.css\?v=)[\w-]+', r'\g<1>20261119photos', source)
     return source
