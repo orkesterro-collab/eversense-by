@@ -17,3 +17,21 @@
   outline-offset: 4px;
   border-radius: 2px;
 }
+
+/* A native image link also works in the carousel's looped copies. */
+.ev-benefit-photo > .ev-benefit-article {
+  position: absolute;
+  inset: 0;
+  display: block;
+  cursor: pointer;
+}
+.ev-benefit-article img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ev-benefit-article:focus-visible {
+  outline: 3px solid #343333;
+  outline-offset: -5px;
+}

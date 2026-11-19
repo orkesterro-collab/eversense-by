@@ -209,6 +209,17 @@ def laminate_classes_page():
     body = render_laminate_classes(guide, page, href)
     write_page(page, guide['title'], guide['lead'], body, 'classes')
 
+def water_resistance_page():
+    page = 'water-resistance.html'
+    guide = GUIDES['water-resistance']
+    items = ''.join('<li>' + e(point) + '</li>' for point in guide['points'])
+    body = ('<article class="ev-section"><div class="ev-wrap ev-prose"><h2>' + e(guide['heading']) +
+            '</h2><ul>' + items + '</ul><div class="ev-actions">' +
+            link('Правила ухода', 'care.html#water-and-spills', page, 'ev-text-link') +
+            link('Инструкция по укладке', 'installation.html', page, 'ev-text-link') +
+            '</div></div></article>')
+    write_page(page, guide['title'], guide['lead'], body, 'water-resistance')
+
 def installation_pages():
     for key, page in [('installation', 'installation.html'), ('underlay', 'installation-underlay.html'), ('glue', 'installation-glue.html'), ('methods', 'installation-methods.html')]:
         guide = INSTALLATION_GUIDES[key]
@@ -238,7 +249,7 @@ def other_pages():
     body = '<section class="ev-section"><div class="ev-wrap ev-prose"><section><h2>До согласования стоимости</h2><p>Покажите мастеру план помещения, выбранный артикул и инструкцию EVERSENSE. Обсудите направление рядов, переходы между комнатами, трубы, дверные проёмы и встроенную мебель. Договоритесь, кто заказывает покрытие и расходные материалы.</p><ul><li>Какие измерения основания нужны: ровность, влажность и готовность подогрева.</li><li>Нужно ли снимать старое покрытие и выравнивать основание.</li><li>Какая подложка и пароизоляция предусмотрены для вашей конструкции.</li><li>Какие работы, профили, плинтусы и вывоз мусора включены в смету.</li></ul></section><section><h2>Перед началом укладки</h2><p>Сверьте количество упаковок с раскладкой и согласованным запасом. Вместе проверьте маркировку и состояние панелей. Попросите зафиксировать результаты измерений основания и уточните, где будут компенсационные зазоры и переходные профили.</p><div class="ev-actions">'+link('Этапы укладки','installation.html',page,'ev-button ev-button--primary')+link('Документы для мастера','downloads.html',page,'ev-button')+'</div></section><section><h2>При приёмке работы</h2><p>Осмотрите поверхность, соединения панелей, примыкания и дверные проёмы при хорошем освещении. Проверьте открывание дверей. Обсудите уход и защиту под мебелью, сохраните оставшиеся целые панели.</p><p>Попросите передать акт работ, сведения о подложке и результаты проверки основания. Этикетки упаковок и документы о покупке храните вместе: они помогут при последующем обращении по покрытию.</p>'+link('Как ухаживать за готовым полом','care.html',page,'ev-text-link')+'</section></div></section>'
     write_page(page,'Подготовка к работе с мастером','Короткий список для обсуждения сметы, подготовки основания и приёмки готового пола.',body,'installers')
     page='sitemap.html'
-    nav=[('Главная','index.html'),('Каталог','catalog-ru/'),('Как выбрать','choose.html'),('О продукте','about.html'),('Наша история','history.html'),('Классы ламината и испытания','laminate-classes.html'),('Интерьеры','projects.html'),('Избранное','favorites.html'),('Укладка','installation.html'),('Укладка на подложку','installation-underlay.html'),('Укладка на клей','installation-glue.html'),('Способы укладки: плюсы и минусы','installation-methods.html'),('Уход','care.html'),('Гарантия','warranty.html'),('Вопросы и ответы','faq.html'),('Документы','downloads.html'),('Где купить','where-to-buy.html'),('Контакты','contacts.html'),('Подготовка к работе с мастером','installers.html'),('Конфиденциальность','privacy.html')]
+    nav=[('Главная','index.html'),('Каталог','catalog-ru/'),('Как выбрать','choose.html'),('О продукте','about.html'),('Наша история','history.html'),('Классы ламината и испытания','laminate-classes.html'),('Интерьеры','projects.html'),('Избранное','favorites.html'),('Укладка','installation.html'),('Укладка на подложку','installation-underlay.html'),('Укладка на клей','installation-glue.html'),('Способы укладки: плюсы и минусы','installation-methods.html'),('Уход','care.html'),('Влагостойкость','water-resistance.html'),('Гарантия','warranty.html'),('Вопросы и ответы','faq.html'),('Документы','downloads.html'),('Где купить','where-to-buy.html'),('Контакты','contacts.html'),('Подготовка к работе с мастером','installers.html'),('Конфиденциальность','privacy.html')]
     body='<section class="ev-section"><div class="ev-wrap"><div class="ev-link-grid">'+''.join(link('<h2>'+t+'</h2><span aria-hidden="true">↗</span>',u,page,'ev-link-card') for t,u in nav)+'</div><h2>Все декоры</h2><div class="ev-link-grid">'+''.join(link(p['sku']+' · '+e(p['name']),p['canonicalPath'],page,'ev-text-link') for p in PRODUCTS)+'</div></div></section>'
     write_page(page,'Все страницы','Разделы сайта и все декоры EVERSENSE.',body,'sitemap')
 
@@ -265,6 +276,6 @@ if __name__ == '__main__':
         installation_pages()
         print('Built installation hub, two instructions and comparison article.')
     else:
-        catalogs();guides();installation_pages();laminate_classes_page();tools_pages();other_pages();aliases()
+        catalogs();guides();installation_pages();laminate_classes_page();water_resistance_page();tools_pages();other_pages();aliases()
         write_history_page(ROOT, footer('history.html'))
-        print('Built 4 catalogs, 6 buyer guides, 4 installation pages, 2 buyer tools, 5 support pages and 34 legacy redirects.')
+        print('Built 4 catalogs, 7 buyer guides, 4 installation pages, 2 buyer tools, 5 support pages and 34 legacy redirects.')
