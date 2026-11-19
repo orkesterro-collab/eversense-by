@@ -9,7 +9,7 @@
       return;
     }
     const observer = new IntersectionObserver(entries => {
-      if (!entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= (options.threshold || 0))) return;
+      if (!entries.some(entry => entry.isIntersecting)) return;
       observer.disconnect();
       callback();
     }, options);
@@ -21,7 +21,6 @@
     const sheet = gallery.querySelector('.ev-interiors__sheet');
     const preview = gallery.querySelector('.ev-interiors__preview');
     const opener = gallery.querySelector('.ev-interiors__opener');
-    const hint = gallery.querySelector('.ev-interiors__hint');
     const track = gallery.querySelector('.ev-interiors__track');
     const slides = Array.from(track.children);
     const previous = gallery.querySelector('.ev-interiors__previous');
@@ -121,7 +120,6 @@
       sheet.getBoundingClientRect();
       gallery.classList.add('is-open');
       opener.setAttribute('aria-expanded', 'true');
-      hint.hidden = true;
       track.focus({ preventScroll: true });
       opener.hidden = true;
     });
@@ -170,6 +168,5 @@
     board.classList.add('ev-interiors-artboard');
     gallery.hidden = false;
     whenVisible(gallery, { rootMargin: '160px 0px' }, loadPreview);
-    whenVisible(hint, { threshold: .95 }, () => gallery.classList.add('is-hinting'));
   });
 }());

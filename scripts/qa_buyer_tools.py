@@ -1057,6 +1057,8 @@ def main():
                 require(galleries.count() == 3, 'Expected three collection galleries')
                 require(galleries.locator('img[src]').count() == 0, 'Interiors loaded before their collections approached the viewport')
                 saved_sku = None
+                cover_arrow_visible = """el => el.checkVisibility({checkOpacity:true, checkVisibilityCSS:true})
+                    && el.getAnimations().length === 0"""
                 for index, collection in enumerate(('nature', 'luxury', 'minimal')):
                     gallery = galleries.nth(index)
                     products_in_collection = [p for p in products if p['collectionID'] == collection]
@@ -1087,10 +1089,7 @@ def main():
                     hint = gallery.locator('.ev-interiors__hint').element_handle()
                     hint_box = hint.bounding_box()
                     require(hint.evaluate("el=>getComputedStyle(el).backgroundColor==='rgba(0, 0, 0, 0)'"), 'Opening arrow should not have a circle')
-                    if device == 'mobile' and index == 0:
-                        page.wait_for_function("el=>getComputedStyle(el).animationIterationCount==='3'", arg=hint)
-                        hint.evaluate('el=>el.getAnimations()[0].finish()')
-                        require(hint.evaluate("el=>getComputedStyle(el).opacity==='0'"), 'Opening hint should disappear after three pulses')
+                    require(hint.evaluate(cover_arrow_visible), 'The collection cover should show a steady opening arrow')
                     opener = gallery.locator('.ev-interiors__opener')
                     opener.press('Enter')
                     track = gallery.locator('.ev-interiors__track')
@@ -1170,7 +1169,7 @@ def main():
                     require(opener.get_attribute('aria-expanded') == 'false' and opener.evaluate('el=>el===document.activeElement'),
                             'Closing should return to the photo strip and restore focus')
                     page.wait_for_function("el=>getComputedStyle(el).visibility==='hidden'", arg=track.element_handle())
-                    require(hint.evaluate('el=>el.hidden && el.getAnimations().length===0'), 'The opening hint replayed after closing')
+                    require(hint.evaluate(cover_arrow_visible), 'The opening arrow should be visible again after closing')
                 goto(page, 'favorites.html')
                 require(page.locator(f'#ev-favorites [data-product="{saved_sku}"]').count() == 1,
                         'The decor saved from the home gallery should appear in Favorites')

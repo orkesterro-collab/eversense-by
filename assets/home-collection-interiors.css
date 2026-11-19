@@ -71,7 +71,7 @@
   place-items: center;
   width: 40px;
   height: 40px;
-  opacity: 0;
+  opacity: .86;
 }
 .ev-interiors__hint::before, .ev-interiors__next::before { filter: drop-shadow(0 1px 2px #292726); }
 .ev-interiors__hint::before, .ev-interiors__next::before, .ev-interiors__controls button::before {
@@ -82,11 +82,6 @@
   border-left: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
   transform: translateX(2px) rotate(45deg);
-}
-.ev-interiors.is-hinting .ev-interiors__hint { animation: ev-interiors-hint 1800ms ease-in-out 3 both; }
-@keyframes ev-interiors-hint {
-  0%, 100% { opacity: 0; }
-  35%, 60% { opacity: .86; }
 }
 
 .ev-interiors__track {
@@ -211,9 +206,4 @@
 @media (prefers-reduced-motion: reduce) {
   /* Keep the deliberate two-second opening. Suppress decorative fades. */
   .ev-interiors__slide img { transition: none; }
-  .ev-interiors.is-hinting .ev-interiors__hint { animation: ev-interiors-hint-still 5400ms step-end both; }
-}
-@keyframes ev-interiors-hint-still {
-  from { opacity: .86; }
-  to { opacity: 0; }
 }
