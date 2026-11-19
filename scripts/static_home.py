@@ -112,8 +112,8 @@ def make_static_home(source):
             # the removed scroll animation used to bring them into view.
             if (self.record in COLLECTION_RECORDS
                     and values.get('data-elem-id') in COLLECTION_CONTENT):
-                attrs = [(key, str(int(value) + 600)
-                          if key == 'data-field-top-value' and int(value) < 0 else value)
+                attrs = [(key, format(float(value) + 600, 'g')
+                          if key == 'data-field-top-value' and float(value) < 0 else value)
                          for key, value in attrs]
             if attrs != original_attrs:
                 raw = self.get_starttag_text()
@@ -139,9 +139,9 @@ def make_static_home(source):
                       r')"\]\{[^{}]*?\btop:calc\(50vh - 275px \+ )(-\d+)(px\);)')
     source = re.sub(collection_top,
                     lambda match: match[1] + str(int(match[2]) + 600) + match[3], source)
+    source = source.replace('html.ev-home-static #ev-global-header{transition:none}', '')
     if 'id="ev-home-static-style"' not in source:
-        rules = ['html.ev-home-static{scroll-behavior:auto!important;scroll-snap-type:none!important}',
-                 'html.ev-home-static #ev-global-header{transition:none}']
+        rules = ['html.ev-home-static{scroll-behavior:auto!important;scroll-snap-type:none!important}']
         for record in LAYER_RECORDS:
             root = '#rec' + record
             rules.append('@media(min-width:1200px){' + root + ' .t396__artboard,' + root +

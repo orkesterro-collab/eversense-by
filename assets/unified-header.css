@@ -30,6 +30,8 @@ body.ev-has-global-header {--ev-header-height:68px}
 #ev-global-header,#ev-global-header *{box-sizing:border-box}
 #ev-global-header{position:fixed;inset:0 0 auto;z-index:2147483000;height:var(--ev-header-height);background:#292828;color:#fff;font-family:Manrope,Arial,sans-serif;box-shadow:0 1px 0 rgba(255,255,255,.08);transform:translate3d(0,0,0);transition:transform .24s ease;will-change:transform}
 #ev-global-header.ev-header-hidden{transform:translate3d(0,-105%,0);pointer-events:none}
+@media(max-width:959px){#ev-global-header{transition:transform .18s ease-out}}
+@media(min-width:960px){html:is(.ev-home-static,.ev-product-static) #ev-global-header{transition:none;will-change:auto}}
 #ev-global-header .ev-header-inner{height:100%;max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:20px}
 #ev-global-header .ev-header-logo{display:inline-flex;align-items:center;height:100%;flex:0 0 auto;text-decoration:none!important}
 #ev-global-header .ev-header-logo img{display:block;width:158px;height:auto;max-height:calc(var(--ev-header-height) - 3px);object-fit:contain}

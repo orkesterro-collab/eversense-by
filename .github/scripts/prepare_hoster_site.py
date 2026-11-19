@@ -23,7 +23,7 @@ DOMAINS = {"eversense.by", "www.eversense.by", "orkesterro-collab.github.io"}
 TRANSFORM_EXTS = {".html", ".css", ".js", ".json", ".txt", ".xml"}
 release_revision = os.environ.get("GITHUB_SHA", "20261110b")[:12]
 RELEASE_ASSETS = {
-    "/assets/product-heading.css",
+    "/assets/product-heading.css", "/assets/eversense.js",
     "/assets/prices.js", "/assets/prices.css", "/assets/unified-header.js", "/assets/unified-header.css",
     "/assets/buyer.js", "/assets/buyer.css", "/assets/buyer-core.js", "/assets/products-data.js",
     "/assets/explore-guides.css", "/assets/explore-product.css", "/assets/explore-product.js",
@@ -188,7 +188,7 @@ def rewrite_asset_versions(html, source):
 
 
 def version_dynamic_loaders(script, path):
-    if path == "assets/prices.js":
+    if path in {"assets/prices.js", "assets/eversense.js"}:
         return re.sub(r"(unified-header\.js\?v=)[^\"'#&\s]+",
                       lambda match: match.group(1) + release_revision, script)
     if path == "assets/unified-header.js":

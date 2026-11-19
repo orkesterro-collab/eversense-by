@@ -61,10 +61,11 @@ with sync_playwright() as playwright:
                 row["page_errors"] = errors[:8]
                 page.screenshot(path=str(OUT / (label + "-" + device + ".png")),
                                 full_page=False, animations="disabled", timeout=30000)
-                # Home and product details use native scrolling with a stationary header.
                 header = page.locator("#ev-global-header")
                 header.wait_for(state="visible", timeout=12000)
-                row["shared_header_visible"] = True
+                row["shared_header_visible"] = abs(header.bounding_box()["y"]) <= 1
+                if not row["shared_header_visible"]:
+                    failures.append(f"{device} {path}: header offscreen on entry")
                 row["official_logo_loaded"] = header.locator("img").first.evaluate(
                     "img => img.complete && img.naturalWidth > 0")
                 if not row["official_logo_loaded"]:
@@ -78,14 +79,15 @@ with sync_playwright() as playwright:
                 row["escape_closes_menu"] = not page.locator("#ev-global-menu").is_visible()
                 if not row["escape_closes_menu"]:
                     failures.append(f"{device} {path}: Escape did not close shared menu")
+                toggle.evaluate("button => button.blur()")
                 page.evaluate("window.scrollTo({top: 500, behavior: 'instant'})")
                 page.wait_for_timeout(450)
-                row["header_hides_down"] = "ev-header-hidden" in (header.get_attribute("class") or "")
-                if row["header_hides_down"] != (label not in ("home", "product")):
+                row["header_hides_down"] = header.evaluate("el => el.getBoundingClientRect().bottom <= 0")
+                if row["header_hides_down"] != (device == "mobile" or label not in ("home", "product")):
                     failures.append(f"{device} {path}: unexpected header behavior on downward scroll")
-                page.evaluate("window.scrollTo({top: 180, behavior: 'instant'})")
+                page.evaluate("window.scrollBy({top: -12, behavior: 'instant'})")
                 page.wait_for_timeout(450)
-                row["header_returns_up"] = "ev-header-hidden" not in (header.get_attribute("class") or "")
+                row["header_returns_up"] = abs(header.bounding_box()["y"]) <= 1
                 if not row["header_returns_up"]:
                     failures.append(f"{device} {path}: header did not reappear on upward scroll")
                 page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")

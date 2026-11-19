@@ -15,11 +15,3 @@ html.ev-product-static #t-header .t396__artboard {
   transform: none !important;
   top: auto !important;
 }
-html.ev-product-static #ev-global-header {
-  transition: none !important;
-  will-change: auto;
-}
-html.ev-product-static #ev-global-header.ev-header-hidden {
-  transform: none !important;
-  pointer-events: auto !important;
-}

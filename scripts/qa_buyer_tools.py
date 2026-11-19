@@ -644,6 +644,16 @@ def main():
 
             def header_test(page, context, device):
                 goto(page, "about.html")
+                if device != "desktop":
+                    page.evaluate("scrollTo({top:320, behavior:'instant'})")
+                    page.wait_for_function("document.querySelector('#ev-global-header').getBoundingClientRect().bottom <= 0")
+                    page.evaluate("""async () => {
+                      for (let i = 0; i < 8; i++) {
+                        scrollBy({top:-1, behavior:'instant'});
+                        await new Promise(requestAnimationFrame);
+                      }
+                    }""")
+                    page.wait_for_function("document.querySelector('#ev-global-header').getBoundingClientRect().top >= -1")
                 toggle = page.locator(".ev-header-toggle")
                 toggle.focus()
                 page.keyboard.press("Enter")
@@ -945,8 +955,14 @@ def main():
                     finally:
                         page.set_viewport_size(original_viewport)
                         page.wait_for_timeout(500)
-                require(page.locator('#ev-global-header.ev-header-hidden').count() == 0,
-                        "Home navigation still slides away on scroll")
+                header = page.locator('#ev-global-header')
+                if device == 'desktop':
+                    require(abs(header.bounding_box()['y']) <= 1, "Desktop home navigation moved")
+                else:
+                    require(header.evaluate('el=>el.getBoundingClientRect().bottom <= 0'),
+                            "Mobile home navigation did not slide offscreen")
+                    page.mouse.wheel(0, -10)
+                    page.wait_for_function("document.querySelector('#ev-global-header').getBoundingClientRect().top >= -1")
                 fixed = page.locator('#allrecords .tn-atom, #allrecords .t396__carrier').evaluate_all(
                     "els=>els.filter(el=>getComputedStyle(el).backgroundAttachment==='fixed').length")
                 require(fixed == 0, "Fixed/parallax backgrounds remain on home")

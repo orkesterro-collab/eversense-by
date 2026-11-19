@@ -223,8 +223,15 @@ def main():
                             require(before[key] is not None and abs(after[key] - before[key]) <= 2,
                                     "Content moves relative to document: " + key + " " + str([before[key], after[key]]))
                         header = after["header"]
-                        require(header and header["height"] > 40 and abs(header["top"]) <= 2
-                                and not header["hidden"], "Header hides or moves on scrolling: " + str(header))
+                        require(header and header["height"] > 40, "Missing product header")
+                        if device == "mobile":
+                            require(header["hidden"] and header["top"] + header["height"] <= 0,
+                                    "Mobile product header stayed onscreen: " + str(header))
+                            page.mouse.wheel(0, -10)
+                            page.wait_for_function("document.querySelector('#ev-global-header').getBoundingClientRect().top >= -1")
+                        else:
+                            require(abs(header["top"]) <= 2 and not header["hidden"],
+                                    "Desktop product header moved: " + str(header))
                         pinned = page.locator("body *").evaluate_all("""els=>els.filter(e=>getComputedStyle(e).backgroundAttachment==='fixed').map(e=>e.outerHTML.slice(0,200))""")
                         require(not pinned, "Fixed/parallax background remains: " + str(pinned))
                         if route in ru_paths[:1] + en_paths[:1]:

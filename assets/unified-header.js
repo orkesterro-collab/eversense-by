@@ -156,26 +156,44 @@
       header.classList.remove("ev-header-hidden");
     });
 
-    // Static home and product pages keep navigation stationary while scrolling.
-    if (document.documentElement.matches(".ev-home-static, .ev-product-static")) return;
-    var lastY = Math.max(0, window.scrollY);
+    var mobileLayout = window.matchMedia("(max-width: 959px)");
+    var stationaryOnDesktop = document.documentElement.matches(".ev-home-static, .ev-product-static");
+    function scrollPosition() {
+      // Ignore overscroll at both edges, including the rebound on iOS.
+      var root = document.scrollingElement || document.documentElement;
+      return Math.max(0, Math.min(window.scrollY, root.scrollHeight - root.clientHeight));
+    }
+    var lastY = scrollPosition();
     var travel = 0, direction = 0;
+    function resetScroll() {
+      lastY = scrollPosition();
+      travel = direction = 0;
+      header.classList.remove("ev-header-hidden");
+    }
+    mobileLayout.addEventListener("change", resetScroll);
+    window.addEventListener("pageshow", function () {
+      // History and fragment navigation may open the page already scrolled.
+      window.requestAnimationFrame(resetScroll);
+    });
     window.addEventListener("scroll", function () {
-      var y = Math.max(0, window.scrollY);
+      var mobile = mobileLayout.matches;
+      if (!mobile && stationaryOnDesktop) return;
+      var y = scrollPosition();
       var delta = y - lastY;
       lastY = y;
-      if (y <= 24) {
+      if (y <= 24 || !menu.hidden ||
+          (mobile && header.contains(document.activeElement) && document.activeElement.matches(":focus-visible"))) {
         header.classList.remove("ev-header-hidden");
         travel = 0;
         direction = 0;
         return;
       }
-      if (!menu.hidden || Math.abs(delta) < 2) return;
+      if (delta === 0 || (!mobile && Math.abs(delta) < 2)) return;
       var next = delta > 0 ? 1 : -1;
       if (direction !== next) { direction = next; travel = 0; }
       travel += Math.abs(delta);
-      if (next > 0 && y > 110 && travel >= 16) header.classList.add("ev-header-hidden");
-      if (next < 0 && travel >= 10) header.classList.remove("ev-header-hidden");
+      if (next > 0 && y > (mobile ? 64 : 110) && travel >= 16) header.classList.add("ev-header-hidden");
+      if (next < 0 && travel >= (mobile ? 8 : 10)) header.classList.remove("ev-header-hidden");
     }, { passive: true });
   }
   function initialize() {
