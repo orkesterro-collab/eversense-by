@@ -25,7 +25,7 @@ HOMES = {'index.html', 'ru/index.html', 'en/index.html'}
 PNG_NAMES = ('1-overlay-corundum-v2', '1-overlay-corundum-v3',
              '2-decor-brown-casella-v2', '3-hdf-core-v2')
 CARD_SIZES = '(max-width: 640px) calc(100vw - 40px), (max-width: 1050px) calc((100vw - 64px) / 2), 400px'
-MEDIA_RUNTIME_VERSION = '?v=20261118b'
+MEDIA_RUNTIME_VERSION = '?v=20261119a'
 
 
 def relative_url(target, page):
@@ -62,7 +62,7 @@ def optimize_html(source, page, runtime, responsive, video_manifest):
     for name in PNG_NAMES:
         source = source.replace(name + '.png', name + '.webp')
     video_edits = 0
-    mobile_videos = {entry['video']: entry['mobile'] for entry in video_manifest.values() if 'mobile' in entry}
+    delivery_videos = {entry['video']: entry for entry in video_manifest.values()}
 
     def video(match):
         nonlocal video_edits
@@ -148,8 +148,10 @@ def optimize_html(source, page, runtime, responsive, video_manifest):
                     attrs['src'] = url.split('?', 1)[0] + MEDIA_RUNTIME_VERSION
             if tag == 'source' and attrs.get('data-ev-src'):
                 path = (local_path(attrs['data-ev-src'], page) or '').lstrip('/')
-                if path in mobile_videos:
-                    attrs['data-ev-mobile-src'] = relative_url(mobile_videos[path], page)
+                if path in delivery_videos:
+                    delivery = delivery_videos[path]
+                    attrs['data-ev-mobile-src'] = relative_url(delivery['mobile'], page)
+                    attrs['data-ev-loop-src'] = relative_url(delivery['loop_image'], page)
             if tag == 'link':
                 rel = attrs.get('rel', '').lower()
                 url = attrs.get('href', '')

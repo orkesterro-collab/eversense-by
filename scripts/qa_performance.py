@@ -68,14 +68,26 @@ def main():
             if args.browser_executable:
                 launch["executable_path"] = args.browser_executable
             browser = playwright.chromium.launch(**launch)
-            for device, width, height in [("desktop", 1440, 1000), ("mobile", 390, 844)]:
+            for device, width, height in [("desktop", 1440, 1000), ("mobile", 390, 844),
+                                          ("mobile-autoplay-denied", 390, 844)]:
+                mobile = width < 500
                 context = browser.new_context(viewport={"width": width, "height": height},
-                    device_scale_factor=1, is_mobile=width < 500, has_touch=width < 500,
-                    user_agent=playwright.devices["Pixel 7"]["user_agent"] if device == "mobile" else None,
-                    locale="ru-RU", reduced_motion="no-preference")
-                if device == "mobile":
+                    device_scale_factor=1, is_mobile=mobile, has_touch=mobile,
+                    user_agent=playwright.devices["Pixel 7"]["user_agent"] if mobile else None,
+                    locale="ru-RU", reduced_motion="reduce" if mobile else "no-preference")
+                if mobile:
                     context.add_init_script("""if (navigator.connection) {
                         Object.defineProperty(navigator.connection, 'saveData', {get: () => true});
+                    }""")
+                if device == "mobile-autoplay-denied":
+                    context.add_init_script("""{
+                        const nativePlay = HTMLMediaElement.prototype.play;
+                        HTMLMediaElement.prototype.play = function () {
+                            if (!this.matches('video[data-ev-lazy-video]')) return nativePlay.call(this);
+                            this.pause();
+                            this.dataset.qaPlayDenied = 'true';
+                            return Promise.reject(new DOMException('Autoplay blocked', 'NotAllowedError'));
+                        };
                     }""")
                 context.set_default_timeout(15000)
                 context.route("https://docs.google.com/spreadsheets/**/gviz/**",
@@ -91,7 +103,7 @@ def main():
 
                 def request(request):
                     host = urlsplit(request.url).hostname or ""
-                    if request.resource_type == "media":
+                    if request.resource_type == "media" or urlsplit(request.url).path.endswith("-loop.webp"):
                         media.append(request.url)
                     if (host in CDN_HOSTS or host.endswith(".tildacdn.com")) and request.url not in RETAINED_ANALYTICS:
                         cdn.append(request.url)
@@ -136,6 +148,57 @@ def main():
                     return state
                 case("videos stay unloaded before scrolling", initial_media)
 
+                if device == "mobile-autoplay-denied":
+                    def denied_videos():
+                        details = []
+                        for index in range(2):
+                            state = without_gesture(f"""(async () => {{
+                                const video = document.querySelectorAll('video[data-ev-lazy-video]')[{index}];
+                                const wrapper = video.parentElement;
+                                const before = wrapper.getBoundingClientRect();
+                                async function showLoop() {{
+                                    wrapper.scrollIntoView({{block:'center', behavior:'instant'}});
+                                    const deadline = performance.now() + 10000;
+                                    while (performance.now() < deadline) {{
+                                        const image = wrapper.querySelector('img.ev-video-loop');
+                                        if (image?.complete && image.naturalWidth &&
+                                            image.checkVisibility({{checkVisibilityCSS:true, checkOpacity:true}}))
+                                            return image;
+                                        await new Promise(resolve => setTimeout(resolve, 75));
+                                    }}
+                                    throw new Error('Scrolling to the blocked video did not show its loop');
+                                }}
+                                const image = await showLoop();
+                                const decoder = new ImageDecoder({{type:'image/webp',
+                                    data: await (await fetch(image.currentSrc)).arrayBuffer()}});
+                                await decoder.tracks.ready;
+                                const frames = decoder.tracks.selectedTrack.frameCount;
+                                decoder.close();
+                                window.scrollTo({{top:0, behavior:'instant'}});
+                                const deadline = performance.now() + 2000;
+                                while (image.checkVisibility({{checkVisibilityCSS:true, checkOpacity:true}}) &&
+                                       performance.now() < deadline)
+                                    await new Promise(resolve => setTimeout(resolve, 50));
+                                const away = wrapper.getBoundingClientRect().top >= innerHeight && video.paused &&
+                                    !image.checkVisibility({{checkVisibilityCSS:true, checkOpacity:true}});
+                                const restored = await showLoop();
+                                const after = wrapper.getBoundingClientRect(), rect = restored.getBoundingClientRect();
+                                return {{frames, away, src:restored.currentSrc, denied:video.dataset.qaPlayDenied,
+                                    nativeHidden:!video.checkVisibility({{checkVisibilityCSS:true, checkOpacity:true}}),
+                                    activated:navigator.userActivation.hasBeenActive,
+                                    sizeStable:Math.abs(before.width-after.width)<2 && Math.abs(before.height-after.height)<2,
+                                    onScreen:rect.width>0 && rect.height>0 && rect.bottom>0 && rect.top<innerHeight}};
+                            }})()""")
+                            require(state["frames"] > 1 and state["away"] and state["onScreen"] and
+                                    state["sizeStable"] and state["denied"] == "true" and
+                                    state["nativeHidden"] and not state["activated"],
+                                    f"Video {index + 1} failed blocked-autoplay fallback: {state}")
+                            details.append(state)
+                        return details
+                    case("blocked videos display animated loops without a tap", denied_videos)
+                    context.close()
+                    continue
+
                 def videos():
                     details = []
                     for index in range(2):
@@ -164,6 +227,8 @@ def main():
                         details.append(state)
                     return details
                 case("videos autoplay without a gesture and pause offscreen", videos)
+                if mobile:
+                    page.emulate_media(reduced_motion="no-preference")
 
                 page.wait_for_function("window.nlm087obj && window.nlm087obj.isSlidersLoaded['413064765']")
 

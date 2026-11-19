@@ -19,6 +19,7 @@ MANIFEST = OUTPUT / "manifest.json"
 SOURCES = ("7633391bb438-1", "fa4db5586248-2")
 RECIPE = "h264-1920-crf23-medium-yuv420p-faststart-muted-v1;poster-1280-webp80-t1"
 MOBILE_RECIPE = "h264-960-baseline-crf26-maxrate760k-faststart-muted-v1"
+LOOP_RECIPE = "animated-webp-576-12.5fps-q55-loop-v1"
 
 
 def sha(path: Path) -> str:
@@ -67,6 +68,7 @@ def main() -> None:
         source = ROOT / "assets/original-tilda" / (stem + ".mp4")
         video, poster = OUTPUT / (stem + "-1080p.mp4"), OUTPUT / (stem + "-poster.webp")
         mobile = OUTPUT / (stem + "-540p.mp4")
+        loop_image = OUTPUT / (stem + "-loop.webp")
         fingerprint = sha(source)
         old = previous.get("videos", {}).get(str(source.relative_to(ROOT)), {})
         if not (old.get("source_sha256") == fingerprint and previous.get("recipe") == RECIPE
@@ -90,23 +92,35 @@ def main() -> None:
                 "-crf", "26", "-maxrate", "760k", "-bufsize", "950k", "-g", "50",
                 "-preset", "medium", "-threads", "4",
                 "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(mobile)], check=True)
+        if not (old.get("source_sha256") == fingerprint and previous.get("loop_recipe") == LOOP_RECIPE
+                and loop_image.exists() and old.get("loop_image_sha256") == sha(loop_image)):
+            subprocess.run([
+                "ffmpeg", "-v", "error", "-y", "-i", str(source),
+                "-map", "0:v:0", "-an", "-vf", "fps=25/2,scale='min(576,iw)':-2:flags=lanczos",
+                "-c:v", "libwebp_anim", "-pix_fmt", "yuv420p", "-quality", "55", "-loop", "0",
+                str(loop_image)], check=True)
         original = probe(source)
         encoded = verify_delivery(video, original, 1920)
         verify_delivery(mobile, original, 960)
         records[str(source.relative_to(ROOT))] = {
             "video": str(video.relative_to(ROOT)), "mobile": str(mobile.relative_to(ROOT)),
             "poster": str(poster.relative_to(ROOT)),
+            "loop_image": str(loop_image.relative_to(ROOT)),
             "source_sha256": fingerprint, "video_sha256": sha(video), "poster_sha256": sha(poster),
             "mobile_sha256": sha(mobile),
+            "loop_image_sha256": sha(loop_image),
             "source_bytes": source.stat().st_size, "video_bytes": video.stat().st_size,
             "mobile_bytes": mobile.stat().st_size,
+            "loop_image_bytes": loop_image.stat().st_size,
             "poster_bytes": poster.stat().st_size,
             "duration_seconds": float(encoded["format"]["duration"]),
             "width": encoded["streams"][0]["width"], "height": encoded["streams"][0]["height"],
             "faststart": True,
         }
         print(f"{source.name}: {video.stat().st_size:,} bytes at 1080p, {mobile.stat().st_size:,} at 540p")
-    MANIFEST.write_text(json.dumps({"recipe": RECIPE, "mobile_recipe": MOBILE_RECIPE, "videos": records}, indent=2) + "\n")
+    MANIFEST.write_text(json.dumps({
+        "recipe": RECIPE, "mobile_recipe": MOBILE_RECIPE, "loop_recipe": LOOP_RECIPE, "videos": records,
+    }, indent=2) + "\n")
 
 
 if __name__ == "__main__":
