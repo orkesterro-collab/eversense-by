@@ -17,6 +17,14 @@ BENEFITS = (
     ('impact', 'e52e5803e60a-_5-min.webp', 'laminate-classes.html#impact-resistance',
      'Как проверяют ударопрочность пола', 'How flooring is tested for impact resistance'),
 )
+PHONE_COPY = {
+    'intro': ('Все ощущения от деревянного пола —', 'без эксплуатационных минусов'),
+    'warranty': ('Расчетливая гарантия', 'Ваши внуки вырастут прежде, чем закончится гарантия на пол. Гарантия — 30 лет безупречной работы.'),
+    'water': ('Практичная водонепроницаемость', 'Не стоит переживать, если вы опрокинете на пол вазу с цветами. EVERSENSE выдерживает 72 часа в контакте с водой.'),
+    'wear': ('Стойкость к износу', 'Если вы любите танго, смело танцуйте на EVERSENSE. Покрытие соответствует 34 классу использования. Стойкость к истиранию — не менее 8 500 оборотов.'),
+    'impact': ('Способность держать удар', 'У EVERSENSE высокая ударная прочность поверхности — в соответствии с нормами EN 13329 / EN 15468.'),
+}
+PHONE_CAPTION = re.compile(r'<!-- ev-benefit-phone -->.*?<!-- /ev-benefit-phone -->', re.S)
 COPY = {'1746691102171': 'heading', '1746691102174': 'subheading',
         '1744019111686': 'brand', '1742902620650': 'heading',
         '1742902620663': 'body', '1742902620666': 'body',
@@ -90,6 +98,15 @@ def make_home_benefits(source, page):
         target = posixpath.relpath(article, directory)
         title_link = f'<a class="ev-home-article-link" href="{target}" hreflang="ru" aria-label="{label}">'
         body = UNLINKED_TITLE.sub(lambda m: m[1] + title_link + m[2] + '</a>' + m[3], body)
+        if not english:
+            title, description = PHONE_COPY[kind]
+            brand = '<p class="ev-m-brand">EVERSENSE.</p>' if kind != 'intro' else ''
+            caption = (f'<!-- ev-benefit-phone --><div class="ev-m-caption">{brand}<h2>{title}</h2>'
+                       f'<p>{description}</p><a class="ev-m-read" href="{target}" '
+                       f'aria-label="Узнать больше — {title}">Узнать больше <span aria-hidden="true">→</span></a>'
+                       '</div><!-- /ev-benefit-phone -->')
+            start_copy = '<div class="ev-benefit-copy">'
+            body = PHONE_CAPTION.sub('', body).replace(start_copy, start_copy + caption, 1)
         photo = (f'<a class="tn-atom ev-benefit-article" href="{target}" hreflang="ru">'
                  f'<img src="{assets}/original-tilda/{filename}" alt="{label}" '
                  f'width="1680" height="1820" loading="lazy" decoding="async" draggable="false"></a>')

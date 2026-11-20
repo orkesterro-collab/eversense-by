@@ -1,0 +1,92 @@
+<template id="intro">
+<section class="ev-m-only ev-m-block ev-m-intro">
+  <h2>Баланс красоты<br>и практичности</h2>
+  <p>Древесная основа, выразительная фактура и защита поверхности для повседневной жизни.</p>
+</section>
+</template>
+
+<template id="solution">
+<div class="ev-m-only ev-m-block ev-m-solution">
+  <h2>Решение<br>от EVERSENSE</h2>
+  <p>Современные технологии<br>и естественная красота.</p>
+</div>
+</template>
+
+<template id="layers">
+<section class="ev-m-only ev-m-block ev-m-layers">
+  <h2>Четыре слоя<br>EVERSENSE</h2>
+  <figure class="ev-m-assembly" aria-label="Четыре слоя панели EVERSENSE, от оверлея до стабилизирующего слоя" role="img">
+    <img class="ev-m-balancer" src="{{base}}assets/original-tilda/9ecaa5080584-4_balancer-min.webp" alt="" width="1680" height="944" loading="lazy">
+    <img class="ev-m-board" src="{{base}}assets/original-tilda/9404692d9a29-3_board-min.webp" alt="" width="1680" height="944" loading="lazy">
+    <img class="ev-m-decor" src="{{base}}assets/original-tilda/c9f879219a4a-2_paper-min.webp" alt="" width="1680" height="944" loading="lazy">
+    <img class="ev-m-overlay" src="{{base}}assets/original-tilda/603494132a85-1_overlay-min.webp" alt="" width="1680" height="944" loading="lazy">
+    <svg viewBox="0 118 320 217" aria-hidden="true" focusable="false">
+      <path d="M39 148.5H128.5 M39 196.5H138.5 M39 243.5H147.5 M39 291.5H158.5" fill="none" stroke="#837361"/>
+      <g fill="#6c5b48" stroke="#f6f3ee"><circle cx="128.5" cy="148.5" r="3.5"/><circle cx="138.5" cy="196.5" r="3.5"/><circle cx="147.5" cy="243.5" r="3.5"/><circle cx="158.5" cy="291.5" r="3.5"/></g>
+      <g class="ev-m-callouts">
+        <image x="20" y="139" width="19" height="19" href="{{base}}assets/original-tilda/6b7ff768ea32-_1.svg"/>
+        <image x="20" y="186" width="19" height="19" href="{{base}}assets/original-tilda/78f530465a6b-_2.svg"/>
+        <image x="20" y="234" width="19" height="19" href="{{base}}assets/original-tilda/d91f266606a8-_3.svg"/>
+        <image x="20" y="281" width="19" height="19" href="{{base}}assets/original-tilda/8c4df131e03a-_4.svg"/>
+      </g>
+    </svg>
+  </figure>
+  <ol class="ev-m-legend">
+    <li><strong>Оверлей</strong><small>Защита поверхности</small></li>
+    <li><strong>Декор</strong><small>Рисунок пола</small></li>
+    <li><strong>Плита</strong><small>Несущая основа</small></li>
+    <li><strong>Стабилизирующий слой</strong><small>Сохраняет форму</small></li>
+  </ol>
+  <a class="ev-m-text-link" href="{{base}}about.html#layers">Как устроена панель</a>
+</section>
+</template>
+
+<template id="collections">
+<section class="ev-m-only ev-m-block ev-m-intro">
+  <h2>Три коллекции</h2>
+  <p>От светлого дуба до мрамора. Выберите настроение для своего интерьера.</p>
+</section>
+</template>
+
+<template id="help">
+<div class="ev-m-only ev-m-block ev-m-help">
+  <h2>Помощь с выбором</h2>
+  <p>Посмотрите пол в интерьере и подберите свой декор.</p>
+  <nav class="ev-m-choices" aria-label="Помощь с выбором">
+    <a href="{{base}}projects.html"><img src="{{base}}assets/original-tilda/b572561dead9-__-min.webp" width="66" height="62" loading="lazy" alt=""><span><strong>Сравнить интерьеры</strong><small>Два декора в одной комнате</small></span></a>
+    <a href="{{base}}about.html#layers"><img src="{{base}}assets/original-tilda/3-hdf-core-v2.webp" width="66" height="62" loading="lazy" alt=""><span><strong>Как устроен пол</strong><small>Материалы и слои панели</small></span></a>
+    <a href="{{base}}choose.html"><img src="{{base}}assets/original-tilda/8528d0440ac0-EL1000___ver1_top-mi.webp" width="66" height="62" loading="lazy" alt=""><span><strong>Подобрать декор</strong><small>Оттенок и рисунок</small></span></a>
+  </nav>
+  <h3>Планирование покупки</h3>
+  <nav class="ev-m-links" aria-label="Планирование покупки">
+    <a href="{{base}}compare.html">Сравнение</a><a href="{{base}}calculator.html">Калькулятор</a><a href="{{base}}favorites.html">Избранное</a>
+  </nav>
+  <nav class="ev-m-links ev-m-more" aria-label="Укладка и эксплуатация">
+    <a href="{{base}}installation.html">Укладка</a><a href="{{base}}care.html">Уход</a><a href="{{base}}faq.html">Вопросы</a><a href="{{base}}downloads.html">Документы</a><a href="{{base}}warranty.html">Гарантия</a>
+  </nav>
+</div>
+</template>
+
+<template id="eco">
+<section class="ev-m-only ev-m-block ev-m-photo ev-m-eco">
+  <h2>Экологичное<br>производство</h2>
+  <details><summary>Низкий углеродный след</summary><p>Технологии производства EVERSENSE позволяют свести выбросы CO₂ к минимуму на этапах A1–A3 по EN 15804. Правильность расчётов подтверждена сторонними организациями.</p></details>
+  <details><summary>Возобновляемые материалы</summary><p>Отслужившую древесную плиту можно использовать при производстве древесно-стружечных плит.</p></details>
+  <details><summary>Повторное использование древесины</summary><p>Для производства используют вторичное сырьё и побочную продукцию лесопильных предприятий. Очищенную воду возвращают в производственный цикл.</p></details>
+  <details><summary>Древесина из легальных источников</summary><p>Происхождение древесины проверяет независимая сторона. EVERSENSE поддерживает принципы устойчивого лесопользования.</p></details>
+</section>
+</template>
+
+<template id="textures">
+<section class="ev-m-only ev-m-block ev-m-photo ev-m-textures">
+  <h2>Текстуры<br>для дизайнеров</h2><p>Декоры EVERSENSE для 3D-визуализаций и мудбордов.</p>
+  <a class="ev-m-button ev-m-button-light" href="{{textures}}">Скачать текстуры</a>
+</section>
+</template>
+
+<template id="trust">
+<section class="ev-m-only ev-m-block ev-m-photo ev-m-trust">
+  <h2>Нам важно<br>ваше доверие</h2>
+  <a class="ev-m-button" href="{{base}}catalog-ru/">Посмотреть каталог</a>
+</section>
+</template>

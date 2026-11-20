@@ -179,7 +179,10 @@ def main():
                                 while (image.checkVisibility({{checkVisibilityCSS:true, checkOpacity:true}}) &&
                                        performance.now() < deadline)
                                     await new Promise(resolve => setTimeout(resolve, 50));
-                                const away = wrapper.getBoundingClientRect().top >= innerHeight && video.paused &&
+                                // The welcome video extends above its clipping artboard on phones.
+                                const visibleTop = Math.max(wrapper.getBoundingClientRect().top,
+                                    wrapper.closest('.t396__artboard').getBoundingClientRect().top);
+                                const away = visibleTop >= innerHeight && video.paused &&
                                     !image.checkVisibility({{checkVisibilityCSS:true, checkOpacity:true}});
                                 const restored = await showLoop();
                                 const after = wrapper.getBoundingClientRect(), rect = restored.getBoundingClientRect();
