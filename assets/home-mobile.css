@@ -195,7 +195,7 @@
   #allrecords .ev-m-textures, #allrecords .ev-m-trust { padding: 24px var(--ev-m-edge); }
   #allrecords .ev-m-textures { min-height: 275px; background-image: linear-gradient(90deg,#1b1612cf,#1e171289 55%,#1b161217),url("original-tilda/793f54aaa5b5-textures_2000_1.webp"); background-position: 78% center; }
   #allrecords .ev-m-textures p { font-size: 15px; max-width: 265px; margin: 10px 0 13px; }
-  #allrecords .ev-m-button-light { color: #292623; background: #fff; border-color: #fff; }
+  #allrecords .ev-m-textures .ev-m-button-light { color: #292623; background: #fff; border-color: #fff; }
   #allrecords .ev-m-trust { min-height: 315px; background-image: linear-gradient(90deg,#1b1612cf,#1e171289 55%,#1b161217),url("original-tilda/d2c8217953ef-Frame_85555-min.webp"); background-position: 65% 43%; }
   #allrecords .ev-m-trust a { margin-top: 18px; }
   #ev-history-banner .ev-history-banner__inner { width: calc(100% - 48px); }

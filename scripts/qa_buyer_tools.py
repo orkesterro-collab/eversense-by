@@ -941,6 +941,10 @@ def main():
                     require(detail.locator('p').is_visible(), "The production detail did not open")
                     detail.locator('summary').click()
                     require(not detail.locator('p').is_visible(), "The production detail did not close")
+                    download = page.get_by_role('link', name='Скачать текстуры', exact=True)
+                    require('EVERSENSE.zip' in download.get_attribute('href') and
+                            download.evaluate("el=>getComputedStyle(el).color !== getComputedStyle(el).backgroundColor"),
+                            "The texture download should have a visible label and link to the archive")
                     require(page.locator('#ev-history-banner + #ev-home-footer').count() == 1,
                             "The production article should immediately precede the footer")
                 overlap = page.locator(layer + ' [data-elem-type="text"]').evaluate_all("""els=>{
