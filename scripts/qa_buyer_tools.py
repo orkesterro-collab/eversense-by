@@ -897,6 +897,10 @@ def main():
                     for candidate in button.all():
                         if candidate.evaluate("el=>getComputedStyle(el).opacity==='1'"):
                             candidate.scroll_into_view_if_needed()
+                            if page.viewport_size['width'] < 960 and not path.startswith('en/'):
+                                box, cover = candidate.bounding_box(), panel.bounding_box()
+                                require(20 <= box['x'] - cover['x'] <= 28 and box['width'] <= 220 and box['height'] >= 44,
+                                        f"Expected a compact left-aligned catalog button: {record}: {box}")
                             require(candidate.evaluate("""el=>{const r=el.getBoundingClientRect();
                               const hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
                               return hit===el || el.contains(hit);}"""), f"Catalog button is covered: {record}")
@@ -913,17 +917,32 @@ def main():
                 layer = '#rec1040271736' if path.startswith('en/') else '#rec1002600136'
                 page.locator(layer).scroll_into_view_if_needed()
                 page.wait_for_timeout(400)
-                before = page.locator(layer + ' [data-elem-id="1742894294619"]').evaluate("""el=>({
+                heading = page.locator(layer + ' .ev-m-layers h2:visible, ' + layer + ' [data-elem-id="1742894294619"]:visible')
+                before = heading.evaluate("""el=>({
                   y:el.getBoundingClientRect().top+scrollY,opacity:getComputedStyle(el).opacity,
                   transform:getComputedStyle(el).transform})""")
                 page.mouse.wheel(0, 240)
                 page.wait_for_timeout(400)
-                after = page.locator(layer + ' [data-elem-id="1742894294619"]').evaluate("""el=>({
+                after = heading.evaluate("""el=>({
                   y:el.getBoundingClientRect().top+scrollY,opacity:getComputedStyle(el).opacity,
                   transform:getComputedStyle(el).transform})""")
                 require(abs(after['y'] - before['y']) < 2 and after['opacity'] == '1'
                         and after['transform'] == before['transform'],
                         f"Layer heading moves or fades during scrolling: {before} -> {after}")
+                if device == 'mobile' and not path.startswith('en/'):
+                    assembly = page.locator(layer + ' .ev-m-assembly')
+                    require(assembly.locator(':scope > img').count() == 4 and
+                            assembly.evaluate("""el => Math.abs(el.getBoundingClientRect().right - innerWidth) < 1 &&
+                              [...el.querySelectorAll('img')].every(img => img.naturalWidth > 0 &&
+                                img.getBoundingClientRect().right > innerWidth)"""),
+                            "The four original materials should extend past the right edge")
+                    detail = page.locator('.ev-m-eco details').first
+                    detail.locator('summary').click()
+                    require(detail.locator('p').is_visible(), "The production detail did not open")
+                    detail.locator('summary').click()
+                    require(not detail.locator('p').is_visible(), "The production detail did not close")
+                    require(page.locator('#ev-history-banner + #ev-home-footer').count() == 1,
+                            "The production article should immediately precede the footer")
                 overlap = page.locator(layer + ' [data-elem-type="text"]').evaluate_all("""els=>{
                   const boxes=els.map(el=>({r:el.getBoundingClientRect(),text:el.innerText})).filter(x=>x.r.width&&x.r.height);
                   return boxes.flatMap((a,i)=>boxes.slice(i+1).filter(b=>
@@ -1066,6 +1085,11 @@ def main():
                     if width < 960:
                         require(metrics['stacked'] and metrics['photoShare'] > .35,
                                 f"Expected text above the mobile photograph on slide {index} at {width}: {metrics}")
+                        if not path.startswith('en/'):
+                            read_more = active.get_by_role('link', name=re.compile('^Узнать больше'))
+                            require(read_more.get_attribute('href') == link.get_attribute('href')
+                                    and read_more.bounding_box()['height'] >= 44,
+                                    f"Missing mobile article button on slide {index}")
                     else:
                         require(abs(metrics['photoShare'] - .6) < .002,
                                 f"Wrong desktop photo width on slide {index} at {width}: {metrics}")
@@ -1079,7 +1103,7 @@ def main():
                         shot(page, 'compact-benefits-' + path.replace('/', '-') + '-' + str(width), full=False)
                     if width == 390 and path == 'index.html':
                         with context.expect_page() as opened:
-                            link.click(modifiers=['Control'])
+                            (read_more if index == 4 else link).click(modifiers=['Control'])
                         destination = opened.value
                         destination.wait_for_url(base + '/' + article, wait_until='domcontentloaded')
                         fragment = article.partition('#')[2]

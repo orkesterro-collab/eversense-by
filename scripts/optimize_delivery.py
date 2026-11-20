@@ -18,6 +18,7 @@ from urllib.parse import unquote, urlsplit
 from home_benefits import make_home_benefits
 from home_collection_interiors import make_home_collection_interiors
 from home_wood import make_home_wood
+from home_mobile import make_mobile_home
 from static_home import compact_collection_panels
 from static_product import make_static_product
 
@@ -60,6 +61,7 @@ def optimize_html(source, page, runtime, responsive, video_manifest):
         source = compact_collection_panels(source)
         source = make_home_wood(source)
         source = make_home_collection_interiors(source, page, responsive)
+        source = make_mobile_home(source, page)
     # These four layer photographs used lossless PNG for photographic content.
     for name in PNG_NAMES:
         source = source.replace(name + '.png', name + '.webp')
