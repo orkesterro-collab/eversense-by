@@ -1,181 +1,155 @@
 #!/usr/bin/env python3
-"""Real-browser QA for new Eversense partners directory on hoster.by."""
+"""Check the published directory against the current public partner sheet."""
 import json
 from pathlib import Path
+
 from playwright.sync_api import sync_playwright
+from check_partners_feed import active_partners, has_pin
 
 URL = "https://eversense.by/where-to-buy.html"
 OUT = Path("partners-browser-qa")
 OUT.mkdir(exist_ok=True)
-results = []
-errors = []
+dealers = active_partners()
+ids = {row["partner_id"].strip() for row in dealers}
+cities = {row["city"].strip() for row in dealers}
+minsk = [row for row in dealers if row["city"].strip() == "Минск"]
+pin_count = sum(map(has_pin, dealers))
+results, errors = [], []
+
+
+def card(page, row):
+    return page.locator(f'.partner-card[data-partner-id="{row["partner_id"]}"]')
+
+
+def check_directory(page, label):
+    response = page.goto(URL, wait_until="domcontentloaded", timeout=55000)
+    assert response and response.status == 200
+    page.wait_for_function("() => window.EversensePartners?.isLoaded()", timeout=35000)
+    panel = page.locator("#partners-map-panel")
+    directory = page.locator("#partners-list")
+    pins = page.locator(".leaflet-marker-icon.ev-pin")
+    groups = page.locator("#partners-groups > .city-group")
+    region = next(row for row in dealers if row["city"] != "Минск" and has_pin(row))
+    city = region["city"].strip()
+    city_select = page.locator("#partners-city")
+    search = page.locator("#partners-search")
+    reset = page.locator("#partners-reset")
+
+    assert panel.is_visible() and directory.is_visible()
+    assert panel.bounding_box()["y"] + panel.bounding_box()["height"] <= directory.bounding_box()["y"] + 1
+    assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
+    assert pins.count() == pin_count and pin_count > 0
+    assert not reset.is_visible()
+    assert page.locator("#partners-demo,.district-group,.city-group__right,#partners-count,.view-switch").count() == 0
+    names = groups.evaluate_all("els => els.map(el => el.dataset.city)")
+    assert len(names) == len(cities) and set(names) == cities and names[0] == "Минск"
+    assert page.evaluate("s => s.slice(1).every((x,i) => !i || s[i].localeCompare(x,'ru')<=0)", names)
+    assert groups.first.evaluate("el => el.tagName") == "SECTION"
+    assert groups.first.locator(".partner-card:visible").count() == len(minsk)
+    assert set(page.locator(".partner-card:visible").evaluate_all("a=>a.map(el=>el.dataset.partnerId)")) == ids
+    assert page.locator(".demo-tag").count() == sum(r["demo"].upper() == "TRUE" for r in dealers)
+    assert not page.locator('a[href="https://example.com"]').count()
+    assert groups.nth(1).evaluate("el => getComputedStyle(el).borderTopWidth") == "1px"
+    assert search.evaluate("el => getComputedStyle(el).borderTopWidth") == "0px"
+
+    first = card(page, minsk[0])
+    assert first.locator("summary").inner_text().strip().startswith(minsk[0]["name"].strip())
+    assert minsk[0]["address"].strip() in first.locator("summary").inner_text()
+    closed = first.evaluate("el => getComputedStyle(el).backgroundColor")
+    first.locator("summary").click()
+    assert first.locator(".partner-card__row").count() == 3
+    assert first.evaluate("el => getComputedStyle(el).borderTopWidth") == "0px"
+    assert first.evaluate("el => getComputedStyle(el).backgroundColor") != closed
+    if minsk[0]["phone"]:
+        assert first.locator('a[href^="tel:"]').count() == 1
+    site = minsk[0]["website"] or minsk[0]["Сайт дилера"]
+    if site:
+        assert first.locator('dd a[href^="http"]').get_attribute("href").rstrip("/") == site.rstrip("/")
+    for row in dealers:
+        if not has_pin(row):
+            assert card(page, row).count() == 1 and not card(page, row).locator("[data-map-id]").count()
+
+    page.evaluate("window.scrollTo(0,0)")
+    page.screenshot(path=str(OUT / f"{label}-overview.png"), animations="disabled", timeout=40000)
+    page.locator(".directory-link").click()
+    assert page.evaluate("location.hash") == "#partners-list"
+
+    city_select.select_option(city)
+    assert reset.is_visible() and pins.count() == pin_count
+    assert page.locator(".partner-card:visible").count() == sum(r["city"].strip() == city for r in dealers)
+    selected = card(page, region)
+    selected.locator("summary").click()
+    selected.locator("button[data-map-id]").click()
+    popup = page.locator(".ev-popup__details")
+    popup.wait_for(state="visible")
+    assert popup.get_attribute("data-list-id") == region["partner_id"]
+    page.locator(".leaflet-popup-close-button").click()
+    page.locator(".ev-pin--selected").click()
+    popup.wait_for(state="visible")
+    # A marker outside the current city can still take the visitor to its exact store.
+    city_select.select_option("Минск")
+    popup.click()
+    assert selected.get_attribute("open") is not None and city_select.input_value() == ""
+    assert selected.locator("summary").evaluate("el => el === document.activeElement")
+
+    city_select.select_option(city)
+    page.locator("#partners-map-reset").click()
+    assert city_select.input_value() == city and pins.count() == pin_count
+    reset.click()
+    if minsk[0]["district"]:
+        search.fill(minsk[0]["district"])
+        assert card(page, minsk[0]).is_visible()
+    search.fill("no-such-store-987654")
+    assert page.locator("#partners-empty").is_visible() and page.locator(".partner-card").count() == 0
+    assert pins.count() == pin_count
+    reset.click()
+    assert page.locator(".partner-card").count() == len(ids) and not reset.is_visible()
+
+    # A change in sheet sort_order must also work without a district grouping.
+    if len(minsk) > 1:
+        promoted = minsk[-1]["partner_id"]
+        page.evaluate("""id => {
+            const records = window.EversensePartners.all();
+            const rows = records.map(r => ({c: [r.id,r.id===id?-100000:r.order,r.city,r.district,
+                r.name,r.website,r.phone,r.address,r.hours,r.lat,r.lng,r.active,r.demo].map(v=>({v}))}));
+            window.EversensePartnersFeed({status:"ok",table:{rows}});
+        }""", promoted)
+        assert page.locator(".partner-card").first.get_attribute("data-partner-id") == promoted
+    directory.scroll_into_view_if_needed()
+    page.screenshot(path=str(OUT / f"{label}-directory.png"), full_page=True, animations="disabled", timeout=40000)
+    return {"device": label, "shops": len(ids), "minsk": len(minsk), "cities": len(cities), "pins": pins.count()}
+
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=True, args=["--no-sandbox", "--disable-dev-shm-usage"])
     for label, width, height in [("desktop", 1440, 920), ("mobile", 390, 844)]:
-        page = browser.new_page(viewport={"width": width, "height": height},
-                                ignore_https_errors=False, device_scale_factor=1)
-        row = {"device": label}
+        page = browser.new_page(viewport={"width": width, "height": height}, has_touch=label == "mobile",
+                                is_mobile=label == "mobile", reduced_motion="reduce", device_scale_factor=1)
+        page.set_default_timeout(12000)
         js_errors = []
-        page.on("pageerror", lambda err: js_errors.append(str(err)[:220]))
+        page.on("pageerror", lambda error: js_errors.append(str(error)))
         try:
-            response = page.goto(URL, wait_until="domcontentloaded", timeout=55000)
-            row["http"] = response.status if response else None
-            assert response is not None and response.status == 200, f"HTTP {row['http']}"
-            page.wait_for_function(
-                "() => !!(window.EversensePartners && window.EversensePartners.isLoaded())",
-                timeout=35000)
-            page.wait_for_timeout(700)
-            row["data_count"] = page.evaluate("window.EversensePartners.all().length")
-            row["city_count"] = page.locator(".city-group").count()
-            row["minsk_count"] = page.locator('.city-group[data-city="Минск"] .partner-card').count()
-            row["map_markers"] = page.locator(".leaflet-marker-icon").count()
-            row["districts"] = page.locator('.city-group[data-city="Минск"] .district-group').count()
-            row["demo_banner_removed"] = page.locator("#partners-demo").count() == 0
-            row["demo_tags_count"] = page.locator(".demo-tag").count()
-            assert row["data_count"] == 40, row
-            assert row["city_count"] == 16 and row["minsk_count"] == 10, row
-            assert row["districts"] == 9, row
-            assert row["map_markers"] == 40, "All 40 markers should appear on map: " + str(row)
-            assert row["demo_banner_removed"], "Large DEMO banner must be removed"
-            assert row["demo_tags_count"] == 40, "Sample dealers must retain compact DEMO labels"
-            assert not page.locator("#partners-reset").is_visible(), "Clear filter should be hidden initially"
-            row["search_style"] = page.locator(".search-field input").evaluate("el => ({top:getComputedStyle(el).borderTopWidth, bottom:getComputedStyle(el).borderBottomWidth, bg:getComputedStyle(el).backgroundColor})")
-            assert row["search_style"]["top"] == "0px" and row["search_style"]["bottom"] == "0px", "Search must be unboxed"
-            assert page.locator(".district-group__count,.city-group__right,#partners-count,#cities-count,#partners-showing").count() == 0, "Visible partner counters must be removed"
-            border = page.locator('.city-group[data-city="Минск"] .partner-card').first.evaluate(
-                "el => ({width:getComputedStyle(el).borderTopWidth,shadow:getComputedStyle(el).boxShadow})")
-            row["partner_card_style"] = border
-            assert border["width"] == "0px" and border["shadow"] == "none", "Dealer rows must have no boxes or shadows"
-            # A single fine border separates cities; no separators between salons.
-            row["city_dividers"] = page.locator("#partners-groups > .city-group + .city-group").count()
-            city_divider_width = page.locator("#partners-groups > .city-group + .city-group").first.evaluate(
-                "el => getComputedStyle(el).borderTopWidth")
-            row["city_divider_width"] = city_divider_width
-            assert row["city_dividers"] == 15 and city_divider_width == "1px", "City separators are missing"
-            closed_card_background = page.locator('.city-group[data-city="Минск"] .partner-card').nth(1).evaluate(
-                "el => getComputedStyle(el).backgroundColor")
-            row["closed_card_background"] = closed_card_background
-            assert not page.locator(".partner-card__sub:visible").count(), "Duplicate district caption must be removed"
-            assert page.locator('a[href="https://example.com"]').count() == 0, "Demo websites must not be promoted as real links"
-
-            # Map is the default view; the directory remains available on demand.
-            assert page.locator("#partners-map-panel").is_visible(), "Map must be the default view"
-            assert not page.locator("#partners-list").is_visible(), "List must have its own view"
-            assert page.locator("#partners-view-map").get_attribute("aria-pressed") == "true"
-            assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "Horizontal overflow"
-            page.screenshot(path=str(OUT / (label + "-map.png")), full_page=True, animations="disabled")
-            page.click("#partners-view-list")
-            assert page.locator("#partners-list").is_visible(), "List switch did not reveal the directory"
-            assert not page.locator("#partners-map-panel").is_visible()
-            assert page.locator("#partners-view-list").get_attribute("aria-pressed") == "true"
-
-            # Expanding partner shows all requested contact fields.
-            minsk = page.locator('.city-group[data-city="Минск"]')
-            row["minsk_static_section"] = minsk.evaluate("el => el.tagName === 'SECTION'")
-            row["district_headers_visible"] = minsk.locator(".district-group__heading:visible").count()
-            row["district_accordions"] = minsk.locator(".district-group > summary").count()
-            assert row["minsk_static_section"], "Minsk must not be collapsible"
-            assert row["district_headers_visible"] == 9, "All 9 districts must be visible immediately"
-            assert row["district_accordions"] == 0, "Districts must not require a click"
-            assert minsk.locator(".partner-card:visible").count() == 10, "All Minsk dealers must be visible"
-            partner = minsk.locator(".partner-card").first
-            partner.locator("summary").click()
-            assert partner.get_attribute("open") is not None, "Contact accordion did not open"
-            row["expanded_card_background"] = partner.evaluate("el => getComputedStyle(el).backgroundColor")
-            assert row["expanded_card_background"] != closed_card_background, (
-                "An expanded salon must have a different, slightly darker background")
-            assert partner.evaluate("el => getComputedStyle(el).borderTopWidth") == "0px", (
-                "Expanded salons must remain borderless")
-            row["contact_rows"] = partner.locator(".partner-card__row").count()
-            assert row["contact_rows"] == 4, "Expected address, telephone, website, hours"
-
-            # City filter: 2 sites in Brest, with two corresponding pins.
-            page.select_option("#partners-city", "Брест")
-            page.wait_for_timeout(300)
-            assert page.locator("#partners-reset").is_visible(), "Clear filter must appear when city is selected"
-            row["brest_visible"] = page.locator(".partner-card").count()
-            page.click("#partners-view-map")
-            assert page.locator("#partners-city").input_value() == "Брест", "Switching views lost the city filter"
-            row["brest_pins"] = page.locator(".leaflet-marker-icon").count()
-            assert row["brest_visible"] == 2 and row["brest_pins"] == 2, row
-
-            # A marker opens contacts in place; the explicit link opens the matching list card.
-            page.locator(".leaflet-marker-icon").first.click()
-            page.locator(".ev-popup__details").wait_for(state="visible")
-            assert page.locator("#partners-map-panel").is_visible(), "Marker unexpectedly left the map"
-            page.locator(".ev-popup__details").click()
-            assert page.locator("#partners-list").is_visible()
-            active = page.locator(".partner-card[open]").first
-            assert active.locator(".partner-card__row").count() == 4
-            active.locator("button[data-map-id]").click()
-            assert page.locator("#partners-map-panel").is_visible(), "Show on map did not switch back"
-            page.locator(".ev-popup__details").wait_for(state="visible")
-
-            # Rank changes are driven by sort_order, not the Sheet row's physical position.
-            # Inject a temporary, in-browser-only response: no Google Sheet writes.
-            page.evaluate("""() => {
-                const records = window.EversensePartners.all();
-                const cells = r => [r.id,r.order,r.city,r.district,r.name,r.website,r.phone,
-                                    r.address,r.hours,r.lat,r.lng,r.active,r.demo]
-                                 .map(v=>({v:v}));
-                const second = records.find(r=>r.id==="DEMO-BY-02");
-                if (!second) throw Error("Brest sample #2 not found");
-                second.order = -100;
-                window.EversensePartnersFeed({status:"ok",table:{rows:records.map(r=>({c:cells(r)}))}});
-            }""")
-            page.wait_for_timeout(200)
-            row["rank_first"] = page.locator(".partner-card").first.get_attribute("data-partner-id")
-            assert row["rank_first"] == "DEMO-BY-02", "sort_order did not promote dealer above peer"
-
-            page.select_option("#partners-city", "")
-            page.fill("#partners-search", "Фрунзенский")
-            page.wait_for_timeout(200)
-            row["district_search_count"] = page.locator(".partner-card").count()
-            assert row["district_search_count"] == 2, row
-
-            page.fill("#partners-search", "no-such-store-987654")
-            assert page.locator("#partners-empty").is_visible(), "Empty search needs a visible message"
-            assert page.locator(".leaflet-marker-icon").count() == 0
-            assert page.locator(".leaflet-popup").count() == 0, "Empty search retained an old popup"
-            page.click("#partners-map-reset")
-            assert page.locator("#partners-search").input_value() == ""
-            assert page.locator(".leaflet-marker-icon").count() == 40
-            assert not page.locator("#partners-reset").is_visible(), "Clear filter must disappear when filters are empty"
-            page.click("#partners-view-list")
-            page.screenshot(path=str(OUT / (label + "-directory.png")),
-                            full_page=True, animations="disabled", timeout=40000)
-            row["js_errors"] = js_errors
-            assert not js_errors, "JS errors: " + str(js_errors)
+            result = check_directory(page, label)
+            assert not js_errors, js_errors
+            results.append(result)
+            print("PARTNER_BROWSER_QA", json.dumps(result), flush=True)
         except Exception as exc:
-            row["error"] = str(exc)[:400]
-            errors.append(label + ": " + str(exc)[:400])
-        print("PARTNER_BROWSER_QA", json.dumps(row, ensure_ascii=False), flush=True)
-        results.append(row)
-        page.close()
-    home = browser.new_page(ignore_https_errors=False)
+            errors.append(f"{label}: {type(exc).__name__}: {exc}")
+            page.screenshot(path=str(OUT / f"{label}-error.png"), animations="disabled")
+            import traceback
+            traceback.print_exc()
+        finally:
+            page.close()
+    home = browser.new_page()
     try:
         response = home.goto("https://eversense.by/", wait_until="domcontentloaded", timeout=50000)
-        assert response and response.status == 200
-        home_links = home.evaluate("""() => [...document.querySelectorAll('a[href]')]
-            .filter(a => /где купить/i.test(a.textContent || '') ||
-                (a.getAttribute('href') || '').includes('where-to-buy'))
-            .map(a => ({label:(a.textContent||'').trim().slice(0,40),
-                         href:a.getAttribute('href')||''}))""")
-        print("PARTNERS_HOMEPAGE_LINKS",json.dumps(home_links[:30],ensure_ascii=False),flush=True)
-        assert any(x["href"] in ("/where-to-buy.html","https://eversense.by/where-to-buy.html")
-                   for x in home_links), "Homepage is missing link to new live dealer directory"
+        assert response and response.ok
+        assert home.locator('a[href="/where-to-buy.html"],a[href="https://eversense.by/where-to-buy.html"]').count()
     except Exception as exc:
-        errors.append("Homepage partner navigation: " + str(exc)[:400])
+        errors.append(f"Homepage navigation: {exc}")
     finally:
-        home.close()
-    browser.close()
+        browser.close()
 
-(OUT / "results.json").write_text(
-    json.dumps({"results": results, "errors": errors}, ensure_ascii=False, indent=2), encoding="utf-8")
-for err in errors:
-    print("PARTNER_BROWSER_QA FAIL:", err, flush=True)
+(OUT / "results.json").write_text(json.dumps({"results": results, "errors": errors}, indent=2))
 if errors:
-    raise SystemExit("Partner browser QA failed")
-print("PASS: 40 partners, map/list switching, Minsk districts, city filter, popup/list navigation,",
-      "empty search, reset, demo labels, contacts and ranking on desktop/mobile.", flush=True)
+    raise SystemExit("\n".join(errors))
