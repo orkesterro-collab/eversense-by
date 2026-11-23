@@ -39,6 +39,7 @@ def check_directory(page, label):
     assert panel.bounding_box()["y"] + panel.bounding_box()["height"] <= directory.bounding_box()["y"] + 1
     assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
     assert pins.count() == pin_count and pin_count > 0
+    assert panel.locator("path.country-outline").is_visible()
     assert not reset.is_visible()
     assert page.locator("#partners-demo,.district-group,.city-group__right,#partners-count,.view-switch").count() == 0
     names = groups.evaluate_all("els => els.map(el => el.dataset.city)")
@@ -83,6 +84,7 @@ def check_directory(page, label):
     popup = page.locator(".ev-popup__details")
     popup.wait_for(state="visible")
     assert popup.get_attribute("data-list-id") == region["partner_id"]
+    assert not panel.locator("path.country-outline").count()
     page.locator(".leaflet-popup-close-button").click()
     page.locator(".ev-pin--selected").click()
     popup.wait_for(state="visible")
@@ -95,6 +97,7 @@ def check_directory(page, label):
     city_select.select_option(city)
     page.locator("#partners-map-reset").click()
     assert city_select.input_value() == city and pins.count() == pin_count
+    assert panel.locator("path.country-outline").is_visible()
     reset.click()
     if minsk[0]["district"]:
         search.fill(minsk[0]["district"])
