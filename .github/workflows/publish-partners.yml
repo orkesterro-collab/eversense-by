@@ -27,7 +27,7 @@ jobs:
       - name: Check client script syntax
         run: node --check assets/partners.js
 
-      - name: Check 40 partner rows are publicly readable
+      - name: Check the current public dealer export
         run: python3 .github/scripts/check_partners_feed.py
 
       - name: Publish HTML, CSS, JS to verified hoster.by directory
@@ -40,7 +40,7 @@ jobs:
           python3 -m pip install --break-system-packages playwright
           python3 -m playwright install --with-deps chromium
 
-      - name: Check live partners map, contacts, search and order
+      - name: Check the live national map and city directory
         run: python3 .github/scripts/qa_partners_browser.py
 
       - name: Upload screenshots and QA details
