@@ -23,7 +23,7 @@ PRODUCTS.sort(key=lambda p: (['nature','luxury','minimal'].index(p['collectionID
 GUIDES = json.loads((ROOT / 'content/buyer-guides.json').read_text())
 INSTALLATION_GUIDES = json.loads((ROOT / 'content/installation-guides.json').read_text())
 VERSION = '20261112favoriteportrait'
-CATALOG_VERSION = '20261118catalogdetails'
+CATALOG_VERSION = '20261124carddetails'
 HEART_ICON = '<svg class="ev-heart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 4.6c-2.1-2.1-5.5-2.1-7.6 0L12 5.8l-1.2-1.2c-2.1-2.1-5.5-2.1-7.6 0s-2.1 5.5 0 7.6L12 21l8.8-8.8c2.1-2.1 2.1-5.5 0-7.6Z"/></svg>'
 COLLECTIONS = [
     ('nature', 'Природная эстетика', 'Спокойные древесные оттенки и выразительные рисунки дуба.'),
@@ -57,7 +57,7 @@ def footer(page):
 def write_page(page, title, lead, body, page_type='', collection='', hero_actions='', structured=None):
     canonical = 'https://eversense.by/' + (page[:-10] if page.endswith('index.html') else page)
     schema = structured or {'@context':'https://schema.org','@type':'WebPage','name':title,'description':lead,'url':canonical,'inLanguage':'ru'}
-    version = CATALOG_VERSION if page_type == 'catalog' else VERSION
+    version = CATALOG_VERSION if page_type in ('catalog', 'favorites') else VERSION
     extras = []
     if page_type in ('product', 'choose', 'faq', 'installation', 'care', 'warranty', 'downloads'):
         extras.append('explore-guides.css')
@@ -106,7 +106,7 @@ def catalog_card(product, page, show_collection):
     photo = e(href(product['productImage'], page))
     interior = e(href(product['interiorImage'], page))
     collection = f'<span>{e(product["collectionName"])}</span>' if show_collection else ''
-    size = f'{product["lengthMM"]} × {product["widthMM"]} мм'
+    size = f'{product["lengthMM"]} × {product["widthMM"]} × {product["thicknessMM"]} мм'
     return f'''<article class="ev-card" data-product="{sku}">
   <a class="ev-card-image" href="{url}">
     <img src="{photo}" alt="{name}" width="640" height="500" loading="lazy">
@@ -233,6 +233,8 @@ def tools_pages():
     write_page(page,'Рассчитать покупку','Площадь комнаты → запас → целые упаковки. Получите расчёт покрытия и сохраните ссылку для продавца.',body,'calculator')
     page='favorites.html'
     body='<section class="ev-section"><div class="ev-wrap"><div class="ev-favorites-bar"><p>В подборке: <b id="ev-favorite-total">0</b></p><div class="ev-actions"><button type="button" class="ev-button" data-share-selection disabled>Скопировать ссылку</button><button type="button" class="ev-text-link" data-print>Распечатать</button></div></div><div id="ev-shared-note" class="ev-note" hidden><p>Вы открыли подборку по ссылке. Её можно сохранить в своём избранном.</p><button type="button" class="ev-button" data-save-shared>Добавить в моё избранное</button></div><div id="ev-favorites"><p>Отметьте понравившиеся декоры в каталоге.</p>'+link('Открыть каталог','catalog-ru/',page,'ev-button')+'</div><p class="ev-note">Избранное хранится в этом браузере. Чтобы открыть подборку на другом устройстве или показать продавцу, скопируйте ссылку.</p></div></section>'
+    cards = '\n'.join(catalog_card(p, page, show_collection=True) for p in PRODUCTS)
+    body += f'<template id="ev-favorite-cards">{cards}</template>'
     write_page(page,'Ваши избранные декоры','Сохраните понравившиеся декоры и покажите подборку в магазине.',body,'favorites',hero_actions='')
 
 def other_pages():

@@ -377,6 +377,9 @@ def main():
                 hearts = page.locator('#ev-catalog-results [data-ev-favorite]')
                 require(hearts.count() == 30, "Catalog must keep all 30 favorite buttons")
                 require(hearts.first.locator('svg').evaluate("el=>getComputedStyle(el).fill") == 'none', "Empty card heart should be outlined")
+                sizes = page.locator('#ev-catalog-results .ev-card-size').all_text_contents()
+                expected_sizes = [f"{p['lengthMM']} × {p['widthMM']} × {p['thicknessMM']} мм" for p in products]
+                require(sorted(sizes) == sorted(expected_sizes), "Catalog dimensions differ from product data")
                 first_card = page.locator('#ev-catalog-results .ev-card').first
                 heart_box = hearts.first.bounding_box()
                 card_box = first_card.bounding_box()
@@ -445,7 +448,17 @@ def main():
                 require(sale.bounding_box()['y'] < previous.bounding_box()['y'] < until.bounding_box()['y'], "Sale details should sit below the current price")
 
                 goto(page, "favorites.html")
-                require(page.locator('#ev-favorites .ev-card-actions a[href*="calculator.html?sku=EL1036"]').count() == 1, "Saved decor must have calculator with selected SKU")
+                saved_card = page.locator('#ev-favorites [data-product="EL1036"]')
+                saved_heart = saved_card.locator('button.ev-card-favorite[aria-pressed="true"]')
+                require(saved_card.locator('button').count() == 1 and saved_heart.locator('svg').count() == 1,
+                        "A saved card must have one active heart")
+                require(saved_card.locator('.ev-card-actions, a[href*="calculator.html"]').count() == 0,
+                        "Favorites still contain an action row")
+                require(saved_card.locator('.ev-card-meta span').all_text_contents() ==
+                        ['Природная эстетика', '1292 × 193 × 8 мм'], "Favorites details differ from the catalog")
+                page.evaluate("data=>window.EversensePriceFeed(data)", prices)
+                require(saved_card.locator('.ev-price-sale').evaluate("el=>getComputedStyle(el).color") ==
+                        'rgb(180, 58, 54)', "Favorites discount price differs from the catalog")
                 grid = page.locator('#ev-favorites .ev-grid')
                 require(grid.count() == 1, "Favorites must use the same product grid as the catalog")
                 fav_geometry = grid.evaluate("""el=>{

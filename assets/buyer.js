@@ -40,7 +40,7 @@
     var current=money(p.sale||p.normal)+' BYN/м²';
     var previous=p.sale?'<del>'+money(p.normal)+'</del> ':'';
     var until=p.sale&&p.until?'<small>Акция до '+esc(p.until.split('-').reverse().join('.'))+'</small>':'';
-    if(pageName==='catalog'){
+    if(pageName==='catalog'||pageName==='favorites'){
       var priceClass=p.sale?'ev-price-sale':'ev-price-normal';
       return '<strong class="'+priceClass+'">'+current+'</strong>'+previous+until;
     }
@@ -95,7 +95,20 @@
   function renderFavorites(){
     var root=document.getElementById('ev-favorites');if(!root)return;
     var list=selectedList();
-    root.innerHTML=list.length?'<div class="ev-grid">'+list.map(function(s){return card(bySku.get(s),true);}).join('')+'</div>':'<div class="ev-empty"><h2>Здесь будут ваши декоры</h2><p>Отметьте понравившиеся варианты в каталоге, чтобы вернуться к ним и показать продавцу.</p><a class="ev-button ev-button--primary" href="'+route('catalog-ru/')+'">Выбрать декор</a></div>';
+    if(list.length){
+      var templates=document.getElementById('ev-favorite-cards').content;
+      var grid=document.createElement('div');
+      grid.className='ev-grid';
+      list.forEach(function(sku){
+        var source=templates.querySelector('[data-product="'+sku+'"]');
+        var savedCard=document.importNode(source,true);
+        savedCard.querySelector('[data-buyer-price]').innerHTML=priceHtml(sku);
+        grid.appendChild(savedCard);
+      });
+      root.replaceChildren(grid);
+    }else{
+      root.innerHTML='<div class="ev-empty"><h2>Здесь будут ваши декоры</h2><p>Отметьте понравившиеся варианты в каталоге, чтобы вернуться к ним и показать продавцу.</p><a class="ev-button ev-button--primary" href="'+route('catalog-ru/')+'">Выбрать декор</a></div>';
+    }
     var shared=document.getElementById('ev-shared-note');if(shared)shared.hidden=imported===null;
     document.querySelectorAll('[data-share-selection]').forEach(function(b){b.disabled=!list.length;});
     var count=document.getElementById('ev-favorite-total');if(count)count.textContent=number(list.length);
