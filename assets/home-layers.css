@@ -1,0 +1,22 @@
+/* The wide diagram includes separate artboards for its top and bottom spacing. */
+#allrecords :is(#rec1002600111, #rec1002600136, #rec1002600141, #rec1002600146,
+                #rec1040271731, #rec1040271736, #rec1040271741, #rec1040271746) .t396__artboard,
+#allrecords :is(#rec1002600111, #rec1002600141, #rec1002600146,
+                #rec1040271731, #rec1040271741, #rec1040271746) .tn-atom {
+  background-color: #f6f3ee;
+}
+
+#allrecords :is(#rec1002600136, #rec1040271736) [data-elem-type="text"] .tn-atom {
+  color: #302e2c;
+}
+
+/* The one-pixel shapes are leader lines. The seven-pixel shapes mark their ends. */
+#allrecords :is(#rec1002600136, #rec1040271736) [data-elem-type="shape"][data-field-height-value="1"] .tn-atom {
+  background-color: #837361;
+  opacity: 1;
+}
+
+#allrecords :is(#rec1002600136, #rec1040271736) [data-elem-type="shape"][data-field-height-value="7"] .tn-atom {
+  background-color: #6c5b48;
+  border-color: #f6f3ee;
+}

@@ -158,6 +158,11 @@ def make_static_home(source):
         source = source.replace('<style id="ev-home-static-style">',
                                 '<style id="ev-home-static-style">' + carrier_rule, 1)
     source = make_home_senses(source)
+    if 'id="ev-home-layers-css"' not in source:
+        assets = re.search(r'(?:src|href)="((?:\.\./)*assets/)', source)[1]
+        layers_css = (f'<link id="ev-home-layers-css" rel="stylesheet" media="(min-width: 960px)" '
+                      f'href="{assets}home-layers.css">')
+        source = source.replace('</head>', layers_css + '</head>', 1)
     source = make_home_footer(source)
     source = make_home_article_links(source)
     return make_home_wood(source)
