@@ -10,7 +10,6 @@ CONTENT = Path(__file__).resolve().parents[1] / 'content'
 RECORDS = {
     'intro': '1002599921', 'solution': '1002600036', 'layers': '1002600136',
     'collections': '1002600151', 'eco': '1016194446', 'textures': '2341420221',
-    'trust': '1002600211',
 }
 GENERATED = re.compile(r'<!-- ev-mobile:start -->.*?<!-- ev-mobile:end -->', re.S)
 

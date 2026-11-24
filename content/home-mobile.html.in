@@ -83,10 +83,3 @@
   <a class="ev-m-button ev-m-button-light" href="{{textures}}">Скачать текстуры</a>
 </section>
 </template>
-
-<template id="trust">
-<section class="ev-m-only ev-m-block ev-m-photo ev-m-trust">
-  <h2>Нам важно<br>ваше доверие</h2>
-  <a class="ev-m-button" href="{{base}}catalog-ru/">Посмотреть каталог</a>
-</section>
-</template>

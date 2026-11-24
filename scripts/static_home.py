@@ -71,6 +71,9 @@ def compact_collection_panels(source):
 
 
 def make_static_home(source):
+    # Drop the trust artboard from both language versions when rebuilding the mirror.
+    source = re.sub(r'<div id="rec(?:1002600211|1040271806)"[^>]*>.*?<!-- /T396 -->\s*</div>\s*',
+                    '', source, flags=re.S)
     offsets = []
     position = 0
     for line in source.splitlines(keepends=True):
