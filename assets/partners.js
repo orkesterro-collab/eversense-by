@@ -6,7 +6,8 @@
 
   var SHEET_ID = "1zzypRi-wST20xu0rns-uSnGk7NmikkW2kw44jvsDgBY";
   var CSV_URL = "https://docs.google.com/spreadsheets/d/" + SHEET_ID + "/export?format=csv&gid=24681103&range=A%3AN";
-  var COUNTRY_BOUNDS = [[51.18, 23.12], [56.22, 32.82]];
+  // Approximate city centres for the overview only. Directions use each shop's own coordinates or address.
+  var CITY_CENTRES = new Map([["береза", [52.53, 24.98]], ["слуцк", [53.02, 27.54]]]);
   // Belarus boundary, simplified from Natural Earth Admin 0 Countries (1:50m, public domain).
   var COUNTRY_OUTLINE = [
     [52.101, 31.763], [52.077, 31.079], [51.895, 30.755], [51.596, 30.533], [51.355, 30.633],
@@ -35,14 +36,7 @@
   var el = function (id) { return document.getElementById(id); };
   var locale = new Intl.Collator("ru", { sensitivity: "base" });
   var partners = [];
-  var map = null;
-  var markers = new Map();
-  var layer = null;
-  var selectedId = null;
   var loaded = false;
-  var overview = true;
-  var coarsePointer = window.matchMedia("(pointer: coarse)").matches;
-  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var feedTimeout = null;
   var loading = false;
 
@@ -114,8 +108,23 @@
       return locale.compare(a, b);
     });
   }
-  function locationLabel(p) {
-    return p.city.toLocaleLowerCase("ru") === "минск" && p.district ? p.city + " · " + p.district + " район" : p.city;
+  function cityGroupId(city) {
+    return "city-" + city.replace(/\s+/g, "-");
+  }
+  function directionsMarkup(p) {
+    if (p.demo || (!p.address && !validCoords(p.lat, p.lng))) return "";
+    var url = new URL("https://yandex.by/maps/");
+    var label;
+    if (validCoords(p.lat, p.lng)) {
+      url.searchParams.set("rtext", "~" + p.lat + "," + p.lng);
+      url.searchParams.set("rtt", "auto");
+      label = 'Построить маршрут<span class="sr-only"> в Яндекс Картах</span>';
+    } else {
+      url.searchParams.set("text", ["Беларусь", p.city, p.address].join(", "));
+      label = "Найти адрес в Яндекс Картах";
+    }
+    return '<div class="partner-card__foot"><a class="partner-card__route" target="_blank" rel="noopener noreferrer" href="' +
+      escapeHTML(url.href) + '">' + label + '</a></div>';
   }
   function filtered() {
     var q = searchable(el("partners-search").value);
@@ -151,9 +160,7 @@
           '<div class="partner-card__row"><dt>Сайт</dt><dd>' + siteMarkup + '</dd></div>' +
           '<div class="partner-card__row"><dt>Режим работы</dt><dd>' + escapeHTML(p.hours || "Уточняется") + '</dd></div>' +
         '</dl>' +
-        '<div class="partner-card__foot">' +
-        (map && validCoords(p.lat, p.lng) ? '<button type="button" class="partner-card__showmap" data-map-id="' + key + '">Показать на карте ↗</button>' : '') +
-        '</div>' +
+        directionsMarkup(p) +
       '</div></details>';
   }
   function renderList(items) {
@@ -170,32 +177,15 @@
         records.map(partnerMarkup).join("") + "</div>";
       var title = '<span class="city-group__name">' + escapeHTML(city) + '</span>';
       if (minsk) {
-        return '<section class="city-group city-group--minsk" data-city="' + escapeHTML(city) +
+        return '<section class="city-group city-group--minsk" id="' + escapeHTML(cityGroupId(city)) + '" data-city="' + escapeHTML(city) +
           '" aria-label="Магазины Минска">' +
-          '<h3 class="city-group__heading">' + title + '</h3>' +
+          '<h3 class="city-group__heading" tabindex="-1">' + title + '</h3>' +
           '<div class="city-group__body">' + body + '</div></section>';
       }
-      return '<details class="city-group" data-city="' + escapeHTML(city) + '" open><summary>' + title +
+      return '<details class="city-group" id="' + escapeHTML(cityGroupId(city)) + '" data-city="' + escapeHTML(city) + '" open><summary>' + title +
         '<span class="chevron" aria-hidden="true"></span></summary>' +
         '<div class="city-group__body">' + body + "</div></details>";
     }).join("");
-  }
-  function icon(p, selected) {
-    return window.L.divIcon({
-      className: "ev-pin " + (p.demo ? "ev-pin--demo " : "") + (selected ? "ev-pin--selected" : ""),
-      html: '<span class="ev-pin__dot" aria-hidden="true"></span>',
-      iconSize: [30, 30], iconAnchor: [15, 15], popupAnchor: [0, -9]
-    });
-  }
-  function popupMarkup(p) {
-    var tel = p.demo ? null : phoneLink(p.phone);
-    return '<div class="ev-popup"><p class="ev-popup__name">' + escapeHTML(p.name.replace(/^ДЕМО\s*[•·-]\s*/i, "")) + '</p>' +
-      '<p class="ev-popup__meta">' + escapeHTML(locationLabel(p)) + '</p>' +
-      (p.address ? '<p class="ev-popup__address">' + escapeHTML(p.address) + '</p>' : '') +
-      (tel ? '<a class="ev-popup__phone" href="' + escapeHTML(tel) + '">' + escapeHTML(p.phone) + '</a>' : '') +
-      (p.hours ? '<p class="ev-popup__meta">' + escapeHTML(p.hours) + '</p>' : '') +
-      (p.demo ? '<div class="ev-popup__note">Условная демо-точка, не действующий дилер</div>' : '') +
-      '<button type="button" class="ev-popup__details" data-list-id="' + escapeHTML(p.id) + '">Все контакты</button></div>';
   }
   function cardById(id) {
     return Array.from(el("partners-groups").querySelectorAll(".partner-card")).find(function (card) {
@@ -207,103 +197,105 @@
     el("partners-city").value = "";
     render();
   }
-  function showPartnerInList(id) {
-    var card = cardById(id);
-    if (!card) {
-      resetFilters();
-      card = cardById(id);
-    }
-    if (!card) return;
-    var parent = card.parentElement;
-    while (parent && parent !== document.body) {
-      if (parent.tagName === "DETAILS") parent.open = true;
-      parent = parent.parentElement;
-    }
-    card.open = true;
-    card.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
-    card.querySelector("summary").focus({ preventScroll: true });
+  // Equirectangular extent around Belarus. Both layers use the same percentage coordinates.
+  function project(lat, lng) {
+    return { x: (lng - 22.7) / 10.5 * 100, y: (56.45 - lat) / 5.4 * 100 };
   }
-  function showCountry() {
-    if (!map) return;
-    map.closePopup();
-    markSelected(null);
-    map.fitBounds(COUNTRY_BOUNDS, { padding: [20, 18], animate: false });
-    overview = true;
-    el("partners-map-reset").hidden = true;
-    if (coarsePointer) map.dragging.disable();
+  function overlapArea(a, b) {
+    return Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left))
+      * Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top));
   }
-  function setupMap() {
-    var target = el("partners-map");
-    if (!window.L) {
-      target.innerHTML = '<div class="map-skeleton">Карта временно недоступна. Адреса магазинов — ниже.</div>';
-      return;
-    }
-    target.innerHTML = "";
-    map = window.L.map(target, {
-      zoomControl: false, scrollWheelZoom: false, zoomSnap: 0.25, dragging: !coarsePointer
+  function layoutMapLabels() {
+    var layer = el("map-cities");
+    var bounds = { left: 1, top: 1, right: layer.clientWidth - 1, bottom: layer.clientHeight - 1 };
+    var pins = Array.from(layer.children, function (link) {
+      return { link: link, x: link.offsetLeft, y: link.offsetTop,
+        width: link.firstElementChild.offsetWidth, height: link.firstElementChild.offsetHeight };
     });
-    window.L.control.zoom({ position: "bottomright" }).addTo(map);
-    window.L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 18,
-      attribution: '&copy; <a target="_blank" rel="noopener" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-    var world = [[-85, -180], [-85, 180], [85, 180], [85, -180]];
-    var countryOverlay = window.L.layerGroup([
-      window.L.polygon([world, COUNTRY_OUTLINE], {
-        interactive: false, stroke: false, fillColor: "#f1eee7", fillOpacity: 0.82
-      }),
-      window.L.polygon(COUNTRY_OUTLINE, {
-        interactive: false, className: "country-outline", color: "#817b69", weight: 1.4, opacity: 0.85,
-        fillColor: "#d6c79f", fillOpacity: 0.13
-      })
-    ]);
-    function updateCountryOverlay() {
-      if (map.getZoom() <= 8) countryOverlay.addTo(map);
-      else countryOverlay.remove();
-    }
-    map.on("zoomend", updateCountryOverlay);
-    layer = window.L.layerGroup().addTo(map);
-    map.on("dragstart zoomstart", function () {
-      overview = false;
-      el("partners-map-reset").hidden = false;
-      if (coarsePointer) map.dragging.enable();
+    var occupied = pins.map(function (pin) {
+      return { left: pin.x - 6, right: pin.x + 6, top: pin.y - 6, bottom: pin.y + 6 };
     });
-    map.on("resize", function () { if (overview) showCountry(); });
-    showCountry();
+    pins.forEach(function (pin) {
+      var w = pin.width, h = pin.height;
+      var gap = pin.link.classList.contains("map-city--capital") ? 11 : 7;
+      var positions = [[gap, -h / 2], [-w - gap, -h / 2], [-w / 2, -h - gap],
+        [-w / 2, gap], [gap, -h - 4], [-w - gap, -h - 4], [gap, 4], [-w - gap, 4]];
+      var best, bestScore = Infinity;
+      for (var offset of positions) {
+        var left = pin.x + offset[0], top = pin.y + offset[1];
+        var box = { left: left, top: top, right: left + w, bottom: top + h };
+        var score = (w * h - overlapArea(box, bounds)) * 10;
+        occupied.forEach(function (other) { score += overlapArea(box, other); });
+        if (score < bestScore) { best = box; bestScore = score; }
+        if (score === 0) break;
+      }
+      pin.link.style.setProperty("--label-x", (best.left - pin.x) + "px");
+      pin.link.style.setProperty("--label-y", (best.top - pin.y) + "px");
+      occupied.push({ left: best.left - 2, top: best.top - 2, right: best.right + 2, bottom: best.bottom + 2 });
+    });
   }
   function renderMap() {
-    if (!map) return;
-    var openId = selectedId && markers.get(selectedId) && markers.get(selectedId).isPopupOpen() ? selectedId : null;
-    layer.clearLayers();
-    markers.clear();
-    partners.forEach(function (p) {
-      if (!validCoords(p.lat, p.lng)) return;
-      var marker = window.L.marker([p.lat, p.lng], { icon: icon(p, p.id === selectedId), title: p.name });
-      marker.bindPopup(popupMarkup(p), { closeButton: true, autoPanPadding: [20, 24] });
-      marker.on("click", function () { focusPartner(p.id, true); });
-      marker.addTo(layer);
-      markers.set(p.id, marker);
+    var links = document.createDocumentFragment();
+    cityNames(partners).forEach(function (city) {
+      var located = partners.filter(function (p) { return p.city === city && validCoords(p.lat, p.lng); });
+      var centre = CITY_CENTRES.get(searchable(city));
+      if (located.length) {
+        var lat = 0, lng = 0;
+        located.forEach(function (p) { lat += p.lat; lng += p.lng; });
+        centre = [lat / located.length, lng / located.length];
+      }
+      if (!centre) return;
+      var point = project(centre[0], centre[1]);
+      var link = document.createElement("a");
+      link.className = searchable(city) === "минск" ? "map-city map-city--capital" : "map-city";
+      link.dataset.city = city;
+      link.href = "#" + encodeURIComponent(cityGroupId(city));
+      link.setAttribute("aria-label", city + " — показать магазины");
+      link.style.left = point.x + "%";
+      link.style.top = point.y + "%";
+      var label = document.createElement("span");
+      label.className = "map-city__label";
+      label.textContent = city;
+      link.appendChild(label);
+      links.appendChild(link);
     });
-    if (openId && markers.has(openId)) markers.get(openId).openPopup();
-    if (!markers.has(selectedId)) selectedId = null;
+    var layer = el("map-cities");
+    layer.replaceChildren(links);
+    el("map-hint").hidden = !layer.childElementCount;
+    layoutMapLabels();
   }
-  function markSelected(id) {
-    var previous = markers.get(selectedId);
-    if (previous && previous.getElement()) previous.getElement().classList.remove("ev-pin--selected");
-    selectedId = id;
-    var next = markers.get(id);
-    if (next && next.getElement()) next.getElement().classList.add("ev-pin--selected");
+  function showCity(city) {
+    var filterCity = el("partners-city").value;
+    if (el("partners-search").value || (filterCity && filterCity !== city)) resetFilters();
+    var group = el(cityGroupId(city));
+    if (!group) return;
+    if (group.tagName === "DETAILS") group.open = true;
+    group.scrollIntoView({ block: "start" });
+    group.firstElementChild.focus({ preventScroll: true });
   }
-  function focusPartner(id, fromMap) {
-    var marker = markers.get(id);
-    if (!marker) return;
-    markSelected(id);
-    map.setView(marker.getLatLng(), Math.max(map.getZoom(), 13), { animate: false });
-    marker.openPopup();
-    if (!fromMap) {
-      el("partners-map").scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
-      marker.getElement().focus({ preventScroll: true });
-    }
+  function openLinkedCity() {
+    var link = Array.from(el("map-cities").children).find(function (item) {
+      return item.hash === location.hash;
+    });
+    if (link) showCity(link.dataset.city);
+  }
+  function setupMap() {
+    var path = COUNTRY_OUTLINE.map(function (coords) {
+      var point = project(coords[0], coords[1]);
+      return point.x.toFixed(3) + "," + point.y.toFixed(3);
+    });
+    el("country-outline").setAttribute("d", "M" + path.join(" L") + " Z");
+    el("map-cities").addEventListener("click", function (event) {
+      var link = event.target.closest("a[data-city]");
+      if (!link || event.button || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      if (location.hash !== link.hash) history.pushState(null, "", link.hash);
+      showCity(link.dataset.city);
+    });
+    window.addEventListener("hashchange", openLinkedCity);
+    if (window.ResizeObserver) new ResizeObserver(layoutMapLabels).observe(el("partners-map"));
+    else window.addEventListener("resize", layoutMapLabels);
+    if (document.fonts) document.fonts.ready.then(layoutMapLabels);
   }
   function render() {
     var list = filtered();
@@ -346,6 +338,7 @@
     var collapsed = new Set(Array.from(document.querySelectorAll("details.city-group:not([open])"), function (group) {
       return group.dataset.city;
     }));
+    var firstLoad = !loaded;
     partners = next;
     loaded = true;
     refreshCities();
@@ -358,6 +351,7 @@
       if (collapsed.has(group.dataset.city)) group.open = false;
     });
     renderMap();
+    if (firstLoad && location.hash) openLinkedCity();
   }
   // The raw CSV preserves dealer URLs in columns with mixed cell types.
   function csvRows(text) {
@@ -438,18 +432,9 @@
   }
   function init() {
     setupMap();
-    el("partners-map").addEventListener("click", function (event) {
-      var button = event.target.closest("button[data-list-id]");
-      if (button) showPartnerInList(button.dataset.listId);
-    });
     el("partners-search").addEventListener("input", render);
     el("partners-city").addEventListener("change", render);
     el("partners-reset").addEventListener("click", resetFilters);
-    el("partners-map-reset").addEventListener("click", showCountry);
-    el("partners-groups").addEventListener("click", function (event) {
-      var button = event.target.closest("button[data-map-id]");
-      if (button) focusPartner(button.dataset.mapId, false);
-    });
     loadFeed();
     window.setInterval(loadFeed, REFRESH_MS);
     window.EversensePartners = {
