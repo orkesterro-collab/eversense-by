@@ -35,7 +35,7 @@ body.ev-has-global-header {--ev-header-height:68px}
 #ev-global-header .ev-header-inner{height:100%;max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:20px}
 #ev-global-header .ev-header-logo{display:inline-flex;align-items:center;height:100%;flex:0 0 auto;text-decoration:none!important}
 #ev-global-header .ev-header-logo img{display:block;width:158px;height:auto;max-height:calc(var(--ev-header-height) - 3px);object-fit:contain}
-#ev-global-header .ev-header-quick{display:flex;align-items:center;gap:30px;margin-left:auto}
+#ev-global-header .ev-header-quick{display:flex;align-items:center;gap:30px}
 #ev-global-header .ev-header-quick a{color:#fff;text-decoration:none!important;font-size:14px;font-weight:500;line-height:1.4;white-space:nowrap}
 #ev-global-header .ev-header-quick a:hover,#ev-global-header .ev-header-quick a[aria-current="page"]{color:#c0a58c}
 #ev-global-header .ev-header-toggle{display:flex;align-items:center;justify-content:center;width:48px;height:48px;flex:0 0 48px;margin-right:-10px;border:0;border-radius:0;background:transparent;color:#fff;cursor:pointer;padding:10px}
@@ -58,13 +58,13 @@ body.ev-has-global-header {--ev-header-height:68px}
 @media(prefers-reduced-motion:reduce){#ev-global-header,#ev-global-header .ev-header-lines span{transition:none!important}}
 
 /* Always-visible favorites shortcut; compact heart on phones. */
-#ev-global-header .ev-header-favorites{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;color:#fff;text-decoration:none!important;font-size:14px;font-weight:500;line-height:1.4;white-space:nowrap;flex:0 0 auto}
+#ev-global-header .ev-header-favorites{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-left:auto;min-height:44px;color:#fff;text-decoration:none!important;font-size:14px;font-weight:500;line-height:1.4;white-space:nowrap;flex:0 0 auto}
 #ev-global-header .ev-header-favorites .ev-heart-icon{display:block;flex:0 0 24px;width:24px;height:24px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
 #ev-global-header .ev-header-favorites.has-favorites .ev-heart-icon{stroke:#f05252;fill:#f05252}
 #ev-global-header .ev-header-favorites:hover{color:#c0a58c}
 #ev-global-header .ev-header-favorites-count{display:none}
 @media(max-width:900px){#ev-global-header .ev-header-quick{gap:16px}#ev-global-header .ev-header-inner{gap:12px}}
-@media(max-width:760px){#ev-global-header .ev-header-quick{display:none}#ev-global-header .ev-header-favorites{margin-left:auto}}
+@media(max-width:760px){#ev-global-header .ev-header-quick{display:none}}
 @media(max-width:640px){
   #ev-global-header .ev-header-favorites{position:relative;width:44px}
   #ev-global-header .ev-header-favorites [data-favorites-summary]{display:none}
