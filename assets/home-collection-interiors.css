@@ -17,6 +17,8 @@
 .ev-interiors {
   --interiors-duration: 2000ms;
   --interiors-peek: 5%;
+  --interiors-control-inset: calc(var(--interiors-peek) + 1px);
+  --interiors-control-step: 16mm;
   position: absolute;
   inset: 0;
   z-index: 20;
@@ -142,7 +144,7 @@
 .ev-interiors__close, .ev-interiors__next {
   position: absolute;
   top: 50%;
-  right: calc(var(--interiors-peek) + 1px);
+  right: var(--interiors-control-inset);
   transform: translateY(-50%);
   display: none;
   place-items: center;
@@ -154,7 +156,7 @@
   color: #fff;
   cursor: pointer;
 }
-.ev-interiors__close { top: calc(50% - 16mm); }
+.ev-interiors__close { top: calc(50% - var(--interiors-control-step)); }
 .ev-interiors.is-open .ev-interiors__close,
 .ev-interiors.is-open .ev-interiors__next { display: grid; }
 .ev-interiors__close::before, .ev-interiors__close::after {
@@ -169,7 +171,9 @@
 .ev-interiors__close::after { transform: rotate(-45deg); }
 .ev-interiors__next::before { transform: translateX(-2px) rotate(225deg); }
 .ev-interiors__controls { position: absolute; top: 16px; right: 68px; display: none; }
-.ev-interiors.is-open .ev-interiors__controls { display: flex; }
+@media (min-width: 640px) and (max-width: 959px) {
+  .ev-interiors.is-open .ev-interiors__controls { display: flex; }
+}
 .ev-interiors__controls button {
   display: grid;
   place-items: center;
@@ -191,6 +195,25 @@
   white-space: nowrap;
 }
 
+@media (min-width: 960px) {
+  /* Match the collection heading's 40px grid inset and type at the artboard's scale. */
+  .ev-interiors__slide figcaption {
+    left: calc(40px * var(--zoom, 1));
+    right: calc(var(--interiors-control-inset) + 44px);
+    max-width: none;
+    transform: none;
+    font-size: calc(40px * var(--zoom, 1));
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: left;
+  }
+  .ev-interiors .ev-interiors__favorite {
+    top: calc(50% + var(--interiors-control-step));
+    right: var(--interiors-control-inset);
+    transform: translateY(-50%);
+  }
+}
+
 @media (max-width: 639px) {
   .ev-interiors-artboard > [data-elem-type="button"] { bottom: 16px; }
   .ev-interiors__slide img { object-fit: cover; object-position: center bottom; }
@@ -201,7 +224,6 @@
     transform: none;
     text-align: left;
   }
-  .ev-interiors.is-open .ev-interiors__controls { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   /* Keep the deliberate two-second opening. Suppress decorative fades. */

@@ -1238,8 +1238,25 @@ def main():
                             'Gallery selected an incorrect image format for the viewport')
                     require(slides.locator('img[src]').count() == 2, 'Opening should load the first frame and its neighbor')
                     caption = slides.first.locator('figcaption')
-                    require(caption.evaluate("el=>{const s=getComputedStyle(el);return parseFloat(s.fontSize)<=12&&s.backgroundColor==='rgba(0, 0, 0, 0)';}"),
-                            'Interior name should be small and appear directly on the photo')
+                    require(caption.evaluate("el=>getComputedStyle(el).backgroundColor==='rgba(0, 0, 0, 0)'"),
+                            'Interior name should appear directly on the photo')
+                    if mobile:
+                        require(caption.evaluate("el=>parseFloat(getComputedStyle(el).fontSize)<=12"),
+                                'Mobile interior names should retain their compact size')
+                    else:
+                        require(caption.evaluate("""el=>{
+                          const heading=document.querySelector('#rec1002600151 h2.tn-atom');
+                          const firstLine=node=>{
+                            const range=document.createRange();
+                            range.selectNodeContents(node);
+                            return range.getClientRects()[0];
+                          };
+                          const title=firstLine(heading), name=firstLine(el);
+                          return Math.abs(title.left-name.left)<1.5 && Math.abs(title.height-name.height)<1.5
+                            && getComputedStyle(el).fontWeight===getComputedStyle(heading).fontWeight;
+                        }"""), 'Desktop interior names should match the left edge and type of the collection heading')
+                        require(gallery.get_by_role('button', name='Предыдущий интерьер').count()==0,
+                                'Desktop gallery should omit the upper back arrow')
                     close = gallery.locator('.ev-interiors__close')
                     close_box = close.bounding_box()
                     first_next = slides.first.locator('.ev-interiors__next')
@@ -1251,6 +1268,11 @@ def main():
                             'Next arrow should sit at the opening arrow height')
                     require(abs(next_center_y - close_box['y'] - close_box['height'] / 2 - 16 * 96 / 25.4) < 1,
                             'Close icon should sit 16 mm above the next arrow')
+                    if not mobile:
+                        heart = slides.first.locator('[data-ev-favorite]').bounding_box()
+                        require(heart and abs(heart['x'] + heart['width']/2 - next_box['x'] - next_box['width']/2) < 1
+                                and abs(heart['y'] + heart['height']/2 - next_center_y - 16 * 96 / 25.4) < 1,
+                                'Desktop favorite should sit directly below the next arrow')
                     if index == 0:
                         favorite = slides.first.locator('[data-ev-favorite]')
                         saved_sku = favorite.get_attribute('data-ev-favorite')

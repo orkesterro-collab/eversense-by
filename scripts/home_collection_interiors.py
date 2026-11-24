@@ -18,7 +18,7 @@ RECORDS = {'nature': '1002600156', 'luxury': '1002600161', 'minimal': '100260016
 ASSET_DIR = 'assets/collection-interiors'
 STYLE = 'home-collection-interiors.css'
 SCRIPT = 'home-collection-interiors.js'
-VERSION = '5'
+VERSION = '6'
 HEART_ICON = '<svg class="ev-heart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 4.6c-2.1-2.1-5.5-2.1-7.6 0L12 5.8l-1.2-1.2c-2.1-2.1-5.5-2.1-7.6 0s-2.1 5.5 0 7.6L12 21l8.8-8.8c2.1-2.1 2.1-5.5 0-7.6Z"/></svg>'
 MARKUP = re.compile(r'\n<!-- ev-collection-interiors -->.*?<!-- /ev-collection-interiors -->', re.S)
 ASSETS = re.compile(r'<link\b[^>]*\bid="ev-collection-interiors-css"[^>]*>|'
