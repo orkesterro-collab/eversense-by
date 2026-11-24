@@ -87,7 +87,7 @@ jobs:
           python3 .github/scripts/prepare_hoster_site.py
       - name: Install browser tester
         run: |
-          python3 -m pip install playwright
+          python3 -m pip install playwright pypdf
           python3 -m playwright install --with-deps chromium
       - name: Check buyer journeys on desktop and mobile
         run: python3 scripts/qa_buyer_tools.py

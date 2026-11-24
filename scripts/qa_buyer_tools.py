@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Browser QA against staged _deploy; never contacts or changes the live store.
 
-Run after installing Playwright + Chromium:
+Run after installing Playwright, Chromium and pypdf:
     python scripts/qa_buyer_tools.py
 Optional: --site-dir _deploy --output buyer-qa --port 8765
 All results and screenshots are written before a nonzero exit on failure.
@@ -20,8 +20,11 @@ import time
 import traceback
 from decimal import Decimal
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from io import BytesIO
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
+
+from pypdf import PdfReader
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -494,6 +497,29 @@ def main():
                 return {"next_card_focus": True, "empty_catalog_link_focus": True}
             for device, width, height in DEVICES:
                 case("favorites-keyboard-removal-" + device, favorites_keyboard_test, width, height)
+
+            def favorites_print_test(page, context):
+                # Long names and sale details exercise the taller printed cards.
+                ordered = sorted(products, key=lambda p: -len(p["name"]))
+                sale_feed = {"status": "ok", "table": {"rows": [
+                    {"c": [{"v": p["sku"]}, {"v": 65.66}, {"v": 50.96}, {"v": "2099-11-29"}]}
+                    for p in ordered]}}
+                results = {}
+                for count in (4, 9, len(ordered)):
+                    selected = [p["sku"] for p in ordered[:count]]
+                    goto(page, "favorites.html?items=" + ",".join(selected))
+                    page.evaluate("data=>window.EversensePriceFeed(data)", sale_feed)
+                    pdf = PdfReader(BytesIO(page.pdf(format="A4", prefer_css_page_size=True)))
+                    batches = [selected[i:i + 4] for i in range(0, count, 4)]
+                    require(len(pdf.pages) == len(batches), f"{count} favorites printed on {len(pdf.pages)} sheets")
+                    for n, (sheet, batch) in enumerate(zip(pdf.pages, batches), 1):
+                        content = "".join(sheet.extract_text().split())
+                        printed = re.findall(r"EL[0-9]+", content)
+                        require(sorted(printed) == sorted(batch), f"Sheet {n}: expected {batch}, found {printed}")
+                        require(content.count("29.11.2099") == len(batch), f"Sale details missing on sheet {n}")
+                    results[count] = [len(batch) for batch in batches]
+                return results
+            case("favorites-print-four-per-a4", favorites_print_test)
 
             def calc_values(page):
                 return page.locator("#ev-calc-result").evaluate("el=>({packs:parseInt(el.querySelector('h2').innerText,10),values:Object.fromEntries([...el.querySelectorAll('dl > div')].map(d=>[d.querySelector('dt').innerText,d.querySelector('dd').innerText]))})")

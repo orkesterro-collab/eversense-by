@@ -439,6 +439,37 @@ body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-imag
   .ev-card-meta,.ev-sku {font-size:9pt}
 }
 
+@page favorites-sheet {
+  size: A4 portrait;
+  margin: 12mm;
+}
+
+@media print {
+  body[data-buyer-page="favorites"] {page:favorites-sheet}
+  body[data-buyer-page="favorites"] .ev-wrap {width:100%}
+  body[data-buyer-page="favorites"] .ev-hero {padding:0 0 5mm}
+  body[data-buyer-page="favorites"] .ev-hero h1 {font-size:20pt;margin:0 0 1mm}
+  body[data-buyer-page="favorites"] .ev-hero .ev-lead {font-size:10pt;line-height:1.3}
+  #ev-shared-note, #ev-favorites + .ev-note {display:none}
+
+  #ev-favorites .ev-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:6mm}
+  #ev-favorites .ev-card {display:block;grid-row:auto;break-inside:avoid}
+  #ev-favorites .ev-card:nth-child(4n + 5) {break-before:page}
+  #ev-favorites .ev-card-image {aspect-ratio:6/5}
+  /* Swap the frame dimensions before rotating the material photograph. */
+  #ev-favorites .ev-card-image > img:first-child {
+    width:83.333333%;height:120%;
+    transform:translate(-50%,-50%) rotate(90deg);
+  }
+  #ev-favorites .ev-sku {margin:2mm 0 .5mm;font-size:9pt;line-height:1.2}
+  #ev-favorites .ev-card-title {font-size:12pt;line-height:1.2;margin:0 0 1mm}
+  #ev-favorites .ev-card-meta {font-size:9pt;line-height:1.3;margin:0 0 1mm!important}
+  #ev-favorites .ev-price-box {min-height:0}
+  #ev-favorites .ev-price-box > :is(strong,.ev-price-pending) {display:block;min-height:0}
+  #ev-favorites .ev-price-box strong {font-size:11pt}
+  #ev-favorites .ev-price-box > :is(del,small) {font-size:8pt;line-height:1.25}
+}
+
 /* Keep every collection visible on phones. */
 @media(max-width:640px){
  body[data-buyer-page="catalog"] .ev-inline-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;gap:8px}
