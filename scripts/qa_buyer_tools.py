@@ -1181,6 +1181,8 @@ def main():
                 if device == 'mobile':
                     page.emulate_media(reduced_motion='no-preference')
                 goto(page, 'index.html' if mobile else 'ru/', prices=False)
+                # The desktop page wrapper stays transparent briefly after DOMContentLoaded.
+                page.wait_for_function("document.getElementById('allrecords').checkVisibility({checkOpacity: true})")
                 cookie_ok = page.get_by_text('OK', exact=True)
                 if cookie_ok.count() and cookie_ok.first.is_visible():
                     cookie_ok.first.click()
