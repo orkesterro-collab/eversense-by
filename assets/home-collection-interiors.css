@@ -1,11 +1,41 @@
 /* Clip the Tilda wrapper without making it a second horizontal scroller. */
 #allrecords { overflow: clip; }
 .ev-interiors-artboard { isolation: isolate; }
-.ev-interiors-artboard > [data-elem-type="button"] {
+#allrecords .ev-interiors-artboard > .tn-elem[data-elem-type="button"] {
   z-index: 21 !important;
   top: auto !important;
   bottom: 24px;
+  width: max-content !important;
+  height: auto !important;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
+/* The texture download and the three collection links use the same light button. */
+#allrecords :is(.ev-m-textures, .t396__artboard > .tn-elem[data-elem-type="button"]) > a.ev-m-button-light {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  max-width: 100%;
+  height: auto;
+  min-height: 47px;
+  padding: 11px 15px;
+  border: 1px solid #fff;
+  border-radius: 0;
+  color: #292623;
+  background: #fff;
+  text-decoration: none;
+  font: 650 14px/1.2 Manrope, Arial, sans-serif;
+  letter-spacing: -.024em;
+}
+#allrecords .t396__artboard > .tn-elem[data-elem-type="button"] > .tn-atom.ev-m-button-light :is(.tn-atom__button-content, .tn-atom__button-text) {
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+}
+#allrecords .ev-m-button-light .tn-atom__button-border { display: none; }
 /* The artboards have separate catalog buttons below and above the 960px breakpoint. */
 @media (max-width: 959px) {
   .ev-interiors-artboard > [data-elem-id="1742824742704"] { display: none !important; }
@@ -127,7 +157,7 @@
   transform: translateX(-50%);
   box-sizing: border-box;
   max-width: calc(100% - 320px);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
   text-align: center;
@@ -135,8 +165,9 @@
 }
 .ev-interiors .ev-interiors__favorite {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: calc(50% + var(--interiors-control-step));
+  right: var(--interiors-control-inset);
+  transform: translateY(-50%);
   color: #fff;
   cursor: pointer;
 }
@@ -196,26 +227,20 @@
 }
 
 @media (min-width: 960px) {
-  /* Match the collection heading's 40px grid inset and type at the artboard's scale. */
+  /* Align with the collection heading and render the decor name 2px larger. */
   .ev-interiors__slide figcaption {
     left: calc(40px * var(--zoom, 1));
     right: calc(var(--interiors-control-inset) + 44px);
     max-width: none;
     transform: none;
-    font-size: calc(40px * var(--zoom, 1));
+    font-size: calc(40px * var(--zoom, 1) + 2px);
     font-weight: 600;
     line-height: 1.25;
     text-align: left;
   }
-  .ev-interiors .ev-interiors__favorite {
-    top: calc(50% + var(--interiors-control-step));
-    right: var(--interiors-control-inset);
-    transform: translateY(-50%);
-  }
 }
 
 @media (max-width: 639px) {
-  .ev-interiors-artboard > [data-elem-type="button"] { bottom: 16px; }
   .ev-interiors__slide img { object-fit: cover; object-position: center bottom; }
   .ev-interiors__slide figcaption {
     top: 29px;

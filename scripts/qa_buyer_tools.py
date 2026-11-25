@@ -1210,14 +1210,23 @@ def main():
                       return (box.right-el.querySelector('.ev-interiors__sheet').getBoundingClientRect().left)/box.width;
                     }""")
                     require(abs(peek - .05) < .005, f'Incorrect closed gallery reveal: {peek}')
-                    cta = gallery.locator('..').get_by_role('link', name=products_in_collection[0]['collectionName'], exact=True)
+                    cta = gallery.locator('..').get_by_role('link', name='Перейти в коллекцию', exact=True)
                     require(cta.count() == 1, 'Expected one catalog link at each breakpoint')
-                    cta_style = cta.evaluate("""el=>({
-                      gap:el.closest('.ev-interiors-artboard').getBoundingClientRect().bottom-el.getBoundingClientRect().bottom,
-                      background:getComputedStyle(el).backgroundColor,
-                      blur:getComputedStyle(el.parentElement).backdropFilter
-                    })""")
-                    require(12 <= cta_style['gap'] <= 36 and 'blur(' in cta_style['blur'], f'Catalog link should sit lower with its original blur: {cta_style}')
+                    expected_path = products_in_collection[0]['canonicalPath'].rsplit('/', 2)[0]
+                    require(urlparse(cta.get_attribute('href')).path.rstrip('/') == expected_path,
+                            f'Collection button should open {expected_path}')
+                    cta_style = cta.evaluate("""el=>{
+                      const css=getComputedStyle(el), reference=getComputedStyle(document.querySelector('.ev-m-textures a'));
+                      const label=getComputedStyle(el.querySelector('.tn-atom__button-text'));
+                      const properties=['backgroundColor','borderRadius','borderTopColor','borderTopWidth',
+                        'paddingTop','paddingLeft','minHeight','fontFamily','fontSize','fontWeight','letterSpacing'];
+                      return {gap:el.closest('.ev-interiors-artboard').getBoundingClientRect().bottom-el.getBoundingClientRect().bottom,
+                        background:css.backgroundColor, color:label.color, matches:properties.every(p=>css[p]===reference[p]),
+                        blur:getComputedStyle(el.parentElement).backdropFilter};
+                    }""")
+                    require(12 <= cta_style['gap'] <= 36 and cta_style['background'] == 'rgb(255, 255, 255)'
+                            and cta_style['color'] == 'rgb(41, 38, 35)' and cta_style['matches']
+                            and cta_style['blur'] == 'none', f'Expected the light texture-download button style: {cta_style}')
 
                     hint = gallery.locator('.ev-interiors__hint').element_handle()
                     hint_box = hint.bounding_box()
@@ -1243,8 +1252,8 @@ def main():
                     require(caption.evaluate("el=>getComputedStyle(el).backgroundColor==='rgba(0, 0, 0, 0)'"),
                             'Interior name should appear directly on the photo')
                     if mobile:
-                        require(caption.evaluate("el=>parseFloat(getComputedStyle(el).fontSize)<=12"),
-                                'Mobile interior names should retain their compact size')
+                        require(caption.evaluate("el=>getComputedStyle(el).fontSize==='14px'"),
+                                'Mobile interior names should be 14px')
                     else:
                         require(caption.evaluate("""el=>{
                           const heading=document.querySelector('#rec1002600151 h2.tn-atom');
@@ -1254,9 +1263,10 @@ def main():
                             return range.getClientRects()[0];
                           };
                           const title=firstLine(heading), name=firstLine(el);
-                          return Math.abs(title.left-name.left)<1.5 && Math.abs(title.height-name.height)<1.5
-                            && getComputedStyle(el).fontWeight===getComputedStyle(heading).fontWeight;
-                        }"""), 'Desktop interior names should match the left edge and type of the collection heading')
+                          const css=getComputedStyle(el), scale=parseFloat(css.getPropertyValue('--zoom')) || 1;
+                          return Math.abs(title.left-name.left)<1.5 && Math.abs(parseFloat(css.fontSize)-(40*scale+2))<.1
+                            && css.fontWeight===getComputedStyle(heading).fontWeight;
+                        }"""), 'Desktop interior names should keep the heading alignment and gain 2px')
                         require(gallery.get_by_role('button', name='Предыдущий интерьер').count()==0,
                                 'Desktop gallery should omit the upper back arrow')
                     close = gallery.locator('.ev-interiors__close')
@@ -1270,11 +1280,10 @@ def main():
                             'Next arrow should sit at the opening arrow height')
                     require(abs(next_center_y - close_box['y'] - close_box['height'] / 2 - 16 * 96 / 25.4) < 1,
                             'Close icon should sit 16 mm above the next arrow')
-                    if not mobile:
-                        heart = slides.first.locator('[data-ev-favorite]').bounding_box()
-                        require(heart and abs(heart['x'] + heart['width']/2 - next_box['x'] - next_box['width']/2) < 1
-                                and abs(heart['y'] + heart['height']/2 - next_center_y - 16 * 96 / 25.4) < 1,
-                                'Desktop favorite should sit directly below the next arrow')
+                    heart = slides.first.locator('[data-ev-favorite]').bounding_box()
+                    require(heart and abs(heart['x'] + heart['width']/2 - next_box['x'] - next_box['width']/2) < 1
+                            and abs(heart['y'] + heart['height']/2 - next_center_y - 16 * 96 / 25.4) < 1,
+                            'Favorite should be the third control, directly below the next arrow')
                     if index == 0:
                         favorite = slides.first.locator('[data-ev-favorite]')
                         saved_sku = favorite.get_attribute('data-ev-favorite')
