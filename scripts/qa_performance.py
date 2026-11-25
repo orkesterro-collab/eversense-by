@@ -265,6 +265,41 @@ def main():
                     return {"before": before, "after": wrapper.get_attribute("data-slider-pos")}
                 case("hero next slide works", slider)
 
+                if mobile:
+                    def senses_touch():
+                        section = page.locator("#ev-senses")
+                        section.evaluate("el => el.scrollIntoView({block: 'center', behavior: 'instant'})")
+                        buttons = section.locator(".ev-sense-toggle")
+                        buttons.nth(1).tap()
+
+                        def expect_panel(index):
+                            require(section.get_attribute("data-active") == str(index) and
+                                    buttons.nth(index).get_attribute("aria-expanded") == "true",
+                                    f"Sensory panel {index + 1} did not open")
+
+                        def swipe(dx, dy):
+                            box = section.bounding_box()
+                            x, y = box["x"] + box["width"] / 2, box["y"] + box["height"] / 2
+                            cdp.send("Input.dispatchTouchEvent", {"type": "touchStart",
+                                "touchPoints": [{"x": x, "y": y}]})
+                            for step in range(1, 5):
+                                cdp.send("Input.dispatchTouchEvent", {"type": "touchMove",
+                                    "touchPoints": [{"x": x + dx * step / 4, "y": y + dy * step / 4}]})
+                            cdp.send("Input.dispatchTouchEvent", {"type": "touchEnd", "touchPoints": []})
+
+                        expect_panel(1)
+                        swipe(-100, 3)
+                        expect_panel(2)
+                        swipe(-100, 0)
+                        expect_panel(0)
+                        swipe(100, -3)
+                        expect_panel(2)
+                        before = page.evaluate("scrollY")
+                        swipe(8, -120)
+                        page.wait_for_function("before => scrollY > before + 20", arg=before)
+                        expect_panel(2)
+                    case("sensory panels handle taps, swipes and page scrolling", senses_touch)
+
                 def scroll_images():
                     total = page.evaluate("document.documentElement.scrollHeight")
                     broken = []
