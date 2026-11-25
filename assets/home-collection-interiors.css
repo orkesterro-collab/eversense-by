@@ -41,6 +41,12 @@
   .ev-interiors-artboard > [data-elem-id="1742824742704"] { display: none !important; }
 }
 @media (min-width: 960px) {
+  /* Keep the original grid inset while the light button keeps its own size. */
+  #allrecords .ev-interiors-artboard > .tn-elem[data-elem-id="1742824742704"] {
+    zoom: 1 !important;
+    left: calc(40px * var(--zoom, 1)) !important;
+    bottom: calc(24px * var(--zoom, 1));
+  }
   .ev-interiors-artboard > [data-elem-type="button"]:not([data-elem-id="1742824742704"]) { display: none !important; }
 }
 

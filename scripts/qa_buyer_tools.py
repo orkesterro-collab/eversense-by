@@ -1220,12 +1220,15 @@ def main():
                       const label=getComputedStyle(el.querySelector('.tn-atom__button-text'));
                       const properties=['backgroundColor','borderRadius','borderTopColor','borderTopWidth',
                         'paddingTop','paddingLeft','minHeight','fontFamily','fontSize','fontWeight','letterSpacing'];
-                      return {gap:el.closest('.ev-interiors-artboard').getBoundingClientRect().bottom-el.getBoundingClientRect().bottom,
-                        background:css.backgroundColor, color:label.color, matches:properties.every(p=>css[p]===reference[p]),
+                      const rect=el.getBoundingClientRect();
+                      return {gap:el.closest('.ev-interiors-artboard').getBoundingClientRect().bottom-rect.bottom,
+                        height:rect.height, background:css.backgroundColor, color:label.color,
+                        differences:properties.filter(p=>css[p]!==reference[p]),
                         blur:getComputedStyle(el.parentElement).backdropFilter};
                     }""")
                     require(12 <= cta_style['gap'] <= 36 and cta_style['background'] == 'rgb(255, 255, 255)'
-                            and cta_style['color'] == 'rgb(41, 38, 35)' and cta_style['matches']
+                            and cta_style['color'] == 'rgb(41, 38, 35)' and not cta_style['differences']
+                            and abs(cta_style['height'] - 47) < 1
                             and cta_style['blur'] == 'none', f'Expected the light texture-download button style: {cta_style}')
 
                     hint = gallery.locator('.ev-interiors__hint').element_handle()
