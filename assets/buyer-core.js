@@ -53,5 +53,5 @@
     var totalCents=moneyCents(purchasedUnits,unitPrice);
     return {packs:packs,neededArea:Number(numerator)/10000000000,purchasedArea:purchasedUnits/10000,extraArea:(purchasedUnits-areaUnits)/10000,totalCents:totalCents};
   }
-  return {cleanItems:cleanItems,parseDecimal:parseDecimal,calculate:calculate};
+  return {cleanItems:cleanItems,parseDecimal:parseDecimal,calculate:calculate,moneyCents:moneyCents};
 });

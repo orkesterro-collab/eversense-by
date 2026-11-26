@@ -93,6 +93,15 @@ def main():
             {"c": [{"v": p["sku"]}, {"v": 45.90}, {"v": None}, {"v": None}, {"v": None}, {"v": 100}]}
             for p in products]}}
         jsonp = "window.EversensePriceFeed(" + json.dumps(payload, ensure_ascii=False) + ");"
+        def installation_payload(glue=249.26, underlay=10.79, floating=20, bonded=29):
+            rows = [
+                ("На клей", "Материал", 7, glue), ("На клей", "Работа", 1, bonded),
+                ("На подложку", "Материал", 6, underlay), ("На подложку", "Работа", 1, floating),
+            ]
+            return {"status": "ok", "table": {"rows": [
+                {"c": [{"v": value} for value in row]} for row in rows]}}
+
+        installation_jsonp = "window.EversenseInstallationFeed(" + json.dumps(installation_payload()) + ");"
         server = ThreadingHTTPServer(("127.0.0.1", args.port), functools.partial(QuietHandler, directory=str(site_dir)))
         threading.Thread(target=server.serve_forever, daemon=True).start()
 
@@ -138,9 +147,18 @@ def main():
                 def feed_route(route):
                     if feed == "blocked":
                         route.abort("failed")
+                        return
+                    query = parse_qs(urlparse(route.request.url).query)
+                    if query.get("sheet") == ["price"]:
+                        body = jsonp
+                    elif (query.get("gid") == ["26112620"] and query.get("range") == ["A4:H7"]
+                          and query.get("tq") == ["select A,B,E,F"] and query.get("headers") == ["0"]):
+                        body = installation_jsonp
                     else:
-                        route.fulfill(status=200, content_type="application/javascript; charset=utf-8",
-                                      body=jsonp, headers={"Cache-Control": "no-store"})
+                        route.abort("failed")
+                        return
+                    route.fulfill(status=200, content_type="application/javascript; charset=utf-8",
+                                  body=body, headers={"Cache-Control": "no-store"})
                 context.route("https://docs.google.com/spreadsheets/**/gviz/**", feed_route)
                 return context
 
@@ -246,7 +264,7 @@ def main():
                 begun = time.monotonic()
                 try:
                     row["details"] = callback(page, context) or {}
-                    local_js = [e for e in logs["page_errors"] if re.search(r"/(?:assets/)?(?:buyer(?:-core)?|prices|unified-header)\.js", e["stack"])]
+                    local_js = [e for e in logs["page_errors"] if re.search(r"/(?:assets/)?(?:buyer(?:-core)?|prices|unified-header|installation-costs)\.js", e["stack"])]
                     require(not local_js, f"Buyer JavaScript errors: {local_js[:3]}")
                     require(not logs["local_failures"], f"Local assets failed: {logs['local_failures'][:6]}")
                 except Exception as error:
@@ -573,18 +591,82 @@ def main():
             for device, width, height in DEVICES[:2]:
                 case("calculator-" + device, lambda p, c, d=device: calculator_test(p, c, d), width, height)
 
+            def installation_test(page, context):
+                with page.expect_response(lambda reply: "/gviz/" in reply.url and
+                                          parse_qs(urlparse(reply.url).query).get("gid") == ["26112620"]) as feed:
+                    goto(page, "calculator.html?sku=EL1040")
+                require(feed.value.ok, "Installation prices must come from the dedicated materials tab")
+                estimate = page.locator("#ev-install-estimate")
+                require(estimate.is_hidden(), "Installation estimates appeared before calculating a purchase")
+
+                def check_costs(method, amounts):
+                    card = estimate.locator(f'[data-install-method="{method}"]')
+                    for name, amount in zip(("material", "work", "total"), amounts):
+                        item = card.locator(f'[data-install-value="{name}"]')
+                        require(numeric(item.inner_text()) == Decimal(amount),
+                                f"{method} {name}: expected {amount}, got {item.inner_text()}")
+
+                def check_standard():
+                    check_costs("glue", ("747.78", "580", "1327.78"))
+                    check_costs("underlay", ("258.96", "400", "658.96"))
+
+                calculate(page, "EL1040", "20", "5")
+                estimate.wait_for()
+                check_standard()
+                calculate(page, "EL1000", "20", "18")
+                check_standard()
+                calculate(page, "EL1000", "42", "5")
+                check_costs("glue", ("1495.56", "1218", "2713.56"))
+                check_costs("underlay", ("453.18", "840", "1293.18"))
+                calculate(page, "EL1000", "42,01", "5")
+                check_costs("glue", ("1744.82", "1218.29", "2963.11"))
+                check_costs("underlay", ("517.92", "840.20", "1358.12"))
+                page.locator("#ev-area").fill("0")
+                require(estimate.is_hidden(), "Stale installation prices remain after editing the area")
+                page.locator('#ev-calc-form button[type="submit"]').click()
+                require(estimate.is_hidden(), "Invalid area produced an installation estimate")
+                calculate(page, "EL1040", "20", "5")
+                page.locator("#ev-area").focus()
+                page.evaluate("data => window.EversenseInstallationFeed(data)",
+                              installation_payload(glue=250, underlay=11, floating=21, bonded=30))
+                check_costs("glue", ("750", "600", "1350"))
+                check_costs("underlay", ("264", "420", "684"))
+                require(page.locator("#ev-area").evaluate("input => input === document.activeElement"),
+                        "Updating installation prices moved keyboard focus")
+                def block_install_feed(route):
+                    if parse_qs(urlparse(route.request.url).query).get("gid") == ["26112620"]:
+                        route.abort("failed")
+                    else:
+                        route.fallback()
+                context.route("https://docs.google.com/spreadsheets/**/gviz/**", block_install_feed)
+                page.reload(wait_until="domcontentloaded")
+                page.wait_for_function("window.EversenseInstallationCosts?.get()?.cached === true")
+                check_costs("glue", ("750", "600", "1350"))
+                check_costs("underlay", ("264", "420", "684"))
+                require(estimate.locator("[data-install-cached]").is_visible(),
+                        "Cached rates must be identified to the buyer")
+                layout_metrics(page)
+
+            case("installation-estimates-from-clean-area", installation_test, 390, 844)
+
             def no_price_test(page, context):
                 goto(page, "calculator.html", prices=False)
                 values = calculate(page, "EL1052", "20", "10")
                 require(values["packs"] == 12, "Missing feed broke quantity calculation")
                 require("Уточнить" in values["values"]["Стоимость материала"], "Missing price became a numeric or fake total")
+                require(page.evaluate("window.EversenseInstallationCosts.get() === null"),
+                        "First visit without a materials feed returned unverified rates")
+                amounts = page.locator('#ev-install-estimate [data-install-value="total"]').all_inner_texts()
+                require(len(amounts) == 2 and all("Уточнить" in amount and not re.search(r"\d", amount)
+                                                  for amount in amounts),
+                        f"Missing installation prices must show two unavailable totals: {amounts}")
                 return values
             case("calculator-without-price-feed", no_price_test, feed="blocked")
 
             def late_price_update_test(page, context):
                 feed_requests = []
                 page.on("request", lambda request: feed_requests.append(request.url)
-                        if "docs.google.com/spreadsheets/" in request.url and "/gviz/" in request.url else None)
+                        if "/gviz/" in request.url and parse_qs(urlparse(request.url).query).get("sheet") == ["price"] else None)
                 changed_payload = {"status": "ok", "table": {"rows": [
                     {"c": [{"v": p["sku"]}, {"v": 60}, {"v": None}, {"v": None}, {"v": None}]}
                     for p in products]}}

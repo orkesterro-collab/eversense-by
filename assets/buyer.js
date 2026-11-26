@@ -114,14 +114,82 @@
     var count=document.getElementById('ev-favorite-total');if(count)count.textContent=number(list.length);
     syncButtons();
   }
+  var russianCount = new Intl.PluralRules('ru');
+
+  function renderInstallationMethod(card, area, costs){
+    var glue = card.dataset.installMethod === 'glue';
+    var coverage = glue ? costs.glueCoverage : costs.underlayCoverage;
+    var price = glue ? costs.gluePrice : costs.underlayPricePerM2;
+    var rate = glue ? costs.glueRate : costs.floatRate;
+    var areaUnits = Math.round(area * 10000);
+    var coverageUnits = Math.round(coverage * 10000);
+    var units = coverageUnits > 0 ? Math.ceil(areaUnits / coverageUnits) : null;
+    var packCents = core.moneyCents(glue ? 10000 : coverageUnits || 0, price);
+    var packPrice = glue ? price : (packCents !== null ? packCents / 100 : null);
+    var material = units !== null ? core.moneyCents(units * 10000, packPrice) : null;
+    var work = core.moneyCents(areaUnits, rate);
+    var total = material !== null && work !== null ? material + work : null;
+
+    function field(name){return card.querySelector('[data-install-value="' + name + '"]');}
+    function showAmount(name, cents){
+      field(name).innerHTML = Number.isSafeInteger(cents)
+        ? (name === 'total' ? '≈ ' : '') + money(cents / 100) + ' <small>BYN</small>'
+        : '<small>Уточнить стоимость</small>';
+    }
+    showAmount('material', material);
+    showAmount('work', work);
+    showAmount('total', total);
+
+    var packInfo = glue ? 'Банка 7 кг' : 'Рулон';
+    if(coverageUnits > 0){
+      packInfo += glue ? ' ≈ ' + number(coverage, 4) + ' м² при расходе ' + number(7 / coverage, 3) + ' кг/м²'
+                       : ' ' + number(coverage, 4) + ' м²';
+    }
+    if(!glue && price > 0) packInfo += ' по ' + money(price) + ' BYN/м²';
+    field('package').textContent = packInfo + '.';
+    var unitsText = 'Количество упаковок уточняется';
+    if(units !== null){
+      var forms = glue ? {one:'банка',few:'банки',many:'банок'} : {one:'рулон',few:'рулона',many:'рулонов'};
+      unitsText = number(units) + ' ' + forms[russianCount.select(units)];
+      if(packCents !== null) unitsText += ' × ' + money(packCents / 100) + ' BYN';
+    }
+    field('quantity').textContent = unitsText;
+    field('rate').textContent = number(area, 4) + ' м²' + (rate > 0 ? ' × ' + number(rate, 4) + ' BYN/м²' : ' · ставка уточняется');
+  }
+
+  function renderInstallationEstimate(form){
+    var section = document.getElementById('ev-install-estimate');
+    if(!section) return;
+    section.hidden = form.dataset.calculated !== 'true';
+    if(section.hidden) return;
+    var product = bySku.get(form.elements.sku.value);
+    var area = core.parseDecimal(form.elements.area.value);
+    var costs = window.EversenseInstallationCosts && window.EversenseInstallationCosts.get();
+    var preview = document.querySelector('#ev-calc-product img');
+    var swatch = section.querySelector('[data-install-swatch]');
+    if(preview && swatch.src !== preview.src){
+      swatch.sizes = '60px';
+      swatch.srcset = preview.srcset;
+      swatch.src = preview.src;
+    }
+    section.querySelector('[data-install-name]').textContent = fullName(product);
+    section.querySelector('[data-install-sku]').textContent = product.sku;
+    section.querySelector('[data-install-area]').textContent = number(area, 4) + ' м²';
+    section.querySelectorAll('[data-install-method]').forEach(function(card){
+      renderInstallationMethod(card, area, costs || {});
+    });
+    section.querySelector('[data-install-cached]').hidden = !(costs && costs.cached);
+  }
+
   function renderCalculation(focus){
     var form=document.getElementById('ev-calc-form');if(!form)return;
     var sku=form.elements.sku.value,p=bySku.get(sku),root=document.getElementById('ev-calc-result');
-    if(!p){root.innerHTML='<p>Выберите декор для расчёта.</p>';return;}
+    if(!p){root.innerHTML='<p>Выберите декор для расчёта.</p>';form.dataset.calculated='false';renderInstallationEstimate(form);return;}
     var result=core.calculate(form.elements.area.value,form.elements.reserve.value,p.packArea,activePrice(sku));
-    if(result.error){root.innerHTML='<p class="ev-error" role="alert">'+esc(result.error)+'</p>';form.dataset.calculated='false';return;}
+    if(result.error){root.innerHTML='<p class="ev-error" role="alert">'+esc(result.error)+'</p>';form.dataset.calculated='false';renderInstallationEstimate(form);return;}
     form.dataset.calculated='true';
     root.innerHTML='<span class="ev-eyebrow">'+esc(fullName(p))+' · '+p.sku+'</span><h2>'+result.packs+' <small>уп.</small></h2><dl class="ev-calc-values"><div><dt>С выбранным запасом</dt><dd>'+number(result.neededArea,4)+' м²</dd></div><div><dt>В целых упаковках</dt><dd>'+number(result.purchasedArea,4)+' м²</dd></div><div><dt>В одной упаковке</dt><dd>'+number(p.packArea,4)+' м² / '+p.packCount+' шт.</dd></div><div><dt>Стоимость материала</dt><dd>'+(result.totalCents===null?'Уточнить цену':money(result.totalCents/100)+' BYN')+'</dd></div></dl><p class="ev-note">Расчёт включает только покрытие. Подложка, плинтусы, доставка и монтаж рассчитываются отдельно. Количество уточните по плану помещения и выбранной раскладке.</p><div class="ev-actions"><a class="ev-button ev-button--primary" href="'+route('contacts.html')+'?sku='+sku+'&packs='+result.packs+'">Уточнить наличие</a><button class="ev-text-link" type="button" data-share-calculation>Скопировать расчёт</button></div>';
+    renderInstallationEstimate(form);
     var url=new URL(location.href);url.searchParams.set('sku',sku);url.searchParams.set('area',form.elements.area.value);url.searchParams.set('reserve',form.elements.reserve.value);history.replaceState(null,'',url);
     syncButtons();
     if(focus){root.focus({preventScroll:true});if(window.innerWidth<750)root.scrollIntoView({behavior:'smooth',block:'start'});}
@@ -133,7 +201,8 @@
     if(params.has('reserve')&&core.parseDecimal(params.get('reserve'))!==null)form.elements.reserve.value=params.get('reserve');
     function preview(){var p=bySku.get(form.elements.sku.value),el=document.getElementById('ev-calc-product');if(p&&el)el.innerHTML='<img src="'+route(p.productImage)+'"'+imageAttrs(p.productImage,'(max-width: 760px) 100vw, 360px')+' alt="'+esc(fullName(p))+'" width="360" height="240"><p>'+p.sku+' · '+p.lengthMM+' × '+p.widthMM+' × '+p.thicknessMM+' мм<br>'+number(p.packArea,4)+' м² в упаковке</p>';}
     form.addEventListener('submit',function(e){e.preventDefault();renderCalculation(true);});
-    form.addEventListener('input',function(){if(form.dataset.calculated==='true'){form.dataset.calculated='false';document.getElementById('ev-calc-result').innerHTML='<p>Данные изменились. Нажмите «Рассчитать», чтобы обновить результат.</p>';}});
+    form.addEventListener('input',function(){if(form.dataset.calculated==='true'){form.dataset.calculated='false';renderInstallationEstimate(form);document.getElementById('ev-calc-result').innerHTML='<p>Данные изменились. Нажмите «Рассчитать», чтобы обновить результат.</p>';}});
+    window.addEventListener('ev-installation-costs-updated',function(){renderInstallationEstimate(form);});
     form.elements.sku.addEventListener('change',preview);preview();
     if(params.has('area'))renderCalculation(false);
   }

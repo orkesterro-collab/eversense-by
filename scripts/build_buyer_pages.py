@@ -69,6 +69,8 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
         extras.extend(['explore-product.css', 'explore-product.js'])
     if page_type == 'projects':
         extras.extend(['explore-interiors.css', 'explore-interiors.js'])
+    if page_type == 'calculator':
+        extras.append('installation-costs.js')
     extra_assets = '\n'.join(f'<link rel="stylesheet" href="{href("assets/"+file,page)}?v={VERSION}">' if file.endswith('.css') else f'<script src="{href("assets/"+file,page)}?v={VERSION}" defer></script>' for file in extras)
     breadcrumb = link('Главная', 'index.html', page) + '<span aria-hidden="true">/</span>'
     if page_type == 'installation' and page != 'installation.html':
@@ -226,10 +228,40 @@ def installation_pages():
         body = render_installation_guide(guide, page, href)
         write_page(page, guide['title'], guide['lead'], body, 'installation')
 
+def installation_estimate():
+    def card(method, title, material, url, labor, layer):
+        return f'''<article class="ev-install-card" data-install-method="{method}">
+<header><h3 id="ev-install-{method}">{title}</h3>
+<svg viewBox="0 0 110 52" width="76" height="42" aria-hidden="true" focusable="false">
+<path d="M5 39h86l14-7v6l-14 7H5Z" fill="#b1aaa0"/><path d="M5 39l14-7h86l-14 7Z" fill="#e1d9cd"/>
+{layer}
+<path d="M5 19h86l14-7v7l-14 7H5Z" fill="#9a8061"/><path d="M5 19l14-8h86l-14 8Z" fill="#cfbca4" stroke="#ad987d" stroke-width=".8"/>
+<path d="m24 15 45 .2m-29-1.8h40" stroke="#b7a184" fill="none"/></svg></header>
+<table aria-labelledby="ev-install-{method}"><tbody>
+<tr><th scope="row"><span class="ev-install-kind">Материал</span><a href="{url}">{material}</a></th><td class="ev-install-cost" data-install-value="material"></td></tr>
+<tr><td colspan="2" class="ev-install-details"><p data-install-value="package"></p><p data-install-value="quantity"></p></td></tr>
+<tr class="ev-install-labor"><th scope="row"><span class="ev-install-kind">Работа</span>{labor}</th><td class="ev-install-cost" data-install-value="work"></td></tr>
+<tr><td colspan="2" class="ev-install-details"><p data-install-value="rate"></p></td></tr>
+</tbody><tfoot><tr><th scope="row">Итого за укладку</th><td class="ev-install-cost" data-install-value="total"></td></tr></tfoot></table></article>'''
+
+    glue = card('glue', 'Укладка на клей', 'Kesto Flex Silan',
+                'https://triopol.by/product/silanovyj-klej-dlya-parketa-kesto-flex-silan-2/', 'Приклеивание ламината',
+                '<path d="m6 34 4-4 4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4" stroke="#947a59" stroke-width="2.6" fill="none"/>')
+    underlay = card('underlay', 'Укладка на подложку', 'Bonkeel Smart Aquastop',
+                    'https://triopol.by/product/podlozhka-dlya-laminata-bonkeel-smart-aquastop/', 'Плавающая укладка',
+                    '<path d="M6 30h85l12-6v5l-12 6H6Z" fill="#8c8b72"/><path d="M6 30h85l12-6M91 30v5" fill="none" stroke="#d3d3ba"/>')
+    return f'''<section id="ev-install-estimate" class="ev-install-estimate" aria-labelledby="ev-install-heading" hidden>
+<h2 id="ev-install-heading">Сколько стоит укладка</h2>
+<div class="ev-install-summary"><img data-install-swatch alt="" width="60" height="54">
+<div><strong data-install-name></strong><small data-install-sku></small></div>
+<div class="ev-install-area"><strong data-install-area></strong><small>Чистая площадь</small></div></div>
+<div class="ev-install-options">{glue}{underlay}</div>
+<p class="ev-install-footnote">Банки и рулоны округлены до целых упаковок. Работа рассчитана по чистой площади. Ориентир для Минска при прямой укладке на готовое основание. Стоимость ламината считается отдельно. <span data-install-cached hidden>Цены по последнему доступному расчёту.</span></p></section>'''
+
 def tools_pages():
     page = 'calculator.html'
     opts = [(p['sku'],p['sku']+' · '+p['name']) for p in PRODUCTS]
-    body = '<section class="ev-section"><div class="ev-wrap ev-calculator"><form id="ev-calc-form" novalidate>'+field('Декор','sku',opts)+'<div id="ev-calc-product"></div><div class="ev-filter-row"><div class="ev-field"><label for="ev-area">Площадь помещений, м²</label><input type="text" inputmode="decimal" id="ev-area" name="area" placeholder="Например, 20,5" required autocomplete="off" aria-describedby="ev-area-hint"><small id="ev-area-hint">Укажите «чистую» площадь в м² как есть из плана объекта.</small></div><div class="ev-field"><label for="ev-reserve">Запас на подрезку, %</label><input type="text" inputmode="decimal" id="ev-reserve" name="reserve" value="5" required aria-describedby="ev-reserve-hint"><small id="ev-reserve-hint">При палубной укладке стандартная прирезка — 5%. Если укладка диагональная, прирезка может составить 8–10%.</small></div></div><button type="submit" class="ev-button ev-button--primary">Рассчитать</button><p class="ev-note">Расчёт округляет количество вверх до целых упаковок.</p></form><section id="ev-calc-result" class="ev-result" aria-live="polite" tabindex="-1"><span class="ev-eyebrow">Ваш расчёт</span><h2>Сколько упаковок нужно?</h2><p>Выберите декор и введите площадь. Здесь появятся количество, площадь покупки и стоимость покрытия по текущей цене.</p></section></div></section>'
+    body = '<section class="ev-section"><div class="ev-wrap ev-calculator"><form id="ev-calc-form" novalidate>'+field('Декор','sku',opts)+'<div id="ev-calc-product"></div><div class="ev-filter-row"><div class="ev-field"><label for="ev-area">Площадь помещений, м²</label><input type="text" inputmode="decimal" id="ev-area" name="area" placeholder="Например, 20,5" required autocomplete="off" aria-describedby="ev-area-hint"><small id="ev-area-hint">Укажите «чистую» площадь в м² как есть из плана объекта.</small></div><div class="ev-field"><label for="ev-reserve">Запас на подрезку, %</label><input type="text" inputmode="decimal" id="ev-reserve" name="reserve" value="5" required aria-describedby="ev-reserve-hint"><small id="ev-reserve-hint">При палубной укладке стандартная прирезка — 5%. Если укладка диагональная, прирезка может составить 8–10%.</small></div></div><button type="submit" class="ev-button ev-button--primary">Рассчитать</button><p class="ev-note">Расчёт округляет количество вверх до целых упаковок.</p></form><section id="ev-calc-result" class="ev-result" aria-live="polite" tabindex="-1"><span class="ev-eyebrow">Ваш расчёт</span><h2>Сколько упаковок нужно?</h2><p>Выберите декор и введите площадь. Здесь появятся количество, площадь покупки и стоимость покрытия по текущей цене.</p></section>'+installation_estimate()+'</div></section>'
     write_page(page,'Рассчитать покупку','Площадь помещений → запас → целые упаковки. Получите расчёт покрытия и сохраните ссылку для продавца.',body,'calculator')
     page='favorites.html'
     body='<section class="ev-section"><div class="ev-wrap"><div class="ev-favorites-bar"><p>В подборке: <b id="ev-favorite-total">0</b></p><div class="ev-actions"><button type="button" class="ev-button" data-share-selection disabled>Скопировать ссылку</button><button type="button" class="ev-text-link" data-print>Распечатать</button></div></div><div id="ev-shared-note" class="ev-note" hidden><p>Вы открыли подборку по ссылке. Её можно сохранить в своём избранном.</p><button type="button" class="ev-button" data-save-shared>Добавить в моё избранное</button></div><div id="ev-favorites"><p>Отметьте понравившиеся декоры в каталоге.</p>'+link('Открыть каталог','catalog-ru/',page,'ev-button')+'</div><p class="ev-note">Избранное хранится в этом браузере. Чтобы открыть подборку на другом устройстве или показать продавцу, скопируйте ссылку.</p></div></section>'
