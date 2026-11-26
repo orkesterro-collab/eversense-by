@@ -124,6 +124,7 @@
       menuLink(["Каталог", "catalog-ru/"]) +
       '<a class="ev-header-stores" href="' + storesUrl + '" aria-label="' + storesLabel + '" title="' + storesLabel + '"' +
       (current === new URL(storesUrl).pathname ? ' aria-current="page"' : '') + '>' +
+      '<span>' + storesLabel + '</span>' +
       '<img src="' + asset("brand-icons/storefront-pin.svg") + '" width="24" height="24" alt=""></a></nav>' +
       '<button class="ev-header-toggle" type="button" aria-controls="ev-global-menu" aria-expanded="false" aria-label="Открыть меню">' +
       '<span class="ev-header-lines" aria-hidden="true"><span></span><span></span><span></span></span></button>' +

@@ -711,8 +711,14 @@ def main():
                 require(stores.evaluate("a=>a.href") == base + "/where-to-buy.html", "Incorrect store locator destination")
                 bounds = stores.bounding_box()
                 require(bounds["width"] >= 44 and bounds["height"] >= 44, "Store locator tap target is too small")
-                require(stores.locator("img").evaluate("async img => { await img.decode(); return img.naturalWidth === 24; }"),
-                        "Storefront icon did not load")
+                icon = stores.locator("img")
+                label = stores.get_by_text("Где купить", exact=True)
+                if device == "desktop":
+                    require(label.is_visible() and not icon.is_visible(), "Desktop header should display the store locator text")
+                else:
+                    require(icon.is_visible() and not label.is_visible(), "Mobile header should display the storefront icon")
+                    require(icon.evaluate("async img => { await img.decode(); return img.naturalWidth === 24; }"),
+                            "Storefront icon did not load")
                 return {"links": len(paths), "keyboard_open_and_escape": True}
             for device, width, height in DEVICES:
                 case("header-" + device, lambda p, c, d=device: header_test(p, c, d), width, height)
