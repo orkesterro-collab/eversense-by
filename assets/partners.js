@@ -253,7 +253,7 @@
       link.className = searchable(city) === "минск" ? "map-city map-city--capital" : "map-city";
       link.dataset.city = city;
       link.href = "#" + encodeURIComponent(cityGroupId(city));
-      link.setAttribute("aria-label", city + " — показать магазины");
+      link.setAttribute("aria-label", document.documentElement.lang === "en" ? "Show stores in " + city : city + " — показать магазины");
       link.style.left = point.x + "%";
       link.style.top = point.y + "%";
       var label = document.createElement("span");
@@ -303,6 +303,10 @@
     if (link) showCity(link.dataset.city);
   }
   function setupMap() {
+    if (document.documentElement.lang === "en") {
+      el("partners-map-panel").setAttribute("aria-label", "EVERSENSE stores in Belarus");
+      el("map-cities").setAttribute("aria-label", "Find stores by city");
+    }
     var path = COUNTRY_OUTLINE.map(function (coords) {
       var point = project(coords[0], coords[1]);
       return point.x.toFixed(3) + "," + point.y.toFixed(3);
@@ -310,6 +314,7 @@
     el("country-outline").setAttribute("d", "M" + path.join(" L") + " Z");
     el("partners-map-panel").addEventListener("click", function (event) {
       var link = event.target.closest("a[data-city]");
+      if (document.documentElement.classList.contains("map-embed")) return;
       if (!link || event.button || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       if (location.hash !== link.hash) history.pushState(null, "", link.hash);

@@ -9,13 +9,25 @@
   <title>Где купить EVERSENSE в Беларуси | Карта и партнёры</title>
 
 
+  <script>
+    (function () {
+      var params = new URLSearchParams(location.search);
+      if (window.parent === window || params.get("view") !== "map") return;
+      document.documentElement.classList.add("map-embed");
+      if (params.get("lang") === "en") document.documentElement.lang = "en";
+      var base = document.createElement("base");
+      base.href = new URL(location.pathname, location.origin).href;
+      base.target = "_top";
+      document.head.appendChild(base);
+    })();
+  </script>
   <link href="assets/vendor/fonts/manrope.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/vendor/maplibre-gl-5.24.1.css">
-  <link rel="stylesheet" href="assets/partners.css?v=20261126-map">
+  <link rel="stylesheet" href="assets/partners.css?v=20261126-map2">
   <link rel="stylesheet" href="assets/unified-header.css?v=20261104a">
   <script async id="partners-map-library" src="assets/vendor/maplibre-gl-5.24.1.js"></script>
-  <script defer src="assets/partners-map.js?v=20261126-map"></script>
-  <script defer src="assets/partners.js?v=20261126-map"></script>
+  <script defer src="assets/partners-map.js?v=20261126-map2"></script>
+  <script defer src="assets/partners.js?v=20261126-map2"></script>
   <script defer src="assets/unified-header.js?v=20261104a"></script>
 </head>
 <body>

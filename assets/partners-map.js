@@ -4,7 +4,8 @@
 
   var BELARUS = [[23.15, 51.23], [32.77, 56.18]];
   var SHOP_ZOOM = 9;
-  var locale = {
+  var english = document.documentElement.lang === "en";
+  var locale = english ? {"Map.Title": "EVERSENSE stores in Belarus"} : {
     "Map.Title": "Карта магазинов EVERSENSE",
     "NavigationControl.ZoomIn": "Приблизить",
     "NavigationControl.ZoomOut": "Отдалить",
@@ -23,7 +24,9 @@
     if (shop) link.dataset.partnerId = shop.id;
     link.href = shop ? "#shop-" + encodeURIComponent(shop.id) : city.href;
     var name = shop ? shop.name : city.name;
-    link.setAttribute("aria-label", name + (shop ? " — открыть магазин" : " — показать магазины"));
+    var action = english ? (shop ? "Open store " : "Show stores in ") + name
+      : name + (shop ? " — открыть магазин" : " — показать магазины");
+    link.setAttribute("aria-label", action);
     caption.className = "dealer-pin__caption";
     caption.textContent = name;
     link.appendChild(caption);
@@ -125,7 +128,7 @@
           var button = document.createElement("button");
           group.className = "maplibregl-ctrl map-home";
           button.type = "button";
-          button.textContent = "Вся Беларусь";
+          button.textContent = english ? "All of Belarus" : "Вся Беларусь";
           button.addEventListener("click", function () {
             map.fitBounds(BELARUS, {padding: padding(), duration: 0});
           });

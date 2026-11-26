@@ -23,6 +23,7 @@ on:
       - "black-friday/**"
       - "catalog-ru/**"
       - "catalog-en/**"
+      - "where-to-buy-map-*/**"
       - "ru/**"
       - "en/**"
       - "*.html"

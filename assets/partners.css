@@ -135,3 +135,11 @@
 @media(max-width:900px){.intro__inner{padding-top:32px}.intro h1{font-size:40px}.partner-list{grid-template-columns:1fr}.footer__inner{grid-template-columns:1fr 1fr}.footer__links{grid-column:1/-1;flex-direction:row}}
 @media(max-width:650px){.top-nav{display:none}.breadcrumbs{font-size:12px}.breadcrumbs .page-width{padding-top:7px;padding-bottom:17px}.intro__inner{display:block;padding-top:22px;padding-bottom:10px}.intro h1{font-size:34px;max-width:500px;line-height:1.13}.controls{flex-wrap:wrap;gap:4px 20px;margin-bottom:18px}.search-field{flex:1 0 100%}.search-field input{font-size:13px}.city-select{flex:1;height:44px}.city-select select{height:43px;font-size:13px}.city-select:after{top:16px}.clear-button{height:44px}.list-section{padding-top:20px;padding-bottom:50px}.list-section h2{font-size:25px;margin-bottom:6px}.city-group__name{font-size:21px}.partner-card__row{grid-template-columns:78px minmax(0,1fr);gap:8px}.footer__inner{grid-template-columns:1fr;gap:28px;padding-top:36px;padding-bottom:36px}.footer__links{grid-column:auto;flex-wrap:wrap}.status{font-size:12px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+/* The older map pages keep their own header, language switch and footer. */
+html.map-embed, .map-embed body, .map-embed main, .map-embed .map-frame, .map-embed .map-viewport {
+  height: 100%; min-height: 0; margin: 0; padding: 0; border: 0;
+}
+html.map-embed, .map-embed body { overflow: hidden; }
+.map-embed body.ev-has-global-header .site-top + main { padding-top: 0; }
+.map-embed body > :not(main), .map-embed main > :not(.map-frame), .map-embed .map-hint { display: none !important; }
