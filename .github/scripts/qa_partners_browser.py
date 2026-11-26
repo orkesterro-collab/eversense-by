@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Check the published directory against the current public partner sheet."""
 import json
+from collections import Counter
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
@@ -29,7 +30,9 @@ def check_directory(page, label):
     page.wait_for_function("() => window.EversensePartners?.isLoaded()", timeout=35000)
     panel = page.locator("#partners-map-panel")
     directory = page.locator("#partners-list")
-    pins = panel.locator(".map-city")
+    basemap = panel.locator("#partners-basemap")
+    basemap.wait_for(state="visible", timeout=55000)
+    pins = basemap.locator(".dealer-pin")
     groups = page.locator("#partners-groups > .city-group")
     region = next(row for row in dealers if row["city"] != "Минск" and has_pin(row))
     city = region["city"].strip()
@@ -44,16 +47,12 @@ def check_directory(page, label):
     assert set(pins.evaluate_all("els => els.map(el => el.dataset.city)")) == located_cities
     assert not panel.locator("iframe, .leaflet-container").count()
     assert page.locator("#map-hint").is_visible()
-    # Check actual labels in screen pixels after the Cyrillic font has loaded.
-    page.evaluate("document.fonts.ready")
-    page.wait_for_function("""() => {
-        const frame = document.querySelector('#partners-map').getBoundingClientRect();
-        const labels = [...document.querySelectorAll('.map-city__label')].map(el => el.getBoundingClientRect());
-        return labels.every((a, i) => a.left >= frame.left - 1 && a.right <= frame.right + 1
-          && labels.slice(i + 1).every(b => a.right <= b.left + 1 || b.right <= a.left + 1
-            || a.bottom <= b.top + 1 || b.bottom <= a.top + 1));
-    }""")
-    assert panel.locator("path.country-outline").is_visible()
+    canvas = basemap.locator("canvas.maplibregl-canvas")
+    assert canvas.is_visible() and not panel.locator("#partners-map").is_visible()
+    assert canvas.evaluate("el => getComputedStyle(el).filter") == "grayscale(1) sepia(0.25)"
+    assert basemap.locator('a[href*="openstreetmap.org/copyright"]').count()
+    assert basemap.get_by_role("button", name="Приблизить").is_visible()
+    assert basemap.get_by_role("button", name="Вся Беларусь").is_visible()
     assert not reset.is_visible()
     assert page.locator("#partners-demo,.district-group,.city-group__right,#partners-count,.view-switch").count() == 0
     names = groups.evaluate_all("els => els.map(el => el.dataset.city)")
@@ -110,8 +109,8 @@ def check_directory(page, label):
     # A map link reveals the whole city even after a different city or an empty search.
     city_select.select_option("Минск")
     search.fill("no-such-store-987654")
-    pin = panel.get_by_role("link", name=city + " — показать магазины", exact=True)
-    pin.locator(".map-city__label").click()
+    pin = basemap.get_by_role("link", name=city + " — показать магазины", exact=True)
+    pin.click()
     group = groups.filter(has=card(page, region))
     assert group.get_attribute("open") is not None
     assert city_select.input_value() == "" and search.input_value() == ""
@@ -125,7 +124,7 @@ def check_directory(page, label):
     assert group.get_attribute("open") is not None
     assert group.locator(":scope > summary").evaluate("el => el === document.activeElement")
     if minsk:
-        panel.get_by_role("link", name="Минск — показать магазины").click()
+        basemap.get_by_role("link", name="Минск — показать магазины").click()
         assert groups.first.locator(".partner-card:visible").count() == len(minsk)
         assert groups.first.locator("h3").evaluate("el => el === document.activeElement")
 
@@ -137,6 +136,26 @@ def check_directory(page, label):
     assert pins.count() == len(located_cities)
     reset.click()
     assert page.locator(".partner-card").count() == len(ids) and not reset.is_visible()
+
+    # At street scales a store pin opens its own card. Returning to the overview restores city pins.
+    addresses = {row["partner_id"].strip(): (row["city"].strip(),
+                 float(row["longitude"].replace(",", ".")), float(row["latitude"].replace(",", ".")))
+                 for row in dealers if has_pin(row)}
+    counts = Counter(addresses.values())
+    single_shop_ids = {shop_id for shop_id, location in addresses.items() if counts[location] == 1}
+    if single_shop_ids:
+        shop_pins = basemap.locator(".dealer-pin[data-partner-id]")
+        for _ in range(7):
+            if shop_pins.count():
+                break
+            basemap.get_by_role("button", name="Приблизить").click()
+            page.wait_for_timeout(350)
+        assert set(shop_pins.evaluate_all("els => els.map(el => el.dataset.partnerId)")) == single_shop_ids
+        shop_id = shop_pins.first.get_attribute("data-partner-id")
+        shop_pins.first.press("Enter")
+        assert page.locator('[id="shop-' + shop_id + '"]').evaluate("el => el.open && el.firstElementChild === document.activeElement")
+        basemap.get_by_role("button", name="Вся Беларусь").click()
+        assert set(pins.evaluate_all("els => els.map(el => el.dataset.city)")) == located_cities
 
     # A change in sheet sort_order must also work without a district grouping.
     if len(minsk) > 1:
@@ -154,7 +173,7 @@ def check_directory(page, label):
 
 
 with sync_playwright() as playwright:
-    browser = playwright.chromium.launch(headless=True, args=["--no-sandbox", "--disable-dev-shm-usage"])
+    browser = playwright.chromium.launch(headless=True, args=["--no-sandbox", "--disable-dev-shm-usage", "--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"])
     for label, width, height in [("desktop", 1440, 920), ("mobile", 390, 844)]:
         page = browser.new_page(viewport={"width": width, "height": height}, has_touch=label == "mobile",
                                 is_mobile=label == "mobile", reduced_motion="reduce", device_scale_factor=1)

@@ -36,6 +36,7 @@
   var el = function (id) { return document.getElementById(id); };
   var locale = new Intl.Collator("ru", { sensitivity: "base" });
   var partners = [];
+  var updateMapLocations;
   var loaded = false;
   var feedTimeout = null;
   var loading = false;
@@ -149,7 +150,7 @@
     var phoneMarkup = p.demo ? escapeHTML(p.phone || "Не указан") + " (пример)"
       : tel ? '<a href="' + escapeHTML(tel) + '">' + escapeHTML(p.phone) + "</a>"
       : escapeHTML(p.phone || "Не указан");
-    return '<details class="partner-card" data-partner-id="' + key + '">' +
+    return '<details class="partner-card" id="shop-' + key + '" data-partner-id="' + key + '">' +
       '<summary><span class="partner-card__head">' +
         '<span class="partner-card__name">' + escapeHTML(displayName) + demo + '</span>' +
         (p.address ? '<span class="partner-card__address">' + escapeHTML(p.address) + '</span>' : '') +
@@ -207,6 +208,7 @@
   }
   function layoutMapLabels() {
     var layer = el("map-cities");
+    if (!layer.clientWidth) return;
     var bounds = { left: 1, top: 1, right: layer.clientWidth - 1, bottom: layer.clientHeight - 1 };
     var pins = Array.from(layer.children, function (link) {
       return { link: link, x: link.offsetLeft, y: link.offsetTop,
@@ -236,6 +238,7 @@
   }
   function renderMap() {
     var links = document.createDocumentFragment();
+    var locations = [];
     cityNames(partners).forEach(function (city) {
       var located = partners.filter(function (p) { return p.city === city && validCoords(p.lat, p.lng); });
       var centre = CITY_CENTRES.get(searchable(city));
@@ -258,10 +261,12 @@
       label.textContent = city;
       link.appendChild(label);
       links.appendChild(link);
+      locations.push({name: city, coordinates: [centre[1], centre[0]], href: link.getAttribute("href"), shops: located});
     });
     var layer = el("map-cities");
     layer.replaceChildren(links);
     el("map-hint").hidden = !layer.childElementCount;
+    if (updateMapLocations) updateMapLocations(locations);
     layoutMapLabels();
   }
   function showCity(city) {
@@ -273,10 +278,28 @@
     group.scrollIntoView({ block: "start" });
     group.firstElementChild.focus({ preventScroll: true });
   }
-  function openLinkedCity() {
-    var link = Array.from(el("map-cities").children).find(function (item) {
-      return item.hash === location.hash;
-    });
+  function openMapLocation(city, shopId) {
+    if (!shopId) {
+      showCity(city);
+      return;
+    }
+    if (!cardById(shopId)) resetFilters();
+    var card = cardById(shopId);
+    if (!card) return;
+    var group = el(cityGroupId(city));
+    if (group.tagName === "DETAILS") group.open = true;
+    card.open = true;
+    card.scrollIntoView({block: "start"});
+    card.firstElementChild.focus({preventScroll: true});
+  }
+  function openLinkedLocation() {
+    var hash = location.hash;
+    if (hash.startsWith("#shop-")) {
+      var item = partners.find(function (p) { return "#shop-" + encodeURIComponent(p.id) === hash; });
+      if (item) openMapLocation(item.city, item.id);
+      return;
+    }
+    var link = Array.from(el("map-cities").children).find(function (item) { return item.hash === hash; });
     if (link) showCity(link.dataset.city);
   }
   function setupMap() {
@@ -285,14 +308,15 @@
       return point.x.toFixed(3) + "," + point.y.toFixed(3);
     });
     el("country-outline").setAttribute("d", "M" + path.join(" L") + " Z");
-    el("map-cities").addEventListener("click", function (event) {
+    el("partners-map-panel").addEventListener("click", function (event) {
       var link = event.target.closest("a[data-city]");
       if (!link || event.button || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       if (location.hash !== link.hash) history.pushState(null, "", link.hash);
-      showCity(link.dataset.city);
+      openMapLocation(link.dataset.city, link.dataset.partnerId);
     });
-    window.addEventListener("hashchange", openLinkedCity);
+    if (window.EversenseShopMap) updateMapLocations = window.EversenseShopMap.mount(el("partners-basemap"));
+    window.addEventListener("hashchange", openLinkedLocation);
     if (window.ResizeObserver) new ResizeObserver(layoutMapLabels).observe(el("partners-map"));
     else window.addEventListener("resize", layoutMapLabels);
     if (document.fonts) document.fonts.ready.then(layoutMapLabels);
@@ -351,7 +375,7 @@
       if (collapsed.has(group.dataset.city)) group.open = false;
     });
     renderMap();
-    if (firstLoad && location.hash) openLinkedCity();
+    if (firstLoad && location.hash) openLinkedLocation();
   }
   // The raw CSV preserves dealer URLs in columns with mixed cell types.
   function csvRows(text) {

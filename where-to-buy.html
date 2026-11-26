@@ -10,9 +10,12 @@
 
 
   <link href="assets/vendor/fonts/manrope.css" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/partners.css?v=20261124-cities">
+  <link rel="stylesheet" href="assets/vendor/maplibre-gl-5.24.1.css">
+  <link rel="stylesheet" href="assets/partners.css?v=20261126-map">
   <link rel="stylesheet" href="assets/unified-header.css?v=20261104a">
-  <script defer src="/assets/partners.js?v=20261124-cities"></script>
+  <script async id="partners-map-library" src="assets/vendor/maplibre-gl-5.24.1.js"></script>
+  <script defer src="assets/partners-map.js?v=20261126-map"></script>
+  <script defer src="assets/partners.js?v=20261126-map"></script>
   <script defer src="assets/unified-header.js?v=20261104a"></script>
 </head>
 <body>
@@ -43,11 +46,14 @@
     </section>
 
     <section class="map-frame" id="partners-map-panel" aria-label="Города Беларуси с магазинами EVERSENSE">
-      <div class="map-canvas" id="partners-map">
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-          <path class="country-outline" id="country-outline" vector-effect="non-scaling-stroke"></path>
-        </svg>
-        <nav id="map-cities" aria-label="Перейти к магазинам города"></nav>
+      <div class="map-viewport">
+        <div id="partners-basemap" data-style="assets/partners-map-style.json?v=20261126-map" inert aria-hidden="true"></div>
+        <div class="map-canvas" id="partners-map">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path class="country-outline" id="country-outline" vector-effect="non-scaling-stroke"></path>
+          </svg>
+          <nav id="map-cities" aria-label="Перейти к магазинам города"></nav>
+        </div>
       </div>
       <p class="map-hint" id="map-hint" hidden>Выберите город, чтобы увидеть его магазины.</p>
     </section>

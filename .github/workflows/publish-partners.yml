@@ -4,8 +4,8 @@ on:
     branches: [main]
     paths:
       - where-to-buy.html
-      - assets/partners.css
-      - assets/partners.js
+      - "assets/partners*"
+      - "assets/vendor/maplibre-gl-*"
       - .github/scripts/sync_partners_ftps.py
       - .github/scripts/check_partners_feed.py
       - .github/scripts/qa_partners_browser.py
@@ -25,7 +25,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check client script syntax
-        run: node --check assets/partners.js
+        run: |
+          node --check assets/partners.js
+          node --check assets/partners-map.js
+          python3 -m json.tool assets/partners-map-style.json > /dev/null
 
       - name: Check the current public dealer export
         run: python3 .github/scripts/check_partners_feed.py

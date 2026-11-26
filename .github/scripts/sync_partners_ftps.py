@@ -19,7 +19,11 @@ HOST = "vh108.hoster.by"
 IP = "87.232.64.108"
 DOMAINS = ("eversense.by", "www.eversense.by")
 PIN_SHA256 = "25327D62994712DD70353A3F2C3B7F35666073CCC950A04785A37D4E5E8EC9BB"
-PATHS = ["assets/partners.js", "assets/partners.css", "where-to-buy.html"]
+PATHS = [
+    *(path.as_posix() for path in sorted(Path("assets/vendor").glob("maplibre-gl-*"))),
+    "assets/partners-woodland.png", "assets/partners-map-style.json", "assets/partners-map.js",
+    "assets/partners.js", "assets/partners.css", "where-to-buy.html",
+]
 CANDIDATES = [".", "../eversense.by", "/eversense.by", "eversense.by",
               "/www/eversense.by", "www/eversense.by",
               "../../eversense.by", "../../www/eversense.by"]
