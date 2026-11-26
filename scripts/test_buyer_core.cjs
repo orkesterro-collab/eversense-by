@@ -118,4 +118,35 @@ test('20 percent reserve at an exact boundary does not add a spurious pack', () 
   assert.equal(result.totalCents, 15224);
 });
 
+test('compares recommended, smaller and larger orders on the same clean area', () => {
+  const result = core.calculate('20,0', '5,0', '1,99', 50.96, 8);
+  assert.equal(result.area, 20);
+  assert.equal(result.reserve, 5);
+  assert.equal(result.neededArea, 21);
+  assert.deepEqual(result.scenarios.map(s => s.packs), [11, 10, 12]);
+  assert.deepEqual(result.scenarios.map(s => s.purchasedArea), [21.89, 19.9, 23.88]);
+  assert.deepEqual(result.scenarios.map(s => s.extraArea), [1.89, -0.1, 3.88]);
+  assert.deepEqual(result.scenarios.map(s => s.extraBoards.toFixed(1)), ['7.6', '-0.4', '15.6']);
+  assert.deepEqual(result.scenarios.map(s => s.totalCents), [111551, 101410, 121692]);
+});
+test('smaller order can cover the room exactly or leave less than the chosen allowance', () => {
+  const exact = core.calculate('1,99', 5, 1.99, null, 8).scenarios[1];
+  assert.equal(exact.extraArea, 0);
+  assert.equal(exact.extraBoards, 0);
+  assert.equal(exact.totalCents, null);
+  const smaller = core.calculate('1,95', 5, 1.99, 50, 8).scenarios[1];
+  assert.equal(smaller.packs, 1);
+  assert.equal(smaller.extraArea, 0.04);
+});
+test('one-pack order has no smaller purchase; missing board count leaves figures and prices intact', () => {
+  const result = core.calculate('0,25', 0, 2.54, 40);
+  const [recommended, fewer, larger] = result.scenarios;
+  assert.equal(fewer, null);
+  assert.equal(recommended.extraBoards, null);
+  assert.equal(recommended.totalCents, 10160);
+  assert.equal(larger.packs, 2);
+  assert.equal(larger.purchasedArea, 5.08);
+  assert.equal(larger.totalCents, 20320);
+});
+
 process.stdout.write(`\n${checks} test groups passed.\n`);

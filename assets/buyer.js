@@ -181,14 +181,98 @@
     section.querySelector('[data-install-cached]').hidden = !(costs && costs.cached);
   }
 
+  var packAreaFormat = new Intl.NumberFormat('ru-RU', {minimumFractionDigits:2, maximumFractionDigits:4});
+  var boardFormat = new Intl.NumberFormat('ru-RU', {minimumFractionDigits:1, maximumFractionDigits:1});
+  var bynIcon = '<img class="ev-pack-byn" src="' + route('assets/brand-icons/byn.svg') + '" alt="BYN" width="10" height="10">';
+
+  function packComparison(result, product){
+    var options = result.scenarios.filter(Boolean);
+    var fewer = result.scenarios[1];
+    var cleanArea = number(result.area, 4);
+    var target = number(result.neededArea, 4);
+    // Preserve a more precise target when rounding would make the smaller purchase look sufficient.
+    if(fewer && Number(result.neededArea.toFixed(4)) <= fewer.purchasedArea && result.neededArea > fewer.purchasedArea){
+      target = '&gt; ' + number(fewer.purchasedArea, 4);
+    }
+    var largest = options[options.length - 1];
+    var wideFigures = largest.purchasedArea >= 1000 || largest.totalCents >= 10000000;
+    var m2 = ' <span class="ev-pack-unit">м²</span>';
+
+    function row(label, value, className){
+      return '<tr class="' + className + '"><th scope="row">' + label + '</th>' + options.map(function(option){
+        return '<td>' + value(option) + '</td>';
+      }).join('') + '</tr>';
+    }
+    function formatQuantity(value){
+      // Give large quantities a natural wrap point between thousands on small screens.
+      return value.replace(/[  ]/g, ' <wbr>');
+    }
+    function balance(value, equivalent){
+      if(value === null) return '—';
+      var abs = Math.abs(value);
+      var text = equivalent ? boardFormat.format(abs) : packAreaFormat.format(abs);
+      if(equivalent && abs > 0 && abs < 0.05) text = number(abs, 5);
+      var sign = value < 0 ? '−' : (value > 0 && !equivalent ? '+' : '');
+      return '<span' + (value < 0 ? ' class="ev-pack-negative"' : '') + '>' +
+        (equivalent ? '≈ ' : '') + sign + formatQuantity(text) + (equivalent ? '' : m2) + '</span>';
+    }
+
+    var rows = row('Целыми пачками', function(option){
+      return formatQuantity(number(option.packs)) + ' <span class="ev-pack-unit">уп.</span>';
+    }, 'ev-pack-count');
+    rows += row('Итого метраж', function(option){return formatQuantity(packAreaFormat.format(option.purchasedArea)) + m2;}, 'ev-pack-area');
+    rows += row('На прирезку', function(option){return balance(option.extraArea, false);}, 'ev-pack-balance');
+    rows += row('В пересчёте на доски', function(option){return balance(option.extraBoards, true);}, 'ev-pack-boards');
+    rows += row('Стоимость покрытия', function(option){
+      return option.totalCents === null ? '<span class="ev-pack-price-pending">Уточнить цену</span>' :
+        formatQuantity(money(option.totalCents / 100)) + ' ' + bynIcon;
+    }, 'ev-pack-total');
+
+    var warning = '';
+    if(fewer){
+      var form = russianCount.select(fewer.packs);
+      var quantity = number(fewer.packs) + ' ' + {one:'упаковка покрывает',few:'упаковки покрывают',many:'упаковок покрывают'}[form];
+      var shortfall;
+      if(fewer.extraArea < 0){
+        shortfall = 'До чистого метража не хватает ' + packAreaFormat.format(-fewer.extraArea) + ' м² ещё до подрезки.';
+      }else{
+        var missingReserve = result.neededArea - fewer.purchasedArea;
+        var missingText = missingReserve < 0.0001 ? 'менее 0,0001' : packAreaFormat.format(missingReserve);
+        shortfall = 'До выбранного запаса не хватает ' + missingText + ' м².';
+      }
+      warning = '<p class="ev-pack-warning"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor">' +
+        '<circle cx="8" cy="8" r="6.5"/><path d="M8 4.5v4.6M8 10.5v1" stroke-width="1.4"/></svg><span>' +
+        quantity + ' ' + packAreaFormat.format(fewer.purchasedArea) + ' м². ' + shortfall + '</span></p>';
+    }
+
+    var boards = Number(product.packCount);
+    var packInfo = 'В одной упаковке ' + number(product.packArea, 4) + ' м²';
+    if(Number.isSafeInteger(boards) && boards > 0){
+      packInfo += ' · ' + number(boards) + ' ' + {one:'доска',few:'доски',many:'досок'}[russianCount.select(boards)];
+    }
+    return '<div class="ev-pack-hero' + (cleanArea.length > 5 ? ' ev-pack-hero--long' : '') + '">' +
+      '<div><span class="ev-pack-label">Чистый метраж</span><div class="ev-pack-metric">' + cleanArea + ' <small>м²</small></div></div>' +
+      '<dl class="ev-pack-settings"><div><dt>Выбранная прирезка</dt><dd>' + number(result.reserve, 4) + '%</dd></div>' +
+      '<div><dt>С выбранным запасом</dt><dd>' + target + ' м²</dd></div></dl></div>' +
+      '<div class="ev-pack-heading"><h2 id="ev-pack-title">Сколько упаковок взять?</h2><p>' + packInfo + '</p></div>' +
+      '<table class="ev-pack-table' + (wideFigures ? ' ev-pack-table--large' : '') + '" aria-labelledby="ev-pack-title"><thead><tr><th scope="col">Вариант</th><th scope="col">По расчёту</th>' +
+      (fewer ? '<th scope="col">На пачку<br>меньше</th>' : '') + '<th scope="col">На пачку<br>больше</th></tr></thead><tbody>' +
+      rows + '</tbody></table>' + warning +
+      '<aside class="ev-pack-tip"><div><h3>Запас для ремонта</h3><p>По опыту советуем оставить после укладки ' +
+      '<strong>3–5 целых досок</strong> для возможного косметического ремонта в будущем.</p></div>' +
+      '<img src="' + route('assets/brand-icons/spare-boards.svg') + '" alt="" width="65" height="61"></aside>';
+  }
+
   function renderCalculation(focus){
     var form=document.getElementById('ev-calc-form');if(!form)return;
     var sku=form.elements.sku.value,p=bySku.get(sku),root=document.getElementById('ev-calc-result');
     if(!p){root.innerHTML='<p>Выберите декор для расчёта.</p>';form.dataset.calculated='false';renderInstallationEstimate(form);return;}
-    var result=core.calculate(form.elements.area.value,form.elements.reserve.value,p.packArea,activePrice(sku));
+    var result=core.calculate(form.elements.area.value,form.elements.reserve.value,p.packArea,activePrice(sku),p.packCount);
     if(result.error){root.innerHTML='<p class="ev-error" role="alert">'+esc(result.error)+'</p>';form.dataset.calculated='false';renderInstallationEstimate(form);return;}
     form.dataset.calculated='true';
-    root.innerHTML='<span class="ev-eyebrow">'+esc(fullName(p))+' · '+p.sku+'</span><h2>'+result.packs+' <small>уп.</small></h2><dl class="ev-calc-values"><div><dt>С выбранным запасом</dt><dd>'+number(result.neededArea,4)+' м²</dd></div><div><dt>В целых упаковках</dt><dd>'+number(result.purchasedArea,4)+' м²</dd></div><div><dt>В одной упаковке</dt><dd>'+number(p.packArea,4)+' м² / '+p.packCount+' шт.</dd></div><div><dt>Стоимость материала</dt><dd>'+(result.totalCents===null?'Уточнить цену':money(result.totalCents/100)+' BYN')+'</dd></div></dl><p class="ev-note">Расчёт включает только покрытие. Подложка, плинтусы, доставка и монтаж рассчитываются отдельно. Количество уточните по плану помещения и выбранной раскладке.</p><div class="ev-actions"><a class="ev-button ev-button--primary" href="'+route('contacts.html')+'?sku='+sku+'&packs='+result.packs+'">Уточнить наличие</a><button class="ev-text-link" type="button" data-share-calculation>Скопировать расчёт</button></div>';
+    root.innerHTML=packComparison(result,p) +
+      '<div class="ev-actions"><a class="ev-button ev-button--primary" href="'+route('contacts.html')+'?sku='+sku+'&amp;packs='+result.packs+'">Уточнить наличие</a>' +
+      '<button class="ev-text-link" type="button" data-share-calculation>Скопировать расчёт</button></div>';
     renderInstallationEstimate(form);
     var url=new URL(location.href);url.searchParams.set('sku',sku);url.searchParams.set('area',form.elements.area.value);url.searchParams.set('reserve',form.elements.reserve.value);history.replaceState(null,'',url);
     syncButtons();

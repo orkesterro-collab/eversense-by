@@ -38,7 +38,7 @@
     var total=(numerator*2n+denominator)/(denominator*2n);
     return total<=BigInt(Number.MAX_SAFE_INTEGER)?Number(total):null;
   }
-  function calculate(area,reserve,packArea,unitPrice){
+  function calculate(area,reserve,packArea,unitPrice,packCount){
     area=parseDecimal(area);reserve=parseDecimal(reserve);packArea=parseDecimal(packArea);
     if(area===null||area<=0||area>100000) return {error:'Укажите площадь больше 0 и не больше 100 000 м².'};
     if(reserve===null||reserve<0||reserve>20) return {error:'Укажите запас от 0 до 20%.'};
@@ -48,10 +48,29 @@
     if(!Number.isSafeInteger(packUnits)||packUnits<=0) return {error:'Площадь упаковки этого декора нужно уточнить у продавца.'};
     var numerator=BigInt(areaUnits)*BigInt(1000000+reserveUnits),denominator=BigInt(packUnits)*1000000n;
     var packs=Number((numerator+denominator-1n)/denominator);
-    var purchasedUnits=packs*packUnits;
-    // Round the final material total once, half up, to BYN kopeks.
-    var totalCents=moneyCents(purchasedUnits,unitPrice);
-    return {packs:packs,neededArea:Number(numerator)/10000000000,purchasedArea:purchasedUnits/10000,extraArea:(purchasedUnits-areaUnits)/10000,totalCents:totalCents};
+    packCount=parseDecimal(packCount);
+    function scenario(quantity){
+      var purchasedUnits=quantity*packUnits;
+      var extraUnits=purchasedUnits-areaUnits;
+      return {
+        packs:quantity,
+        purchasedArea:purchasedUnits/10000,
+        extraArea:extraUnits/10000,
+        extraBoards:Number.isSafeInteger(packCount)&&packCount>0 ? extraUnits/packUnits*packCount : null,
+        totalCents:moneyCents(purchasedUnits,unitPrice)
+      };
+    }
+    var recommended=scenario(packs);
+    return {
+      area:area,
+      reserve:reserve,
+      neededArea:Number(numerator)/10000000000,
+      packs:packs,
+      purchasedArea:recommended.purchasedArea,
+      extraArea:recommended.extraArea,
+      totalCents:recommended.totalCents,
+      scenarios:[recommended,packs>1 ? scenario(packs-1) : null,scenario(packs+1)]
+    };
   }
   return {cleanItems:cleanItems,parseDecimal:parseDecimal,calculate:calculate,moneyCents:moneyCents};
 });

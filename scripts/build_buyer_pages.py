@@ -58,6 +58,8 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
     canonical = 'https://eversense.by/' + (page[:-10] if page.endswith('index.html') else page)
     schema = structured or {'@context':'https://schema.org','@type':'WebPage','name':title,'description':lead,'url':canonical,'inLanguage':'ru'}
     version = CATALOG_VERSION if page_type in ('catalog', 'favorites') else VERSION
+    buyer_version = '20261126packcomparison' if page_type == 'calculator' else version
+    core_version = buyer_version if page_type == 'calculator' else VERSION
     extras = []
     if page_type in ('product', 'choose', 'faq', 'installation', 'care', 'warranty', 'downloads'):
         extras.append('explore-guides.css')
@@ -84,13 +86,13 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
 <link rel="canonical" href="{canonical}"><meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:title" content="{e(title)} — EVERSENSE"><meta property="og:description" content="{e(lead)}"><meta property="og:url" content="{canonical}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{href('assets/buyer.css',page)}?v={version}" data-ev-buyer-css>
+<link rel="stylesheet" href="{href('assets/buyer.css',page)}?v={buyer_version}" data-ev-buyer-css>
 {extra_assets}
 <script type="application/ld+json">{json.dumps(schema,ensure_ascii=False).replace('<',chr(92)+'u003c')}</script>
 <script src="{href('assets/products-data.js',page)}?v={VERSION}" defer></script>
-<script src="{href('assets/buyer-core.js',page)}?v={VERSION}" defer></script>
+<script src="{href('assets/buyer-core.js',page)}?v={core_version}" defer></script>
 <script src="{href('assets/prices.js',page)}?v={version}" defer></script>
-<script src="{href('assets/buyer.js',page)}?v={version}" defer></script>
+<script src="{href('assets/buyer.js',page)}?v={buyer_version}" defer></script>
 </head><body class="ev-buyer" data-buyer-page="{e(page_type)}" data-collection="{e(collection)}">
 <a href="#main" class="ev-skip-link">Перейти к содержанию</a>
 <main id="main"><section class="ev-hero"><div class="ev-wrap"><nav class="ev-breadcrumb" aria-label="Хлебные крошки">{breadcrumb}</nav><h1>{e(title)}</h1><p class="ev-lead">{e(lead)}</p>{hero_actions}</div></section>

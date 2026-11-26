@@ -235,12 +235,77 @@ body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-imag
 .ev-stat > span,.ev-stat dt {display:block;font-size:12px;line-height:1.6;color:#343333;margin-bottom:5px}
 .ev-stat strong,.ev-stat dd {display:block;font-size:clamp(28px,3vw,42px);font-weight:500;letter-spacing:0;line-height:1.18;color:#343333;margin:0}
 .ev-stat small {display:block;margin-top:7px}
-.ev-calc-values {margin:0 0 25px}
-.ev-calc-values > div {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:baseline;gap:10px 22px;padding:15px 0;border-bottom:1px solid #DADADA}
-.ev-calc-values dt {color:#343333;font-size:12px;line-height:1.6}
-.ev-calc-values dd {margin:0;text-align:right;color:#343333;font-size:17px;font-weight:500;line-height:1.5;overflow-wrap:anywhere}
-#ev-calc-result h2 {font-size:clamp(48px,5vw,64px);line-height:1.05;letter-spacing:0;margin-bottom:25px}
-#ev-calc-result h2 small {font-size:22px;letter-spacing:0}
+#ev-calc-result > h2 {font-size:clamp(48px,5vw,64px);line-height:1.05;letter-spacing:0;margin-bottom:25px}
+#ev-calc-form[data-calculated="true"] + .ev-result {
+  padding:0;border:0;container-type:inline-size;color:#292825;
+  font-variant-numeric:tabular-nums;scroll-margin-top:calc(var(--ev-header-height,68px) + 20px);
+}
+.ev-pack-hero {
+  display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);align-items:center;
+  gap:14px;padding:0 3px 22px;border-bottom:1px solid #d8d4ce;
+}
+.ev-pack-label {display:block;margin-bottom:4px;font-size:16px;font-weight:500;line-height:1.2}
+.ev-pack-metric {font-size:clamp(44px,15cqi,65px);line-height:1.05;letter-spacing:-.065em;font-weight:530;overflow-wrap:anywhere}
+.ev-pack-metric small {color:inherit;font-size:.49em;line-height:1;letter-spacing:-.06em;font-weight:500}
+.ev-pack-settings {display:grid;align-content:center;align-self:stretch;gap:7px;margin:0;padding-left:16px;border-left:2px solid #bca58c}
+.ev-pack-settings div {display:flex;justify-content:space-between;align-items:baseline;gap:5px}
+.ev-pack-settings dt {font-size:12.2px;line-height:1.4;color:#625b53}
+.ev-pack-settings dd {flex:none;white-space:nowrap;margin:0;text-align:right;font-size:16px;font-weight:650;line-height:1.35}
+.ev-pack-heading {margin:21px 3px 14px}
+.ev-pack-heading h2 {margin:0 0 4px;font-size:clamp(24px,6.2cqi,31px);font-weight:615;line-height:1.2;letter-spacing:-.045em}
+.ev-pack-heading p {margin:0;font-size:13px;color:#645e57;line-height:1.5}
+.ev-pack-table {width:100%;table-layout:fixed;border:1px solid #d8d4ce;border-spacing:0;line-height:1.3}
+.ev-pack-table th,.ev-pack-table td {padding:11px 3px;border-bottom:1px solid #e3dfd8;text-align:center;vertical-align:middle;overflow-wrap:anywhere}
+.ev-pack-table th:first-child {width:25%;padding-left:9px;text-align:left}
+.ev-pack-table thead th {height:50px;background:#f7f6f3;font-size:12.5px;font-weight:600;line-height:1.22}
+.ev-pack-table thead th:first-child {color:#625f59;font-weight:500}
+.ev-pack-table thead th:nth-child(2) {background:#3b352f;color:white}
+.ev-pack-table thead th:nth-child(2)::before {content:"";display:inline-block;width:6px;height:6px;margin:0 4px 1.5px 0;border-radius:50%;background:#d3baa0}
+.ev-pack-table tbody th {color:#4e4a44;font-size:12.5px;font-weight:520}
+.ev-pack-table tbody td {font-size:clamp(15px,4.12cqi,19px);font-weight:570;letter-spacing:-.035em;line-height:1.18}
+.ev-pack-table tbody td:nth-child(2) {background:#f3eee6}
+.ev-pack-unit {font-size:.75em;font-weight:500}
+.ev-pack-table .ev-pack-count td {font-size:clamp(23px,6.4cqi,32px);line-height:1.05}
+.ev-pack-count td:nth-child(2) {font-weight:680}
+.ev-pack-count .ev-pack-unit {font-size:.56em}
+.ev-pack-negative {color:#973e30}
+.ev-pack-table .ev-pack-boards td {font-size:clamp(14px,3.86cqi,18px)}
+.ev-pack-table .ev-pack-total > * {background:#f8f7f4;border-bottom:0;border-top:1px solid #c5beb3;padding-block:15px}
+.ev-pack-table .ev-pack-total td {font-size:clamp(13px,4.06cqi,18px);font-weight:700;letter-spacing:-.04em}
+.ev-pack-table .ev-pack-total td:nth-child(2) {background:#e8dece}
+.ev-pack-total .ev-pack-byn {display:inline-block;margin-left:.04em;width:.67em;height:.75em;vertical-align:baseline}
+.ev-pack-price-pending {font-size:.8em;font-weight:550}
+.ev-result .ev-pack-warning {display:flex;align-items:flex-start;gap:7px;margin:12px 2px 0;color:#83503f;font-size:12.2px;line-height:1.5}
+.ev-pack-warning svg {flex:none;width:14px;height:14px;margin-top:2px}
+.ev-pack-tip {display:grid;grid-template-columns:minmax(0,1fr) 65px;align-items:center;gap:12px;margin-top:18px;padding:14px 13px 14px 14px;background:#f4f0ea;border-left:2px solid #b79c80}
+.ev-pack-tip h3 {margin:0 0 5px;font-size:16px;font-weight:650;letter-spacing:-.02em}
+.ev-pack-tip p {margin:0;color:#4d463f;font-size:13px;line-height:1.5}
+.ev-pack-tip strong {color:#312f2b}
+@container (max-width:460px){
+  .ev-pack-hero--long {grid-template-columns:minmax(0,1fr)}
+  .ev-pack-hero--long .ev-pack-metric {font-size:42px}
+  .ev-pack-hero--long .ev-pack-settings {max-width:25em}
+}
+@container (max-width:380px){
+  .ev-pack-table--large tbody td {font-size:13px}
+  .ev-pack-table--large .ev-pack-count td {font-size:18px}
+  .ev-pack-table--large .ev-pack-total td {font-size:12.5px}
+}
+@container (max-width:345px){
+  .ev-pack-hero {gap:8px}
+  .ev-pack-settings {padding-left:8px}
+  .ev-pack-settings dd {font-size:14px}
+  .ev-pack-table th:first-child {width:26%;padding-left:5px}
+  .ev-pack-table thead th,.ev-pack-table tbody th {font-size:11.5px}
+  .ev-pack-table thead th:nth-child(2)::before {display:none}
+  .ev-pack-tip {grid-template-columns:minmax(0,1fr) 47px}
+}
+@media(min-width:761px) and (max-width:980px){
+  .ev-calculator {grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:24px}
+}
+@media(max-width:760px){
+  #ev-calc-form[data-calculated="true"] + .ev-result {margin-inline:-4px}
+}
 #ev-calc-product img {display:block;width:100%;max-width:360px;height:180px;object-fit:contain;background:#FFFFFF;margin:0 0 14px}
 #ev-calc-product p {font-size:13px;line-height:1.8;color:#343333}
 .ev-install-estimate {grid-column:1/-1;color:#302e2c}
@@ -440,8 +505,6 @@ body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-imag
   .ev-result {padding:24px 20px}
   .ev-result .ev-actions {align-items:stretch;flex-direction:column}
   .ev-result .ev-button {width:100%}
-  .ev-calc-values > div {gap:8px 14px}
-  .ev-calc-values dd {font-size:15px}
   .ev-copy-box {padding:21px}
   .ev-live-status {bottom:18px;padding:13px 17px;font-size:12px}
   .ev-comparison {min-width:650px;font-size:12px}

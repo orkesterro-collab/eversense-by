@@ -44,7 +44,7 @@ def require(condition, message):
 
 
 def numeric(text):
-    return Decimal(re.sub(r"[^\d,.-]", "", text).replace(",", "."))
+    return Decimal(re.sub(r"[^\d,.-]", "", text.replace("−", "-")).replace(",", "."))
 
 
 def main():
@@ -540,20 +540,53 @@ def main():
             case("favorites-print-four-per-a4", favorites_print_test)
 
             def calc_values(page):
-                return page.locator("#ev-calc-result").evaluate("el=>({packs:parseInt(el.querySelector('h2').innerText,10),values:Object.fromEntries([...el.querySelectorAll('dl > div')].map(d=>[d.querySelector('dt').innerText,d.querySelector('dd').innerText]))})")
+                return page.locator("#ev-calc-result").evaluate(r"""result => {
+                    const table = result.querySelector('.ev-pack-table');
+                    const settings = Object.fromEntries(Array.from(result.querySelectorAll('.ev-pack-settings > div'),
+                        line => [line.querySelector('dt').innerText, line.querySelector('dd').innerText]));
+                    return {
+                        clean: result.querySelector('.ev-pack-metric').innerText,
+                        target: settings['С выбранным запасом'],
+                        reserve: settings['Выбранная прирезка'],
+                        rows: Object.fromEntries(Array.from(table.tBodies[0].rows, row => [
+                            row.querySelector('th[scope="row"]').innerText.replace(/\s+/g, ' ').trim(),
+                            Array.from(row.querySelectorAll('td'), cell => cell.innerText.trim())
+                        ]))
+                    };
+                }""")
+
+            def row_numbers(result, label):
+                return [numeric(value) for value in result["rows"][label]]
 
             def calculate(page, sku, area, reserve):
                 page.locator('#ev-calc-form [name="sku"]').select_option(sku)
                 page.locator('#ev-calc-form [name="area"]').fill(area)
                 page.locator('#ev-calc-form [name="reserve"]').fill(reserve)
                 page.locator('#ev-calc-form button[type="submit"]').click()
-                page.wait_for_selector("#ev-calc-result dl")
+                page.wait_for_selector("#ev-calc-result .ev-pack-table")
                 return calc_values(page)
 
             def calculator_test(page, context, device):
                 goto(page, "calculator.html?sku=EL1040&area=20")
                 require(page.locator("#ev-reserve").input_value() == "5", "New calculations must start with 5%")
-                require(calc_values(page)["packs"] == 11, "Default reserve or selected pack size is wrong")
+                default = calc_values(page)
+                require(numeric(default["clean"]) == 20 and numeric(default["reserve"]) == 5
+                        and numeric(default["target"]) == 21, "Clean area, chosen reserve or target area is wrong")
+                require(row_numbers(default, "Целыми пачками") == [11, 10, 12], "Wrong comparison pack counts or order")
+                require(row_numbers(default, "Итого метраж") == list(map(Decimal, ["21.89", "19.90", "23.88"])),
+                        "Purchased areas must use whole packs")
+                require(row_numbers(default, "На прирезку") == list(map(Decimal, ["1.89", "-0.10", "3.88"])),
+                        "Cutting balance must show a shortfall for ten packs")
+                require(row_numbers(default, "В пересчёте на доски") == list(map(Decimal, ["7.6", "-0.4", "15.6"])),
+                        "Board equivalents must use the selected SKU's board size")
+                require(row_numbers(default, "Стоимость покрытия") == list(map(Decimal, ["1004.75", "913.41", "1096.09"])),
+                        "Prices must reflect each scenario's purchased area")
+                result = page.locator("#ev-calc-result")
+                warning = result.locator(".ev-pack-warning")
+                require(warning.is_visible() and re.search(r"0,10\s*м²", warning.inner_text()),
+                        "Shortage warning must identify the missing clean area")
+                require(re.search(r"3\s*[–—-]\s*5\s+(?:целых\s+)?досок", result.inner_text()),
+                        "Repair-board advice missing")
                 if device == "mobile":
                     photo = page.locator("#ev-calc-product img")
                     photo.evaluate("img => img.decode()")
@@ -564,23 +597,27 @@ def main():
                     }""")
                     require(fits, "Mobile calculator photo must span the screen at its original aspect ratio")
                 classic = calculate(page, "EL1052", "20", "10")
-                require(classic["packs"] == 12, f"Classic pack count: {classic}")
-                require(numeric(classic["values"]["В целых упаковках"]) == Decimal("23.88"), "Classic area wrong")
-                require(numeric(classic["values"]["Стоимость материала"]) == Decimal("1096.09"), "Classic monetary total wrong")
+                require(row_numbers(classic, "Целыми пачками") == [12, 11, 13], f"Classic pack count: {classic}")
+                require(row_numbers(classic, "Итого метраж")[0] == Decimal("23.88"), "Classic area wrong")
+                require(row_numbers(classic, "Стоимость покрытия")[0] == Decimal("1096.09"), "Classic monetary total wrong")
                 shot(page, "calculator-result-" + device)
                 layout_metrics(page)
                 large = calculate(page, "EL1000", "20", "10")
-                require(large["packs"] == 9 and numeric(large["values"]["В целых упаковках"]) == Decimal("22.86"), "Large SKU reused Classic pack area")
-                require(numeric(large["values"]["Стоимость материала"]) == Decimal("1049.27"), "Large total wrong")
+                require(row_numbers(large, "Целыми пачками") == [9, 8, 10] and row_numbers(large, "Итого метраж")[0] == Decimal("22.86"), "Large SKU reused Classic pack area")
+                require(row_numbers(large, "Стоимость покрытия")[0] == Decimal("1049.27"), "Large total wrong")
                 edge = calculate(page, "EL1052", "1,81", "10")
-                require(edge["packs"] == 2, "Comma input or early area rounding lost a package")
-                require(numeric(edge["values"]["С выбранным запасом"]) == Decimal("1.991"), "Reserve area rounded early")
-                require(numeric(edge["values"]["Стоимость материала"]) == Decimal("182.68"), "Comma case price wrong")
+                require(row_numbers(edge, "Целыми пачками") == [2, 1, 3], "Comma input or early area rounding lost a package")
+                require(numeric(edge["target"]) == Decimal("1.991"), "Reserve area rounded early")
+                require(row_numbers(edge, "Стоимость покрытия")[0] == Decimal("182.68"), "Comma case price wrong")
                 page.locator("[data-share-calculation]").click()
                 page.wait_for_function("window.__qaCopied")
                 copied = page.evaluate("window.__qaCopied")
                 goto(page, urlparse(copied).path + "?" + urlparse(copied).query)
-                require(calc_values(page)["packs"] == 2, "Shared calculator URL cannot restore comma input")
+                require(row_numbers(calc_values(page), "Целыми пачками") == [2, 1, 3],
+                        "Shared calculator URL cannot restore comma input")
+                single = calculate(page, "EL1052", "1", "0")
+                require(row_numbers(single, "Целыми пачками") == [1, 2]
+                        and not result.locator(".ev-pack-warning").count(), "Single-pack order offered zero packs or a shortage warning")
                 for field, value in [("area", "0"), ("area", "-1"), ("area", "NaN"), ("reserve", "21")]:
                     page.locator('#ev-calc-form [name="area"]').fill("20")
                     page.locator('#ev-calc-form [name="reserve"]').fill("10")
@@ -652,8 +689,8 @@ def main():
             def no_price_test(page, context):
                 goto(page, "calculator.html", prices=False)
                 values = calculate(page, "EL1052", "20", "10")
-                require(values["packs"] == 12, "Missing feed broke quantity calculation")
-                require("Уточнить" in values["values"]["Стоимость материала"], "Missing price became a numeric or fake total")
+                require(row_numbers(values, "Целыми пачками") == [12, 11, 13], "Missing feed broke quantity calculation")
+                require(all("Уточнить" in price and not re.search(r"\d", price) for price in values["rows"]["Стоимость покрытия"]), "Missing price became a numeric or fake total")
                 require(page.evaluate("window.EversenseInstallationCosts.get() === null"),
                         "First visit without a materials feed returned unverified rates")
                 amounts = page.locator('#ev-install-estimate [data-install-value="total"]').all_inner_texts()
@@ -682,15 +719,16 @@ def main():
                     "Not all catalog cards responded to the late price event")
                 goto(page, "calculator.html")
                 before = calculate(page, "EL1052", "20", "10")
-                require(numeric(before["values"]["Стоимость материала"]) == Decimal("1096.09"),
+                require(row_numbers(before, "Стоимость покрытия")[0] == Decimal("1096.09"),
                         "Initial calculation does not use mocked starting price")
                 requests_before = len(feed_requests)
                 page.evaluate("data=>window.EversensePriceFeed(data)", changed_payload)
                 page.wait_for_function("()=>document.querySelector('#ev-calc-result').innerText.replace(/\\s/g,'').includes('1432,80')")
                 after = calc_values(page)
-                require(after["packs"] == 12 and numeric(after["values"]["В целых упаковках"]) == Decimal("23.88"),
+                require(row_numbers(after, "Целыми пачками") == row_numbers(before, "Целыми пачками")
+                        and row_numbers(after, "Итого метраж") == row_numbers(before, "Итого метраж"),
                         "Price-only update altered package quantities")
-                require(numeric(after["values"]["Стоимость материала"]) == Decimal("1432.80"),
+                require(row_numbers(after, "Стоимость покрытия") == list(map(Decimal, ["1432.80", "1313.40", "1552.20"])),
                         "Calculated total did not react to the new price")
                 require(len(feed_requests) == requests_before, "Calculation refresh unexpectedly requested the feed")
                 return {"updated_card_count": 30, "new_unit_price": 60, "before": before, "after": after,
