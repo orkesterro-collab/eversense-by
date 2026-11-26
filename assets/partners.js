@@ -206,22 +206,17 @@
     return Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left))
       * Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top));
   }
-  function layoutMapLabels() {
-    var layer = el("map-cities");
-    if (!layer.clientWidth) return;
-    var bounds = { left: 1, top: 1, right: layer.clientWidth - 1, bottom: layer.clientHeight - 1 };
-    var pins = Array.from(layer.children, function (link) {
-      return { link: link, x: link.offsetLeft, y: link.offsetTop,
-        width: link.firstElementChild.offsetWidth, height: link.firstElementChild.offsetHeight };
-    });
+  function placeMapLabels(pins, bounds, obstacles) {
     var occupied = pins.map(function (pin) {
-      return { left: pin.x - 6, right: pin.x + 6, top: pin.y - 6, bottom: pin.y + 6 };
-    });
+      return { left: pin.x - pin.radius, right: pin.x + pin.radius,
+        top: pin.y - pin.radius, bottom: pin.y + pin.radius };
+    }).concat(obstacles || []);
     pins.forEach(function (pin) {
       var w = pin.width, h = pin.height;
-      var gap = pin.link.classList.contains("map-city--capital") ? 11 : 7;
-      var positions = [[gap, -h / 2], [-w - gap, -h / 2], [-w / 2, -h - gap],
-        [-w / 2, gap], [gap, -h - 4], [-w - gap, -h - 4], [gap, 4], [-w - gap, 4]];
+      var gap = pin.gap;
+      var above = [-w / 2, -h - gap], right = [gap, -h / 2], leftSide = [-w - gap, -h / 2];
+      var positions = pin.preferAbove ? [above, right, leftSide] : [right, leftSide, above];
+      positions.push([-w / 2, gap], [gap, -h - 4], [-w - gap, -h - 4], [gap, 4], [-w - gap, 4]);
       var best, bestScore = Infinity;
       for (var offset of positions) {
         var left = pin.x + offset[0], top = pin.y + offset[1];
@@ -235,6 +230,16 @@
       pin.link.style.setProperty("--label-y", (best.top - pin.y) + "px");
       occupied.push({ left: best.left - 2, top: best.top - 2, right: best.right + 2, bottom: best.bottom + 2 });
     });
+  }
+  function layoutMapLabels() {
+    var layer = el("map-cities");
+    if (!layer.clientWidth) return;
+    var pins = Array.from(layer.children, function (link) {
+      return { link: link, x: link.offsetLeft, y: link.offsetTop, radius: 6,
+        gap: link.classList.contains("map-city--capital") ? 11 : 7,
+        width: link.firstElementChild.offsetWidth, height: link.firstElementChild.offsetHeight };
+    });
+    placeMapLabels(pins, { left: 1, top: 1, right: layer.clientWidth - 1, bottom: layer.clientHeight - 1 });
   }
   function renderMap() {
     var links = document.createDocumentFragment();
@@ -320,7 +325,7 @@
       if (location.hash !== link.hash) history.pushState(null, "", link.hash);
       openMapLocation(link.dataset.city, link.dataset.partnerId);
     });
-    if (window.EversenseShopMap) updateMapLocations = window.EversenseShopMap.mount(el("partners-basemap"));
+    if (window.EversenseShopMap) updateMapLocations = window.EversenseShopMap.mount(el("partners-basemap"), placeMapLabels);
     window.addEventListener("hashchange", openLinkedLocation);
     if (window.ResizeObserver) new ResizeObserver(layoutMapLabels).observe(el("partners-map"));
     else window.addEventListener("resize", layoutMapLabels);

@@ -53,6 +53,39 @@
 .dealer-pin:is(:hover, :focus-visible) { z-index: 2; }
 .dealer-pin:is(:hover, :focus-visible)::before { border-color: #292722; }
 .dealer-pin:is(:hover, :focus-visible) .dealer-pin__caption { opacity: 1; }
+.dealer-pin--shop { padding: 0; border: 0; background: transparent; }
+.dealer-pin--shop .dealer-pin__caption {
+  left: calc(50% + var(--label-x, 18px)); top: calc(50% + var(--label-y, -12px)); bottom: auto;
+  transform: none; opacity: 1; pointer-events: auto; max-width: 165px;
+  padding: 4px 7px; overflow-wrap: anywhere;
+}
+.dealer-pin--shop[aria-expanded="true"]::before { border-color: #292722; box-shadow: 0 0 0 3px #fffcf4; }
+.dealer-popup { z-index: 4; font: 14px/1.4 Manrope, Arial, sans-serif; color: #35332e; }
+.dealer-popup .maplibregl-popup-content {
+  padding: 0; background: #fffefa; border-radius: 8px;
+  box-shadow: 0 2px 14px #403b3338; text-align: left;
+}
+.dealer-contacts { width: 260px; max-width: 100%; max-height: min(310px, 48vh); overflow-y: auto; overscroll-behavior: contain; }
+.dealer-contact { padding: 14px; }
+.dealer-contact + .dealer-contact { border-top: 1px solid #e5e1d8; }
+.dealer-contact__name { margin: 0; padding-right: 28px; font-size: 16px; font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; }
+.dealer-contact__address, .dealer-contact__unlisted { margin: 4px 0; color: #6a665e; font-size: 13px; overflow-wrap: anywhere; }
+.dealer-contacts__close {
+  position: absolute; right: 3px; top: 3px; width: 36px; height: 36px;
+  padding: 0; border: 0; border-radius: 50%; background: #fffefa; color: #525048;
+  font: 24px/1 Arial, sans-serif;
+}
+.dealer-contact__phone-row { display: flex; align-items: center; flex-wrap: wrap; column-gap: 8px; justify-content: space-between; }
+.dealer-contact__phone { font-size: 15px; font-weight: 600; -webkit-user-select: text; user-select: text; cursor: text; overflow-wrap: anywhere; }
+.dealer-contact__copy { padding: 0 3px; min-height: 40px; border: 0; background: transparent; color: #574f44; font: inherit; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+.dealer-contact__status:not(.sr-only):not(:empty) { width: 100%; font-size: 12px; color: #58544e; }
+.dealer-contact__status:empty { display: none; }
+.dealer-contact__find {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 40px;
+  margin-top: 4px; padding: 6px 13px; border-radius: 4px; background: #454139;
+  color: #fff; font-size: 13px; font-weight: 600; text-decoration: none;
+}
+.dealer-contact__find:hover { background: #302d28; }
 .partner-card[id] { scroll-margin-top: 90px; }
 .map-canvas {
   position: relative;
@@ -127,6 +160,16 @@
   .map-viewport { height: clamp(340px, 55vh, 470px); height: clamp(340px, 55svh, 470px); }
   .dealer-pin::before { width: 26px; height: 26px; border-width: 3px; }
   .dealer-pin::after { width: 15px; height: 15px; }
+  .dealer-pin--shop .dealer-pin__caption { max-width: 140px; font-size: 12px; }
+  /* Keep the phone and both actions in view when a marker is tapped near a screen edge. */
+  #partners-basemap .dealer-popup {
+    inset: auto 10px 32px; margin-inline: auto; width: auto; max-width: 340px !important;
+    transform: none !important;
+  }
+  .dealer-popup .maplibregl-popup-tip { display: none; }
+  .dealer-popup .maplibregl-popup-content, .dealer-contacts { width: 100%; }
+  .dealer-contacts { max-height: min(270px, 42vh); }
+  .dealer-contact__copy, .dealer-contact__find { min-height: 44px; }
   .map-city { font-size: 12px; }
   .map-city--capital { font-size: 15px; }
   .map-hint { font-size: 13px; }

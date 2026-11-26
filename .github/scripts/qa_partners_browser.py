@@ -24,6 +24,72 @@ def card(page, row):
     return page.locator(f'.partner-card[data-partner-id="{row["partner_id"]}"]')
 
 
+def check_shop_contact(page, basemap, dealers, device):
+    def location(row):
+        return (row["city"].strip(), float(row["longitude"].replace(",", ".")),
+                float(row["latitude"].replace(",", ".")))
+
+    located = [r for r in dealers if has_pin(r)]
+    if not located:
+        return None
+    counts = Counter(location(r) for r in located)
+    singles = {r["partner_id"].strip() for r in located if counts[location(r)] == 1}
+    target = next((r for r in located if r["city"].strip() == "Борисов" and "musson" in r["name"].lower()), None)
+    if target is None:
+        target = next((r for r in located if r["phone"].strip()), located[0])
+    city, name, shop_id = (target[k].strip() for k in ("city", "name", "partner_id"))
+
+    # Centre the chosen city before zooming, as a visitor would.
+    basemap.evaluate("el => el.scrollIntoView({block:'center', behavior:'instant'})")
+    city_pin = basemap.get_by_role("link", name=city + " — показать магазины", exact=True)
+    frame, pin = basemap.bounding_box(), city_pin.bounding_box()
+    dx = frame["x"] + frame["width"] / 2 - pin["x"] - pin["width"] / 2
+    dy = frame["y"] + frame["height"] / 2 - pin["y"] - pin["height"] / 2
+    x, y = frame["x"] + frame["width"] * 0.38, frame["y"] + frame["height"] * 0.32
+    page.mouse.move(x, y)
+    page.mouse.down()
+    page.mouse.move(x + dx, y + dy, steps=12)
+    page.wait_for_timeout(180)
+    page.mouse.up()
+    shop_pins = basemap.locator("button.dealer-pin--shop")
+    for _ in range(7):
+        if shop_pins.count():
+            break
+        basemap.get_by_role("button", name="Приблизить").click()
+        page.wait_for_timeout(350)
+    assert shop_pins.count() == len(counts)
+    assert set(basemap.locator("button.dealer-pin--shop[data-partner-id]").evaluate_all("els=>els.map(el=>el.dataset.partnerId)")) == singles
+    marker = (shop_pins.filter(has_text=name) if shop_id not in singles
+              else basemap.locator(f'button.dealer-pin[data-partner-id="{shop_id}"]'))
+    caption = marker.locator(".dealer-pin__caption")
+    assert name in caption.inner_text() and caption.evaluate("el => getComputedStyle(el).opacity === '1' && getComputedStyle(el).pointerEvents !== 'none'")
+    initial_hash = page.evaluate("location.hash")
+    (caption.tap if device == "mobile" else caption.click)()
+    dialog = basemap.get_by_role("dialog")
+    contact = dialog.locator(f'.dealer-contact[data-partner-id="{shop_id}"]')
+    assert contact.is_visible() and contact.locator("h3").inner_text() == name
+    assert page.evaluate("location.hash") == initial_hash
+    phone = contact.locator(".dealer-contact__phone")
+    has_phone = bool(phone.count())
+    assert has_phone == any(c.isdigit() for c in target["phone"])
+    if has_phone:
+        assert phone.first.inner_text() in target["phone"]
+        copy = contact.get_by_role("button", name="Скопировать номер").first
+        (copy.tap if device == "mobile" else copy.click)()
+        contact.get_by_text("Скопировано", exact=True).first.wait_for()
+        assert page.evaluate("navigator.clipboard.readText()") == phone.first.inner_text()
+    else:
+        assert contact.locator(".dealer-contact__unlisted").is_visible() and not contact.locator(".dealer-contact__copy").count()
+    page.screenshot(path=str(OUT / f"{device}-shop-contact.png"), animations="disabled")
+    find = contact.get_by_role("link", name="Найти в списке")
+    (find.tap if device == "mobile" else find.click)()
+    dialog.wait_for(state="hidden")
+    assert card(page, target).evaluate("el => el.open && el.firstElementChild === document.activeElement")
+    assert page.evaluate("decodeURIComponent(location.hash)") == "#shop-" + shop_id
+    basemap.get_by_role("button", name="Вся Беларусь").click()
+    return {"store": name, "city": city, "copied": has_phone}
+
+
 def check_directory(page, label):
     response = page.goto(URL, wait_until="domcontentloaded", timeout=55000)
     assert response and response.status == 200
@@ -137,25 +203,8 @@ def check_directory(page, label):
     reset.click()
     assert page.locator(".partner-card").count() == len(ids) and not reset.is_visible()
 
-    # At street scales a store pin opens its own card. Returning to the overview restores city pins.
-    addresses = {row["partner_id"].strip(): (row["city"].strip(),
-                 float(row["longitude"].replace(",", ".")), float(row["latitude"].replace(",", ".")))
-                 for row in dealers if has_pin(row)}
-    counts = Counter(addresses.values())
-    single_shop_ids = {shop_id for shop_id, location in addresses.items() if counts[location] == 1}
-    if single_shop_ids:
-        shop_pins = basemap.locator(".dealer-pin[data-partner-id]")
-        for _ in range(7):
-            if shop_pins.count():
-                break
-            basemap.get_by_role("button", name="Приблизить").click()
-            page.wait_for_timeout(350)
-        assert set(shop_pins.evaluate_all("els => els.map(el => el.dataset.partnerId)")) == single_shop_ids
-        shop_id = shop_pins.first.get_attribute("data-partner-id")
-        shop_pins.first.press("Enter")
-        assert page.locator('[id="shop-' + shop_id + '"]').evaluate("el => el.open && el.firstElementChild === document.activeElement")
-        basemap.get_by_role("button", name="Вся Беларусь").click()
-        assert set(pins.evaluate_all("els => els.map(el => el.dataset.city)")) == located_cities
+    contact_result = check_shop_contact(page, basemap, dealers, label)
+    assert set(pins.evaluate_all("els => els.map(el => el.dataset.city)")) == located_cities
 
     # A change in sheet sort_order must also work without a district grouping.
     if len(minsk) > 1:
@@ -169,7 +218,7 @@ def check_directory(page, label):
         assert page.locator(".partner-card").first.get_attribute("data-partner-id") == promoted
     directory.scroll_into_view_if_needed()
     page.screenshot(path=str(OUT / f"{label}-directory.png"), full_page=True, animations="disabled", timeout=40000)
-    return {"device": label, "shops": len(ids), "minsk": len(minsk), "cities": len(cities), "city_links": pins.count()}
+    return {"device": label, "shops": len(ids), "minsk": len(minsk), "cities": len(cities), "city_links": pins.count(), "contact": contact_result}
 
 
 with sync_playwright() as playwright:
@@ -177,6 +226,7 @@ with sync_playwright() as playwright:
     for label, width, height in [("desktop", 1440, 920), ("mobile", 390, 844)]:
         page = browser.new_page(viewport={"width": width, "height": height}, has_touch=label == "mobile",
                                 is_mobile=label == "mobile", reduced_motion="reduce", device_scale_factor=1)
+        page.context.grant_permissions(["clipboard-read", "clipboard-write"], origin="https://eversense.by")
         page.set_default_timeout(12000)
         js_errors = []
         page.on("pageerror", lambda error: js_errors.append(str(error)))
