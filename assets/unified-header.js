@@ -102,6 +102,8 @@
       ] }
     ];
     var current = location.pathname.replace(/\/index\.html$/, "/");
+    var storesUrl = route("where-to-buy.html");
+    var storesLabel = /(?:^|\/)(?:en|[^/]+-en)(?:\/|$)/.test(current) ? "Where to buy" : "Где купить";
     function menuLink(item) {
       var target = route(item[1]);
       var active = current.replace(/\/$/, "") === new URL(target).pathname.replace(/\/$/, "");
@@ -119,7 +121,10 @@
       '<svg class="ev-heart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 4.6c-2.1-2.1-5.5-2.1-7.6 0L12 5.8l-1.2-1.2c-2.1-2.1-5.5-2.1-7.6 0s-2.1 5.5 0 7.6L12 21l8.8-8.8c2.1-2.1 2.1-5.5 0-7.6Z"/></svg>' +
       '<span data-favorites-summary>Избранное - пока пусто</span><span class="ev-header-favorites-count" data-favorites-count aria-hidden="true"></span></a>' +
       '<nav class="ev-header-quick" aria-label="Быстрый переход">' +
-      menuLink(["Каталог", "catalog-ru/"]) + menuLink(["Где купить", "where-to-buy.html"]) + '</nav>' +
+      menuLink(["Каталог", "catalog-ru/"]) +
+      '<a class="ev-header-stores" href="' + storesUrl + '" aria-label="' + storesLabel + '" title="' + storesLabel + '"' +
+      (current === new URL(storesUrl).pathname ? ' aria-current="page"' : '') + '>' +
+      '<img src="' + asset("brand-icons/storefront-pin.svg") + '" width="24" height="24" alt=""></a></nav>' +
       '<button class="ev-header-toggle" type="button" aria-controls="ev-global-menu" aria-expanded="false" aria-label="Открыть меню">' +
       '<span class="ev-header-lines" aria-hidden="true"><span></span><span></span><span></span></span></button>' +
       '</div><nav class="ev-header-menu" id="ev-global-menu" aria-label="Главное меню" hidden>' + menuHtml + '</nav>';

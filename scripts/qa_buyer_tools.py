@@ -706,6 +706,13 @@ def main():
                 page.keyboard.press("Escape")
                 require(not menu.is_visible() and toggle.get_attribute("aria-expanded") == "false", "Escape failed to close menu")
                 require(toggle.evaluate("el=>el===document.activeElement"), "Escape did not restore toggle focus")
+                stores = page.locator(".ev-header-inner").get_by_role("link", name="Где купить", exact=True)
+                require(stores.count() == 1 and stores.is_visible(), "Store locator must be visible with the menu closed")
+                require(stores.evaluate("a=>a.href") == base + "/where-to-buy.html", "Incorrect store locator destination")
+                bounds = stores.bounding_box()
+                require(bounds["width"] >= 44 and bounds["height"] >= 44, "Store locator tap target is too small")
+                require(stores.locator("img").evaluate("async img => { await img.decode(); return img.naturalWidth === 24; }"),
+                        "Storefront icon did not load")
                 return {"links": len(paths), "keyboard_open_and_escape": True}
             for device, width, height in DEVICES:
                 case("header-" + device, lambda p, c, d=device: header_test(p, c, d), width, height)
