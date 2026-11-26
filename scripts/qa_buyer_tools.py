@@ -533,7 +533,18 @@ def main():
                 return calc_values(page)
 
             def calculator_test(page, context, device):
-                goto(page, "calculator.html")
+                goto(page, "calculator.html?sku=EL1040&area=20")
+                require(page.locator("#ev-reserve").input_value() == "5", "New calculations must start with 5%")
+                require(calc_values(page)["packs"] == 11, "Default reserve or selected pack size is wrong")
+                if device == "mobile":
+                    photo = page.locator("#ev-calc-product img")
+                    photo.evaluate("img => img.decode()")
+                    fits = photo.evaluate("""img => {
+                        const r = img.getBoundingClientRect();
+                        return Math.abs(r.left) < 1 && Math.abs(r.right - document.documentElement.clientWidth) < 1
+                            && Math.abs(r.height - r.width * img.naturalHeight / img.naturalWidth) < 1;
+                    }""")
+                    require(fits, "Mobile calculator photo must span the screen at its original aspect ratio")
                 classic = calculate(page, "EL1052", "20", "10")
                 require(classic["packs"] == 12, f"Classic pack count: {classic}")
                 require(numeric(classic["values"]["В целых упаковках"]) == Decimal("23.88"), "Classic area wrong")

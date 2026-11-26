@@ -131,7 +131,7 @@
     var s=params.get('sku');if(bySku.has(s))form.elements.sku.value=s;
     if(params.has('area')&&core.parseDecimal(params.get('area'))!==null)form.elements.area.value=params.get('area');
     if(params.has('reserve')&&core.parseDecimal(params.get('reserve'))!==null)form.elements.reserve.value=params.get('reserve');
-    function preview(){var p=bySku.get(form.elements.sku.value),el=document.getElementById('ev-calc-product');if(p&&el)el.innerHTML='<img src="'+route(p.productImage)+'"'+imageAttrs(p.productImage,'(max-width: 640px) calc(100vw - 40px), 360px')+' alt="'+esc(fullName(p))+'" width="360" height="240"><p>'+p.sku+' · '+p.lengthMM+' × '+p.widthMM+' × '+p.thicknessMM+' мм<br>'+number(p.packArea,4)+' м² в упаковке</p>';}
+    function preview(){var p=bySku.get(form.elements.sku.value),el=document.getElementById('ev-calc-product');if(p&&el)el.innerHTML='<img src="'+route(p.productImage)+'"'+imageAttrs(p.productImage,'(max-width: 760px) 100vw, 360px')+' alt="'+esc(fullName(p))+'" width="360" height="240"><p>'+p.sku+' · '+p.lengthMM+' × '+p.widthMM+' × '+p.thicknessMM+' мм<br>'+number(p.packArea,4)+' м² в упаковке</p>';}
     form.addEventListener('submit',function(e){e.preventDefault();renderCalculation(true);});
     form.addEventListener('input',function(){if(form.dataset.calculated==='true'){form.dataset.calculated='false';document.getElementById('ev-calc-result').innerHTML='<p>Данные изменились. Нажмите «Рассчитать», чтобы обновить результат.</p>';}});
     form.elements.sku.addEventListener('change',preview);preview();

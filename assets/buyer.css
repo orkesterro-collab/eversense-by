@@ -343,6 +343,7 @@ body:is([data-buyer-page="catalog"],[data-buyer-page="favorites"]) .ev-card-imag
   .ev-link-card > span:first-child {margin-bottom:12px}
   .ev-link-card h2,.ev-link-card h3 {font-size:27px}
   .ev-calculator {grid-template-columns:minmax(0,1fr);gap:32px}
+  #ev-calc-product img {width:calc(100% + 40px);max-width:none;height:auto;margin-inline:-20px}
   .ev-result {position:static;padding:26px}
   .ev-room-grid {grid-template-columns:minmax(0,1fr);gap:30px}
   .ev-article-visual {grid-template-columns:minmax(0,1fr);gap:25px;margin-block:25px}
