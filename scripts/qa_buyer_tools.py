@@ -558,8 +558,15 @@ def main():
             def row_numbers(result, label):
                 return [numeric(value) for value in result["rows"][label]]
 
-            def calculate(page, sku, area, reserve):
-                page.locator('#ev-calc-form [name="sku"]').select_option(sku)
+            def check_calculator_product(page, sku):
+                preview = page.locator("#ev-calc-product")
+                require(page.locator("#ev-calc-form select").count() == 0, "Calculator still offers a decor picker")
+                require(preview.get_by_role("heading", name=by_sku[sku]["name"], exact=True).is_visible(),
+                        f"{sku}: calculator lost the product's display name")
+                require(preview.inner_text().count(sku) == 1 and sku in preview.locator(".ev-calc-product-meta").inner_text(),
+                        f"{sku}: calculator should show one SKU in the photo caption")
+
+            def calculate(page, area, reserve):
                 page.locator('#ev-calc-form [name="area"]').fill(area)
                 page.locator('#ev-calc-form [name="reserve"]').fill(reserve)
                 page.locator('#ev-calc-form button[type="submit"]').click()
@@ -569,6 +576,9 @@ def main():
             def calculator_test(page, context, device):
                 goto(page, "calculator.html?sku=EL1040&area=20")
                 require(page.locator("#ev-reserve").input_value() == "5", "New calculations must start with 5%")
+                check_calculator_product(page, "EL1040")
+                require(page.evaluate("scrollY < 1 && document.activeElement.id !== 'ev-calc-result'"),
+                        "Opening a saved result should leave the buyer at the top of the page")
                 default = calc_values(page)
                 require(numeric(default["clean"]) == 20 and numeric(default["reserve"]) == 5
                         and numeric(default["target"]) == 21, "Clean area, chosen reserve or target area is wrong")
@@ -596,16 +606,23 @@ def main():
                             && Math.abs(r.height - r.width * img.naturalHeight / img.naturalWidth) < 1;
                     }""")
                     require(fits, "Mobile calculator photo must span the screen at its original aspect ratio")
-                classic = calculate(page, "EL1052", "20", "10")
+                goto(page, "calculator.html?sku=EL1052")
+                check_calculator_product(page, "EL1052")
+                require(result.is_hidden(), "Empty calculator should not present a result before the area is entered")
+                classic = calculate(page, "20", "10")
+                require(result.evaluate("el => el === document.activeElement"), "Submitted calculation should focus the result")
                 require(row_numbers(classic, "Целыми пачками") == [12, 11, 13], f"Classic pack count: {classic}")
                 require(row_numbers(classic, "Итого метраж")[0] == Decimal("23.88"), "Classic area wrong")
                 require(row_numbers(classic, "Стоимость покрытия")[0] == Decimal("1096.09"), "Classic monetary total wrong")
                 shot(page, "calculator-result-" + device)
                 layout_metrics(page)
-                large = calculate(page, "EL1000", "20", "10")
+                goto(page, "calculator.html?sku=EL1000")
+                check_calculator_product(page, "EL1000")
+                large = calculate(page, "20", "10")
                 require(row_numbers(large, "Целыми пачками") == [9, 8, 10] and row_numbers(large, "Итого метраж")[0] == Decimal("22.86"), "Large SKU reused Classic pack area")
                 require(row_numbers(large, "Стоимость покрытия")[0] == Decimal("1049.27"), "Large total wrong")
-                edge = calculate(page, "EL1052", "1,81", "10")
+                goto(page, "calculator.html?sku=EL1052")
+                edge = calculate(page, "1,81", "10")
                 require(row_numbers(edge, "Целыми пачками") == [2, 1, 3], "Comma input or early area rounding lost a package")
                 require(numeric(edge["target"]) == Decimal("1.991"), "Reserve area rounded early")
                 require(row_numbers(edge, "Стоимость покрытия")[0] == Decimal("182.68"), "Comma case price wrong")
@@ -613,9 +630,10 @@ def main():
                 page.wait_for_function("window.__qaCopied")
                 copied = page.evaluate("window.__qaCopied")
                 goto(page, urlparse(copied).path + "?" + urlparse(copied).query)
+                check_calculator_product(page, "EL1052")
                 require(row_numbers(calc_values(page), "Целыми пачками") == [2, 1, 3],
                         "Shared calculator URL cannot restore comma input")
-                single = calculate(page, "EL1052", "1", "0")
+                single = calculate(page, "1", "0")
                 require(row_numbers(single, "Целыми пачками") == [1, 2]
                         and not result.locator(".ev-pack-warning").count(), "Single-pack order offered zero packs or a shortage warning")
                 for field, value in [("area", "0"), ("area", "-1"), ("area", "NaN"), ("reserve", "21")]:
@@ -624,6 +642,13 @@ def main():
                     page.locator(f'#ev-calc-form [name="{field}"]').fill(value)
                     page.locator('#ev-calc-form button[type="submit"]').click()
                     require(page.locator("#ev-calc-result [role='alert']").is_visible(), f"Invalid {field}={value} accepted")
+                for path in ("calculator.html", "calculator.html?sku=UNKNOWN&area=20"):
+                    goto(page, path)
+                    fallback = page.locator("#ev-calc-empty a")
+                    require(fallback.is_visible() and urlparse(fallback.get_attribute("href")).path.rstrip("/").endswith("catalog-ru"),
+                            "Unresolved decor needs a visible link to the catalog")
+                    require(page.locator("#ev-calc-form").is_hidden() and result.is_hidden()
+                            and page.locator("#ev-install-estimate").is_hidden(), "Unresolved decor must never quote a different SKU")
                 return {"classic": classic, "large": large, "comma_edge": edge, "invalid_inputs_rejected": 4}
             for device, width, height in DEVICES[:2]:
                 case("calculator-" + device, lambda p, c, d=device: calculator_test(p, c, d), width, height)
@@ -647,22 +672,24 @@ def main():
                     check_costs("glue", ("747.78", "580", "1327.78"))
                     check_costs("underlay", ("258.96", "400", "658.96"))
 
-                calculate(page, "EL1040", "20", "5")
+                calculate(page, "20", "5")
                 estimate.wait_for()
                 check_standard()
-                calculate(page, "EL1000", "20", "18")
+                goto(page, "calculator.html?sku=EL1000")
+                calculate(page, "20", "18")
                 check_standard()
-                calculate(page, "EL1000", "42", "5")
+                calculate(page, "42", "5")
                 check_costs("glue", ("1495.56", "1218", "2713.56"))
                 check_costs("underlay", ("453.18", "840", "1293.18"))
-                calculate(page, "EL1000", "42,01", "5")
+                calculate(page, "42,01", "5")
                 check_costs("glue", ("1744.82", "1218.29", "2963.11"))
                 check_costs("underlay", ("517.92", "840.20", "1358.12"))
                 page.locator("#ev-area").fill("0")
                 require(estimate.is_hidden(), "Stale installation prices remain after editing the area")
                 page.locator('#ev-calc-form button[type="submit"]').click()
                 require(estimate.is_hidden(), "Invalid area produced an installation estimate")
-                calculate(page, "EL1040", "20", "5")
+                goto(page, "calculator.html?sku=EL1040")
+                calculate(page, "20", "5")
                 page.locator("#ev-area").focus()
                 page.evaluate("data => window.EversenseInstallationFeed(data)",
                               installation_payload(glue=250, underlay=11, floating=21, bonded=30))
@@ -687,8 +714,8 @@ def main():
             case("installation-estimates-from-clean-area", installation_test, 390, 844)
 
             def no_price_test(page, context):
-                goto(page, "calculator.html", prices=False)
-                values = calculate(page, "EL1052", "20", "10")
+                goto(page, "calculator.html?sku=EL1052", prices=False)
+                values = calculate(page, "20", "10")
                 require(row_numbers(values, "Целыми пачками") == [12, 11, 13], "Missing feed broke quantity calculation")
                 require(all("Уточнить" in price and not re.search(r"\d", price) for price in values["rows"]["Стоимость покрытия"]), "Missing price became a numeric or fake total")
                 require(page.evaluate("window.EversenseInstallationCosts.get() === null"),
@@ -717,14 +744,18 @@ def main():
                 require(page.locator("#ev-catalog-results [data-buyer-price]").evaluate_all(
                     "els=>els.length===30&&els.every(el=>el.innerText.includes('60,00'))"),
                     "Not all catalog cards responded to the late price event")
-                goto(page, "calculator.html")
-                before = calculate(page, "EL1052", "20", "10")
+                goto(page, "calculator.html?sku=EL1052")
+                before = calculate(page, "20", "10")
                 require(row_numbers(before, "Стоимость покрытия")[0] == Decimal("1096.09"),
                         "Initial calculation does not use mocked starting price")
+                page.locator("#ev-area").focus()
+                scroll_before = page.evaluate("scrollY")
                 requests_before = len(feed_requests)
                 page.evaluate("data=>window.EversensePriceFeed(data)", changed_payload)
                 page.wait_for_function("()=>document.querySelector('#ev-calc-result').innerText.replace(/\\s/g,'').includes('1432,80')")
                 after = calc_values(page)
+                require(page.locator("#ev-area").evaluate("el => document.activeElement === el")
+                        and abs(page.evaluate("scrollY") - scroll_before) <= 1, "Price feed moved focus or scrolled the calculator")
                 require(row_numbers(after, "Целыми пачками") == row_numbers(before, "Целыми пачками")
                         and row_numbers(after, "Итого метраж") == row_numbers(before, "Итого метраж"),
                         "Price-only update altered package quantities")

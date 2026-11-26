@@ -73,7 +73,7 @@
   }
   function updatePrices(){
     document.querySelectorAll('[data-buyer-price]').forEach(function(n){n.innerHTML=priceHtml(n.dataset.buyerPrice);});
-    var calc=document.getElementById('ev-calc-form');if(calc&&calc.dataset.calculated==='true')renderCalculation(false);
+    var calc=document.getElementById('ev-calc-form');if(calc&&calc.dataset.calculated==='true')renderCalculation();
   }
   function toggleFavorite(sku){
     if(!bySku.has(sku))return;
@@ -254,19 +254,20 @@
       '<div><span class="ev-pack-label">Чистый метраж</span><div class="ev-pack-metric">' + cleanArea + ' <small>м²</small></div></div>' +
       '<dl class="ev-pack-settings"><div><dt>Выбранная прирезка</dt><dd>' + number(result.reserve, 4) + '%</dd></div>' +
       '<div><dt>С выбранным запасом</dt><dd>' + target + ' м²</dd></div></dl></div>' +
-      '<div class="ev-pack-heading"><h2 id="ev-pack-title">Сколько упаковок взять?</h2><p>' + packInfo + '</p></div>' +
+      '<div class="ev-pack-comparison"><div class="ev-pack-heading"><h2 id="ev-pack-title">Сколько упаковок взять?</h2><p>' + packInfo + '</p></div>' +
       '<table class="ev-pack-table' + (wideFigures ? ' ev-pack-table--large' : '') + '" aria-labelledby="ev-pack-title"><thead><tr><th scope="col">Вариант</th><th scope="col">По расчёту</th>' +
       (fewer ? '<th scope="col">На пачку<br>меньше</th>' : '') + '<th scope="col">На пачку<br>больше</th></tr></thead><tbody>' +
-      rows + '</tbody></table>' + warning +
+      rows + '</tbody></table>' + warning + '</div>' +
       '<aside class="ev-pack-tip"><div><h3>Запас для ремонта</h3><p>По опыту советуем оставить после укладки ' +
       '<strong>3–5 целых досок</strong> для возможного косметического ремонта в будущем.</p></div>' +
       '<img src="' + route('assets/brand-icons/spare-boards.svg') + '" alt="" width="65" height="61"></aside>';
   }
 
-  function renderCalculation(focus){
+  function renderCalculation(){
     var form=document.getElementById('ev-calc-form');if(!form)return;
     var sku=form.elements.sku.value,p=bySku.get(sku),root=document.getElementById('ev-calc-result');
-    if(!p){root.innerHTML='<p>Выберите декор для расчёта.</p>';form.dataset.calculated='false';renderInstallationEstimate(form);return;}
+    if(!p)return;
+    root.hidden=false;
     var result=core.calculate(form.elements.area.value,form.elements.reserve.value,p.packArea,activePrice(sku),p.packCount);
     if(result.error){root.innerHTML='<p class="ev-error" role="alert">'+esc(result.error)+'</p>';form.dataset.calculated='false';renderInstallationEstimate(form);return;}
     form.dataset.calculated='true';
@@ -276,19 +277,44 @@
     renderInstallationEstimate(form);
     var url=new URL(location.href);url.searchParams.set('sku',sku);url.searchParams.set('area',form.elements.area.value);url.searchParams.set('reserve',form.elements.reserve.value);history.replaceState(null,'',url);
     syncButtons();
-    if(focus){root.focus({preventScroll:true});if(window.innerWidth<750)root.scrollIntoView({behavior:'smooth',block:'start'});}
   }
   function mountCalculator(){
     var form=document.getElementById('ev-calc-form');if(!form)return;
-    var s=params.get('sku');if(bySku.has(s))form.elements.sku.value=s;
+    var sku=(params.get('sku')||'').trim().toUpperCase();
+    var product=bySku.get(sku);
+    if(!product){
+      var empty=document.getElementById('ev-calc-empty');
+      if(sku)empty.querySelector('h2').textContent='Декор по этой ссылке не найден';
+      empty.hidden=false;
+      return;
+    }
+    form.elements.sku.value=product.sku;
+    var name=esc(fullName(product));
+    var dimensions=[product.lengthMM,product.widthMM,product.thicknessMM].map(esc).join(' × ')+' мм';
+    document.getElementById('ev-calc-product').innerHTML=
+      '<h2 class="ev-calc-product-name">'+name+'</h2>'+
+      '<img src="'+route(product.productImage)+'"'+imageAttrs(product.productImage,'(max-width: 760px) 100vw, (max-width: 1150px) 45vw, 520px')+' alt="'+name+'" width="360" height="240">'+
+      '<p class="ev-calc-product-meta"><span>'+esc(product.sku)+'</span> · <span>'+dimensions+'</span><br>'+
+      '<span>'+number(product.packArea,4)+' м² в упаковке</span></p>';
+    form.hidden=false;
     if(params.has('area')&&core.parseDecimal(params.get('area'))!==null)form.elements.area.value=params.get('area');
     if(params.has('reserve')&&core.parseDecimal(params.get('reserve'))!==null)form.elements.reserve.value=params.get('reserve');
-    function preview(){var p=bySku.get(form.elements.sku.value),el=document.getElementById('ev-calc-product');if(p&&el)el.innerHTML='<img src="'+route(p.productImage)+'"'+imageAttrs(p.productImage,'(max-width: 760px) 100vw, 360px')+' alt="'+esc(fullName(p))+'" width="360" height="240"><p>'+p.sku+' · '+p.lengthMM+' × '+p.widthMM+' × '+p.thicknessMM+' мм<br>'+number(p.packArea,4)+' м² в упаковке</p>';}
-    form.addEventListener('submit',function(e){e.preventDefault();renderCalculation(true);});
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      renderCalculation();
+      var root=document.getElementById('ev-calc-result');
+      root.focus({preventScroll:true});
+      var top=root.getBoundingClientRect().top;
+      var headerMargin=parseFloat(getComputedStyle(root).scrollMarginTop)||0;
+      var visibleHeight=Math.min(root.offsetHeight,180,window.innerHeight/2);
+      if(top<headerMargin-1||top>window.innerHeight-visibleHeight){
+        var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        root.scrollIntoView({behavior:reduced?'instant':'smooth',block:'start'});
+      }
+    });
     form.addEventListener('input',function(){if(form.dataset.calculated==='true'){form.dataset.calculated='false';renderInstallationEstimate(form);document.getElementById('ev-calc-result').innerHTML='<p>Данные изменились. Нажмите «Рассчитать», чтобы обновить результат.</p>';}});
     window.addEventListener('ev-installation-costs-updated',function(){renderInstallationEstimate(form);});
-    form.elements.sku.addEventListener('change',preview);preview();
-    if(params.has('area'))renderCalculation(false);
+    if(params.has('area'))renderCalculation();
   }
   function matchesTone(p,tone){if(!tone)return true;if(tone==='light')return p.tags.tone==='light';var patterns={natural:/натуральн/i,gray:/сер/i,brown:/коричнев/i,beige:/беж/i};return !!(patterns[tone]&&patterns[tone].test(p.shade||''));}
   function mountCatalog(){

@@ -58,8 +58,8 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
     canonical = 'https://eversense.by/' + (page[:-10] if page.endswith('index.html') else page)
     schema = structured or {'@context':'https://schema.org','@type':'WebPage','name':title,'description':lead,'url':canonical,'inLanguage':'ru'}
     version = CATALOG_VERSION if page_type in ('catalog', 'favorites') else VERSION
-    buyer_version = '20261126packcomparison' if page_type == 'calculator' else version
-    core_version = buyer_version if page_type == 'calculator' else VERSION
+    buyer_version = '20261127brandcalc' if page_type == 'calculator' else version
+    core_version = '20261126packcomparison' if page_type == 'calculator' else VERSION
     extras = []
     if page_type in ('product', 'choose', 'faq', 'installation', 'care', 'warranty', 'downloads'):
         extras.append('explore-guides.css')
@@ -78,6 +78,8 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
     if page_type == 'installation' and page != 'installation.html':
         breadcrumb += link('Укладка', 'installation.html', page) + '<span aria-hidden="true">/</span>'
     breadcrumb += '<span>' + e(title) + '</span>'
+    noscript_note = ('Для расчёта включите JavaScript. <a href="catalog-ru/">Перейти в каталог</a>' if page_type == 'calculator' else
+                     'Для расчёта, фильтров и избранного включите JavaScript. Страницы декоров и полезные материалы доступны по обычным ссылкам.')
     html = f'''<!doctype html>
 <html lang="ru" data-buyer-static="true"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -97,7 +99,7 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
 <a href="#main" class="ev-skip-link">Перейти к содержанию</a>
 <main id="main"><section class="ev-hero"><div class="ev-wrap"><nav class="ev-breadcrumb" aria-label="Хлебные крошки">{breadcrumb}</nav><h1>{e(title)}</h1><p class="ev-lead">{e(lead)}</p>{hero_actions}</div></section>
 {body}</main>{footer(page)}
-<noscript><div class="ev-wrap ev-note">Для расчёта, фильтров и избранного включите JavaScript. Страницы декоров и полезные материалы доступны по обычным ссылкам.</div></noscript>
+<noscript><div class="ev-wrap ev-note">{noscript_note}</div></noscript>
 </body></html>'''
     path = ROOT / page
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -262,9 +264,16 @@ def installation_estimate():
 
 def tools_pages():
     page = 'calculator.html'
-    opts = [(p['sku'],p['sku']+' · '+p['name']) for p in PRODUCTS]
-    body = '<section class="ev-section"><div class="ev-wrap ev-calculator"><form id="ev-calc-form" novalidate>'+field('Декор','sku',opts)+'<div id="ev-calc-product"></div><div class="ev-filter-row"><div class="ev-field"><label for="ev-area">Площадь помещений, м²</label><input type="text" inputmode="decimal" id="ev-area" name="area" placeholder="Например, 20,5" required autocomplete="off" aria-describedby="ev-area-hint"><small id="ev-area-hint">Укажите «чистую» площадь в м² как есть из плана объекта.</small></div><div class="ev-field"><label for="ev-reserve">Запас на подрезку, %</label><input type="text" inputmode="decimal" id="ev-reserve" name="reserve" value="5" required aria-describedby="ev-reserve-hint"><small id="ev-reserve-hint">При палубной укладке стандартная прирезка — 5%. Если укладка диагональная, прирезка может составить 8–10%.</small></div></div><button type="submit" class="ev-button ev-button--primary">Рассчитать</button><p class="ev-note">Расчёт округляет количество вверх до целых упаковок.</p></form><section id="ev-calc-result" class="ev-result" aria-live="polite" tabindex="-1"><span class="ev-eyebrow">Ваш расчёт</span><h2>Сколько упаковок нужно?</h2><p>Выберите декор и введите площадь. Здесь появятся количество, площадь покупки и стоимость покрытия по текущей цене.</p></section>'+installation_estimate()+'</div></section>'
-    write_page(page,'Рассчитать покупку','Площадь помещений → запас → целые упаковки. Получите расчёт покрытия и сохраните ссылку для продавца.',body,'calculator')
+    body = '''<section class="ev-section"><div class="ev-wrap ev-calculator">
+<section id="ev-calc-empty" hidden><h2>Какой декор рассчитать?</h2><p>Откройте карточку нужного декора и нажмите «Рассчитать».</p><a class="ev-button ev-button--primary" href="catalog-ru/">Выбрать декор в каталоге</a></section>
+<form id="ev-calc-form" novalidate hidden><input type="hidden" name="sku"><div id="ev-calc-product"></div>
+<div class="ev-calc-inputs"><h2 class="ev-calc-fields-title">Параметры расчёта</h2><div class="ev-filter-row">
+<div class="ev-field"><label for="ev-area">Площадь помещений, м²</label><input type="text" inputmode="decimal" id="ev-area" name="area" placeholder="Например, 20,5" required autocomplete="off" aria-describedby="ev-area-hint"><small id="ev-area-hint">Укажите «чистую» площадь в м² как есть из плана объекта.</small></div>
+<div class="ev-field"><label for="ev-reserve">Запас на подрезку, %</label><input type="text" inputmode="decimal" id="ev-reserve" name="reserve" value="5" required aria-describedby="ev-reserve-hint"><small id="ev-reserve-hint">При палубной укладке стандартная прирезка — 5%. Если укладка диагональная, прирезка может составить 8–10%.</small></div>
+</div><button type="submit" class="ev-button ev-button--primary">Рассчитать</button></div></form>
+<section id="ev-calc-result" class="ev-result" aria-live="polite" tabindex="-1" hidden></section>
+''' + installation_estimate() + '</div></section>'
+    write_page(page,'Рассчитать покупку','Рассчитайте количество упаковок, стоимость покрытия и укладки.',body,'calculator')
     page='favorites.html'
     body='<section class="ev-section"><div class="ev-wrap"><div class="ev-favorites-bar"><p>В подборке: <b id="ev-favorite-total">0</b></p><div class="ev-actions"><button type="button" class="ev-button" data-share-selection disabled>Скопировать ссылку</button><button type="button" class="ev-text-link" data-print>Распечатать</button></div></div><div id="ev-shared-note" class="ev-note" hidden><p>Вы открыли подборку по ссылке. Её можно сохранить в своём избранном.</p><button type="button" class="ev-button" data-save-shared>Добавить в моё избранное</button></div><div id="ev-favorites"><p>Отметьте понравившиеся декоры в каталоге.</p>'+link('Открыть каталог','catalog-ru/',page,'ev-button')+'</div><p class="ev-note">Избранное хранится в этом браузере. Чтобы открыть подборку на другом устройстве или показать продавцу, скопируйте ссылку.</p></div></section>'
     cards = '\n'.join(catalog_card(p, page, show_collection=True) for p in PRODUCTS)
