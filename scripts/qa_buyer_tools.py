@@ -576,6 +576,13 @@ def main():
             def calculator_test(page, context, device):
                 goto(page, "calculator.html?sku=EL1040&area=20")
                 require(page.locator("#ev-reserve").input_value() == "5", "New calculations must start with 5%")
+                actions = page.locator(".ev-calc-end-actions")
+                stores = actions.get_by_role("link", name="Где купить", exact=True)
+                require(stores.is_visible() and stores.evaluate("a => a.href") == base + "/where-to-buy.html"
+                        and stores.evaluate("a => a === a.parentElement.lastElementChild"),
+                        "The last calculation action must lead to the store locator")
+                require(page.locator("main a[href*='contacts.html']").count() == 0,
+                        "The purchase calculation must not route buyers to Contacts")
                 check_calculator_product(page, "EL1040")
                 require(page.evaluate("scrollY < 1 && document.activeElement.id !== 'ev-calc-result'"),
                         "Opening a saved result should leave the buyer at the top of the page")

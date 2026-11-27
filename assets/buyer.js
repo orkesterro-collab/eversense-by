@@ -190,10 +190,6 @@
         ? purchase.totalCents + installation : null;
       section.querySelector('[data-order-total="' + card.dataset.installMethod + '"]').innerHTML = estimateAmount(total, true);
     });
-    var availability = new URL(route('contacts.html'));
-    availability.searchParams.set('sku', product.sku);
-    availability.searchParams.set('packs', purchase.packs);
-    section.querySelector('[data-calc-availability]').href = availability.href;
     section.querySelector('[data-install-cached]').hidden = !(costs && costs.cached);
   }
 

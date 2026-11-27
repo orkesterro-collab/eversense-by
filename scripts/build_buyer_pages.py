@@ -58,7 +58,7 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
     canonical = 'https://eversense.by/' + (page[:-10] if page.endswith('index.html') else page)
     schema = structured or {'@context':'https://schema.org','@type':'WebPage','name':title,'description':lead,'url':canonical,'inLanguage':'ru'}
     version = CATALOG_VERSION if page_type in ('catalog', 'favorites') else VERSION
-    buyer_version = '20261127printqr' if page_type == 'calculator' else version
+    buyer_version = '20261127stores' if page_type == 'calculator' else version
     core_version = '20261127estimate' if page_type == 'calculator' else VERSION
     extras = []
     if page_type in ('product', 'choose', 'faq', 'installation', 'care', 'warranty', 'downloads'):
@@ -266,9 +266,9 @@ def installation_estimate():
 <dl><div><dt>С укладкой на клей</dt><dd data-order-total="glue"></dd></div>
 <div><dt>С плавающей укладкой на подложку</dt><dd data-order-total="underlay"></dd></div></dl></section>
 <div class="ev-calc-end-actions ev-actions">
-<a class="ev-text-link" href="contacts.html" data-calc-availability>Уточнить наличие</a>
 <button type="button" class="ev-button" data-share-calculation>Скопировать ссылку на расчёт</button>
 <button type="button" class="ev-button" data-print>Распечатать расчёт</button>
+<a class="ev-button" href="where-to-buy.html">Где купить</a>
 </div></section>'''
 
 def tools_pages():
