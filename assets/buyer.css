@@ -382,15 +382,20 @@ body[data-buyer-page="calculator"] .ev-section {padding-block:clamp(26px,3.2vw,4
 .ev-order-summary dt {font-size:15px;line-height:1.4}
 .ev-order-summary dd {margin:0;text-align:right;font-size:clamp(20px,2vw,27px);font-weight:650;line-height:1.2;font-variant-numeric:tabular-nums}
 .ev-order-summary dd small {font-size:.65em;white-space:nowrap}
-.ev-calc-end-actions {margin-top:18px;justify-content:flex-end}
+.ev-calc-end-actions {
+  display:grid;grid-template-columns:repeat(3,minmax(0,max-content));grid-auto-rows:1fr;
+  align-items:stretch;justify-content:end;margin-top:18px
+}
+.ev-calc-end-actions > .ev-button {min-width:0;min-height:52px;font:inherit;line-height:1.5;overflow-wrap:anywhere}
 .ev-calc-end-actions > a {background:var(--ev-ink);color:white;border-color:var(--ev-ink)}
 .ev-calc-end-actions > a:hover {background:white;color:var(--ev-ink)}
 .ev-calc-print-head,.ev-calc-print-guide {display:none}
 @media(max-width:760px){
   .ev-order-summary {grid-template-columns:minmax(0,1fr);gap:15px}
+  .ev-calc-end-actions {grid-template-columns:minmax(0,1fr);gap:8px}
+  .ev-calc-end-actions > .ev-button {padding-inline:12px}
 }
 @media(max-width:480px){
-  .ev-calc-end-actions {display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
   .ev-order-summary dl > div {display:flex;flex-wrap:wrap;gap:3px 8px}
   .ev-order-summary dt {flex:1 1 7em}
   .ev-order-summary dd {max-width:100%;margin-left:auto;font-size:18px}

@@ -577,6 +577,9 @@ def main():
                 goto(page, "calculator.html?sku=EL1040&area=20")
                 require(page.locator("#ev-reserve").input_value() == "5", "New calculations must start with 5%")
                 actions = page.locator(".ev-calc-end-actions")
+                heights = actions.locator(".ev-button").evaluate_all("buttons => buttons.map(b => b.getBoundingClientRect().height)")
+                require(len(heights) == 3 and min(heights) >= 48 and max(heights) - min(heights) < 0.1,
+                        f"Copy, print and store buttons should have the same height: {heights}")
                 stores = actions.get_by_role("link", name="Где купить", exact=True)
                 require(stores.is_visible() and stores.evaluate("a => a.href") == base + "/where-to-buy.html"
                         and stores.evaluate("a => a === a.parentElement.lastElementChild"),

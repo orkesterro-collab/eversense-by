@@ -58,7 +58,7 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
     canonical = 'https://eversense.by/' + (page[:-10] if page.endswith('index.html') else page)
     schema = structured or {'@context':'https://schema.org','@type':'WebPage','name':title,'description':lead,'url':canonical,'inLanguage':'ru'}
     version = CATALOG_VERSION if page_type in ('catalog', 'favorites') else VERSION
-    buyer_version = '20261127stores' if page_type == 'calculator' else version
+    buyer_version = '20261127buttons' if page_type == 'calculator' else version
     core_version = '20261127estimate' if page_type == 'calculator' else VERSION
     extras = []
     if page_type in ('product', 'choose', 'faq', 'installation', 'care', 'warranty', 'downloads'):
