@@ -2,6 +2,7 @@
 """Audit deployed Eversense pages and static assets at verified hoster.by IP."""
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
+import json
 import subprocess
 import sys
 import time
@@ -52,3 +53,15 @@ for path, typ, status in sorted(bad)[:80]:
 if bad:
     raise SystemExit(f"Live site has {len(bad)} failing paths")
 print("PASS: every deployed HTML page and sampled CSS/JS/image URLs returned HTTP 200", flush=True)
+
+# A static 200 for PHP would leave the contact form looking healthy but unable to send.
+# An empty submission must reach server-side validation without sending an email.
+response = subprocess.run(
+    ["curl", "-ksS", "--max-time", "20", "--resolve", f"{HOST}:443:{IP}",
+     "-H", "Accept: application/json", "--data", "email=&message=",
+     "-w", "\\n%{http_code}", f"https://{HOST}/assets/contact/submit.php"],
+    capture_output=True, text=True, timeout=25, check=True)
+body, _, status = response.stdout.rpartition("\n")
+if status != "422" or json.loads(body).get("ok") is not False:
+    raise SystemExit(f"Contact form validation failed (HTTP {status})")
+print("PASS: hosted cooperation form validated a submission without sending mail", flush=True)

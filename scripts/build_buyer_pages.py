@@ -73,6 +73,8 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
         extras.extend(['explore-interiors.css', 'explore-interiors.js'])
     if page_type == 'calculator':
         extras.append('installation-costs.js')
+    if page_type == 'contacts':
+        extras.extend(['contact/form.css', 'contact/form.js'])
     extra_assets = '\n'.join(f'<link rel="stylesheet" href="{href("assets/"+file,page)}?v={VERSION}">' if file.endswith('.css') else f'<script src="{href("assets/"+file,page)}?v={VERSION}" defer></script>' for file in extras)
     breadcrumb = link('Главная', 'index.html', page) + '<span aria-hidden="true">/</span>'
     if page_type == 'installation' and page != 'installation.html':
@@ -291,10 +293,44 @@ def tools_pages():
     body += f'<template id="ev-favorite-cards">{cards}</template>'
     write_page(page,'Ваши избранные декоры','Сохраните понравившиеся декоры и покажите подборку в магазине.',body,'favorites',hero_actions='')
 
+def contacts_page():
+    lead = 'Для покупки напольного покрытия обращайтесь к одному из наших сертифицированных партнёров.'
+    buyer_actions = """
+<p class="ev-contact-prep">Перед звонком в магазин запишите площадь помещения и артикулы понравившихся декоров. Продавец проверит наличие, рассчитает количество упаковок и подскажет, какие образцы есть в салоне.</p>
+<div id="ev-contact-selection" class="ev-note" hidden></div>
+<div class="ev-actions"><a class="ev-button ev-store-button" href="where-to-buy.html">Где купить</a></div>"""
+    body = """
+<section class="ev-section" aria-labelledby="cooperation">
+  <div class="ev-wrap">
+    <div class="ev-contact-layout">
+      <div class="ev-contact-intro">
+        <h2 id="cooperation">Сотрудничество</h2>
+        <p>Для связи по вопросам сотрудничества заполните форму или позвоните по телефону <a class="ev-contact-phone" href="tel:+375296713971">+375 29 671-39-71</a>.</p>
+      </div>
+      <form id="cooperation-form" class="ev-contact-form" method="post" action="assets/contact/submit.php" aria-labelledby="cooperation">
+        <div class="ev-contact-fields">
+          <label class="ev-field"><span>Имя или компания (необязательно)</span><input name="name" autocomplete="name" maxlength="120"></label>
+          <label class="ev-field"><span>Электронная почта для ответа</span><input type="email" name="email" autocomplete="email" maxlength="254" required></label>
+        </div>
+        <label class="ev-field"><span>Сообщение</span><textarea name="message" rows="5" maxlength="3000" required></textarea></label>
+        <div hidden aria-hidden="true"><label>Ваш сайт<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <button class="ev-button ev-contact-submit" type="submit">Отправить сообщение</button>
+        <p class="ev-contact-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        <p class="ev-contact-confirmation" id="cooperation-sent" tabindex="-1">Спасибо! Сообщение отправлено.</p>
+      </form>
+    </div>
+    <section class="ev-contact-company" aria-labelledby="company-details">
+      <h2 id="company-details">Реквизиты</h2>
+      <p><strong>ООО «Флорсток»</strong><br>Представитель торговой марки EVERSENSE в Беларуси.<br>УНП 192608003</p>
+      <p>Юридический адрес — 220062, Республика Беларусь, г. Минск, пр. Победителей, д. 129, пом. 358.</p>
+    </section>
+  </div>
+</section>"""
+    write_page('contacts.html', 'Контакты в Беларуси', lead, body, 'contacts', hero_actions=buyer_actions)
+
+
 def other_pages():
-    page='contacts.html'
-    body='<section class="ev-section"><div class="ev-wrap"><section id="ev-contact-selection" class="ev-note" hidden></section><div class="ev-article-layout"><div><span class="ev-eyebrow">Республика Беларусь</span><h2>ООО «Флорсток»</h2><p>Представитель торговой марки EVERSENSE в Беларуси.</p></div><div class="ev-prose"><section><h2>Обсудим вашу покупку</h2><p>Уточните наличие нужного декора, количество упаковок и возможность посмотреть образец. Если уже выбрали варианты, назовите артикулы или сохраните ссылку на подборку.</p><div class="ev-actions"><a class="ev-button ev-button--primary" href="tel:+375296713971">+375 29 671-39-71</a>'+link('Найти магазин','where-to-buy.html',page,'ev-button')+'</div></section><section><h2>Что подготовить к разговору</h2><ul><li>Артикул или два-три понравившихся декора.</li><li>Площадь помещения и ориентировочное время покупки.</li><li>Тип помещения, наличие подогрева и особенности основания.</li><li>Город, в котором удобно получить покупку или посмотреть образец.</li></ul></section><section><h2>Реквизиты</h2><p>ООО «Флорсток»<br>УНП 192608003<br>220062, Республика Беларусь, г. Минск,<br>пр. Победителей, д. 129, пом. 358</p><p>Перед визитом уточните адрес торговой точки и наличие экспозиции: адрес компании может отличаться от адреса магазина.</p></section></div></div></div></section>'
-    write_page(page,'Контакты в Беларуси','Проверить наличие, найти образец и получить ответы по выбранному покрытию.',body,'contacts')
+    contacts_page()
     page='projects.html'
     body=render_interiors(page, PRODUCTS, href)
     write_page(page,'Одна комната — разный характер','Три комнаты. Шесть декоров. Посмотрите, как пол меняет интерьер.',body,'projects')

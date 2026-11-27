@@ -66,6 +66,13 @@ def main():
     sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'scripts'))
     from optimize_delivery import optimize_site
     optimize_site(root)
+    # The static mirror submits natively to the PHP handler on the main site.
+    handler = 'assets/contact/submit.php'
+    (root / handler).unlink(missing_ok=True)
+    contacts = root / 'contacts.html'
+    form = contacts.read_text(encoding='utf-8')
+    contacts.write_text(form.replace(f'action="{handler}"', f'action="https://eversense.by/{handler}"'),
+                        encoding='utf-8')
     count = 0
     for path in root.rglob('*.html'):
         original = path.read_text(encoding='utf-8')

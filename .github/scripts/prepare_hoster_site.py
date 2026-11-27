@@ -27,6 +27,7 @@ RELEASE_ASSETS = {
     "/assets/prices.js", "/assets/prices.css", "/assets/unified-header.js", "/assets/unified-header.css",
     "/assets/buyer.js", "/assets/buyer.css", "/assets/buyer-core.js", "/assets/products-data.js",
     "/assets/installation-costs.js",
+    "/assets/contact/form.css", "/assets/contact/form.js",
     "/assets/explore-guides.css", "/assets/explore-product.css", "/assets/explore-product.js",
     "/assets/explore-interiors.css", "/assets/explore-interiors.js",
     "/assets/home-senses.css", "/assets/home-senses.js",

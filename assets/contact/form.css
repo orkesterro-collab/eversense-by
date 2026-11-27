@@ -1,0 +1,93 @@
+.ev-hero .ev-contact-prep {
+  max-width: 66ch;
+  margin: 14px 0 0;
+  color: #dadada;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.ev-hero .ev-store-button {
+  background: #fff;
+  color: #343333;
+  border-color: #fff;
+}
+
+.ev-hero .ev-store-button:hover {
+  background: transparent;
+  color: #fff;
+}
+
+#ev-contact-selection {
+  max-width: 66ch;
+  background: transparent;
+  color: #fff;
+}
+
+#ev-contact-selection h2 { margin-bottom: 6px; }
+
+.ev-contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: clamp(32px, 6vw, 84px);
+  align-items: start;
+}
+
+.ev-contact-intro h2, .ev-contact-company h2 {
+  margin: 0 0 16px;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.2;
+}
+
+.ev-contact-intro p, .ev-contact-company p {
+  max-width: 58ch;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.ev-contact-phone {
+  white-space: nowrap;
+  text-underline-offset: 3px;
+}
+
+.ev-contact-form, .ev-contact-fields {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.ev-contact-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ev-contact-form textarea { resize: vertical; }
+
+.ev-contact-submit {
+  justify-self: start;
+  background: #343333;
+  border-color: #343333;
+  color: #fff;
+}
+
+.ev-contact-submit:hover {
+  background: #fff;
+  color: #343333;
+}
+
+.ev-contact-status:empty, .ev-contact-confirmation:not(:target) { display: none; }
+.ev-contact-status, .ev-contact-confirmation { line-height: 1.6; }
+.ev-contact-status.is-error { color: #903c2e; }
+.ev-contact-confirmation { scroll-margin-top: calc(var(--ev-header-height, 68px) + 25px); }
+
+.ev-contact-company {
+  margin-top: clamp(40px, 6vw, 80px);
+  padding-top: 30px;
+  border-top: 1px solid var(--ev-line, #dadada);
+}
+
+.ev-contact-company h2 { font-size: 24px; }
+.ev-contact-company p:last-child { margin-bottom: 0; }
+
+@media (max-width: 760px) {
+  .ev-contact-layout { grid-template-columns: 1fr; gap: 18px; }
+}
+
+@media (max-width: 540px) {
+  .ev-contact-fields { grid-template-columns: 1fr; }
+}
