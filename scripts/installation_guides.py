@@ -70,6 +70,59 @@ def _steps(steps):
     return '<ol class="ev-install-steps">' + ''.join(result) + '</ol>'
 
 
+def _diagram_link(diagram, page, href):
+    src = _e(href(diagram['src'], page))
+    alt = _e(diagram['alt'])
+    width = int(diagram['width'])
+    height = int(diagram['height'])
+    return (
+        f'<a href="{src}" target="_blank" rel="noopener noreferrer" aria-label="Увеличить: {alt}">'
+        f'<img src="{src}" alt="{alt}" width="{width}" height="{height}" loading="lazy" decoding="async"></a>'
+    )
+
+
+def _extras(items):
+    if not items:
+        return ''
+    notes = ''.join('<p><mark>' + _e(item) + '</mark></p>' for item in items)
+    return '<div class="ev-install-extras"><span>Дополнение сайта</span>' + notes + '</div>'
+
+
+def _illustrated(group, copy, page, href):
+    figures = []
+    diagrams = group.get('diagrams', [])
+    if group.get('layers'):
+        layers = ''.join('<li><i aria-hidden="true"></i><span>' + _e(layer) + '</span></li>' for layer in group['layers'])
+        substrate = 'wood' if group['substrate'] == 'wood' else 'mineral'
+        figures.append(
+            '<figure class="ev-install-section-cut"><figcaption>Слои сверху вниз</figcaption>'
+            f'<ol class="ev-install-layers ev-install-layers--{substrate}" role="list">{layers}</ol></figure>'
+        )
+    for diagram in diagrams:
+        caption = diagram.get('caption')
+        if not caption and len(diagrams) > 1:
+            caption = diagram['alt']
+        caption_html = '<figcaption>' + _e(caption) + '</figcaption>' if caption else ''
+        figures.append('<figure>' + _diagram_link(diagram, page, href) + caption_html + '</figure>')
+    if not figures:
+        return copy
+    gallery = '<div class="ev-install-figures">' + ''.join(figures) + '</div>'
+    if not copy:
+        return gallery
+    if len(diagrams) > 1 or any(diagram['width'] > 3 * diagram['height'] for diagram in diagrams):
+        return '<div class="ev-install-sequence">' + copy + gallery + '</div>'
+    return '<div class="ev-install-illustrated">' + gallery + '<div class="ev-install-copy">' + copy + '</div></div>'
+
+
+def _block(block, section_title, page, href):
+    title = '<h3>' + _e(block['title']) + '</h3>' if block.get('title') else ''
+    copy = ''.join('<p>' + _e(value) + '</p>' for value in block.get('paragraphs', []))
+    copy += _list(block.get('bullets', []))
+    body = _illustrated(block, copy, page, href)
+    body += _table(block.get('table', {}), block.get('title', section_title))
+    return '<div class="ev-install-block">' + title + body + _extras(block.get('extras', [])) + '</div>'
+
+
 def _assembly_methods(methods, page, href):
     if not methods:
         return ''
@@ -81,15 +134,12 @@ def _assembly_methods(methods, page, href):
     for method in methods:
         method_id = _e(method['id'])
         title = 'Способ ' + _e(method['code']) + '. ' + _e(method['title'])
-        images = []
-        for diagram in method['diagrams']:
-            src = _e(href(diagram['src'], page))
-            alt = _e(diagram['alt'])
-            images.append('<a href="' + src + '" target="_blank" rel="noopener noreferrer" aria-label="Увеличить: ' + alt + '"><img src="' + src + '" alt="' + alt + '" width="' + str(int(diagram['width'])) + '" height="' + str(int(diagram['height'])) + '" loading="lazy" decoding="async"></a>')
+        images = [_diagram_link(diagram, page, href) for diagram in method['diagrams']]
         steps = '<ol class="ev-install-method-steps">' + ''.join('<li>' + _e(step) + '</li>' for step in method['steps']) + '</ol>'
         figure = '<figure class="ev-install-method-figure"><div class="ev-install-diagrams">' + ''.join(images) + '</div><figcaption>' + _e(method['caption']) + '</figcaption></figure>'
+        layout = _block(method['layout'], title, page, href) if method.get('layout') else ''
         note = '<p class="ev-install-method-note">' + _e(method['note']) + '</p>' if method.get('note') else ''
-        result.append('<div class="ev-install-method" id="' + method_id + '" role="group" aria-labelledby="' + method_id + '-heading"><h3 id="' + method_id + '-heading">' + title + '</h3><p>' + _e(method['description']) + '</p>' + steps + figure + note + '</div>')
+        result.append('<div class="ev-install-method" id="' + method_id + '" role="group" aria-labelledby="' + method_id + '-heading"><h3 id="' + method_id + '-heading">' + title + '</h3><p>' + _e(method['description']) + '</p>' + layout + steps + figure + note + '</div>')
     return navigation + '<p class="ev-install-diagram-help">На схемах сохранены обозначения производителя. Нажмите на рисунок, чтобы открыть его крупнее в новой вкладке.</p>' + ''.join(result)
 
 
@@ -104,9 +154,8 @@ def _pros_cons(section):
 def render_installation_guide(guide, page, href):
     """Return the article body using the site's existing relative-link helper.
 
-    Expected fields are navigation, quick_checks, notice, sections and related.
-    Sections accept paragraphs, bullets, steps, assembly_methods, table, notice,
-    links, pros and cons.
+    Sections optionally group text and drawings into blocks. Extras are separate
+    editorial additions to a guide with a factory_pdf source.
     Every text value is escaped; editorial content cannot inject markup.
     """
     navigation = ''
@@ -124,10 +173,19 @@ def render_installation_guide(guide, page, href):
         ) + '</dl>'
 
     sections = guide.get('sections', [])
-    toc = '<nav class="ev-install-toc" aria-label="Содержание статьи"><h2>На этой странице</h2><ul>' + ''.join(
-        '<li><a href="#' + _e(section['id']) + '">' + _e(section['title']) + '</a></li>'
+    toc_list = '<ul>' + ''.join(
+        '<li><a href="#' + _e(section['id']) + '">' + _e(section.get('nav_title', section['title'])) + '</a></li>'
         for section in sections
-    ) + '</ul></nav>' if sections else ''
+    ) + '</ul>'
+    toc_body = '<h2>На этой странице</h2>' + toc_list
+    source = ''
+    guide_css = 'ev-install-guide'
+    if guide.get('factory_pdf'):
+        guide_css += ' ev-install-guide--factory'
+        pdf = _link(guide['factory_pdf'], page, href, 'ev-install-source-link')
+        source = '<div class="ev-install-source">' + pdf + '</div>'
+        toc_body = '<details open><summary>Содержание инструкции</summary>' + toc_list + '</details>'
+    toc = '<nav class="ev-install-toc" aria-label="Содержание статьи">' + toc_body + '</nav>' if sections else ''
 
     article = []
     for section in sections:
@@ -135,10 +193,13 @@ def render_installation_guide(guide, page, href):
         section_body = ''.join('<p>' + _e(paragraph) + '</p>' for paragraph in section.get('paragraphs', []))
         section_body += _notice(section.get('notice'))
         section_body += _list(section.get('bullets', []))
+        section_body = _illustrated(section, section_body, page, href)
         section_body += _table(section.get('table', {}), section['title'])
         section_body += _steps(section.get('steps', []))
+        section_body += ''.join(_block(block, section['title'], page, href) for block in section.get('blocks', []))
         section_body += _assembly_methods(section.get('assembly_methods', []), page, href)
         section_body += _pros_cons(section)
+        section_body += _extras(section.get('extras', []))
         if section.get('links'):
             section_body += '<div class="ev-install-links">' + ''.join(
                 _link(item, page, href, 'ev-install-text-link') for item in section['links']
@@ -151,5 +212,5 @@ def render_installation_guide(guide, page, href):
             _link(item, page, href) for item in guide['related']
         ) + '</nav></div></section>'
 
-    intro = navigation + _notice(guide.get('notice'), 'h2', True) + checks
-    return '<div class="ev-install-guide"><div class="ev-wrap ev-install-intro">' + intro + '</div><div class="ev-wrap ev-install-layout">' + toc + '<article class="ev-prose ev-install-article">' + ''.join(article) + '</article></div>' + related + '</div>'
+    intro = navigation + source + _notice(guide.get('notice'), 'h2', True) + checks
+    return '<div class="' + guide_css + '"><div class="ev-wrap ev-install-intro">' + intro + '</div><div class="ev-wrap ev-install-layout">' + toc + '<article class="ev-prose ev-install-article">' + ''.join(article) + '</article></div>' + related + '</div>'

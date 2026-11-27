@@ -76,6 +76,8 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
     if page_type == 'contacts':
         extras.extend(['contact/form.css', 'contact/form.js'])
     extra_version = '20261127postcard' if page_type == 'contacts' else VERSION
+    if page == 'installation-underlay.html':
+        extra_version = '20261127factory'
     extra_assets = '\n'.join(f'<link rel="stylesheet" href="{href("assets/"+file,page)}?v={extra_version}">' if file.endswith('.css') else f'<script src="{href("assets/"+file,page)}?v={extra_version}" defer></script>' for file in extras)
     breadcrumb = link('Главная', 'index.html', page) + '<span aria-hidden="true">/</span>'
     if page_type == 'installation' and page != 'installation.html':

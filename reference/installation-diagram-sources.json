@@ -1,7 +1,7 @@
 {
   "source_url": "https://drive.google.com/file/d/1dImDaWKPtefl-TOjxHiSL3zauqBfHdJH/view",
   "source_sha256": "ab26a3d8b1f0c4b3e605f1e3cd79ce1bc04ce641487ffcce9fe7bc1cb4b82143",
-  "checked": "2026-11-16",
+  "checked": "2026-11-27",
   "credit": "EVERSENSE / ЭГГЕР Древпродукт Гагарин. Инструкция по укладке, раздел 4.2, печатные страницы 9–12.",
   "processing": "Иллюстрации извлечены из PDF с исходными обозначениями; геометрия и последовательность не перерисовывались. Рендер 4 px/pt, WebP quality 92.",
   "images": [
@@ -316,6 +316,333 @@
         539.589,
         352.882
       ]
+    }
+  ],
+  "local_pdf": "downloads/documents/eversense-installation.pdf",
+  "additional_figures": [
+    {
+      "src": "assets/installation/factory/inspect.webp",
+      "pdf_page": 2,
+      "clip_pt": [
+        41,
+        258,
+        173,
+        344
+      ],
+      "width": 528,
+      "height": 344
+    },
+    {
+      "src": "assets/installation/factory/flatness.webp",
+      "pdf_page": 2,
+      "clip_pt": [
+        650,
+        330,
+        782,
+        416
+      ],
+      "width": 528,
+      "height": 344
+    },
+    {
+      "src": "assets/installation/factory/carpet.webp",
+      "pdf_page": 3,
+      "clip_pt": [
+        41,
+        503,
+        173,
+        589
+      ],
+      "width": 528,
+      "height": 344
+    },
+    {
+      "src": "assets/installation/factory/tools.webp",
+      "pdf_page": 4,
+      "clip_pt": [
+        41,
+        378,
+        541,
+        492
+      ],
+      "width": 2000,
+      "height": 456
+    },
+    {
+      "src": "assets/installation/factory/kitchen.webp",
+      "pdf_page": 4,
+      "clip_pt": [
+        41,
+        715,
+        173,
+        801
+      ],
+      "width": 528,
+      "height": 344
+    },
+    {
+      "src": "assets/installation/factory/row-width.webp",
+      "pdf_page": 4,
+      "clip_pt": [
+        650,
+        344,
+        783,
+        430
+      ],
+      "width": 532,
+      "height": 344
+    },
+    {
+      "src": "assets/installation/factory/gap-wall.webp",
+      "pdf_page": 4,
+      "clip_pt": [
+        650,
+        723,
+        775,
+        804
+      ],
+      "width": 500,
+      "height": 324
+    },
+    {
+      "src": "assets/installation/factory/gap-doorway.webp",
+      "pdf_page": 4,
+      "clip_pt": [
+        775,
+        723,
+        900,
+        804
+      ],
+      "width": 500,
+      "height": 324
+    },
+    {
+      "src": "assets/installation/factory/gap-large-room.webp",
+      "pdf_page": 4,
+      "clip_pt": [
+        900,
+        723,
+        1025,
+        804
+      ],
+      "width": 500,
+      "height": 324
+    },
+    {
+      "src": "assets/installation/factory/gap-obstacles.webp",
+      "pdf_page": 4,
+      "clip_pt": [
+        1025,
+        723,
+        1150,
+        804
+      ],
+      "width": 500,
+      "height": 324
+    },
+    {
+      "src": "assets/installation/factory/floating.webp",
+      "pdf_page": 5,
+      "clip_pt": [
+        41,
+        370,
+        173,
+        456
+      ],
+      "width": 528,
+      "height": 344
+    },
+    {
+      "src": "assets/installation/factory/groove.webp",
+      "pdf_page": 5,
+      "clip_pt": [
+        41,
+        501,
+        173,
+        588
+      ],
+      "width": 528,
+      "height": 348
+    },
+    {
+      "src": "assets/installation/factory/row-order.webp",
+      "pdf_page": 6,
+      "clip_pt": [
+        41,
+        315,
+        320,
+        369
+      ],
+      "width": 1116,
+      "height": 216
+    },
+    {
+      "src": "assets/installation/factory/commercial-seal.webp",
+      "pdf_page": 7,
+      "clip_pt": [
+        41,
+        523,
+        301,
+        581
+      ],
+      "width": 1040,
+      "height": 232
+    },
+    {
+      "src": "assets/installation/factory/pipe-drill.webp",
+      "pdf_page": 7,
+      "clip_pt": [
+        41,
+        624,
+        165,
+        705
+      ],
+      "width": 496,
+      "height": 324
+    },
+    {
+      "src": "assets/installation/factory/pipe-cut-45.webp",
+      "pdf_page": 7,
+      "clip_pt": [
+        166,
+        624,
+        290,
+        705
+      ],
+      "width": 496,
+      "height": 324
+    },
+    {
+      "src": "assets/installation/factory/pipe-join.webp",
+      "pdf_page": 7,
+      "clip_pt": [
+        291,
+        624,
+        416,
+        705
+      ],
+      "width": 500,
+      "height": 324
+    },
+    {
+      "src": "assets/installation/factory/pipe-finish.webp",
+      "pdf_page": 7,
+      "clip_pt": [
+        416,
+        624,
+        541,
+        705
+      ],
+      "width": 500,
+      "height": 324
+    },
+    {
+      "src": "assets/installation/factory/door-cut.webp",
+      "pdf_page": 7,
+      "clip_pt": [
+        650,
+        236,
+        783,
+        322
+      ],
+      "width": 532,
+      "height": 344
+    },
+    {
+      "src": "assets/installation/factory/door-slide.webp",
+      "pdf_page": 7,
+      "clip_pt": [
+        783,
+        236,
+        916,
+        322
+      ],
+      "width": 532,
+      "height": 344
+    },
+    {
+      "src": "assets/installation/factory/door-lock.webp",
+      "pdf_page": 7,
+      "clip_pt": [
+        917,
+        236,
+        1049,
+        322
+      ],
+      "width": 528,
+      "height": 344
+    },
+    {
+      "src": "assets/installation/factory/disassemble-row.webp",
+      "pdf_page": 7,
+      "clip_pt": [
+        650,
+        503,
+        783,
+        595
+      ],
+      "width": 532,
+      "height": 368
+    },
+    {
+      "src": "assets/installation/factory/disassemble-end.webp",
+      "pdf_page": 7,
+      "clip_pt": [
+        783,
+        503,
+        915,
+        595
+      ],
+      "width": 528,
+      "height": 368
+    },
+    {
+      "src": "assets/installation/factory/disassemble-finish.webp",
+      "pdf_page": 7,
+      "clip_pt": [
+        915,
+        503,
+        1048,
+        595
+      ],
+      "width": 532,
+      "height": 368
+    },
+    {
+      "src": "assets/installation/factory/bathroom.webp",
+      "pdf_page": 8,
+      "clip_pt": [
+        41,
+        588,
+        171,
+        673
+      ],
+      "width": 520,
+      "height": 340
+    },
+    {
+      "src": "assets/installation/factory/bath-film.webp",
+      "pdf_page": 8,
+      "clip_pt": [
+        170,
+        588,
+        301,
+        673
+      ],
+      "width": 524,
+      "height": 340
+    },
+    {
+      "src": "assets/installation/factory/bath-seal.webp",
+      "pdf_page": 8,
+      "clip_pt": [
+        41,
+        718,
+        173,
+        803
+      ],
+      "width": 528,
+      "height": 340
     }
   ]
 }
