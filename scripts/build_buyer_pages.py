@@ -75,7 +75,8 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
         extras.append('installation-costs.js')
     if page_type == 'contacts':
         extras.extend(['contact/form.css', 'contact/form.js'])
-    extra_assets = '\n'.join(f'<link rel="stylesheet" href="{href("assets/"+file,page)}?v={VERSION}">' if file.endswith('.css') else f'<script src="{href("assets/"+file,page)}?v={VERSION}" defer></script>' for file in extras)
+    extra_version = '20261127postcard' if page_type == 'contacts' else VERSION
+    extra_assets = '\n'.join(f'<link rel="stylesheet" href="{href("assets/"+file,page)}?v={extra_version}">' if file.endswith('.css') else f'<script src="{href("assets/"+file,page)}?v={extra_version}" defer></script>' for file in extras)
     breadcrumb = link('Главная', 'index.html', page) + '<span aria-hidden="true">/</span>'
     if page_type == 'installation' and page != 'installation.html':
         breadcrumb += link('Укладка', 'installation.html', page) + '<span aria-hidden="true">/</span>'
@@ -308,15 +309,33 @@ def contacts_page():
         <p>Для связи по вопросам сотрудничества заполните форму или позвоните по телефону <a class="ev-contact-phone" href="tel:+375296713971">+375 29 671-39-71</a>.</p>
       </div>
       <form id="cooperation-form" class="ev-contact-form" method="post" action="assets/contact/submit.php" aria-labelledby="cooperation">
-        <div class="ev-contact-fields">
-          <label class="ev-field"><span>Имя или компания (необязательно)</span><input name="name" autocomplete="name" maxlength="120"></label>
-          <label class="ev-field"><span>Электронная почта для ответа</span><input type="email" name="email" autocomplete="email" maxlength="254" required></label>
+        <div class="ev-postcard-address">
+          <div class="ev-postcard-recipient">
+            <span class="ev-postcard-to">Кому</span>
+            <p class="ev-postcard-name">ООО «Флорсток»</p>
+            <p class="ev-postcard-city">Минск, Беларусь</p>
+          </div>
+          <div class="ev-postcard-postage" aria-hidden="true">
+            <div class="ev-postcard-stamp">
+              <img class="ev-postcard-photo" src="assets/contact/postcard-forest.webp" width="288" height="342" alt="">
+              <img class="ev-postcard-logo" src="assets/original-tilda/44ef8387add2-Frame_784.svg" width="110" height="40" alt="">
+            </div>
+            <span class="ev-postcard-postmark"></span>
+          </div>
         </div>
-        <label class="ev-field"><span>Сообщение</span><textarea name="message" rows="5" maxlength="3000" required></textarea></label>
+        <label class="ev-field ev-postcard-writing"><span>Сообщение</span>
+          <textarea name="message" rows="5" maxlength="3000" placeholder="Расскажите о вашем предложении" required></textarea>
+        </label>
+        <div class="ev-contact-fields">
+          <label class="ev-field"><span>Имя или компания</span><input name="name" autocomplete="name" maxlength="120" required></label>
+          <label class="ev-field"><span>Почта или телефон</span><input type="text" name="contact" maxlength="254" autocapitalize="none" spellcheck="false" required></label>
+        </div>
         <div hidden aria-hidden="true"><label>Ваш сайт<input name="website" tabindex="-1" autocomplete="off"></label></div>
-        <button class="ev-button ev-contact-submit" type="submit">Отправить сообщение</button>
-        <p class="ev-contact-status" role="status" aria-live="polite" aria-atomic="true"></p>
-        <p class="ev-contact-confirmation" id="cooperation-sent" tabindex="-1">Спасибо! Сообщение отправлено.</p>
+        <div class="ev-postcard-actions">
+          <button class="ev-button ev-contact-submit" type="submit">Отправить сообщение<span class="ev-postcard-arrow" aria-hidden="true">→</span></button>
+          <p class="ev-contact-status" role="status" aria-live="polite" aria-atomic="true"></p>
+          <p class="ev-contact-confirmation" id="cooperation-sent" tabindex="-1">Спасибо! Сообщение отправлено.</p>
+        </div>
       </form>
     </div>
     <section class="ev-contact-company" aria-labelledby="company-details">

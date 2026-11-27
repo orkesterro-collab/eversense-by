@@ -27,48 +27,215 @@
 
 .ev-contact-layout {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  gap: clamp(32px, 6vw, 84px);
-  align-items: start;
+  gap: 26px;
+}
+
+.ev-contact-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: end;
+  column-gap: 42px;
 }
 
 .ev-contact-intro h2, .ev-contact-company h2 {
-  margin: 0 0 16px;
-  font-size: clamp(28px, 3.4vw, 44px);
-  line-height: 1.2;
+  margin: 0;
+  font-size: clamp(30px, 3.5vw, 46px);
+  line-height: 1.16;
 }
 
 .ev-contact-intro p, .ev-contact-company p {
   max-width: 58ch;
   font-size: 16px;
-  line-height: 1.75;
+  line-height: 1.65;
 }
+.ev-contact-intro p { margin: 0; }
+.ev-contact-phone { white-space: nowrap; text-underline-offset: 3px; }
 
-.ev-contact-phone {
-  white-space: nowrap;
-  text-underline-offset: 3px;
-}
-
-.ev-contact-form, .ev-contact-fields {
+/* The back of the postcard. Both columns are part of the same native form. */
+.ev-contact-form {
+  --post-ink: #343333;
+  --post-secondary: #695e53;
+  --post-rule: #c4b7a6;
+  --post-leading: 35px;
+  position: relative;
   display: grid;
-  gap: 18px;
+  grid-template-columns: minmax(0, 1.2fr) 1px minmax(0, 1fr);
+  grid-template-areas:
+    "writing divider address"
+    "writing divider sender"
+    "actions divider sender";
+  column-gap: clamp(23px, 3.2vw, 46px);
+  row-gap: 20px;
+  min-width: 0;
+  padding: clamp(25px, 3.5vw, 43px);
+  isolation: isolate;
+  background: #f6f2e9 url("postcard-paper.png") repeat;
+  border: 1px solid #d1c7b9;
+  box-shadow: 0 2px 0 -1px #d1c7b9, 0 12px 24px -21px #5f4f3c;
+  color: var(--post-ink);
+}
+.ev-contact-form::after {
+  content: "";
+  grid-area: divider;
+  background: var(--post-rule);
+}
+.ev-contact-form .ev-field { min-width: 0; gap: 3px; }
+.ev-contact-form .ev-field > span {
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 600;
+  color: var(--post-ink);
+}
+.ev-contact-form .ev-field input, .ev-contact-form .ev-field textarea {
+  border: 0;
+  border-radius: 0;
+  padding-inline: 2px;
+  color: var(--post-ink);
+  background-color: transparent;
+  font-family: inherit;
+  font-size: 16px;
+}
+.ev-contact-form .ev-field input {
+  min-height: 44px;
+  padding-block: 6px 3px;
+  border-bottom: 1px solid #a59785;
+}
+.ev-contact-form .ev-field input:focus-visible, .ev-contact-form .ev-field textarea:focus-visible {
+  outline: 2px solid #625342;
+  outline-offset: 3px;
+  background-color: #fffaf2;
+}
+
+.ev-postcard-address {
+  grid-area: address;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  min-width: 0;
+  gap: 12px;
+}
+.ev-postcard-recipient { min-width: 0; padding-bottom: 6px; }
+.ev-postcard-to {
+  display: block;
+  color: var(--post-secondary);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.ev-postcard-recipient .ev-postcard-name {
+  margin: 0;
+  font-size: clamp(19px, 1.8vw, 25px);
+  font-weight: 500;
+  line-height: 1.35;
+}
+.ev-postcard-recipient .ev-postcard-city {
+  margin: 3px 0 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--post-secondary);
+}
+
+.ev-postcard-postage {
+  --stamp-width: clamp(81px, 8.4vw, 113px);
+  position: relative;
+  width: calc(var(--stamp-width) + 33px);
+  flex-shrink: 0;
+  align-self: flex-start;
+  padding: 3px 3px 7px 30px;
+  pointer-events: none;
+}
+.ev-postcard-stamp {
+  position: relative;
+  width: var(--stamp-width);
+  aspect-ratio: 0.82;
+  padding: 7px;
+  background: #fffdf6;
+  transform: rotate(3deg);
+  mask:
+    linear-gradient(#000 0 0) center / calc(100% - 7px) calc(100% - 7px) no-repeat,
+    radial-gradient(circle at 50% 0, transparent 2px, #000 2.5px) top / 8px 4px repeat-x,
+    radial-gradient(circle at 50% 100%, transparent 2px, #000 2.5px) bottom / 8px 4px repeat-x,
+    radial-gradient(circle at 0 50%, transparent 2px, #000 2.5px) left / 4px 8px repeat-y,
+    radial-gradient(circle at 100% 50%, transparent 2px, #000 2.5px) right / 4px 8px repeat-y;
+}
+.ev-postcard-stamp .ev-postcard-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ev-postcard-stamp .ev-postcard-logo {
+  position: absolute;
+  inset: auto 14% 12%;
+  width: 72%;
+  height: auto;
+}
+.ev-postcard-postmark {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 49%;
+  aspect-ratio: 1;
+  background: url("postcard-rings.png") center / contain no-repeat;
+  transform: rotate(-13deg);
+  opacity: .75;
+}
+.ev-postcard-postmark::after {
+  content: "";
+  position: absolute;
+  left: 87%;
+  top: 39%;
+  width: 55%;
+  height: 17px;
+  background: repeating-linear-gradient(to bottom, #665a49 0 1px, transparent 1px 7px);
+}
+
+.ev-postcard-writing { grid-area: writing; align-self: start; }
+.ev-contact-form .ev-postcard-writing > span {
+  margin-bottom: 9px;
+  font-size: clamp(23px, 2.2vw, 30px);
+  font-weight: 500;
+  letter-spacing: -.035em;
+}
+.ev-contact-form .ev-postcard-writing textarea {
+  display: block;
+  width: 100%;
+  min-height: calc(6 * var(--post-leading));
+  line-height: var(--post-leading);
+  padding-block: 0;
+  resize: vertical;
+  background-image: url("postcard-rule.png");
+  background-repeat: repeat;
+  background-size: 1px var(--post-leading);
+}
+.ev-postcard-writing textarea::placeholder { opacity: 1; color: #756b5e; }
+.ev-contact-fields {
+  grid-area: sender;
+  align-self: end;
+  display: grid;
+  gap: 16px;
   min-width: 0;
 }
-
-.ev-contact-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.ev-contact-form textarea { resize: vertical; }
-
-.ev-contact-submit {
+.ev-postcard-actions {
+  grid-area: actions;
+  display: grid;
+  align-content: end;
+  gap: 10px;
+}
+.ev-postcard-actions .ev-contact-submit {
   justify-self: start;
-  background: #343333;
-  border-color: #343333;
+  gap: 20px;
+  background: var(--post-ink);
+  border-color: var(--post-ink);
   color: #fff;
 }
-
-.ev-contact-submit:hover {
-  background: #fff;
-  color: #343333;
+.ev-postcard-actions .ev-contact-submit:hover {
+  background: #fffaf2;
+  color: var(--post-ink);
 }
+.ev-postcard-arrow { font: 21px/1 Arial, sans-serif; }
+.ev-postcard-actions p { margin: 0; }
 
 .ev-contact-status:empty, .ev-contact-confirmation:not(:target) { display: none; }
 .ev-contact-status, .ev-contact-confirmation { line-height: 1.6; }
@@ -85,9 +252,22 @@
 .ev-contact-company p:last-child { margin-bottom: 0; }
 
 @media (max-width: 760px) {
-  .ev-contact-layout { grid-template-columns: 1fr; gap: 18px; }
+  .ev-contact-layout { gap: 18px; }
+  .ev-contact-intro { grid-template-columns: 1fr; gap: 10px; }
+  .ev-contact-form {
+    --post-leading: 32px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "address" "writing" "sender" "actions";
+    gap: 22px;
+    padding: clamp(18px, 4.5vw, 28px);
+  }
+  .ev-contact-form::after { display: none; }
+  .ev-postcard-address { padding-bottom: 14px; border-bottom: 1px solid var(--post-rule); }
+  .ev-postcard-postage { --stamp-width: 76px; }
+  .ev-contact-form .ev-postcard-writing > span { font-size: 22px; margin-bottom: 4px; }
+  .ev-contact-form .ev-postcard-writing textarea { min-height: calc(3 * var(--post-leading)); height: calc(3 * var(--post-leading)); }
+  .ev-contact-fields { gap: 15px; }
 }
-
-@media (max-width: 540px) {
-  .ev-contact-fields { grid-template-columns: 1fr; }
+@media (max-width: 480px) {
+  .ev-postcard-actions .ev-contact-submit { width: 100%; justify-content: space-between; }
 }

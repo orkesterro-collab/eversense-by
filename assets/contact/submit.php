@@ -41,17 +41,27 @@ function field($key)
     if (!is_string($value)) {
         respond(422, 'Проверьте поля формы и повторите отправку.');
     }
-    return trim($value);
+    $value = preg_replace('/\A[\s\p{Z}]+|[\s\p{Z}]+\z/u', '', $value);
+    if ($value === null) {
+        respond(422, 'Проверьте поля формы и повторите отправку.');
+    }
+    return $value;
 }
 
 $name = field('name');
-$email = field('email');
+// A previously opened contact page can still post the old email field.
+$contact = field(array_key_exists('contact', $_POST) ? 'contact' : 'email');
 $message = str_replace(["\r\n", "\r"], "\n", field('message'));
-if (field('website') !== '' || !preg_match('/\A[^\p{Cc}]{0,120}\z/u', $name)) {
+if (field('website') !== '') {
     respond(422, 'Проверьте поля формы и повторите отправку.');
 }
-if (strlen($email) > 254 || preg_match('/[\r\n]/', $email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    respond(422, 'Укажите действительный адрес электронной почты для ответа.');
+if (!preg_match('/\A[^\p{Cc}]{1,120}\z/u', $name)) {
+    respond(422, 'Введите имя или название компании (до 120 символов).');
+}
+$isEmail = !preg_match('/[\x00-\x1f\x7f]/', $contact) && filter_var($contact, FILTER_VALIDATE_EMAIL);
+$phoneNumber = preg_replace('/[\p{Zs}\p{Pd}().]/u', '', $contact);
+if (strlen($contact) > 254 || (!$isEmail && !preg_match('/\A\+?[0-9]{7,15}\z/', $phoneNumber))) {
+    respond(422, 'Укажите электронную почту или номер телефона для ответа.');
 }
 if (!preg_match('/\A.{1,3000}\z/su', $message) || preg_match('/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/', $message)) {
     respond(422, 'Введите сообщение длиной до 3000 символов.');
@@ -80,20 +90,21 @@ if (!ftruncate($lock, 0) || !fwrite($lock, (string) $now) || !fflush($lock)) {
 }
 
 $body = "Обращение по вопросам сотрудничества с eversense.by\r\n\r\n";
-if ($name !== '') {
-    $body .= "Имя или компания: $name\r\n";
-}
-$body .= "Электронная почта для ответа: $email\r\n\r\n" . str_replace("\n", "\r\n", $message);
+$body .= "Имя или компания: $name\r\n";
+$contactLabel = $isEmail ? 'Электронная почта для ответа' : 'Телефон для ответа';
+$body .= "$contactLabel: $contact\r\n\r\n" . str_replace("\n", "\r\n", $message);
 $subject = '=?UTF-8?B?' . base64_encode('EVERSENSE — сотрудничество') . '?=';
-$headers = implode("\r\n", [
+$headers = [
     'From: EVERSENSE <' . CONTACT_SENDER . '>',
-    'Reply-To: ' . $email,
     'MIME-Version: 1.0',
     'Content-Type: text/plain; charset=UTF-8',
     'Content-Transfer-Encoding: base64',
-]);
+];
+if ($isEmail) {
+    $headers[] = 'Reply-To: ' . $contact;
+}
 $accepted = function_exists('mail') && @mail(
-    CONTACT_RECIPIENT, $subject, chunk_split(base64_encode($body)), $headers, '-f' . CONTACT_SENDER
+    CONTACT_RECIPIENT, $subject, chunk_split(base64_encode($body)), implode("\r\n", $headers), '-f' . CONTACT_SENDER
 );
 if (!$accepted) {
     ftruncate($lock, 0);

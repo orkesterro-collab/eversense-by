@@ -2,12 +2,32 @@
   'use strict';
 
   const form = document.getElementById('cooperation-form');
-  if (!form || !window.fetch || new URL(form.action).origin !== window.location.origin) return;
+  if (!form) return;
 
   const submit = form.querySelector('button[type="submit"]');
   const status = form.querySelector('[role="status"]');
+  const contact = form.elements.namedItem('contact');
+  const emailCheck = document.createElement('input');
+  emailCheck.type = 'email';
+  if (contact) {
+    contact.addEventListener('input', () => contact.setCustomValidity(''));
+  }
 
   form.addEventListener('submit', async function (event) {
+    for (const field of form.querySelectorAll('[required]')) {
+      field.value = field.value.trim();
+    }
+    if (contact) {
+      const phone = contact.value.replace(/[\p{Zs}\p{Pd}().]/gu, '');
+      emailCheck.value = contact.value;
+      const valid = emailCheck.validity.valid || /^\+?[0-9]{7,15}$/.test(phone);
+      contact.setCustomValidity(valid ? '' : 'Укажите электронную почту или номер телефона для ответа.');
+    }
+    if (!form.reportValidity()) {
+      event.preventDefault();
+      return;
+    }
+    if (!window.fetch || new URL(form.action).origin !== window.location.origin) return;
     event.preventDefault();
     if (submit.disabled) return;
     submit.disabled = true;

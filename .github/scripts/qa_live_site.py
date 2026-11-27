@@ -10,6 +10,20 @@ import time
 ROOT = Path("_deploy")
 HOST = "eversense.by"
 IP = "87.232.64.108"
+# A static 200 for PHP would leave the contact form looking healthy but unable to send.
+# Missing reply details must be rejected before the site-wide crawl starts.
+response = subprocess.run(
+    ["curl", "-ksS", "--max-time", "20", "--resolve", f"{HOST}:443:{IP}",
+     "-H", "Accept: application/json", "-H", f"Origin: https://{HOST}",
+     "--referer", f"https://{HOST}/contacts.html",
+     "--data", "name=QA&contact=&message=QA",
+     "-w", "\\n%{http_code}", f"https://{HOST}/assets/contact/submit.php"],
+    capture_output=True, text=True, timeout=25, check=True)
+body, _, status = response.stdout.rpartition("\n")
+if status != "422" or json.loads(body).get("ok") is not False:
+    raise SystemExit(f"Contact form validation failed (HTTP {status})")
+print("PASS: hosted cooperation form validated a submission without sending mail", flush=True)
+
 pages = sorted(ROOT.rglob("*.html"))
 resources = [
     "assets/prices.js", "assets/prices.css", "assets/eversense.js",
@@ -53,15 +67,3 @@ for path, typ, status in sorted(bad)[:80]:
 if bad:
     raise SystemExit(f"Live site has {len(bad)} failing paths")
 print("PASS: every deployed HTML page and sampled CSS/JS/image URLs returned HTTP 200", flush=True)
-
-# A static 200 for PHP would leave the contact form looking healthy but unable to send.
-# An empty submission must reach server-side validation without sending an email.
-response = subprocess.run(
-    ["curl", "-ksS", "--max-time", "20", "--resolve", f"{HOST}:443:{IP}",
-     "-H", "Accept: application/json", "--data", "email=&message=",
-     "-w", "\\n%{http_code}", f"https://{HOST}/assets/contact/submit.php"],
-    capture_output=True, text=True, timeout=25, check=True)
-body, _, status = response.stdout.rpartition("\n")
-if status != "422" or json.loads(body).get("ok") is not False:
-    raise SystemExit(f"Contact form validation failed (HTTP {status})")
-print("PASS: hosted cooperation form validated a submission without sending mail", flush=True)
