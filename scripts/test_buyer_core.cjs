@@ -126,12 +126,14 @@ test('compares recommended, smaller and larger orders on the same clean area', (
   assert.deepEqual(result.scenarios.map(s => s.packs), [11, 10, 12]);
   assert.deepEqual(result.scenarios.map(s => s.purchasedArea), [21.89, 19.9, 23.88]);
   assert.deepEqual(result.scenarios.map(s => s.extraArea), [1.89, -0.1, 3.88]);
+  assert.deepEqual(result.scenarios.map(s => s.extraPercent), [9.45, -0.5, 19.4]);
   assert.deepEqual(result.scenarios.map(s => s.extraBoards.toFixed(1)), ['7.6', '-0.4', '15.6']);
   assert.deepEqual(result.scenarios.map(s => s.totalCents), [111551, 101410, 121692]);
 });
 test('smaller order can cover the room exactly or leave less than the chosen allowance', () => {
   const exact = core.calculate('1,99', 5, 1.99, null, 8).scenarios[1];
   assert.equal(exact.extraArea, 0);
+  assert.equal(exact.extraPercent, 0);
   assert.equal(exact.extraBoards, 0);
   assert.equal(exact.totalCents, null);
   const smaller = core.calculate('1,95', 5, 1.99, 50, 8).scenarios[1];

@@ -116,6 +116,11 @@
   }
   var russianCount = new Intl.PluralRules('ru');
 
+  function estimateAmount(cents, approximate){
+    if(!Number.isSafeInteger(cents)) return '<small>Уточнить стоимость</small>';
+    return (approximate ? '≈ ' : '') + money(cents / 100) + ' <small>BYN</small>';
+  }
+
   function renderInstallationMethod(card, area, costs){
     var glue = card.dataset.installMethod === 'glue';
     var coverage = glue ? costs.glueCoverage : costs.underlayCoverage;
@@ -131,14 +136,9 @@
     var total = material !== null && work !== null ? material + work : null;
 
     function field(name){return card.querySelector('[data-install-value="' + name + '"]');}
-    function showAmount(name, cents){
-      field(name).innerHTML = Number.isSafeInteger(cents)
-        ? (name === 'total' ? '≈ ' : '') + money(cents / 100) + ' <small>BYN</small>'
-        : '<small>Уточнить стоимость</small>';
-    }
-    showAmount('material', material);
-    showAmount('work', work);
-    showAmount('total', total);
+    field('material').innerHTML = estimateAmount(material, false);
+    field('work').innerHTML = estimateAmount(work, false);
+    field('total').innerHTML = estimateAmount(total, true);
 
     var packInfo = glue ? 'Банка 7 кг' : 'Рулон';
     if(coverageUnits > 0){
@@ -155,15 +155,22 @@
     }
     field('quantity').textContent = unitsText;
     field('rate').textContent = number(area, 4) + ' м²' + (rate > 0 ? ' × ' + number(rate, 4) + ' BYN/м²' : ' · ставка уточняется');
+    return total;
   }
 
-  function renderInstallationEstimate(form){
+  function purchaseFromForm(form, product){
+    return core.calculate(form.elements.area.value, form.elements.reserve.value,
+      product.packArea, activePrice(product.sku), product.packCount);
+  }
+
+  function renderInstallationEstimate(form, purchase){
     var section = document.getElementById('ev-install-estimate');
     if(!section) return;
     section.hidden = form.dataset.calculated !== 'true';
     if(section.hidden) return;
     var product = bySku.get(form.elements.sku.value);
-    var area = core.parseDecimal(form.elements.area.value);
+    // Installation rates and the flooring price arrive independently.
+    purchase = purchase || purchaseFromForm(form, product);
     var costs = window.EversenseInstallationCosts && window.EversenseInstallationCosts.get();
     var preview = document.querySelector('#ev-calc-product img');
     var swatch = section.querySelector('[data-install-swatch]');
@@ -174,10 +181,19 @@
     }
     section.querySelector('[data-install-name]').textContent = fullName(product);
     section.querySelector('[data-install-sku]').textContent = product.sku;
-    section.querySelector('[data-install-area]').textContent = number(area, 4) + ' м²';
+    section.querySelector('[data-install-area]').textContent = number(purchase.area, 4) + ' м²';
+    section.querySelector('[data-order-packs]').textContent = number(purchase.packs) + ' уп.';
+    section.querySelector('[data-order-floor]').innerHTML = estimateAmount(purchase.totalCents, false);
     section.querySelectorAll('[data-install-method]').forEach(function(card){
-      renderInstallationMethod(card, area, costs || {});
+      var installation = renderInstallationMethod(card, purchase.area, costs || {});
+      var total = Number.isSafeInteger(purchase.totalCents) && Number.isSafeInteger(installation)
+        ? purchase.totalCents + installation : null;
+      section.querySelector('[data-order-total="' + card.dataset.installMethod + '"]').innerHTML = estimateAmount(total, true);
     });
+    var availability = new URL(route('contacts.html'));
+    availability.searchParams.set('sku', product.sku);
+    availability.searchParams.set('packs', purchase.packs);
+    section.querySelector('[data-calc-availability]').href = availability.href;
     section.querySelector('[data-install-cached]').hidden = !(costs && costs.cached);
   }
 
@@ -222,28 +238,19 @@
     }, 'ev-pack-count');
     rows += row('Итого метраж', function(option){return formatQuantity(packAreaFormat.format(option.purchasedArea)) + m2;}, 'ev-pack-area');
     rows += row('На прирезку', function(option){return balance(option.extraArea, false);}, 'ev-pack-balance');
+    rows += row('Фактическая прирезка <small>от чистой площади</small>', function(option){
+      var percent = option.extraPercent;
+      var absolute = Math.abs(percent);
+      var text = absolute > 0 && absolute < 0.01
+        ? absolute.toLocaleString('ru-RU', {maximumSignificantDigits:1}) : number(absolute);
+      return '<span' + (percent < 0 ? ' class="ev-pack-negative">−' : '>') +
+        formatQuantity(text) + ' <span class="ev-pack-unit">%</span></span>';
+    }, 'ev-pack-percent');
     rows += row('В пересчёте на доски', function(option){return balance(option.extraBoards, true);}, 'ev-pack-boards');
     rows += row('Стоимость покрытия', function(option){
       return option.totalCents === null ? '<span class="ev-pack-price-pending">Уточнить цену</span>' :
         formatQuantity(money(option.totalCents / 100)) + ' ' + bynIcon;
     }, 'ev-pack-total');
-
-    var warning = '';
-    if(fewer){
-      var form = russianCount.select(fewer.packs);
-      var quantity = number(fewer.packs) + ' ' + {one:'упаковка покрывает',few:'упаковки покрывают',many:'упаковок покрывают'}[form];
-      var shortfall;
-      if(fewer.extraArea < 0){
-        shortfall = 'До чистого метража не хватает ' + packAreaFormat.format(-fewer.extraArea) + ' м² ещё до подрезки.';
-      }else{
-        var missingReserve = result.neededArea - fewer.purchasedArea;
-        var missingText = missingReserve < 0.0001 ? 'менее 0,0001' : packAreaFormat.format(missingReserve);
-        shortfall = 'До выбранного запаса не хватает ' + missingText + ' м².';
-      }
-      warning = '<p class="ev-pack-warning"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor">' +
-        '<circle cx="8" cy="8" r="6.5"/><path d="M8 4.5v4.6M8 10.5v1" stroke-width="1.4"/></svg><span>' +
-        quantity + ' ' + packAreaFormat.format(fewer.purchasedArea) + ' м². ' + shortfall + '</span></p>';
-    }
 
     var boards = Number(product.packCount);
     var packInfo = 'В одной упаковке ' + number(product.packArea, 4) + ' м²';
@@ -256,8 +263,8 @@
       '<div><dt>С выбранным запасом</dt><dd>' + target + ' м²</dd></div></dl></div>' +
       '<div class="ev-pack-comparison"><div class="ev-pack-heading"><h2 id="ev-pack-title">Сколько упаковок взять?</h2><p>' + packInfo + '</p></div>' +
       '<table class="ev-pack-table' + (wideFigures ? ' ev-pack-table--large' : '') + '" aria-labelledby="ev-pack-title"><thead><tr><th scope="col">Вариант</th><th scope="col">По расчёту</th>' +
-      (fewer ? '<th scope="col">На пачку<br>меньше</th>' : '') + '<th scope="col">На пачку<br>больше</th></tr></thead><tbody>' +
-      rows + '</tbody></table>' + warning + '</div>' +
+      (fewer ? '<th scope="col">На пачку <br>меньше</th>' : '') + '<th scope="col">На пачку <br>больше</th></tr></thead><tbody>' +
+      rows + '</tbody></table><p class="ev-pack-footnote">Выше приведены расчёты для сравнения пограничных вариантов, поскольку покрытие продаётся целыми пачками.</p></div>' +
       '<aside class="ev-pack-tip"><div><h3>Запас для ремонта</h3><p>По опыту советуем оставить после укладки ' +
       '<strong>3–5 целых досок</strong> для возможного косметического ремонта в будущем.</p></div>' +
       '<img src="' + route('assets/brand-icons/spare-boards.svg') + '" alt="" width="65" height="61"></aside>';
@@ -268,13 +275,11 @@
     var sku=form.elements.sku.value,p=bySku.get(sku),root=document.getElementById('ev-calc-result');
     if(!p)return;
     root.hidden=false;
-    var result=core.calculate(form.elements.area.value,form.elements.reserve.value,p.packArea,activePrice(sku),p.packCount);
+    var result=purchaseFromForm(form,p);
     if(result.error){root.innerHTML='<p class="ev-error" role="alert">'+esc(result.error)+'</p>';form.dataset.calculated='false';renderInstallationEstimate(form);return;}
     form.dataset.calculated='true';
-    root.innerHTML=packComparison(result,p) +
-      '<div class="ev-actions"><a class="ev-button ev-button--primary" href="'+route('contacts.html')+'?sku='+sku+'&amp;packs='+result.packs+'">Уточнить наличие</a>' +
-      '<button class="ev-text-link" type="button" data-share-calculation>Скопировать расчёт</button></div>';
-    renderInstallationEstimate(form);
+    root.innerHTML=packComparison(result,p);
+    renderInstallationEstimate(form,result);
     var url=new URL(location.href);url.searchParams.set('sku',sku);url.searchParams.set('area',form.elements.area.value);url.searchParams.set('reserve',form.elements.reserve.value);history.replaceState(null,'',url);
     syncButtons();
   }
@@ -424,12 +429,16 @@
     if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(text).then(function(){announce('Ссылка скопирована.');},function(){manualCopy(text);});
     else manualCopy(text);
   }
-  function manualCopy(text){var el=document.getElementById('ev-copy-fallback');if(!el){el=document.createElement('div');el.id='ev-copy-fallback';el.className='ev-copy-box ev-buyer';el.innerHTML='<label>Скопируйте ссылку<input readonly aria-label="Ссылка на подборку"></label><button type="button" class="ev-button" data-close-copy>Закрыть</button>';document.body.appendChild(el);}el.hidden=false;var input=el.querySelector('input');input.value=text;input.focus();input.select();announce('Ссылка готова: выделите и скопируйте её.');}
+  function manualCopy(text){var el=document.getElementById('ev-copy-fallback');if(!el){el=document.createElement('div');el.id='ev-copy-fallback';el.className='ev-copy-box ev-buyer';el.innerHTML='<label>Скопируйте ссылку<input readonly></label><button type="button" class="ev-button" data-close-copy>Закрыть</button>';document.body.appendChild(el);}el.hidden=false;var input=el.querySelector('input');input.value=text;input.focus();input.select();announce('Ссылка выделена для копирования.');}
   document.addEventListener('click',function(e){
     var favorite=e.target.closest('[data-ev-favorite]');
     if(favorite){e.preventDefault();toggleFavorite(favorite.dataset.evFavorite);}
     if(e.target.closest('[data-share-selection]'))copy(route('favorites.html')+'?items='+selectedList().join(','));
-    if(e.target.closest('[data-share-calculation]'))copy(location.href);
+    if(e.target.closest('[data-share-calculation]')){
+      var form=document.getElementById('ev-calc-form'), shareUrl=new URL(route('calculator.html'));
+      ['sku','area','reserve'].forEach(function(key){shareUrl.searchParams.set(key,form.elements[key].value);});
+      copy(shareUrl.href);
+    }
     if(e.target.closest('[data-print]'))window.print();
     if(e.target.closest('[data-close-copy]'))document.getElementById('ev-copy-fallback').hidden=true;
     if(e.target.closest('[data-save-shared]')){favorites=core.cleanItems(favorites.concat(imported||[]),products,30);persist('eversense.favorites.v1',favorites);syncButtons();announce('Декоры добавлены в ваше избранное.');}

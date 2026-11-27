@@ -56,6 +56,7 @@
         packs:quantity,
         purchasedArea:purchasedUnits/10000,
         extraArea:extraUnits/10000,
+        extraPercent:extraUnits*100/areaUnits,
         extraBoards:Number.isSafeInteger(packCount)&&packCount>0 ? extraUnits/packUnits*packCount : null,
         totalCents:moneyCents(purchasedUnits,unitPrice)
       };

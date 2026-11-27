@@ -592,9 +592,12 @@ def main():
                 require(row_numbers(default, "Стоимость покрытия") == list(map(Decimal, ["1004.75", "913.41", "1096.09"])),
                         "Prices must reflect each scenario's purchased area")
                 result = page.locator("#ev-calc-result")
-                warning = result.locator(".ev-pack-warning")
-                require(warning.is_visible() and re.search(r"0,10\s*м²", warning.inner_text()),
-                        "Shortage warning must identify the missing clean area")
+                percent_label = "Фактическая прирезка от чистой площади"
+                require(row_numbers(default, percent_label) == list(map(Decimal, ["9.45", "-0.5", "19.4"]))
+                        and list(default["rows"]).index(percent_label) == list(default["rows"]).index("На прирезку") + 1,
+                        "Actual reserve must use the clean area and follow the cutting area")
+                require("целыми пачками" in result.locator(".ev-pack-footnote").inner_text(),
+                        "Whole-pack comparison note is missing")
                 require(re.search(r"3\s*[–—-]\s*5\s+(?:целых\s+)?досок", result.inner_text()),
                         "Repair-board advice missing")
                 if device == "mobile":
@@ -626,16 +629,18 @@ def main():
                 require(row_numbers(edge, "Целыми пачками") == [2, 1, 3], "Comma input or early area rounding lost a package")
                 require(numeric(edge["target"]) == Decimal("1.991"), "Reserve area rounded early")
                 require(row_numbers(edge, "Стоимость покрытия")[0] == Decimal("182.68"), "Comma case price wrong")
-                page.locator("[data-share-calculation]").click()
+                page.get_by_role("button", name="Скопировать ссылку на расчёт").click()
                 page.wait_for_function("window.__qaCopied")
                 copied = page.evaluate("window.__qaCopied")
+                require(parse_qs(urlparse(copied).query) == {"sku":["EL1052"], "area":["1,81"], "reserve":["10"]},
+                        "Shared link must contain the selected decor, area and reserve")
                 goto(page, urlparse(copied).path + "?" + urlparse(copied).query)
                 check_calculator_product(page, "EL1052")
                 require(row_numbers(calc_values(page), "Целыми пачками") == [2, 1, 3],
                         "Shared calculator URL cannot restore comma input")
                 single = calculate(page, "1", "0")
                 require(row_numbers(single, "Целыми пачками") == [1, 2]
-                        and not result.locator(".ev-pack-warning").count(), "Single-pack order offered zero packs or a shortage warning")
+                        and len(row_numbers(single, percent_label)) == 2, "Single-pack order offered zero packs")
                 for field, value in [("area", "0"), ("area", "-1"), ("area", "NaN"), ("reserve", "21")]:
                     page.locator('#ev-calc-form [name="area"]').fill("20")
                     page.locator('#ev-calc-form [name="reserve"]').fill("10")
@@ -667,6 +672,10 @@ def main():
                         item = card.locator(f'[data-install-value="{name}"]')
                         require(numeric(item.inner_text()) == Decimal(amount),
                                 f"{method} {name}: expected {amount}, got {item.inner_text()}")
+                    flooring = numeric(estimate.locator("[data-order-floor]").inner_text())
+                    require(flooring == row_numbers(calc_values(page), "Стоимость покрытия")[0], "Wrong pack scenario in order total")
+                    total = estimate.locator(f'[data-order-total="{method}"]')
+                    require(numeric(total.inner_text()) == flooring + Decimal(amounts[2]), f"Wrong full estimate for {method}")
 
                 def check_standard():
                     check_costs("glue", ("747.78", "580", "1327.78"))
@@ -713,6 +722,27 @@ def main():
 
             case("installation-estimates-from-clean-area", installation_test, 390, 844)
 
+            def calculator_print_test(page, context):
+                for sku, area in (("EL1040", "38"), ("EL1037", "99999.9999")):
+                    goto(page, f"calculator.html?sku={sku}&area={area}&reserve=5")
+                    page.wait_for_function("window.EversenseInstallationCosts?.get() && window.EversensePrices?.get('EL1040')")
+                    actions = page.locator(".ev-calc-end-actions")
+                    require(actions.locator("[data-share-calculation]").is_visible(), "Calculation actions must appear below the estimate")
+                    require(page.locator(".ev-install-compare").get_attribute("href") == "installation-methods.html",
+                            "Method comparison link is missing")
+                    page.evaluate("window.print = () => { window.__qaPrintRequested = true; }")
+                    actions.get_by_role("button", name="Распечатать расчёт").click()
+                    require(page.evaluate("window.__qaPrintRequested"), "Print button must open the browser print dialog")
+                    amounts = page.locator("[data-order-total]").all_inner_texts()
+                    pdf = PdfReader(BytesIO(page.pdf(format="A4", prefer_css_page_size=True, print_background=True)))
+                    require(len(pdf.pages) == 1, f"Calculation for {sku} must print on one A4 page")
+                    sheet = re.sub(r"\s+", "", pdf.pages[0].extract_text())
+                    for value in [sku, "Фактическаяприрезка", "KestoFlexSilan", "BonkeelSmartAquastop",
+                                  "Итогозапокрытиеиукладку", *amounts]:
+                        require(re.sub(r"\s+", "", value) in sheet, f"Missing printed value: {value}")
+                    require("Скопироватьссылку" not in sheet, "Interactive buttons leaked into print")
+            case("calculator-one-page-estimate", calculator_print_test)
+
             def no_price_test(page, context):
                 goto(page, "calculator.html?sku=EL1052", prices=False)
                 values = calculate(page, "20", "10")
@@ -721,6 +751,9 @@ def main():
                 require(page.evaluate("window.EversenseInstallationCosts.get() === null"),
                         "First visit without a materials feed returned unverified rates")
                 amounts = page.locator('#ev-install-estimate [data-install-value="total"]').all_inner_texts()
+                grand = page.locator("#ev-install-estimate [data-order-total]").all_inner_texts()
+                require(len(grand) == 2 and all("Уточнить" in value for value in grand),
+                        "Both order totals must wait for missing prices")
                 require(len(amounts) == 2 and all("Уточнить" in amount and not re.search(r"\d", amount)
                                                   for amount in amounts),
                         f"Missing installation prices must show two unavailable totals: {amounts}")
@@ -761,6 +794,9 @@ def main():
                         "Price-only update altered package quantities")
                 require(row_numbers(after, "Стоимость покрытия") == list(map(Decimal, ["1432.80", "1313.40", "1552.20"])),
                         "Calculated total did not react to the new price")
+                require(numeric(page.locator('[data-order-total="glue"]').inner_text()) == Decimal("2760.58")
+                        and numeric(page.locator('[data-order-total="underlay"]').inner_text()) == Decimal("2091.76"),
+                        "Full order totals did not react to the new flooring price")
                 require(len(feed_requests) == requests_before, "Calculation refresh unexpectedly requested the feed")
                 return {"updated_card_count": 30, "new_unit_price": 60, "before": before, "after": after,
                         "update_requested_network": False}

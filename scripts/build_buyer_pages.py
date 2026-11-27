@@ -58,8 +58,8 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
     canonical = 'https://eversense.by/' + (page[:-10] if page.endswith('index.html') else page)
     schema = structured or {'@context':'https://schema.org','@type':'WebPage','name':title,'description':lead,'url':canonical,'inLanguage':'ru'}
     version = CATALOG_VERSION if page_type in ('catalog', 'favorites') else VERSION
-    buyer_version = '20261127brandcalc' if page_type == 'calculator' else version
-    core_version = '20261126packcomparison' if page_type == 'calculator' else VERSION
+    buyer_version = '20261127estimate' if page_type == 'calculator' else version
+    core_version = buyer_version if page_type == 'calculator' else VERSION
     extras = []
     if page_type in ('product', 'choose', 'faq', 'installation', 'care', 'warranty', 'downloads'):
         extras.append('explore-guides.css')
@@ -242,9 +242,9 @@ def installation_estimate():
 <path d="M5 19h86l14-7v7l-14 7H5Z" fill="#9a8061"/><path d="M5 19l14-8h86l-14 8Z" fill="#cfbca4" stroke="#ad987d" stroke-width=".8"/>
 <path d="m24 15 45 .2m-29-1.8h40" stroke="#b7a184" fill="none"/></svg></header>
 <table aria-labelledby="ev-install-{method}"><tbody>
-<tr><th scope="row"><span class="ev-install-kind">Материал</span><a href="{url}">{material}</a></th><td class="ev-install-cost" data-install-value="material"></td></tr>
+<tr><th scope="row"><span class="ev-install-kind">Материал для примера</span><a href="{url}">{material}</a></th><td class="ev-install-cost" data-install-value="material"></td></tr>
 <tr><td colspan="2" class="ev-install-details"><p data-install-value="package"></p><p data-install-value="quantity"></p></td></tr>
-<tr class="ev-install-labor"><th scope="row"><span class="ev-install-kind">Работа</span>{labor}</th><td class="ev-install-cost" data-install-value="work"></td></tr>
+<tr class="ev-install-labor"><th scope="row"><span class="ev-install-kind">Примерная стоимость работ</span>{labor}</th><td class="ev-install-cost" data-install-value="work"></td></tr>
 <tr><td colspan="2" class="ev-install-details"><p data-install-value="rate"></p></td></tr>
 </tbody><tfoot><tr><th scope="row">Итого за укладку</th><td class="ev-install-cost" data-install-value="total"></td></tr></tfoot></table></article>'''
 
@@ -255,16 +255,28 @@ def installation_estimate():
                     'https://triopol.by/product/podlozhka-dlya-laminata-bonkeel-smart-aquastop/', 'Плавающая укладка',
                     '<path d="M6 30h85l12-6v5l-12 6H6Z" fill="#8c8b72"/><path d="M6 30h85l12-6M91 30v5" fill="none" stroke="#d3d3ba"/>')
     return f'''<section id="ev-install-estimate" class="ev-install-estimate" aria-labelledby="ev-install-heading" hidden>
-<h2 id="ev-install-heading">Сколько стоит укладка</h2>
+<div class="ev-install-heading-row"><h2 id="ev-install-heading">Сколько стоит укладка</h2>
+<a class="ev-text-link ev-install-compare" href="installation-methods.html">Сравнить укладку на клей и на подложку <span aria-hidden="true">→</span></a></div>
 <div class="ev-install-summary"><img data-install-swatch alt="" width="60" height="54">
 <div><strong data-install-name></strong><small data-install-sku></small></div>
 <div class="ev-install-area"><strong data-install-area></strong><small>Чистая площадь</small></div></div>
 <div class="ev-install-options">{glue}{underlay}</div>
-<p class="ev-install-footnote">Банки и рулоны округлены до целых упаковок. Работа рассчитана по чистой площади. Ориентир для Минска при прямой укладке на готовое основание. Стоимость ламината считается отдельно. <span data-install-cached hidden>Цены по последнему доступному расчёту.</span></p></section>'''
+<p class="ev-install-footnote">Выше указаны рекомендуемые материалы и стоимость работ для ориентира. Точную стоимость дополнительных материалов уточняйте в точке продаж. <span data-install-cached hidden>Цены по последнему доступному расчёту.</span></p>
+<section class="ev-order-summary" aria-labelledby="ev-order-heading">
+<div><h3 id="ev-order-heading">Итого за покрытие и укладку</h3>
+<p>Покрытие по расчёту — <span data-order-packs></span> · <span data-order-floor></span><br>В каждый итог включены материал для укладки и работа.</p></div>
+<dl><div><dt>С укладкой на клей</dt><dd data-order-total="glue"></dd></div>
+<div><dt>С плавающей укладкой на подложку</dt><dd data-order-total="underlay"></dd></div></dl></section>
+<div class="ev-calc-end-actions ev-actions">
+<a class="ev-text-link" href="contacts.html" data-calc-availability>Уточнить наличие</a>
+<button type="button" class="ev-button" data-share-calculation>Скопировать ссылку на расчёт</button>
+<button type="button" class="ev-button" data-print>Распечатать расчёт</button>
+</div></section>'''
 
 def tools_pages():
     page = 'calculator.html'
     body = '''<section class="ev-section"><div class="ev-wrap ev-calculator">
+<header class="ev-calc-print-head"><img src="assets/original-tilda/44ef8387add2-Frame_784.svg" alt="EVERSENSE" width="126" height="46"><strong>Расчёт покупки</strong></header>
 <section id="ev-calc-empty" hidden><h2>Какой декор рассчитать?</h2><p>Откройте карточку нужного декора и нажмите «Рассчитать».</p><a class="ev-button ev-button--primary" href="catalog-ru/">Выбрать декор в каталоге</a></section>
 <form id="ev-calc-form" novalidate hidden><input type="hidden" name="sku"><div id="ev-calc-product"></div>
 <div class="ev-calc-inputs"><h2 class="ev-calc-fields-title">Параметры расчёта</h2><div class="ev-filter-row">

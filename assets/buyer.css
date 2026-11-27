@@ -284,11 +284,10 @@ body[data-buyer-page="calculator"] .ev-section {padding-block:clamp(26px,3.2vw,4
   padding:clamp(24px,3vw,40px) 0 0;border-top:1px solid var(--ev-line);color:var(--ev-ink);
   font-variant-numeric:tabular-nums;
 }
-.ev-pack-comparison {grid-column:2;grid-row:1/5;min-width:0;container-type:inline-size}
-.ev-pack-hero,.ev-pack-tip,#ev-calc-result .ev-actions {grid-column:1}
+.ev-pack-comparison {grid-column:2;grid-row:1/3;min-width:0;container-type:inline-size}
+.ev-pack-hero,.ev-pack-tip {grid-column:1}
 .ev-pack-hero {grid-row:1}
 .ev-pack-tip {grid-row:2}
-#ev-calc-result .ev-actions {grid-row:3}
 .ev-pack-hero {
   display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);align-items:center;
   gap:14px;padding:0 0 20px;border-bottom:1px solid var(--ev-line);
@@ -324,8 +323,8 @@ body[data-buyer-page="calculator"] .ev-section {padding-block:clamp(26px,3.2vw,4
 .ev-pack-table .ev-pack-total td:nth-child(2) {background:#E1C5A7}
 .ev-pack-total .ev-pack-byn {display:inline-block;margin-left:.04em;width:.67em;height:.75em;vertical-align:baseline}
 .ev-pack-price-pending {font-size:.8em;font-weight:550}
-.ev-result .ev-pack-warning {display:flex;align-items:flex-start;gap:7px;margin:12px 2px 0;color:#873f31;font-size:12.2px;line-height:1.5}
-.ev-pack-warning svg {flex:none;width:14px;height:14px;margin-top:2px}
+.ev-result .ev-pack-percent th small {display:block;font-size:.9em;line-height:1.25;color:#595858}
+.ev-result .ev-pack-footnote {margin:12px 0 0;color:#595858;font-size:13px;line-height:1.5}
 .ev-pack-tip {display:grid;grid-template-columns:minmax(0,1fr) 65px;align-items:center;gap:12px;margin-top:18px;padding:14px 13px 14px 14px;background:#f7f3ef;border-left:2px solid var(--ev-sand)}
 .ev-pack-tip h3 {margin:0 0 5px;font-size:16px;font-weight:650;letter-spacing:-.02em}
 .ev-pack-tip p {margin:0;color:#535151;font-size:13px;line-height:1.5}
@@ -371,6 +370,34 @@ body[data-buyer-page="calculator"] .ev-section {padding-block:clamp(26px,3.2vw,4
 .ev-install-card tfoot th,.ev-install-card tfoot td {vertical-align:middle;padding-top:11px;padding-bottom:11px}
 .ev-install-card tfoot .ev-install-cost {font-size:clamp(20px,2.6vw,28px);letter-spacing:-.035em}
 .ev-install-estimate .ev-install-footnote {margin:14px 0 0;font-size:13px;line-height:1.6;color:#665f58}
+.ev-install-heading-row {display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 20px;margin-bottom:18px}
+.ev-install-heading-row h2 {margin-bottom:0}
+.ev-install-compare {font-size:14px}
+.ev-order-summary {display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start;gap:20px 40px;
+  margin-top:26px;padding:clamp(18px,2.5vw,30px);border-top:2px solid var(--ev-sand);background:#f7f4f0}
+.ev-order-summary h3 {margin:0 0 8px;font-size:clamp(23px,2.4vw,31px);font-weight:600;letter-spacing:-.035em;line-height:1.18}
+.ev-order-summary p {margin:0;font-size:14px;line-height:1.55;color:#595858}
+.ev-order-summary dl {margin:0;min-width:0}
+.ev-order-summary dl > div {display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:8px 15px;padding:10px 0}
+.ev-order-summary dl > div:first-child {padding-top:0;border-bottom:1px solid #d5cbc0}
+.ev-order-summary dl > div:last-child {padding-bottom:0}
+.ev-order-summary dt {font-size:15px;line-height:1.4}
+.ev-order-summary dd {margin:0;text-align:right;font-size:clamp(20px,2vw,27px);font-weight:650;line-height:1.2;font-variant-numeric:tabular-nums}
+.ev-order-summary dd small {font-size:.65em;white-space:nowrap}
+.ev-calc-end-actions {margin-top:18px;justify-content:flex-end}
+.ev-calc-end-actions > a {margin-right:auto}
+.ev-calc-end-actions [data-print] {background:var(--ev-ink);color:white;border-color:var(--ev-ink)}
+.ev-calc-print-head {display:none}
+@media(max-width:760px){
+  .ev-order-summary {grid-template-columns:minmax(0,1fr);gap:15px}
+}
+@media(max-width:480px){
+  .ev-calc-end-actions {display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+  .ev-calc-end-actions > a {justify-self:center;margin-right:0}
+  .ev-order-summary dl > div {display:flex;flex-wrap:wrap;gap:3px 8px}
+  .ev-order-summary dt {flex:1 1 7em}
+  .ev-order-summary dd {max-width:100%;margin-left:auto;font-size:18px}
+}
 @media(max-width:760px){
   .ev-install-options {grid-template-columns:minmax(0,1fr);gap:15px}
 }
@@ -494,7 +521,6 @@ body[data-buyer-page="calculator"] .ev-section {padding-block:clamp(26px,3.2vw,4
   #ev-calc-form[data-calculated="true"] + .ev-result {display:block}
   .ev-pack-comparison {margin-top:22px}
   .ev-pack-hero--long .ev-pack-metric {font-size:42px}
-  #ev-calc-result .ev-actions {margin-top:14px}
   .ev-result {position:static;padding:26px}
   .ev-room-grid {grid-template-columns:minmax(0,1fr);gap:30px}
   .ev-article-visual {grid-template-columns:minmax(0,1fr);gap:25px;margin-block:25px}
@@ -601,12 +627,68 @@ body[data-buyer-page="calculator"] .ev-section {padding-block:clamp(26px,3.2vw,4
   .ev-card-meta,.ev-sku {font-size:9pt}
 }
 
+@page calculator-sheet {size:A4 portrait;margin:12mm 14mm}
 @media print {
-  body[data-buyer-page="calculator"] .ev-hero .ev-wrap {display:block;padding:0;border:0}
-  body[data-buyer-page="calculator"] .ev-hero .ev-wrap::after {display:none}
+  body[data-buyer-page="calculator"] {page:calculator-sheet;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  body[data-buyer-page="calculator"] .ev-hero,.ev-calc-inputs,.ev-install-summary,.ev-install-compare {display:none!important}
   body[data-buyer-page="calculator"] .ev-section {padding:0}
-  #ev-calc-form[data-calculated="true"] + .ev-result {display:block}
-  .ev-pack-comparison,.ev-install-card {break-inside:avoid}
+  .ev-calculator {display:block;width:100%;margin:0}
+  .ev-calc-print-head {display:flex;align-items:center;justify-content:space-between;padding-bottom:2mm;margin-bottom:4mm;border-bottom:.4mm solid var(--ev-sand)}
+  .ev-calc-print-head img {width:31mm;height:11mm;object-fit:contain;filter:brightness(0)}
+  .ev-calc-print-head strong {font-size:18pt;font-weight:600;letter-spacing:-.035em}
+  #ev-calc-form[data-calculated="true"] {display:block!important}
+  #ev-calc-product {display:grid;grid-template-columns:32mm 1fr;column-gap:4mm;align-content:center;align-items:center}
+  #ev-calc-product img {grid-column:1;grid-row:1/3;width:32mm;max-width:none;height:18mm;margin:0;object-fit:cover}
+  #ev-calc-product .ev-calc-product-name {grid-column:2;grid-row:1;align-self:end;margin:0 0 1mm;font-size:16pt}
+  #ev-calc-product .ev-calc-product-meta {grid-column:2;grid-row:2;align-self:start;margin:0;padding:0;border:0;gap:.4em;font-size:9pt}
+  .ev-calc-product-meta span:last-child {flex-basis:auto;margin:0}
+  .ev-calc-product-meta span:last-child::before {content:"· ";}
+  #ev-calc-form[data-calculated="true"] + .ev-result {display:block;margin:4mm 0 0;padding:3mm 0 0}
+  .ev-pack-hero,.ev-pack-hero--long {display:flex;align-items:center;justify-content:space-between;gap:6mm;padding:0 0 3mm}
+  .ev-pack-hero > div {display:flex;align-items:baseline;gap:3mm}
+  .ev-pack-label {margin:0;font-size:10pt}
+  .ev-pack-hero .ev-pack-metric {font-size:22pt}
+  .ev-pack-hero .ev-pack-settings {display:flex;align-items:center;gap:4mm;padding-left:4mm;max-width:none}
+  .ev-pack-settings div {display:block}
+  .ev-pack-settings dt,.ev-pack-heading p {font-size:8.5pt}
+  .ev-pack-settings dd {text-align:left;font-size:11pt}
+  .ev-pack-comparison {margin:3mm 0 0;container-type:normal;break-inside:avoid}
+  .ev-pack-heading {display:flex;align-items:baseline;justify-content:space-between;gap:5mm;margin:0 0 2mm}
+  .ev-pack-heading h2,.ev-install-estimate h2,.ev-order-summary h3 {margin:0;font-size:14pt;line-height:1.2}
+  .ev-pack-table th,.ev-pack-table td {padding:1.3mm 2mm}
+  .ev-pack-table thead th {height:auto;padding-block:2mm;font-size:9pt}
+  .ev-pack-table thead th br {display:none}
+  .ev-pack-table tbody th {font-size:8.5pt}
+  .ev-pack-table tbody td,.ev-pack-table .ev-pack-boards td {font-size:10pt}
+  .ev-pack-table .ev-pack-count td {font-size:14pt}
+  .ev-pack-table .ev-pack-total > * {padding-block:2mm}
+  .ev-pack-table .ev-pack-total td {font-size:11pt}
+  .ev-result .ev-pack-footnote,.ev-install-estimate .ev-install-footnote {margin:2mm 0;font-size:8.5pt;line-height:1.35}
+  .ev-pack-tip {display:block;margin:2.5mm 0 0;padding:2mm 3mm;break-inside:avoid}
+  .ev-pack-tip img {display:none}
+  .ev-pack-tip h3,.ev-pack-tip p {display:inline;margin:0;font-size:9pt;line-height:1.35}
+  .ev-pack-tip h3 {margin-right:2mm}
+  .ev-install-estimate {margin:3.5mm 0 0;padding-top:3mm}
+  .ev-install-heading-row {margin-bottom:2mm}
+  .ev-install-options {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3mm;break-inside:avoid}
+  .ev-install-card {display:block;break-inside:avoid}
+  .ev-install-card table {height:auto}
+  .ev-install-card tfoot {display:table-row-group}
+  .ev-install-card header {min-height:0;padding:2mm 3mm}
+  .ev-install-card h3 {font-size:12pt}
+  .ev-install-card header svg {width:12mm;height:6mm}
+  .ev-install-card th,.ev-install-card td {padding:1.5mm 3mm 0;font-size:9pt}
+  .ev-install-kind {font-size:7.5pt;letter-spacing:.02em}
+  .ev-install-card .ev-install-cost,.ev-install-card tfoot .ev-install-cost {font-size:10pt}
+  .ev-install-card .ev-install-cost small,.ev-install-details p {font-size:8.5pt}
+  .ev-install-card .ev-install-details {padding:0 3mm 1.5mm}
+  .ev-install-details p {line-height:1.3;margin:1mm 0 0}
+  .ev-install-card tfoot th,.ev-install-card tfoot td {padding-block:1.8mm}
+  .ev-order-summary {grid-template-columns:.9fr 1.1fr;gap:4mm;margin:3mm 0 0;padding:3mm;break-inside:avoid}
+  .ev-order-summary h3 {margin-bottom:1.5mm;font-size:13pt}
+  .ev-order-summary p,.ev-order-summary dt {font-size:9pt;line-height:1.35}
+  .ev-order-summary dd {font-size:12pt}
+  .ev-order-summary dl > div {padding:1.5mm 0}
 }
 
 @page favorites-sheet {

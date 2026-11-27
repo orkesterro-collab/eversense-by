@@ -6,18 +6,19 @@
 <link rel="canonical" href="https://eversense.by/calculator.html"><meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:title" content="Рассчитать покупку — EVERSENSE"><meta property="og:description" content="Рассчитайте количество упаковок, стоимость покрытия и укладки."><meta property="og:url" content="https://eversense.by/calculator.html">
 
 <link href="assets/vendor/fonts/manrope.css" rel="stylesheet">
-<link rel="stylesheet" href="assets/buyer.css?v=20261127brandcalc" data-ev-buyer-css>
+<link rel="stylesheet" href="assets/buyer.css?v=20261127estimate" data-ev-buyer-css>
 
 <script src="assets/installation-costs.js?v=20261126installation" defer></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Рассчитать покупку", "description": "Рассчитайте количество упаковок, стоимость покрытия и укладки.", "url": "https://eversense.by/calculator.html", "inLanguage": "ru"}</script>
 <script src="assets/products-data.js?v=20261111explore" defer></script>
-<script src="assets/buyer-core.js?v=20261126packcomparison" defer></script>
+<script src="assets/buyer-core.js?v=20261127estimate" defer></script>
 <script src="assets/prices.js?v=20261111explore" defer></script>
-<script src="assets/buyer.js?v=20261127brandcalc" defer></script>
+<script src="assets/buyer.js?v=20261127estimate" defer></script>
 </head><body class="ev-buyer" data-buyer-page="calculator" data-collection="">
 <a href="#main" class="ev-skip-link">Перейти к содержанию</a>
 <main id="main"><section class="ev-hero"><div class="ev-wrap"><nav class="ev-breadcrumb" aria-label="Хлебные крошки"><a href="index.html">Главная</a><span aria-hidden="true">/</span><span>Рассчитать покупку</span></nav><h1>Рассчитать покупку</h1><p class="ev-lead">Рассчитайте количество упаковок, стоимость покрытия и укладки.</p></div></section>
 <section class="ev-section"><div class="ev-wrap ev-calculator">
+<header class="ev-calc-print-head"><img src="assets/original-tilda/44ef8387add2-Frame_784.svg" alt="EVERSENSE" width="126" height="46"><strong>Расчёт покупки</strong></header>
 <section id="ev-calc-empty" hidden><h2>Какой декор рассчитать?</h2><p>Откройте карточку нужного декора и нажмите «Рассчитать».</p><a class="ev-button ev-button--primary" href="catalog-ru/">Выбрать декор в каталоге</a></section>
 <form id="ev-calc-form" novalidate hidden><input type="hidden" name="sku"><div id="ev-calc-product"></div>
 <div class="ev-calc-inputs"><h2 class="ev-calc-fields-title">Параметры расчёта</h2><div class="ev-filter-row">
@@ -26,7 +27,8 @@
 </div><button type="submit" class="ev-button ev-button--primary">Рассчитать</button></div></form>
 <section id="ev-calc-result" class="ev-result" aria-live="polite" tabindex="-1" hidden></section>
 <section id="ev-install-estimate" class="ev-install-estimate" aria-labelledby="ev-install-heading" hidden>
-<h2 id="ev-install-heading">Сколько стоит укладка</h2>
+<div class="ev-install-heading-row"><h2 id="ev-install-heading">Сколько стоит укладка</h2>
+<a class="ev-text-link ev-install-compare" href="installation-methods.html">Сравнить укладку на клей и на подложку <span aria-hidden="true">→</span></a></div>
 <div class="ev-install-summary"><img data-install-swatch alt="" width="60" height="54">
 <div><strong data-install-name></strong><small data-install-sku></small></div>
 <div class="ev-install-area"><strong data-install-area></strong><small>Чистая площадь</small></div></div>
@@ -38,9 +40,9 @@
 <path d="M5 19h86l14-7v7l-14 7H5Z" fill="#9a8061"/><path d="M5 19l14-8h86l-14 8Z" fill="#cfbca4" stroke="#ad987d" stroke-width=".8"/>
 <path d="m24 15 45 .2m-29-1.8h40" stroke="#b7a184" fill="none"/></svg></header>
 <table aria-labelledby="ev-install-glue"><tbody>
-<tr><th scope="row"><span class="ev-install-kind">Материал</span><a href="https://triopol.by/product/silanovyj-klej-dlya-parketa-kesto-flex-silan-2/">Kesto Flex Silan</a></th><td class="ev-install-cost" data-install-value="material"></td></tr>
+<tr><th scope="row"><span class="ev-install-kind">Материал для примера</span><a href="https://triopol.by/product/silanovyj-klej-dlya-parketa-kesto-flex-silan-2/">Kesto Flex Silan</a></th><td class="ev-install-cost" data-install-value="material"></td></tr>
 <tr><td colspan="2" class="ev-install-details"><p data-install-value="package"></p><p data-install-value="quantity"></p></td></tr>
-<tr class="ev-install-labor"><th scope="row"><span class="ev-install-kind">Работа</span>Приклеивание ламината</th><td class="ev-install-cost" data-install-value="work"></td></tr>
+<tr class="ev-install-labor"><th scope="row"><span class="ev-install-kind">Примерная стоимость работ</span>Приклеивание ламината</th><td class="ev-install-cost" data-install-value="work"></td></tr>
 <tr><td colspan="2" class="ev-install-details"><p data-install-value="rate"></p></td></tr>
 </tbody><tfoot><tr><th scope="row">Итого за укладку</th><td class="ev-install-cost" data-install-value="total"></td></tr></tfoot></table></article><article class="ev-install-card" data-install-method="underlay">
 <header><h3 id="ev-install-underlay">Укладка на подложку</h3>
@@ -50,11 +52,21 @@
 <path d="M5 19h86l14-7v7l-14 7H5Z" fill="#9a8061"/><path d="M5 19l14-8h86l-14 8Z" fill="#cfbca4" stroke="#ad987d" stroke-width=".8"/>
 <path d="m24 15 45 .2m-29-1.8h40" stroke="#b7a184" fill="none"/></svg></header>
 <table aria-labelledby="ev-install-underlay"><tbody>
-<tr><th scope="row"><span class="ev-install-kind">Материал</span><a href="https://triopol.by/product/podlozhka-dlya-laminata-bonkeel-smart-aquastop/">Bonkeel Smart Aquastop</a></th><td class="ev-install-cost" data-install-value="material"></td></tr>
+<tr><th scope="row"><span class="ev-install-kind">Материал для примера</span><a href="https://triopol.by/product/podlozhka-dlya-laminata-bonkeel-smart-aquastop/">Bonkeel Smart Aquastop</a></th><td class="ev-install-cost" data-install-value="material"></td></tr>
 <tr><td colspan="2" class="ev-install-details"><p data-install-value="package"></p><p data-install-value="quantity"></p></td></tr>
-<tr class="ev-install-labor"><th scope="row"><span class="ev-install-kind">Работа</span>Плавающая укладка</th><td class="ev-install-cost" data-install-value="work"></td></tr>
+<tr class="ev-install-labor"><th scope="row"><span class="ev-install-kind">Примерная стоимость работ</span>Плавающая укладка</th><td class="ev-install-cost" data-install-value="work"></td></tr>
 <tr><td colspan="2" class="ev-install-details"><p data-install-value="rate"></p></td></tr>
 </tbody><tfoot><tr><th scope="row">Итого за укладку</th><td class="ev-install-cost" data-install-value="total"></td></tr></tfoot></table></article></div>
-<p class="ev-install-footnote">Банки и рулоны округлены до целых упаковок. Работа рассчитана по чистой площади. Ориентир для Минска при прямой укладке на готовое основание. Стоимость ламината считается отдельно. <span data-install-cached hidden>Цены по последнему доступному расчёту.</span></p></section></div></section></main><footer class="ev-footer"><div class="ev-wrap"><div><a href="index.html" class="ev-footer-brand"><img class="ev-footer-logo" src="assets/original-tilda/44ef8387add2-Frame_784.svg" alt="EVERSENSE" width="220" height="80" decoding="async"></a><p>Напольные покрытия на древесной основе.</p><p>Представитель в Беларуси — ООО «Флорсток».<br>УНП 192608003<br>220062, г. Минск, пр. Победителей, д. 129, пом. 358</p><p><a href="tel:+375296713971">+375 29 671-39-71</a></p></div><div><h2>Выбрать и купить</h2><nav aria-label="Выбрать и купить"><a href="catalog-ru/">Все декоры</a><a href="choose.html">Помощь с выбором</a><a href="projects.html">Интерьеры</a><a href="where-to-buy.html">Где купить</a><a href="contacts.html">Контакты</a></nav></div><div><h2>Полезно знать</h2><nav aria-label="Полезно знать"><a href="about.html">О продукте</a><a href="installation.html">Укладка и тёплый пол</a><a href="care.html">Уход</a><a href="warranty.html">Гарантия</a><a href="faq.html">Ответы на вопросы</a><a href="downloads.html">Документы</a></nav></div><div class="ev-footer-bottom"><span>© EVERSENSE · Беларусь</span><a href="sitemap.html">Все страницы</a><a href="privacy.html">Конфиденциальность</a></div></div></footer>
+<p class="ev-install-footnote">Выше указаны рекомендуемые материалы и стоимость работ для ориентира. Точную стоимость дополнительных материалов уточняйте в точке продаж. <span data-install-cached hidden>Цены по последнему доступному расчёту.</span></p>
+<section class="ev-order-summary" aria-labelledby="ev-order-heading">
+<div><h3 id="ev-order-heading">Итого за покрытие и укладку</h3>
+<p>Покрытие по расчёту — <span data-order-packs></span> · <span data-order-floor></span><br>В каждый итог включены материал для укладки и работа.</p></div>
+<dl><div><dt>С укладкой на клей</dt><dd data-order-total="glue"></dd></div>
+<div><dt>С плавающей укладкой на подложку</dt><dd data-order-total="underlay"></dd></div></dl></section>
+<div class="ev-calc-end-actions ev-actions">
+<a class="ev-text-link" href="contacts.html" data-calc-availability>Уточнить наличие</a>
+<button type="button" class="ev-button" data-share-calculation>Скопировать ссылку на расчёт</button>
+<button type="button" class="ev-button" data-print>Распечатать расчёт</button>
+</div></section></div></section></main><footer class="ev-footer"><div class="ev-wrap"><div><a href="index.html" class="ev-footer-brand"><img class="ev-footer-logo" src="assets/original-tilda/44ef8387add2-Frame_784.svg" alt="EVERSENSE" width="220" height="80" decoding="async"></a><p>Напольные покрытия на древесной основе.</p><p>Представитель в Беларуси — ООО «Флорсток».<br>УНП 192608003<br>220062, г. Минск, пр. Победителей, д. 129, пом. 358</p><p><a href="tel:+375296713971">+375 29 671-39-71</a></p></div><div><h2>Выбрать и купить</h2><nav aria-label="Выбрать и купить"><a href="catalog-ru/">Все декоры</a><a href="choose.html">Помощь с выбором</a><a href="projects.html">Интерьеры</a><a href="where-to-buy.html">Где купить</a><a href="contacts.html">Контакты</a></nav></div><div><h2>Полезно знать</h2><nav aria-label="Полезно знать"><a href="about.html">О продукте</a><a href="installation.html">Укладка и тёплый пол</a><a href="care.html">Уход</a><a href="warranty.html">Гарантия</a><a href="faq.html">Ответы на вопросы</a><a href="downloads.html">Документы</a></nav></div><div class="ev-footer-bottom"><span>© EVERSENSE · Беларусь</span><a href="sitemap.html">Все страницы</a><a href="privacy.html">Конфиденциальность</a></div></div></footer>
 <noscript><div class="ev-wrap ev-note">Для расчёта включите JavaScript. <a href="catalog-ru/">Перейти в каталог</a></div></noscript>
 </body></html>
