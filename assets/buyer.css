@@ -359,8 +359,6 @@ body[data-buyer-page="calculator"] .ev-section {padding-block:clamp(26px,3.2vw,4
 .ev-install-card th,.ev-install-card td {padding:12px 16px 0;text-align:left;vertical-align:bottom}
 .ev-install-card th {font-size:15px;line-height:1.4;font-weight:600;overflow-wrap:anywhere}
 .ev-install-kind {display:block;font-size:11px;font-weight:600;color:#6b645c;letter-spacing:.075em;text-transform:uppercase}
-.ev-install-card th a {text-decoration:underline;text-decoration-color:#c6bfb5;text-underline-offset:3px}
-.ev-install-card th a:hover {text-decoration-color:currentColor}
 .ev-install-card .ev-install-cost {padding-left:0;text-align:right;white-space:nowrap;font-size:clamp(16px,2vw,20px);font-weight:600;line-height:1.35}
 .ev-install-cost small {font-size:12px}
 .ev-install-card .ev-install-details {padding:0 16px 12px;vertical-align:top}

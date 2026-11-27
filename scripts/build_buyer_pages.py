@@ -233,7 +233,7 @@ def installation_pages():
         write_page(page, guide['title'], guide['lead'], body, 'installation')
 
 def installation_estimate():
-    def card(method, title, material, url, labor, layer):
+    def card(method, title, material, labor, layer):
         return f'''<article class="ev-install-card" data-install-method="{method}">
 <header><h3 id="ev-install-{method}">{title}</h3>
 <svg viewBox="0 0 110 52" width="76" height="42" aria-hidden="true" focusable="false">
@@ -242,17 +242,15 @@ def installation_estimate():
 <path d="M5 19h86l14-7v7l-14 7H5Z" fill="#9a8061"/><path d="M5 19l14-8h86l-14 8Z" fill="#cfbca4" stroke="#ad987d" stroke-width=".8"/>
 <path d="m24 15 45 .2m-29-1.8h40" stroke="#b7a184" fill="none"/></svg></header>
 <table aria-labelledby="ev-install-{method}"><tbody>
-<tr><th scope="row"><span class="ev-install-kind">Материал для примера</span><a href="{url}">{material}</a></th><td class="ev-install-cost" data-install-value="material"></td></tr>
+<tr><th scope="row"><span class="ev-install-kind">Материал для примера</span>{material}</th><td class="ev-install-cost" data-install-value="material"></td></tr>
 <tr><td colspan="2" class="ev-install-details"><p data-install-value="package"></p><p data-install-value="quantity"></p></td></tr>
 <tr class="ev-install-labor"><th scope="row"><span class="ev-install-kind">Примерная стоимость работ</span>{labor}</th><td class="ev-install-cost" data-install-value="work"></td></tr>
 <tr><td colspan="2" class="ev-install-details"><p data-install-value="rate"></p></td></tr>
 </tbody><tfoot><tr><th scope="row">Итого за укладку</th><td class="ev-install-cost" data-install-value="total"></td></tr></tfoot></table></article>'''
 
-    glue = card('glue', 'Укладка на клей', 'Kesto Flex Silan',
-                'https://triopol.by/product/silanovyj-klej-dlya-parketa-kesto-flex-silan-2/', 'Приклеивание ламината',
+    glue = card('glue', 'Укладка на клей', 'Kesto Flex Silan', 'Приклеивание ламината',
                 '<path d="m6 34 4-4 4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4 4 4 4-4" stroke="#947a59" stroke-width="2.6" fill="none"/>')
-    underlay = card('underlay', 'Укладка на подложку', 'Bonkeel Smart Aquastop',
-                    'https://triopol.by/product/podlozhka-dlya-laminata-bonkeel-smart-aquastop/', 'Плавающая укладка',
+    underlay = card('underlay', 'Укладка на подложку', 'Bonkeel Smart Aquastop', 'Плавающая укладка',
                     '<path d="M6 30h85l12-6v5l-12 6H6Z" fill="#8c8b72"/><path d="M6 30h85l12-6M91 30v5" fill="none" stroke="#d3d3ba"/>')
     return f'''<section id="ev-install-estimate" class="ev-install-estimate" aria-labelledby="ev-install-heading" hidden>
 <div class="ev-install-heading-row"><h2 id="ev-install-heading">Сколько стоит укладка</h2>

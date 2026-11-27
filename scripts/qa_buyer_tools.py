@@ -683,6 +683,10 @@ def main():
 
                 calculate(page, "20", "5")
                 estimate.wait_for()
+                for name in ("Kesto Flex Silan", "Bonkeel Smart Aquastop"):
+                    material = estimate.get_by_role("rowheader").filter(has_text=name)
+                    require(material.is_visible() and material.get_by_role("link").count() == 0,
+                            f"{name} must be shown as plain text")
                 check_standard()
                 goto(page, "calculator.html?sku=EL1000")
                 calculate(page, "20", "18")
@@ -747,6 +751,8 @@ def main():
                     require(len(pdf.pages) == 1, f"Calculation for {sku} must print on one A4 page")
                     urls = {a.get_object().get("/A", {}).get("/URI") for a in pdf.pages[0].get("/Annots", [])}
                     require(comparison in urls, "The PDF must contain a clickable installation comparison")
+                    require(all(urlparse(url).hostname not in ("triopol.by", "www.triopol.by") for url in urls if url),
+                            "The PDF must not link installation materials to the retailer")
                     sheet = re.sub(r"\s+", "", pdf.pages[0].extract_text())
                     for value in [sku, "27.11.2026,00:07(Минск)", "Сравнитьукладку", "Фактическаяприрезка", "KestoFlexSilan", "BonkeelSmartAquastop",
                                   "Итогозапокрытиеиукладку", *amounts]:
