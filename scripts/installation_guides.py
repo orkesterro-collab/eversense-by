@@ -151,7 +151,7 @@ def _pros_cons(section):
     return '<div class="ev-install-tradeoffs">' + ''.join(groups) + '</div>' if groups else ''
 
 
-def render_installation_guide(guide, page, href):
+def render_installation_guide(guide, page, href, literal_html=None):
     """Return the article body using the site's existing relative-link helper.
 
     Sections optionally group text and drawings into blocks. Extras are separate
@@ -173,9 +173,10 @@ def render_installation_guide(guide, page, href):
         ) + '</dl>'
 
     sections = guide.get('sections', [])
+    contents = guide.get('contents', sections)
     toc_list = '<ul>' + ''.join(
         '<li><a href="#' + _e(section['id']) + '">' + _e(section.get('nav_title', section['title'])) + '</a></li>'
-        for section in sections
+        for section in contents
     ) + '</ul>'
     toc_body = '<h2>На этой странице</h2>' + toc_list
     source = ''
@@ -185,7 +186,7 @@ def render_installation_guide(guide, page, href):
         pdf = _link(guide['factory_pdf'], page, href, 'ev-install-source-link')
         source = '<div class="ev-install-source">' + pdf + '</div>'
         toc_body = '<details open><summary>Содержание инструкции</summary>' + toc_list + '</details>'
-    toc = '<nav class="ev-install-toc" aria-label="Содержание статьи">' + toc_body + '</nav>' if sections else ''
+    toc = '<nav class="ev-install-toc" aria-label="Содержание статьи">' + toc_body + '</nav>' if contents else ''
 
     article = []
     for section in sections:
@@ -212,5 +213,10 @@ def render_installation_guide(guide, page, href):
             _link(item, page, href) for item in guide['related']
         ) + '</nav></div></section>'
 
+    article_class = 'ev-prose ev-install-article'
+    if literal_html is not None:
+        article = [literal_html]
+        article_class += ' ev-literal-content'
+
     intro = navigation + source + _notice(guide.get('notice'), 'h2', True) + checks
-    return '<div class="' + guide_css + '"><div class="ev-wrap ev-install-intro">' + intro + '</div><div class="ev-wrap ev-install-layout">' + toc + '<article class="ev-prose ev-install-article">' + ''.join(article) + '</article></div>' + related + '</div>'
+    return '<div class="' + guide_css + '"><div class="ev-wrap ev-install-intro">' + intro + '</div><div class="ev-wrap ev-install-layout">' + toc + '<article class="' + article_class + '">' + ''.join(article) + '</article></div>' + related + '</div>'

@@ -643,6 +643,42 @@
       ],
       "width": 528,
       "height": 340
+    },
+    {
+      "src": "assets/installation/factory/row-order-full.webp",
+      "pdf_page": 6,
+      "clip_pt": [
+        41.5,
+        290.5,
+        374.5,
+        352.5
+      ],
+      "width": 1332,
+      "height": 248
+    },
+    {
+      "src": "assets/installation/factory/commercial-seal-full.webp",
+      "pdf_page": 7,
+      "clip_pt": [
+        40,
+        519,
+        301,
+        581
+      ],
+      "width": 1044,
+      "height": 248
+    },
+    {
+      "src": "assets/installation/factory/cover.webp",
+      "pdf_page": 1,
+      "clip_pt": [
+        0,
+        0,
+        595.276,
+        841.89
+      ],
+      "width": 596,
+      "height": 842
     }
   ]
 }

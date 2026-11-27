@@ -190,3 +190,67 @@
  .ev-install-figures figure {break-inside:avoid}
  .ev-install-extras mark {-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+
+/* Factory manual, transcribed in its original reading order. */
+.ev-literal-content :where(h2,h3,h4,h5,[id]) {
+  scroll-margin-top:calc(var(--ev-header-height,68px) + 20px);
+  overflow-wrap:break-word;
+}
+.ev-literal-content h2 {
+  margin:clamp(42px,6vw,72px) 0 20px;
+  padding-top:clamp(24px,3vw,36px);
+  border-top:1px solid var(--ev-line,#dadada);
+}
+.ev-literal-content :is(h3,h4,h5) {
+  margin:30px 0 12px;
+  line-height:1.4;
+}
+.ev-literal-content h4 {font-size:clamp(18px,2vw,21px);font-weight:600}
+.ev-literal-content h5 {font-size:17px;font-weight:600}
+.ev-literal-content p,.ev-literal-content li {max-width:78ch}
+.ev-literal-content li > :where(ul,ol) {margin:8px 0 0}
+.ev-literal-content li::marker {color:#725e49}
+.ev-literal-content .ev-literal-gallery {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,162px),1fr));
+  align-items:start;
+  gap:12px;
+  margin:20px 0 26px;
+}
+.ev-literal-gallery figure {min-width:0;margin:0}
+.ev-literal-gallery figure:only-child {width:min(100%,360px)}
+.ev-literal-gallery--wide figure:only-child {width:100%}
+.ev-literal-gallery a {display:block;cursor:zoom-in;outline-offset:3px}
+.ev-literal-gallery img {display:block;width:100%;height:auto}
+.ev-literal-extras p {line-height:1.75}
+.ev-literal-content address {font-style:normal;line-height:1.75}
+@media (max-width:760px) {
+  .ev-literal-content .ev-install-table tbody td {
+    grid-template-columns:minmax(0,1.6fr) minmax(6em,1fr);
+    gap:10px;
+  }
+  .ev-literal-content :is(ul,ol) {padding-left:20px}
+}
+@media print {
+  .ev-literal-content h2 {margin:18pt 0 8pt;padding-top:8pt}
+  .ev-literal-content :is(h2,h3,h4,h5) {break-after:avoid}
+  .ev-literal-gallery figure {break-inside:avoid}
+}
+.ev-literal-cover {
+  display:grid;
+  grid-template-columns:clamp(78px,16vw,130px) minmax(0,1fr);
+  gap:clamp(16px,3vw,28px);
+  align-items:center;
+}
+.ev-literal-cover-image {display:block;outline-offset:3px}
+.ev-literal-cover img {width:100%;height:auto}
+.ev-literal-cover h2 {
+  margin:0 0 6px;
+  padding:0;
+  border:0;
+  font-size:clamp(21px,3.1vw,34px);
+  line-height:1.2;
+}
+.ev-literal-cover p {margin:0}
+.ev-literal-cover :is(p,a:not(.ev-literal-cover-image)) {font-size:clamp(13px,2vw,16px)}
+.ev-literal-content :is(.ev-factory-arrows,.ev-factory-arrow) {list-style:none}

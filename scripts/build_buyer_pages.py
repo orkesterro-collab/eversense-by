@@ -56,7 +56,7 @@ def footer(page):
 
 def write_page(page, title, lead, body, page_type='', collection='', hero_actions='', structured=None):
     canonical = 'https://eversense.by/' + (page[:-10] if page.endswith('index.html') else page)
-    schema = structured or {'@context':'https://schema.org','@type':'WebPage','name':title,'description':lead,'url':canonical,'inLanguage':'ru'}
+    schema = structured or {'@context':'https://schema.org','@type':'WebPage','name':title,'description':lead or title,'url':canonical,'inLanguage':'ru'}
     version = CATALOG_VERSION if page_type in ('catalog', 'favorites') else VERSION
     buyer_version = '20261127buttons' if page_type == 'calculator' else version
     core_version = '20261127estimate' if page_type == 'calculator' else VERSION
@@ -77,7 +77,7 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
         extras.extend(['contact/form.css', 'contact/form.js'])
     extra_version = '20261127postcard' if page_type == 'contacts' else VERSION
     if page == 'installation-underlay.html':
-        extra_version = '20261127factory'
+        extra_version = '20261127literal'
     extra_assets = '\n'.join(f'<link rel="stylesheet" href="{href("assets/"+file,page)}?v={extra_version}">' if file.endswith('.css') else f'<script src="{href("assets/"+file,page)}?v={extra_version}" defer></script>' for file in extras)
     breadcrumb = link('Главная', 'index.html', page) + '<span aria-hidden="true">/</span>'
     if page_type == 'installation' and page != 'installation.html':
@@ -85,12 +85,13 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
     breadcrumb += '<span>' + e(title) + '</span>'
     noscript_note = ('Для расчёта включите JavaScript. <a href="catalog-ru/">Перейти в каталог</a>' if page_type == 'calculator' else
                      'Для расчёта, фильтров и избранного включите JavaScript. Страницы декоров и полезные материалы доступны по обычным ссылкам.')
+    lead_html = f'<p class="ev-lead">{e(lead)}</p>' if lead else ''
     html = f'''<!doctype html>
 <html lang="ru" data-buyer-static="true"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#343333"><meta name="robots" content="noindex,nofollow">
-<title>{e(title)} — EVERSENSE Беларусь</title><meta name="description" content="{e(lead)}">
-<link rel="canonical" href="{canonical}"><meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:title" content="{e(title)} — EVERSENSE"><meta property="og:description" content="{e(lead)}"><meta property="og:url" content="{canonical}">
+<title>{e(title)} — EVERSENSE Беларусь</title><meta name="description" content="{e(lead or title)}">
+<link rel="canonical" href="{canonical}"><meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:title" content="{e(title)} — EVERSENSE"><meta property="og:description" content="{e(lead or title)}"><meta property="og:url" content="{canonical}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{href('assets/buyer.css',page)}?v={buyer_version}" data-ev-buyer-css>
@@ -102,7 +103,7 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
 <script src="{href('assets/buyer.js',page)}?v={buyer_version}" defer></script>
 </head><body class="ev-buyer" data-buyer-page="{e(page_type)}" data-collection="{e(collection)}">
 <a href="#main" class="ev-skip-link">Перейти к содержанию</a>
-<main id="main"><section class="ev-hero"><div class="ev-wrap"><nav class="ev-breadcrumb" aria-label="Хлебные крошки">{breadcrumb}</nav><h1>{e(title)}</h1><p class="ev-lead">{e(lead)}</p>{hero_actions}</div></section>
+<main id="main"><section class="ev-hero"><div class="ev-wrap"><nav class="ev-breadcrumb" aria-label="Хлебные крошки">{breadcrumb}</nav><h1>{e(title)}</h1>{lead_html}{hero_actions}</div></section>
 {body}</main>{footer(page)}
 <noscript><div class="ev-wrap ev-note">{noscript_note}</div></noscript>
 </body></html>'''
@@ -234,7 +235,8 @@ def water_resistance_page():
 def installation_pages():
     for key, page in [('installation', 'installation.html'), ('underlay', 'installation-underlay.html'), ('glue', 'installation-glue.html'), ('methods', 'installation-methods.html')]:
         guide = INSTALLATION_GUIDES[key]
-        body = render_installation_guide(guide, page, href)
+        literal = (ROOT / 'content/installation-underlay.html.in').read_text() if key == 'underlay' else None
+        body = render_installation_guide(guide, page, href, literal_html=literal)
         write_page(page, guide['title'], guide['lead'], body, 'installation')
 
 def installation_estimate():
