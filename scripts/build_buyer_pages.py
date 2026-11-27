@@ -58,8 +58,8 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
     canonical = 'https://eversense.by/' + (page[:-10] if page.endswith('index.html') else page)
     schema = structured or {'@context':'https://schema.org','@type':'WebPage','name':title,'description':lead,'url':canonical,'inLanguage':'ru'}
     version = CATALOG_VERSION if page_type in ('catalog', 'favorites') else VERSION
-    buyer_version = '20261127estimate' if page_type == 'calculator' else version
-    core_version = buyer_version if page_type == 'calculator' else VERSION
+    buyer_version = '20261127printqr' if page_type == 'calculator' else version
+    core_version = '20261127estimate' if page_type == 'calculator' else VERSION
     extras = []
     if page_type in ('product', 'choose', 'faq', 'installation', 'care', 'warranty', 'downloads'):
         extras.append('explore-guides.css')
@@ -276,9 +276,10 @@ def installation_estimate():
 def tools_pages():
     page = 'calculator.html'
     body = '''<section class="ev-section"><div class="ev-wrap ev-calculator">
-<header class="ev-calc-print-head"><img src="assets/original-tilda/44ef8387add2-Frame_784.svg" alt="EVERSENSE" width="126" height="46"><strong>Расчёт покупки</strong></header>
+<header class="ev-calc-print-head"><img src="assets/original-tilda/44ef8387add2-Frame_784.svg" alt="EVERSENSE" width="126" height="46"><div><strong>Расчёт покупки</strong><small>Дата печати — <time id="ev-calc-print-time"></time> (Минск)</small></div></header>
 <section id="ev-calc-empty" hidden><h2>Какой декор рассчитать?</h2><p>Откройте карточку нужного декора и нажмите «Рассчитать».</p><a class="ev-button ev-button--primary" href="catalog-ru/">Выбрать декор в каталоге</a></section>
 <form id="ev-calc-form" novalidate hidden><input type="hidden" name="sku"><div id="ev-calc-product"></div>
+<a class="ev-calc-print-guide" href="https://eversense.by/installation-methods.html"><span>Сравнить укладку<br>на клей и на подложку</span><img src="assets/installation/methods-qr.svg" width="96" height="96" alt=""></a>
 <div class="ev-calc-inputs"><h2 class="ev-calc-fields-title">Параметры расчёта</h2><div class="ev-filter-row">
 <div class="ev-field"><label for="ev-area">Площадь помещений, м²</label><input type="text" inputmode="decimal" id="ev-area" name="area" placeholder="Например, 20,5" required autocomplete="off" aria-describedby="ev-area-hint"><small id="ev-area-hint">Укажите «чистую» площадь в м² как есть из плана объекта.</small></div>
 <div class="ev-field"><label for="ev-reserve">Запас на подрезку, %</label><input type="text" inputmode="decimal" id="ev-reserve" name="reserve" value="5" required aria-describedby="ev-reserve-hint"><small id="ev-reserve-hint">При палубной укладке стандартная прирезка — 5%. Если укладка диагональная, прирезка может составить 8–10%.</small></div>

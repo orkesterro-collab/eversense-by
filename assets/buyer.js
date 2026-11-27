@@ -283,8 +283,20 @@
     var url=new URL(location.href);url.searchParams.set('sku',sku);url.searchParams.set('area',form.elements.area.value);url.searchParams.set('reserve',form.elements.reserve.value);history.replaceState(null,'',url);
     syncButtons();
   }
+  function updatePrintTime(){
+    var stamp=document.getElementById('ev-calc-print-time');
+    if(!stamp)return;
+    var now=new Date();
+    stamp.dateTime=now.toISOString();
+    stamp.textContent=now.toLocaleString('ru-RU',{
+      timeZone:'Europe/Minsk',year:'numeric',month:'2-digit',day:'2-digit',
+      hour:'2-digit',minute:'2-digit',hourCycle:'h23'
+    });
+  }
   function mountCalculator(){
     var form=document.getElementById('ev-calc-form');if(!form)return;
+    updatePrintTime();
+    window.addEventListener('beforeprint',updatePrintTime);
     var sku=(params.get('sku')||'').trim().toUpperCase();
     var product=bySku.get(sku);
     if(!product){
@@ -439,7 +451,10 @@
       ['sku','area','reserve'].forEach(function(key){shareUrl.searchParams.set(key,form.elements[key].value);});
       copy(shareUrl.href);
     }
-    if(e.target.closest('[data-print]'))window.print();
+    if(e.target.closest('[data-print]')){
+      if(pageName==='calculator')updatePrintTime();
+      window.print();
+    }
     if(e.target.closest('[data-close-copy]'))document.getElementById('ev-copy-fallback').hidden=true;
     if(e.target.closest('[data-save-shared]')){favorites=core.cleanItems(favorites.concat(imported||[]),products,30);persist('eversense.favorites.v1',favorites);syncButtons();announce('Декоры добавлены в ваше избранное.');}
   });

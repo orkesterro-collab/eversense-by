@@ -723,21 +723,32 @@ def main():
             case("installation-estimates-from-clean-area", installation_test, 390, 844)
 
             def calculator_print_test(page, context):
+                comparison = "https://eversense.by/installation-methods.html"
                 for sku, area in (("EL1040", "38"), ("EL1037", "99999.9999")):
+                    page.clock.set_fixed_time("2026-11-26T20:58:00Z")
                     goto(page, f"calculator.html?sku={sku}&area={area}&reserve=5")
                     page.wait_for_function("window.EversenseInstallationCosts?.get() && window.EversensePrices?.get('EL1040')")
                     actions = page.locator(".ev-calc-end-actions")
                     require(actions.locator("[data-share-calculation]").is_visible(), "Calculation actions must appear below the estimate")
                     require(page.locator(".ev-install-compare").get_attribute("href") == "installation-methods.html",
                             "Method comparison link is missing")
-                    page.evaluate("window.print = () => { window.__qaPrintRequested = true; }")
+                    guide = page.locator(".ev-calc-print-guide")
+                    require(guide.is_hidden() and guide.get_attribute("href") == comparison,
+                            "The print guide should link to the public comparison and stay hidden on screen")
+                    guide.locator("img").evaluate("img => img.decode()")
+                    page.clock.set_fixed_time("2026-11-26T21:01:00Z")
+                    page.evaluate("window.print = () => { window.__qaPrintedAt = document.getElementById('ev-calc-print-time').dateTime; }")
                     actions.get_by_role("button", name="Распечатать расчёт").click()
-                    require(page.evaluate("window.__qaPrintRequested"), "Print button must open the browser print dialog")
+                    require(page.evaluate("window.__qaPrintedAt") == "2026-11-26T21:01:00.000Z",
+                            "The print button must refresh the stamp before opening the dialog")
                     amounts = page.locator("[data-order-total]").all_inner_texts()
+                    page.clock.set_fixed_time("2026-11-26T21:07:00Z")
                     pdf = PdfReader(BytesIO(page.pdf(format="A4", prefer_css_page_size=True, print_background=True)))
                     require(len(pdf.pages) == 1, f"Calculation for {sku} must print on one A4 page")
+                    urls = {a.get_object().get("/A", {}).get("/URI") for a in pdf.pages[0].get("/Annots", [])}
+                    require(comparison in urls, "The PDF must contain a clickable installation comparison")
                     sheet = re.sub(r"\s+", "", pdf.pages[0].extract_text())
-                    for value in [sku, "Фактическаяприрезка", "KestoFlexSilan", "BonkeelSmartAquastop",
+                    for value in [sku, "27.11.2026,00:07(Минск)", "Сравнитьукладку", "Фактическаяприрезка", "KestoFlexSilan", "BonkeelSmartAquastop",
                                   "Итогозапокрытиеиукладку", *amounts]:
                         require(re.sub(r"\s+", "", value) in sheet, f"Missing printed value: {value}")
                     require("Скопироватьссылку" not in sheet, "Interactive buttons leaked into print")

@@ -387,7 +387,7 @@ body[data-buyer-page="calculator"] .ev-section {padding-block:clamp(26px,3.2vw,4
 .ev-calc-end-actions {margin-top:18px;justify-content:flex-end}
 .ev-calc-end-actions > a {margin-right:auto}
 .ev-calc-end-actions [data-print] {background:var(--ev-ink);color:white;border-color:var(--ev-ink)}
-.ev-calc-print-head {display:none}
+.ev-calc-print-head,.ev-calc-print-guide {display:none}
 @media(max-width:760px){
   .ev-order-summary {grid-template-columns:minmax(0,1fr);gap:15px}
 }
@@ -635,8 +635,12 @@ body[data-buyer-page="calculator"] .ev-section {padding-block:clamp(26px,3.2vw,4
   .ev-calculator {display:block;width:100%;margin:0}
   .ev-calc-print-head {display:flex;align-items:center;justify-content:space-between;padding-bottom:2mm;margin-bottom:4mm;border-bottom:.4mm solid var(--ev-sand)}
   .ev-calc-print-head img {width:31mm;height:11mm;object-fit:contain;filter:brightness(0)}
-  .ev-calc-print-head strong {font-size:18pt;font-weight:600;letter-spacing:-.035em}
-  #ev-calc-form[data-calculated="true"] {display:block!important}
+  .ev-calc-print-head > div {text-align:right}
+  .ev-calc-print-head strong {display:block;font-size:18pt;line-height:1.1;font-weight:600;letter-spacing:-.035em}
+  .ev-calc-print-head small {display:block;margin-top:1mm;font-size:9pt;line-height:1.3;color:#595858;font-variant-numeric:tabular-nums}
+  #ev-calc-form[data-calculated="true"] {display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:5mm;align-items:center}
+  .ev-calc-print-guide {display:flex;align-items:center;gap:1.5mm;color:var(--ev-ink);text-align:right;text-decoration:none;font-size:9pt;font-weight:550;line-height:1.35}
+  .ev-calc-print-guide img {display:block;width:24mm;height:24mm;max-width:none}
   #ev-calc-product {display:grid;grid-template-columns:32mm 1fr;column-gap:4mm;align-content:center;align-items:center}
   #ev-calc-product img {grid-column:1;grid-row:1/3;width:32mm;max-width:none;height:18mm;margin:0;object-fit:cover}
   #ev-calc-product .ev-calc-product-name {grid-column:2;grid-row:1;align-self:end;margin:0 0 1mm;font-size:16pt}
