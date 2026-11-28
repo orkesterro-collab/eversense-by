@@ -151,6 +151,51 @@ def _pros_cons(section):
     return '<div class="ev-install-tradeoffs">' + ''.join(groups) + '</div>' if groups else ''
 
 
+def _installation_hub(guide, page, href):
+    assets = _e(href('assets/installation/hub/', page))
+    arrow = '<span class="ev-hub-arrow" aria-hidden="true">→</span>'
+    methods = []
+    for method in guide['methods']:
+        key = _e(method['id'])
+        methods.append(f'''
+<a class="ev-hub-method" id="{key}" href="{_e(href(method['url'], page))}" aria-labelledby="{key}-heading">
+  <div class="ev-wrap ev-hub-row">
+    <img class="ev-hub-img" src="{assets}installation-{key}.webp" alt="" width="478" height="291" decoding="async">
+    <div class="ev-hub-copy">
+      <h2 id="{key}-heading">{_e(method['title'])}</h2>
+      <p>{_e(method['description'])}</p>
+      <span class="ev-hub-link">{_e(method['label'])} {arrow}</span>
+    </div>
+  </div>
+</a>''')
+    comparison = guide['comparison']
+    figures = ''.join(f'''
+    <figure>
+      <img src="{assets}{_e(section['image'])}" alt="{_e(section['alt'])}" width="498" height="144" loading="lazy" decoding="async">
+      <figcaption>{_e(section['caption'])}</figcaption>
+    </figure>''' for section in comparison['sections'])
+    care = guide['care']
+    return f'''<div class="ev-hub">
+<div class="ev-wrap ev-hub-title"><h1>{_e(guide['title'])}</h1></div>
+<nav class="ev-install-navigation ev-hub-nav" aria-label="Инструкции и сравнение">
+{''.join(methods)}
+<a class="ev-hub-compare" id="methods" href="{_e(href(comparison['url'], page))}" aria-labelledby="methods-heading methods-link">
+  <div class="ev-wrap ev-hub-compare-inner">
+    <h2 id="methods-heading">{_e(comparison['title'])}</h2>
+    <div class="ev-hub-figures">{figures}</div>
+    <span class="ev-hub-link" id="methods-link">{_e(comparison['label'])} {arrow}</span>
+  </div>
+</a>
+</nav>
+<a class="ev-hub-care" href="{_e(href(care['url'], page))}" aria-labelledby="care-heading">
+  <div class="ev-wrap ev-hub-row">
+    <img class="ev-hub-img" src="{assets}installation-care.webp" alt="" width="368" height="228" loading="lazy" decoding="async">
+    <div class="ev-hub-copy"><h2 id="care-heading">{_e(care['title'])} {arrow}</h2></div>
+  </div>
+</a>
+</div>'''
+
+
 def render_installation_guide(guide, page, href, literal_html=None):
     """Return the article body using the site's existing relative-link helper.
 
@@ -158,6 +203,9 @@ def render_installation_guide(guide, page, href, literal_html=None):
     editorial additions to a guide with a factory_pdf source.
     Every text value is escaped; editorial content cannot inject markup.
     """
+    if page == 'installation.html':
+        return _installation_hub(guide, page, href)
+
     navigation = ''
     if guide.get('navigation'):
         navigation = '<nav class="ev-install-navigation" aria-label="Инструкции и сравнение">' + ''.join(

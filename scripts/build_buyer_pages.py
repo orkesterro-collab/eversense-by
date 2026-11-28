@@ -79,6 +79,13 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
     if page == 'installation-underlay.html':
         extra_version = '20261127literal'
     extra_assets = '\n'.join(f'<link rel="stylesheet" href="{href("assets/"+file,page)}?v={extra_version}">' if file.endswith('.css') else f'<script src="{href("assets/"+file,page)}?v={extra_version}" defer></script>' for file in extras)
+    is_installation_hub = page == 'installation.html'
+    if is_installation_hub:
+        extra_assets += f'\n<link rel="stylesheet" href="{href("assets/installation-hub.css", page)}?v=20261128hub1">'
+        font_links = f'<link href="{href("assets/vendor/fonts/manrope.css", page)}" rel="stylesheet">'
+    else:
+        font_links = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
+                      '<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">')
     breadcrumb = link('Главная', 'index.html', page) + '<span aria-hidden="true">/</span>'
     if page_type == 'installation' and page != 'installation.html':
         breadcrumb += link('Укладка', 'installation.html', page) + '<span aria-hidden="true">/</span>'
@@ -86,14 +93,14 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
     noscript_note = ('Для расчёта включите JavaScript. <a href="catalog-ru/">Перейти в каталог</a>' if page_type == 'calculator' else
                      'Для расчёта, фильтров и избранного включите JavaScript. Страницы декоров и полезные материалы доступны по обычным ссылкам.')
     lead_html = f'<p class="ev-lead">{e(lead)}</p>' if lead else ''
+    hero = '' if is_installation_hub else f'<section class="ev-hero"><div class="ev-wrap"><nav class="ev-breadcrumb" aria-label="Хлебные крошки">{breadcrumb}</nav><h1>{e(title)}</h1>{lead_html}{hero_actions}</div></section>'
     html = f'''<!doctype html>
 <html lang="ru" data-buyer-static="true"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#343333"><meta name="robots" content="noindex,nofollow">
 <title>{e(title)} — EVERSENSE Беларусь</title><meta name="description" content="{e(lead or title)}">
 <link rel="canonical" href="{canonical}"><meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:title" content="{e(title)} — EVERSENSE"><meta property="og:description" content="{e(lead or title)}"><meta property="og:url" content="{canonical}">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+{font_links}
 <link rel="stylesheet" href="{href('assets/buyer.css',page)}?v={buyer_version}" data-ev-buyer-css>
 {extra_assets}
 <script type="application/ld+json">{json.dumps(schema,ensure_ascii=False).replace('<',chr(92)+'u003c')}</script>
@@ -103,7 +110,7 @@ def write_page(page, title, lead, body, page_type='', collection='', hero_action
 <script src="{href('assets/buyer.js',page)}?v={buyer_version}" defer></script>
 </head><body class="ev-buyer" data-buyer-page="{e(page_type)}" data-collection="{e(collection)}">
 <a href="#main" class="ev-skip-link">Перейти к содержанию</a>
-<main id="main"><section class="ev-hero"><div class="ev-wrap"><nav class="ev-breadcrumb" aria-label="Хлебные крошки">{breadcrumb}</nav><h1>{e(title)}</h1>{lead_html}{hero_actions}</div></section>
+<main id="main">{hero}
 {body}</main>{footer(page)}
 <noscript><div class="ev-wrap ev-note">{noscript_note}</div></noscript>
 </body></html>'''
